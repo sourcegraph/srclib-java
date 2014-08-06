@@ -3,3 +3,4 @@ javagraph.iml
 .classpath
 .settings/
 target/
+dependency-reduced-pom.xml
