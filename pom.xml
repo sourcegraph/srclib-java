@@ -9,6 +9,7 @@
 	<name>javagraph</name>
 	<url>https://sourcegraph.com</url>
 	<build>
+		<directory>.bin</directory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -37,6 +38,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<finalName>srclib-java</finalName>
 							<artifactSet>
 								<includes>
 									<include>*</include>

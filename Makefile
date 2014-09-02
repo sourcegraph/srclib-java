@@ -1,6 +1,8 @@
 .PHONY: default
 
-default: target/javagraph-0.0.1-SNAPSHOT.jar
+default: .bin/srclib-java
 
-target/javagraph-0.0.1-SNAPSHOT.jar:
+.bin/srclib-java:
 	mvn package
+	mv .bin/srclib-java.jar .bin/srclib-java
+	chmod +x .bin/srclib-java
