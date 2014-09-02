@@ -1,8 +1,8 @@
 .PHONY: default
 
-default: .bin/srclib-java
+default: install
 
-.bin/srclib-java:
+install:
 	mvn package
 	mv .bin/srclib-java.jar .bin/srclib-java
 	chmod +x .bin/srclib-java
