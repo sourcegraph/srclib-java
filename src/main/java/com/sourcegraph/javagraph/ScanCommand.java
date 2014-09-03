@@ -61,7 +61,9 @@ public class ScanCommand {
 		    	Model model = xpp3Reader.read(reader);
 		    	
 		    	final SourceUnit unit = new SourceUnit();
-				unit.Type = "MavenPackage";
+				unit.Type = "MavenPackage"; //TODO(rameshvarun) Artifact, or Package?
+				
+				// FIXME(rameshvarun) Maybe unit name should actually be groupid/artifactid
 				unit.Name = model.getArtifactId();
 				
 				unit.Dir = pomFile.getParent().toString();
@@ -90,7 +92,8 @@ public class ScanCommand {
 				for(Dependency dep : model.getDependencies()) {
 					unit.Dependencies.add(new SourceUnit.RawDependency(
 							dep.getArtifactId(),
-							dep.getVersion()
+							dep.getVersion(),
+							dep.getGroupId()
 					));
 				}
 				
