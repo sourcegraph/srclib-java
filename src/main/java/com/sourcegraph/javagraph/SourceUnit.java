@@ -10,10 +10,12 @@ public class SourceUnit {
 	public static class RawDependency {
 		String Version;
 		String ArtifactId;
+		String GroupId;
 		
-		public RawDependency(String Version, String ArtifactId) {
+		public RawDependency( String ArtifactId, String Version, String GroupId) {
 			this.Version = Version;
 			this.ArtifactId = ArtifactId;
+			this.GroupId = GroupId;
 		}
 	}
 	
