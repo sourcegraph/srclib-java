@@ -48,7 +48,7 @@ public class Main {
 			case "graph":
 				graph.Execute();
 				return;
-			case "depresove":
+			case "depresolve":
 				depresolve.Execute();
 				return;
 			default:
