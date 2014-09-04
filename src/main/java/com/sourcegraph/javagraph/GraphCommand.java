@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 
+import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -19,14 +20,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 
 public class GraphCommand {
 	
 	public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
 	
+	@Parameter
+	private List<String> files = new ArrayList<String>();
+	
 	static class Doc {
 		public Doc(Symbol symbol) {
-			Path = symbol.getPath();
+			Path = symbol.key.formatPath();
 			
 			//TODO(rameshvarun): Render javadoc string?
 			Format = "text/html";
@@ -41,6 +46,8 @@ public class GraphCommand {
 		String File;
 	}
 	
+	public static SourceUnit unit = null;
+	
 	static class Graph {
 		List<Symbol> Defs = new LinkedList<Symbol>();
 		List<Ref> Refs = new LinkedList<Ref>();
@@ -48,10 +55,8 @@ public class GraphCommand {
 	}
 	
 	public void Execute() {
-		// Final graph object that is serialized to stdout
-		final Graph graph = new Graph();
-		
-		final GraphData rawGraph = new GraphData();
+		final Graph graph = new Graph(); // Final graph object that is serialized to stdout
+		final GraphData rawGraph = new GraphData(); // Raw graph from the tree traversal
 		
 		GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
 		
@@ -106,9 +111,16 @@ public class GraphCommand {
 				JsonObject object = new JsonObject();
 				
 				if(ref.symbol.origin != "") {
-					/*object.add("DefRepo", new JsonPrimitive());
-					object.add("DefUnitType", new JsonPrimitive());
-					object.add("DefUnit", new JsonPrimitive());*/
+					Resolution resolution = ref.symbol.resolveOrigin(unit.Dependencies);
+					
+					if(resolution != null && resolution.Error == null) {
+						object.add("DefRepo", new JsonPrimitive(resolution.Target.ToRepoCloneURL));
+						object.add("DefUnitType", new JsonPrimitive(resolution.Target.ToUnitType));
+						object.add("DefUnit", new JsonPrimitive(resolution.Target.ToUnit));
+					}
+					else {
+						System.err.println("Could not resolve origin: " + ref.symbol.origin);
+					}
 				}
 				
 				object.add("DefPath", new JsonPrimitive(ref.symbol.formatPath()));
@@ -131,7 +143,7 @@ public class GraphCommand {
 		
 		Gson gson = gsonBuilder.create();
 		
-		SourceUnit unit = null;
+
 		try {
 			InputStreamReader reader = new InputStreamReader(System.in);
 			unit = gson.fromJson(reader, SourceUnit.class);

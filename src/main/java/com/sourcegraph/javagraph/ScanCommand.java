@@ -1,5 +1,7 @@
 package com.sourcegraph.javagraph;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -13,6 +15,8 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -58,7 +62,9 @@ public class ScanCommand {
 		
 		for(Path pomFile : pomFiles) {
 			try {
-				Reader reader = new FileReader(pomFile.toFile());
+				BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
+				
+				//Reader reader = new FileReader(pomFile.toFile());
 				MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
 		    	Model model = xpp3Reader.read(reader);
 		    	
@@ -90,15 +96,33 @@ public class ScanCommand {
 				     }
 				});
 				
-				// Dependencies
-				for(Dependency dep : model.getDependencies()) { //TODO(rameshvarun): Use dependency resolve for this
-					unit.Dependencies.add(new SourceUnit.RawDependency(
-							dep.getArtifactId(),
-							dep.getVersion(),
-							dep.getGroupId()
-					));
-				}
 				
+				//NOTE: This method of listing dependencies lists all dependencies, not just direct dependencies
+				ProcessBuilder pb = new ProcessBuilder(dependencyResolveArgs);
+				pb.directory(new File(unit.Dir));
+				try {
+					Process process = pb.start();
+					process.waitFor();
+					
+					String[] lines = IOUtils.toString(process.getErrorStream()).split("\n");
+					for(String line : lines) {
+						if(line.startsWith("   ")) {
+							String[] parts = line.trim().split(":");
+							
+							unit.Dependencies.add(new SourceUnit.RawDependency(
+									parts[0], // GroupID
+									parts[1], // ArtifactID
+									parts[3], // Version
+									parts[4], // Scope
+									parts[5]  // JarFile
+							));
+						}
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.exit(1);
+				}
 				
 				units.add(unit);
 				
