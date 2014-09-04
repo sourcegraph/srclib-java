@@ -104,5 +104,15 @@ public class Symbol implements JSONStreamAware, JSONAware {
 				return false;
 			return true;
 		}
+		
+		public String formatPath() {
+			return path.replace('.', '/').replace('$', '.');
+		}
+		
+		public String formatTreePath() {
+			return formatPath();
+		}
 	}
+	
+
 }
