@@ -19,8 +19,18 @@ public class DepresolveCommand {
 		SourceUnit.RawDependency Raw;
 		ResolvedTarget Target;
 		String Error;
+
+		public static Resolution StdLib() {
+			Resolution res = new Resolution();
+			res.Target = new ResolvedTarget();
+			res.Target.ToRepoCloneURL = "hg.openjdk.java.net/jdk8/jdk8/jdk";
+			res.Target.ToUnitType = "jdk";
+			res.Target.ToUnit = ".";
+
+			return res;
+		}
 	}
-	
+
 	static class ResolvedTarget {
 		String ToRepoCloneURL;
 		String ToUnit;
@@ -29,7 +39,7 @@ public class DepresolveCommand {
 	}
 	public void Execute() {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		
+
 		SourceUnit unit = null;
 		try {
 			InputStreamReader reader = new InputStreamReader(System.in);
@@ -40,51 +50,14 @@ public class DepresolveCommand {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
+
 		final ArrayList<Resolution> resolutions = new ArrayList<Resolution>();
-		
+
 		for(SourceUnit.RawDependency rawDep : unit.Dependencies) {
-			// Get the url to the POM file for this artifact
-			String url = "http://central.maven.org/maven2/" + rawDep.GroupId
-					+ "/" + rawDep.ArtifactId + 
-					"/" + rawDep.Version + "/" + 
-					rawDep.ArtifactId + "-" + 
-					rawDep.Version + ".pom";
-			
-			Resolution resolution = new Resolution();
-			
-			try {
-				InputStream input = new URL(url).openStream();
-				
-				MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-				Model model = xpp3Reader.read(input);
-				input.close();
-				
-				Scm scm = model.getScm();
-				if(scm != null) {
-				
-				
-					resolution.Raw = rawDep;
-					
-					ResolvedTarget target = new ResolvedTarget();
-					target.ToRepoCloneURL = model.getScm().getConnection();
-					target.ToUnit = model.getGroupId() + "/" + model.getArtifactId();
-					target.ToUnitType = "MavenArtifact";
-					target.ToVersionString = model.getVersion();
-					
-					resolution.Target = target;
-				}
-				else {
-					resolution.Error = model.getArtifactId() + " does not have an associated SCM repository.";
-				}
-				
-				
-			} catch (Exception e) {
-				resolution.Error = e.getMessage();
-			}
-			
-			resolutions.add(resolution);
+			resolutions.add(rawDep.Resolve());
 		}
+
+		resolutions.add(Resolution.StdLib());
 		
 		System.out.println(gson.toJson(resolutions));
 	}
