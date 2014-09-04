@@ -68,8 +68,8 @@ public class DepresolveCommand {
 					
 					ResolvedTarget target = new ResolvedTarget();
 					target.ToRepoCloneURL = model.getScm().getConnection();
-					target.ToUnit = model.getArtifactId();
-					target.ToUnitType = "MavenPackage";
+					target.ToUnit = model.getGroupId() + "/" + model.getArtifactId();
+					target.ToUnitType = "MavenArtifact";
 					target.ToVersionString = model.getVersion();
 					
 					resolution.Target = target;

@@ -4,21 +4,21 @@
       "Subcmd": "scan",
       "Op": "scan",
       "SourceUnitTypes": [
-        "MavenPackage"
+        "MavenArtifact"
       ]
     },
     {
       "Subcmd": "graph",
       "Op": "graph",
       "SourceUnitTypes": [
-        "MavenPackage"
+        "MavenArtifact"
       ]
     },
     {
       "Subcmd": "depresolve",
       "Op": "depresolve",
       "SourceUnitTypes": [
-        "MavenPackage"
+        "MavenArtifact"
       ]
     }
   ]

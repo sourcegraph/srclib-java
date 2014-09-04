@@ -28,6 +28,8 @@ public class ScanCommand {
 	@Parameter(names = { "--subdir" }, description = "The path of the current directory (in which the scanner is run), relative to the root directory of the repository being scanned (this is typically the root, \".\", as it is most useful to scan the entire repository)")
 	String subdir;
 	
+	public static String[] dependencyResolveArgs = {"mvn", "dependency:resolve", "-DoutputAbsoluteArtifactFilename=true", "-DoutputFile=/dev/stderr"};
+	
 	public void Execute() {
 		// Source Units list
 		ArrayList<SourceUnit> units = new ArrayList<SourceUnit>();
@@ -61,10 +63,10 @@ public class ScanCommand {
 		    	Model model = xpp3Reader.read(reader);
 		    	
 		    	final SourceUnit unit = new SourceUnit();
-				unit.Type = "MavenPackage"; //TODO(rameshvarun) Artifact, or Package?
+				unit.Type = "MavenArtifact";
 				
-				// FIXME(rameshvarun) Maybe unit name should actually be groupid/artifactid
-				unit.Name = model.getArtifactId();
+				// FIXME(rameshvarun): Maybe unit name should actually be groupid/artifactid
+				unit.Name = model.getGroupId() + "/" + model.getArtifactId();
 				
 				unit.Dir = pomFile.getParent().toString();
 				
@@ -89,7 +91,7 @@ public class ScanCommand {
 				});
 				
 				// Dependencies
-				for(Dependency dep : model.getDependencies()) {
+				for(Dependency dep : model.getDependencies()) { //TODO(rameshvarun): Use dependency resolve for this
 					unit.Dependencies.add(new SourceUnit.RawDependency(
 							dep.getArtifactId(),
 							dep.getVersion(),
