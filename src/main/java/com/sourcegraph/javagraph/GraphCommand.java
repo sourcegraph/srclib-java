@@ -143,7 +143,7 @@ public class GraphCommand {
 		
 		Gson gson = gsonBuilder.create();
 		
-
+		System.err.println("Reading in SourceUnit from StdIn...");
 		try {
 			InputStreamReader reader = new InputStreamReader(System.in);
 			unit = gson.fromJson(reader, SourceUnit.class);
@@ -157,13 +157,14 @@ public class GraphCommand {
 		
 		
 		// Get dependency classpaths
+		System.err.println("Getting classpath...");
 		ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
 		pb.directory(new File(unit.Dir));
 		String classpath = "";
 		try {
 			Process process = pb.start();
-			process.waitFor();
 			
+			IOUtils.copy(process.getInputStream(), System.err);
 			classpath = IOUtils.toString(process.getErrorStream());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
