@@ -1,10 +1,13 @@
 package com.sourcegraph.javagraph;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -39,6 +42,7 @@ public class ScanCommand {
 		ArrayList<SourceUnit> units = new ArrayList<SourceUnit>();
 		
 		// Scan directory, looking for pom.xml files
+		System.err.println("Walking tree, looking for pom.xml files.");
 		final PathMatcher pomPattern = FileSystems.getDefault().getPathMatcher("glob:**/pom.xml");
 		final ArrayList<Path> pomFiles = new ArrayList<Path>();
 		
@@ -60,8 +64,11 @@ public class ScanCommand {
 			System.exit(1);
 		}
 		
+		System.err.println(pomFiles.size() + " POM files found.");
+		
 		for(Path pomFile : pomFiles) {
 			try {
+				System.err.println("Reading " + pomFile + "...");
 				BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
 				
 				//Reader reader = new FileReader(pomFile.toFile());
@@ -98,14 +105,17 @@ public class ScanCommand {
 				
 				
 				//NOTE: This method of listing dependencies lists all dependencies, not just direct dependencies
+				System.err.println("Listing dependencies from " + pomFile + "...");
 				ProcessBuilder pb = new ProcessBuilder(dependencyResolveArgs);
 				pb.directory(new File(unit.Dir));
 				try {
 					Process process = pb.start();
-					process.waitFor();
 					
-					String[] lines = IOUtils.toString(process.getErrorStream()).split("\n");
-					for(String line : lines) {
+					BufferedReader in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+					IOUtils.copy(process.getInputStream(), System.err);
+
+					String line = null;
+					while((line = in.readLine()) != null) {
 						if(line.startsWith("   ")) {
 							String[] parts = line.trim().split(":");
 							
@@ -118,6 +128,9 @@ public class ScanCommand {
 							));
 						}
 					}
+					
+					in.close();
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
