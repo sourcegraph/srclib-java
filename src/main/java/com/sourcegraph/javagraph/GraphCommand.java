@@ -4,8 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.stream.JsonWriter;
 import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 
 public class GraphCommand {
@@ -110,7 +118,7 @@ public class GraphCommand {
 					JsonSerializationContext arg2) {
 				JsonObject object = new JsonObject();
 				
-				if(ref.symbol.origin != "") {
+				if(ref.symbol.origin != "" && !ref.symbol.origin.contains("file:")) {
 					Resolution resolution = ref.symbol.resolveOrigin(unit.Dependencies);
 					
 					if(resolution != null && resolution.Error == null) {
@@ -154,26 +162,30 @@ public class GraphCommand {
 			System.exit(1);
 		}
 		
-		
-		
-		// Get dependency classpaths
-		System.err.println("Getting classpath...");
-		ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
-		pb.directory(new File(unit.Dir));
 		String classpath = "";
-		try {
-			Process process = pb.start();
+		if(!unit.isStdLib()) {
+			// Get dependency classpaths if this is not the stdlib
+			System.err.println("Getting classpath...");
+			ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
+			pb.directory(new File(unit.Dir));
 			
-			IOUtils.copy(process.getInputStream(), System.err);
-			classpath = IOUtils.toString(process.getErrorStream());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			System.exit(1);
+			try {
+				Process process = pb.start();
+				
+				IOUtils.copy(process.getInputStream(), System.err);
+				classpath = IOUtils.toString(process.getErrorStream());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.exit(1);
+			}
+		}
+		else {
+
 		}
 		
 		try{
-			Grapher grapher = new Grapher(classpath, "src/", rawGraph );
+			Grapher grapher = new Grapher(classpath, "src/share/classes/", rawGraph );
 			
 			String[] paths = unit.Files.toArray(new String[unit.Files.size()]);
 			
@@ -195,6 +207,24 @@ public class GraphCommand {
 			System.exit(1);
 		}
 		
-		System.out.println(gson.toJson(graph));
+		System.out.print("{\"Defs\": [");
+		for(Symbol def : graph.Defs) {
+			if(def != graph.Defs.get(0)) System.out.print(",");
+			System.out.print(gson.toJson(def));
+		}
+		
+		System.out.print("], \"Refs\": [");
+		for(Ref ref : graph.Refs) {
+			if(ref != graph.Refs.get(0)) System.out.print(",");
+			System.out.print(gson.toJson(ref));
+		}
+		
+		System.out.print("], \"Docs\": [");
+		for(Doc doc : graph.Docs) {
+			if(doc != graph.Docs.get(0)) System.out.print(",");
+			System.out.print(gson.toJson(doc));
+		}
+		
+		System.out.print("]}");
 	}
 }

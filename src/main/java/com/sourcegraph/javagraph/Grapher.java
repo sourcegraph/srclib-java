@@ -87,6 +87,12 @@ public class Grapher {
 			Iterable<? extends CompilationUnitTree> units = task.parse();
 			task.analyze();
 			for (final CompilationUnitTree unit : units) {
+				
+				if(unit.getPackageName() == null) {
+					System.err.println("Cannot get package name of " + unit);
+					continue;
+				}
+				
 				String pkg = unit.getPackageName().toString();
 				if (!seenPackages.contains(pkg)) {
 					seenPackages.add(pkg);

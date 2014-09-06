@@ -19,15 +19,19 @@ public class DepresolveCommand {
 		SourceUnit.RawDependency Raw;
 		ResolvedTarget Target;
 		String Error;
+		
+		private static Resolution stdlib = null;
 
 		public static Resolution StdLib() {
-			Resolution res = new Resolution();
-			res.Target = new ResolvedTarget();
-			res.Target.ToRepoCloneURL = "hg.openjdk.java.net/jdk8/jdk8/jdk";
-			res.Target.ToUnitType = "jdk";
-			res.Target.ToUnit = ".";
+			if(stdlib == null) {
+				stdlib = new Resolution();
+				stdlib.Target = new ResolvedTarget();
+				stdlib.Target.ToRepoCloneURL = SourceUnit.StdLibRepoURI;
+				stdlib.Target.ToUnitType = "Java";
+				stdlib.Target.ToUnit = ".";
+			}
 
-			return res;
+			return stdlib;
 		}
 	}
 

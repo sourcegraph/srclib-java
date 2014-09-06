@@ -76,10 +76,10 @@ public class ScanCommand {
 		    	Model model = xpp3Reader.read(reader);
 		    	
 		    	final SourceUnit unit = new SourceUnit();
-				unit.Type = "MavenArtifact";
+				unit.Type = "JavaArtifact";
 				
-				// FIXME(rameshvarun): Maybe unit name should actually be groupid/artifactid
-				unit.Name = model.getGroupId() + "/" + model.getArtifactId();
+				String groupId = model.getGroupId() == null ? model.getParent().getGroupId() : model.getGroupId();
+				unit.Name = groupId + "/" + model.getArtifactId();
 				
 				unit.Dir = pomFile.getParent().toString();
 				
@@ -141,8 +141,42 @@ public class ScanCommand {
 				
 		    	reader.close();
 			} catch(Exception e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 			}
+		}
+		
+		// Java Standard Library
+		if(repoURI.equals(SourceUnit.StdLibRepoURI)) {
+			try{
+				// List all java src files
+				final SourceUnit unit = new SourceUnit();
+				unit.Type = "Java";
+				unit.Name = ".";
+				
+				unit.Dir = ".";
+				
+				Files.walkFileTree(Paths.get("src/share/classes/"), new SimpleFileVisitor<Path>() {
+					@Override
+				     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+				         throws IOException
+				     {
+						String filename = file.toString();
+						if(filename.endsWith(".java") && filename.contains("/classes/")) {
+							if(filename.startsWith("./"))
+								filename = filename.substring(2);
+							unit.Files.add(filename);
+						}
+						return FileVisitResult.CONTINUE;
+				     }
+				});
+				
+				units.add(unit);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.exit(1);
+			}
+			
 		}
 		
 		Gson gson = new GsonBuilder().serializeNulls().create();
