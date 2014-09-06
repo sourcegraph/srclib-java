@@ -18,6 +18,11 @@ import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
 
 public class SourceUnit {
 	
+	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
+	public boolean isStdLib() {
+		return Repo.equals(StdLibRepoURI);
+	}
+	
 	public static class RawDependency {
 		String GroupId;
 		String ArtifactId;
@@ -62,7 +67,7 @@ public class SourceUnit {
 						ResolvedTarget target = new ResolvedTarget();
 						target.ToRepoCloneURL = model.getScm().getConnection();
 						target.ToUnit = model.getGroupId() + "/" + model.getArtifactId();
-						target.ToUnitType = "MavenArtifact";
+						target.ToUnitType = "JavaArtifact";
 						target.ToVersionString = model.getVersion();
 						
 						resolved.Target = target;

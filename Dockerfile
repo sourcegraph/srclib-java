@@ -14,8 +14,6 @@ RUN apt-get install -y oracle-java8-installer
 # Install Maven
 RUN apt-get install -qq maven
 
-ENV IN_DOCKER_CONTAINER true
-
 # Add this toolchain
 ADD . /srclib/srclib-java/
 WORKDIR /srclib/srclib-java
