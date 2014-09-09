@@ -88,19 +88,19 @@ public class Grapher {
 			task.analyze();
 			for (final CompilationUnitTree unit : units) {
 				
-				if(unit.getPackageName() == null) {
-					System.err.println("Cannot get package name of " + unit);
-					continue;
+				try {
+					String pkg = unit.getPackageName().toString();
+					if (!seenPackages.contains(pkg)) {
+						seenPackages.add(pkg);
+						writePackageSymbol(pkg);
+					}
+	
+					TreePath root = new TreePath(unit);
+					new TreeScanner(emit, trees).scan(root, null);
+				} catch(Exception e) {
+					e.printStackTrace(System.err);
+					System.err.println("Skipping this compilation unit...");
 				}
-				
-				String pkg = unit.getPackageName().toString();
-				if (!seenPackages.contains(pkg)) {
-					seenPackages.add(pkg);
-					writePackageSymbol(pkg);
-				}
-
-				TreePath root = new TreePath(unit);
-				new TreeScanner(emit, trees).scan(root, null);
 			}
 		} finally {
 			for (Diagnostic<?> diagnostic : diags.getDiagnostics())

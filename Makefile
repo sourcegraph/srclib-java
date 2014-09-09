@@ -4,5 +4,10 @@ default: install
 
 install:
 	mvn package
-	mv .bin/srclib-java.jar .bin/srclib-java
-	chmod +x .bin/srclib-java
+	mv target/srclib-java.jar .bin/srclib-java.jar
+
+test:
+	src -v test -m program
+
+test-gen:
+	src -v test -m program --gen

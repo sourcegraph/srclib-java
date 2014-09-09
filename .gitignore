@@ -2,6 +2,6 @@ javagraph.iml
 .project
 .classpath
 .settings/
-.bin/
+.bin/srclib-java.jar
 target/
 dependency-reduced-pom.xml
