@@ -19,8 +19,10 @@ import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
 public class SourceUnit {
 	
 	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
+	public static String StdLibTestRepoURI = "github.com/sgtest/java-jdk-sample";
+	
 	public boolean isStdLib() {
-		return Repo.equals(StdLibRepoURI);
+		return Repo.equals(StdLibRepoURI) || Repo.equals(StdLibRepoURI);
 	}
 	
 	public static class RawDependency {

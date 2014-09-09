@@ -20,6 +20,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.ExpressionTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
@@ -89,10 +90,10 @@ public class Grapher {
 			for (final CompilationUnitTree unit : units) {
 				
 				try {
-					String pkg = unit.getPackageName().toString();
-					if (!seenPackages.contains(pkg)) {
-						seenPackages.add(pkg);
-						writePackageSymbol(pkg);
+					ExpressionTree pkgName = unit.getPackageName();
+					if (pkgName != null && !seenPackages.contains(pkgName.toString())) {
+						seenPackages.add(pkgName.toString());
+						writePackageSymbol(pkgName.toString());
 					}
 	
 					TreePath root = new TreePath(unit);
@@ -102,9 +103,11 @@ public class Grapher {
 					System.err.println("Skipping this compilation unit...");
 				}
 			}
-		} finally {
+		} catch(Exception e) {
 			for (Diagnostic<?> diagnostic : diags.getDiagnostics())
-				System.out.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toString());
+				System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toString());
+			
+			System.exit(1);
 		}
 	}
 
