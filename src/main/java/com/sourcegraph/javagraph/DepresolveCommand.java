@@ -44,6 +44,7 @@ public class DepresolveCommand {
 	public void Execute() {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
+		// Read in SourceUnit from stdin
 		SourceUnit unit = null;
 		try {
 			InputStreamReader reader = new InputStreamReader(System.in);
@@ -55,14 +56,16 @@ public class DepresolveCommand {
 			System.exit(1);
 		}
 
+		// Resolve all raw dependencies
 		final ArrayList<Resolution> resolutions = new ArrayList<Resolution>();
-
 		for(SourceUnit.RawDependency rawDep : unit.Dependencies) {
 			resolutions.add(rawDep.Resolve());
 		}
 
-		resolutions.add(Resolution.StdLib());
+		// All units but the JDK itself depend on the Std lib
+		if(!unit.Type.equals("Java")) resolutions.add(Resolution.StdLib());
 		
+		// Print out resolved dependencies
 		System.out.println(gson.toJson(resolutions));
 	}
 }

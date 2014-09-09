@@ -95,7 +95,6 @@ public class SourceUnit {
 	List<String> Files = new LinkedList<String>();
 	String Dir;
 	
-	// TODO(rameshvarun): Dependencies list
 	List<RawDependency> Dependencies = new LinkedList<RawDependency>();
 	
 	// TODO(rameshvarun): Info field

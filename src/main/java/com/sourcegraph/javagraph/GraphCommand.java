@@ -162,7 +162,8 @@ public class GraphCommand {
 			System.exit(1);
 		}
 		
-		String classpath = "";
+		String classPath = "";
+		String sourcePath = "";
 		if(!unit.isStdLib()) {
 			// Get dependency classpaths if this is not the stdlib
 			System.err.println("Getting classpath...");
@@ -173,19 +174,25 @@ public class GraphCommand {
 				Process process = pb.start();
 				
 				IOUtils.copy(process.getInputStream(), System.err);
-				classpath = IOUtils.toString(process.getErrorStream());
+				classPath = IOUtils.toString(process.getErrorStream());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				System.exit(1);
 			}
+			
+			sourcePath = unit.Dir + "/src/";
 		}
 		else {
-
+			if(unit.Type.equals("Java")) {
+				sourcePath = String.join(":", ScanCommand.getSourcePaths());
+			} else {
+				sourcePath = unit.Dir;
+			}
 		}
 		
 		try{
-			Grapher grapher = new Grapher(classpath, "src/share/classes/", rawGraph );
+			Grapher grapher = new Grapher(classPath, sourcePath, rawGraph );
 			
 			String[] paths = unit.Files.toArray(new String[unit.Files.size()]);
 			
@@ -207,18 +214,21 @@ public class GraphCommand {
 			System.exit(1);
 		}
 		
+		// Print out Defs
 		System.out.print("{\"Defs\": [");
 		for(Symbol def : graph.Defs) {
 			if(def != graph.Defs.get(0)) System.out.print(",");
 			System.out.print(gson.toJson(def));
 		}
 		
+		// Print out Refs
 		System.out.print("], \"Refs\": [");
 		for(Ref ref : graph.Refs) {
 			if(ref != graph.Refs.get(0)) System.out.print(",");
 			System.out.print(gson.toJson(ref));
 		}
 		
+		// Print out Docs
 		System.out.print("], \"Docs\": [");
 		for(Doc doc : graph.Docs) {
 			if(doc != graph.Docs.get(0)) System.out.print(",");
