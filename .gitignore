@@ -2,6 +2,11 @@ javagraph.iml
 .project
 .classpath
 .settings/
+
+# Binaries
 .bin/srclib-java.jar
+.bin/classes/
+.bin/test-classes/
 target/
+
 dependency-reduced-pom.xml

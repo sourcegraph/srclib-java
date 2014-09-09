@@ -11,3 +11,7 @@ test:
 
 test-gen:
 	src -v test -m program --gen
+
+clean:
+	rm .bin/srclib-java.jar
+	rm -rf target

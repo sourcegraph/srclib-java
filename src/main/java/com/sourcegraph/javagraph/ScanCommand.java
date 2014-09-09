@@ -108,7 +108,7 @@ public class ScanCommand {
 				
 				// List all files TODO(rameshvarun): Maybe can't assume files are in src directory?
 				unit.Files = scanFiles(pomFile.getParent().resolve("src"));
-				
+				unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 				
 				//NOTE: This method of listing dependencies lists all dependencies, not just direct dependencies
 				System.err.println("Listing dependencies from " + pomFile + "...");
@@ -162,6 +162,7 @@ public class ScanCommand {
 				unit.Name = ".";
 				unit.Dir = "src/";
 				unit.Files = scanFiles(getSourcePaths());
+				unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 				units.add(unit);
 				
 				// Test code source unit
@@ -170,6 +171,7 @@ public class ScanCommand {
 				testUnit.Name = "Tests";
 				testUnit.Dir = "test/";
 				testUnit.Files = scanFiles("test/");
+				testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 				units.add(testUnit);
 				
 				// Build tools source unit
@@ -178,6 +180,7 @@ public class ScanCommand {
 				toolsUnit.Name = "BuildTools";
 				toolsUnit.Dir = "make/src/classes/";
 				toolsUnit.Files = scanFiles("make/src/classes/");
+				toolsUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 				units.add(toolsUnit);
 				
 			} catch (Exception e) {
