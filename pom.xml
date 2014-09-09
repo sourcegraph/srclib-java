@@ -14,8 +14,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -37,9 +37,11 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<finalName>srclib-java</finalName>
 							<artifactSet>
 								<includes>
 									<include>*</include>
+									<include>com.sun:tools</include>
 								</includes>
 							</artifactSet>
 							<transformers>
@@ -54,6 +56,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -71,13 +74,44 @@
 			<version>3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun</groupId>
-			<artifactId>tools</artifactId>
-			<version>1.8</version>
-			<scope>system</scope>
-			<systemPath>${java.home}/../lib/tools.jar</systemPath>
+		  <groupId>com.beust</groupId>
+		  <artifactId>jcommander</artifactId>
+		  <version>1.30</version>
+		</dependency>
+		<dependency>
+	      <groupId>com.google.code.gson</groupId>
+	      <artifactId>gson</artifactId>
+	      <version>2.3</version>
+	      <scope>compile</scope>
+	    </dependency>
+	    <dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>3.2.3</version>
+		</dependency>
+		
+		 <dependency>
+          <groupId>com.sun</groupId>
+          <artifactId>tools</artifactId>
+          <version>1.8</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		  <version>3.3.2</version>
 		</dependency>
 	</dependencies>
+	
+	
+
+  
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
