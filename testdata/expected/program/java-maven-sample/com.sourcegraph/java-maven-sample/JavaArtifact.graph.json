@@ -8,7 +8,12 @@
       "File": "",
       "DefStart": 0,
       "DefEnd": 0,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "TypeExpression": null,
+        "Package": "mypkg"
+      }
     },
     {
       "Path": "mypkg/Container/:init",
@@ -18,7 +23,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 29,
       "DefEnd": 38,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/Container:type",
@@ -28,7 +41,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 16,
       "DefEnd": 169,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.Container",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/Container:type/F",
@@ -38,7 +59,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 124,
       "DefEnd": 167,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()mypkg.Container.Inner",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/Container:type/Inner/:init",
@@ -48,7 +77,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 55,
       "DefEnd": 60,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/Container:type/Inner:type",
@@ -58,7 +95,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 42,
       "DefEnd": 121,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.Container.Inner",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/Container:type/Inner:type/F",
@@ -68,7 +113,15 @@
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 65,
       "DefEnd": 118,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()mypkg.Container",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass/:init",
@@ -78,7 +131,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 149,
       "DefEnd": 157,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type",
@@ -88,7 +149,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 136,
       "DefEnd": 650,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.FooClass",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/foo",
@@ -98,7 +167,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 270,
       "DefEnd": 290,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "mypkg.FooClass",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myInt",
@@ -108,7 +185,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 510,
       "DefEnd": 580,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()int",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myInt/len",
@@ -118,7 +203,13 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 533,
       "DefEnd": 563,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": []
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myIntegers",
@@ -128,7 +219,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 293,
       "DefEnd": 352,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "java.util.List\u003cjava.lang.Integer\u003e",
+        "Package": "mypkg",
+        "Modifiers": [
+          "final"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myStatic",
@@ -138,7 +237,16 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 161,
       "DefEnd": 188,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myString",
@@ -148,7 +256,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 583,
       "DefEnd": 648,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()java.lang.String",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myStringStatic",
@@ -158,7 +274,16 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 191,
       "DefEnd": 267,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()java.lang.String",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      }
     },
     {
       "Path": "mypkg/FooClass:type/myStringStatic/s",
@@ -168,7 +293,13 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 233,
       "DefEnd": 252,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "mypkg",
+        "Modifiers": []
+      }
     },
     {
       "Path": "mypkg/FooClass:type/numIntegers",
@@ -178,7 +309,15 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 354,
       "DefEnd": 396,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": [
+          "final"
+        ]
+      }
     },
     {
       "Path": "mypkg/IBar:type",
@@ -188,7 +327,15 @@
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 16,
       "DefEnd": 69,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "INTERFACE",
+        "TypeExpression": "mypkg.IBar",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar",
@@ -198,7 +345,13 @@
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 41,
       "DefEnd": 67,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(mypkg.IBar)mypkg.FooClass",
+        "Package": "mypkg",
+        "Modifiers": []
+      }
     },
     {
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
@@ -208,7 +361,13 @@
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 57,
       "DefEnd": 65,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "mypkg.IBar",
+        "Package": "mypkg",
+        "Modifiers": []
+      }
     },
     {
       "Path": "mypkg/subpkg",
@@ -218,7 +377,12 @@
       "File": "",
       "DefStart": 0,
       "DefEnd": 0,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "TypeExpression": null,
+        "Package": "mypkg.subpkg"
+      }
     },
     {
       "Path": "mypkg/subpkg/QuxEnum/:init",
@@ -228,7 +392,15 @@
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 35,
       "DefEnd": 42,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "private"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type",
@@ -238,7 +410,15 @@
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 23,
       "DefEnd": 61,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "ENUM",
+        "TypeExpression": "mypkg.subpkg.QuxEnum",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/AAA",
@@ -248,7 +428,17 @@
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 46,
       "DefEnd": 49,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "ENUM_CONSTANT",
+        "TypeExpression": "mypkg.subpkg.QuxEnum",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public",
+          "static",
+          "final"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/BBB",
@@ -258,7 +448,17 @@
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 51,
       "DefEnd": 54,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "ENUM_CONSTANT",
+        "TypeExpression": "mypkg.subpkg.QuxEnum",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public",
+          "static",
+          "final"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/CCC",
@@ -268,7 +468,17 @@
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 56,
       "DefEnd": 59,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "ENUM_CONSTANT",
+        "TypeExpression": "mypkg.subpkg.QuxEnum",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public",
+          "static",
+          "final"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/ZipClass/:init",
@@ -278,7 +488,15 @@
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 60,
       "DefEnd": 68,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type",
@@ -288,7 +506,15 @@
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 47,
       "DefEnd": 318,
-      "Exported": true
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.subpkg.ZipClass",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "public"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type/zap",
@@ -298,7 +524,15 @@
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 72,
       "DefEnd": 278,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg.subpkg",
+        "Modifiers": [
+          "private"
+        ]
+      }
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type/zap/foo",
@@ -308,7 +542,13 @@
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 95,
       "DefEnd": 125,
-      "Exported": false
+      "Exported": false,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "mypkg.FooClass",
+        "Package": "mypkg.subpkg",
+        "Modifiers": []
+      }
     }
   ],
   "Refs": [

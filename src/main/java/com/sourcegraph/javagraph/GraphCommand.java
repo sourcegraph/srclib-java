@@ -22,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -105,6 +106,20 @@ public class GraphCommand {
 				
 				object.add("Path", new JsonPrimitive(sym.key.formatPath()));
 				object.add("TreePath", new JsonPrimitive(sym.key.formatTreePath()));
+				
+				// Populate extra data field
+				JsonObject data = new JsonObject();
+				data.addProperty("JavaKind", sym.kind);
+				data.addProperty("TypeExpression", sym.typeExpr);
+				data.addProperty("Package", sym.pkg);
+				
+				if(sym.modifiers != null) {
+					JsonArray modifiers = new JsonArray();
+					for(String modifier : sym.modifiers) modifiers.add(new JsonPrimitive(modifier));
+					data.add("Modifiers", modifiers);
+				}
+				
+				object.add("Data", data);
 				
 				return object;
 			}
