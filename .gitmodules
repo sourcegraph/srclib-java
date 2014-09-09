@@ -1,3 +1,6 @@
 [submodule "testdata/case/java-maven-sample"]
 	path = testdata/case/java-maven-sample
 	url = https://github.com/sgtest/java-maven-sample.git
+[submodule "testdata/case/java-jdk-sample"]
+	path = testdata/case/java-jdk-sample
+	url = https://github.com/sgtest/java-jdk-sample.git

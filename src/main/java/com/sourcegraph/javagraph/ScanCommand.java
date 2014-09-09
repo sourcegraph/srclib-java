@@ -154,7 +154,7 @@ public class ScanCommand {
 		}
 		
 		// Java Standard Library
-		if(repoURI.equals(SourceUnit.StdLibRepoURI)) {
+		if(repoURI.equals(SourceUnit.StdLibRepoURI) || repoURI.equals(SourceUnit.StdLibTestRepoURI)) {
 			try{
 				// Standard Library Unit
 				final SourceUnit unit = new SourceUnit();
@@ -166,13 +166,14 @@ public class ScanCommand {
 				units.add(unit);
 				
 				// Test code source unit
-				final SourceUnit testUnit = new SourceUnit();
+				// FIXME(rameshvarun): Test code scanning is currently disabled, because graphing code expects package names (which the test code lacks)
+				/* final SourceUnit testUnit = new SourceUnit();
 				testUnit.Type = "JavaArtifact";
 				testUnit.Name = "Tests";
 				testUnit.Dir = "test/";
 				testUnit.Files = scanFiles("test/");
 				testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				units.add(testUnit);
+				units.add(testUnit); */
 				
 				// Build tools source unit
 				final SourceUnit toolsUnit = new SourceUnit();
@@ -200,20 +201,24 @@ public class ScanCommand {
 	public static java.util.List<String> scanFiles(String sourcePath) throws IOException {
 		final LinkedList<String> files = new LinkedList<String>();
 		
-		Files.walkFileTree(Paths.get(sourcePath), new SimpleFileVisitor<Path>() {
-			@Override
-		     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-		         throws IOException
-		     {
-				String filename = file.toString();
-				if(filename.endsWith(".java")) {
-					if(filename.startsWith("./"))
-						filename = filename.substring(2);
-					files.add(filename);
-				}
-				return FileVisitResult.CONTINUE;
-		     }
-		});
+		if(Files.exists(Paths.get(sourcePath))) {
+			Files.walkFileTree(Paths.get(sourcePath), new SimpleFileVisitor<Path>() {
+				@Override
+			     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+			         throws IOException
+			     {
+					String filename = file.toString();
+					if(filename.endsWith(".java")) {
+						if(filename.startsWith("./"))
+							filename = filename.substring(2);
+						files.add(filename);
+					}
+					return FileVisitResult.CONTINUE;
+			     }
+			});
+		} else {
+			System.err.println(sourcePath + " does not exist... Skipping...");
+		}
 		
 		return files;
 	}
