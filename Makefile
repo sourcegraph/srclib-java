@@ -1,6 +1,17 @@
 .PHONY: default
 
-default: target/javagraph-0.0.1-SNAPSHOT.jar
+default: install
 
-target/javagraph-0.0.1-SNAPSHOT.jar:
+install:
 	mvn package
+	mv target/srclib-java.jar .bin/srclib-java.jar
+
+test:
+	src -v test -m program
+
+test-gen:
+	src -v test -m program --gen
+
+clean:
+	rm .bin/srclib-java.jar
+	rm -rf target

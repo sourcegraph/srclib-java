@@ -10,6 +10,9 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONStreamAware;
 import org.json.simple.JSONValue;
 
+import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
+import com.sourcegraph.javagraph.SourceUnit.RawDependency;
+
 public class Symbol implements JSONStreamAware, JSONAware {
 	Symbol.Key key;
 	String kind;
@@ -28,6 +31,8 @@ public class Symbol implements JSONStreamAware, JSONAware {
 	String doc;
 
 	String typeExpr;
+	
+
 
 	@Override
 	public String toJSONString() {
@@ -104,5 +109,34 @@ public class Symbol implements JSONStreamAware, JSONAware {
 				return false;
 			return true;
 		}
+		
+		public String formatPath() {
+			return path.replace('.', '/').replace('$', '.');
+		}
+		
+		public String formatTreePath() {
+			return formatPath();
+		}
+		
+		private static String originURIJARFilePrefix = "jar:file:";
+		
+		public Resolution resolveOrigin(List<RawDependency> dependencies) {
+			if(origin == "") return null;
+			if(origin.split("!").length < 2) return null;
+			
+			String jarfile = origin.split("!")[0];
+			
+			if(jarfile.contains("jre/lib/")) return Resolution.StdLib();
+			
+			for(RawDependency dep : dependencies) {
+				if(origin.startsWith(originURIJARFilePrefix + dep.JarPath)) {
+					return dep.Resolve();
+				}
+			}
+			
+			return null;
+		}
 	}
+	
+
 }

@@ -2,11 +2,15 @@ package com.sourcegraph.javagraph;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GraphData implements GraphWriter {
 	public final List<Ref> refs = new ArrayList<>();
 	public final List<Symbol> symbols = new ArrayList<>();
+	
+	public final Map<Symbol.Key, Symbol> keyToSymbol = new HashMap<Symbol.Key, Symbol>();
 
 	public List<Ref> refsTo(Symbol.Key symbol) {
 		List<Ref> symrefs = new ArrayList<>();
@@ -26,6 +30,11 @@ public class GraphData implements GraphWriter {
 	@Override
 	public void writeSymbol(Symbol s) throws IOException {
 		symbols.add(s);
+		keyToSymbol.put(s.key, s);
+	}
+	
+	public Symbol getSymbolFromKey(Symbol.Key key) {
+		return keyToSymbol.get(key);
 	}
 
 	@Override

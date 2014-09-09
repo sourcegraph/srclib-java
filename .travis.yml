@@ -1,0 +1,20 @@
+language: java
+jdk:
+  - oraclejdk8
+
+install:
+  # Makes the tools.jar file accesible from Maven
+  - mvn install:install-file -DgroupId=com.sun -DartifactId=tools -Dversion=1.8 -Dpackaging=jar -Dfile="/usr/lib/jvm/java-8-oracle/lib/tools.jar"
+
+  # Install Srclib
+  - sudo wget -NO /tmp/src.zip 'https://api.equinox.io/1/Applications/ap_BQxVz1iWMxmjQnbVGd85V58qz6/Updates/Asset/src-0.0.22.zip?os=linux&arch=amd64&channel=stable'
+  - sudo unzip /tmp/src*.zip -d /usr/local/bin
+  - sudo mv /usr/local/bin/src-* /usr/local/bin/src
+  - sudo chmod +x /usr/local/bin/src
+
+  # Build this toolchain
+  - make
+  - src toolchain add sourcegraph.com/sourcegraph/srclib-java
+
+script:
+  - make test
