@@ -41,11 +41,25 @@ public class SourceUnit {
 			this.Scope = Scope;
 			this.JarPath = JarPath;
 		}
+		
+		static HashMap<String, String> overrides = new HashMap<String, String>() {{
+			put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
+			put("com.badlogicgames.gdx/", "https://github.com/libgdx/libgdx");
+			put("com.badlogicgames.jglfw/", "https://github.com/badlogic/jglfw");
+			put("org.json/json", "https://github.com/douglascrockford/JSON-java");
+		}};
+		
+		public static String checkOverrides(String lookup) {
+			for(String key : overrides.keySet()) {
+				if(lookup.startsWith(key)) return overrides.get(key);
+			}
+			return null;
+		}
 
 		public Resolution Resolve() {
 			if(resolved == null) {
 				// Get the url to the POM file for this artifact
-				String url = "http://central.maven.org/maven2/" + GroupId
+				String url = "http://central.maven.org/maven2/" + GroupId.replace(".", "/")
 						+ "/" + ArtifactId + 
 						"/" + Version + "/" + 
 						ArtifactId + "-" + 
@@ -54,35 +68,42 @@ public class SourceUnit {
 				resolved = new Resolution();
 				
 				try {
-					InputStream input = new BOMInputStream(new URL(url).openStream());
+					String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
 					
-					MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-					Model model = xpp3Reader.read(input);
-					input.close();
+					if(cloneUrl == null) {
+						InputStream input = new BOMInputStream(new URL(url).openStream());
+						
+						MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
+						Model model = xpp3Reader.read(input);
+						input.close();
+						
+						Scm scm = model.getScm();
+						if(scm != null) cloneUrl = scm.getUrl();
+					}
 					
-					Scm scm = model.getScm();
-					if(scm != null) {
-					
-					
+					if(cloneUrl != null) {
 						resolved.Raw = this;
 						
 						ResolvedTarget target = new ResolvedTarget();
-						target.ToRepoCloneURL = model.getScm().getConnection();
-						target.ToUnit = model.getGroupId() + "/" + model.getArtifactId();
+						target.ToRepoCloneURL = cloneUrl;
+						target.ToUnit = GroupId + "/" + ArtifactId;
 						target.ToUnitType = "JavaArtifact";
-						target.ToVersionString = model.getVersion();
+						target.ToVersionString = Version;
 						
 						resolved.Target = target;
 					}
 					else {
-						resolved.Error = model.getArtifactId() + " does not have an associated SCM repository.";
+						resolved.Error = ArtifactId + " does not have an associated SCM repository.";
 					}
 					
 					
 				} catch (Exception e) {
-					resolved.Error = e.getMessage();
+					resolved.Error = "Could not download file " + e.getMessage();
 				}
 			}
+			
+			if(resolved.Error != null)
+				System.err.println("Error in resolving dependency - " + resolved.Error);
 			
 			return resolved;
 		}

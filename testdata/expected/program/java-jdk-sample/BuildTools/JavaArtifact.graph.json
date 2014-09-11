@@ -1241,9 +1241,9 @@
       "End": 1227
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedReader:type/close",
       "Def": false,
       "Repo": "",
@@ -1252,9 +1252,9 @@
       "End": 2749
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedReader:type/readLine",
       "Def": false,
       "Repo": "",
@@ -1263,9 +1263,9 @@
       "End": 2156
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedReader:type",
       "Def": false,
       "Repo": "",
@@ -1274,9 +1274,9 @@
       "End": 1874
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedReader:type",
       "Def": false,
       "Repo": "",
@@ -1285,9 +1285,9 @@
       "End": 1902
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type/close",
       "Def": false,
       "Repo": "",
@@ -1296,9 +1296,9 @@
       "End": 2771
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type/newLine",
       "Def": false,
       "Repo": "",
@@ -1307,9 +1307,9 @@
       "End": 2356
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type/newLine",
       "Def": false,
       "Repo": "",
@@ -1318,9 +1318,9 @@
       "End": 2494
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type/newLine",
       "Def": false,
       "Repo": "",
@@ -1329,9 +1329,9 @@
       "End": 2727
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type",
       "Def": false,
       "Repo": "",
@@ -1340,9 +1340,9 @@
       "End": 1948
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/BufferedWriter:type",
       "Def": false,
       "Repo": "",
@@ -1351,9 +1351,9 @@
       "End": 1976
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/File:type",
       "Def": false,
       "Repo": "",
@@ -1362,9 +1362,9 @@
       "End": 1784
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/File:type",
       "Def": false,
       "Repo": "",
@@ -1373,9 +1373,9 @@
       "End": 1803
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/File:type",
       "Def": false,
       "Repo": "",
@@ -1384,9 +1384,9 @@
       "End": 1824
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/File:type",
       "Def": false,
       "Repo": "",
@@ -1395,9 +1395,9 @@
       "End": 1843
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/FileReader:type",
       "Def": false,
       "Repo": "",
@@ -1406,9 +1406,9 @@
       "End": 1917
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/FileWriter:type",
       "Def": false,
       "Repo": "",
@@ -1417,9 +1417,9 @@
       "End": 1991
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/IOException:type",
       "Def": false,
       "Repo": "",
@@ -1428,9 +1428,9 @@
       "End": 2799
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1439,9 +1439,9 @@
       "End": 1673
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1450,9 +1450,9 @@
       "End": 2829
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/Writer:type/write:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1461,9 +1461,9 @@
       "End": 2315
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/Writer:type/write:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1472,9 +1472,9 @@
       "End": 2455
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io/Writer:type/write:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1483,9 +1483,9 @@
       "End": 2686
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/io",
       "Def": false,
       "Repo": "",
@@ -1494,9 +1494,9 @@
       "End": 1258
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/Exception:type",
       "Def": false,
       "Repo": "",
@@ -1505,9 +1505,9 @@
       "End": 1618
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/Long:type/toHexString:long",
       "Def": false,
       "Repo": "",
@@ -1516,9 +1516,9 @@
       "End": 2551
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/Long:type",
       "Def": false,
       "Repo": "",
@@ -1527,9 +1527,9 @@
       "End": 2539
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type/charAt:int",
       "Def": false,
       "Repo": "",
@@ -1538,9 +1538,9 @@
       "End": 2215
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type/charAt:int",
       "Def": false,
       "Repo": "",
@@ -1549,9 +1549,9 @@
       "End": 3053
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type/length",
       "Def": false,
       "Repo": "",
@@ -1560,9 +1560,9 @@
       "End": 2194
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type/length",
       "Def": false,
       "Repo": "",
@@ -1571,9 +1571,9 @@
       "End": 2599
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type/length",
       "Def": false,
       "Repo": "",
@@ -1582,9 +1582,9 @@
       "End": 2988
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type",
       "Def": false,
       "Repo": "",
@@ -1593,9 +1593,9 @@
       "End": 1593
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type",
       "Def": false,
       "Repo": "",
@@ -1604,9 +1604,9 @@
       "End": 2106
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type",
       "Def": false,
       "Repo": "",
@@ -1615,9 +1615,9 @@
       "End": 2528
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/String:type",
       "Def": false,
       "Repo": "",
@@ -1626,9 +1626,9 @@
       "End": 2936
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type/err",
       "Def": false,
       "Repo": "",
@@ -1637,9 +1637,9 @@
       "End": 1665
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type/err",
       "Def": false,
       "Repo": "",
@@ -1648,9 +1648,9 @@
       "End": 2821
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type/exit:int",
       "Def": false,
       "Repo": "",
@@ -1659,9 +1659,9 @@
       "End": 1752
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type",
       "Def": false,
       "Repo": "",
@@ -1670,9 +1670,9 @@
       "End": 1661
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type",
       "Def": false,
       "Repo": "",
@@ -1681,9 +1681,9 @@
       "End": 1747
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/System:type",
       "Def": false,
       "Repo": "",
@@ -1692,9 +1692,9 @@
       "End": 2817
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Matcher:type/matches",
       "Def": false,
       "Repo": "",
@@ -1703,9 +1703,9 @@
       "End": 2292
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Matcher:type",
       "Def": false,
       "Repo": "",
@@ -1714,9 +1714,9 @@
       "End": 2246
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Pattern:type/compile:java.lang.String",
       "Def": false,
       "Repo": "",
@@ -1725,9 +1725,9 @@
       "End": 2036
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Pattern:type/matcher:java.lang.CharSequence",
       "Def": false,
       "Repo": "",
@@ -1736,9 +1736,9 @@
       "End": 2260
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Pattern:type",
       "Def": false,
       "Repo": "",
@@ -1747,9 +1747,9 @@
       "End": 2016
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex/Pattern:type",
       "Def": false,
       "Repo": "",
@@ -1758,9 +1758,9 @@
       "End": 2028
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util/regex",
       "Def": false,
       "Repo": "",
@@ -1769,9 +1769,9 @@
       "End": 1284
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/util",
       "Def": false,
       "Repo": "",

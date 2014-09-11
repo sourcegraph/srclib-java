@@ -123,16 +123,16 @@ public class ScanCommand {
 					String line = null;
 					while((line = in.readLine()) != null) {
 						if(line.startsWith("   ")) {
-							if(line.trim().equals("none")) break; // No maven dependencies reported
+							if(line.trim().equals("none")) continue; // No maven dependencies reported
 							
 							String[] parts = line.trim().split(":");
 							
 							unit.Dependencies.add(new SourceUnit.RawDependency(
 									parts[0], // GroupID
 									parts[1], // ArtifactID
-									parts[3], // Version
-									parts[4], // Scope
-									parts[5]  // JarFile
+									parts[parts.length - 3], // Version
+									parts[parts.length - 2], // Scope
+									parts[parts.length - 1]  // JarFile
 							));
 						}
 					}

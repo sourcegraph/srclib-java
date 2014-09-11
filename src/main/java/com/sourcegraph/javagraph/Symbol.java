@@ -121,15 +121,11 @@ public class Symbol implements JSONStreamAware, JSONAware {
 		private static String originURIJARFilePrefix = "jar:file:";
 		
 		public Resolution resolveOrigin(List<RawDependency> dependencies) {
-			if(origin == "") return null;
-			if(origin.split("!").length < 2) return null;
-			
-			String jarfile = origin.split("!")[0];
-			
-			if(jarfile.contains("jre/lib/")) return Resolution.StdLib();
+			if(origin.isEmpty()) return null; // Empty origin could not be resolved
+			if(origin.contains("jre/lib/")) return Resolution.StdLib(); //JRE standard library
 			
 			for(RawDependency dep : dependencies) {
-				if(origin.startsWith(originURIJARFilePrefix + dep.JarPath)) {
+				if(origin.contains(dep.JarPath)) {
 					return dep.Resolve();
 				}
 			}
