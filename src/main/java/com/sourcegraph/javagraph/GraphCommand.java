@@ -133,7 +133,10 @@ public class GraphCommand {
 					JsonSerializationContext arg2) {
 				JsonObject object = new JsonObject();
 				
-				if(ref.symbol.origin != "" && !ref.symbol.origin.contains("file:")) {
+				object.addProperty("Origin", ref.symbol.origin);
+				
+				boolean remoteSymbol = !ref.symbol.origin.isEmpty() && !ref.symbol.origin.startsWith("file:");
+				if(remoteSymbol) {
 					Resolution resolution = ref.symbol.resolveOrigin(unit.Dependencies);
 					
 					if(resolution != null && resolution.Error == null) {
@@ -142,7 +145,8 @@ public class GraphCommand {
 						object.add("DefUnit", new JsonPrimitive(resolution.Target.ToUnit));
 					}
 					else {
-						System.err.println("Could not resolve origin: " + ref.symbol.origin);
+						System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" +  ref.end + " => " + ref.symbol.origin);
+						return new JsonPrimitive("unresolved");
 					}
 				}
 				
@@ -238,9 +242,14 @@ public class GraphCommand {
 		
 		// Print out Refs
 		System.out.print("], \"Refs\": [");
+		boolean firstRef = true;
 		for(Ref ref : graph.Refs) {
-			if(ref != graph.Refs.get(0)) System.out.print(",");
-			System.out.print(gson.toJson(ref));
+			String refString = gson.toJson(ref);
+			if(!refString.equals("\"unresolved\"")) {
+				if(firstRef) firstRef = false;
+				else System.out.print(",");
+				System.out.print(refString);
+			}
 		}
 		
 		// Print out Docs

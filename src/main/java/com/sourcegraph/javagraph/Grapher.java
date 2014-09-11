@@ -106,7 +106,6 @@ public class Grapher {
 		} catch(Exception e) {
 			for (Diagnostic<?> diagnostic : diags.getDiagnostics())
 				System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toString());
-			
 			System.exit(1);
 		}
 	}
