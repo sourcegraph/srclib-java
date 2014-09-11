@@ -65,6 +65,7 @@ public class ScanCommand {
 		final PathMatcher pomPattern = FileSystems.getDefault().getPathMatcher("glob:**/pom.xml");
 		final ArrayList<Path> pomFiles = new ArrayList<Path>();
 		
+		//TODO: Also match .pom files
 		try {
 			Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
 			     @Override

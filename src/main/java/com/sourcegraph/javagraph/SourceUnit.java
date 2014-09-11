@@ -42,6 +42,7 @@ public class SourceUnit {
 			this.JarPath = JarPath;
 		}
 		
+		// Package name to VCS url overrides
 		static HashMap<String, String> overrides = new HashMap<String, String>() {{
 			put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
 			put("com.badlogicgames.gdx/", "https://github.com/libgdx/libgdx");
