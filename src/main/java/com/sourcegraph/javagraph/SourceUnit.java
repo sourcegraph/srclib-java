@@ -25,6 +25,9 @@ public class SourceUnit {
 		return Repo.equals(StdLibRepoURI) || Repo.equals(StdLibRepoURI);
 	}
 	
+	/**
+	 * A Raw, unresolved Maven Dependency.
+	 */
 	public static class RawDependency {
 		String GroupId;
 		String ArtifactId;
@@ -32,6 +35,9 @@ public class SourceUnit {
 		String Scope;
 		String JarPath;
 		
+		/**
+		 * Cache the result of the resolution, so no additional url requests need to be made.
+		 */
 		private transient Resolution resolved = null;
 		
 		public RawDependency(String GroupId, String ArtifactId, String Version, String Scope, String JarPath) {
@@ -42,7 +48,9 @@ public class SourceUnit {
 			this.JarPath = JarPath;
 		}
 		
-		// Package name to VCS url overrides
+		/**
+		 * Provide Clone URL overrides for different groupid/artifactid source units
+		 */
 		static HashMap<String, String> overrides = new HashMap<String, String>() {{
 			put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
 			put("com.badlogicgames.gdx/", "https://github.com/libgdx/libgdx");
@@ -50,6 +58,10 @@ public class SourceUnit {
 			put("org.json/json", "https://github.com/douglascrockford/JSON-java");
 		}};
 		
+		/**
+		 * @param lookup GroupID + "/" + ArtifactID
+		 * @return A VCS url, if an override was found, null if not.
+		 */
 		public static String checkOverrides(String lookup) {
 			for(String key : overrides.keySet()) {
 				if(lookup.startsWith(key)) return overrides.get(key);
@@ -57,6 +69,10 @@ public class SourceUnit {
 			return null;
 		}
 
+		/**
+		 * Try to resolve this raw Dependency to its VCS target.
+		 * @return The Resolution Object. Error will be non-null if a Resolution could not be performed.
+		 */
 		public Resolution Resolve() {
 			if(resolved == null) {
 				// Get the url to the POM file for this artifact
