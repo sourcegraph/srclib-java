@@ -55,6 +55,11 @@ public class GraphCommand {
 		String File;
 	}
 	
+	
+	/**
+	 * The Source Unit that is read in from STDIN. Defined here, so that it can be
+	 * accessed within the anonymous classes below.
+	 */
 	public static SourceUnit unit = null;
 	
 	static class Graph {

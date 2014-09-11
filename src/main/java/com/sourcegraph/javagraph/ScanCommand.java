@@ -79,7 +79,6 @@ public class ScanCommand {
 			     }
 			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -141,7 +140,6 @@ public class ScanCommand {
 					in.close();
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					System.exit(1);
 				}
@@ -186,7 +184,6 @@ public class ScanCommand {
 				units.add(toolsUnit);
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.exit(1);
 			}
@@ -198,7 +195,7 @@ public class ScanCommand {
 	}
 	
 
-
+	// Recursively find .java files under a given source path
 	public static java.util.List<String> scanFiles(String sourcePath) throws IOException {
 		final LinkedList<String> files = new LinkedList<String>();
 		

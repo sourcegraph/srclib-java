@@ -32,8 +32,6 @@ public class Symbol implements JSONStreamAware, JSONAware {
 
 	String typeExpr;
 	
-
-
 	@Override
 	public String toJSONString() {
 		StringWriter b = new StringWriter();
@@ -118,8 +116,11 @@ public class Symbol implements JSONStreamAware, JSONAware {
 			return formatPath();
 		}
 		
-		private static String originURIJARFilePrefix = "jar:file:";
-		
+		/**
+		 * Attempt to resolve the symbol's origin to a remote definition.
+		 * @param dependencies The RawDependency List of the current Source Unit
+		 * @return The resolved dependency, null if it could not be resolved.
+		 */
 		public Resolution resolveOrigin(List<RawDependency> dependencies) {
 			if(origin.isEmpty()) return null; // Empty origin could not be resolved
 			if(origin.contains("jre/lib/")) return Resolution.StdLib(); //JRE standard library
