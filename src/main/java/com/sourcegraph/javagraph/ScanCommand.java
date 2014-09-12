@@ -127,13 +127,17 @@ public class ScanCommand {
 							
 							String[] parts = line.trim().split(":");
 							
-							unit.Dependencies.add(new SourceUnit.RawDependency(
+							
+							SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
 									parts[0], // GroupID
 									parts[1], // ArtifactID
 									parts[parts.length - 3], // Version
 									parts[parts.length - 2], // Scope
 									parts[parts.length - 1]  // JarFile
-							));
+							);
+							
+							if(!unit.Dependencies.contains(dep))
+								unit.Dependencies.add(dep);
 						}
 					}
 					
