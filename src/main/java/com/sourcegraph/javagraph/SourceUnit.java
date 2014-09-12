@@ -56,6 +56,7 @@ public class SourceUnit {
 			put("com.badlogicgames.gdx/", "https://github.com/libgdx/libgdx");
 			put("com.badlogicgames.jglfw/", "https://github.com/badlogic/jglfw");
 			put("org.json/json", "https://github.com/douglascrockford/JSON-java");
+			put("junit/junit", "https://github.com/junit-team/junit");
 		}};
 		
 		/**
@@ -123,6 +124,48 @@ public class SourceUnit {
 				System.err.println("Error in resolving dependency - " + resolved.Error);
 			
 			return resolved;
+		}
+		
+		// Auto-generated HashCode method that compares ArtifactId, GroupId, and Version
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result
+					+ ((ArtifactId == null) ? 0 : ArtifactId.hashCode());
+			result = prime * result
+					+ ((GroupId == null) ? 0 : GroupId.hashCode());
+			result = prime * result
+					+ ((Version == null) ? 0 : Version.hashCode());
+			return result;
+		}
+
+		// Auto-generated Equals method that compares ArtifactId, GroupId, and Version
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			RawDependency other = (RawDependency) obj;
+			if (ArtifactId == null) {
+				if (other.ArtifactId != null)
+					return false;
+			} else if (!ArtifactId.equals(other.ArtifactId))
+				return false;
+			if (GroupId == null) {
+				if (other.GroupId != null)
+					return false;
+			} else if (!GroupId.equals(other.GroupId))
+				return false;
+			if (Version == null) {
+				if (other.Version != null)
+					return false;
+			} else if (!Version.equals(other.Version))
+				return false;
+			return true;
 		}
 	}
 	
