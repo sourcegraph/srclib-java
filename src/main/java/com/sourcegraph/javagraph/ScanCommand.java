@@ -77,6 +77,12 @@ public class ScanCommand {
 			    		 
 			    	 return FileVisitResult.CONTINUE;
 			     }
+                             @Override
+                                 public FileVisitResult visitFileFailed(Path file, IOException e)
+			         throws IOException
+			     {
+			    	 return FileVisitResult.CONTINUE;
+			     }
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
