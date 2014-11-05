@@ -57,6 +57,11 @@ public class ScanCommand {
 	}
 	
 	public void Execute() {
+		// Defaults
+		if (null == repoURI) {
+			repoURI = ".";
+		}
+
 		// Source Units list
 		ArrayList<SourceUnit> units = new ArrayList<SourceUnit>();
 		

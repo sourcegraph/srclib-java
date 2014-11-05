@@ -1,0 +1,86 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "com.sourcegraph.javagraph.Main"
+version = '4.0.0'
+group = 'com.sourcegraph'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  compile group:'com.google.code.gson', name:'gson', version:'2.3'
+  compile group:'org.apache.commons', name:'commons-lang3', version:'3.3.2'
+  compile group:'com.beust', name:'jcommander', version:'1.30'
+  compile group:'com.googlecode.json-simple', name:'json-simple', version:'1.1.1'
+  compile group:'org.apache.maven', name:'maven-model', version:'3.2.3'
+  compile group:'commons-io', name:'commons-io', version:'2.4'
+
+  compile files("${System.properties['java.home']}/../lib/tools.jar")
+
+  testCompile group:'junit', name:'junit', version:'4.10'
+}
+
+/*
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.beust</groupId>
+      <artifactId>jcommander</artifactId>
+      <version>1.30</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.3</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <version>3.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun</groupId>
+      <artifactId>tools</artifactId>
+      <version>1.8</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
+*/
