@@ -16,6 +16,7 @@ dependencies {
   compile group:'com.googlecode.json-simple', name:'json-simple', version:'1.1.1'
   compile group:'org.apache.maven', name:'maven-model', version:'3.2.3'
   compile group:'commons-io', name:'commons-io', version:'2.4'
+  compile group:'org.javatuples', name:'javatuples', version:'1.2'
 
   compile files("${System.properties['java.home']}/../lib/tools.jar")
 
