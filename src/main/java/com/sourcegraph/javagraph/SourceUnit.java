@@ -17,14 +17,14 @@ import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
 
 public class SourceUnit {
-	
+
 	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
 	public static String StdLibTestRepoURI = "github.com/sgtest/java-jdk-sample";
-	
+
 	public boolean isStdLib() {
 		return Repo.equals(StdLibRepoURI) || Repo.equals(StdLibRepoURI);
 	}
-	
+
 	/**
 	 * A Raw, unresolved Maven Dependency.
 	 */
@@ -34,12 +34,12 @@ public class SourceUnit {
 		String Version;
 		String Scope;
 		String JarPath;
-		
+
 		/**
 		 * Cache the result of the resolution, so no additional url requests need to be made.
 		 */
 		private transient Resolution resolved = null;
-		
+
 		public RawDependency(String GroupId, String ArtifactId, String Version, String Scope, String JarPath) {
 			this.GroupId = GroupId;
 			this.ArtifactId = ArtifactId;
@@ -47,7 +47,7 @@ public class SourceUnit {
 			this.Scope = Scope;
 			this.JarPath = JarPath;
 		}
-		
+
 		/**
 		 * Provide Clone URL overrides for different groupid/artifactid source units
 		 */
@@ -58,7 +58,7 @@ public class SourceUnit {
 			put("org.json/json", "https://github.com/douglascrockford/JSON-java");
 			put("junit/junit", "https://github.com/junit-team/junit");
 		}};
-		
+
 		/**
 		 * @param lookup GroupID + "/" + ArtifactID
 		 * @return A VCS url, if an override was found, null if not.
@@ -78,54 +78,54 @@ public class SourceUnit {
 			if(resolved == null) {
 				// Get the url to the POM file for this artifact
 				String url = "http://central.maven.org/maven2/" + GroupId.replace(".", "/")
-						+ "/" + ArtifactId + 
-						"/" + Version + "/" + 
-						ArtifactId + "-" + 
+						+ "/" + ArtifactId +
+						"/" + Version + "/" +
+						ArtifactId + "-" +
 						Version + ".pom";
-				
+
 				resolved = new Resolution();
-				
+
 				try {
 					String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
-					
+
 					if(cloneUrl == null) {
 						InputStream input = new BOMInputStream(new URL(url).openStream());
-						
+
 						MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
 						Model model = xpp3Reader.read(input);
 						input.close();
-						
+
 						Scm scm = model.getScm();
 						if(scm != null) cloneUrl = scm.getUrl();
 					}
-					
+
 					if(cloneUrl != null) {
 						resolved.Raw = this;
-						
+
 						ResolvedTarget target = new ResolvedTarget();
 						target.ToRepoCloneURL = cloneUrl;
 						target.ToUnit = GroupId + "/" + ArtifactId;
 						target.ToUnitType = "JavaArtifact";
 						target.ToVersionString = Version;
-						
+
 						resolved.Target = target;
 					}
 					else {
 						resolved.Error = ArtifactId + " does not have an associated SCM repository.";
 					}
-					
-					
+
+
 				} catch (Exception e) {
 					resolved.Error = "Could not download file " + e.getMessage();
 				}
 			}
-			
+
 			if(resolved.Error != null)
 				System.err.println("Error in resolving dependency - " + resolved.Error);
-			
+
 			return resolved;
 		}
-		
+
 		// Auto-generated HashCode method that compares ArtifactId, GroupId, and Version
 		@Override
 		public int hashCode() {
@@ -168,26 +168,26 @@ public class SourceUnit {
 			return true;
 		}
 	}
-	
+
 	String Name;
 	String Type;
 	String Repo;
-	
+
 	//TODO(rameshvarun): Globs entry
-	
+
 	List<String> Files = new LinkedList<String>();
 	String Dir;
-	
+
 	List<RawDependency> Dependencies = new LinkedList<RawDependency>();
-	
+
 	// TODO(rameshvarun): Info field
-	
+
 	Map<String, Object> Data = new HashMap<String, Object>();
-	
+
 	// TODO(rameshvarun): Config list
-	
+
 	Map<String, String> Ops = new HashMap<String,String>();
-	
+
 	public SourceUnit() {
 		Ops.put("graph", null);
 		Ops.put("depresolve", null);

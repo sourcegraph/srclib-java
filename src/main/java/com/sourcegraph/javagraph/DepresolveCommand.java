@@ -19,7 +19,7 @@ public class DepresolveCommand {
 		SourceUnit.RawDependency Raw;
 		ResolvedTarget Target;
 		String Error;
-		
+
 		private static Resolution stdlib = null;
 
 		public static Resolution StdLib() {
@@ -64,7 +64,7 @@ public class DepresolveCommand {
 
 		// All units but the JDK itself depend on the Std lib
 		if(!unit.Type.equals("Java")) resolutions.add(Resolution.StdLib());
-		
+
 		// Print out resolved dependencies
 		System.out.println(gson.toJson(resolutions));
 	}
