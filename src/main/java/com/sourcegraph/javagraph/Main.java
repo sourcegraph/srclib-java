@@ -11,23 +11,23 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		JCommander jc = new JCommander();
-		
+
 		// Add subcommands
 		ScanCommand scan = new ScanCommand();
 		jc.addCommand("scan", scan);
-		
+
 		GraphCommand graph = new GraphCommand();
 		jc.addCommand("graph", graph);
-		
+
 		DepresolveCommand depresolve = new DepresolveCommand();
 		jc.addCommand("depresolve", depresolve);
-		
+
 		try {
 			jc.parse(args);
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		switch (jc.getParsedCommand()) {
 			case "scan":
 				scan.Execute();
@@ -41,7 +41,7 @@ public class Main {
 			default:
 				System.out.println("Unkown command");
 		}
-		
+
 		jc.usage();
 		System.exit(1);
 	}
