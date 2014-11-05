@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +19,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.apache.commons.io.IOUtils;
@@ -26,11 +28,13 @@ import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.tools.javac.util.List;
+import org.javatuples.Triplet;
 
 public class ScanCommand {
 	@Parameter(names = { "--repo" }, description = "The URI of the repository that contains the directory tree being scanned")
@@ -39,7 +43,79 @@ public class ScanCommand {
 	@Parameter(names = { "--subdir" }, description = "The path of the current directory (in which the scanner is run), relative to the root directory of the repository being scanned (this is typically the root, \".\", as it is most useful to scan the entire repository)")
 	String subdir;
 
-	public static String[] dependencyResolveArgs = {"mvn", "dependency:resolve", "-DoutputAbsoluteArtifactFilename=true", "-DoutputFile=/dev/stderr"};
+	public static class POMAttrs {
+		String groupID;
+		String artifactID;
+		String description;
+		public POMAttrs(String g, String a, String d) {
+			groupID = g;
+			artifactID = a;
+			description = d;
+		}
+	};
+
+	public static POMAttrs getPOMAttrs(Path pomFile)
+		throws IOException, FileNotFoundException, XmlPullParserException
+	{
+		BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
+		MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
+		Model model = xpp3Reader.read(reader);
+
+		String groupId = model.getGroupId() == null
+			? model.getParent().getGroupId()
+			: model.getGroupId();
+
+		return new POMAttrs(groupId, model.getArtifactId(), model.getDescription());
+	}
+
+	public static HashSet<SourceUnit.RawDependency> getPOMDependencies(Path pomFile)
+		throws IOException
+	{
+		String[] mavenArgs = {
+			"mvn", "dependency:resolve",
+			"-DoutputAbsoluteArtifactFilename=true",
+			"-DoutputFile=/dev/stderr"};
+
+		HashSet<SourceUnit.RawDependency> results = new HashSet<SourceUnit.RawDependency>();
+
+		ProcessBuilder pb = new ProcessBuilder(mavenArgs);
+		pb.directory(new File(pomFile.getParent().toString()));
+
+		BufferedReader in = null;
+
+		try {
+			Process process = pb.start();
+			in = new BufferedReader(new InputStreamReader(
+				process.getErrorStream()));
+
+			IOUtils.copy(process.getInputStream(), System.err);
+
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				if (!line.startsWith("   ")) continue;
+				if (line.trim().equals("none")) continue;
+
+				String[] parts = line.trim().split(":");
+
+				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
+					parts[0], // GroupID
+					parts[1], // ArtifactID
+					parts[parts.length - 3], // Version
+					parts[parts.length - 2], // Scope
+					parts[parts.length - 1]  // JarFile
+				);
+
+				results.add(dep);
+			}
+
+			return results;
+		}
+		finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+	}
 
 	public static ArrayList<String> getSourcePaths() {
 		ArrayList<String> sourcePaths = new ArrayList<String>();
@@ -99,71 +175,28 @@ public class ScanCommand {
 		for(Path pomFile : pomFiles) {
 			try {
 				System.err.println("Reading " + pomFile + "...");
-				BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
+				POMAttrs attrs = getPOMAttrs(pomFile);
 
-				//Reader reader = new FileReader(pomFile.toFile());
-				MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-					Model model = xpp3Reader.read(reader);
-
-					final SourceUnit unit = new SourceUnit();
+				final SourceUnit unit = new SourceUnit();
 				unit.Type = "JavaArtifact";
-
-				String groupId = model.getGroupId() == null ? model.getParent().getGroupId() : model.getGroupId();
-				unit.Name = groupId + "/" + model.getArtifactId();
-
+				unit.Name = attrs.groupID + "/" + attrs.artifactID;
 				unit.Dir = pomFile.getParent().toString();
-
-				// Extra information for Data field
 				unit.Data.put("POMFile", pomFile.toString());
-				unit.Data.put("Description", model.getDescription());
+				unit.Data.put("Description", attrs.description);
 
-				// List all files TODO(rameshvarun): Maybe can't assume files are in src directory?
+				// TODO: Java source files can be other places besides ‘./src’
 				unit.Files = scanFiles(pomFile.getParent().resolve("src"));
-				unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 
-				//NOTE: This method of listing dependencies lists all dependencies, not just direct dependencies
-				System.err.println("Listing dependencies from " + pomFile + "...");
-				ProcessBuilder pb = new ProcessBuilder(dependencyResolveArgs);
-				pb.directory(new File(unit.Dir));
-				try {
-					Process process = pb.start();
+				// We need consistent output ordering for testing purposes.
+				unit.Files.sort((String a, String b) -> a.compareTo(b));
 
-					BufferedReader in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-					IOUtils.copy(process.getInputStream(), System.err);
-
-					String line = null;
-					while((line = in.readLine()) != null) {
-						if(line.startsWith("   ")) {
-							if(line.trim().equals("none")) continue; // No maven dependencies reported
-
-							String[] parts = line.trim().split(":");
-
-
-							SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
-									parts[0], // GroupID
-									parts[1], // ArtifactID
-									parts[parts.length - 3], // Version
-									parts[parts.length - 2], // Scope
-									parts[parts.length - 1]  // JarFile
-							);
-
-							if(!unit.Dependencies.contains(dep))
-								unit.Dependencies.add(dep);
-						}
-					}
-
-					in.close();
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					System.exit(1);
-				}
-
+				// This will list all dependencies, not just direct ones.
+				unit.Dependencies = new ArrayList(getPOMDependencies(pomFile));
 				units.add(unit);
 
-					reader.close();
-			} catch(Exception e) {
-				System.err.println(e.getMessage());
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(1);
 			}
 		}
 
