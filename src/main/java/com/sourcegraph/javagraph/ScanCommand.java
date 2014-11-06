@@ -53,17 +53,92 @@ public class ScanCommand {
 		}
 	};
 
-	public static POMAttrs getGradleAttrs(Path gradleFile) {
-		return new POMAttrs(null, null, null);
-	}
-
-	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path pomFile)
+	public static void injectInspectorTaskIntoGradleFile(Path gradleFile)
 		throws IOException
 	{
-		String[] gradleArgs = {"gradle", "dependencies"};
+	}
 
+	public static String extractPayloadFromPrefixedLine(String prefix, String line) {
+		int idx = line.indexOf(prefix);
+		if (-1 == idx) return null;
+		int offset = idx + prefix.length();
+		return line.substring(offset).trim();
+	}
+
+	// TODO Merge this function with ‘getGradleDependencies’.
+	public static POMAttrs getGradleAttrs(Path gradleFile)
+		throws IOException
+	{
+		injectInspectorTaskIntoGradleFile(gradleFile);
+
+		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
 		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
-		pb.directory(new File(pomFile.getParent().toString()));
+		pb.directory(new File(gradleFile.getParent().toString()));
+
+		BufferedReader in = null;
+		HashSet<SourceUnit.RawDependency> results =
+			new HashSet<SourceUnit.RawDependency>();
+
+		String groupID = null;
+		String artifactID = null;
+		String description = null;
+
+		try {
+			Process process = pb.start();
+			in = new BufferedReader(new InputStreamReader(
+				process.getInputStream()));
+
+			IOUtils.copy(process.getErrorStream(), System.err);
+
+			String line = null;
+			while ((line = in.readLine()) != null) {
+
+				String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
+				String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
+				String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
+
+				if (null != groupPayload) groupID = groupPayload;
+				if (null != artifactPayload) artifactID = artifactPayload;
+				if (null != descriptionPayload) description = descriptionPayload;
+
+				if (null != groupPayload ||
+					null != artifactPayload ||
+					null != descriptionPayload)
+				{
+					System.err.println("Matching Line! " + line);
+				}
+			}
+		}
+		finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+
+		return new POMAttrs(groupID, artifactID, description);
+	}
+
+	/**
+		This collects gradle dependency information by calling
+		a custom task ("srclibCollectMetaInformation") that we have
+		injected into the build.gradle file. This outputs a bunch of
+		information including a list of dependencies, each on it's
+		own line. These lines take the following form:
+
+			^DEPENDENCY $scope:$group:$artifact:$version:$jarfile$
+
+	 Here's an example of a dependency line:
+
+			line="DEPENDENCY compile:com.beust:jcommander:1.30:~/.gradle/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
+	*/
+	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path gradleFile)
+		throws IOException
+	{
+		injectInspectorTaskIntoGradleFile(gradleFile);
+
+		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
+		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
+		pb.directory(new File(gradleFile.getParent().toString()));
 
 		BufferedReader in = null;
 		HashSet<SourceUnit.RawDependency> results =
@@ -77,40 +152,20 @@ public class ScanCommand {
 			IOUtils.copy(process.getErrorStream(), System.err);
 
 			String line = null;
-			String scope = null;
 			while ((line = in.readLine()) != null) {
 
-				// Gradle dependency output looks something like this:
-				//   runtime - Runtime classpath for source set 'main'.
-				//   +--- com.googlecode.json-simple:json-simple:1.1.1
-				//   |    \--- junit:junit:4.10
-				//   |         \--- org.hamcrest:hamcrest-core:1.1
+				String payload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
 
-				String[] scopes = {
-					"testRuntime", "compile", "default", "runtime", "testCompile"};
-
-				for (String s : scopes) {
-					if (0 == line.indexOf(s)) {
-						System.err.println("Found a scope! " + s);
-						scope = s;
-						break;
-					}
-				}
-
-				String prefix = "--- ";
-				int idx = line.indexOf(prefix);
-				int offset = idx + prefix.length();
-
-				if (-1 == idx) continue;
+				if (null == payload) continue;
 				System.err.println("Matching Line! " + line);
-				String[] parts = line.substring(offset).trim().split(":");
 
+				String[] parts = payload.split(":");
 				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
-					parts[0], // GroupID
-					parts[1], // ArtifactID
-					parts[2], // Version
-					scope, // Scope
-					null // JarFile
+					parts[1], // GroupID
+					parts[2], // ArtifactID
+					parts[3], // Version
+					parts[0], // Scope
+					parts[4] // JarFile
 				);
 
 				results.add(dep);
@@ -201,7 +256,7 @@ public class ScanCommand {
 					parts[1], // ArtifactID
 					parts[parts.length - 3], // Version
 					parts[parts.length - 2], // Scope
-					parts[parts.length - 1]  // JarFile
+					parts[parts.length - 1] // JarFile
 				);
 
 				results.add(dep);
