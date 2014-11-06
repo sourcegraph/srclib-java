@@ -34,7 +34,6 @@ import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.tools.javac.util.List;
-import org.javatuples.Triplet;
 
 public class ScanCommand {
 	@Parameter(names = { "--repo" }, description = "The URI of the repository that contains the directory tree being scanned")
@@ -54,6 +53,65 @@ public class ScanCommand {
 		}
 	};
 
+	public static POMAttrs getGradleAttrs(Path gradleFile) {
+		return new POMAttrs(null, null, null);
+	}
+
+	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path pomFile)
+		throws IOException
+	{
+		String[] gradleArgs = {"gradle", "dependencies"};
+
+		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
+		pb.directory(new File(pomFile.getParent().toString()));
+
+		BufferedReader in = null;
+		HashSet<SourceUnit.RawDependency> results =
+			new HashSet<SourceUnit.RawDependency>();
+
+		try {
+			Process process = pb.start();
+			in = new BufferedReader(new InputStreamReader(
+				process.getInputStream()));
+
+			IOUtils.copy(process.getErrorStream(), System.err);
+
+			String line = null;
+			while ((line = in.readLine()) != null) {
+
+				// Gradle dependency output looks something like this:
+				//   +--- com.googlecode.json-simple:json-simple:1.1.1
+				//   |    \--- junit:junit:4.10
+				//   |         \--- org.hamcrest:hamcrest-core:1.1
+
+				String prefix = "--- ";
+				int idx = line.indexOf(prefix);
+				int offset = idx + prefix.length();
+
+				if (-1 == idx) continue;
+				System.err.println("Matching Line! " + line);
+				String[] parts = line.substring(offset).trim().split(":");
+
+				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
+					parts[0], // GroupID
+					parts[1], // ArtifactID
+					parts[2], // Version
+					null, // Scope
+					null // JarFile
+				);
+
+				results.add(dep);
+			}
+
+			return results;
+		}
+		finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+	}
+
 	public static POMAttrs getPOMAttrs(Path pomFile)
 		throws IOException, FileNotFoundException, XmlPullParserException
 	{
@@ -66,6 +124,34 @@ public class ScanCommand {
 			: model.getGroupId();
 
 		return new POMAttrs(groupId, model.getArtifactId(), model.getDescription());
+	}
+
+	public static HashSet<Path> findMatchingFiles(String fileName)
+		throws IOException
+	{
+		String pat = "glob:**/" + fileName;
+		PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pat);
+		HashSet<Path> result = new HashSet<Path>();
+
+		Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+					throws IOException
+				{
+					if(matcher.matches(file))
+						result.add(file);
+
+					return FileVisitResult.CONTINUE;
+				}
+         @Override
+         public FileVisitResult visitFileFailed(Path file, IOException e)
+					throws IOException
+				{
+					return FileVisitResult.CONTINUE;
+				}
+		});
+
+		return result;
 	}
 
 	public static HashSet<SourceUnit.RawDependency> getPOMDependencies(Path pomFile)
@@ -133,47 +219,51 @@ public class ScanCommand {
 	}
 
 	public void Execute() {
-		// Defaults
-		if (null == repoURI) {
-			repoURI = ".";
-		}
+		if (null == repoURI) { repoURI = "."; }
 
-		// Source Units list
-		ArrayList<SourceUnit> units = new ArrayList<SourceUnit>();
+		// Recursivly find all pom.xml and build.gradle files.
+		HashSet<Path> pomFiles = null;
+		HashSet<Path> gradleFiles = null;
 
-		// Scan directory, looking for pom.xml files
-		System.err.println("Walking tree, looking for pom.xml files.");
-		final PathMatcher pomPattern = FileSystems.getDefault().getPathMatcher("glob:**/pom.xml");
-		final ArrayList<Path> pomFiles = new ArrayList<Path>();
-
-		//TODO: Also match .pom files
 		try {
-			Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
-					@Override
-					public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-						throws IOException
-					{
-						if(pomPattern.matches(file))
-							pomFiles.add(file);
+			System.err.println("Walking tree, looking for pom.xml files.");
+			pomFiles = findMatchingFiles("pom.xml");
+			System.err.println(pomFiles.size() + " POM files found.");
 
-						return FileVisitResult.CONTINUE;
-					}
-          @Override
-          public FileVisitResult visitFileFailed(Path file, IOException e)
-						throws IOException
-					{
-						return FileVisitResult.CONTINUE;
-					}
-			});
+			System.err.println("Walking tree, looking for build.gradle files.");
+			gradleFiles = findMatchingFiles("build.gradle");
+			System.err.println(gradleFiles.size() + " gradle files found.");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		System.err.println(pomFiles.size() + " POM files found.");
+		ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
 
-		for(Path pomFile : pomFiles) {
-			try {
+		try {
+			for(Path gradleFile : gradleFiles) {
+				System.err.println("Reading " + gradleFile + "...");
+				POMAttrs attrs = getGradleAttrs(gradleFile);
+
+				final SourceUnit unit = new SourceUnit();
+				unit.Type = "JavaArtifact";
+				unit.Name = attrs.groupID + "/" + attrs.artifactID;
+				unit.Dir = gradleFile.getParent().toString();
+				unit.Data.put("GradleFile", gradleFile.toString());
+				unit.Data.put("Description", attrs.description);
+
+				// TODO: Java source files can be other places besides ‘./src’
+				unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
+
+				// We need consistent output ordering for testing purposes.
+				unit.Files.sort((String a, String b) -> a.compareTo(b));
+
+				// This will list all dependencies, not just direct ones.
+				unit.Dependencies = new ArrayList(getGradleDependencies(gradleFile));
+				result.add(unit);
+			}
+
+			for(Path pomFile : pomFiles) {
 				System.err.println("Reading " + pomFile + "...");
 				POMAttrs attrs = getPOMAttrs(pomFile);
 
@@ -192,12 +282,12 @@ public class ScanCommand {
 
 				// This will list all dependencies, not just direct ones.
 				unit.Dependencies = new ArrayList(getPOMDependencies(pomFile));
-				units.add(unit);
+				result.add(unit);
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.exit(1);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
 		}
 
 		// Java Standard Library
@@ -210,7 +300,7 @@ public class ScanCommand {
 				unit.Dir = "src/";
 				unit.Files = scanFiles(getSourcePaths());
 				unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				units.add(unit);
+				result.add(unit);
 
 				// Test code source unit
 				// FIXME(rameshvarun): Test code scanning is currently disabled, because graphing code expects package names (which the test code lacks)
@@ -220,7 +310,7 @@ public class ScanCommand {
 				testUnit.Dir = "test/";
 				testUnit.Files = scanFiles("test/");
 				testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				units.add(testUnit); */
+				result.add(testUnit); */
 
 				// Build tools source unit
 				final SourceUnit toolsUnit = new SourceUnit();
@@ -229,7 +319,7 @@ public class ScanCommand {
 				toolsUnit.Dir = "make/src/classes/";
 				toolsUnit.Files = scanFiles("make/src/classes/");
 				toolsUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				units.add(toolsUnit);
+				result.add(toolsUnit);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -239,7 +329,7 @@ public class ScanCommand {
 		}
 
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		System.out.println(gson.toJson(units));
+		System.out.println(gson.toJson(result));
 	}
 
 
