@@ -56,6 +56,43 @@ public class ScanCommand {
 		}
 	};
 
+  public static String getGradleClassPath(Path gradleFile)
+		throws IOException
+	{
+		injectInspectorTaskIntoGradleFile(gradleFile);
+
+		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
+		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
+		pb.directory(new File(gradleFile.getParent().toString()));
+
+		BufferedReader in = null;
+		HashSet<SourceUnit.RawDependency> results =
+			new HashSet<SourceUnit.RawDependency>();
+
+		String result = null;
+
+		try {
+			Process process = pb.start();
+			in = new BufferedReader(new InputStreamReader(
+				process.getInputStream()));
+
+			IOUtils.copy(process.getErrorStream(), System.err);
+
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				result = extractPayloadFromPrefixedLine("CLASSPATH", line);
+				if (result != null) break;
+			}
+		}
+		finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+
+		return result;
+	}
+
 	public static void injectInspectorTaskIntoGradleFile(Path gradleFile)
 		throws IOException
 	{

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.lang.Error;
 import java.lang.reflect.Type;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -32,8 +33,6 @@ import com.google.gson.stream.JsonWriter;
 import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 
 public class GraphCommand {
-
-	public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
 
 	@Parameter
 	private List<String> files = new ArrayList<String>();
@@ -67,6 +66,32 @@ public class GraphCommand {
 		List<Ref> Refs = new LinkedList<Ref>();
 		List<Doc> Docs = new LinkedList<Doc>();
 	}
+
+	public static String getGradleClassPath(Path gradleFile)
+		throws IOException
+	{
+		return ScanCommand.getGradleClassPath(gradleFile);
+	}
+
+	public static String getMavenClassPath(Path pomFile) {
+
+		String[] buildClasspathArgs = {
+			"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
+
+		ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
+		pb.directory(pomFile.getParent().toFile());
+
+		try {
+			Process process = pb.start();
+			IOUtils.copy(process.getInputStream(), System.err);
+			return IOUtils.toString(process.getErrorStream());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.exit(1);
+			return null;
+		}
+	}
+
 
 	public void Execute() {
 		final Graph graph = new Graph(); // Final graph object that is serialized to stdout
@@ -191,19 +216,23 @@ public class GraphCommand {
 		if(!unit.isStdLib()) {
 			// Get dependency classpaths if this is not the stdlib
 			System.err.println("Getting classpath...");
-			ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
-			pb.directory(new File(unit.Dir));
 
 			try {
-				Process process = pb.start();
+				if (unit.Data.containsKey("GradleFile")) {
+					String filename = (String)unit.Data.get("GradleFile");
+					classPath = getGradleClassPath(Paths.get(filename));
+				} else if (unit.Data.containsKey("POMFile")) {
+					String filename = (String)unit.Data.get("POMFile");
+					classPath = getMavenClassPath(Paths.get(filename));
+				} else {
+					throw new Error("Malformed source unit! Expected Data.POMFile or Data.GradleFile");
+				}
 
-				IOUtils.copy(process.getInputStream(), System.err);
-				classPath = IOUtils.toString(process.getErrorStream());
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch(IOException e) {
+				e.printStackTrace();
 				System.exit(1);
 			}
+
 
 			sourcePath = unit.Dir + "/src/";
 		}
