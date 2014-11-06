@@ -34,6 +34,8 @@ import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 
 public class GraphCommand {
 
+    public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
+
 	@Parameter
 	private List<String> files = new ArrayList<String>();
 
@@ -74,10 +76,6 @@ public class GraphCommand {
 	}
 
 	public static String getMavenClassPath(Path pomFile) {
-
-		String[] buildClasspathArgs = {
-			"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
-
 		ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
 		pb.directory(pomFile.getParent().toFile());
 
@@ -225,7 +223,13 @@ public class GraphCommand {
 					String filename = (String)unit.Data.get("POMFile");
 					classPath = getMavenClassPath(Paths.get(filename));
 				} else {
-					throw new Error("Malformed source unit! Expected Data.POMFile or Data.GradleFile");
+                                    // neither maven or gradle (e.g., Java JDK)
+                                    // TODO(beyang): hack, basically the same as the maven path?
+                                    ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
+                                    pb.directory(new File(unit.Dir));
+                                    Process process = pb.start();
+                                    IOUtils.copy(process.getInputStream(), System.err);
+                                    classPath = IOUtils.toString(process.getErrorStream());
 				}
 
 			} catch(IOException e) {
