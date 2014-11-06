@@ -9,7 +9,7 @@ import java.util.Map;
 public class GraphData implements GraphWriter {
 	public final List<Ref> refs = new ArrayList<>();
 	public final List<Symbol> symbols = new ArrayList<>();
-	
+
 	public final Map<Symbol.Key, Symbol> keyToSymbol = new HashMap<Symbol.Key, Symbol>();
 
 	public List<Ref> refsTo(Symbol.Key symbol) {
@@ -32,7 +32,7 @@ public class GraphData implements GraphWriter {
 		symbols.add(s);
 		keyToSymbol.put(s.key, s);
 	}
-	
+
 	public Symbol getSymbolFromKey(Symbol.Key key) {
 		return keyToSymbol.get(key);
 	}

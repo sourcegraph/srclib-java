@@ -31,7 +31,7 @@ public class Symbol implements JSONStreamAware, JSONAware {
 	String doc;
 
 	String typeExpr;
-	
+
 	@Override
 	public String toJSONString() {
 		StringWriter b = new StringWriter();
@@ -107,15 +107,15 @@ public class Symbol implements JSONStreamAware, JSONAware {
 				return false;
 			return true;
 		}
-		
+
 		public String formatPath() {
 			return path.replace('.', '/').replace('$', '.');
 		}
-		
+
 		public String formatTreePath() {
 			return formatPath();
 		}
-		
+
 		/**
 		 * Attempt to resolve the symbol's origin to a remote definition.
 		 * @param dependencies The RawDependency List of the current Source Unit
@@ -124,19 +124,19 @@ public class Symbol implements JSONStreamAware, JSONAware {
 		public Resolution resolveOrigin(List<RawDependency> dependencies) {
 			if(origin.isEmpty()) return null; // Empty origin could not be resolved
 			if(origin.contains("jre/lib/")) return Resolution.StdLib(); //JRE standard library
-			
+
 			//TODO: Resolve nashorn.jar to http://hg.openjdk.java.net/jdk8/jdk8/nashorn
 			//TODO: Resolve tools.jar to http://hg.openjdk.java.net/jdk8/jdk8/langtools
-			
+
 			for(RawDependency dep : dependencies) {
 				if(origin.contains(dep.JarPath)) {
 					return dep.Resolve();
 				}
 			}
-			
+
 			return null;
 		}
 	}
-	
+
 
 }
