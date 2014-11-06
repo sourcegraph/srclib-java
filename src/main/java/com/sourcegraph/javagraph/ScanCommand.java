@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.ProcessBuilder.Redirect;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -23,6 +25,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Dependency;
@@ -56,6 +59,54 @@ public class ScanCommand {
 	public static void injectInspectorTaskIntoGradleFile(Path gradleFile)
 		throws IOException
 	{
+		String g = FileUtils.readFileToString(gradleFile.toFile());
+		if (-1 != g.indexOf("srclibCollectMetaInformation")) return;
+
+		/*
+			Ok! This is a pretty nasty hack to try and collection information
+			from a gradle build. Here's some known issues:
+
+				- project.{group,version,name} might not be defined. It's
+				possible to generate POM files for the Maven repo with explicit
+				values for theses fields. The project._ values are just the
+				defaults. Basically, this is a flakey heuristic, and it remains
+				to be seen if it will work well for gradle projects in general.
+
+					- It might be possible to actually ask gradle to
+					generate the pom files, and then inspect those. This
+					is what we're doing for dependencies that we pull
+					from the maven repository. However! I'm not sure if
+					there's a sane way to request this, or if that approach
+					will work for gradle projects in general.
+		*/
+		String task = ""
+			+ "task srclibCollectMetaInformation << {\n"
+			+ "	String desc = project.description\n"
+			+ "	if (desc == null) { desc = \"\" }\n"
+			+ "	println \"DESCRIPTION $desc\"\n"
+			+ "	println \"GROUP $project.group\"\n"
+			+ "	println \"VERSION $project.version\"\n"
+			+ "	println \"ARTIFACT $project.name\"\n"
+			+ "	println \"CLASSPATH $configurations.runtime.asPath\"\n"
+			+ "\n"
+			+ "	project.configurations.each { conf ->\n"
+			+ "		conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
+			+ "			String group = it.moduleVersion.id.group\n"
+			+ "			String name = it.moduleVersion.id.name\n"
+			+ "			String version = it.moduleVersion.id.version\n"
+			+ "			String file = it.file\n"
+			+ "			println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n"
+			+ "		}\n"
+			+ "	}\n"
+			+ "}\n";
+
+		try {
+				FileWriter fw = new FileWriter(gradleFile.toFile(),true);
+				fw.write(task);
+				fw.close();
+		} catch(IOException ioe) {
+				System.err.println("IOException: " + ioe.getMessage());
+		}
 	}
 
 	public static String extractPayloadFromPrefixedLine(String prefix, String line) {
@@ -100,13 +151,6 @@ public class ScanCommand {
 				if (null != groupPayload) groupID = groupPayload;
 				if (null != artifactPayload) artifactID = artifactPayload;
 				if (null != descriptionPayload) description = descriptionPayload;
-
-				if (null != groupPayload ||
-					null != artifactPayload ||
-					null != descriptionPayload)
-				{
-					System.err.println("Matching Line! " + line);
-				}
 			}
 		}
 		finally {
@@ -127,7 +171,7 @@ public class ScanCommand {
 
 			^DEPENDENCY $scope:$group:$artifact:$version:$jarfile$
 
-	 Here's an example of a dependency line:
+		Here's an example of a dependency line:
 
 			line="DEPENDENCY compile:com.beust:jcommander:1.30:~/.gradle/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
 	*/
@@ -157,7 +201,6 @@ public class ScanCommand {
 				String payload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
 
 				if (null == payload) continue;
-				System.err.println("Matching Line! " + line);
 
 				String[] parts = payload.split(":");
 				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
