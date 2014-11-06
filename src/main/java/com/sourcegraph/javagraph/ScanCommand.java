@@ -77,12 +77,25 @@ public class ScanCommand {
 			IOUtils.copy(process.getErrorStream(), System.err);
 
 			String line = null;
+			String scope = null;
 			while ((line = in.readLine()) != null) {
 
 				// Gradle dependency output looks something like this:
+				//   runtime - Runtime classpath for source set 'main'.
 				//   +--- com.googlecode.json-simple:json-simple:1.1.1
 				//   |    \--- junit:junit:4.10
 				//   |         \--- org.hamcrest:hamcrest-core:1.1
+
+				String[] scopes = {
+					"testRuntime", "compile", "default", "runtime", "testCompile"};
+
+				for (String s : scopes) {
+					if (0 == line.indexOf(s)) {
+						System.err.println("Found a scope! " + s);
+						scope = s;
+						break;
+					}
+				}
 
 				String prefix = "--- ";
 				int idx = line.indexOf(prefix);
@@ -96,7 +109,7 @@ public class ScanCommand {
 					parts[0], // GroupID
 					parts[1], // ArtifactID
 					parts[2], // Version
-					null, // Scope
+					scope, // Scope
 					null // JarFile
 				);
 
@@ -143,8 +156,8 @@ public class ScanCommand {
 
 					return FileVisitResult.CONTINUE;
 				}
-         @Override
-         public FileVisitResult visitFileFailed(Path file, IOException e)
+				@Override
+				public FileVisitResult visitFileFailed(Path file, IOException e)
 					throws IOException
 				{
 					return FileVisitResult.CONTINUE;
