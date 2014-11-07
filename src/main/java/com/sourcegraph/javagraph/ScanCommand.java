@@ -69,7 +69,7 @@ public class ScanCommand {
 		HashSet<SourceUnit.RawDependency> results =
 			new HashSet<SourceUnit.RawDependency>();
 
-		String result = null;
+		String result = "";
 
 		try {
 			Process process = pb.start();
