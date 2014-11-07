@@ -69,7 +69,7 @@ public class ScanCommand {
 		HashSet<SourceUnit.RawDependency> results =
 			new HashSet<SourceUnit.RawDependency>();
 
-		String result = null;
+		String result = "";
 
 		try {
 			Process process = pb.start();
@@ -167,9 +167,9 @@ public class ScanCommand {
 		HashSet<SourceUnit.RawDependency> results =
 			new HashSet<SourceUnit.RawDependency>();
 
-		String groupID = null;
-		String artifactID = null;
-		String description = null;
+		String groupID = "default-group";
+        String artifactID = gradleFile.getParent().normalize().toString(); // default to path to build.gradle
+        String description = null;
 
 		try {
 			Process process = pb.start();
