@@ -373,104 +373,125 @@ public class ScanCommand {
 		HashSet<Path> pomFiles = null;
 		HashSet<Path> gradleFiles = null;
 
-		try {
-			System.err.println("Walking tree, looking for pom.xml files.");
-			pomFiles = findMatchingFiles("pom.xml");
-			System.err.println(pomFiles.size() + " POM files found.");
+                ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
 
-			System.err.println("Walking tree, looking for build.gradle files.");
-			gradleFiles = findMatchingFiles("build.gradle");
-			System.err.println(gradleFiles.size() + " gradle files found.");
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+		// Check to see if we're in a standard library before
+		// looking for maven/gradle files.
+		if (SourceUnit.isStdLib(repoURI)) {
+			if(repoURI.equals(SourceUnit.StdLibRepoURI) || repoURI.equals(SourceUnit.StdLibTestRepoURI)) {
+				try{
+					// Standard Library Unit
+					final SourceUnit unit = new SourceUnit();
+					unit.Type = "Java";
+					unit.Name = ".";
+					unit.Dir = "src/";
+					unit.Files = scanFiles(getSourcePaths());
+					unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
+					result.add(unit);
 
-		ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
+					// Test code source unit
+					// FIXME(rameshvarun): Test code scanning is currently disabled, because graphing code expects package names (which the test code lacks)
+					/* final SourceUnit testUnit = new SourceUnit();
+					   testUnit.Type = "JavaArtifact";
+					   testUnit.Name = "Tests";
+					   testUnit.Dir = "test/";
+					   testUnit.Files = scanFiles("test/");
+					   testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
+					   result.add(testUnit); */
 
-		try {
-			for(Path pomFile : pomFiles) {
-				System.err.println("Reading " + pomFile + "...");
-				POMAttrs attrs = getPOMAttrs(pomFile);
+					// Build tools source unit
+					final SourceUnit toolsUnit = new SourceUnit();
+					toolsUnit.Type = "JavaArtifact";
+					toolsUnit.Name = "BuildTools";
+					toolsUnit.Dir = "make/src/classes/";
+					toolsUnit.Files = scanFiles("make/src/classes/");
+					toolsUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
+					result.add(toolsUnit);
 
-				final SourceUnit unit = new SourceUnit();
-				unit.Type = "JavaArtifact";
-				unit.Name = attrs.groupID + "/" + attrs.artifactID;
-				unit.Dir = pomFile.getParent().toString();
-				unit.Data.put("POMFile", pomFile.toString());
-				unit.Data.put("Description", attrs.description);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.exit(1);
+				}
 
-				// TODO: Java source files can be other places besides ‘./src’
-				unit.Files = scanFiles(pomFile.getParent().resolve("src"));
+			} else if (repoURI.equals(SourceUnit.AndroidSdkURI)) {
+				try {
+					if (subdir == null) {
+						subdir = ".";
+					}
+					// Android Standard Library Unit
+					final SourceUnit unit = new SourceUnit();
+					unit.Type = "JavaArtifact";
+					unit.Name = "AndroidSDK";
+					unit.Dir = ".";
+					unit.Files = scanFiles(subdir);
+					unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
+					result.add(unit);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.exit(1);
+				}
+			}
+		} else {
+			try {
+				System.err.println("Walking tree, looking for pom.xml files.");
+				pomFiles = findMatchingFiles("pom.xml");
+				System.err.println(pomFiles.size() + " POM files found.");
 
-				// We need consistent output ordering for testing purposes.
-				unit.Files.sort((String a, String b) -> a.compareTo(b));
-
-				// This will list all dependencies, not just direct ones.
-				unit.Dependencies = new ArrayList(getPOMDependencies(pomFile));
-				result.add(unit);
-
+				System.err.println("Walking tree, looking for build.gradle files.");
+				gradleFiles = findMatchingFiles("build.gradle");
+				System.err.println(gradleFiles.size() + " gradle files found.");
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(1);
 			}
 
-            if (pomFiles.size() == 0) { // only look for gradle files if no pom.xml's are present
-                for (Path gradleFile : gradleFiles) {
-                    System.err.println("Reading " + gradleFile + "...");
-                    POMAttrs attrs = getGradleAttrs(gradleFile);
+			try {
+				for(Path pomFile : pomFiles) {
+					System.err.println("Reading " + pomFile + "...");
+					POMAttrs attrs = getPOMAttrs(pomFile);
 
-                    final SourceUnit unit = new SourceUnit();
-                    unit.Type = "JavaArtifact";
-                    unit.Name = attrs.groupID + "/" + attrs.artifactID;
-                    unit.Dir = gradleFile.getParent().toString();
-                    unit.Data.put("GradleFile", gradleFile.toString());
-                    unit.Data.put("Description", attrs.description);
+					final SourceUnit unit = new SourceUnit();
+					unit.Type = "JavaArtifact";
+					unit.Name = attrs.groupID + "/" + attrs.artifactID;
+					unit.Dir = pomFile.getParent().toString();
+					unit.Data.put("POMFile", pomFile.toString());
+					unit.Data.put("Description", attrs.description);
 
-                    // TODO: Java source files can be other places besides ‘./src’
-                    unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
+					// TODO: Java source files can be other places besides ‘./src’
+					unit.Files = scanFiles(pomFile.getParent().resolve("src"));
 
-                    // We need consistent output ordering for testing purposes.
-                    unit.Files.sort((String a, String b) -> a.compareTo(b));
+					// We need consistent output ordering for testing purposes.
+					unit.Files.sort((String a, String b) -> a.compareTo(b));
 
-                    // This will list all dependencies, not just direct ones.
-                    unit.Dependencies = new ArrayList(getGradleDependencies(gradleFile));
-                    result.add(unit);
-                }
-            }
+					// This will list all dependencies, not just direct ones.
+					unit.Dependencies = new ArrayList(getPOMDependencies(pomFile));
+					result.add(unit);
 
-        } catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+				}
 
-		// Java Standard Library
-		if(repoURI.equals(SourceUnit.StdLibRepoURI) || repoURI.equals(SourceUnit.StdLibTestRepoURI)) {
-			try{
-				// Standard Library Unit
-				final SourceUnit unit = new SourceUnit();
-				unit.Type = "Java";
-				unit.Name = ".";
-				unit.Dir = "src/";
-				unit.Files = scanFiles(getSourcePaths());
-				unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				result.add(unit);
+				if (pomFiles.size() == 0) { // only look for gradle files if no pom.xml's are present
+					for (Path gradleFile : gradleFiles) {
+						System.err.println("Reading " + gradleFile + "...");
+						POMAttrs attrs = getGradleAttrs(gradleFile);
 
-				// Test code source unit
-				// FIXME(rameshvarun): Test code scanning is currently disabled, because graphing code expects package names (which the test code lacks)
-				/* final SourceUnit testUnit = new SourceUnit();
-				testUnit.Type = "JavaArtifact";
-				testUnit.Name = "Tests";
-				testUnit.Dir = "test/";
-				testUnit.Files = scanFiles("test/");
-				testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				result.add(testUnit); */
+						final SourceUnit unit = new SourceUnit();
+						unit.Type = "JavaArtifact";
+						unit.Name = attrs.groupID + "/" + attrs.artifactID;
+						unit.Dir = gradleFile.getParent().toString();
+						unit.Data.put("GradleFile", gradleFile.toString());
+						unit.Data.put("Description", attrs.description);
 
-				// Build tools source unit
-				final SourceUnit toolsUnit = new SourceUnit();
-				toolsUnit.Type = "JavaArtifact";
-				toolsUnit.Name = "BuildTools";
-				toolsUnit.Dir = "make/src/classes/";
-				toolsUnit.Files = scanFiles("make/src/classes/");
-				toolsUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-				result.add(toolsUnit);
+						// TODO: Java source files can be other places besides ‘./src’
+						unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
+
+						// We need consistent output ordering for testing purposes.
+						unit.Files.sort((String a, String b) -> a.compareTo(b));
+
+						// This will list all dependencies, not just direct ones.
+						unit.Dependencies = new ArrayList(getGradleDependencies(gradleFile));
+						result.add(unit);
+					}
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -478,6 +499,7 @@ public class ScanCommand {
 			}
 
 		}
+
 
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		System.out.println(gson.toJson(result));

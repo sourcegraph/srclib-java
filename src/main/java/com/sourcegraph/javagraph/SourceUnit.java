@@ -20,9 +20,18 @@ public class SourceUnit {
 
 	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
 	public static String StdLibTestRepoURI = "github.com/sgtest/java-jdk-sample";
+	public static String AndroidSdkURI = "android.googlesource.com/platform/frameworks/base";
 
 	public boolean isStdLib() {
-		return Repo.equals(StdLibRepoURI) || Repo.equals(StdLibRepoURI);
+		if (Repo == null) {
+			return false;
+		}
+		return isStdLib(Repo);
+	}
+
+	public static boolean isStdLib(String repo) {
+		return repo.equals(StdLibRepoURI) || repo.equals(StdLibRepoURI /*SAMER change to StdLibTestRepoURI */) ||
+			repo.equals(AndroidSdkURI);
 	}
 
 	/**
