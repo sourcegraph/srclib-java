@@ -88,14 +88,14 @@ public class Grapher {
 			Iterable<? extends CompilationUnitTree> units = task.parse();
 			task.analyze();
 			for (final CompilationUnitTree unit : units) {
-				
+
 				try {
 					ExpressionTree pkgName = unit.getPackageName();
 					if (pkgName != null && !seenPackages.contains(pkgName.toString())) {
 						seenPackages.add(pkgName.toString());
 						writePackageSymbol(pkgName.toString());
 					}
-	
+
 					TreePath root = new TreePath(unit);
 					new TreeScanner(emit, trees).scan(root, null);
 				} catch(Exception e) {

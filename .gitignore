@@ -10,3 +10,5 @@ javagraph.iml
 target/
 
 dependency-reduced-pom.xml
+.idea/
+*.iml

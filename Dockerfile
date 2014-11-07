@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 
+RUN echo
 RUN apt-get update -qq
 RUN apt-get install -qq curl git python-software-properties software-properties-common
 
