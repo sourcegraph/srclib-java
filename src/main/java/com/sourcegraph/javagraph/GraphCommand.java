@@ -249,6 +249,9 @@ public class GraphCommand {
 		}
 
 		try{
+            if (classPath == null) {
+                classPath = ""; // prevent NPE
+            }
 			Grapher grapher = new Grapher(classPath, sourcePath, rawGraph );
 
 			String[] paths = unit.Files.toArray(new String[unit.Files.size()]);

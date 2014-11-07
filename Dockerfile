@@ -15,6 +15,10 @@ RUN apt-get install -y oracle-java8-installer
 # Install Maven
 RUN apt-get install -qq maven
 
+# Install Gradle
+RUN apt-get install -qq gradle
+RUN ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
+
 # Add this toolchain
 ADD . /srclib/srclib-java/
 WORKDIR /srclib/srclib-java
