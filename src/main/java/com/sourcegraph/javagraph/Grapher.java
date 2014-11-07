@@ -106,6 +106,11 @@ public class Grapher {
 		} catch(Exception e) {
 			for (Diagnostic<?> diagnostic : diags.getDiagnostics())
 				System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toString());
+			e.printStackTrace(System.err);
+			System.err.println("WARNING: If the stack trace contains \"task.analyze();\", there's a reasonable chance you're using a buggy compiler.\n" +
+					   "As of Nov 7, 2014, the Oracle 8 JDK is one of those compilers.\n"+
+					   "See https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\n"+
+					   "and compile OpenJDK 8 with that workaround. OpenJDK 8 build instructions: http://openjdk.java.net/projects/build-infra/guide.html\n");
 			System.exit(1);
 		}
 	}
