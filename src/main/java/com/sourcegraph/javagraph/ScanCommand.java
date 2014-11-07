@@ -389,28 +389,6 @@ public class ScanCommand {
 		ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
 
 		try {
-			for(Path gradleFile : gradleFiles) {
-				System.err.println("Reading " + gradleFile + "...");
-				POMAttrs attrs = getGradleAttrs(gradleFile);
-
-				final SourceUnit unit = new SourceUnit();
-				unit.Type = "JavaArtifact";
-				unit.Name = attrs.groupID + "/" + attrs.artifactID;
-				unit.Dir = gradleFile.getParent().toString();
-				unit.Data.put("GradleFile", gradleFile.toString());
-				unit.Data.put("Description", attrs.description);
-
-				// TODO: Java source files can be other places besides ‘./src’
-				unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
-
-				// We need consistent output ordering for testing purposes.
-				unit.Files.sort((String a, String b) -> a.compareTo(b));
-
-				// This will list all dependencies, not just direct ones.
-				unit.Dependencies = new ArrayList(getGradleDependencies(gradleFile));
-				result.add(unit);
-			}
-
 			for(Path pomFile : pomFiles) {
 				System.err.println("Reading " + pomFile + "...");
 				POMAttrs attrs = getPOMAttrs(pomFile);
@@ -433,7 +411,32 @@ public class ScanCommand {
 				result.add(unit);
 
 			}
-		} catch (Exception e) {
+
+            if (pomFiles.size() == 0) { // only look for gradle files if no pom.xml's are present
+                for (Path gradleFile : gradleFiles) {
+                    System.err.println("Reading " + gradleFile + "...");
+                    POMAttrs attrs = getGradleAttrs(gradleFile);
+
+                    final SourceUnit unit = new SourceUnit();
+                    unit.Type = "JavaArtifact";
+                    unit.Name = attrs.groupID + "/" + attrs.artifactID;
+                    unit.Dir = gradleFile.getParent().toString();
+                    unit.Data.put("GradleFile", gradleFile.toString());
+                    unit.Data.put("Description", attrs.description);
+
+                    // TODO: Java source files can be other places besides ‘./src’
+                    unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
+
+                    // We need consistent output ordering for testing purposes.
+                    unit.Files.sort((String a, String b) -> a.compareTo(b));
+
+                    // This will list all dependencies, not just direct ones.
+                    unit.Dependencies = new ArrayList(getGradleDependencies(gradleFile));
+                    result.add(unit);
+                }
+            }
+
+        } catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
