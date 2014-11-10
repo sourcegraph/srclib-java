@@ -24,6 +24,8 @@ src toolchain add sourcegraph.com/sourcegraph/srclib-java
 
 ## Testing
 
+Run `git submodule update --init` the first time to fetch the submodule test cases in `testdata/case`.
+
 `make test` - Test in program mode
 
 `make test-gen` - Generate new test data in program mode
