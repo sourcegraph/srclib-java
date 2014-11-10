@@ -39,9 +39,9 @@ public class DepresolveCommand {
 			if(androidSDK == null) {
 				androidSDK = new Resolution();
 				androidSDK.Target = new ResolvedTarget();
-				anrdoidSDK.Target.ToRepoCloneURL = SourceUnit.AndroidSdkURI;
+				androidSDK.Target.ToRepoCloneURL = SourceUnit.AndroidSdkURI;
 				androidSDK.Target.ToUnitType = "JavaArtifact";
-				androidSDK.Target.ToUnit = "??";
+				androidSDK.Target.ToUnit = "."; // <- @beyang not sure about this
 			}
 			return androidSDK;
 		}
