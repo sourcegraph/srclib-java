@@ -2,9 +2,12 @@
 
 ## Requirements
 
-srclib-java Requires Oracle JDK 8, or OpenJDK 8 to run, as well as Maven to build.
+srclib-java requires:
 
-Additionally, run the following command to register `tools.jar` as an artifact
+* Oracle JDK 8 or OpenJDK 8
+* Maven 3
+
+Alsi, run the following command to register `tools.jar` as an artifact
 that can be included from Maven.
 ```
 mvn install:install-file -DgroupId=com.sun -DartifactId=tools -Dversion=1.8 -Dpackaging=jar -Dfile="/usr/lib/jvm/java-8-oracle/lib/tools.jar"
