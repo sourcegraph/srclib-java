@@ -21,6 +21,7 @@ public class DepresolveCommand {
 		String Error;
 
 		private static Resolution stdlib = null;
+		private static Resolution androidSDK = null;
 
 		public static Resolution StdLib() {
 			if(stdlib == null) {
@@ -32,6 +33,17 @@ public class DepresolveCommand {
 			}
 
 			return stdlib;
+		}
+
+		public static Resolution AndroidSDK() {
+			if(androidSDK == null) {
+				androidSDK = new Resolution();
+				androidSDK.Target = new ResolvedTarget();
+				androidSDK.Target.ToRepoCloneURL = SourceUnit.AndroidSdkURI;
+				androidSDK.Target.ToUnitType = "JavaArtifact";
+				androidSDK.Target.ToUnit = "."; // <- @beyang not sure about this
+			}
+			return androidSDK;
 		}
 	}
 
