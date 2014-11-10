@@ -124,6 +124,7 @@ public class Symbol implements JSONStreamAware, JSONAware {
 		public Resolution resolveOrigin(List<RawDependency> dependencies) {
 			if(origin.isEmpty()) return null; // Empty origin could not be resolved
 			if(origin.contains("jre/lib/")) return Resolution.StdLib(); //JRE standard library
+                        if(origin.contains("com/google/android/android")) return Resolution.AndroidSDK(); // Android SDK
 
 			//TODO: Resolve nashorn.jar to http://hg.openjdk.java.net/jdk8/jdk8/nashorn
 			//TODO: Resolve tools.jar to http://hg.openjdk.java.net/jdk8/jdk8/langtools
