@@ -21,6 +21,7 @@ public class DepresolveCommand {
 		String Error;
 
 		private static Resolution stdlib = null;
+		private static Resolution androidSDK = null;
 
 		public static Resolution StdLib() {
 			if(stdlib == null) {
