@@ -33,6 +33,17 @@ public class DepresolveCommand {
 
 			return stdlib;
 		}
+
+		public static Resolution AndroidSDK() {
+			if(androidSDK == null) {
+				androidSDK = new Resolution();
+				androidSDK.Target = new ResolvedTarget();
+				androidSDK.Target.ToRepoCloneURL = SourceUnit.AndroidSdkURI;
+				androidSDK.Target.ToUnitType = "JavaArtifact";
+				androidSDK.Target.ToUnit = ".";
+			}
+			return androidSDK;
+		}
 	}
 
 	static class ResolvedTarget {

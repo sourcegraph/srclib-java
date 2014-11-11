@@ -30,7 +30,7 @@ public class SourceUnit {
 	}
 
 	public static boolean isStdLib(String repo) {
-		return repo.equals(StdLibRepoURI) || repo.equals(StdLibRepoURI /*SAMER change to StdLibTestRepoURI */) ||
+		return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI) ||
 			repo.equals(AndroidSdkURI);
 	}
 
