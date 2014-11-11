@@ -34,7 +34,7 @@ import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 
 public class GraphCommand {
 
-    public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
+	public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
 
 	@Parameter
 	private List<String> files = new ArrayList<String>();
@@ -173,7 +173,7 @@ public class GraphCommand {
 						object.add("DefUnit", new JsonPrimitive(resolution.Target.ToUnit));
 					}
 					else {
-						System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" +  ref.end + " => " + ref.symbol.origin);
+						System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" + ref.end + " => " + ref.symbol.origin);
 						return new JsonPrimitive("unresolved");
 					}
 				}
@@ -211,8 +211,8 @@ public class GraphCommand {
 
 		String classPath = "";
 		String sourcePath = "";
-                // The test doesn't work if it goes through the 'else'
-                // flow as if it were actually a standard library.
+		// The test doesn't work if it goes through the 'else'
+		// flow as if it were actually a standard library.
 		if(!unit.isStdLib() || /* TODO(samer): HACK!! */ unit.Repo.equals(SourceUnit.StdLibTestRepoURI)) {
 			// Get dependency classpaths if this is not the stdlib
 			System.err.println("Getting classpath...");
@@ -225,13 +225,13 @@ public class GraphCommand {
 					String filename = (String)unit.Data.get("POMFile");
 					classPath = getMavenClassPath(Paths.get(filename));
 				} else {
-                                    // neither maven or gradle (e.g., Java JDK)
-                                    // TODO(beyang): hack, basically the same as the maven path?
-                                    ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
-                                    pb.directory(new File(unit.Dir));
-                                    Process process = pb.start();
-                                    IOUtils.copy(process.getInputStream(), System.err);
-                                    classPath = IOUtils.toString(process.getErrorStream());
+					// neither maven or gradle (e.g., Java JDK)
+					// TODO(beyang): hack, basically the same as the maven path?
+					ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
+					pb.directory(new File(unit.Dir));
+					Process process = pb.start();
+					IOUtils.copy(process.getInputStream(), System.err);
+					classPath = IOUtils.toString(process.getErrorStream());
 				}
 
 			} catch(IOException e) {
@@ -251,9 +251,10 @@ public class GraphCommand {
 		}
 
 		try{
-            if (classPath == null) {
-                classPath = ""; // prevent NPE
-            }
+			if (classPath == null) {
+				classPath = ""; // prevent NPE
+			}
+
 			Grapher grapher = new Grapher(classPath, sourcePath, rawGraph );
 
 			String[] paths = unit.Files.toArray(new String[unit.Files.size()]);

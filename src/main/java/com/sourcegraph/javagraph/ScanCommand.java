@@ -56,7 +56,7 @@ public class ScanCommand {
 		}
 	};
 
-  public static String getGradleClassPath(Path gradleFile)
+	public static String getGradleClassPath(Path gradleFile)
 		throws IOException
 	{
 		injectInspectorTaskIntoGradleFile(gradleFile);
@@ -168,8 +168,8 @@ public class ScanCommand {
 			new HashSet<SourceUnit.RawDependency>();
 
 		String groupID = "default-group";
-        String artifactID = gradleFile.getParent().normalize().toString(); // default to path to build.gradle
-        String description = null;
+		String artifactID = gradleFile.getParent().normalize().toString(); // default to path to build.gradle
+		String description = null;
 
 		try {
 			Process process = pb.start();
@@ -373,7 +373,7 @@ public class ScanCommand {
 		HashSet<Path> pomFiles = null;
 		HashSet<Path> gradleFiles = null;
 
-                ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
+		ArrayList<SourceUnit> result = new ArrayList<SourceUnit>();
 
 		// Check to see if we're in a standard library before
 		// looking for maven/gradle files.
@@ -388,16 +388,6 @@ public class ScanCommand {
 					unit.Files = scanFiles(getSourcePaths());
 					unit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
 					result.add(unit);
-
-					// Test code source unit
-					// FIXME(rameshvarun): Test code scanning is currently disabled, because graphing code expects package names (which the test code lacks)
-					/* final SourceUnit testUnit = new SourceUnit();
-					   testUnit.Type = "JavaArtifact";
-					   testUnit.Name = "Tests";
-					   testUnit.Dir = "test/";
-					   testUnit.Files = scanFiles("test/");
-					   testUnit.Files.sort( (String a, String b) -> a.compareTo(b) ); // Sort for testing consistency
-					   result.add(testUnit); */
 
 					// Build tools source unit
 					final SourceUnit toolsUnit = new SourceUnit();
