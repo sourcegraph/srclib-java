@@ -1,12 +1,14 @@
-SRC = $(shell find ./src -type f -name '*.java')
+SRC = $(shell find ./src -type f)
 
 .PHONY: default install test test-gen clean
 
 default: install
 
-.bin/srclib-java.jar: pom.xml ${SRC}
-	mvn package
-	mv target/srclib-java.jar .bin/srclib-java.jar
+build/libs/srclib-java-0.0.1-SNAPSHOT.jar: build.gradle ${SRC}
+	gradle jar
+
+.bin/srclib-java.jar: build/libs/srclib-java-0.0.1-SNAPSHOT.jar
+	cp build/libs/srclib-java-0.0.1-SNAPSHOT.jar .bin/srclib-java.jar
 
 install: .bin/srclib-java.jar
 
@@ -18,4 +20,4 @@ test-gen: .bin/srclib-java.jar
 
 clean:
 	rm -f .bin/srclib-java.jar
-	rm -rf target
+	rm -rf build
