@@ -211,7 +211,9 @@ public class GraphCommand {
 
 		String classPath = "";
 		String sourcePath = "";
-		if(!unit.isStdLib()) {
+                // The test doesn't work if it goes through the 'else'
+                // flow as if it were actually a standard library.
+		if(!unit.isStdLib() || /* TODO(samer): HACK!! */ unit.Repo.equals(SourceUnit.StdLibTestRepoURI)) {
 			// Get dependency classpaths if this is not the stdlib
 			System.err.println("Getting classpath...");
 
