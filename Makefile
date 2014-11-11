@@ -1,17 +1,21 @@
-.PHONY: default
+SRC = $(shell find ./src -type f -name '*.java')
+
+.PHONY: default install test test-gen clean
 
 default: install
 
-install:
+.bin/srclib-java.jar: pom.xml ${SRC}
 	mvn package
 	mv target/srclib-java.jar .bin/srclib-java.jar
 
-test:
+install: .bin/srclib-java.jar
+
+test: .bin/srclib-java.jar
 	src -v test -m program
 
-test-gen:
+test-gen: .bin/srclib-java.jar
 	src -v test -m program --gen
 
 clean:
-	rm .bin/srclib-java.jar
+	rm -f .bin/srclib-java.jar
 	rm -rf target
