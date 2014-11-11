@@ -1,25 +1,25 @@
 package com.sourcegraph.javagraph;
 
+import com.beust.jcommander.*;
+import com.jcabi.manifests.Manifests;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-import com.beust.jcommander.*;
-
-
 public class Main {
-
 	public static void main(String[] args) throws IOException {
+		String version = Manifests.read("Javagraph-Version");
+		System.err.println("Using javagraph version '" + version + "'");
+
 		JCommander jc = new JCommander();
 
 		// Add subcommands
 		ScanCommand scan = new ScanCommand();
-		jc.addCommand("scan", scan);
-
 		GraphCommand graph = new GraphCommand();
-		jc.addCommand("graph", graph);
-
 		DepresolveCommand depresolve = new DepresolveCommand();
+
+		jc.addCommand("scan", scan);
+		jc.addCommand("graph", graph);
 		jc.addCommand("depresolve", depresolve);
 
 		try {
@@ -31,18 +31,17 @@ public class Main {
 		switch (jc.getParsedCommand()) {
 			case "scan":
 				scan.Execute();
-				return;
+				break;
 			case "graph":
 				graph.Execute();
-				return;
+				break;
 			case "depresolve":
 				depresolve.Execute();
-				return;
+				break;
 			default:
 				System.out.println("Unkown command");
+				jc.usage();
+				System.exit(1);
 		}
-
-		jc.usage();
-		System.exit(1);
 	}
 }
