@@ -8,6 +8,8 @@ javagraph.iml
 .bin/classes/
 .bin/test-classes/
 target/
+build/
+.gradle
 
 dependency-reduced-pom.xml
 .idea/
