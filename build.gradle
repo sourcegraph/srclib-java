@@ -5,6 +5,8 @@ mainClassName = "com.sourcegraph.javagraph.Main"
 version = '0.0.1-SNAPSHOT'
 group = 'com.sourcegraph'
 
+sourceCompatibility = '1.8'
+
 repositories {
 	mavenCentral()
 	maven { url 'http://repo.gradle.org/gradle/libs-releases-local' }
