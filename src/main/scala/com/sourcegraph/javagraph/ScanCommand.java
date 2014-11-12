@@ -226,6 +226,7 @@ public class ScanCommand {
 		HashSet<SourceUnit.RawDependency> results =
 			new HashSet<SourceUnit.RawDependency>();
 
+		String homedir = System.getProperty("user.home");
 		try {
 			Process process = pb.start();
 			in = new BufferedReader(new InputStreamReader(
@@ -246,7 +247,7 @@ public class ScanCommand {
 					parts[2], // ArtifactID
 					parts[3], // Version
 					parts[0], // Scope
-					parts[4] // JarFile
+					swapPrefix(parts[4], homedir, "~") // JarFile
 				);
 
 				results.add(dep);
@@ -303,9 +304,19 @@ public class ScanCommand {
 		return result;
 	}
 
+	public static String swapPrefix(String path, String old, String replacement) {
+		// System.err.println("Swap " + path + " " + old + " " + replacement);
+		if (path.startsWith(old + File.separator)) {
+			// System.err.println("Swap " + path + " with " + replacement + path.substring(old.length()));
+			return replacement + path.substring(old.length());
+		}
+		return path;
+	}
+
 	public static HashSet<SourceUnit.RawDependency> getPOMDependencies(Path pomFile)
 		throws IOException
 	{
+		String homedir = System.getProperty("user.home");
 		String[] mavenArgs = {
 			"mvn", "dependency:resolve",
 			"-DoutputAbsoluteArtifactFilename=true",
@@ -337,7 +348,7 @@ public class ScanCommand {
 					parts[1], // ArtifactID
 					parts[parts.length - 3], // Version
 					parts[parts.length - 2], // Scope
-					parts[parts.length - 1] // JarFile
+					swapPrefix(parts[parts.length-1], homedir, "~") // JarFile
 				);
 
 				results.add(dep);
