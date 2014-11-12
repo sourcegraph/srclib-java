@@ -59,9 +59,9 @@ public class ScanCommand {
 	public static String getGradleClassPath(Path gradleFile)
 		throws IOException
 	{
-		injectInspectorTaskIntoGradleFile(gradleFile);
+		createGradleInspectorInitScript();
 
-		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
+		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
 		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
 		pb.directory(new File(gradleFile.getParent().toString()));
 
@@ -93,12 +93,10 @@ public class ScanCommand {
 		return result;
 	}
 
-	public static void injectInspectorTaskIntoGradleFile(Path gradleFile)
+
+	public static void createGradleInspectorInitScript()
 		throws IOException
 	{
-		String g = FileUtils.readFileToString(gradleFile.toFile());
-		if (-1 != g.indexOf("srclibCollectMetaInformation")) return;
-
 		/*
 			Ok! This is a pretty nasty hack to try and collection information
 			from a gradle build. Here's some known issues:
@@ -117,28 +115,32 @@ public class ScanCommand {
 					will work for gradle projects in general.
 		*/
 		String task = ""
-			+ "task srclibCollectMetaInformation << {\n"
-			+ "	String desc = project.description\n"
-			+ "	if (desc == null) { desc = \"\" }\n"
-			+ "	println \"DESCRIPTION $desc\"\n"
-			+ "	println \"GROUP $project.group\"\n"
-			+ "	println \"VERSION $project.version\"\n"
-			+ "	println \"ARTIFACT $project.name\"\n"
-			+ "	println \"CLASSPATH $configurations.runtime.asPath\"\n"
-			+ "\n"
-			+ "	project.configurations.each { conf ->\n"
-			+ "		conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
-			+ "			String group = it.moduleVersion.id.group\n"
-			+ "			String name = it.moduleVersion.id.name\n"
-			+ "			String version = it.moduleVersion.id.version\n"
-			+ "			String file = it.file\n"
-			+ "			println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n"
-			+ "		}\n"
-			+ "	}\n"
+			+ "allprojects {"
+			+ " task srclibCollectMetaInformation << {\n"
+			+ "  String desc = project.description\n"
+			+ "  if (desc == null) { desc = \"\" }\n"
+			+ "  println \"DESCRIPTION $desc\"\n"
+			+ "  println \"GROUP $project.group\"\n"
+			+ "  println \"VERSION $project.version\"\n"
+			+ "  println \"ARTIFACT $project.name\"\n"
+			+ "  println \"CLASSPATH $configurations.runtime.asPath\"\n"
+			+ " \n"
+			+ "  project.configurations.each { conf ->\n"
+			+ "   conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
+			+ "    String group = it.moduleVersion.id.group\n"
+			+ "    String name = it.moduleVersion.id.name\n"
+			+ "    String version = it.moduleVersion.id.version\n"
+			+ "    String file = it.file\n"
+			+ "    println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n"
+			+ "   }\n"
+			+ "  }\n"
+			+ " }\n"
 			+ "}\n";
 
+
+
 		try {
-				FileWriter fw = new FileWriter(gradleFile.toFile(),true);
+				FileWriter fw = new FileWriter("/tmp/srclib-collect-meta-information.gradle",false);
 				fw.write(task);
 				fw.close();
 		} catch(IOException ioe) {
@@ -157,9 +159,9 @@ public class ScanCommand {
 	public static POMAttrs getGradleAttrs(Path gradleFile)
 		throws IOException
 	{
-		injectInspectorTaskIntoGradleFile(gradleFile);
+		createGradleInspectorInitScript();
 
-		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
+		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
 		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
 		pb.directory(new File(gradleFile.getParent().toString()));
 
@@ -200,11 +202,10 @@ public class ScanCommand {
 	}
 
 	/**
-		This collects gradle dependency information by calling
-		a custom task ("srclibCollectMetaInformation") that we have
-		injected into the build.gradle file. This outputs a bunch of
-		information including a list of dependencies, each on it's
-		own line. These lines take the following form:
+		This collects gradle dependency information by running a
+		custom gradle init script that defines a special task. The task
+		outputs a bunch of information including a list of dependencies,
+		each on it's own line. These lines take the following form:
 
 			^DEPENDENCY $scope:$group:$artifact:$version:$jarfile$
 
@@ -215,9 +216,9 @@ public class ScanCommand {
 	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path gradleFile)
 		throws IOException
 	{
-		injectInspectorTaskIntoGradleFile(gradleFile);
+		createGradleInspectorInitScript();
 
-		String[] gradleArgs = {"gradle", "srclibCollectMetaInformation"};
+		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
 		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
 		pb.directory(new File(gradleFile.getParent().toString()));
 
