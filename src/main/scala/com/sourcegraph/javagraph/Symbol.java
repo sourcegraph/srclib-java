@@ -128,8 +128,10 @@ public class Symbol implements JSONStreamAware, JSONAware {
 			//TODO: Resolve nashorn.jar to http://hg.openjdk.java.net/jdk8/jdk8/nashorn
 			//TODO: Resolve tools.jar to http://hg.openjdk.java.net/jdk8/jdk8/langtools
 
-			for(RawDependency dep : dependencies) {
-				if(origin.contains(dep.JarPath)) {
+			String homedir = System.getProperty("user.home");
+			for (RawDependency dep : dependencies) {
+				String jarPath = ScanCommand.swapPrefix(dep.JarPath, "~", homedir);
+				if (origin.contains(jarPath)) {
 					return dep.Resolve();
 				}
 			}
