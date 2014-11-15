@@ -45,231 +45,36 @@ public class ScanCommand {
 	@Parameter(names = { "--subdir" }, description = "The path of the current directory (in which the scanner is run), relative to the root directory of the repository being scanned (this is typically the root, \".\", as it is most useful to scan the entire repository)")
 	String subdir;
 
-	public static class POMAttrs {
-		String groupID;
-		String artifactID;
-		String description;
-		public POMAttrs(String g, String a, String d) {
-			groupID = g;
-			artifactID = a;
-			description = d;
-		}
-	};
-
-	public static String getGradleClassPath(Path gradleFile)
+	public static String getGradleClassPath(Path build)
 		throws IOException
 	{
-		createGradleInspectorInitScript();
-
-		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
-		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
-		pb.directory(new File(gradleFile.getParent().toString()));
-
-		BufferedReader in = null;
-		HashSet<SourceUnit.RawDependency> results =
-			new HashSet<SourceUnit.RawDependency>();
-
-		String result = "";
-
-		try {
-			Process process = pb.start();
-			in = new BufferedReader(new InputStreamReader(
-				process.getInputStream()));
-
-			IOUtils.copy(process.getErrorStream(), System.err);
-
-			String line = null;
-			while ((line = in.readLine()) != null) {
-				result = extractPayloadFromPrefixedLine("CLASSPATH", line);
-				if (result != null) break;
-			}
-		}
-		finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-
-		return result;
-	}
-
-
-	public static void createGradleInspectorInitScript()
-		throws IOException
-	{
-		/*
-			Ok! This is a pretty nasty hack to try and collection information
-			from a gradle build. Here's some known issues:
-
-				- project.{group,version,name} might not be defined. It's
-				possible to generate POM files for the Maven repo with explicit
-				values for theses fields. The project._ values are just the
-				defaults. Basically, this is a flakey heuristic, and it remains
-				to be seen if it will work well for gradle projects in general.
-
-					- It might be possible to actually ask gradle to
-					generate the pom files, and then inspect those. This
-					is what we're doing for dependencies that we pull
-					from the maven repository. However! I'm not sure if
-					there's a sane way to request this, or if that approach
-					will work for gradle projects in general.
-		*/
-		String task = ""
-			+ "allprojects {"
-			+ " task srclibCollectMetaInformation << {\n"
-			+ "  String classpath = ''\n"
-			+ "  if (project.plugins.hasPlugin('java')) {\n"
-			+ "   classpath = configurations.runtime.asPath\n"
-			+ "  }\n"
-			+ "\n"
-			+ "  String desc = project.description\n"
-			+ "  if (desc == null) { desc = \"\" }\n"
-			+ "\n"
-			+ "  println \"DESCRIPTION $desc\"\n"
-			+ "  println \"GROUP $project.group\"\n"
-			+ "  println \"VERSION $project.version\"\n"
-			+ "  println \"ARTIFACT $project.name\"\n"
-			+ "  println \"CLASSPATH $classpath\"\n"
-			+ "\n"
-			+ "  try {\n"
-			+ "   project.configurations.each { conf ->\n"
-			+ "    conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
-			+ "     String group = it.moduleVersion.id.group\n"
-			+ "     String name = it.moduleVersion.id.name\n"
-			+ "     String version = it.moduleVersion.id.version\n"
-			+ "     String file = it.file\n"
-			+ "     println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n"
-			+ "    }\n"
-			+ "   }\n"
-			+ "  }\n"
-			+ "  catch (Exception e) {}\n"
-			+ " }\n"
-			+ "}\n";
-
-		try {
-				FileWriter fw = new FileWriter("/tmp/srclib-collect-meta-information.gradle",false);
-				fw.write(task);
-				fw.close();
-		} catch(IOException ioe) {
-				System.err.println("IOException: " + ioe.getMessage());
-		}
-	}
-
-	public static String extractPayloadFromPrefixedLine(String prefix, String line) {
-		int idx = line.indexOf(prefix);
-		if (-1 == idx) return null;
-		int offset = idx + prefix.length();
-		return line.substring(offset).trim();
+		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).classPath;
 	}
 
 	// TODO Merge this function with ‘getGradleDependencies’.
-	public static POMAttrs getGradleAttrs(Path gradleFile)
+	public static BuildAnalysis.POMAttrs getGradleAttrs(Path build)
 		throws IOException
 	{
-		createGradleInspectorInitScript();
-
-		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
-		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
-		pb.directory(new File(gradleFile.getParent().toString()));
-
-		BufferedReader in = null;
-		HashSet<SourceUnit.RawDependency> results =
-			new HashSet<SourceUnit.RawDependency>();
-
-		String groupID = "default-group";
-		String artifactID = gradleFile.getParent().normalize().toString(); // default to path to build.gradle
-		String description = null;
-
-		try {
-			Process process = pb.start();
-			in = new BufferedReader(new InputStreamReader(
-				process.getInputStream()));
-
-			IOUtils.copy(process.getErrorStream(), System.err);
-
-			String line = null;
-			while ((line = in.readLine()) != null) {
-
-				String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
-				String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
-				String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
-
-				if (null != groupPayload) groupID = groupPayload;
-				if (null != artifactPayload) artifactID = artifactPayload;
-				if (null != descriptionPayload) description = descriptionPayload;
-			}
-		}
-		finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-
-		return new POMAttrs(groupID, artifactID, description);
+		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).attrs;
 	}
 
-	/**
-		This collects gradle dependency information by running a
-		custom gradle init script that defines a special task. The task
-		outputs a bunch of information including a list of dependencies,
-		each on it's own line. These lines take the following form:
+	public static Path getWrapper() {
+		Path result = Paths.get("./gradlew").toAbsolutePath();
+		File tmp = new File(result.toString());
+		if (tmp.exists() && !tmp.isDirectory()) {
+			return result;
+		}
 
-			^DEPENDENCY $scope:$group:$artifact:$version:$jarfile$
+		return null;
+	}
 
-		Here's an example of a dependency line:
-
-			line="DEPENDENCY compile:com.beust:jcommander:1.30:~/.gradle/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
-	*/
-	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path gradleFile)
+	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path build)
 		throws IOException
 	{
-		createGradleInspectorInitScript();
-
-		String[] gradleArgs = {"gradle", "-I", "/tmp/srclib-collect-meta-information.gradle", "srclibCollectMetaInformation"};
-		ProcessBuilder pb = new ProcessBuilder(gradleArgs);
-		pb.directory(new File(gradleFile.getParent().toString()));
-
-		BufferedReader in = null;
-		HashSet<SourceUnit.RawDependency> results =
-			new HashSet<SourceUnit.RawDependency>();
-
-		String homedir = System.getProperty("user.home");
-		try {
-			Process process = pb.start();
-			in = new BufferedReader(new InputStreamReader(
-				process.getInputStream()));
-
-			IOUtils.copy(process.getErrorStream(), System.err);
-
-			String line = null;
-			while ((line = in.readLine()) != null) {
-
-				String payload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
-
-				if (null == payload) continue;
-
-				String[] parts = payload.split(":");
-				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
-					parts[1], // GroupID
-					parts[2], // ArtifactID
-					parts[3], // Version
-					parts[0], // Scope
-					swapPrefix(parts[4], homedir, "~") // JarFile
-				);
-
-				results.add(dep);
-			}
-
-			return results;
-		}
-		finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).dependencies;
 	}
 
-	public static POMAttrs getPOMAttrs(Path pomFile)
+	public static BuildAnalysis.POMAttrs getPOMAttrs(Path pomFile)
 		throws IOException, FileNotFoundException, XmlPullParserException
 	{
 		BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
@@ -280,7 +85,7 @@ public class ScanCommand {
 			? model.getParent().getGroupId()
 			: model.getGroupId();
 
-		return new POMAttrs(groupId, model.getArtifactId(), model.getDescription());
+		return new BuildAnalysis.POMAttrs(groupId, model.getArtifactId(), model.getDescription());
 	}
 
 	public static HashSet<Path> findMatchingFiles(String fileName)
@@ -457,7 +262,7 @@ public class ScanCommand {
 			try {
 				for(Path pomFile : pomFiles) {
 					System.err.println("Reading " + pomFile + "...");
-					POMAttrs attrs = getPOMAttrs(pomFile);
+					BuildAnalysis.POMAttrs attrs = getPOMAttrs(pomFile);
 
 					final SourceUnit unit = new SourceUnit();
 					unit.Type = "JavaArtifact";
@@ -483,7 +288,7 @@ public class ScanCommand {
 			try {
 				for (Path gradleFile : gradleFiles) {
 					System.err.println("Reading " + gradleFile + "...");
-					POMAttrs attrs = getGradleAttrs(gradleFile);
+					BuildAnalysis.POMAttrs attrs = getGradleAttrs(gradleFile);
 
 					final SourceUnit unit = new SourceUnit();
 					unit.Type = "JavaArtifact";
