@@ -30,6 +30,9 @@ RUN mkdir /src
 RUN chown -R srclib /src /srclib
 USER srclib
 
+# Allow determining whether we're running in Docker
+ENV IN_DOCKER_CONTAINER true
+
 WORKDIR /src
 
 ENTRYPOINT ["srclib-java"]

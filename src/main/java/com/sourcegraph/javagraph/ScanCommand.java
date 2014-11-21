@@ -30,6 +30,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sourcegraph.javagraph.BuildAnalysis.POMAttrs;
 
 public class ScanCommand {
 	@Parameter(names = { "--repo" }, description = "The URI of the repository that contains the directory tree being scanned")
@@ -43,8 +44,19 @@ public class ScanCommand {
 	}
 
 	// TODO Merge this function with ‘getGradleDependencies’.
-	public static BuildAnalysis.POMAttrs getGradleAttrs(Path build) throws IOException {
-		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).attrs;
+	public static BuildAnalysis.POMAttrs getGradleAttrs(String repoURI, Path build) throws IOException {
+		POMAttrs attrs = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).attrs;
+
+		// KLUDGE: fix the project name inside docker containers. By default, the name of a Gradle project is the name
+		// of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
+		// every Gradle project rooted at the VCS root directory "src". This kludge could erroneously change the project
+		// name if the name is actually supposed to be "src" (e.g., if the name is set manually).
+		if (System.getenv().get("IN_DOCKER_CONTAINER") != null && attrs.artifactID.equals("src")) {
+			String[] parts = repoURI.split("/");
+			attrs.artifactID = parts[parts.length - 1];
+		}
+
+		return attrs;
 	}
 
 	public static Path getWrapper() {
@@ -259,7 +271,7 @@ public class ScanCommand {
 				for (Path gradleFile : gradleFiles) {
 					try {
 						System.err.println("Reading " + gradleFile + "...");
-						BuildAnalysis.POMAttrs attrs = getGradleAttrs(gradleFile);
+						BuildAnalysis.POMAttrs attrs = getGradleAttrs(repoURI, gradleFile);
 
 						final SourceUnit unit = new SourceUnit();
 						unit.Type = "JavaArtifact";
