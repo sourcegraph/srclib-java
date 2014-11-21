@@ -60,7 +60,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 	}
 
 	public void emitRef(int[] span, Symbol.Key symbol) {
-		Ref r = new Ref(symbol, compilationUnit.getSourceFile().getName(), span[0], span[1]);
+		Ref r = new Ref(symbol, compilationUnit.getSourceFile().getName(),
+				span[0], span[1]);
 		if (seenRefs.contains(r))
 			return;
 		seenRefs.add(r);
@@ -113,7 +114,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
 	private void error(String message) {
 		Tree node = getCurrentPath().getLeaf();
-		System.err.println("Error: " + message + " [node " + node.getKind() + "]");
+		System.err.println("Error: " + message + " [node " + node.getKind()
+				+ "]");
 	}
 
 	private Symbol.Key currentSymbolKey() {
@@ -173,7 +175,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 		int[] nameSpan, defSpan;
 		if (isCtor) {
 			if (isSynthetic) {
-				ClassTree klass = (ClassTree) trees.getPath(currentElement().getEnclosingElement()).getLeaf();
+				ClassTree klass = (ClassTree) trees.getPath(
+						currentElement().getEnclosingElement()).getLeaf();
 				if (klass.getSimpleName().toString().isEmpty()) {
 					// TODO(sqs): why is there an anonymous synthetic node? what
 					// does that even mean?
@@ -183,7 +186,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 				defSpan = nameSpan = spans.name(klass);
 
 			} else {
-				nameSpan = spans.name(currentElement().getEnclosingElement().getSimpleName().toString(), node);
+				nameSpan = spans.name(currentElement().getEnclosingElement()
+						.getSimpleName().toString(), node);
 				defSpan = treeSpan(node);
 			}
 		} else {
@@ -233,8 +237,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 		TreePath pkgName = new TreePath(getCurrentPath(), node);
 		new PackageNameScanner() {
 			@Override
-			public void writePackageName(String qualName, String simpleName, Tree node) {
-				emitRef(spans.name(simpleName, node), new Symbol.Key("", qualName));
+			public void writePackageName(String qualName, String simpleName,
+					Tree node) {
+				emitRef(spans.name(simpleName, node), new Symbol.Key("",
+						qualName));
 			}
 		}.scan(pkgName, null);
 	}
@@ -253,7 +259,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 	}
 
 	private int[] treeSpan(Tree node) {
-		int[] span = new int[] { (int) srcPos.getStartPosition(compilationUnit, node), (int) srcPos.getEndPosition(compilationUnit, node) };
+		int[] span = new int[] {
+				(int) srcPos.getStartPosition(compilationUnit, node),
+				(int) srcPos.getEndPosition(compilationUnit, node) };
 		if (span[1] == -1)
 			return null;
 		return span;

@@ -16,6 +16,13 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
 import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
 
+/**
+ * SourceUnit represents a source unit expected by srclib. A source unit is a
+ * build-system- and language-independent abstraction of a Maven repository or
+ * Gradle project. This class also includes static helpers for special case
+ * source units like the Java SDK.
+ *
+ */
 public class SourceUnit {
 
 	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
@@ -30,8 +37,8 @@ public class SourceUnit {
 	}
 
 	public static boolean isStdLib(String repo) {
-		return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI) ||
-			repo.equals(AndroidSdkURI);
+		return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI)
+				|| repo.equals(AndroidSdkURI);
 	}
 
 	/**
@@ -45,11 +52,13 @@ public class SourceUnit {
 		String JarPath;
 
 		/**
-		 * Cache the result of the resolution, so no additional url requests need to be made.
+		 * Cache the result of the resolution, so no additional url requests
+		 * need to be made.
 		 */
 		private transient Resolution resolved = null;
 
-		public RawDependency(String GroupId, String ArtifactId, String Version, String Scope, String JarPath) {
+		public RawDependency(String GroupId, String ArtifactId, String Version,
+				String Scope, String JarPath) {
 			this.GroupId = GroupId;
 			this.ArtifactId = ArtifactId;
 			this.Version = Version;
@@ -58,57 +67,67 @@ public class SourceUnit {
 		}
 
 		/**
-		 * Provide Clone URL overrides for different groupid/artifactid source units
+		 * Provide Clone URL overrides for different groupid/artifactid source
+		 * units
 		 */
-		static HashMap<String, String> overrides = new HashMap<String, String>() {{
-			put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
-			put("com.badlogicgames.gdx/", "https://github.com/libgdx/libgdx");
-			put("com.badlogicgames.jglfw/", "https://github.com/badlogic/jglfw");
-			put("org.json/json", "https://github.com/douglascrockford/JSON-java");
-			put("junit/junit", "https://github.com/junit-team/junit");
-		}};
+		static HashMap<String, String> overrides = new HashMap<String, String>() {
+			{
+				put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
+				put("com.badlogicgames.gdx/",
+						"https://github.com/libgdx/libgdx");
+				put("com.badlogicgames.jglfw/",
+						"https://github.com/badlogic/jglfw");
+				put("org.json/json",
+						"https://github.com/douglascrockford/JSON-java");
+				put("junit/junit", "https://github.com/junit-team/junit");
+			}
+		};
 
 		/**
-		 * @param lookup GroupID + "/" + ArtifactID
+		 * @param lookup
+		 *            GroupID + "/" + ArtifactID
 		 * @return A VCS url, if an override was found, null if not.
 		 */
 		public static String checkOverrides(String lookup) {
-			for(String key : overrides.keySet()) {
-				if(lookup.startsWith(key)) return overrides.get(key);
+			for (String key : overrides.keySet()) {
+				if (lookup.startsWith(key))
+					return overrides.get(key);
 			}
 			return null;
 		}
 
 		/**
 		 * Try to resolve this raw Dependency to its VCS target.
-		 * @return The Resolution Object. Error will be non-null if a Resolution could not be performed.
+		 * 
+		 * @return The Resolution Object. Error will be non-null if a Resolution
+		 *         could not be performed.
 		 */
 		public Resolution Resolve() {
-			if(resolved == null) {
+			if (resolved == null) {
 				// Get the url to the POM file for this artifact
-				String url = "http://central.maven.org/maven2/" + GroupId.replace(".", "/")
-						+ "/" + ArtifactId +
-						"/" + Version + "/" +
-						ArtifactId + "-" +
-						Version + ".pom";
+				String url = "http://central.maven.org/maven2/"
+						+ GroupId.replace(".", "/") + "/" + ArtifactId + "/"
+						+ Version + "/" + ArtifactId + "-" + Version + ".pom";
 
 				resolved = new Resolution();
 
 				try {
 					String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
 
-					if(cloneUrl == null) {
-						InputStream input = new BOMInputStream(new URL(url).openStream());
+					if (cloneUrl == null) {
+						InputStream input = new BOMInputStream(
+								new URL(url).openStream());
 
 						MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
 						Model model = xpp3Reader.read(input);
 						input.close();
 
 						Scm scm = model.getScm();
-						if(scm != null) cloneUrl = scm.getUrl();
+						if (scm != null)
+							cloneUrl = scm.getUrl();
 					}
 
-					if(cloneUrl != null) {
+					if (cloneUrl != null) {
 						resolved.Raw = this;
 
 						ResolvedTarget target = new ResolvedTarget();
@@ -118,24 +137,26 @@ public class SourceUnit {
 						target.ToVersionString = Version;
 
 						resolved.Target = target;
+					} else {
+						resolved.Error = ArtifactId
+								+ " does not have an associated SCM repository.";
 					}
-					else {
-						resolved.Error = ArtifactId + " does not have an associated SCM repository.";
-					}
-
 
 				} catch (Exception e) {
-					resolved.Error = "Could not download file " + e.getMessage();
+					resolved.Error = "Could not download file "
+							+ e.getMessage();
 				}
 			}
 
-			if(resolved.Error != null)
-				System.err.println("Error in resolving dependency - " + resolved.Error);
+			if (resolved.Error != null)
+				System.err.println("Error in resolving dependency - "
+						+ resolved.Error);
 
 			return resolved;
 		}
 
-		// Auto-generated HashCode method that compares ArtifactId, GroupId, and Version
+		// Auto-generated HashCode method that compares ArtifactId, GroupId, and
+		// Version
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -149,7 +170,8 @@ public class SourceUnit {
 			return result;
 		}
 
-		// Auto-generated Equals method that compares ArtifactId, GroupId, and Version
+		// Auto-generated Equals method that compares ArtifactId, GroupId, and
+		// Version
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -182,7 +204,7 @@ public class SourceUnit {
 	String Type;
 	String Repo;
 
-	//TODO(rameshvarun): Globs entry
+	// TODO(rameshvarun): Globs entry
 
 	List<String> Files = new LinkedList<String>();
 	String Dir;
@@ -195,7 +217,7 @@ public class SourceUnit {
 
 	// TODO(rameshvarun): Config list
 
-	Map<String, String> Ops = new HashMap<String,String>();
+	Map<String, String> Ops = new HashMap<String, String>();
 
 	public SourceUnit() {
 		Ops.put("graph", null);

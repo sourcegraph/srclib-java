@@ -15,7 +15,9 @@ public class GraphData implements GraphWriter {
 	public List<Ref> refsTo(Symbol.Key symbol) {
 		List<Ref> symrefs = new ArrayList<>();
 		for (Ref r : refs) {
-			if (r.symbol.equals(symbol) || (symbol.origin.equals("*") && r.symbol.path.equals(symbol.path))) {
+			if (r.symbol.equals(symbol)
+					|| (symbol.origin.equals("*") && r.symbol.path
+							.equals(symbol.path))) {
 				symrefs.add(r);
 			}
 		}
