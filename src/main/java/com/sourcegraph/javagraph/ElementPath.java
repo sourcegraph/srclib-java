@@ -29,7 +29,8 @@ public class ElementPath {
 		components.add(0, name);
 	}
 
-	private static class Visitor extends ElementKindVisitor8<ElementPath, ElementPath> {
+	private static class Visitor extends
+			ElementKindVisitor8<ElementPath, ElementPath> {
 		@Override
 		public ElementPath visitPackage(PackageElement e, ElementPath p) {
 			p.unshift(e.getQualifiedName().toString());
@@ -65,7 +66,8 @@ public class ElementPath {
 		}
 
 		@Override
-		public ElementPath visitExecutableAsMethod(ExecutableElement e, ElementPath p) {
+		public ElementPath visitExecutableAsMethod(ExecutableElement e,
+				ElementPath p) {
 			String methodName = e.getSimpleName().toString();
 			final List<String> params = getParameters(e);
 			String name = methodName;
@@ -76,9 +78,11 @@ public class ElementPath {
 		}
 
 		@Override
-		public ElementPath visitExecutableAsConstructor(ExecutableElement e, ElementPath p) {
+		public ElementPath visitExecutableAsConstructor(ExecutableElement e,
+				ElementPath p) {
 			final List<String> params = getParameters(e);
-			String name = e.getEnclosingElement().getSimpleName().toString() + "/:init";
+			String name = e.getEnclosingElement().getSimpleName().toString()
+					+ "/:init";
 			if (!params.isEmpty())
 				name += ":" + StringUtils.join(params, ":");
 			p.unshift(name);

@@ -20,5 +20,6 @@ public abstract class PackageNameScanner extends TreePathScanner<Void, Void> {
 		return null;
 	}
 
-	public abstract void writePackageName(String qualName, String simpleName, Tree node);
+	public abstract void writePackageName(String qualName, String simpleName,
+			Tree node);
 }

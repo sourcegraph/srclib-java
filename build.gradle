@@ -1,4 +1,4 @@
-apply plugin: 'scala'
+apply plugin: 'eclipse'
 apply plugin: 'application'
 
 mainClassName = "com.sourcegraph.javagraph.Main"
@@ -14,7 +14,6 @@ repositories {
 
 dependencies {
 	testCompile 'junit:junit:4.10'
-	compile 'org.scala-lang:scala-library:2.11.1'
 	compile 'com.google.code.gson:gson:2.3'
 	compile 'org.apache.commons:commons-lang3:3.3.2'
 	compile 'com.beust:jcommander:1.30'
