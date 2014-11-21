@@ -74,12 +74,14 @@ public final class Spans {
 
 	public int[] name(String name, Tree t) throws SpanException {
 		if (!SourceVersion.isIdentifier(name)) {
-			throw new SpanException("Name '" + name.toString() + "' is not an identifier");
+			throw new SpanException("Name '" + name.toString()
+					+ "' is not an identifier");
 		}
 
 		String src;
 		try {
-			src = compilationUnit.getSourceFile().getCharContent(true).toString();
+			src = compilationUnit.getSourceFile().getCharContent(true)
+					.toString();
 		} catch (IOException e) {
 			return null;
 		}
@@ -89,13 +91,15 @@ public final class Spans {
 		if (treeStart == -1)
 			throw new SpanException("No treeStart found for " + t.toString());
 		if (treeEnd == -1)
-			throw new SpanException("No treeEnd found for " + t.toString() + " (name: '" + name + "')" + src.substring(treeStart));
+			throw new SpanException("No treeEnd found for " + t.toString()
+					+ " (name: '" + name + "')" + src.substring(treeStart));
 
 		String treeSrc = src.substring(treeStart, treeEnd);
 		int nameStart = treeSrc.indexOf(name);
 		if (nameStart == -1)
 			throw new SpanException("No nameStart found for " + t.toString());
-		return new int[] { treeStart + nameStart, treeStart + nameStart + name.length() };
+		return new int[] { treeStart + nameStart,
+				treeStart + nameStart + name.length() };
 	}
 
 	public static class SpanException extends RuntimeException {

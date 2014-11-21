@@ -46,7 +46,8 @@ public class Grapher {
 		javacOpts.add(sourcepath);
 		String bootClasspath = System.getProperty("sun.boot.class.path");
 		if (bootClasspath == null || bootClasspath.isEmpty()) {
-			System.err.println("System property sun.boot.class.path is not set. It is required to load rt.jar.");
+			System.err
+					.println("System property sun.boot.class.path is not set. It is required to load rt.jar.");
 			System.exit(1);
 		}
 		javacOpts.add("-Xbootclasspath:" + bootClasspath);
@@ -63,22 +64,29 @@ public class Grapher {
 			if (file.isFile()) {
 				files.add(file);
 			} else if (file.isDirectory()) {
-				Files.walkFileTree(file.toPath(), new SimpleFileVisitor<Path>() {
-					@Override
-					public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-						if (attrs.isRegularFile() && file.toString().endsWith(".java"))
-							files.add(file.toFile());
-						return FileVisitResult.CONTINUE;
-					}
-				});
+				Files.walkFileTree(file.toPath(),
+						new SimpleFileVisitor<Path>() {
+							@Override
+							public FileVisitResult visitFile(Path file,
+									BasicFileAttributes attrs)
+									throws IOException {
+								if (attrs.isRegularFile()
+										&& file.toString().endsWith(".java"))
+									files.add(file.toFile());
+								return FileVisitResult.CONTINUE;
+							}
+						});
 			}
 		}
-		Iterable<? extends JavaFileObject> units = fileManager.getJavaFileObjectsFromFiles(files);
+		Iterable<? extends JavaFileObject> units = fileManager
+				.getJavaFileObjectsFromFiles(files);
 		graph(units);
 	}
 
-	public void graph(Iterable<? extends JavaFileObject> files) throws IOException {
-		final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, null, javacOpts, null, files);
+	public void graph(Iterable<? extends JavaFileObject> files)
+			throws IOException {
+		final JavacTask task = (JavacTask) compiler.getTask(null, fileManager,
+				null, javacOpts, null, files);
 
 		final Trees trees = Trees.instance(task);
 
@@ -91,26 +99,29 @@ public class Grapher {
 
 				try {
 					ExpressionTree pkgName = unit.getPackageName();
-					if (pkgName != null && !seenPackages.contains(pkgName.toString())) {
+					if (pkgName != null
+							&& !seenPackages.contains(pkgName.toString())) {
 						seenPackages.add(pkgName.toString());
 						writePackageSymbol(pkgName.toString());
 					}
 
 					TreePath root = new TreePath(unit);
 					new TreeScanner(emit, trees).scan(root, null);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 					System.err.println("Skipping this compilation unit...");
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			for (Diagnostic<?> diagnostic : diags.getDiagnostics())
-				System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toString());
+				System.err.format("Error on line %d in %s%n", diagnostic
+						.getLineNumber(), diagnostic.getSource().toString());
 			e.printStackTrace(System.err);
-			System.err.println("WARNING: If the stack trace contains \"task.analyze();\", there's a reasonable chance you're using a buggy compiler.\n" +
-					   "As of Nov 7, 2014, the Oracle 8 JDK is one of those compilers.\n"+
-					   "See https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\n"+
-					   "and compile OpenJDK 8 with that workaround. OpenJDK 8 build instructions: http://openjdk.java.net/projects/build-infra/guide.html\n");
+			System.err
+					.println("WARNING: If the stack trace contains \"task.analyze();\", there's a reasonable chance you're using a buggy compiler.\n"
+							+ "As of Nov 7, 2014, the Oracle 8 JDK is one of those compilers.\n"
+							+ "See https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\n"
+							+ "and compile OpenJDK 8 with that workaround. OpenJDK 8 build instructions: http://openjdk.java.net/projects/build-infra/guide.html\n");
 			System.exit(1);
 		}
 	}
