@@ -10,20 +10,9 @@ import java.nio.file.Path;
 import java.util.HashSet;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.plexus.util.FileUtils;
 
 public class BuildAnalysis {
-
-	public static String modifiedGradleScriptPath;
-	public static String gradleCacheDir;
-	static {
-		try {
-			modifiedGradleScriptPath = Files.createTempFile("srclib-collect-meta", "gradle").toString();
-			gradleCacheDir = Files.createTempDirectory("gradle-cache").toString();
-		} catch (Exception e) {
-			System.err.println("FATAL: could not create temporary files or temporary directory");
-			System.exit(1);
-		}
-	}
 
 	public static class POMAttrs {
 		public String groupID = "default-group";
@@ -86,92 +75,91 @@ public class BuildAnalysis {
 		}
 
 		public static BuildInfo collectMetaInformation(Path wrapper, Path build) throws IOException {
-			FileWriter fw = new FileWriter(modifiedGradleScriptPath, false);
+			Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
+			Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
 			try {
-				fw.write(taskCode);
-			} finally {
-				fw.close();
-			}
+				FileWriter fw = new FileWriter(modifiedGradleScriptFile.toString(), false);
 
-			String[] prefix = { "DESCRIPTION", "GROUP", "VERSION", "ARTIFACT", "CLASSPATH", "DEPENDENCY" };
+				try {
+					fw.write(taskCode);
+				} finally {
+					fw.close();
+				}
 
-			String wrapperPath = "INTERNAL_ERROR";
-			if (wrapper != null) {
-				wrapperPath = wrapper.toAbsolutePath().toString();
-			}
+				String[] prefix = { "DESCRIPTION", "GROUP", "VERSION", "ARTIFACT", "CLASSPATH", "DEPENDENCY" };
 
-			String[] gradlewArgs = { "bash", wrapperPath, "-I", modifiedGradleScriptPath, "--project-cache-dir",
-					gradleCacheDir, "srclibCollectMetaInformation" };
+				String wrapperPath = "INTERNAL_ERROR";
+				if (wrapper != null) {
+					wrapperPath = wrapper.toAbsolutePath().toString();
+				}
 
-			String[] gradleArgs = { "gradle", "-I", modifiedGradleScriptPath, "--project-cache-dir", gradleCacheDir,
-					"srclibCollectMetaInformation" };
+				String[] gradlewArgs = { "bash", wrapperPath, "-I", modifiedGradleScriptFile.toString(),
+						"--project-cache-dir", gradleCacheDir.toString(), "srclibCollectMetaInformation" };
 
-			String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
-			Path workDir = build.toAbsolutePath().getParent();
+				String[] gradleArgs = { "gradle", "-I", modifiedGradleScriptFile.toString(), "--project-cache-dir",
+						gradleCacheDir.toString(), "srclibCollectMetaInformation" };
 
-			if (wrapper != null) {
-				System.err.println("Using gradle wrapper script:" + wrapper.toString());
-			}
+				String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
+				Path workDir = build.toAbsolutePath().getParent();
 
-			ProcessBuilder pb = new ProcessBuilder(cmd);
-			pb.directory(new File(workDir.toString()));
-			BufferedReader in = null;
-			BuildInfo result = new BuildInfo();
-			result.attrs.artifactID = workDir.normalize().toString();
+				if (wrapper != null) {
+					System.err.println("Using gradle wrapper script:" + wrapper.toString());
+				}
 
-			try {
-				Process process = pb.start();
-				in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				ProcessBuilder pb = new ProcessBuilder(cmd);
+				pb.directory(new File(workDir.toString()));
+				BufferedReader in = null;
+				BuildInfo result = new BuildInfo();
+				result.attrs.artifactID = workDir.normalize().toString();
 
-				IOUtils.copy(process.getErrorStream(), System.err);
+				try {
+					Process process = pb.start();
+					in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-				String line = null;
-				while ((line = in.readLine()) != null) {
+					IOUtils.copy(process.getErrorStream(), System.err);
 
-					String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
-					String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
-					String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
-					String versionPayload = extractPayloadFromPrefixedLine("VERSION", line);
-					String classPathPayload = extractPayloadFromPrefixedLine("CLASSPATH", line);
-					String dependencyPayload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
+					String line = null;
+					while ((line = in.readLine()) != null) {
 
-					if (null != groupPayload)
-						result.attrs.groupID = groupPayload;
-					if (null != artifactPayload)
-						result.attrs.artifactID = artifactPayload;
-					if (null != descriptionPayload)
-						result.attrs.description = descriptionPayload;
-					if (null != versionPayload)
-						result.version = versionPayload;
-					if (null != classPathPayload)
-						result.classPath = classPathPayload;
-					if (null != dependencyPayload) {
-						String[] parts = dependencyPayload.split(":");
-						result.dependencies.add(new SourceUnit.RawDependency(parts[1], // GroupID
-								parts[2], // ArtifactID
-								parts[3], // Version
-								parts[0], // Scope
-								ScanCommand.swapPrefix(parts[4], homedir, "~") // JarFile
-								));
+						String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
+						String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
+						String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
+						String versionPayload = extractPayloadFromPrefixedLine("VERSION", line);
+						String classPathPayload = extractPayloadFromPrefixedLine("CLASSPATH", line);
+						String dependencyPayload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
+
+						if (null != groupPayload)
+							result.attrs.groupID = groupPayload;
+						if (null != artifactPayload)
+							result.attrs.artifactID = artifactPayload;
+						if (null != descriptionPayload)
+							result.attrs.description = descriptionPayload;
+						if (null != versionPayload)
+							result.version = versionPayload;
+						if (null != classPathPayload)
+							result.classPath = classPathPayload;
+						if (null != dependencyPayload) {
+							String[] parts = dependencyPayload.split(":");
+							result.dependencies.add(new SourceUnit.RawDependency(parts[1], // GroupID
+									parts[2], // ArtifactID
+									parts[3], // Version
+									parts[0], // Scope
+									ScanCommand.swapPrefix(parts[4], homedir, "~") // JarFile
+									));
+						}
+					}
+				} finally {
+					if (in != null) {
+						in.close();
 					}
 				}
+
+				return result;
 			} finally {
-				if (in != null) {
-					in.close();
-				}
+				FileUtils.deleteDirectory(gradleCacheDir.toString());
+				Files.deleteIfExists(modifiedGradleScriptFile);
 			}
-
-			// System.err.println(result.attrs.groupID);
-			// System.err.println(result.attrs.artifactID);
-			// System.err.println(result.attrs.description);
-			// System.err.println(result.classPath);
-			// System.err.println(result.version);
-			// for (SourceUnit.RawDependency d : result.dependencies) {
-			// System.err.println(d);
-			// }
-
-			return result;
 		}
 	}
 }
