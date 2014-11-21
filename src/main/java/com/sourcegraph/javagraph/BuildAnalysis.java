@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
 
@@ -12,8 +13,17 @@ import org.apache.commons.io.IOUtils;
 
 public class BuildAnalysis {
 
-	public static final String modifiedGradleScriptPath = System.getProperty("java.io.tmpdir")
-			+ "/srclib-collect-meta-information.gradle";
+	public static String modifiedGradleScriptPath;
+	public static String gradleCacheDir;
+	static {
+		try {
+			modifiedGradleScriptPath = Files.createTempFile("srclib-collect-meta", "gradle").toString();
+			gradleCacheDir = Files.createTempDirectory("gradle-cache").toString();
+		} catch (Exception e) {
+			System.err.println("FATAL: could not create temporary files or temporary directory");
+			System.exit(1);
+		}
+	}
 
 	public static class POMAttrs {
 		public String groupID = "default-group";
@@ -91,10 +101,11 @@ public class BuildAnalysis {
 				wrapperPath = wrapper.toAbsolutePath().toString();
 			}
 
-			String[] gradlewArgs = { "bash", wrapperPath, "-I", modifiedGradleScriptPath,
-					"srclibCollectMetaInformation" };
+			String[] gradlewArgs = { "bash", wrapperPath, "-I", modifiedGradleScriptPath, "--project-cache-dir",
+					gradleCacheDir, "srclibCollectMetaInformation" };
 
-			String[] gradleArgs = { "gradle", "-I", modifiedGradleScriptPath, "srclibCollectMetaInformation" };
+			String[] gradleArgs = { "gradle", "-I", modifiedGradleScriptPath, "--project-cache-dir", gradleCacheDir,
+					"srclibCollectMetaInformation" };
 
 			String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
 			Path workDir = build.toAbsolutePath().getParent();
