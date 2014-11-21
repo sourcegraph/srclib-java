@@ -24,7 +24,7 @@ public class DepresolveCommand {
 		private static Resolution androidSDK = null;
 
 		public static Resolution StdLib() {
-			if(stdlib == null) {
+			if (stdlib == null) {
 				stdlib = new Resolution();
 				stdlib.Target = new ResolvedTarget();
 				stdlib.Target.ToRepoCloneURL = SourceUnit.StdLibRepoURI;
@@ -36,7 +36,7 @@ public class DepresolveCommand {
 		}
 
 		public static Resolution AndroidSDK() {
-			if(androidSDK == null) {
+			if (androidSDK == null) {
 				androidSDK = new Resolution();
 				androidSDK.Target = new ResolvedTarget();
 				androidSDK.Target.ToRepoCloneURL = SourceUnit.AndroidSdkURI;
@@ -53,6 +53,7 @@ public class DepresolveCommand {
 		String ToUnitType;
 		String ToVersionString;
 	}
+
 	public void Execute() {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
@@ -70,12 +71,13 @@ public class DepresolveCommand {
 
 		// Resolve all raw dependencies
 		final ArrayList<Resolution> resolutions = new ArrayList<Resolution>();
-		for(SourceUnit.RawDependency rawDep : unit.Dependencies) {
+		for (SourceUnit.RawDependency rawDep : unit.Dependencies) {
 			resolutions.add(rawDep.Resolve());
 		}
 
 		// All units but the JDK itself depend on the Std lib
-		if(!unit.Type.equals("Java")) resolutions.add(Resolution.StdLib());
+		if (!unit.Type.equals("Java"))
+			resolutions.add(Resolution.StdLib());
 
 		// Print out resolved dependencies
 		System.out.println(gson.toJson(resolutions));

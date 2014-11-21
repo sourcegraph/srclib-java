@@ -24,24 +24,24 @@ public class Main {
 
 		try {
 			jc.parse(args);
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		switch (jc.getParsedCommand()) {
-			case "scan":
-				scan.Execute();
-				break;
-			case "graph":
-				graph.Execute();
-				break;
-			case "depresolve":
-				depresolve.Execute();
-				break;
-			default:
-				System.out.println("Unkown command");
-				jc.usage();
-				System.exit(1);
+		case "scan":
+			scan.Execute();
+			break;
+		case "graph":
+			graph.Execute();
+			break;
+		case "depresolve":
+			depresolve.Execute();
+			break;
+		default:
+			System.out.println("Unkown command");
+			jc.usage();
+			System.exit(1);
 		}
 	}
 }

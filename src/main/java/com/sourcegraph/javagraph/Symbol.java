@@ -81,7 +81,8 @@ public class Symbol implements JSONStreamAware, JSONAware {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((origin == null) ? 0 : origin.hashCode());
+			result = prime * result
+					+ ((origin == null) ? 0 : origin.hashCode());
 			result = prime * result + ((path == null) ? 0 : path.hashCode());
 			return result;
 		}
@@ -118,19 +119,26 @@ public class Symbol implements JSONStreamAware, JSONAware {
 
 		/**
 		 * Attempt to resolve the symbol's origin to a remote definition.
-		 * @param dependencies The RawDependency List of the current Source Unit
+		 * 
+		 * @param dependencies
+		 *            The RawDependency List of the current Source Unit
 		 * @return The resolved dependency, null if it could not be resolved.
 		 */
 		public Resolution resolveOrigin(List<RawDependency> dependencies) {
-			if(origin.isEmpty()) return null; // Empty origin could not be resolved
-			if(origin.contains("jre/lib/")) return Resolution.StdLib(); //JRE standard library
+			if (origin.isEmpty())
+				return null; // Empty origin could not be resolved
+			if (origin.contains("jre/lib/"))
+				return Resolution.StdLib(); // JRE standard library
 
-			//TODO: Resolve nashorn.jar to http://hg.openjdk.java.net/jdk8/jdk8/nashorn
-			//TODO: Resolve tools.jar to http://hg.openjdk.java.net/jdk8/jdk8/langtools
+			// TODO: Resolve nashorn.jar to
+			// http://hg.openjdk.java.net/jdk8/jdk8/nashorn
+			// TODO: Resolve tools.jar to
+			// http://hg.openjdk.java.net/jdk8/jdk8/langtools
 
 			String homedir = System.getProperty("user.home");
 			for (RawDependency dep : dependencies) {
-				String jarPath = ScanCommand.swapPrefix(dep.JarPath, "~", homedir);
+				String jarPath = ScanCommand.swapPrefix(dep.JarPath, "~",
+						homedir);
 				if (origin.contains(jarPath)) {
 					return dep.Resolve();
 				}
@@ -139,6 +147,5 @@ public class Symbol implements JSONStreamAware, JSONAware {
 			return null;
 		}
 	}
-
 
 }
