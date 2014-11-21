@@ -4,13 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.lang.ProcessBuilder.Redirect;
-import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -26,16 +21,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.internal.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -51,8 +43,7 @@ public class ScanCommand {
 	}
 
 	// TODO Merge this function with ‘getGradleDependencies’.
-	public static BuildAnalysis.POMAttrs getGradleAttrs(Path build)
-			throws IOException {
+	public static BuildAnalysis.POMAttrs getGradleAttrs(Path build) throws IOException {
 		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).attrs;
 	}
 
@@ -66,35 +57,29 @@ public class ScanCommand {
 		return null;
 	}
 
-	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(
-			Path build) throws IOException {
+	public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path build) throws IOException {
 		return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).dependencies;
 	}
 
-	public static BuildAnalysis.POMAttrs getPOMAttrs(Path pomFile)
-			throws IOException, FileNotFoundException, XmlPullParserException {
-		BOMInputStream reader = new BOMInputStream(new FileInputStream(
-				pomFile.toFile()));
+	public static BuildAnalysis.POMAttrs getPOMAttrs(Path pomFile) throws IOException, FileNotFoundException,
+			XmlPullParserException {
+		BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
 		MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
 		Model model = xpp3Reader.read(reader);
 
-		String groupId = model.getGroupId() == null ? model.getParent()
-				.getGroupId() : model.getGroupId();
+		String groupId = model.getGroupId() == null ? model.getParent().getGroupId() : model.getGroupId();
 
-		return new BuildAnalysis.POMAttrs(groupId, model.getArtifactId(),
-				model.getDescription());
+		return new BuildAnalysis.POMAttrs(groupId, model.getArtifactId(), model.getDescription());
 	}
 
-	public static HashSet<Path> findMatchingFiles(String fileName)
-			throws IOException {
+	public static HashSet<Path> findMatchingFiles(String fileName) throws IOException {
 		String pat = "glob:**/" + fileName;
 		PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pat);
 		HashSet<Path> result = new HashSet<Path>();
 
 		Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult visitFile(Path file,
-					BasicFileAttributes attrs) throws IOException {
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 				if (matcher.matches(file))
 					result.add(file);
 
@@ -102,8 +87,7 @@ public class ScanCommand {
 			}
 
 			@Override
-			public FileVisitResult visitFileFailed(Path file, IOException e)
-					throws IOException {
+			public FileVisitResult visitFileFailed(Path file, IOException e) throws IOException {
 				return FileVisitResult.CONTINUE;
 			}
 		});
@@ -121,11 +105,9 @@ public class ScanCommand {
 		return path;
 	}
 
-	public static HashSet<SourceUnit.RawDependency> getPOMDependencies(
-			Path pomFile) throws IOException {
+	public static HashSet<SourceUnit.RawDependency> getPOMDependencies(Path pomFile) throws IOException {
 		String homedir = System.getProperty("user.home");
-		String[] mavenArgs = { "mvn", "dependency:resolve",
-				"-DoutputAbsoluteArtifactFilename=true",
+		String[] mavenArgs = { "mvn", "dependency:resolve", "-DoutputAbsoluteArtifactFilename=true",
 				"-DoutputFile=/dev/stderr" };
 
 		HashSet<SourceUnit.RawDependency> results = new HashSet<SourceUnit.RawDependency>();
@@ -137,8 +119,7 @@ public class ScanCommand {
 
 		try {
 			Process process = pb.start();
-			in = new BufferedReader(new InputStreamReader(
-					process.getErrorStream()));
+			in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
 			IOUtils.copy(process.getInputStream(), System.err);
 
@@ -151,8 +132,7 @@ public class ScanCommand {
 
 				String[] parts = line.trim().split(":");
 
-				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(
-						parts[0], // GroupID
+				SourceUnit.RawDependency dep = new SourceUnit.RawDependency(parts[0], // GroupID
 						parts[1], // ArtifactID
 						parts[parts.length - 3], // Version
 						parts[parts.length - 2], // Scope
@@ -185,153 +165,132 @@ public class ScanCommand {
 		return sourcePaths;
 	}
 
+	public static Collection<SourceUnit> stdLibUnits() throws Exception {
+		List<SourceUnit> units = new ArrayList<>();
+
+		// Standard Library Unit
+		final SourceUnit unit = new SourceUnit();
+		unit.Type = "Java";
+		unit.Name = ".";
+		unit.Dir = "src/";
+		unit.Files = scanFiles(getSourcePaths());
+		// Sort for testing consistency
+		unit.Files.sort((String a, String b) -> a.compareTo(b));
+		units.add(unit);
+
+		// Build tools source unit
+		final SourceUnit toolsUnit = new SourceUnit();
+		toolsUnit.Type = "JavaArtifact";
+		toolsUnit.Name = "BuildTools";
+		toolsUnit.Dir = "make/src/classes/";
+		toolsUnit.Files = scanFiles("make/src/classes/");
+		// Sort for testing consistency
+		toolsUnit.Files.sort((String a, String b) -> a.compareTo(b));
+		units.add(toolsUnit);
+		return units;
+	}
+
+	public static SourceUnit androidSDKUnit(String subdir) throws Exception {
+		// Android Standard Library Unit
+		final SourceUnit unit = new SourceUnit();
+		unit.Type = "JavaArtifact";
+		unit.Name = "AndroidSDK";
+		unit.Dir = ".";
+		unit.Files = scanFiles(subdir);
+		// Sort for testing consistency
+		unit.Files.sort((String a, String b) -> a.compareTo(b));
+		return unit;
+	}
+
 	public void Execute() {
-		if (null == repoURI) {
-			repoURI = ".";
-		}
-
-		// Recursively find all pom.xml and build.gradle files.
-		HashSet<Path> pomFiles = null;
-		HashSet<Path> gradleFiles = null;
-
-		List<SourceUnit> result = new ArrayList<>();
-
-		// Check to see if we're in a standard library before
-		// looking for maven/gradle files.
-		if (SourceUnit.isStdLib(repoURI)) {
-			if (repoURI.equals(SourceUnit.StdLibRepoURI)
-					|| repoURI.equals(SourceUnit.StdLibTestRepoURI)) {
-				try {
-					// Standard Library Unit
-					final SourceUnit unit = new SourceUnit();
-					unit.Type = "Java";
-					unit.Name = ".";
-					unit.Dir = "src/";
-					unit.Files = scanFiles(getSourcePaths());
-					unit.Files.sort((String a, String b) -> a.compareTo(b)); // Sort
-																				// for
-																				// testing
-																				// consistency
-					result.add(unit);
-
-					// Build tools source unit
-					final SourceUnit toolsUnit = new SourceUnit();
-					toolsUnit.Type = "JavaArtifact";
-					toolsUnit.Name = "BuildTools";
-					toolsUnit.Dir = "make/src/classes/";
-					toolsUnit.Files = scanFiles("make/src/classes/");
-					toolsUnit.Files
-							.sort((String a, String b) -> a.compareTo(b)); // Sort
-																			// for
-																			// testing
-																			// consistency
-					result.add(toolsUnit);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.exit(1);
-				}
-
-			} else if (repoURI.equals(SourceUnit.AndroidSdkURI)) {
-				try {
-					if (subdir == null) {
-						subdir = ".";
-					}
-					// Android Standard Library Unit
-					final SourceUnit unit = new SourceUnit();
-					unit.Type = "JavaArtifact";
-					unit.Name = "AndroidSDK";
-					unit.Dir = ".";
-					unit.Files = scanFiles(subdir);
-					unit.Files.sort((String a, String b) -> a.compareTo(b)); // Sort
-																				// for
-																				// testing
-																				// consistency
-					result.add(unit);
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.exit(1);
-				}
+		try {
+			if (null == repoURI) {
+				repoURI = ".";
 			}
-		} else {
-			try {
-				System.err.println("Walking tree, looking for pom.xml files.");
+			if (null == subdir) {
+				subdir = ".";
+			}
+
+			List<SourceUnit> units = new ArrayList<>();
+
+			if (SourceUnit.isStdLib(repoURI)) {
+				// Standard library special cases
+				if (repoURI.equals(SourceUnit.StdLibRepoURI) || repoURI.equals(SourceUnit.StdLibTestRepoURI)) {
+					units.addAll(stdLibUnits());
+				} else if (repoURI.equals(SourceUnit.AndroidSdkURI)) {
+					units.add(androidSDKUnit(this.subdir));
+				}
+			} else {
+				// Recursively find all pom.xml and build.gradle files
+				HashSet<Path> pomFiles = null;
+				HashSet<Path> gradleFiles = null;
+
 				pomFiles = findMatchingFiles("pom.xml");
 				System.err.println(pomFiles.size() + " POM files found.");
 
-				System.err
-						.println("Walking tree, looking for build.gradle files.");
 				gradleFiles = findMatchingFiles("build.gradle");
 				System.err.println(gradleFiles.size() + " gradle files found.");
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(1);
-			}
 
-			try {
 				for (Path pomFile : pomFiles) {
-					System.err.println("Reading " + pomFile + "...");
-					BuildAnalysis.POMAttrs attrs = getPOMAttrs(pomFile);
+					try {
+						System.err.println("Reading " + pomFile + "...");
+						BuildAnalysis.POMAttrs attrs = getPOMAttrs(pomFile);
 
-					final SourceUnit unit = new SourceUnit();
-					unit.Type = "JavaArtifact";
-					unit.Name = attrs.groupID + "/" + attrs.artifactID;
-					unit.Dir = pomFile.getParent().toString();
-					unit.Data.put("POMFile", pomFile.toString());
-					unit.Data.put("Description", attrs.description);
+						final SourceUnit unit = new SourceUnit();
+						unit.Type = "JavaArtifact";
+						unit.Name = attrs.groupID + "/" + attrs.artifactID;
+						unit.Dir = pomFile.getParent().toString();
+						unit.Data.put("POMFile", pomFile.toString());
+						unit.Data.put("Description", attrs.description);
 
-					// TODO: Java source files can be other places besides
-					// ‘./src’
-					unit.Files = scanFiles(pomFile.getParent().resolve("src"));
+						// TODO: Java source files can be other places './src'
+						unit.Files = scanFiles(pomFile.getParent().resolve("src"));
 
-					// We need consistent output ordering for testing purposes.
-					unit.Files.sort((String a, String b) -> a.compareTo(b));
+						// Sort for test consistency.
+						unit.Files.sort((String a, String b) -> a.compareTo(b));
 
-					// This will list all dependencies, not just direct ones.
-					unit.Dependencies = new ArrayList(
-							getPOMDependencies(pomFile));
-					result.add(unit);
+						// This will list all dependencies, not just direct ones.
+						unit.Dependencies = new ArrayList<>(getPOMDependencies(pomFile));
+						units.add(unit);
+					} catch (Exception e) {
+						System.err.println("Error processing pom file " + pomFile + ": " + e.toString());
+					}
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.err
-						.println("Caught exception looking for maven files. Continuing...");
-			}
-			try {
 				for (Path gradleFile : gradleFiles) {
-					System.err.println("Reading " + gradleFile + "...");
-					BuildAnalysis.POMAttrs attrs = getGradleAttrs(gradleFile);
+					try {
+						System.err.println("Reading " + gradleFile + "...");
+						BuildAnalysis.POMAttrs attrs = getGradleAttrs(gradleFile);
 
-					final SourceUnit unit = new SourceUnit();
-					unit.Type = "JavaArtifact";
-					unit.Name = attrs.groupID + "/" + attrs.artifactID;
-					unit.Dir = gradleFile.getParent().toString();
-					unit.Data.put("GradleFile", gradleFile.toString());
-					unit.Data.put("Description", attrs.description);
+						final SourceUnit unit = new SourceUnit();
+						unit.Type = "JavaArtifact";
+						unit.Name = attrs.groupID + "/" + attrs.artifactID;
+						unit.Dir = gradleFile.getParent().toString();
+						unit.Data.put("GradleFile", gradleFile.toString());
+						unit.Data.put("Description", attrs.description);
 
-					// TODO: Java source files can be other places besides
-					// ‘./src’
-					unit.Files = scanFiles(gradleFile.getParent()
-							.resolve("src"));
+						// TODO: Java source files can be other places besides ‘./src’
+						unit.Files = scanFiles(gradleFile.getParent().resolve("src"));
 
-					// We need consistent output ordering for testing purposes.
-					unit.Files.sort((String a, String b) -> a.compareTo(b));
+						// We need consistent output ordering for testing purposes.
+						unit.Files.sort((String a, String b) -> a.compareTo(b));
 
-					// This will list all dependencies, not just direct ones.
-					unit.Dependencies = new ArrayList(
-							getGradleDependencies(gradleFile));
-					result.add(unit);
+						// This will list all dependencies, not just direct ones.
+						unit.Dependencies = new ArrayList<>(getGradleDependencies(gradleFile));
+						units.add(unit);
+					} catch (Exception e) {
+						System.err.println("Error processing gradle file " + gradleFile + ": " + e.toString());
+					}
+
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.err
-						.println("Caught exception looking for gradle files. Continuing...");
 			}
 
+			Gson gson = new GsonBuilder().serializeNulls().create();
+			System.out.println(gson.toJson(units));
+		} catch (Exception e) {
+			System.err.println("Uncaught error: " + e.toString());
+			e.printStackTrace();
+			System.exit(1);
 		}
-
-		Gson gson = new GsonBuilder().serializeNulls().create();
-		System.out.println(gson.toJson(result));
 	}
 
 	// Recursively find .java files under a given source path
@@ -339,20 +298,18 @@ public class ScanCommand {
 		final LinkedList<String> files = new LinkedList<String>();
 
 		if (Files.exists(Paths.get(sourcePath))) {
-			Files.walkFileTree(Paths.get(sourcePath),
-					new SimpleFileVisitor<Path>() {
-						@Override
-						public FileVisitResult visitFile(Path file,
-								BasicFileAttributes attrs) throws IOException {
-							String filename = file.toString();
-							if (filename.endsWith(".java")) {
-								if (filename.startsWith("./"))
-									filename = filename.substring(2);
-								files.add(filename);
-							}
-							return FileVisitResult.CONTINUE;
-						}
-					});
+			Files.walkFileTree(Paths.get(sourcePath), new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+					String filename = file.toString();
+					if (filename.endsWith(".java")) {
+						if (filename.startsWith("./"))
+							filename = filename.substring(2);
+						files.add(filename);
+					}
+					return FileVisitResult.CONTINUE;
+				}
+			});
 		} else {
 			System.err.println(sourcePath + " does not exist... Skipping...");
 		}
@@ -360,8 +317,7 @@ public class ScanCommand {
 		return files;
 	}
 
-	public static List<String> scanFiles(Collection<String> sourcePaths)
-			throws IOException {
+	public static List<String> scanFiles(Collection<String> sourcePaths) throws IOException {
 		final LinkedList<String> files = new LinkedList<String>();
 		for (String sourcePath : getSourcePaths())
 			files.addAll(scanFiles(sourcePath));
