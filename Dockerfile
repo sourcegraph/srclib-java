@@ -15,8 +15,11 @@ RUN apt-get install -y oracle-java8-installer
 # Install Maven
 RUN apt-get install -qq maven
 
-# Install Gradle
-RUN apt-get install -qq gradle
+# Install Gradle 2.2
+RUN curl -L -o gradle.zip https://services.gradle.org/distributions/gradle-2.2-bin.zip
+RUN unzip gradle.zip
+RUN mv gradle-2.2 /gradle
+ENV PATH /gradle/bin:${PATH}
 RUN ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
 
 # Add this toolchain
