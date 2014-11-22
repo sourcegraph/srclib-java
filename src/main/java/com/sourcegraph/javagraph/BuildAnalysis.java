@@ -1,41 +1,16 @@
 package com.sourcegraph.javagraph;
 
-import com.sun.tools.javac.util.List;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.lang.Error;
-import java.lang.ProcessBuilder.Redirect;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
-import java.nio.file.PathMatcher;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.input.BOMInputStream;
+
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.model.Model;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.codehaus.plexus.util.FileUtils;
 
 public class BuildAnalysis {
 
@@ -65,8 +40,7 @@ public class BuildAnalysis {
 			dependencies = new HashSet<SourceUnit.RawDependency>();
 		}
 
-		public BuildInfo(POMAttrs a, String cp, String v,
-				HashSet<SourceUnit.RawDependency> deps) {
+		public BuildInfo(POMAttrs a, String cp, String v, HashSet<SourceUnit.RawDependency> deps) {
 			attrs = a;
 			classPath = cp;
 			version = v;
@@ -76,38 +50,23 @@ public class BuildAnalysis {
 
 	public static class Gradle {
 
-		static String taskCode = ""
-				+ "allprojects {"
-				+ " task srclibCollectMetaInformation << {\n"
-				+ "  String classpath = ''\n"
-				+ "  if (project.plugins.hasPlugin('java')) {\n"
-				+ "   classpath = configurations.runtime.asPath\n"
-				+ "  }\n"
-				+ "\n"
-				+ "  String desc = project.description\n"
-				+ "  if (desc == null) { desc = \"\" }\n"
-				+ "\n"
-				+ "  println \"DESCRIPTION $desc\"\n"
-				+ "  println \"GROUP $project.group\"\n"
-				+ "  println \"VERSION $project.version\"\n"
-				+ "  println \"ARTIFACT $project.name\"\n"
-				+ "  println \"CLASSPATH $classpath\"\n"
-				+ "\n"
-				+ "  try {\n"
+		static String taskCode = "" + "allprojects {" + " task srclibCollectMetaInformation << {\n"
+				+ "  String classpath = ''\n" + "  if (project.plugins.hasPlugin('java')) {\n"
+				+ "   classpath = configurations.runtime.asPath\n" + "  }\n" + "\n"
+				+ "  String desc = project.description\n" + "  if (desc == null) { desc = \"\" }\n" + "\n"
+				+ "  println \"DESCRIPTION $desc\"\n" + "  println \"GROUP $project.group\"\n"
+				+ "  println \"VERSION $project.version\"\n" + "  println \"ARTIFACT $project.name\"\n"
+				+ "  println \"CLASSPATH $classpath\"\n" + "\n" + "  try {\n"
 				+ "   project.configurations.each { conf ->\n"
 				+ "    conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
-				+ "     String group = it.moduleVersion.id.group\n"
-				+ "     String name = it.moduleVersion.id.name\n"
-				+ "     String version = it.moduleVersion.id.version\n"
-				+ "     String file = it.file\n"
-				+ "     println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n"
-				+ "    }\n" + "   }\n" + "  }\n" + "  catch (Exception e) {}\n"
-				+ " }\n" + "}\n";
+				+ "     String group = it.moduleVersion.id.group\n" + "     String name = it.moduleVersion.id.name\n"
+				+ "     String version = it.moduleVersion.id.version\n" + "     String file = it.file\n"
+				+ "     println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n" + "    }\n" + "   }\n"
+				+ "  }\n" + "  catch (Exception e) {}\n" + " }\n" + "}\n";
 
 		private static String homedir = System.getProperty("user.home");
 
-		public static String extractPayloadFromPrefixedLine(String prefix,
-				String line) {
+		public static String extractPayloadFromPrefixedLine(String prefix, String line) {
 			int idx = line.indexOf(prefix);
 			if (-1 == idx)
 				return null;
@@ -115,107 +74,92 @@ public class BuildAnalysis {
 			return line.substring(offset).trim();
 		}
 
-		public static BuildInfo collectMetaInformation(Path wrapper, Path build)
-				throws IOException {
-			FileWriter fw = new FileWriter(
-					"/tmp/srclib-collect-meta-information.gradle", false);
+		public static BuildInfo collectMetaInformation(Path wrapper, Path build) throws IOException {
+			Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
+			Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
 			try {
-				fw.write(taskCode);
-			} finally {
-				fw.close();
-			}
+				FileWriter fw = new FileWriter(modifiedGradleScriptFile.toString(), false);
 
-			String[] prefix = { "DESCRIPTION", "GROUP", "VERSION", "ARTIFACT",
-					"CLASSPATH", "DEPENDENCY" };
+				try {
+					fw.write(taskCode);
+				} finally {
+					fw.close();
+				}
 
-			String wrapperPath = "INTERNAL_ERROR";
-			if (wrapper != null) {
-				wrapperPath = wrapper.toAbsolutePath().toString();
-			}
+				String[] prefix = { "DESCRIPTION", "GROUP", "VERSION", "ARTIFACT", "CLASSPATH", "DEPENDENCY" };
 
-			String[] gradlewArgs = { "bash", wrapperPath, "-I",
-					"/tmp/srclib-collect-meta-information.gradle",
-					"srclibCollectMetaInformation" };
+				String wrapperPath = "INTERNAL_ERROR";
+				if (wrapper != null) {
+					wrapperPath = wrapper.toAbsolutePath().toString();
+				}
 
-			String[] gradleArgs = { "gradle", "-I",
-					"/tmp/srclib-collect-meta-information.gradle",
-					"srclibCollectMetaInformation" };
+				String[] gradlewArgs = { "bash", wrapperPath, "-I", modifiedGradleScriptFile.toString(),
+						"--project-cache-dir", gradleCacheDir.toString(), "srclibCollectMetaInformation" };
 
-			String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
-			Path workDir = build.toAbsolutePath().getParent();
+				String[] gradleArgs = { "gradle", "-I", modifiedGradleScriptFile.toString(), "--project-cache-dir",
+						gradleCacheDir.toString(), "srclibCollectMetaInformation" };
 
-			if (wrapper != null) {
-				System.err.println("Using gradle wrapper script:"
-						+ wrapper.toString());
-			}
+				String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
+				Path workDir = build.toAbsolutePath().getParent();
 
-			ProcessBuilder pb = new ProcessBuilder(cmd);
-			pb.directory(new File(workDir.toString()));
-			BufferedReader in = null;
-			BuildInfo result = new BuildInfo();
-			result.attrs.artifactID = workDir.normalize().toString();
+				if (wrapper != null) {
+					System.err.println("Using gradle wrapper script:" + wrapper.toString());
+				}
 
-			try {
-				Process process = pb.start();
-				in = new BufferedReader(new InputStreamReader(
-						process.getInputStream()));
+				ProcessBuilder pb = new ProcessBuilder(cmd);
+				pb.directory(new File(workDir.toString()));
+				BufferedReader in = null;
+				BuildInfo result = new BuildInfo();
+				result.attrs.artifactID = workDir.normalize().toString();
 
-				IOUtils.copy(process.getErrorStream(), System.err);
+				try {
+					Process process = pb.start();
+					in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-				String line = null;
-				while ((line = in.readLine()) != null) {
+					IOUtils.copy(process.getErrorStream(), System.err);
 
-					String groupPayload = extractPayloadFromPrefixedLine(
-							"GROUP", line);
-					String artifactPayload = extractPayloadFromPrefixedLine(
-							"ARTIFACT", line);
-					String descriptionPayload = extractPayloadFromPrefixedLine(
-							"DESCRIPTION", line);
-					String versionPayload = extractPayloadFromPrefixedLine(
-							"VERSION", line);
-					String classPathPayload = extractPayloadFromPrefixedLine(
-							"CLASSPATH", line);
-					String dependencyPayload = extractPayloadFromPrefixedLine(
-							"DEPENDENCY", line);
+					String line = null;
+					while ((line = in.readLine()) != null) {
 
-					if (null != groupPayload)
-						result.attrs.groupID = groupPayload;
-					if (null != artifactPayload)
-						result.attrs.artifactID = artifactPayload;
-					if (null != descriptionPayload)
-						result.attrs.description = descriptionPayload;
-					if (null != versionPayload)
-						result.version = versionPayload;
-					if (null != classPathPayload)
-						result.classPath = classPathPayload;
-					if (null != dependencyPayload) {
-						String[] parts = dependencyPayload.split(":");
-						result.dependencies.add(new SourceUnit.RawDependency(
-								parts[1], // GroupID
-								parts[2], // ArtifactID
-								parts[3], // Version
-								parts[0], // Scope
-								ScanCommand.swapPrefix(parts[4], homedir, "~") // JarFile
-								));
+						String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
+						String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
+						String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
+						String versionPayload = extractPayloadFromPrefixedLine("VERSION", line);
+						String classPathPayload = extractPayloadFromPrefixedLine("CLASSPATH", line);
+						String dependencyPayload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
+
+						if (null != groupPayload)
+							result.attrs.groupID = groupPayload;
+						if (null != artifactPayload)
+							result.attrs.artifactID = artifactPayload;
+						if (null != descriptionPayload)
+							result.attrs.description = descriptionPayload;
+						if (null != versionPayload)
+							result.version = versionPayload;
+						if (null != classPathPayload)
+							result.classPath = classPathPayload;
+						if (null != dependencyPayload) {
+							String[] parts = dependencyPayload.split(":");
+							result.dependencies.add(new SourceUnit.RawDependency(parts[1], // GroupID
+									parts[2], // ArtifactID
+									parts[3], // Version
+									parts[0], // Scope
+									ScanCommand.swapPrefix(parts[4], homedir, "~") // JarFile
+									));
+						}
+					}
+				} finally {
+					if (in != null) {
+						in.close();
 					}
 				}
+
+				return result;
 			} finally {
-				if (in != null) {
-					in.close();
-				}
+				FileUtils.deleteDirectory(gradleCacheDir.toString());
+				Files.deleteIfExists(modifiedGradleScriptFile);
 			}
-
-			// System.err.println(result.attrs.groupID);
-			// System.err.println(result.attrs.artifactID);
-			// System.err.println(result.attrs.description);
-			// System.err.println(result.classPath);
-			// System.err.println(result.version);
-			// for (SourceUnit.RawDependency d : result.dependencies) {
-			// System.err.println(d);
-			// }
-
-			return result;
 		}
 	}
 }
