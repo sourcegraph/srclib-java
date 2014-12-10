@@ -9,6 +9,7 @@
       "DefStart": 0,
       "DefEnd": 0,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
         "TypeExpression": null,
@@ -24,6 +25,7 @@
       "DefStart": 1489,
       "DefEnd": 1496,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -42,6 +44,7 @@
       "DefStart": 1476,
       "DefEnd": 3202,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "build.tools.addjsum.AddJsum",
@@ -60,6 +63,7 @@
       "DefStart": 1501,
       "DefEnd": 1559,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long",
@@ -80,6 +84,7 @@
       "DefStart": 2893,
       "DefEnd": 3200,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long,java.lang.String)long",
@@ -99,6 +104,7 @@
       "DefStart": 3034,
       "DefEnd": 3057,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "char",
@@ -115,6 +121,7 @@
       "DefStart": 2948,
       "DefEnd": 2963,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -131,6 +138,7 @@
       "DefStart": 3001,
       "DefEnd": 3010,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -147,6 +155,7 @@
       "DefStart": 2968,
       "DefEnd": 2991,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -163,6 +172,7 @@
       "DefStart": 2918,
       "DefEnd": 2928,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -179,6 +189,7 @@
       "DefStart": 2930,
       "DefEnd": 2940,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.String",
@@ -195,6 +206,7 @@
       "DefStart": 1563,
       "DefEnd": 2889,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.lang.String[])void",
@@ -214,6 +226,7 @@
       "DefStart": 1587,
       "DefEnd": 1600,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.String[]",
@@ -230,6 +243,7 @@
       "DefStart": 2062,
       "DefEnd": 2092,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -246,6 +260,7 @@
       "DefStart": 2573,
       "DefEnd": 2602,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -262,6 +277,7 @@
       "DefStart": 2788,
       "DefEnd": 2801,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "EXCEPTION_PARAMETER",
         "TypeExpression": "java.io.IOException",
@@ -278,6 +294,7 @@
       "DefStart": 2522,
       "DefEnd": 2566,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -294,6 +311,7 @@
       "DefStart": 2614,
       "DefEnd": 2623,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -310,6 +328,7 @@
       "DefStart": 1780,
       "DefEnd": 1813,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.File",
@@ -326,6 +345,7 @@
       "DefStart": 2100,
       "DefEnd": 2119,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -342,6 +362,7 @@
       "DefStart": 2239,
       "DefEnd": 2267,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.util.regex.Matcher",
@@ -358,6 +379,7 @@
       "DefStart": 1820,
       "DefEnd": 1853,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.File",
@@ -374,6 +396,7 @@
       "DefStart": 2009,
       "DefEnd": 2055,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.util.regex.Pattern",
@@ -390,6 +413,7 @@
       "DefStart": 1860,
       "DefEnd": 1927,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.BufferedReader",
@@ -406,6 +430,7 @@
       "DefStart": 1934,
       "DefEnd": 2002,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.BufferedWriter",
