@@ -117,6 +117,8 @@ public class GraphCommand {
 				else
 					object.add("Exported", new JsonPrimitive(false));
 
+                                object.add("Local", new JsonPrimitive(sym.kind.equals("LOCAL_VARIABLE")));
+
 				switch(sym.kind) {
 					case "ENUM": case "CLASS": case "INTERFACE": case "ANNOTATION_TYPE":
 						object.add("Kind", new JsonPrimitive("type"));
