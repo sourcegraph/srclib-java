@@ -83,6 +83,16 @@ public class ScanCommand {
             }
 
             @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                // Skip common build data directories and dot-directories.
+                String dirName = dir.getFileName().normalize().toString();
+                if (dirName.equals("build") || dirName.equals("target") || dirName.startsWith(".")) {
+                    return FileVisitResult.SKIP_SUBTREE;
+                }
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
             public FileVisitResult visitFileFailed(Path file, IOException e) throws IOException {
                 return FileVisitResult.CONTINUE;
             }
