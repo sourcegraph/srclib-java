@@ -1,6 +1,12 @@
 package com.sourcegraph.javagraph;
 
-import java.io.FileInputStream;
+import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
+import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
+import org.apache.commons.io.input.BOMInputStream;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.Scm;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -8,219 +14,202 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.input.BOMInputStream;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.Scm;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-
-import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
-import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
-
 /**
  * SourceUnit represents a source unit expected by srclib. A source unit is a
  * build-system- and language-independent abstraction of a Maven repository or
  * Gradle project. This class also includes static helpers for special case
  * source units like the Java SDK.
- *
  */
 public class SourceUnit {
 
-	public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
-	public static String StdLibTestRepoURI = "github.com/sgtest/java-jdk-sample";
-	public static String AndroidSdkURI = "android.googlesource.com/platform/frameworks/base";
+    public static String StdLibRepoURI = "hg.openjdk.java.net/jdk8/jdk8/jdk";
+    public static String StdLibTestRepoURI = "github.com/sgtest/java-jdk-sample";
+    public static String AndroidSdkURI = "android.googlesource.com/platform/frameworks/base";
+    String Name;
+    String Type;
+    String Repo;
+    List<String> Files = new LinkedList<String>();
+    String Dir;
+    List<RawDependency> Dependencies = new LinkedList<RawDependency>();
 
-	public boolean isStdLib() {
-		if (Repo == null) {
-			return false;
-		}
-		return isStdLib(Repo);
-	}
+    // TODO(rameshvarun): Globs entry
+    Map<String, Object> Data = new HashMap<String, Object>();
+    Map<String, String> Ops = new HashMap<String, String>();
 
-	public static boolean isStdLib(String repo) {
-		return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI)
-				|| repo.equals(AndroidSdkURI);
-	}
+    public SourceUnit() {
+        Ops.put("graph", null);
+        Ops.put("depresolve", null);
+    }
 
-	/**
-	 * A Raw, unresolved Maven Dependency.
-	 */
-	public static class RawDependency {
-		String GroupId;
-		String ArtifactId;
-		String Version;
-		String Scope;
-		String JarPath;
+    // TODO(rameshvarun): Info field
 
-		/**
-		 * Cache the result of the resolution, so no additional url requests
-		 * need to be made.
-		 */
-		private transient Resolution resolved = null;
+    public static boolean isStdLib(String repo) {
+        return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI)
+                || repo.equals(AndroidSdkURI);
+    }
 
-		public RawDependency(String GroupId, String ArtifactId, String Version,
-				String Scope, String JarPath) {
-			this.GroupId = GroupId;
-			this.ArtifactId = ArtifactId;
-			this.Version = Version;
-			this.Scope = Scope;
-			this.JarPath = JarPath;
-		}
+    // TODO(rameshvarun): Config list
 
-		/**
-		 * Provide Clone URL overrides for different groupid/artifactid source
-		 * units
-		 */
-		static HashMap<String, String> overrides = new HashMap<String, String>() {
-			{
-				put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
-				put("com.badlogicgames.gdx/",
-						"https://github.com/libgdx/libgdx");
-				put("com.badlogicgames.jglfw/",
-						"https://github.com/badlogic/jglfw");
-				put("org.json/json",
-						"https://github.com/douglascrockford/JSON-java");
-				put("junit/junit", "https://github.com/junit-team/junit");
-			}
-		};
+    public boolean isStdLib() {
+        if (Repo == null) {
+            return false;
+        }
+        return isStdLib(Repo);
+    }
 
-		/**
-		 * @param lookup
-		 *            GroupID + "/" + ArtifactID
-		 * @return A VCS url, if an override was found, null if not.
-		 */
-		public static String checkOverrides(String lookup) {
-			for (String key : overrides.keySet()) {
-				if (lookup.startsWith(key))
-					return overrides.get(key);
-			}
-			return null;
-		}
+    /**
+     * A Raw, unresolved Maven Dependency.
+     */
+    public static class RawDependency {
+        /**
+         * Provide Clone URL overrides for different groupid/artifactid source
+         * units
+         */
+        static HashMap<String, String> overrides = new HashMap<String, String>() {
+            {
+                put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
+                put("com.badlogicgames.gdx/",
+                        "https://github.com/libgdx/libgdx");
+                put("com.badlogicgames.jglfw/",
+                        "https://github.com/badlogic/jglfw");
+                put("org.json/json",
+                        "https://github.com/douglascrockford/JSON-java");
+                put("junit/junit", "https://github.com/junit-team/junit");
+            }
+        };
+        String GroupId;
+        String ArtifactId;
+        String Version;
+        String Scope;
+        String JarPath;
+        /**
+         * Cache the result of the resolution, so no additional url requests
+         * need to be made.
+         */
+        private transient Resolution resolved = null;
 
-		/**
-		 * Try to resolve this raw Dependency to its VCS target.
-		 * 
-		 * @return The Resolution Object. Error will be non-null if a Resolution
-		 *         could not be performed.
-		 */
-		public Resolution Resolve() {
-			if (resolved == null) {
-				// Get the url to the POM file for this artifact
-				String url = "http://central.maven.org/maven2/"
-						+ GroupId.replace(".", "/") + "/" + ArtifactId + "/"
-						+ Version + "/" + ArtifactId + "-" + Version + ".pom";
+        public RawDependency(String GroupId, String ArtifactId, String Version,
+                             String Scope, String JarPath) {
+            this.GroupId = GroupId;
+            this.ArtifactId = ArtifactId;
+            this.Version = Version;
+            this.Scope = Scope;
+            this.JarPath = JarPath;
+        }
 
-				resolved = new Resolution();
+        /**
+         * @param lookup GroupID + "/" + ArtifactID
+         * @return A VCS url, if an override was found, null if not.
+         */
+        public static String checkOverrides(String lookup) {
+            for (String key : overrides.keySet()) {
+                if (lookup.startsWith(key))
+                    return overrides.get(key);
+            }
+            return null;
+        }
 
-				try {
-					String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
+        /**
+         * Try to resolve this raw Dependency to its VCS target.
+         *
+         * @return The Resolution Object. Error will be non-null if a Resolution
+         * could not be performed.
+         */
+        public Resolution Resolve() {
+            if (resolved == null) {
+                // Get the url to the POM file for this artifact
+                String url = "http://central.maven.org/maven2/"
+                        + GroupId.replace(".", "/") + "/" + ArtifactId + "/"
+                        + Version + "/" + ArtifactId + "-" + Version + ".pom";
 
-					if (cloneUrl == null) {
-						InputStream input = new BOMInputStream(
-								new URL(url).openStream());
+                resolved = new Resolution();
 
-						MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-						Model model = xpp3Reader.read(input);
-						input.close();
+                try {
+                    String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
 
-						Scm scm = model.getScm();
-						if (scm != null)
-							cloneUrl = scm.getUrl();
-					}
+                    if (cloneUrl == null) {
+                        InputStream input = new BOMInputStream(
+                                new URL(url).openStream());
 
-					if (cloneUrl != null) {
-						resolved.Raw = this;
+                        MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
+                        Model model = xpp3Reader.read(input);
+                        input.close();
 
-						ResolvedTarget target = new ResolvedTarget();
-						target.ToRepoCloneURL = cloneUrl;
-						target.ToUnit = GroupId + "/" + ArtifactId;
-						target.ToUnitType = "JavaArtifact";
-						target.ToVersionString = Version;
+                        Scm scm = model.getScm();
+                        if (scm != null)
+                            cloneUrl = scm.getUrl();
+                    }
 
-						resolved.Target = target;
-					} else {
-						resolved.Error = ArtifactId
-								+ " does not have an associated SCM repository.";
-					}
+                    if (cloneUrl != null) {
+                        resolved.Raw = this;
 
-				} catch (Exception e) {
-					resolved.Error = "Could not download file "
-							+ e.getMessage();
-				}
-			}
+                        ResolvedTarget target = new ResolvedTarget();
+                        target.ToRepoCloneURL = cloneUrl;
+                        target.ToUnit = GroupId + "/" + ArtifactId;
+                        target.ToUnitType = "JavaArtifact";
+                        target.ToVersionString = Version;
 
-			if (resolved.Error != null)
-				System.err.println("Error in resolving dependency - "
-						+ resolved.Error);
+                        resolved.Target = target;
+                    } else {
+                        resolved.Error = ArtifactId
+                                + " does not have an associated SCM repository.";
+                    }
 
-			return resolved;
-		}
+                } catch (Exception e) {
+                    resolved.Error = "Could not download file "
+                            + e.getMessage();
+                }
+            }
 
-		// Auto-generated HashCode method that compares ArtifactId, GroupId, and
-		// Version
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result
-					+ ((ArtifactId == null) ? 0 : ArtifactId.hashCode());
-			result = prime * result
-					+ ((GroupId == null) ? 0 : GroupId.hashCode());
-			result = prime * result
-					+ ((Version == null) ? 0 : Version.hashCode());
-			return result;
-		}
+            if (resolved.Error != null)
+                System.err.println("Error in resolving dependency - "
+                        + resolved.Error);
 
-		// Auto-generated Equals method that compares ArtifactId, GroupId, and
-		// Version
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			RawDependency other = (RawDependency) obj;
-			if (ArtifactId == null) {
-				if (other.ArtifactId != null)
-					return false;
-			} else if (!ArtifactId.equals(other.ArtifactId))
-				return false;
-			if (GroupId == null) {
-				if (other.GroupId != null)
-					return false;
-			} else if (!GroupId.equals(other.GroupId))
-				return false;
-			if (Version == null) {
-				if (other.Version != null)
-					return false;
-			} else if (!Version.equals(other.Version))
-				return false;
-			return true;
-		}
-	}
+            return resolved;
+        }
 
-	String Name;
-	String Type;
-	String Repo;
+        // Auto-generated HashCode method that compares ArtifactId, GroupId, and
+        // Version
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result
+                    + ((ArtifactId == null) ? 0 : ArtifactId.hashCode());
+            result = prime * result
+                    + ((GroupId == null) ? 0 : GroupId.hashCode());
+            result = prime * result
+                    + ((Version == null) ? 0 : Version.hashCode());
+            return result;
+        }
 
-	// TODO(rameshvarun): Globs entry
-
-	List<String> Files = new LinkedList<String>();
-	String Dir;
-
-	List<RawDependency> Dependencies = new LinkedList<RawDependency>();
-
-	// TODO(rameshvarun): Info field
-
-	Map<String, Object> Data = new HashMap<String, Object>();
-
-	// TODO(rameshvarun): Config list
-
-	Map<String, String> Ops = new HashMap<String, String>();
-
-	public SourceUnit() {
-		Ops.put("graph", null);
-		Ops.put("depresolve", null);
-	}
+        // Auto-generated Equals method that compares ArtifactId, GroupId, and
+        // Version
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            RawDependency other = (RawDependency) obj;
+            if (ArtifactId == null) {
+                if (other.ArtifactId != null)
+                    return false;
+            } else if (!ArtifactId.equals(other.ArtifactId))
+                return false;
+            if (GroupId == null) {
+                if (other.GroupId != null)
+                    return false;
+            } else if (!GroupId.equals(other.GroupId))
+                return false;
+            if (Version == null) {
+                if (other.Version != null)
+                    return false;
+            } else if (!Version.equals(other.Version))
+                return false;
+            return true;
+        }
+    }
 }
