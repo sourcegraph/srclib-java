@@ -25,6 +25,7 @@ public class Main {
             jc.parse(args);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.exit(1);
         }
 
         switch (jc.getParsedCommand()) {
