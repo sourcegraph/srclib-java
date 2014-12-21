@@ -14,6 +14,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -122,14 +123,13 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             return null;
         }
 
-        Symbol.Key key = new Symbol.Key("", path.toString());
-
+        URI defOrigin = null;
         JavaFileObject f = Origins.forElement(cur);
         if (f != null) {
-            key.origin = f.toUri().toString();
+            defOrigin = f.toUri();
         }
 
-        return key;
+        return new Symbol.Key(defOrigin, path.toString());
     }
 
     private Element currentElement() {
@@ -230,8 +230,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             @Override
             public void writePackageName(String qualName, String simpleName,
                                          Tree node) {
-                emitRef(spans.name(simpleName, node), new Symbol.Key("",
-                        qualName));
+// TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
+                emitRef(spans.name(simpleName, node), new Symbol.Key(null, qualName));
             }
         }.scan(pkgName, null);
     }

@@ -4,12 +4,7 @@ import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sourcegraph.javagraph.BuildAnalysis.POMAttrs;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import java.io.*;
 import java.nio.file.*;
@@ -53,25 +48,14 @@ public class ScanCommand {
         return null;
     }
 
-    public static HashSet<SourceUnit.RawDependency> getGradleDependencies(Path build) throws IOException {
+    public static HashSet<RawDependency> getGradleDependencies(Path build) throws IOException {
         return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).dependencies;
-    }
-
-    public static BuildAnalysis.POMAttrs getPOMAttrs(Path pomFile) throws IOException, FileNotFoundException,
-            XmlPullParserException {
-        BOMInputStream reader = new BOMInputStream(new FileInputStream(pomFile.toFile()));
-        MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-        Model model = xpp3Reader.read(reader);
-
-        String groupId = model.getGroupId() == null ? model.getParent().getGroupId() : model.getGroupId();
-
-        return new BuildAnalysis.POMAttrs(groupId, model.getArtifactId(), model.getDescription());
     }
 
     public static HashSet<Path> findMatchingFiles(String fileName) throws IOException {
         String pat = "glob:**/" + fileName;
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pat);
-        HashSet<Path> result = new HashSet<Path>();
+        HashSet<Path> result = new HashSet<>();
 
         Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
             @Override
@@ -99,62 +83,6 @@ public class ScanCommand {
         });
 
         return result;
-    }
-
-    public static String swapPrefix(String path, String old, String replacement) {
-        // System.err.println("Swap " + path + " " + old + " " + replacement);
-        if (path.startsWith(old + File.separator)) {
-            // System.err.println("Swap " + path + " with " + replacement +
-            // path.substring(old.length()));
-            return replacement + path.substring(old.length());
-        }
-        return path;
-    }
-
-
-    public static HashSet<SourceUnit.RawDependency> getPOMDependencies(Path pomFile) throws IOException {
-        String homedir = System.getProperty("user.home");
-        String[] mavenArgs = {"mvn", "dependency:resolve", "-DoutputAbsoluteArtifactFilename=true",
-                "-DoutputFile=/dev/stderr"};
-
-        HashSet<SourceUnit.RawDependency> results = new HashSet<SourceUnit.RawDependency>();
-
-        ProcessBuilder pb = new ProcessBuilder(mavenArgs);
-        pb.directory(new File(pomFile.getParent().toString()));
-
-        BufferedReader in = null;
-
-        try {
-            Process process = pb.start();
-            in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-            IOUtils.copy(process.getInputStream(), System.err);
-
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                if (!line.startsWith("   "))
-                    continue;
-                if (line.trim().equals("none"))
-                    continue;
-
-                String[] parts = line.trim().split(":");
-
-                SourceUnit.RawDependency dep = new SourceUnit.RawDependency(parts[0], // GroupID
-                        parts[1], // ArtifactID
-                        parts[parts.length - 3], // Version
-                        parts[parts.length - 2], // Scope
-                        swapPrefix(parts[parts.length - 1], homedir, "~") // JarFile
-                );
-
-                results.add(dep);
-            }
-
-            return results;
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
     }
 
     public static ArrayList<String> getSourcePaths() {
@@ -246,10 +174,10 @@ public class ScanCommand {
 
     public void Execute() {
         try {
-            if (null == repoURI) {
+            if (repoURI == null) {
                 repoURI = ".";
             }
-            if (null == subdir) {
+            if (subdir == null) {
                 subdir = ".";
             }
 
@@ -264,25 +192,20 @@ public class ScanCommand {
                 }
             } else {
                 // Recursively find all pom.xml and build.gradle files
-                HashSet<Path> pomFiles = null;
-                HashSet<Path> gradleFiles = null;
-
-                pomFiles = findMatchingFiles("pom.xml");
-                System.err.println(pomFiles.size() + " POM files found.");
-
-                gradleFiles = findMatchingFiles("build.gradle");
-                System.err.println(gradleFiles.size() + " gradle files found.");
+                HashSet<Path> pomFiles = findMatchingFiles("pom.xml");
+                HashSet<Path> gradleFiles = findMatchingFiles("build.gradle");
 
                 for (Path pomFile : pomFiles) {
                     try {
-                        System.err.println("Reading " + pomFile + "...");
-                        BuildAnalysis.POMAttrs attrs = getPOMAttrs(pomFile);
-
                         final SourceUnit unit = new SourceUnit();
+
+                        // Add POMFile so we can open the corresponding Maven project.
+                        unit.Data.put("POMFile", pomFile.toString());
+
+                        BuildAnalysis.POMAttrs attrs = unit.getPOMAttrs();
                         unit.Type = "JavaArtifact";
                         unit.Name = attrs.groupID + "/" + attrs.artifactID;
                         unit.Dir = pomFile.getParent().toString();
-                        unit.Data.put("POMFile", pomFile.toString());
                         unit.Data.put("Description", attrs.description);
 
                         // TODO: Java source files can be other places './src'
@@ -292,7 +215,7 @@ public class ScanCommand {
                         unit.Files.sort((String a, String b) -> a.compareTo(b));
 
                         // This will list all dependencies, not just direct ones.
-                        unit.Dependencies = new ArrayList<>(getPOMDependencies(pomFile));
+                        unit.Dependencies = new ArrayList<>(unit.getRawPOMDependencies());
                         units.add(unit);
                     } catch (Exception e) {
                         System.err.println("Error processing pom file " + pomFile + ": " + e.toString());
@@ -300,7 +223,6 @@ public class ScanCommand {
                 }
                 for (Path gradleFile : gradleFiles) {
                     try {
-                        System.err.println("Reading " + gradleFile + "...");
                         BuildAnalysis.POMAttrs attrs = getGradleAttrs(repoURI, gradleFile);
 
                         final SourceUnit unit = new SourceUnit();

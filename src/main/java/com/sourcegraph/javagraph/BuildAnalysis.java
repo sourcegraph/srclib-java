@@ -31,14 +31,14 @@ public class BuildAnalysis {
         public String classPath = "";
         public String version = "";
         public POMAttrs attrs;
-        public HashSet<SourceUnit.RawDependency> dependencies;
+        public HashSet<RawDependency> dependencies;
 
         public BuildInfo() {
             attrs = new POMAttrs();
-            dependencies = new HashSet<SourceUnit.RawDependency>();
+            dependencies = new HashSet<RawDependency>();
         }
 
-        public BuildInfo(POMAttrs a, String cp, String v, HashSet<SourceUnit.RawDependency> deps) {
+        public BuildInfo(POMAttrs a, String cp, String v, HashSet<RawDependency> deps) {
             attrs = a;
             classPath = cp;
             version = v;
@@ -141,11 +141,11 @@ public class BuildAnalysis {
                             result.classPath = classPathPayload;
                         if (null != dependencyPayload) {
                             String[] parts = dependencyPayload.split(":");
-                            result.dependencies.add(new SourceUnit.RawDependency(parts[1], // GroupID
+                            result.dependencies.add(new RawDependency(
+                                    parts[1], // GroupID
                                     parts[2], // ArtifactID
                                     parts[3], // Version
-                                    parts[0], // Scope
-                                    ScanCommand.swapPrefix(parts[4], homedir, "~") // JarFile
+                                    parts[0] // Scope
                             ));
                         }
                     }
