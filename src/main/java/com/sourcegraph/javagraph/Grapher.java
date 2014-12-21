@@ -122,7 +122,8 @@ public class Grapher {
 
     private void writePackageSymbol(String packageName) throws IOException {
         Symbol s = new Symbol();
-        s.key = new Symbol.Key("", packageName);
+        // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
+        s.key = new Symbol.Key(null, packageName);
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);
         s.kind = "PACKAGE";
         s.pkg = packageName;

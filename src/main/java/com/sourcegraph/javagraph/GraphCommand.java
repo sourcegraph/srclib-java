@@ -8,23 +8,26 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GraphCommand {
+    @Parameter(names = {"--debug-unit-file"}, description = "The path to a source unit input file, which will be read as though it came from stdin. Used to mimic stdin when you can't actually pipe to stdin (e.g., in IntelliJ run configurations).")
+    String debugUnitFile;
 
     public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
+
     /**
      * The Source Unit that is read in from STDIN. Defined here, so that it can be
      * accessed within the anonymous classes below.
      */
     public static SourceUnit unit = null;
-    @Parameter
-    private List<String> files = new ArrayList<String>();
 
     public static String getGradleClassPath(Path gradleFile)
             throws IOException {
@@ -122,18 +125,19 @@ public class GraphCommand {
                                          JsonSerializationContext arg2) {
                 JsonObject object = new JsonObject();
 
-                object.addProperty("Origin", ref.symbol.origin);
+                if (ref.symbol.getOrigin() != null) {
+                    object.addProperty("Origin", ref.symbol.getOrigin().toString());
+                }
 
-                boolean remoteSymbol = !ref.symbol.origin.isEmpty() && !ref.symbol.origin.startsWith("file:");
-                if (remoteSymbol) {
-                    Resolution resolution = ref.symbol.resolveOrigin(unit.Dependencies);
+                if (ref.symbol.hasRemoteOrigin()) {
+                    Resolution resolution = ref.symbol.resolveOrigin(unit);
 
                     if (resolution != null && resolution.Error == null) {
                         object.add("DefRepo", new JsonPrimitive(resolution.Target.ToRepoCloneURL));
                         object.add("DefUnitType", new JsonPrimitive(resolution.Target.ToUnitType));
                         object.add("DefUnit", new JsonPrimitive(resolution.Target.ToUnit));
                     } else {
-                        System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" + ref.end + " => " + ref.symbol.origin);
+                        System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" + ref.end + " => " + ref.symbol.getOrigin());
                         return new JsonPrimitive("unresolved");
                     }
                 }
@@ -158,11 +162,16 @@ public class GraphCommand {
 
         Gson gson = gsonBuilder.create();
 
-        System.err.println("Reading in SourceUnit from StdIn...");
         try {
-            InputStreamReader reader = new InputStreamReader(System.in);
-            unit = gson.fromJson(reader, SourceUnit.class);
-            reader.close();
+            Reader r;
+            if (debugUnitFile != null && !debugUnitFile.isEmpty()) {
+                System.err.println("Reading from --debug-unit-file " + debugUnitFile);
+                r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
+            } else {
+                r = new InputStreamReader(System.in);
+            }
+            unit = gson.fromJson(r, SourceUnit.class);
+            r.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -282,7 +291,7 @@ public class GraphCommand {
 
     static class Graph {
         List<Symbol> Defs = new LinkedList<Symbol>();
-        List<Ref> Refs = new LinkedList<Ref>();
-        List<Doc> Docs = new LinkedList<Doc>();
+        List<Ref> Refs = new LinkedList<>();
+        List<Doc> Docs = new LinkedList<>();
     }
 }

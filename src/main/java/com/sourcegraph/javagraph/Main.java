@@ -38,7 +38,7 @@ public class Main {
                 depresolve.Execute();
                 break;
             default:
-                System.out.println("Unkown command");
+                System.out.println("Unknown command");
                 jc.usage();
                 System.exit(1);
         }

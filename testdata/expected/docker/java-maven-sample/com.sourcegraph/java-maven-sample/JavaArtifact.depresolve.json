@@ -1,1 +1,1 @@
-[{"Raw":null,"Target":{"ToRepoCloneURL":"hg.openjdk.java.net/jdk8/jdk8/jdk","ToUnit":".","ToUnitType":"Java","ToVersionString":null},"Error":null}]
+[{"Raw":{"GroupId":"org.apache.commons","ArtifactId":"commons-csv","Version":"1.0","Scope":null},"Target":{"ToRepoCloneURL":"https://github.com/apache/commons-csv","ToUnit":"org.apache.commons/commons-csv","ToUnitType":"JavaArtifact","ToVersionString":"1.0"},"Error":null},{"Raw":null,"Target":{"ToRepoCloneURL":"hg.openjdk.java.net/jdk8/jdk8/jdk","ToUnit":".","ToUnitType":"Java","ToVersionString":null},"Error":null}]

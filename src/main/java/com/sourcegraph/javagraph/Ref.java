@@ -1,15 +1,6 @@
 package com.sourcegraph.javagraph;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONStreamAware;
-import org.json.simple.JSONValue;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.LinkedHashMap;
-
-public class Ref implements JSONStreamAware, JSONAware {
+public class Ref  {
     Symbol.Key symbol;
 
     String file;
@@ -21,33 +12,6 @@ public class Ref implements JSONStreamAware, JSONAware {
         this.file = file;
         this.start = start;
         this.end = end;
-    }
-
-    @Override
-    public String toJSONString() {
-        StringWriter b = new StringWriter();
-        try {
-            writeJSONString(b);
-        } catch (IOException e) {
-        }
-        return b.toString();
-    }
-
-    @Override
-    public String toString() {
-        return toJSONString();
-    }
-
-    @Override
-    public void writeJSONString(Writer out) throws IOException {
-        LinkedHashMap<String, Object> obj = new LinkedHashMap<>();
-        if (symbol.origin != null && symbol.origin != "")
-            obj.put("symbolOrigin", symbol.origin);
-        obj.put("symbolPath", symbol.path);
-        obj.put("file", file);
-        obj.put("start", start);
-        obj.put("end", end);
-        JSONValue.writeJSONString(obj, out);
     }
 
     @Override

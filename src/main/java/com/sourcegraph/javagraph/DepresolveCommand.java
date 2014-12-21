@@ -25,7 +25,7 @@ public class DepresolveCommand {
 
         // Resolve all raw dependencies
         final ArrayList<Resolution> resolutions = new ArrayList<Resolution>();
-        for (SourceUnit.RawDependency rawDep : unit.Dependencies) {
+        for (RawDependency rawDep : unit.Dependencies) {
             resolutions.add(rawDep.Resolve());
         }
 
@@ -40,7 +40,7 @@ public class DepresolveCommand {
     static class Resolution {
         private static Resolution stdlib = null;
         private static Resolution androidSDK = null;
-        SourceUnit.RawDependency Raw;
+        RawDependency Raw;
         ResolvedTarget Target;
         String Error;
 

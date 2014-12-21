@@ -1,18 +1,19 @@
 package com.sourcegraph.javagraph;
 
-import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
-import com.sourcegraph.javagraph.DepresolveCommand.ResolvedTarget;
-import org.apache.commons.io.input.BOMInputStream;
+import org.apache.commons.io.IOUtils;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
-import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.sonatype.aether.resolution.ArtifactDescriptorException;
+import org.sonatype.aether.resolution.DependencyResolutionException;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.*;
 
 /**
  * SourceUnit represents a source unit expected by srclib. A source unit is a
@@ -28,13 +29,13 @@ public class SourceUnit {
     String Name;
     String Type;
     String Repo;
-    List<String> Files = new LinkedList<String>();
+    List<String> Files = new LinkedList<>();
     String Dir;
-    List<RawDependency> Dependencies = new LinkedList<RawDependency>();
+    List<RawDependency> Dependencies = new LinkedList<>();
 
     // TODO(rameshvarun): Globs entry
-    Map<String, Object> Data = new HashMap<String, Object>();
-    Map<String, String> Ops = new HashMap<String, String>();
+    Map<String, Object> Data = new HashMap<>();
+    Map<String, String> Ops = new HashMap<>();
 
     public SourceUnit() {
         Ops.put("graph", null);
@@ -44,172 +45,116 @@ public class SourceUnit {
     // TODO(rameshvarun): Info field
 
     public static boolean isStdLib(String repo) {
-        return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI)
-                || repo.equals(AndroidSdkURI);
+        return repo.equals(StdLibRepoURI) || repo.equals(StdLibTestRepoURI) || repo.equals(AndroidSdkURI);
+    }
+
+    /**
+     * Memoized; access via openMavenProject.
+     */
+    private transient MavenProject mavenProject;
+
+    private MavenProject openMavenProject() throws IOException, XmlPullParserException {
+        if (mavenProject != null) {
+            return mavenProject;
+        }
+
+        Path pomFile = getPOMFilePath();
+        if (pomFile == null) return null;
+
+        MavenXpp3Reader mavenReader = new MavenXpp3Reader();
+        BufferedReader reader = null;
+        try {
+            reader = java.nio.file.Files.newBufferedReader(pomFile, StandardCharsets.UTF_8);
+            Model model = mavenReader.read(reader);
+            model.setPomFile(pomFile.toFile());
+            mavenProject = new MavenProject(model);
+        } finally {
+            reader.close();
+        }
+        return mavenProject;
+    }
+
+    public BuildAnalysis.POMAttrs getPOMAttrs() throws IOException, FileNotFoundException, XmlPullParserException {
+        MavenProject proj = openMavenProject();
+        String groupId = proj.getGroupId() == null ? proj.getParent().getGroupId() : proj.getGroupId();
+        return new BuildAnalysis.POMAttrs(groupId, proj.getArtifactId(), proj.getDescription());
+    }
+
+    public HashSet<RawDependency> getRawPOMDependencies() throws IOException, XmlPullParserException {
+        HashSet<RawDependency> results = new HashSet<>();
+        MavenProject proj = openMavenProject();
+        List<Dependency> deps = proj.getDependencies();
+        for (Dependency d : deps) {
+            results.add(new RawDependency(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope()));
+        }
+        return results;
+    }
+
+    private transient Map<Path, RawDependency> jarPathToDep;
+
+    private Map<Path, RawDependency> resolveMavenDependencyArtifacts() throws IOException {
+        if (jarPathToDep != null) {
+            return jarPathToDep;
+        }
+        jarPathToDep=new HashMap<>();
+
+        String homedir = System.getProperty("user.home");
+        String[] mavenArgs = {"mvn", "dependency:resolve", "-DoutputAbsoluteArtifactFilename=true", "-DoutputFile=/dev/stderr"};
+
+        ProcessBuilder pb = new ProcessBuilder(mavenArgs);
+        pb.directory(new File(getPOMFilePath().getParent().toString()));
+        BufferedReader in = null;
+        try {
+            Process process = pb.start();
+            in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+            IOUtils.copy(process.getInputStream(), System.err);
+
+            String line;
+            while ((line = in.readLine()) != null) {
+                if (!line.startsWith("   "))
+                    continue;
+                if (line.trim().equals("none"))
+                    continue;
+
+                String[] parts = line.trim().split(":");
+
+                RawDependency dep = new RawDependency(parts[0], // GroupID
+                        parts[1], // ArtifactID
+                        parts[parts.length - 3], // Version
+                        parts[parts.length - 2] // Scope
+                );
+
+                // was: ScanCommand.swapPrefix(parts[parts.length - 1], homedir, "~")
+                Path jarFile = FileSystems.getDefault().getPath(parts[parts.length - 1]);
+                System.err.println("JAR FILE IS: " + jarFile.toString());
+                jarPathToDep.put(jarFile, dep);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        return jarPathToDep;
+    }
+
+    public RawDependency resolveJARToPOMDependency(Path jarFile) throws IOException, XmlPullParserException, ArtifactDescriptorException, DependencyResolutionException {
+        Map<Path, RawDependency> path2dep = resolveMavenDependencyArtifacts();
+        return path2dep.get(jarFile);
     }
 
     // TODO(rameshvarun): Config list
 
     public boolean isStdLib() {
-        if (Repo == null) {
-            return false;
-        }
-        return isStdLib(Repo);
+        return Repo != null && isStdLib(Repo);
     }
 
-    /**
-     * A Raw, unresolved Maven Dependency.
-     */
-    public static class RawDependency {
-        /**
-         * Provide Clone URL overrides for different groupid/artifactid source
-         * units
-         */
-        static HashMap<String, String> overrides = new HashMap<String, String>() {
-            {
-                put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
-                put("com.badlogicgames.gdx/",
-                        "https://github.com/libgdx/libgdx");
-                put("com.badlogicgames.jglfw/",
-                        "https://github.com/badlogic/jglfw");
-                put("org.json/json",
-                        "https://github.com/douglascrockford/JSON-java");
-                put("junit/junit", "https://github.com/junit-team/junit");
-            }
-        };
-        String GroupId;
-        String ArtifactId;
-        String Version;
-        String Scope;
-        String JarPath;
-        /**
-         * Cache the result of the resolution, so no additional url requests
-         * need to be made.
-         */
-        private transient Resolution resolved = null;
-
-        public RawDependency(String GroupId, String ArtifactId, String Version,
-                             String Scope, String JarPath) {
-            this.GroupId = GroupId;
-            this.ArtifactId = ArtifactId;
-            this.Version = Version;
-            this.Scope = Scope;
-            this.JarPath = JarPath;
-        }
-
-        /**
-         * @param lookup GroupID + "/" + ArtifactID
-         * @return A VCS url, if an override was found, null if not.
-         */
-        public static String checkOverrides(String lookup) {
-            for (String key : overrides.keySet()) {
-                if (lookup.startsWith(key))
-                    return overrides.get(key);
-            }
+    public Path getPOMFilePath() {
+        String pomFile = (String) Data.get("POMFile");
+        if (pomFile == null) {
             return null;
         }
-
-        /**
-         * Try to resolve this raw Dependency to its VCS target.
-         *
-         * @return The Resolution Object. Error will be non-null if a Resolution
-         * could not be performed.
-         */
-        public Resolution Resolve() {
-            if (resolved == null) {
-                // Get the url to the POM file for this artifact
-                String url = "http://central.maven.org/maven2/"
-                        + GroupId.replace(".", "/") + "/" + ArtifactId + "/"
-                        + Version + "/" + ArtifactId + "-" + Version + ".pom";
-
-                resolved = new Resolution();
-
-                try {
-                    String cloneUrl = checkOverrides(GroupId + "/" + ArtifactId);
-
-                    if (cloneUrl == null) {
-                        InputStream input = new BOMInputStream(
-                                new URL(url).openStream());
-
-                        MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-                        Model model = xpp3Reader.read(input);
-                        input.close();
-
-                        Scm scm = model.getScm();
-                        if (scm != null)
-                            cloneUrl = scm.getUrl();
-                    }
-
-                    if (cloneUrl != null) {
-                        resolved.Raw = this;
-
-                        ResolvedTarget target = new ResolvedTarget();
-                        target.ToRepoCloneURL = cloneUrl;
-                        target.ToUnit = GroupId + "/" + ArtifactId;
-                        target.ToUnitType = "JavaArtifact";
-                        target.ToVersionString = Version;
-
-                        resolved.Target = target;
-                    } else {
-                        resolved.Error = ArtifactId
-                                + " does not have an associated SCM repository.";
-                    }
-
-                } catch (Exception e) {
-                    resolved.Error = "Could not download file "
-                            + e.getMessage();
-                }
-            }
-
-            if (resolved.Error != null)
-                System.err.println("Error in resolving dependency - "
-                        + resolved.Error);
-
-            return resolved;
-        }
-
-        // Auto-generated HashCode method that compares ArtifactId, GroupId, and
-        // Version
-        @Override
-        public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result
-                    + ((ArtifactId == null) ? 0 : ArtifactId.hashCode());
-            result = prime * result
-                    + ((GroupId == null) ? 0 : GroupId.hashCode());
-            result = prime * result
-                    + ((Version == null) ? 0 : Version.hashCode());
-            return result;
-        }
-
-        // Auto-generated Equals method that compares ArtifactId, GroupId, and
-        // Version
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
-            RawDependency other = (RawDependency) obj;
-            if (ArtifactId == null) {
-                if (other.ArtifactId != null)
-                    return false;
-            } else if (!ArtifactId.equals(other.ArtifactId))
-                return false;
-            if (GroupId == null) {
-                if (other.GroupId != null)
-                    return false;
-            } else if (!GroupId.equals(other.GroupId))
-                return false;
-            if (Version == null) {
-                if (other.Version != null)
-                    return false;
-            } else if (!Version.equals(other.Version))
-                return false;
-            return true;
-        }
+        return FileSystems.getDefault().getPath(pomFile);
     }
+
 }
