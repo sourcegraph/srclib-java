@@ -16,9 +16,9 @@ public class TestGrapher extends TestCase {
 		List<JavaFileObject> files = new ArrayList<>();
 		files.add(new StringJavaFileObject(name, javaSource));
 		try {
-			g.graph(files);
+			g.graphJavaFiles(files);
 		} catch (IOException e) {
-			fail("IOException in graph: " + name);
+			fail("IOException in graphJavaFiles: " + name);
 		}
 		return w;
 	}
@@ -33,59 +33,59 @@ public class TestGrapher extends TestCase {
 	@Test
 	public void testGraph_PackageSymbol_Single() {
 		GraphData w = graph("Foo.java", "package foo;");
-		assertEquals(1, w.symbols.size());
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo")).size());
+		assertEquals(1, w.defs.size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo")).size());
 	}
 
 	@Test
 	public void testGraph_PackageSymbol_Qualified() {
 		GraphData w = graph("Foo.java", "package foo.bar;");
-		assertEquals(1, w.symbols.size());
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo.bar")).size());
+		assertEquals(1, w.defs.size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.bar")).size());
 	}
 
 	@Test
 	public void testGraph_PackageRef() {
 		GraphData w = graph("Foo.java", "package foo; public class Foo { public java.lang.String s; }");
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "java")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(matchAnyOrigin, "java.lang")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(matchAnyOrigin, "java.lang.String:type")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "java")).size());
+		assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang")).size());
+		assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang.String:type")).size());
 	}
 
 	@Test
 	public void testGraph_ImportRef() {
 		GraphData w = graph("Foo.java", "package foo; import java.lang.String;");
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "java")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(matchAnyOrigin, "java.lang")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(matchAnyOrigin, "java.lang.String:type")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "java")).size());
+		assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang")).size());
+		assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang.String:type")).size());
 	}
 
 	@Test
 	public void testGraph_ImportStarRef() {
 		GraphData w = graph("Foo.java", "package foo; import java.lang.*;");
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "java")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(matchAnyOrigin, "java.lang")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "java")).size());
+		assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang")).size());
 	}
 
 	@Test
 	public void testGraph_ClassSymbol() {
 		GraphData w = graph("Bar.java", "package foo;\npublic class Bar {}");
-		assertEquals(3, w.symbols.size());
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo.Bar:type")).size());
+		assertEquals(3, w.defs.size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
 	}
 
 	@Test
 	public void testGraph_ClassRef() {
 		GraphData w = graph("Bar.java", "package foo; public class Bar { private foo.Bar b; }");
-		assertEquals(2, w.refsTo(new Symbol.Key(null, "foo.Bar:type")).size());
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
 	}
 
 	@Test
 	public void testGraph_ComplexRefs() {
 		GraphData w = graph("Bar.java", "package foo; import java.lang.String; public class Bar { public Bar() { }\nstatic class Qux extends Bar { Qux() { super(); } } }");
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo.Bar:type.Qux:type")).size());
-		assertEquals(1, w.refsTo(new Symbol.Key(null, "foo.Bar:type.Qux/:init")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type.Qux:type")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type.Qux/:init")).size());
 	}
 
 	@Test
