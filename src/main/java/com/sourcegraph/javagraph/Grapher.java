@@ -5,7 +5,9 @@ import com.sun.source.tree.ExpressionTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.lang.model.element.Element;
 import javax.tools.*;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +40,15 @@ public class Grapher {
         javacOpts.add(classpath != null ? classpath : "");
         javacOpts.add("-sourcepath");
         javacOpts.add(sourcepath != null ? sourcepath : "");
+
+        // Speed up compilation by not doing dataflow, code gen, etc.
+        javacOpts.add("-XDcompilePolicy=attr");
+        javacOpts.add("-XDshouldStopPolicyIfError=ATTR");
+        javacOpts.add("-XDshouldStopPolicyIfNoError=ATTR");
+
+        // This is necessary to produce Elements (and therefore defs and refs) when compilation errors occur. It will still probably fail on syntax errors, but typechecking errors are survivable.
+        javacOpts.add("-proc:none");
+
         String bootClasspath = System.getProperty("sun.boot.class.path");
         if (bootClasspath == null || bootClasspath.isEmpty()) {
             System.err.println("System property sun.boot.class.path is not set. It is required to load rt.jar.");
@@ -77,6 +88,7 @@ public class Grapher {
     }
 
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
+        System.err.println("javac " + StringUtils.join(javacOpts, ' ') + " " + StringUtils.join(files, ' '));
         final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, null, javacOpts, null, files);
 
         final Trees trees = Trees.instance(task);
@@ -85,7 +97,12 @@ public class Grapher {
 
         try {
             Iterable<? extends CompilationUnitTree> units = task.parse();
-            task.analyze();
+            Iterable<? extends Element> elems = task.analyze();
+            System.err.println("task.analyze():");
+            for (final Element e : elems) {
+                System.err.println(" - Elem: " + e.toString());
+            }
+            System.err.println("========================");
             for (final CompilationUnitTree unit : units) {
                 try {
                     ExpressionTree pkgName = unit.getPackageName();

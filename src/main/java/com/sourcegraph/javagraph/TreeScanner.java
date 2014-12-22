@@ -109,7 +109,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         }
     }
 
-    public boolean verbose = true;
+    public boolean verbose = false;
 
     private void error(String message) {
         if (!verbose) return;
