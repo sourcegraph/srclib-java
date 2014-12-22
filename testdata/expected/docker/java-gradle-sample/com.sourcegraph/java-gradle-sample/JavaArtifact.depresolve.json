@@ -1,1 +1,79 @@
-[{"Raw":{"GroupId":"com.beust","ArtifactId":"jcommander","Version":"1.30","Scope":"compile"},"Target":{"ToRepoCloneURL":"git@github.com:cbeust/jcommander.git","ToUnit":"com.beust/jcommander","ToUnitType":"JavaArtifact","ToVersionString":"1.30"},"Error":null},{"Raw":null,"Target":{"ToRepoCloneURL":"hg.openjdk.java.net/jdk8/jdk8/jdk","ToUnit":".","ToUnitType":"Java","ToVersionString":null},"Error":null}]
+[
+  {
+    "Raw": {
+      "groupID": "com.beust",
+      "artifactID": "jcommander",
+      "version": "1.30",
+      "scope": "default"
+    },
+    "Target": {
+      "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
+      "ToUnit": "com.beust/jcommander",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.30"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.beust",
+      "artifactID": "jcommander",
+      "version": "1.30",
+      "scope": "compile"
+    },
+    "Target": {
+      "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
+      "ToUnit": "com.beust/jcommander",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.30"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.beust",
+      "artifactID": "jcommander",
+      "version": "1.30",
+      "scope": "testCompile"
+    },
+    "Target": {
+      "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
+      "ToUnit": "com.beust/jcommander",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.30"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.beust",
+      "artifactID": "jcommander",
+      "version": "1.30",
+      "scope": "testRuntime"
+    },
+    "Target": {
+      "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
+      "ToUnit": "com.beust/jcommander",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.30"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.beust",
+      "artifactID": "jcommander",
+      "version": "1.30",
+      "scope": "runtime"
+    },
+    "Target": {
+      "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
+      "ToUnit": "com.beust/jcommander",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.30"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "ToUnit": ".",
+      "ToUnitType": "Java"
+    }
+  }
+]

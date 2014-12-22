@@ -12,7 +12,6 @@
       "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "build.tools.addjsum"
       }
     },
