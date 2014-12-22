@@ -1,16 +1,36 @@
 FROM ubuntu:14.04
 
-RUN echo
+RUN echo cachebuster 2014-12-22
 RUN apt-get update -qq
 RUN apt-get install -qq curl git python-software-properties software-properties-common
 
-# Install Java 8
+# Install Java 8 (to bootstrap building our own one, below)
 RUN add-apt-repository ppa:webupd8team/java
 RUN apt-get update -qq
-
 # auto accept oracle jdk license
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN apt-get install -y oracle-java8-installer
+
+# Install newer jdk8u to fix
+# https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel. We can remove this once jdk 8u26+ is released.
+RUN apt-get install -qq mercurial
+RUN hg clone http://hg.openjdk.java.net/jdk8u/jdk8u /tmp/jdk8u-build
+WORKDIR /tmp/jdk8u-build
+# Really get jdk8u (otherwise get_source.sh gets jdk8 not jdk8u subrepos)
+RUN bash ./get_source.sh
+RUN apt-get install -qq unzip build-essential zip libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libasound2-dev libfreetype6-dev
+RUN mkdir -p /srclib
+# Explicitly specify freetype dirs due to bug http://mail.openjdk.java.net/pipermail/build-dev/2013-October/010874.html.
+RUN bash ./configure --prefix=/srclib --with-freetype-lib=/usr/lib/x86_64-linux-gnu --with-freetype-include=/usr/include/freetype2
+RUN make all
+RUN make install
+# Remove the Java we used to bootstrap our custom jdk8u
+RUN sudo apt-get remove -qq oracle-java8-installer
+# Set up our system to use this JDK.
+ENV PATH /tmp/jdk8u-build/build/linux-x86_64-normal-server-release/images/j2sdk-image/bin:$PATH
+RUN env --unset=JAVA_HOME
+ENV LANG C
+
 
 # Install Maven
 RUN apt-get install -qq maven
