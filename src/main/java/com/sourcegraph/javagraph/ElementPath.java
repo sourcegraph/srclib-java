@@ -60,6 +60,13 @@ public class ElementPath {
         }
 
         @Override
+        public ElementPath visitUnknown(Element e, ElementPath p) {
+            System.err.println("Element visitor: unknown element " + e.getSimpleName().toString() + " of type " + e.getKind().toString());
+            p.unshift(e.getSimpleName().toString());
+            return visit(e.getEnclosingElement(), p);
+        }
+
+        @Override
         public ElementPath visitExecutableAsMethod(ExecutableElement e,
                                                    ElementPath p) {
             String methodName = e.getSimpleName().toString();
