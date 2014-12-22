@@ -1,1 +1,1 @@
-{"Name":"BuildTools","Type":"JavaArtifact","Repo":"github.com/sgtest/java-jdk-sample","Globs":null,"Files":["make/src/classes/build/tools/AddJsum.java"],"Dir":"make/src/classes/","Data":{},"Ops":{"depresolve":null,"graph":null}}
+{"Name":"BuildTools","Type":"JavaArtifact","Repo":"github.com/sgtest/java-jdk-sample","Globs":null,"Files":["make/src/classes/build/tools/AddJsum.java"],"Dir":"make/src/classes/","Data":{},"Ops":{}}

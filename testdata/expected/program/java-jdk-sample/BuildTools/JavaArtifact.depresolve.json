@@ -1,1 +1,9 @@
-[{"Raw":null,"Target":{"ToRepoCloneURL":"hg.openjdk.java.net/jdk8/jdk8/jdk","ToUnit":".","ToUnitType":"Java","ToVersionString":null},"Error":null}]
+[
+  {
+    "Target": {
+      "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "ToUnit": ".",
+      "ToUnitType": "Java"
+    }
+  }
+]
