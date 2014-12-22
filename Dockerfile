@@ -30,7 +30,10 @@ RUN sudo apt-get remove -qq oracle-java8-installer
 ENV PATH /tmp/jdk8u-build/build/linux-x86_64-normal-server-release/images/j2sdk-image/bin:$PATH
 RUN env --unset=JAVA_HOME
 ENV LANG C
-
+# Use the keystore with SSL certs from jdk7
+RUN rm -rf /srclib/jvm/openjdk-1.8.0-internal/jre/lib/security
+RUN ln -s /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/security /srclib/jvm/openjdk-1.8.0-internal/jre/lib/security
+ENV JAVA_HOME /srclib/jvm/openjdk-1.8.0-internal
 
 # Install Maven
 RUN apt-get install -qq maven
