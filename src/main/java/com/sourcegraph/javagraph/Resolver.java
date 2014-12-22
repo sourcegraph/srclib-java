@@ -12,6 +12,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Resolver {
     private final Project proj;
@@ -20,18 +21,23 @@ public class Resolver {
         this.proj = proj;
     }
 
+    private Map<URI,ResolvedTarget> resolvedOrigins = new HashMap<>();
+
     public ResolvedTarget resolveOrigin(URI origin) throws Exception {
         if (origin == null) return null;
+        if (resolvedOrigins.containsKey(origin)) return resolvedOrigins.get(origin);
 
         Path jarFile;
         try {
             jarFile = getOriginJARFilePath(origin);
         } catch (URISyntaxException e) {
             System.err.println("Error getting origin file path for origin: " + origin.toString() + "; exception was " + e.toString());
+            resolvedOrigins.put(origin, null);
             return null;
         }
 
         if (jarFile.toString().contains("jre/lib/")) {
+            resolvedOrigins.put(origin, ResolvedTarget.jdk());
             return ResolvedTarget.jdk();
         }
 
@@ -47,13 +53,17 @@ public class Resolver {
             System.err.println("Error resolving JAR file path " + jarFile + " to dependency: " + e.toString());
         }
         if (rawDep == null) {
+            resolvedOrigins.put(origin, null);
             return null;
         }
 
         DepResolution res = resolveRawDep(rawDep);
         if (res.Error != null) {
-            throw new Exception(res.Error);
+            System.err.println("Error resolving raw dependency " + rawDep.toString() + " to dep target: " + res.Error);
+            resolvedOrigins.put(origin, null);
+            return null;
         }
+        resolvedOrigins.put(origin, res.Target);
         return res.Target;
     }
 
