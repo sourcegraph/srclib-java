@@ -7,7 +7,6 @@ import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.lang.model.element.Element;
 import javax.tools.*;
 import java.io.File;
 import java.io.IOException;
@@ -97,12 +96,7 @@ public class Grapher {
 
         try {
             Iterable<? extends CompilationUnitTree> units = task.parse();
-            Iterable<? extends Element> elems = task.analyze();
-            System.err.println("task.analyze():");
-            for (final Element e : elems) {
-                System.err.println(" - Elem: " + e.toString());
-            }
-            System.err.println("========================");
+            task.analyze();
             for (final CompilationUnitTree unit : units) {
                 try {
                     ExpressionTree pkgName = unit.getPackageName();
