@@ -12,7 +12,6 @@
       "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "mypkg"
       }
     },
@@ -489,7 +488,6 @@
       "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "mypkg.subpkg"
       }
     },
