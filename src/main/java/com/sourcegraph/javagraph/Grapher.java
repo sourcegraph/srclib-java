@@ -112,7 +112,7 @@ public class Grapher {
                     new TreeScanner(emit, trees).scan(root, null);
                 } catch (Exception e) {
                     e.printStackTrace(System.err);
-                    System.err.println("Skipping compilation unit " + unit.getPackageName() + " due to exception: " + e.toString());
+                    System.err.println("Skipping compilation unit " + unit.getPackageName() + " (" + unit.getSourceFile() + ") due to exception: " + e.toString());
                 }
             }
         } catch (Exception e) {

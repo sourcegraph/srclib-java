@@ -40,4 +40,14 @@ public class RawDependency {
         result = 31 * result + (scope != null ? scope.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "RawDependency{" +
+                "groupID='" + groupID + '\'' +
+                ", artifactID='" + artifactID + '\'' +
+                ", version='" + version + '\'' +
+                ", scope='" + scope + '\'' +
+                '}';
+    }
 }
