@@ -93,4 +93,49 @@ public class TestGrapher extends TestCase {
 		// This code snippet was outputting duplicates.
 		graph("Bar.java", "package foo; public class Bar { static { new java.security.PrivilegedAction<Object>() { public Object run() { return null; } }; } }");
 	}
+
+	@Test
+	public void testGraph_AnonClassInstance() {
+		// Test that anon class instances are given synthesized names.
+		GraphData w = graph("Bar.java", "package foo; public class Bar { interface I { public void F(); }; private I foo() { return new I() { @Override public void F() { F(); } }; } }");
+		//System.err.println("======== Refs:\n" + StringUtils.join(w.refs, "\n") + "\n============\n");
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo.anon-p-Bar-99:type.F")).size());
+		assertNotNull(w.getSymbolFromKey(new DefKey(null, "foo.Bar:type.foo.anon-p-Bar-99:type.F")));
+	}
+
+
+	// Test that def paths in unresolved blocks (that have compile errors, etc.) are still constructed.
+
+	@Test
+	public void testGraph_UnresolvedRef_ReturnType() {
+		// When a method has a return type that can't be resolved.
+		GraphData w = graph("Bar.java", "package foo; public class Bar { private invalid.pkg.name.MyType foo(String x) { foo(x); return null; } }");
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo:java$lang$String")).size());
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo:java$lang$String.x")).size());
+	}
+
+	@Test
+	public void testGraph_UnresolvedRef_ParamType() {
+		// When a method has a parameter type that can't be resolved.
+		GraphData w = graph("Bar.java", "package foo; public class Bar { private void foo(invalid.pkg.name.MyType x) { foo(x); } }");
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo:invalid$pkg$name$MyType")).size());
+		assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo:invalid$pkg$name$MyType.x")).size());
+	}
+
+	@Test
+	public void testGraph_UnresolvedRef_AnonClassInstance() {
+		// When a method has a parameter type that can't be resolved.
+		GraphData w = graph("Bar.java", "package foo; public class Bar { private void foo() {  new invalid.pkg.name.MyType() { @Override public void bar() { bar(); } }; } }");
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
+		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type.foo")).size());
+		String barPath = "unknown-pkg-i-3.u-i-2.bar";
+		//System.err.println("======== Refs:\n" + StringUtils.join(w.refs, "\n") + "\n============\n");
+		// TODO(sqs): should be 2 for the def ref and the bar() call, but it's linking it to the anon class for some reason
+		assertEquals(1, w.refsTo(new DefKey(null, barPath)).size());
+		assertNotNull(w.getSymbolFromKey(new DefKey(null, barPath)));
+		assertNull(w.getSymbolFromKey(new DefKey(null, "..bar")));
+		assertNull(w.getSymbolFromKey(new DefKey(null, "anon:type")));
+	}
 }

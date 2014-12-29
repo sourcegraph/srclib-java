@@ -124,7 +124,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             return null;
         }
 
-        ElementPath path = ElementPath.get(cur);
+        ElementPath path = ElementPath.get(trees, cur);
         if (path == null) {
             error("path is null");
             return null;

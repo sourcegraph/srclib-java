@@ -50,4 +50,12 @@ public class DefKey {
     public String getPath() {
         return path;
     }
+
+    @Override
+    public String toString() {
+        return "DefKey{" +
+                (origin != null ? "origin=" + origin + ", " : "") +
+                "path='" + path + '\'' +
+                '}';
+    }
 }
