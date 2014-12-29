@@ -54,6 +54,11 @@ public class Ref {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : "") + "}";
+    }
+
     static class JSONSerializer implements JsonSerializer<Ref> {
         @Override
         public JsonElement serialize(Ref ref, Type arg1, JsonSerializationContext arg2) {
