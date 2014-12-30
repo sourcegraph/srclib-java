@@ -1,17 +1,23 @@
 package com.sourcegraph.javagraph;
 
+import com.sun.source.util.SourcePositions;
+import com.sun.source.util.TreePath;
+import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.*;
 import javax.lang.model.util.ElementKindVisitor8;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ElementPath {
     private final List<String> components = new ArrayList<>(5);
 
-    public static ElementPath get(Element e) {
-        return new Visitor().visit(e, new ElementPath());
+    public static ElementPath get(Trees trees, Element e) {
+        return new Visitor(trees).visit(e, new ElementPath());
     }
 
     @Override
@@ -23,21 +29,60 @@ public class ElementPath {
         components.add(0, name);
     }
 
+    private static Map<Element, Integer> anonClasses = new HashMap<>();
+
     private static class Visitor extends
             ElementKindVisitor8<ElementPath, ElementPath> {
+        private final Trees trees;
+
+        public Visitor(Trees trees) {
+            this.trees = trees;
+        }
+
         @Override
         public ElementPath visitPackage(PackageElement e, ElementPath p) {
-            p.unshift(e.getQualifiedName().toString());
+            String name = e.getQualifiedName().toString();
+            if (name.isEmpty()) {
+                name = "unknown-pkg-" + getUniqueID(e);
+            }
+            p.unshift(name);
             return p;
+        }
+
+        private String getUniqueID(Element e) {
+            String name;
+            TreePath tp = trees.getPath(e);
+            SourcePositions sp = trees.getSourcePositions();
+            if (tp != null) {
+                String filename = tp.getCompilationUnit().getSourceFile().getName();
+                String fileBasename = new File(filename).getName().replace(".java", "");
+                name = "p-" + fileBasename + "-" + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
+            } else {
+                // If we can't even get the char pos of this (e.g., it's an instantiation of an unresolvable class), just increment some global counter.
+                if (!anonClasses.containsKey(e)) {
+                    anonClasses.put(e, anonClasses.size() + 1);
+                }
+                name = "i-" + anonClasses.get(e);
+            }
+            return name;
+        }
+
+        private String getSourcePos(Element e) {
+            TreePath tp = trees.getPath(e);
+            SourcePositions sp = trees.getSourcePositions();
+            if (tp != null) {
+                return tp.getCompilationUnit().getSourceFile().getName() + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
+            }
+            return "(unknown file)";
         }
 
         @Override
         public ElementPath visitType(TypeElement e, ElementPath p) {
             String name = e.getSimpleName().toString();
             Element enclosing = e.getEnclosingElement();
-            // TODO(sqs): handle multiple anonymous names at same level
-            if (name.isEmpty())
-                name = "anon";
+            if (name.isEmpty() || name.equals("<any?>")) {
+             name = "anon-" + getUniqueID(e);
+            }
 
             // Except for top-level package scope, a type and a variable with
             // the same name may exist in the same scope. We must disambiguate
@@ -55,6 +100,17 @@ public class ElementPath {
         @Override
         public ElementPath visitVariable(VariableElement e, ElementPath p) {
             String name = e.getSimpleName().toString();
+            p.unshift(name);
+            return visit(e.getEnclosingElement(), p);
+        }
+
+        @Override
+        public ElementPath visitUnknown(Element e, ElementPath p) {
+            System.err.println("Element visitor: unknown element " + e.getSimpleName().toString() + " of type " + e.getKind().toString() + " at " + getSourcePos(e));
+            String name = e.getSimpleName().toString();
+            if (name.isEmpty()) {
+                name = "u-" + getUniqueID(e);
+            }
             p.unshift(name);
             return visit(e.getEnclosingElement(), p);
         }

@@ -1,4 +1,5 @@
 #!/bin/bash
 
+unset CDPATH
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 java -Xmx5g -jar "$DIR/srclib-java.jar" "$@"

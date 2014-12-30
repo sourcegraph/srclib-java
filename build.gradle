@@ -18,9 +18,19 @@ dependencies {
 	compile 'org.apache.commons:commons-lang3:3.3.2'
 	compile 'com.beust:jcommander:1.30'
 	compile 'com.googlecode.json-simple:json-simple:1.1.1'
+	compile 'org.apache.maven:maven-core:3.2.3'
 	compile 'org.apache.maven:maven-model:3.2.3'
 	compile 'commons-io:commons-io:2.4'
 	compile 'com.jcabi:jcabi-manifests:0.7.5'
+
+	compile	'org.eclipse.aether:aether-api:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-impl:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-spi:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-util:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-transport-http:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-connector-basic:0.9.0.M4'
+	compile	'org.eclipse.aether:aether-transport-file:0.9.0.M4'
+
 	compile files("${System.properties['java.home']}/../lib/tools.jar")
 }
 

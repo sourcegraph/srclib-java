@@ -8,20 +8,23 @@ import java.util.Map;
 
 public class GraphData implements GraphWriter {
     public final List<Ref> refs = new ArrayList<>();
-    public final List<Symbol> symbols = new ArrayList<>();
+    public final List<Def> defs = new ArrayList<>();
 
-    public final Map<Symbol.Key, Symbol> keyToSymbol = new HashMap<Symbol.Key, Symbol>();
+    public final Map<DefKey, Def> keyToSymbol = new HashMap<DefKey, Def>();
 
-    public List<Ref> refsTo(Symbol.Key symbol) {
-        List<Ref> symrefs = new ArrayList<>();
-        for (Ref r : refs) {
-            if (r.symbol.equals(symbol)
-                    || (symbol.origin.equals("*") && r.symbol.path
-                    .equals(symbol.path))) {
-                symrefs.add(r);
+    public List<Ref> refsTo(DefKey defKey) {
+        List<Ref> refs = new ArrayList<>();
+        for (Ref r : this.refs) {
+            boolean exactMatch = r.defKey.equals(defKey);
+            boolean fuzzyMatch = defKey.getPath().equals(r.defKey.getPath()) && (
+                    (defKey.getOrigin() == null && r.defKey.getOrigin() == null) ||
+                    (defKey.getOrigin() != null && defKey.getOrigin().getPath().equals("ANY"))
+            );
+            if (exactMatch || fuzzyMatch) {
+                refs.add(r);
             }
         }
-        return symrefs;
+        return refs;
     }
 
     @Override
@@ -30,32 +33,17 @@ public class GraphData implements GraphWriter {
     }
 
     @Override
-    public void writeSymbol(Symbol s) throws IOException {
-        symbols.add(s);
-        keyToSymbol.put(s.key, s);
+    public void writeDef(Def s) throws IOException {
+        defs.add(s);
+        keyToSymbol.put(s.defKey, s);
     }
 
-    public Symbol getSymbolFromKey(Symbol.Key key) {
-        return keyToSymbol.get(key);
+    public Def getSymbolFromKey(DefKey defKey) {
+        return keyToSymbol.get(defKey);
     }
 
     @Override
     public void flush() throws IOException {
     }
 
-    public void printRefs() throws IOException {
-        System.err.println("## Printing " + refs.size() + " refs");
-        for (Ref r : refs) {
-            System.err.println(r.toJSONString());
-        }
-        System.err.flush();
-    }
-
-    public void printSymbols() throws IOException {
-        System.err.println("## Printing " + symbols.size() + " symbols");
-        for (Symbol s : symbols) {
-            System.err.println(s.toJSONString());
-        }
-        System.err.flush();
-    }
 }

@@ -1,267 +1,74 @@
 package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.Parameter;
-import com.google.gson.*;
-import com.sourcegraph.javagraph.DepresolveCommand.Resolution;
-import org.apache.commons.io.IOUtils;
+import com.google.gson.Gson;
+import org.apache.commons.lang.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.Reader;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GraphCommand {
+    @Parameter(names = {"--debug-unit-file"}, description = "The path to a source unit input file, which will be read as though it came from stdin. Used to mimic stdin when you can't actually pipe to stdin (e.g., in IntelliJ run configurations).")
+    String debugUnitFile;
 
-    public static String[] buildClasspathArgs = {"mvn", "dependency:build-classpath", "-Dmdep.outputFile=/dev/stderr"};
     /**
      * The Source Unit that is read in from STDIN. Defined here, so that it can be
      * accessed within the anonymous classes below.
      */
     public static SourceUnit unit = null;
-    @Parameter
-    private List<String> files = new ArrayList<String>();
-
-    public static String getGradleClassPath(Path gradleFile)
-            throws IOException {
-        return ScanCommand.getGradleClassPath(gradleFile);
-    }
-
-    public static String getMavenClassPath(Path pomFile) {
-        ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
-        pb.directory(pomFile.getParent().toFile());
-
-        try {
-            Process process = pb.start();
-            IOUtils.copy(process.getInputStream(), System.err);
-            return IOUtils.toString(process.getErrorStream());
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            System.exit(1);
-            return null;
-        }
-    }
 
     public void Execute() {
-        final Graph graph = new Graph(); // Final graph object that is serialized to stdout
-        final GraphData rawGraph = new GraphData(); // Raw graph from the tree traversal
+        final Graph graph = new Graph(); // Final graphJavaFiles object that is serialized to stdout
+        final GraphData rawGraph = new GraphData(); // Raw graphJavaFiles from the tree traversal
 
-        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
-
-        // Serializing Symbols
-        gsonBuilder.registerTypeAdapter(Symbol.class, new JsonSerializer<Symbol>() {
-            @Override
-            public JsonElement serialize(Symbol sym, Type arg1,
-                                         JsonSerializationContext arg2) {
-                JsonObject object = new JsonObject();
-
-                if (sym.file != null)
-                    object.add("File", new JsonPrimitive(sym.file));
-
-                object.add("Name", new JsonPrimitive(sym.name));
-
-                object.add("DefStart", new JsonPrimitive(sym.defStart));
-                object.add("DefEnd", new JsonPrimitive(sym.defEnd));
-
-                if (sym.modifiers != null)
-                    object.add("Exported", new JsonPrimitive(sym.modifiers.contains("public")));
-                else
-                    object.add("Exported", new JsonPrimitive(false));
-
-                object.add("Local", new JsonPrimitive(sym.kind.equals("LOCAL_VARIABLE")));
-
-                switch (sym.kind) {
-                    case "ENUM":
-                    case "CLASS":
-                    case "INTERFACE":
-                    case "ANNOTATION_TYPE":
-                        object.add("Kind", new JsonPrimitive("type"));
-                        break;
-                    case "METHOD":
-                    case "CONSTRUCTOR":
-                        object.add("Kind", new JsonPrimitive("func"));
-                        break;
-                    case "PACKAGE":
-                        object.add("Kind", new JsonPrimitive("package"));
-                        break;
-                    default:
-                        object.add("Kind", new JsonPrimitive("var"));
-                        break;
-                }
-
-                object.add("Path", new JsonPrimitive(sym.key.formatPath()));
-                object.add("TreePath", new JsonPrimitive(sym.key.formatTreePath()));
-
-                // Populate extra data field
-                JsonObject data = new JsonObject();
-                data.addProperty("JavaKind", sym.kind);
-                data.addProperty("TypeExpression", sym.typeExpr);
-                data.addProperty("Package", sym.pkg);
-
-                if (sym.modifiers != null) {
-                    JsonArray modifiers = new JsonArray();
-                    for (String modifier : sym.modifiers) modifiers.add(new JsonPrimitive(modifier));
-                    data.add("Modifiers", modifiers);
-                }
-
-                object.add("Data", data);
-
-                return object;
-            }
-
-        });
-
-        // Serializing Refs
-        gsonBuilder.registerTypeAdapter(Ref.class, new JsonSerializer<Ref>() {
-            @Override
-            public JsonElement serialize(Ref ref, Type arg1,
-                                         JsonSerializationContext arg2) {
-                JsonObject object = new JsonObject();
-
-                object.addProperty("Origin", ref.symbol.origin);
-
-                boolean remoteSymbol = !ref.symbol.origin.isEmpty() && !ref.symbol.origin.startsWith("file:");
-                if (remoteSymbol) {
-                    Resolution resolution = ref.symbol.resolveOrigin(unit.Dependencies);
-
-                    if (resolution != null && resolution.Error == null) {
-                        object.add("DefRepo", new JsonPrimitive(resolution.Target.ToRepoCloneURL));
-                        object.add("DefUnitType", new JsonPrimitive(resolution.Target.ToUnitType));
-                        object.add("DefUnit", new JsonPrimitive(resolution.Target.ToUnit));
-                    } else {
-                        System.err.println("Could not resolve origin: " + ref.file + ":" + ref.start + "-" + ref.end + " => " + ref.symbol.origin);
-                        return new JsonPrimitive("unresolved");
-                    }
-                }
-
-                object.add("DefPath", new JsonPrimitive(ref.symbol.formatPath()));
-
-                Symbol symbol = rawGraph.getSymbolFromKey(ref.symbol);
-                if (symbol != null && symbol.identStart == ref.start && symbol.identEnd == ref.end) {
-                    object.add("Def", new JsonPrimitive(true));
-                } else {
-                    object.add("Def", new JsonPrimitive(false));
-                }
-
-                object.add("File", new JsonPrimitive(ref.file));
-                object.add("Start", new JsonPrimitive(ref.start));
-                object.add("End", new JsonPrimitive(ref.end));
-
-                return object;
-            }
-
-        });
-
-        Gson gson = gsonBuilder.create();
-
-        System.err.println("Reading in SourceUnit from StdIn...");
         try {
-            InputStreamReader reader = new InputStreamReader(System.in);
-            unit = gson.fromJson(reader, SourceUnit.class);
-            reader.close();
+            Reader r;
+            if (debugUnitFile != null && !debugUnitFile.isEmpty()) {
+                System.err.println("Reading source unit JSON from --debug-unit-file " + debugUnitFile);
+                r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
+            } else {
+                r = new InputStreamReader(System.in);
+            }
+            unit = new Gson().fromJson(r, SourceUnit.class);
+            r.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.exit(1);
         }
 
-        String classPath = "";
-        String sourcePath = "";
-        // The test doesn't work if it goes through the 'else'
-        // flow as if it were actually a standard library.
-        if (!unit.isStdLib() || /* TODO(samer): HACK!! */ unit.Repo.equals(SourceUnit.StdLibTestRepoURI)) {
-            // Get dependency classpaths if this is not the stdlib
-            System.err.println("Getting classpath...");
-
-            try {
-                if (unit.Data.containsKey("GradleFile")) {
-                    String filename = (String) unit.Data.get("GradleFile");
-                    classPath = getGradleClassPath(Paths.get(filename));
-                } else if (unit.Data.containsKey("POMFile")) {
-                    String filename = (String) unit.Data.get("POMFile");
-                    classPath = getMavenClassPath(Paths.get(filename));
-                } else {
-                    // neither maven or gradle (e.g., Java JDK)
-                    // TODO(beyang): hack, basically the same as the maven path?
-                    ProcessBuilder pb = new ProcessBuilder(buildClasspathArgs);
-                    pb.directory(new File(unit.Dir));
-                    Process process = pb.start();
-                    IOUtils.copy(process.getInputStream(), System.err);
-                    classPath = IOUtils.toString(process.getErrorStream());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
-
-
-            sourcePath = unit.Dir + "/src/";
-        } else {
-            if (unit.Type.equals("Java")) {
-                sourcePath = String.join(":", ScanCommand.getSourcePaths());
-            } else {
-                sourcePath = unit.Dir;
-            }
-        }
-
+        Project proj = unit.getProject();
+        Resolver rs = new Resolver(proj);
         try {
-            if (classPath == null) {
-                classPath = ""; // prevent NPE
-            }
-
-            Grapher grapher = new Grapher(classPath, sourcePath, rawGraph);
-
-            String[] paths = unit.Files.toArray(new String[unit.Files.size()]);
-
-            grapher.graph(paths);
+            Grapher grapher = new Grapher(StringUtils.join(proj.getClassPath(), ':'), "", rawGraph);
+            grapher.graphFilesAndDirs(unit.Files);
             grapher.close();
 
-            for (Symbol symbol : rawGraph.symbols) {
-                graph.Defs.add(symbol);
-
-                // Ignore empty docstrings
-                if (symbol.doc != null)
-                    graph.Docs.add(new Doc(symbol));
+            graph.Defs = rawGraph.defs;
+            for (Def def : rawGraph.defs) {
+                // Ignore empty docstrings.
+                if (def.doc != null) {
+                    graph.Docs.add(new Doc(def));
+                }
             }
 
+            for (Ref ref : rawGraph.refs) {
+                ResolvedTarget target = rs.resolveOrigin(ref.defKey.getOrigin());
+                if (target != null) {
+                    ref.setDefTarget(target);
+                }
+            }
             graph.Refs = rawGraph.refs;
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        // Print out Defs
-        System.out.print("{\"Defs\": [");
-        for (Symbol def : graph.Defs) {
-            if (def != graph.Defs.get(0)) System.out.print(",");
-            System.out.print(gson.toJson(def));
-        }
-
-        // Print out Refs
-        System.out.print("], \"Refs\": [");
-        boolean firstRef = true;
-        for (Ref ref : graph.Refs) {
-            String refString = gson.toJson(ref);
-            if (!refString.equals("\"unresolved\"")) {
-                if (firstRef) firstRef = false;
-                else System.out.print(",");
-                System.out.print(refString);
-            }
-        }
-
-        // Print out Docs
-        System.out.print("], \"Docs\": [");
-        for (Doc doc : graph.Docs) {
-            if (doc != graph.Docs.get(0)) System.out.print(",");
-            System.out.print(gson.toJson(doc));
-        }
-
-        System.out.print("]}");
+        JSONUtil.writeJSON(graph);
     }
 
     static class Doc {
@@ -270,19 +77,19 @@ public class GraphCommand {
         String Data;
         String File;
 
-        public Doc(Symbol symbol) {
-            Path = symbol.key.formatPath();
+        public Doc(Def def) {
+            Path = def.defKey.formatPath();
 
             //TODO(rameshvarun): Render javadoc string?
             Format = "text/html";
-            Data = symbol.doc;
-            File = symbol.file;
+            Data = def.doc;
+            File = def.file;
         }
     }
 
     static class Graph {
-        List<Symbol> Defs = new LinkedList<Symbol>();
-        List<Ref> Refs = new LinkedList<Ref>();
-        List<Doc> Docs = new LinkedList<Doc>();
+        List<Def> Defs = new LinkedList<Def>();
+        List<Ref> Refs = new LinkedList<>();
+        List<Doc> Docs = new LinkedList<>();
     }
 }
