@@ -9,9 +9,9 @@
       "DefStart": 0,
       "DefEnd": 0,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "java.math"
       }
     },
@@ -24,6 +24,7 @@
       "DefStart": 11880,
       "DefEnd": 12307,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(byte[])void",
@@ -42,6 +43,7 @@
       "DefStart": 11898,
       "DefEnd": 11908,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "byte[]",
@@ -58,6 +60,7 @@
       "DefStart": 40102,
       "DefEnd": 40351,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(byte[],int)void",
@@ -76,6 +79,7 @@
       "DefStart": 40121,
       "DefEnd": 40137,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "byte[]",
@@ -92,6 +96,7 @@
       "DefStart": 40139,
       "DefEnd": 40149,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -108,6 +113,7 @@
       "DefStart": 19187,
       "DefEnd": 20664,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(char[],int,int)void",
@@ -124,6 +130,7 @@
       "DefStart": 19239,
       "DefEnd": 19254,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -140,6 +147,7 @@
       "DefStart": 20086,
       "DefEnd": 20135,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -156,6 +164,7 @@
       "DefStart": 20383,
       "DefEnd": 20448,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -172,6 +181,7 @@
       "DefStart": 19220,
       "DefEnd": 19227,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -188,6 +198,7 @@
       "DefStart": 19983,
       "DefEnd": 20019,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -204,6 +215,7 @@
       "DefStart": 19760,
       "DefEnd": 19819,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -220,6 +232,7 @@
       "DefStart": 19239,
       "DefEnd": 19265,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -236,6 +249,7 @@
       "DefStart": 19667,
       "DefEnd": 19680,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -252,6 +266,7 @@
       "DefStart": 19210,
       "DefEnd": 19218,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -268,6 +283,7 @@
       "DefStart": 19198,
       "DefEnd": 19208,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "char[]",
@@ -284,6 +300,7 @@
       "DefStart": 13960,
       "DefEnd": 14493,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int,byte[])void",
@@ -302,6 +319,7 @@
       "DefStart": 13990,
       "DefEnd": 14006,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "byte[]",
@@ -318,6 +336,7 @@
       "DefStart": 13978,
       "DefEnd": 13988,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -334,6 +353,7 @@
       "DefStart": 25572,
       "DefEnd": 25995,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int,int,java.util.Random)void",
@@ -352,6 +372,7 @@
       "DefStart": 25590,
       "DefEnd": 25603,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -368,6 +389,7 @@
       "DefStart": 25605,
       "DefEnd": 25618,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -384,6 +406,7 @@
       "DefStart": 25642,
       "DefEnd": 25659,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -400,6 +423,7 @@
       "DefStart": 25620,
       "DefEnd": 25630,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -416,6 +440,7 @@
       "DefStart": 14760,
       "DefEnd": 15292,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int,int[])void",
@@ -434,6 +459,7 @@
       "DefStart": 14791,
       "DefEnd": 14806,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -450,6 +476,7 @@
       "DefStart": 14779,
       "DefEnd": 14789,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -466,6 +493,7 @@
       "DefStart": 23908,
       "DefEnd": 24001,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int,java.util.Random)void",
@@ -484,6 +512,7 @@
       "DefStart": 23926,
       "DefEnd": 23937,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -500,6 +529,7 @@
       "DefStart": 23939,
       "DefEnd": 23949,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -516,6 +546,7 @@
       "DefStart": 12611,
       "DefEnd": 13044,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int[])void",
@@ -534,6 +565,7 @@
       "DefStart": 12630,
       "DefEnd": 12639,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -550,6 +582,7 @@
       "DefStart": 39760,
       "DefEnd": 39977,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(int[],int)void",
@@ -566,6 +599,7 @@
       "DefStart": 39771,
       "DefEnd": 39786,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -582,6 +616,7 @@
       "DefStart": 39788,
       "DefEnd": 39798,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -598,6 +633,7 @@
       "DefStart": 23217,
       "DefEnd": 23277,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(java.lang.String)void",
@@ -616,6 +652,7 @@
       "DefStart": 23235,
       "DefEnd": 23245,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.String",
@@ -632,6 +669,7 @@
       "DefStart": 16187,
       "DefEnd": 19032,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(java.lang.String,int)void",
@@ -650,6 +688,7 @@
       "DefStart": 16238,
       "DefEnd": 16253,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -666,6 +705,7 @@
       "DefStart": 18013,
       "DefEnd": 18065,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -682,6 +722,7 @@
       "DefStart": 18155,
       "DefEnd": 18217,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -698,6 +739,7 @@
       "DefStart": 18480,
       "DefEnd": 18497,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -714,6 +756,7 @@
       "DefStart": 16613,
       "DefEnd": 16647,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -730,6 +773,7 @@
       "DefStart": 16656,
       "DefEnd": 16690,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -746,6 +790,7 @@
       "DefStart": 16273,
       "DefEnd": 16302,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -764,6 +809,7 @@
       "DefStart": 17910,
       "DefEnd": 17946,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -780,6 +826,7 @@
       "DefStart": 17706,
       "DefEnd": 17768,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -796,6 +843,7 @@
       "DefStart": 16238,
       "DefEnd": 16264,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -812,6 +860,7 @@
       "DefStart": 17859,
       "DefEnd": 17901,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -828,6 +877,7 @@
       "DefStart": 16217,
       "DefEnd": 16226,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -844,6 +894,7 @@
       "DefStart": 16591,
       "DefEnd": 16604,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -860,6 +911,7 @@
       "DefStart": 18438,
       "DefEnd": 18471,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -876,6 +928,7 @@
       "DefStart": 16205,
       "DefEnd": 16215,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.String",
@@ -892,6 +945,7 @@
       "DefStart": 41780,
       "DefEnd": 42191,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "(long)void",
@@ -910,6 +964,7 @@
       "DefStart": 41943,
       "DefEnd": 41976,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -926,6 +981,7 @@
       "DefStart": 41799,
       "DefEnd": 41807,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -942,6 +998,7 @@
       "DefStart": 5652,
       "DefEnd": 162456,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "java.math.BigInteger",
@@ -960,6 +1017,7 @@
       "DefStart": 10841,
       "DefEnd": 10887,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -979,6 +1037,7 @@
       "DefStart": 10407,
       "DefEnd": 10456,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -998,6 +1057,7 @@
       "DefStart": 26319,
       "DefEnd": 26374,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1018,6 +1078,7 @@
       "DefStart": 9787,
       "DefEnd": 9845,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1038,6 +1099,7 @@
       "DefStart": 9104,
       "DefEnd": 9154,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1058,6 +1120,7 @@
       "DefStart": 43313,
       "DefEnd": 43365,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "double",
@@ -1078,6 +1141,7 @@
       "DefStart": 8359,
       "DefEnd": 8401,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long",
@@ -1097,6 +1161,7 @@
       "DefStart": 42653,
       "DefEnd": 42696,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1117,6 +1182,7 @@
       "DefStart": 8516,
       "DefEnd": 8595,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1137,6 +1203,7 @@
       "DefStart": 44630,
       "DefEnd": 44689,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1157,6 +1224,7 @@
       "DefStart": 44384,
       "DefEnd": 44432,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1177,6 +1245,7 @@
       "DefStart": 8763,
       "DefEnd": 8831,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1197,6 +1266,7 @@
       "DefStart": 11336,
       "DefEnd": 11403,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1217,6 +1287,7 @@
       "DefStart": 29052,
       "DefEnd": 29172,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1237,6 +1308,7 @@
       "DefStart": 26201,
       "DefEnd": 26253,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1257,6 +1329,7 @@
       "DefStart": 44774,
       "DefEnd": 44823,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1277,6 +1350,7 @@
       "DefStart": 10094,
       "DefEnd": 10152,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1297,6 +1371,7 @@
       "DefStart": 9487,
       "DefEnd": 9538,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -1317,6 +1392,7 @@
       "DefStart": 44507,
       "DefEnd": 44556,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1337,6 +1413,7 @@
       "DefStart": 156862,
       "DefEnd": 156874,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -1355,6 +1432,7 @@
       "DefStart": 156841,
       "DefEnd": 157738,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "java.math.BigInteger.UnsafeHolder",
@@ -1374,6 +1452,7 @@
       "DefStart": 156986,
       "DefEnd": 157022,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long",
@@ -1394,6 +1473,7 @@
       "DefStart": 157606,
       "DefEnd": 157732,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,int[])void",
@@ -1412,6 +1492,7 @@
       "DefStart": 157625,
       "DefEnd": 157638,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -1428,6 +1509,7 @@
       "DefStart": 157640,
       "DefEnd": 157655,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -1444,6 +1526,7 @@
       "DefStart": 157481,
       "DefEnd": 157596,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,int)void",
@@ -1462,6 +1545,7 @@
       "DefStart": 157501,
       "DefEnd": 157514,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -1478,6 +1562,7 @@
       "DefStart": 157516,
       "DefEnd": 157524,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -1494,6 +1579,7 @@
       "DefStart": 156938,
       "DefEnd": 156977,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long",
@@ -1514,6 +1600,7 @@
       "DefStart": 156885,
       "DefEnd": 156929,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "sun.misc.Unsafe",
@@ -1534,6 +1621,7 @@
       "DefStart": 44231,
       "DefEnd": 44299,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger",
@@ -1554,6 +1642,7 @@
       "DefStart": 87603,
       "DefEnd": 87687,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -1572,6 +1661,7 @@
       "DefStart": 48286,
       "DefEnd": 49637,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[])int[]",
@@ -1591,6 +1681,7 @@
       "DefStart": 49432,
       "DefEnd": 49474,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1607,6 +1698,7 @@
       "DefStart": 49115,
       "DefEnd": 49149,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -1623,6 +1715,7 @@
       "DefStart": 48562,
       "DefEnd": 48593,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1639,6 +1732,7 @@
       "DefStart": 48602,
       "DefEnd": 48615,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -1655,6 +1749,7 @@
       "DefStart": 48426,
       "DefEnd": 48440,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1671,6 +1766,7 @@
       "DefStart": 48311,
       "DefEnd": 48318,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -1687,6 +1783,7 @@
       "DefStart": 48500,
       "DefEnd": 48522,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1703,6 +1800,7 @@
       "DefStart": 48320,
       "DefEnd": 48327,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -1719,6 +1817,7 @@
       "DefStart": 48531,
       "DefEnd": 48553,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1735,6 +1834,7 @@
       "DefStart": 46577,
       "DefEnd": 48102,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],long)int[]",
@@ -1754,6 +1854,7 @@
       "DefStart": 47897,
       "DefEnd": 47939,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1770,6 +1871,7 @@
       "DefStart": 47582,
       "DefEnd": 47616,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -1786,6 +1888,7 @@
       "DefStart": 46723,
       "DefEnd": 46756,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1802,6 +1905,7 @@
       "DefStart": 46701,
       "DefEnd": 46714,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1818,6 +1922,7 @@
       "DefStart": 46648,
       "DefEnd": 46661,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -1834,6 +1939,7 @@
       "DefStart": 46611,
       "DefEnd": 46619,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -1850,6 +1956,7 @@
       "DefStart": 46602,
       "DefEnd": 46609,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -1866,6 +1973,7 @@
       "DefStart": 46670,
       "DefEnd": 46692,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1882,6 +1990,7 @@
       "DefStart": 46631,
       "DefEnd": 46639,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1898,6 +2007,7 @@
       "DefStart": 45038,
       "DefEnd": 45612,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -1916,6 +2026,7 @@
       "DefStart": 45286,
       "DefEnd": 45318,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1932,6 +2043,7 @@
       "DefStart": 45374,
       "DefEnd": 45479,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -1948,6 +2060,7 @@
       "DefStart": 45060,
       "DefEnd": 45074,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -1964,6 +2077,7 @@
       "DefStart": 45767,
       "DefEnd": 46325,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long)java.math.BigInteger",
@@ -1980,6 +2094,7 @@
       "DefStart": 46015,
       "DefEnd": 46047,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -1996,6 +2111,7 @@
       "DefStart": 46103,
       "DefEnd": 46193,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2012,6 +2128,7 @@
       "DefStart": 45782,
       "DefEnd": 45790,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -2028,6 +2145,7 @@
       "DefStart": 102747,
       "DefEnd": 103268,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int,int)int",
@@ -2046,6 +2164,7 @@
       "DefStart": 102765,
       "DefEnd": 102772,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -2062,6 +2181,7 @@
       "DefStart": 102796,
       "DefEnd": 102805,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2078,6 +2198,7 @@
       "DefStart": 102786,
       "DefEnd": 102794,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2094,6 +2215,7 @@
       "DefStart": 102774,
       "DefEnd": 102784,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2110,6 +2232,7 @@
       "DefStart": 102858,
       "DefEnd": 102913,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -2126,6 +2249,7 @@
       "DefStart": 110982,
       "DefEnd": 111288,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -2144,6 +2268,7 @@
       "DefStart": 111107,
       "DefEnd": 111114,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2160,6 +2285,7 @@
       "DefStart": 111030,
       "DefEnd": 111093,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2176,6 +2302,7 @@
       "DefStart": 111004,
       "DefEnd": 111018,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -2192,6 +2319,7 @@
       "DefStart": 113383,
       "DefEnd": 113693,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -2210,6 +2338,7 @@
       "DefStart": 113511,
       "DefEnd": 113518,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2226,6 +2355,7 @@
       "DefStart": 113434,
       "DefEnd": 113497,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2242,6 +2372,7 @@
       "DefStart": 113408,
       "DefEnd": 113422,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -2258,6 +2389,7 @@
       "DefStart": 7012,
       "DefEnd": 7049,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -2276,6 +2408,7 @@
       "DefStart": 119256,
       "DefEnd": 119311,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2292,6 +2425,7 @@
       "DefStart": 119489,
       "DefEnd": 119496,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2308,6 +2442,7 @@
       "DefStart": 119674,
       "DefEnd": 119706,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2324,6 +2459,7 @@
       "DefStart": 119674,
       "DefEnd": 119703,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2340,6 +2476,7 @@
       "DefStart": 7368,
       "DefEnd": 7406,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -2358,6 +2495,7 @@
       "DefStart": 118537,
       "DefEnd": 118544,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2374,6 +2512,7 @@
       "DefStart": 118082,
       "DefEnd": 118101,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2390,6 +2529,7 @@
       "DefStart": 118055,
       "DefEnd": 118069,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2406,6 +2546,7 @@
       "DefStart": 118283,
       "DefEnd": 118345,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2422,6 +2563,7 @@
       "DefStart": 117931,
       "DefEnd": 117986,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2438,6 +2580,7 @@
       "DefStart": 118463,
       "DefEnd": 118510,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -2454,6 +2597,7 @@
       "DefStart": 87293,
       "DefEnd": 87452,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int)int",
@@ -2473,6 +2617,7 @@
       "DefStart": 87333,
       "DefEnd": 87340,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2489,6 +2634,7 @@
       "DefStart": 87322,
       "DefEnd": 87331,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -2505,6 +2651,7 @@
       "DefStart": 85265,
       "DefEnd": 85359,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)int",
@@ -2523,6 +2670,7 @@
       "DefStart": 85292,
       "DefEnd": 85297,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2539,6 +2687,7 @@
       "DefStart": 21452,
       "DefEnd": 21774,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long[]",
@@ -2558,6 +2707,7 @@
       "DefStart": 92107,
       "DefEnd": 92237,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int[]",
@@ -2576,6 +2726,7 @@
       "DefStart": 162145,
       "DefEnd": 162454,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()byte",
@@ -2594,6 +2745,7 @@
       "DefStart": 162240,
       "DefEnd": 162263,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2610,6 +2762,7 @@
       "DefStart": 40575,
       "DefEnd": 40737,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()void",
@@ -2628,6 +2781,7 @@
       "DefStart": 115263,
       "DefEnd": 115689,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -2646,6 +2800,7 @@
       "DefStart": 115506,
       "DefEnd": 115513,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2662,6 +2817,7 @@
       "DefStart": 115394,
       "DefEnd": 115415,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2678,6 +2834,7 @@
       "DefStart": 115290,
       "DefEnd": 115295,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -2694,6 +2851,7 @@
       "DefStart": 115424,
       "DefEnd": 115491,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2710,6 +2868,7 @@
       "DefStart": 122540,
       "DefEnd": 123013,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)int",
@@ -2728,6 +2887,7 @@
       "DefStart": 122845,
       "DefEnd": 122859,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2744,6 +2904,7 @@
       "DefStart": 122872,
       "DefEnd": 122886,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2760,6 +2921,7 @@
       "DefStart": 122805,
       "DefEnd": 122814,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2776,6 +2938,7 @@
       "DefStart": 122617,
       "DefEnd": 122638,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2792,6 +2955,7 @@
       "DefStart": 122675,
       "DefEnd": 122696,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2808,6 +2972,7 @@
       "DefStart": 122593,
       "DefEnd": 122608,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2824,6 +2989,7 @@
       "DefStart": 122647,
       "DefEnd": 122666,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2840,6 +3006,7 @@
       "DefStart": 122567,
       "DefEnd": 122581,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -2856,6 +3023,7 @@
       "DefStart": 123147,
       "DefEnd": 124178,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long)int",
@@ -2874,6 +3042,7 @@
       "DefStart": 123575,
       "DefEnd": 123589,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2890,6 +3059,7 @@
       "DefStart": 123602,
       "DefEnd": 123619,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2906,6 +3076,7 @@
       "DefStart": 123397,
       "DefEnd": 123430,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2922,6 +3093,7 @@
       "DefStart": 123256,
       "DefEnd": 123276,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -2938,6 +3110,7 @@
       "DefStart": 123232,
       "DefEnd": 123247,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -2954,6 +3127,7 @@
       "DefStart": 123174,
       "DefEnd": 123182,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -2970,6 +3144,7 @@
       "DefStart": 121782,
       "DefEnd": 122146,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)int",
@@ -2988,6 +3163,7 @@
       "DefStart": 121803,
       "DefEnd": 121817,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3004,6 +3180,7 @@
       "DefStart": 21842,
       "DefEnd": 22593,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int)void",
@@ -3023,6 +3200,7 @@
       "DefStart": 22091,
       "DefEnd": 22106,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3039,6 +3217,7 @@
       "DefStart": 22120,
       "DefEnd": 22133,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3055,6 +3234,7 @@
       "DefStart": 22036,
       "DefEnd": 22055,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3071,6 +3251,7 @@
       "DefStart": 22065,
       "DefEnd": 22082,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3087,6 +3268,7 @@
       "DefStart": 22328,
       "DefEnd": 22370,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3103,6 +3285,7 @@
       "DefStart": 21880,
       "DefEnd": 21887,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -3119,6 +3302,7 @@
       "DefStart": 21889,
       "DefEnd": 21894,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -3135,6 +3319,7 @@
       "DefStart": 21964,
       "DefEnd": 21991,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3151,6 +3336,7 @@
       "DefStart": 21896,
       "DefEnd": 21901,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -3167,6 +3353,7 @@
       "DefStart": 22000,
       "DefEnd": 22027,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3183,6 +3370,7 @@
       "DefStart": 150480,
       "DefEnd": 150651,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int[]",
@@ -3202,6 +3390,7 @@
       "DefStart": 148947,
       "DefEnd": 149147,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int[]",
@@ -3221,6 +3410,7 @@
       "DefStart": 75149,
       "DefEnd": 75440,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -3239,6 +3429,7 @@
       "DefStart": 75174,
       "DefEnd": 75188,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3255,6 +3446,7 @@
       "DefStart": 76657,
       "DefEnd": 76986,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger[]",
@@ -3273,6 +3465,7 @@
       "DefStart": 76696,
       "DefEnd": 76710,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3289,6 +3482,7 @@
       "DefStart": 79225,
       "DefEnd": 79691,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger[]",
@@ -3307,6 +3501,7 @@
       "DefStart": 79306,
       "DefEnd": 79352,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3323,6 +3518,7 @@
       "DefStart": 79485,
       "DefEnd": 79560,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -3339,6 +3535,7 @@
       "DefStart": 79361,
       "DefEnd": 79476,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3355,6 +3552,7 @@
       "DefStart": 79569,
       "DefEnd": 79633,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -3371,6 +3569,7 @@
       "DefStart": 79280,
       "DefEnd": 79294,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3387,6 +3586,7 @@
       "DefStart": 77017,
       "DefEnd": 77509,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger[]",
@@ -3405,6 +3605,7 @@
       "DefStart": 77137,
       "DefEnd": 77246,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3421,6 +3622,7 @@
       "DefStart": 77137,
       "DefEnd": 77308,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3437,6 +3639,7 @@
       "DefStart": 77137,
       "DefEnd": 77183,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3453,6 +3656,7 @@
       "DefStart": 77317,
       "DefEnd": 77359,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3469,6 +3673,7 @@
       "DefStart": 77088,
       "DefEnd": 77128,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger[]",
@@ -3485,6 +3690,7 @@
       "DefStart": 77062,
       "DefEnd": 77076,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3501,6 +3707,7 @@
       "DefStart": 78600,
       "DefEnd": 78722,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -3519,6 +3726,7 @@
       "DefStart": 78641,
       "DefEnd": 78655,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3535,6 +3743,7 @@
       "DefStart": 75821,
       "DefEnd": 76149,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -3553,6 +3762,7 @@
       "DefStart": 75878,
       "DefEnd": 75987,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3569,6 +3779,7 @@
       "DefStart": 75878,
       "DefEnd": 76049,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3585,6 +3796,7 @@
       "DefStart": 75878,
       "DefEnd": 75924,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -3601,6 +3813,7 @@
       "DefStart": 75852,
       "DefEnd": 75866,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -3617,6 +3830,7 @@
       "DefStart": 140690,
       "DefEnd": 143825,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()double",
@@ -3635,6 +3849,7 @@
       "DefStart": 143215,
       "DefEnd": 143327,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3651,6 +3866,7 @@
       "DefStart": 140790,
       "DefEnd": 140859,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3667,6 +3883,7 @@
       "DefStart": 141960,
       "DefEnd": 141973,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3683,6 +3900,7 @@
       "DefStart": 143007,
       "DefEnd": 143134,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -3699,6 +3917,7 @@
       "DefStart": 141982,
       "DefEnd": 141994,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3715,6 +3934,7 @@
       "DefStart": 141892,
       "DefEnd": 141917,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3731,6 +3951,7 @@
       "DefStart": 141926,
       "DefEnd": 141950,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3747,6 +3968,7 @@
       "DefStart": 141649,
       "DefEnd": 141703,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3763,6 +3985,7 @@
       "DefStart": 142472,
       "DefEnd": 142513,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3779,6 +4002,7 @@
       "DefStart": 143143,
       "DefEnd": 143206,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3795,6 +4019,7 @@
       "DefStart": 141713,
       "DefEnd": 141735,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3811,6 +4036,7 @@
       "DefStart": 124495,
       "DefEnd": 125084,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.lang.Object)boolean",
@@ -3829,6 +4055,7 @@
       "DefStart": 124971,
       "DefEnd": 124980,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3845,6 +4072,7 @@
       "DefStart": 124852,
       "DefEnd": 124871,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3861,6 +4089,7 @@
       "DefStart": 124829,
       "DefEnd": 124843,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -3877,6 +4106,7 @@
       "DefStart": 124517,
       "DefEnd": 124525,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.Object",
@@ -3893,6 +4123,7 @@
       "DefStart": 124725,
       "DefEnd": 124758,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -3909,6 +4140,7 @@
       "DefStart": 124880,
       "DefEnd": 124900,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -3925,6 +4157,7 @@
       "DefStart": 66744,
       "DefEnd": 67842,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -3943,6 +4176,7 @@
       "DefStart": 66857,
       "DefEnd": 66878,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -3959,6 +4193,7 @@
       "DefStart": 66913,
       "DefEnd": 66924,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3975,6 +4210,7 @@
       "DefStart": 66790,
       "DefEnd": 66811,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -3991,6 +4227,7 @@
       "DefStart": 66857,
       "DefEnd": 66870,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -4007,6 +4244,7 @@
       "DefStart": 66820,
       "DefEnd": 66848,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -4023,6 +4261,7 @@
       "DefStart": 66857,
       "DefEnd": 66867,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -4039,6 +4278,7 @@
       "DefStart": 66857,
       "DefEnd": 66864,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -4055,6 +4295,7 @@
       "DefStart": 8211,
       "DefEnd": 8258,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -4073,6 +4314,7 @@
       "DefStart": 152559,
       "DefEnd": 152591,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4089,6 +4331,7 @@
       "DefStart": 152739,
       "DefEnd": 152745,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4105,6 +4348,7 @@
       "DefStart": 152758,
       "DefEnd": 152780,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4121,6 +4365,7 @@
       "DefStart": 116008,
       "DefEnd": 116421,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -4139,6 +4384,7 @@
       "DefStart": 116239,
       "DefEnd": 116246,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4155,6 +4401,7 @@
       "DefStart": 116138,
       "DefEnd": 116159,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4171,6 +4418,7 @@
       "DefStart": 116034,
       "DefEnd": 116039,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4187,6 +4435,7 @@
       "DefStart": 116168,
       "DefEnd": 116224,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -4203,6 +4452,7 @@
       "DefStart": 137099,
       "DefEnd": 139963,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()float",
@@ -4221,6 +4471,7 @@
       "DefStart": 139369,
       "DefEnd": 139471,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4237,6 +4488,7 @@
       "DefStart": 137198,
       "DefEnd": 137267,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4253,6 +4505,7 @@
       "DefStart": 139162,
       "DefEnd": 139289,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -4269,6 +4522,7 @@
       "DefStart": 138288,
       "DefEnd": 138313,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4285,6 +4539,7 @@
       "DefStart": 138322,
       "DefEnd": 138346,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4301,6 +4556,7 @@
       "DefStart": 138048,
       "DefEnd": 138101,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4317,6 +4573,7 @@
       "DefStart": 138629,
       "DefEnd": 138669,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4333,6 +4590,7 @@
       "DefStart": 139298,
       "DefEnd": 139360,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4349,6 +4607,7 @@
       "DefStart": 138111,
       "DefEnd": 138132,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4365,6 +4624,7 @@
       "DefStart": 84796,
       "DefEnd": 85176,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -4383,6 +4643,7 @@
       "DefStart": 84970,
       "DefEnd": 85020,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -4399,6 +4660,7 @@
       "DefStart": 85029,
       "DefEnd": 85078,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -4415,6 +4677,7 @@
       "DefStart": 85088,
       "DefEnd": 85130,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -4431,6 +4694,7 @@
       "DefStart": 84818,
       "DefEnd": 84832,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -4447,6 +4711,7 @@
       "DefStart": 151979,
       "DefEnd": 152261,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)int",
@@ -4465,6 +4730,7 @@
       "DefStart": 152116,
       "DefEnd": 152149,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4481,6 +4747,7 @@
       "DefStart": 151998,
       "DefEnd": 152003,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4497,6 +4764,7 @@
       "DefStart": 68009,
       "DefEnd": 68311,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -4515,6 +4783,7 @@
       "DefStart": 68054,
       "DefEnd": 68075,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4531,6 +4800,7 @@
       "DefStart": 68146,
       "DefEnd": 68175,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -4547,6 +4817,7 @@
       "DefStart": 68037,
       "DefEnd": 68042,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4563,6 +4834,7 @@
       "DefStart": 116796,
       "DefEnd": 117365,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -4581,6 +4853,7 @@
       "DefStart": 117128,
       "DefEnd": 117136,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4597,6 +4870,7 @@
       "DefStart": 117128,
       "DefEnd": 117134,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4613,6 +4887,7 @@
       "DefStart": 116835,
       "DefEnd": 116895,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4629,6 +4904,7 @@
       "DefStart": 33044,
       "DefEnd": 33309,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)int",
@@ -4648,6 +4924,7 @@
       "DefStart": 33081,
       "DefEnd": 33094,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4664,6 +4941,7 @@
       "DefStart": 131895,
       "DefEnd": 132632,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,int)java.math.BigInteger",
@@ -4683,6 +4961,7 @@
       "DefStart": 131980,
       "DefEnd": 132023,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger[]",
@@ -4699,6 +4978,7 @@
       "DefStart": 131956,
       "DefEnd": 131968,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4715,6 +4995,7 @@
       "DefStart": 132250,
       "DefEnd": 132267,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4731,6 +5012,7 @@
       "DefStart": 132143,
       "DefEnd": 132176,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4747,6 +5029,7 @@
       "DefStart": 132362,
       "DefEnd": 132393,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger[][]",
@@ -4763,6 +5046,7 @@
       "DefStart": 131945,
       "DefEnd": 131954,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4779,6 +5063,7 @@
       "DefStart": 65246,
       "DefEnd": 66339,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,int,int,int)java.math.BigInteger",
@@ -4797,6 +5082,7 @@
       "DefStart": 65379,
       "DefEnd": 65394,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4813,6 +5099,7 @@
       "DefStart": 65355,
       "DefEnd": 65367,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4829,6 +5116,7 @@
       "DefStart": 66161,
       "DefEnd": 66197,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -4845,6 +5133,7 @@
       "DefStart": 65379,
       "DefEnd": 65410,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4861,6 +5150,7 @@
       "DefStart": 65278,
       "DefEnd": 65291,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4877,6 +5167,7 @@
       "DefStart": 65379,
       "DefEnd": 65418,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4893,6 +5184,7 @@
       "DefStart": 65308,
       "DefEnd": 65317,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4909,6 +5201,7 @@
       "DefStart": 65379,
       "DefEnd": 65405,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4925,6 +5218,7 @@
       "DefStart": 65379,
       "DefEnd": 65389,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4941,6 +5235,7 @@
       "DefStart": 65293,
       "DefEnd": 65306,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -4957,6 +5252,7 @@
       "DefStart": 68497,
       "DefEnd": 68840,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -4975,6 +5271,7 @@
       "DefStart": 68542,
       "DefEnd": 68563,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -4991,6 +5288,7 @@
       "DefStart": 68525,
       "DefEnd": 68530,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5007,6 +5305,7 @@
       "DefStart": 68665,
       "DefEnd": 68701,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -5023,6 +5322,7 @@
       "DefStart": 68633,
       "DefEnd": 68656,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5039,6 +5339,7 @@
       "DefStart": 126032,
       "DefEnd": 126232,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -5057,6 +5358,7 @@
       "DefStart": 126064,
       "DefEnd": 126081,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5073,6 +5375,7 @@
       "DefStart": 126096,
       "DefEnd": 126103,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5089,6 +5392,7 @@
       "DefStart": 101393,
       "DefEnd": 101724,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[],int)int",
@@ -5108,6 +5412,7 @@
       "DefStart": 101429,
       "DefEnd": 101439,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -5124,6 +5429,7 @@
       "DefStart": 101441,
       "DefEnd": 101451,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -5140,6 +5446,7 @@
       "DefStart": 101514,
       "DefEnd": 101544,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -5156,6 +5463,7 @@
       "DefStart": 101557,
       "DefEnd": 101587,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -5172,6 +5480,7 @@
       "DefStart": 101477,
       "DefEnd": 101484,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5188,6 +5497,7 @@
       "DefStart": 101453,
       "DefEnd": 101460,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5204,6 +5514,7 @@
       "DefStart": 151437,
       "DefEnd": 151508,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -5222,6 +5533,7 @@
       "DefStart": 150657,
       "DefEnd": 151175,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int[]",
@@ -5241,6 +5553,7 @@
       "DefStart": 135425,
       "DefEnd": 135529,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -5259,6 +5572,7 @@
       "DefStart": 135457,
       "DefEnd": 135472,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5275,6 +5589,7 @@
       "DefStart": 160613,
       "DefEnd": 160815,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -5293,6 +5608,7 @@
       "DefStart": 120749,
       "DefEnd": 121065,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)boolean",
@@ -5311,6 +5627,7 @@
       "DefStart": 120780,
       "DefEnd": 120793,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5327,6 +5644,7 @@
       "DefStart": 120858,
       "DefEnd": 120884,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -5343,6 +5661,7 @@
       "DefStart": 35693,
       "DefEnd": 37275,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.math.BigInteger)int",
@@ -5362,6 +5681,7 @@
       "DefStart": 35871,
       "DefEnd": 35881,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5378,6 +5698,7 @@
       "DefStart": 35732,
       "DefEnd": 35744,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -5394,6 +5715,7 @@
       "DefStart": 36002,
       "DefEnd": 36017,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5410,6 +5732,7 @@
       "DefStart": 35725,
       "DefEnd": 35730,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5426,6 +5749,7 @@
       "DefStart": 37069,
       "DefEnd": 37079,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5442,6 +5766,7 @@
       "DefStart": 35890,
       "DefEnd": 35920,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5458,6 +5783,7 @@
       "DefStart": 110376,
       "DefEnd": 110662,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[])int[]",
@@ -5474,6 +5800,7 @@
       "DefStart": 110447,
       "DefEnd": 110465,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5490,6 +5817,7 @@
       "DefStart": 110417,
       "DefEnd": 110433,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5506,6 +5834,7 @@
       "DefStart": 110396,
       "DefEnd": 110405,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -5522,6 +5851,7 @@
       "DefStart": 29435,
       "DefEnd": 30363,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,int,java.util.Random)java.math.BigInteger",
@@ -5541,6 +5871,7 @@
       "DefStart": 29472,
       "DefEnd": 29485,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5557,6 +5888,7 @@
       "DefStart": 29839,
       "DefEnd": 29902,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -5573,6 +5905,7 @@
       "DefStart": 29487,
       "DefEnd": 29500,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5589,6 +5922,7 @@
       "DefStart": 29524,
       "DefEnd": 29537,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -5605,6 +5939,7 @@
       "DefStart": 29502,
       "DefEnd": 29512,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -5621,6 +5956,7 @@
       "DefStart": 29726,
       "DefEnd": 29771,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5637,6 +5973,7 @@
       "DefStart": 29780,
       "DefEnd": 29830,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BitSieve",
@@ -5653,6 +5990,7 @@
       "DefStart": 85525,
       "DefEnd": 86412,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int)int[]",
@@ -5672,6 +6010,7 @@
       "DefStart": 85556,
       "DefEnd": 85563,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -5688,6 +6027,7 @@
       "DefStart": 85648,
       "DefEnd": 85691,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5704,6 +6044,7 @@
       "DefStart": 85565,
       "DefEnd": 85572,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5720,6 +6061,7 @@
       "DefStart": 85574,
       "DefEnd": 85579,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -5736,6 +6078,7 @@
       "DefStart": 85620,
       "DefEnd": 85639,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5752,6 +6095,7 @@
       "DefStart": 85591,
       "DefEnd": 85611,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5768,6 +6112,7 @@
       "DefStart": 85962,
       "DefEnd": 85996,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -5784,6 +6129,7 @@
       "DefStart": 43193,
       "DefEnd": 43232,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "double[]",
@@ -5804,6 +6150,7 @@
       "DefStart": 149153,
       "DefEnd": 150400,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger[]",
@@ -5823,6 +6170,7 @@
       "DefStart": 136199,
       "DefEnd": 136377,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()long",
@@ -5841,6 +6189,7 @@
       "DefStart": 136264,
       "DefEnd": 136271,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5857,6 +6206,7 @@
       "DefStart": 136233,
       "DefEnd": 136249,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -5873,6 +6223,7 @@
       "DefStart": 159905,
       "DefEnd": 160111,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()long",
@@ -5891,6 +6242,7 @@
       "DefStart": 7713,
       "DefEnd": 7754,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -5909,6 +6261,7 @@
       "DefStart": 37281,
       "DefEnd": 38216,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.math.BigInteger,java.math.BigInteger)java.math.BigInteger",
@@ -5928,6 +6281,7 @@
       "DefStart": 37372,
       "DefEnd": 37409,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -5944,6 +6298,7 @@
       "DefStart": 37510,
       "DefEnd": 37531,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -5960,6 +6315,7 @@
       "DefStart": 37334,
       "DefEnd": 37346,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -5976,6 +6332,7 @@
       "DefStart": 37348,
       "DefEnd": 37360,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -5992,6 +6349,7 @@
       "DefStart": 37418,
       "DefEnd": 37437,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6008,6 +6366,7 @@
       "DefStart": 37438,
       "DefEnd": 37452,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6024,6 +6383,7 @@
       "DefStart": 37461,
       "DefEnd": 37480,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6040,6 +6400,7 @@
       "DefStart": 37481,
       "DefEnd": 37495,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6056,6 +6417,7 @@
       "DefStart": 37327,
       "DefEnd": 37332,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -6072,6 +6434,7 @@
       "DefStart": 6542,
       "DefEnd": 6558,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int[]",
@@ -6090,6 +6453,7 @@
       "DefStart": 158765,
       "DefEnd": 159400,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()byte[]",
@@ -6108,6 +6472,7 @@
       "DefStart": 158841,
       "DefEnd": 158914,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6124,6 +6489,7 @@
       "DefStart": 158923,
       "DefEnd": 158956,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6140,6 +6506,7 @@
       "DefStart": 159014,
       "DefEnd": 159051,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6156,6 +6523,7 @@
       "DefStart": 159014,
       "DefEnd": 159034,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6172,6 +6540,7 @@
       "DefStart": 159014,
       "DefEnd": 159071,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6188,6 +6557,7 @@
       "DefStart": 158810,
       "DefEnd": 158831,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6204,6 +6574,7 @@
       "DefStart": 159014,
       "DefEnd": 159083,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6220,6 +6591,7 @@
       "DefStart": 158965,
       "DefEnd": 158999,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "byte[]",
@@ -6236,6 +6608,7 @@
       "DefStart": 145718,
       "DefEnd": 147252,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(byte[])int[]",
@@ -6255,6 +6628,7 @@
       "DefStart": 145752,
       "DefEnd": 145760,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "byte[]",
@@ -6271,6 +6645,7 @@
       "DefStart": 146438,
       "DefEnd": 146461,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6287,6 +6662,7 @@
       "DefStart": 145793,
       "DefEnd": 145819,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6303,6 +6679,7 @@
       "DefStart": 146163,
       "DefEnd": 146205,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6319,6 +6696,7 @@
       "DefStart": 146475,
       "DefEnd": 146494,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6335,6 +6713,7 @@
       "DefStart": 146214,
       "DefEnd": 146274,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6351,6 +6730,7 @@
       "DefStart": 146707,
       "DefEnd": 146714,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6367,6 +6747,7 @@
       "DefStart": 145772,
       "DefEnd": 145784,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6383,6 +6764,7 @@
       "DefStart": 145772,
       "DefEnd": 145781,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6399,6 +6781,7 @@
       "DefStart": 146879,
       "DefEnd": 146924,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6415,6 +6798,7 @@
       "DefStart": 146562,
       "DefEnd": 146609,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6431,6 +6815,7 @@
       "DefStart": 146283,
       "DefEnd": 146317,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -6447,6 +6832,7 @@
       "DefStart": 147426,
       "DefEnd": 148309,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[])int[]",
@@ -6466,6 +6852,7 @@
       "DefStart": 147460,
       "DefEnd": 147467,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -6482,6 +6869,7 @@
       "DefStart": 147832,
       "DefEnd": 147871,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6498,6 +6886,7 @@
       "DefStart": 148056,
       "DefEnd": 148068,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6514,6 +6903,7 @@
       "DefStart": 147479,
       "DefEnd": 147491,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6530,6 +6920,7 @@
       "DefStart": 147479,
       "DefEnd": 147488,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6546,6 +6937,7 @@
       "DefStart": 147880,
       "DefEnd": 147931,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -6562,6 +6954,7 @@
       "DefStart": 125789,
       "DefEnd": 125884,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -6580,6 +6973,7 @@
       "DefStart": 125811,
       "DefEnd": 125825,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -6596,6 +6990,7 @@
       "DefStart": 125394,
       "DefEnd": 125489,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -6614,6 +7009,7 @@
       "DefStart": 125416,
       "DefEnd": 125430,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -6630,6 +7026,7 @@
       "DefStart": 104252,
       "DefEnd": 104752,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -6648,6 +7045,7 @@
       "DefStart": 104582,
       "DefEnd": 104618,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6664,6 +7062,7 @@
       "DefStart": 104425,
       "DefEnd": 104454,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -6680,6 +7079,7 @@
       "DefStart": 104387,
       "DefEnd": 104416,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6696,6 +7096,7 @@
       "DefStart": 104276,
       "DefEnd": 104281,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -6712,6 +7113,7 @@
       "DefStart": 88529,
       "DefEnd": 88788,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -6730,6 +7132,7 @@
       "DefStart": 88551,
       "DefEnd": 88563,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -6746,6 +7149,7 @@
       "DefStart": 88682,
       "DefEnd": 88720,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6762,6 +7166,7 @@
       "DefStart": 105156,
       "DefEnd": 105801,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -6780,6 +7185,7 @@
       "DefStart": 105588,
       "DefEnd": 105640,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -6796,6 +7202,7 @@
       "DefStart": 105649,
       "DefEnd": 105696,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -6812,6 +7219,7 @@
       "DefStart": 105185,
       "DefEnd": 105197,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -6828,6 +7236,7 @@
       "DefStart": 105403,
       "DefEnd": 105428,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6844,6 +7253,7 @@
       "DefStart": 105706,
       "DefEnd": 105756,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -6860,6 +7270,7 @@
       "DefStart": 103363,
       "DefEnd": 104103,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,int)java.math.BigInteger",
@@ -6878,6 +7289,7 @@
       "DefStart": 103614,
       "DefEnd": 103651,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6894,6 +7306,7 @@
       "DefStart": 103660,
       "DefEnd": 103678,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6910,6 +7323,7 @@
       "DefStart": 103390,
       "DefEnd": 103409,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -6926,6 +7340,7 @@
       "DefStart": 103688,
       "DefEnd": 103721,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -6942,6 +7357,7 @@
       "DefStart": 103411,
       "DefEnd": 103416,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -6958,6 +7374,7 @@
       "DefStart": 103581,
       "DefEnd": 103605,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -6974,6 +7391,7 @@
       "DefStart": 89303,
       "DefEnd": 92101,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,java.math.BigInteger)java.math.BigInteger",
@@ -6992,6 +7410,7 @@
       "DefStart": 90979,
       "DefEnd": 91080,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7008,6 +7427,7 @@
       "DefStart": 91145,
       "DefEnd": 91187,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7024,6 +7444,7 @@
       "DefStart": 89989,
       "DefEnd": 90099,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7040,6 +7461,7 @@
       "DefStart": 90796,
       "DefEnd": 90914,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7056,6 +7478,7 @@
       "DefStart": 89328,
       "DefEnd": 89347,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -7072,6 +7495,7 @@
       "DefStart": 89864,
       "DefEnd": 89885,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -7088,6 +7512,7 @@
       "DefStart": 89349,
       "DefEnd": 89361,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -7104,6 +7529,7 @@
       "DefStart": 90643,
       "DefEnd": 90675,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7120,6 +7546,7 @@
       "DefStart": 90699,
       "DefEnd": 90732,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7136,6 +7563,7 @@
       "DefStart": 90568,
       "DefEnd": 90596,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7152,6 +7580,7 @@
       "DefStart": 91881,
       "DefEnd": 91927,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -7168,6 +7597,7 @@
       "DefStart": 90108,
       "DefEnd": 90126,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7184,6 +7614,7 @@
       "DefStart": 91533,
       "DefEnd": 91580,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -7200,6 +7631,7 @@
       "DefStart": 91693,
       "DefEnd": 91740,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -7216,6 +7648,7 @@
       "DefStart": 91264,
       "DefEnd": 91298,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7232,6 +7665,7 @@
       "DefStart": 91311,
       "DefEnd": 91345,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -7248,6 +7682,7 @@
       "DefStart": 100706,
       "DefEnd": 101236,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[],int,int)int[]",
@@ -7267,6 +7702,7 @@
       "DefStart": 100787,
       "DefEnd": 100795,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7283,6 +7719,7 @@
       "DefStart": 100913,
       "DefEnd": 100966,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7299,6 +7736,7 @@
       "DefStart": 100768,
       "DefEnd": 100775,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7315,6 +7753,7 @@
       "DefStart": 100804,
       "DefEnd": 100819,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7331,6 +7770,7 @@
       "DefStart": 100758,
       "DefEnd": 100766,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7347,6 +7787,7 @@
       "DefStart": 100747,
       "DefEnd": 100756,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -7363,6 +7804,7 @@
       "DefStart": 100738,
       "DefEnd": 100745,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -7379,6 +7821,7 @@
       "DefStart": 100868,
       "DefEnd": 100900,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7395,6 +7838,7 @@
       "DefStart": 100828,
       "DefEnd": 100841,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7411,6 +7855,7 @@
       "DefStart": 102185,
       "DefEnd": 102635,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[],int,int,int)int",
@@ -7429,6 +7874,7 @@
       "DefStart": 102298,
       "DefEnd": 102313,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7445,6 +7891,7 @@
       "DefStart": 102214,
       "DefEnd": 102222,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -7461,6 +7908,7 @@
       "DefStart": 102368,
       "DefEnd": 102379,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7477,6 +7925,7 @@
       "DefStart": 102245,
       "DefEnd": 102250,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7493,6 +7942,7 @@
       "DefStart": 102262,
       "DefEnd": 102289,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7509,6 +7959,7 @@
       "DefStart": 102236,
       "DefEnd": 102243,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7525,6 +7976,7 @@
       "DefStart": 102224,
       "DefEnd": 102234,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7541,6 +7993,7 @@
       "DefStart": 102203,
       "DefEnd": 102212,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -7557,6 +8010,7 @@
       "DefStart": 102408,
       "DefEnd": 102514,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7573,6 +8027,7 @@
       "DefStart": 54311,
       "DefEnd": 55344,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -7591,6 +8046,7 @@
       "DefStart": 54875,
       "DefEnd": 54977,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -7607,6 +8063,7 @@
       "DefStart": 54581,
       "DefEnd": 54628,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7623,6 +8080,7 @@
       "DefStart": 54338,
       "DefEnd": 54352,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -7639,6 +8097,7 @@
       "DefStart": 54434,
       "DefEnd": 54456,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7655,6 +8114,7 @@
       "DefStart": 54465,
       "DefEnd": 54491,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7671,6 +8131,7 @@
       "DefStart": 56286,
       "DefEnd": 57632,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long)java.math.BigInteger",
@@ -7687,6 +8148,7 @@
       "DefStart": 56802,
       "DefEnd": 56817,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7703,6 +8165,7 @@
       "DefStart": 56559,
       "DefEnd": 56578,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7719,6 +8182,7 @@
       "DefStart": 56613,
       "DefEnd": 56637,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7735,6 +8199,7 @@
       "DefStart": 56869,
       "DefEnd": 56885,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7751,6 +8216,7 @@
       "DefStart": 56914,
       "DefEnd": 56965,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7767,6 +8233,7 @@
       "DefStart": 56725,
       "DefEnd": 56793,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -7783,6 +8250,7 @@
       "DefStart": 56472,
       "DefEnd": 56511,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7799,6 +8267,7 @@
       "DefStart": 56826,
       "DefEnd": 56855,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7815,6 +8284,7 @@
       "DefStart": 56306,
       "DefEnd": 56312,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -7831,6 +8301,7 @@
       "DefStart": 56698,
       "DefEnd": 56716,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -7847,6 +8318,7 @@
       "DefStart": 56667,
       "DefEnd": 56689,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7863,6 +8335,7 @@
       "DefStart": 55350,
       "DefEnd": 56128,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int)java.math.BigInteger",
@@ -7882,6 +8355,7 @@
       "DefStart": 55634,
       "DefEnd": 55649,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7898,6 +8372,7 @@
       "DefStart": 55734,
       "DefEnd": 55750,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7914,6 +8389,7 @@
       "DefStart": 55779,
       "DefEnd": 55826,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -7930,6 +8406,7 @@
       "DefStart": 55593,
       "DefEnd": 55625,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -7946,6 +8423,7 @@
       "DefStart": 55691,
       "DefEnd": 55720,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -7962,6 +8440,7 @@
       "DefStart": 55406,
       "DefEnd": 55414,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -7978,6 +8457,7 @@
       "DefStart": 55390,
       "DefEnd": 55397,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -7994,6 +8474,7 @@
       "DefStart": 55564,
       "DefEnd": 55584,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8010,6 +8491,7 @@
       "DefStart": 55399,
       "DefEnd": 55404,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -8026,6 +8508,7 @@
       "DefStart": 55658,
       "DefEnd": 55682,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -8042,6 +8525,7 @@
       "DefStart": 59638,
       "DefEnd": 60686,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,java.math.BigInteger)java.math.BigInteger",
@@ -8061,6 +8545,7 @@
       "DefStart": 59845,
       "DefEnd": 59885,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8077,6 +8562,7 @@
       "DefStart": 60174,
       "DefEnd": 60206,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8093,6 +8579,7 @@
       "DefStart": 60230,
       "DefEnd": 60262,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8109,6 +8596,7 @@
       "DefStart": 60317,
       "DefEnd": 60365,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8125,6 +8613,7 @@
       "DefStart": 60450,
       "DefEnd": 60553,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8141,6 +8630,7 @@
       "DefStart": 59682,
       "DefEnd": 59694,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -8157,6 +8647,7 @@
       "DefStart": 60047,
       "DefEnd": 60080,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8173,6 +8664,7 @@
       "DefStart": 60005,
       "DefEnd": 60038,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8189,6 +8681,7 @@
       "DefStart": 59720,
       "DefEnd": 59744,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8205,6 +8698,7 @@
       "DefStart": 59696,
       "DefEnd": 59708,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -8221,6 +8715,7 @@
       "DefStart": 60131,
       "DefEnd": 60164,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8237,6 +8732,7 @@
       "DefStart": 60089,
       "DefEnd": 60122,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8253,6 +8749,7 @@
       "DefStart": 59753,
       "DefEnd": 59777,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8269,6 +8766,7 @@
       "DefStart": 57808,
       "DefEnd": 58797,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int[],int,int[])int[]",
@@ -8287,6 +8785,7 @@
       "DefStart": 58043,
       "DefEnd": 58058,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -8303,6 +8802,7 @@
       "DefStart": 58358,
       "DefEnd": 58374,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8319,6 +8819,7 @@
       "DefStart": 58072,
       "DefEnd": 58085,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8335,6 +8836,7 @@
       "DefStart": 58072,
       "DefEnd": 58103,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8351,6 +8853,7 @@
       "DefStart": 58137,
       "DefEnd": 58232,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -8367,6 +8870,7 @@
       "DefStart": 57836,
       "DefEnd": 57843,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -8383,6 +8887,7 @@
       "DefStart": 57845,
       "DefEnd": 57853,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -8399,6 +8904,7 @@
       "DefStart": 57893,
       "DefEnd": 57915,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8415,6 +8921,7 @@
       "DefStart": 57855,
       "DefEnd": 57862,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -8431,6 +8938,7 @@
       "DefStart": 57864,
       "DefEnd": 57872,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -8447,6 +8955,7 @@
       "DefStart": 57924,
       "DefEnd": 57946,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8463,6 +8972,7 @@
       "DefStart": 57874,
       "DefEnd": 57881,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -8479,6 +8989,7 @@
       "DefStart": 62248,
       "DefEnd": 64589,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,java.math.BigInteger)java.math.BigInteger",
@@ -8498,6 +9009,7 @@
       "DefStart": 62292,
       "DefEnd": 62304,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -8514,6 +9026,7 @@
       "DefStart": 62814,
       "DefEnd": 62828,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8530,6 +9043,7 @@
       "DefStart": 62814,
       "DefEnd": 62832,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8546,6 +9060,7 @@
       "DefStart": 62814,
       "DefEnd": 62836,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8562,6 +9077,7 @@
       "DefStart": 62330,
       "DefEnd": 62354,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8578,6 +9094,7 @@
       "DefStart": 62306,
       "DefEnd": 62318,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -8594,6 +9111,7 @@
       "DefStart": 62814,
       "DefEnd": 62840,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8610,6 +9128,7 @@
       "DefStart": 62814,
       "DefEnd": 62844,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8626,6 +9145,7 @@
       "DefStart": 62814,
       "DefEnd": 62848,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8642,6 +9162,7 @@
       "DefStart": 62363,
       "DefEnd": 62387,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8658,6 +9179,7 @@
       "DefStart": 63140,
       "DefEnd": 63191,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8674,6 +9196,7 @@
       "DefStart": 63140,
       "DefEnd": 63196,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8690,6 +9213,7 @@
       "DefStart": 62504,
       "DefEnd": 62526,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8706,6 +9230,7 @@
       "DefStart": 62397,
       "DefEnd": 62432,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8722,6 +9247,7 @@
       "DefStart": 62629,
       "DefEnd": 62651,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8738,6 +9264,7 @@
       "DefStart": 64342,
       "DefEnd": 64456,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8754,6 +9281,7 @@
       "DefStart": 64318,
       "DefEnd": 64332,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -8770,6 +9298,7 @@
       "DefStart": 63140,
       "DefEnd": 63177,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8786,6 +9315,7 @@
       "DefStart": 63140,
       "DefEnd": 63181,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8802,6 +9332,7 @@
       "DefStart": 63140,
       "DefEnd": 63186,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8818,6 +9349,7 @@
       "DefStart": 63140,
       "DefEnd": 63154,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8834,6 +9366,7 @@
       "DefStart": 63140,
       "DefEnd": 63158,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8850,6 +9383,7 @@
       "DefStart": 63140,
       "DefEnd": 63162,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8866,6 +9400,7 @@
       "DefStart": 63140,
       "DefEnd": 63173,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8882,6 +9417,7 @@
       "DefStart": 63140,
       "DefEnd": 63167,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8898,6 +9434,7 @@
       "DefStart": 42776,
       "DefEnd": 42846,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger[]",
@@ -8917,6 +9454,7 @@
       "DefStart": 87805,
       "DefEnd": 87894,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -8935,6 +9473,7 @@
       "DefStart": 30957,
       "DefEnd": 33038,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -8953,6 +9492,7 @@
       "DefStart": 32756,
       "DefEnd": 32888,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -8969,6 +9509,7 @@
       "DefStart": 31603,
       "DefEnd": 31662,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -8985,6 +9526,7 @@
       "DefStart": 31209,
       "DefEnd": 31243,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9001,6 +9543,7 @@
       "DefStart": 32599,
       "DefEnd": 32653,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9017,6 +9560,7 @@
       "DefStart": 32689,
       "DefEnd": 32744,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BitSieve",
@@ -9033,6 +9577,7 @@
       "DefStart": 112714,
       "DefEnd": 112921,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -9051,6 +9596,7 @@
       "DefStart": 112798,
       "DefEnd": 112805,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9067,6 +9613,7 @@
       "DefStart": 112748,
       "DefEnd": 112784,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9083,6 +9630,7 @@
       "DefStart": 92376,
       "DefEnd": 100546,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,java.math.BigInteger)java.math.BigInteger",
@@ -9101,6 +9649,7 @@
       "DefStart": 96793,
       "DefEnd": 96845,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9117,6 +9666,7 @@
       "DefStart": 96855,
       "DefEnd": 96958,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -9133,6 +9683,7 @@
       "DefStart": 97489,
       "DefEnd": 97535,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9149,6 +9700,7 @@
       "DefStart": 96855,
       "DefEnd": 97017,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -9165,6 +9717,7 @@
       "DefStart": 95898,
       "DefEnd": 95923,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9181,6 +9734,7 @@
       "DefStart": 97977,
       "DefEnd": 98016,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9197,6 +9751,7 @@
       "DefStart": 98026,
       "DefEnd": 98038,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9213,6 +9768,7 @@
       "DefStart": 98078,
       "DefEnd": 98093,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9229,6 +9785,7 @@
       "DefStart": 96088,
       "DefEnd": 96127,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9245,6 +9802,7 @@
       "DefStart": 98047,
       "DefEnd": 98069,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9261,6 +9819,7 @@
       "DefStart": 95932,
       "DefEnd": 95950,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9277,6 +9836,7 @@
       "DefStart": 96568,
       "DefEnd": 96575,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9293,6 +9853,7 @@
       "DefStart": 96683,
       "DefEnd": 96740,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9309,6 +9870,7 @@
       "DefStart": 98501,
       "DefEnd": 98522,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -9325,6 +9887,7 @@
       "DefStart": 95959,
       "DefEnd": 95977,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9341,6 +9904,7 @@
       "DefStart": 95986,
       "DefEnd": 96010,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9357,6 +9921,7 @@
       "DefStart": 98656,
       "DefEnd": 98686,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9373,6 +9938,7 @@
       "DefStart": 98384,
       "DefEnd": 98404,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9389,6 +9955,7 @@
       "DefStart": 97229,
       "DefEnd": 97267,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9405,6 +9972,7 @@
       "DefStart": 97773,
       "DefEnd": 97837,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9421,6 +9989,7 @@
       "DefStart": 96855,
       "DefEnd": 96901,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -9437,6 +10006,7 @@
       "DefStart": 97027,
       "DefEnd": 97065,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -9453,6 +10023,7 @@
       "DefStart": 97625,
       "DefEnd": 97660,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9469,6 +10040,7 @@
       "DefStart": 97279,
       "DefEnd": 97306,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9485,6 +10057,7 @@
       "DefStart": 96519,
       "DefEnd": 96554,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[][]",
@@ -9501,6 +10074,7 @@
       "DefStart": 96404,
       "DefEnd": 96429,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9517,6 +10091,7 @@
       "DefStart": 96065,
       "DefEnd": 96079,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9533,6 +10108,7 @@
       "DefStart": 92405,
       "DefEnd": 92417,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -9549,6 +10125,7 @@
       "DefStart": 92419,
       "DefEnd": 92431,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -9565,6 +10142,7 @@
       "DefStart": 111580,
       "DefEnd": 111885,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -9583,6 +10161,7 @@
       "DefStart": 111704,
       "DefEnd": 111711,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9599,6 +10178,7 @@
       "DefStart": 111627,
       "DefEnd": 111690,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -9615,6 +10195,7 @@
       "DefStart": 111601,
       "DefEnd": 111615,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -9631,6 +10212,7 @@
       "DefStart": 20844,
       "DefEnd": 21352,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(char[],int,int)int",
@@ -9649,6 +10231,7 @@
       "DefStart": 20891,
       "DefEnd": 20898,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -9665,6 +10248,7 @@
       "DefStart": 21066,
       "DefEnd": 21083,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9681,6 +10265,7 @@
       "DefStart": 21121,
       "DefEnd": 21170,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9697,6 +10282,7 @@
       "DefStart": 20910,
       "DefEnd": 20960,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9713,6 +10299,7 @@
       "DefStart": 20865,
       "DefEnd": 20878,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "char[]",
@@ -9729,6 +10316,7 @@
       "DefStart": 20880,
       "DefEnd": 20889,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -9745,6 +10333,7 @@
       "DefStart": 35190,
       "DefEnd": 35604,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()boolean",
@@ -9763,6 +10352,7 @@
       "DefStart": 35303,
       "DefEnd": 35313,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9779,6 +10369,7 @@
       "DefStart": 35236,
       "DefEnd": 35275,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9795,6 +10386,7 @@
       "DefStart": 35481,
       "DefEnd": 35538,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9811,6 +10403,7 @@
       "DefStart": 38537,
       "DefEnd": 39535,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.util.Random)boolean",
@@ -9829,6 +10422,7 @@
       "DefStart": 38768,
       "DefEnd": 38796,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9845,6 +10439,7 @@
       "DefStart": 39046,
       "DefEnd": 39059,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9861,6 +10456,7 @@
       "DefStart": 38948,
       "DefEnd": 38955,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9877,6 +10473,7 @@
       "DefStart": 38571,
       "DefEnd": 38585,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -9893,6 +10490,7 @@
       "DefStart": 39220,
       "DefEnd": 39230,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -9909,6 +10507,7 @@
       "DefStart": 38731,
       "DefEnd": 38759,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9925,6 +10524,7 @@
       "DefStart": 38587,
       "DefEnd": 38597,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -9941,6 +10541,7 @@
       "DefStart": 38677,
       "DefEnd": 38722,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9957,6 +10558,7 @@
       "DefStart": 39243,
       "DefEnd": 39276,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -9973,6 +10575,7 @@
       "DefStart": 42701,
       "DefEnd": 42771,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger[]",
@@ -9992,6 +10595,7 @@
       "DefStart": 80140,
       "DefEnd": 84483,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -10010,6 +10614,7 @@
       "DefStart": 83637,
       "DefEnd": 83661,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -10026,6 +10631,7 @@
       "DefStart": 82450,
       "DefEnd": 82500,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -10042,6 +10648,7 @@
       "DefStart": 80736,
       "DefEnd": 80784,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -10058,6 +10665,7 @@
       "DefStart": 80162,
       "DefEnd": 80174,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10074,6 +10682,7 @@
       "DefStart": 82351,
       "DefEnd": 82408,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10090,6 +10699,7 @@
       "DefStart": 80375,
       "DefEnd": 80412,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -10106,6 +10716,7 @@
       "DefStart": 80678,
       "DefEnd": 80727,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10122,6 +10733,7 @@
       "DefStart": 80881,
       "DefEnd": 80899,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10138,6 +10750,7 @@
       "DefStart": 82421,
       "DefEnd": 82437,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -10154,6 +10767,7 @@
       "DefStart": 82003,
       "DefEnd": 82053,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -10170,6 +10784,7 @@
       "DefStart": 82514,
       "DefEnd": 82545,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10186,6 +10801,7 @@
       "DefStart": 43070,
       "DefEnd": 43120,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.math.BigInteger[][]",
@@ -10206,6 +10822,7 @@
       "DefStart": 33992,
       "DefEnd": 34994,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.util.Random)boolean",
@@ -10222,6 +10839,7 @@
       "DefStart": 34017,
       "DefEnd": 34030,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10238,6 +10856,7 @@
       "DefStart": 34081,
       "DefEnd": 34136,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10254,6 +10873,7 @@
       "DefStart": 34032,
       "DefEnd": 34045,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -10270,6 +10890,7 @@
       "DefStart": 34057,
       "DefEnd": 34072,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10286,6 +10907,7 @@
       "DefStart": 34371,
       "DefEnd": 34405,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10302,6 +10924,7 @@
       "DefStart": 86825,
       "DefEnd": 87144,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int)void",
@@ -10320,6 +10943,7 @@
       "DefStart": 86856,
       "DefEnd": 86863,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -10336,6 +10960,7 @@
       "DefStart": 87028,
       "DefEnd": 87038,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10352,6 +10977,7 @@
       "DefStart": 86974,
       "DefEnd": 86990,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10368,6 +10994,7 @@
       "DefStart": 86974,
       "DefEnd": 86982,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10384,6 +11011,7 @@
       "DefStart": 86865,
       "DefEnd": 86872,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10400,6 +11028,7 @@
       "DefStart": 86974,
       "DefEnd": 87000,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10416,6 +11045,7 @@
       "DefStart": 86874,
       "DefEnd": 86879,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10432,6 +11062,7 @@
       "DefStart": 86944,
       "DefEnd": 86960,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10448,6 +11079,7 @@
       "DefStart": 86490,
       "DefEnd": 86747,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int)void",
@@ -10466,6 +11098,7 @@
       "DefStart": 86522,
       "DefEnd": 86529,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -10482,6 +11115,7 @@
       "DefStart": 86634,
       "DefEnd": 86644,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10498,6 +11132,7 @@
       "DefStart": 86587,
       "DefEnd": 86606,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10514,6 +11149,7 @@
       "DefStart": 86587,
       "DefEnd": 86599,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10530,6 +11166,7 @@
       "DefStart": 86531,
       "DefEnd": 86538,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10546,6 +11183,7 @@
       "DefStart": 86540,
       "DefEnd": 86545,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10562,6 +11200,7 @@
       "DefStart": 86557,
       "DefEnd": 86573,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10578,6 +11217,7 @@
       "DefStart": 27001,
       "DefEnd": 27354,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.util.Random)java.math.BigInteger",
@@ -10597,6 +11237,7 @@
       "DefStart": 27040,
       "DefEnd": 27053,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10613,6 +11254,7 @@
       "DefStart": 27055,
       "DefEnd": 27065,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -10629,6 +11271,7 @@
       "DefStart": 24007,
       "DefEnd": 24568,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,java.util.Random)byte[]",
@@ -10648,6 +11291,7 @@
       "DefStart": 24431,
       "DefEnd": 24469,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10664,6 +11308,7 @@
       "DefStart": 24040,
       "DefEnd": 24051,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -10680,6 +11325,7 @@
       "DefStart": 24180,
       "DefEnd": 24222,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10696,6 +11342,7 @@
       "DefStart": 24249,
       "DefEnd": 24288,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "byte[]",
@@ -10712,6 +11359,7 @@
       "DefStart": 24053,
       "DefEnd": 24063,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -10728,6 +11376,7 @@
       "DefStart": 154814,
       "DefEnd": 156773,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.io.ObjectInputStream)void",
@@ -10746,6 +11395,7 @@
       "DefStart": 156617,
       "DefEnd": 156638,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "EXCEPTION_PARAMETER",
         "TypeExpression": "java.lang.ArithmeticException",
@@ -10762,6 +11412,7 @@
       "DefStart": 155393,
       "DefEnd": 155444,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.ObjectInputStream.GetField",
@@ -10778,6 +11429,7 @@
       "DefStart": 155951,
       "DefEnd": 155996,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -10794,6 +11446,7 @@
       "DefStart": 155566,
       "DefEnd": 155623,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "byte[]",
@@ -10810,6 +11463,7 @@
       "DefStart": 155701,
       "DefEnd": 155753,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -10826,6 +11480,7 @@
       "DefStart": 154838,
       "DefEnd": 154865,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.io.ObjectInputStream",
@@ -10842,6 +11497,7 @@
       "DefStart": 155521,
       "DefEnd": 155557,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -10858,6 +11514,7 @@
       "DefStart": 77807,
       "DefEnd": 78107,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -10876,6 +11533,7 @@
       "DefStart": 77835,
       "DefEnd": 77849,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -10892,6 +11550,7 @@
       "DefStart": 78883,
       "DefEnd": 79008,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -10910,6 +11569,7 @@
       "DefStart": 78927,
       "DefEnd": 78941,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -10926,6 +11586,7 @@
       "DefStart": 78138,
       "DefEnd": 78438,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -10944,6 +11605,7 @@
       "DefStart": 78198,
       "DefEnd": 78307,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -10960,6 +11622,7 @@
       "DefStart": 78198,
       "DefEnd": 78369,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -10976,6 +11639,7 @@
       "DefStart": 78198,
       "DefEnd": 78244,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -10992,6 +11656,7 @@
       "DefStart": 78172,
       "DefEnd": 78186,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -11008,6 +11673,7 @@
       "DefStart": 40743,
       "DefEnd": 40871,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()void",
@@ -11027,6 +11693,7 @@
       "DefStart": 153735,
       "DefEnd": 154169,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.io.ObjectStreamField[]",
@@ -11047,6 +11714,7 @@
       "DefStart": 153068,
       "DefEnd": 153135,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "long",
@@ -11067,6 +11735,7 @@
       "DefStart": 114529,
       "DefEnd": 114941,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -11085,6 +11754,7 @@
       "DefStart": 114759,
       "DefEnd": 114766,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11101,6 +11771,7 @@
       "DefStart": 114658,
       "DefEnd": 114679,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11117,6 +11788,7 @@
       "DefStart": 114554,
       "DefEnd": 114559,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11133,6 +11805,7 @@
       "DefStart": 114688,
       "DefEnd": 114744,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -11149,6 +11822,7 @@
       "DefStart": 106186,
       "DefEnd": 106614,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -11167,6 +11841,7 @@
       "DefStart": 106214,
       "DefEnd": 106219,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11183,6 +11858,7 @@
       "DefStart": 106995,
       "DefEnd": 107834,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int)int[]",
@@ -11202,6 +11878,7 @@
       "DefStart": 107386,
       "DefEnd": 107419,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11218,6 +11895,7 @@
       "DefStart": 107326,
       "DefEnd": 107336,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11234,6 +11912,7 @@
       "DefStart": 107644,
       "DefEnd": 107652,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11250,6 +11929,7 @@
       "DefStart": 107026,
       "DefEnd": 107035,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -11266,6 +11946,7 @@
       "DefStart": 107113,
       "DefEnd": 107137,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11282,6 +11963,7 @@
       "DefStart": 107037,
       "DefEnd": 107042,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11298,6 +11980,7 @@
       "DefStart": 107083,
       "DefEnd": 107104,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11314,6 +11997,7 @@
       "DefStart": 107349,
       "DefEnd": 107373,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11330,6 +12014,7 @@
       "DefStart": 107054,
       "DefEnd": 107074,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11346,6 +12031,7 @@
       "DefStart": 107146,
       "DefEnd": 107166,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -11362,6 +12048,7 @@
       "DefStart": 108223,
       "DefEnd": 108653,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -11380,6 +12067,7 @@
       "DefStart": 108252,
       "DefEnd": 108257,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11396,6 +12084,7 @@
       "DefStart": 108949,
       "DefEnd": 110370,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.math.BigInteger",
@@ -11414,6 +12103,7 @@
       "DefStart": 109434,
       "DefEnd": 109466,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11430,6 +12120,7 @@
       "DefStart": 109411,
       "DefEnd": 109421,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11446,6 +12137,7 @@
       "DefStart": 109728,
       "DefEnd": 109736,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11462,6 +12154,7 @@
       "DefStart": 109059,
       "DefEnd": 109083,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11478,6 +12171,7 @@
       "DefStart": 108983,
       "DefEnd": 108988,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11494,6 +12188,7 @@
       "DefStart": 109029,
       "DefEnd": 109050,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11510,6 +12205,7 @@
       "DefStart": 109691,
       "DefEnd": 109715,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11526,6 +12222,7 @@
       "DefStart": 109000,
       "DefEnd": 109020,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11542,6 +12239,7 @@
       "DefStart": 109092,
       "DefEnd": 109112,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -11558,6 +12256,7 @@
       "DefStart": 109298,
       "DefEnd": 109329,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11574,6 +12273,7 @@
       "DefStart": 109973,
       "DefEnd": 109998,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -11590,6 +12290,7 @@
       "DefStart": 161325,
       "DefEnd": 161640,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()short",
@@ -11608,6 +12309,7 @@
       "DefStart": 161422,
       "DefEnd": 161445,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11624,6 +12326,7 @@
       "DefStart": 151541,
       "DefEnd": 151605,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -11642,6 +12345,7 @@
       "DefStart": 151649,
       "DefEnd": 151714,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -11660,6 +12364,7 @@
       "DefStart": 6037,
       "DefEnd": 6054,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -11678,6 +12383,7 @@
       "DefStart": 27605,
       "DefEnd": 29046,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int,int,java.util.Random)java.math.BigInteger",
@@ -11697,6 +12403,7 @@
       "DefStart": 27642,
       "DefEnd": 27655,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11713,6 +12420,7 @@
       "DefStart": 27657,
       "DefEnd": 27670,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -11729,6 +12437,7 @@
       "DefStart": 27777,
       "DefEnd": 27820,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11745,6 +12454,7 @@
       "DefStart": 27854,
       "DefEnd": 27888,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11761,6 +12471,7 @@
       "DefStart": 27996,
       "DefEnd": 28003,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11777,6 +12488,7 @@
       "DefStart": 27694,
       "DefEnd": 27730,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11793,6 +12505,7 @@
       "DefStart": 28249,
       "DefEnd": 28288,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -11809,6 +12522,7 @@
       "DefStart": 28388,
       "DefEnd": 28442,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -11825,6 +12539,7 @@
       "DefStart": 27672,
       "DefEnd": 27682,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.util.Random",
@@ -11841,6 +12556,7 @@
       "DefStart": 27739,
       "DefEnd": 27768,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -11857,6 +12573,7 @@
       "DefStart": 127885,
       "DefEnd": 129581,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.lang.String",
@@ -11875,6 +12592,7 @@
       "DefStart": 128400,
       "DefEnd": 128512,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -11891,6 +12609,7 @@
       "DefStart": 128400,
       "DefEnd": 128576,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -11907,6 +12626,7 @@
       "DefStart": 128949,
       "DefEnd": 129021,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.StringBuilder",
@@ -11923,6 +12643,7 @@
       "DefStart": 128354,
       "DefEnd": 128386,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -11939,6 +12660,7 @@
       "DefStart": 128127,
       "DefEnd": 128179,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String[]",
@@ -11955,6 +12677,7 @@
       "DefStart": 129213,
       "DefEnd": 129230,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11971,6 +12694,7 @@
       "DefStart": 128073,
       "DefEnd": 128118,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -11987,6 +12711,7 @@
       "DefStart": 128289,
       "DefEnd": 128307,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12003,6 +12728,7 @@
       "DefStart": 129323,
       "DefEnd": 129389,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12019,6 +12745,7 @@
       "DefStart": 128400,
       "DefEnd": 128446,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -12035,6 +12762,7 @@
       "DefStart": 128639,
       "DefEnd": 128693,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12051,6 +12779,7 @@
       "DefStart": 128589,
       "DefEnd": 128626,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.MutableBigInteger",
@@ -12067,6 +12796,7 @@
       "DefStart": 128706,
       "DefEnd": 128760,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12083,6 +12813,7 @@
       "DefStart": 127914,
       "DefEnd": 127923,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -12099,6 +12830,7 @@
       "DefStart": 128252,
       "DefEnd": 128280,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12115,6 +12847,7 @@
       "DefStart": 68997,
       "DefEnd": 69492,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -12133,6 +12866,7 @@
       "DefStart": 69097,
       "DefEnd": 69118,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12149,6 +12883,7 @@
       "DefStart": 69180,
       "DefEnd": 69218,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -12165,6 +12900,7 @@
       "DefStart": 72309,
       "DefEnd": 72765,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -12183,6 +12919,7 @@
       "DefStart": 72356,
       "DefEnd": 72386,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12199,6 +12936,7 @@
       "DefStart": 72436,
       "DefEnd": 72467,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12215,6 +12953,7 @@
       "DefStart": 72477,
       "DefEnd": 72506,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12231,6 +12970,7 @@
       "DefStart": 72396,
       "DefEnd": 72427,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12247,6 +12987,7 @@
       "DefStart": 72530,
       "DefEnd": 72559,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12263,6 +13004,7 @@
       "DefStart": 69648,
       "DefEnd": 71967,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int,int[])int[]",
@@ -12283,6 +13025,7 @@
       "DefStart": 71317,
       "DefEnd": 71329,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12299,6 +13042,7 @@
       "DefStart": 71317,
       "DefEnd": 71325,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12315,6 +13059,7 @@
       "DefStart": 71276,
       "DefEnd": 71303,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12331,6 +13076,7 @@
       "DefStart": 69696,
       "DefEnd": 69703,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -12347,6 +13093,7 @@
       "DefStart": 71657,
       "DefEnd": 71676,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12363,6 +13110,7 @@
       "DefStart": 71359,
       "DefEnd": 71391,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -12379,6 +13127,7 @@
       "DefStart": 71404,
       "DefEnd": 71433,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -12395,6 +13144,7 @@
       "DefStart": 71715,
       "DefEnd": 71730,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12411,6 +13161,7 @@
       "DefStart": 69687,
       "DefEnd": 69694,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -12427,6 +13178,7 @@
       "DefStart": 69705,
       "DefEnd": 69712,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -12443,6 +13195,7 @@
       "DefStart": 71100,
       "DefEnd": 71120,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12459,6 +13212,7 @@
       "DefStart": 73132,
       "DefEnd": 74877,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.math.BigInteger",
@@ -12477,6 +13231,7 @@
       "DefStart": 73550,
       "DefEnd": 73564,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12493,6 +13248,7 @@
       "DefStart": 73550,
       "DefEnd": 73568,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12509,6 +13265,7 @@
       "DefStart": 73550,
       "DefEnd": 73572,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12525,6 +13282,7 @@
       "DefStart": 73704,
       "DefEnd": 73755,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12541,6 +13299,7 @@
       "DefStart": 73272,
       "DefEnd": 73290,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12557,6 +13316,7 @@
       "DefStart": 73179,
       "DefEnd": 73200,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12573,6 +13333,7 @@
       "DefStart": 73393,
       "DefEnd": 73411,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12589,6 +13350,7 @@
       "DefStart": 74746,
       "DefEnd": 74760,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12605,6 +13367,7 @@
       "DefStart": 73704,
       "DefEnd": 73741,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12621,6 +13384,7 @@
       "DefStart": 73704,
       "DefEnd": 73745,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12637,6 +13401,7 @@
       "DefStart": 73704,
       "DefEnd": 73750,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12653,6 +13418,7 @@
       "DefStart": 73704,
       "DefEnd": 73718,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12669,6 +13435,7 @@
       "DefStart": 73704,
       "DefEnd": 73722,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12685,6 +13452,7 @@
       "DefStart": 73704,
       "DefEnd": 73726,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12701,6 +13469,7 @@
       "DefStart": 73704,
       "DefEnd": 73737,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12717,6 +13486,7 @@
       "DefStart": 73704,
       "DefEnd": 73731,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -12733,6 +13503,7 @@
       "DefStart": 144766,
       "DefEnd": 145543,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(byte[])int[]",
@@ -12752,6 +13523,7 @@
       "DefStart": 144809,
       "DefEnd": 144817,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "byte[]",
@@ -12768,6 +13540,7 @@
       "DefStart": 145167,
       "DefEnd": 145190,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12784,6 +13557,7 @@
       "DefStart": 144829,
       "DefEnd": 144855,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12800,6 +13574,7 @@
       "DefStart": 145291,
       "DefEnd": 145325,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12816,6 +13591,7 @@
       "DefStart": 145338,
       "DefEnd": 145388,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12832,6 +13608,7 @@
       "DefStart": 145204,
       "DefEnd": 145223,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12848,6 +13625,7 @@
       "DefStart": 145067,
       "DefEnd": 145115,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12864,6 +13642,7 @@
       "DefStart": 145406,
       "DefEnd": 145413,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12880,6 +13659,7 @@
       "DefStart": 144864,
       "DefEnd": 144873,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12896,6 +13676,7 @@
       "DefStart": 145124,
       "DefEnd": 145158,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -12912,6 +13693,7 @@
       "DefStart": 143924,
       "DefEnd": 144207,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[])int[]",
@@ -12931,6 +13713,7 @@
       "DefStart": 144018,
       "DefEnd": 144027,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12947,6 +13730,7 @@
       "DefStart": 143966,
       "DefEnd": 143975,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -12963,6 +13747,7 @@
       "DefStart": 143987,
       "DefEnd": 144009,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -12979,6 +13764,7 @@
       "DefStart": 101809,
       "DefEnd": 102088,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[],int)int",
@@ -12998,6 +13784,7 @@
       "DefStart": 101833,
       "DefEnd": 101840,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13014,6 +13801,7 @@
       "DefStart": 101842,
       "DefEnd": 101849,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13030,6 +13818,7 @@
       "DefStart": 101851,
       "DefEnd": 101858,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -13046,6 +13835,7 @@
       "DefStart": 101870,
       "DefEnd": 101883,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -13062,6 +13852,7 @@
       "DefStart": 53228,
       "DefEnd": 54121,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],int[])int[]",
@@ -13081,6 +13872,7 @@
       "DefStart": 53258,
       "DefEnd": 53267,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13097,6 +13889,7 @@
       "DefStart": 53293,
       "DefEnd": 53319,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13113,6 +13906,7 @@
       "DefStart": 53819,
       "DefEnd": 53860,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -13129,6 +13923,7 @@
       "DefStart": 53411,
       "DefEnd": 53431,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -13145,6 +13940,7 @@
       "DefStart": 53269,
       "DefEnd": 53281,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13161,6 +13957,7 @@
       "DefStart": 53370,
       "DefEnd": 53402,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13177,6 +13974,7 @@
       "DefStart": 53328,
       "DefEnd": 53361,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -13193,6 +13991,7 @@
       "DefStart": 51158,
       "DefEnd": 52182,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[],long)int[]",
@@ -13212,6 +14011,7 @@
       "DefStart": 51188,
       "DefEnd": 51197,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13228,6 +14028,7 @@
       "DefStart": 51261,
       "DefEnd": 51287,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13244,6 +14045,7 @@
       "DefStart": 51880,
       "DefEnd": 51921,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -13260,6 +14062,7 @@
       "DefStart": 51338,
       "DefEnd": 51358,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -13276,6 +14079,7 @@
       "DefStart": 51219,
       "DefEnd": 51252,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13292,6 +14096,7 @@
       "DefStart": 51296,
       "DefEnd": 51329,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -13308,6 +14113,7 @@
       "DefStart": 51199,
       "DefEnd": 51207,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -13324,6 +14130,7 @@
       "DefStart": 52374,
       "DefEnd": 52961,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -13342,6 +14149,7 @@
       "DefStart": 52636,
       "DefEnd": 52668,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13358,6 +14166,7 @@
       "DefStart": 52724,
       "DefEnd": 52829,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -13374,6 +14183,7 @@
       "DefStart": 52401,
       "DefEnd": 52415,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -13390,6 +14200,7 @@
       "DefStart": 49643,
       "DefEnd": 50869,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long,int[])int[]",
@@ -13409,6 +14220,7 @@
       "DefStart": 50216,
       "DefEnd": 50257,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "boolean",
@@ -13425,6 +14237,7 @@
       "DefStart": 50008,
       "DefEnd": 50075,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "long",
@@ -13441,6 +14254,7 @@
       "DefStart": 49707,
       "DefEnd": 49740,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13457,6 +14271,7 @@
       "DefStart": 49683,
       "DefEnd": 49695,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13473,6 +14288,7 @@
       "DefStart": 49782,
       "DefEnd": 49808,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -13489,6 +14305,7 @@
       "DefStart": 49673,
       "DefEnd": 49681,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -13505,6 +14322,7 @@
       "DefStart": 114040,
       "DefEnd": 114221,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)boolean",
@@ -13523,6 +14341,7 @@
       "DefStart": 114063,
       "DefEnd": 114068,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -13539,6 +14358,7 @@
       "DefStart": 134259,
       "DefEnd": 134756,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()byte[]",
@@ -13557,6 +14377,7 @@
       "DefStart": 134338,
       "DefEnd": 134375,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "byte[]",
@@ -13573,6 +14394,7 @@
       "DefStart": 134297,
       "DefEnd": 134329,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13589,6 +14411,7 @@
       "DefStart": 134390,
       "DefEnd": 134421,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13605,6 +14428,7 @@
       "DefStart": 134390,
       "DefEnd": 134406,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13621,6 +14445,7 @@
       "DefStart": 134390,
       "DefEnd": 134443,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13637,6 +14462,7 @@
       "DefStart": 134390,
       "DefEnd": 134432,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13653,6 +14479,7 @@
       "DefStart": 133500,
       "DefEnd": 133561,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.lang.String",
@@ -13671,6 +14498,7 @@
       "DefStart": 127058,
       "DefEnd": 127802,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int)java.lang.String",
@@ -13689,6 +14517,7 @@
       "DefStart": 127081,
       "DefEnd": 127090,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -13705,6 +14534,7 @@
       "DefStart": 127553,
       "DefEnd": 127592,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.StringBuilder",
@@ -13721,6 +14551,7 @@
       "DefStart": 130143,
       "DefEnd": 131636,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger,java.lang.StringBuilder,int,int)void",
@@ -13740,6 +14571,7 @@
       "DefStart": 130950,
       "DefEnd": 130956,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13756,6 +14588,7 @@
       "DefStart": 130248,
       "DefEnd": 130258,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -13772,6 +14605,7 @@
       "DefStart": 131416,
       "DefEnd": 131444,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13788,6 +14622,7 @@
       "DefStart": 130722,
       "DefEnd": 130738,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13804,6 +14639,7 @@
       "DefStart": 130950,
       "DefEnd": 130959,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13820,6 +14656,7 @@
       "DefStart": 130204,
       "DefEnd": 130213,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int",
@@ -13836,6 +14673,7 @@
       "DefStart": 131342,
       "DefEnd": 131363,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger[]",
@@ -13852,6 +14690,7 @@
       "DefStart": 130484,
       "DefEnd": 130518,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -13868,6 +14707,7 @@
       "DefStart": 130186,
       "DefEnd": 130202,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.StringBuilder",
@@ -13884,6 +14724,7 @@
       "DefStart": 130172,
       "DefEnd": 130184,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -13900,6 +14741,7 @@
       "DefStart": 131284,
       "DefEnd": 131333,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.math.BigInteger",
@@ -13916,6 +14758,7 @@
       "DefStart": 144359,
       "DefEnd": 144667,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[])int[]",
@@ -13935,6 +14778,7 @@
       "DefStart": 144460,
       "DefEnd": 144469,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13951,6 +14795,7 @@
       "DefStart": 144408,
       "DefEnd": 144417,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -13967,6 +14812,7 @@
       "DefStart": 144429,
       "DefEnd": 144451,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -13983,6 +14829,7 @@
       "DefStart": 42423,
       "DefEnd": 42551,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(int[])java.math.BigInteger",
@@ -14002,6 +14849,7 @@
       "DefStart": 42457,
       "DefEnd": 42466,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "int[]",
@@ -14018,6 +14866,7 @@
       "DefStart": 41295,
       "DefEnd": 41678,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(long)java.math.BigInteger",
@@ -14037,6 +14886,7 @@
       "DefStart": 41328,
       "DefEnd": 41336,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "long",
@@ -14053,6 +14903,7 @@
       "DefStart": 158059,
       "DefEnd": 158692,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.io.ObjectOutputStream)void",
@@ -14071,6 +14922,7 @@
       "DefStart": 158188,
       "DefEnd": 158239,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.io.ObjectOutputStream.PutField",
@@ -14087,6 +14939,7 @@
       "DefStart": 158084,
       "DefEnd": 158104,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.io.ObjectOutputStream",
@@ -14103,6 +14956,7 @@
       "DefStart": 112188,
       "DefEnd": 112494,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(java.math.BigInteger)java.math.BigInteger",
@@ -14121,6 +14975,7 @@
       "DefStart": 112313,
       "DefEnd": 112320,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -14137,6 +14992,7 @@
       "DefStart": 112236,
       "DefEnd": 112299,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int[]",
@@ -14153,6 +15009,7 @@
       "DefStart": 112210,
       "DefEnd": 112224,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.math.BigInteger",
@@ -14169,6 +15026,7 @@
       "DefStart": 132692,
       "DefEnd": 132739,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.lang.String[]",
@@ -26814,7 +27672,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/bitCount",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 119235,
@@ -27331,7 +28189,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/bitLength",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 117909,
@@ -28409,7 +29267,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/compareMagnitude:long/a",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 123835,
@@ -28508,7 +29366,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/compareMagnitude:long/b",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 123862,
@@ -29080,7 +29938,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/destructiveMulAdd:int[]:int:int/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 22441,
@@ -31852,7 +32710,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/firstNonzeroIntNum",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 152528,
@@ -36934,7 +37792,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/leftShift:int[]:int:int/result",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 86191,
@@ -40388,7 +41246,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/makePositive:byte[]/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 147060,
@@ -41081,7 +41939,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/makePositive:int[]/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 148220,
@@ -44854,7 +45712,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/multiply:long/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 57192,
@@ -44931,7 +45789,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/multiply:long/product",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 57246,
@@ -46559,7 +47417,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/multiplyToLen:int[]:int:int[]:int:int[]/j",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 58435,
@@ -46636,7 +47494,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/multiplyToLen:int[]:int:int[]:int:int[]/k",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 58445,
@@ -46713,7 +47571,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/multiplyToLen:int[]:int:int[]:int:int[]/product",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 58500,
@@ -50376,7 +51234,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 97323,
@@ -50431,7 +51289,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 97732,
@@ -50486,7 +51344,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 98107,
@@ -51201,7 +52059,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/t2",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 100339,
@@ -53621,7 +54479,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/pow:int/workingExponent",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 83679,
@@ -55282,7 +56140,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/readObject:java.io.ObjectInputStream/message",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 156064,
@@ -57020,7 +57878,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/shiftRightImpl:int/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 110016,
@@ -57108,7 +57966,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/shiftRightImpl:int/j",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 110032,
@@ -58912,7 +59770,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/signum",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 88093,
@@ -60529,7 +61387,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/squareToLen:int[]:int:int[]/i",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 71657,
@@ -64599,7 +65457,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/subtract:long:int[]/difference",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 50556,
@@ -64808,7 +65666,7 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/math/BigInteger:type/subtract:long:int[]/result",
-      "Def": false,
+      "Def": true,
       "Repo": "",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 49931,

@@ -25,6 +25,7 @@ public class Main {
             jc.parse(args);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.exit(1);
         }
 
         switch (jc.getParsedCommand()) {
@@ -38,7 +39,7 @@ public class Main {
                 depresolve.Execute();
                 break;
             default:
-                System.out.println("Unkown command");
+                System.out.println("Unknown command");
                 jc.usage();
                 System.exit(1);
         }

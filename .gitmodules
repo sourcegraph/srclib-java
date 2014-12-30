@@ -7,3 +7,6 @@
 [submodule "testdata/case/java-gradle-sample"]
 	path = testdata/case/java-gradle-sample
 	url = https://github.com/sgtest/java-gradle-sample.git
+[submodule "testdata/case/java-error-tolerance"]
+	path = testdata/case/java-error-tolerance
+	url = https://github.com/sgtest/java-error-tolerance.git

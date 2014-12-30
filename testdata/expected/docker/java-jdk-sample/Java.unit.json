@@ -1,1 +1,1 @@
-{"Name":".","Type":"Java","Repo":"github.com/sgtest/java-jdk-sample","Globs":null,"Files":["src/share/classes/java/math/BigInteger.java"],"Dir":"src/","Data":{},"Ops":{"depresolve":null,"graph":null}}
+{"Name":".","Type":"Java","Repo":"github.com/sgtest/java-jdk-sample","Globs":null,"Files":["src/share/classes/java/math/BigInteger.java"],"Dir":"src/","Data":{"JDK":true},"Ops":{}}

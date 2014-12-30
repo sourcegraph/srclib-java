@@ -9,9 +9,9 @@
       "DefStart": 0,
       "DefEnd": 0,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "mypkg"
       }
     },
@@ -24,6 +24,7 @@
       "DefStart": 29,
       "DefEnd": 38,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -42,6 +43,7 @@
       "DefStart": 16,
       "DefEnd": 169,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.Container",
@@ -60,6 +62,7 @@
       "DefStart": 124,
       "DefEnd": 167,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()mypkg.Container.Inner",
@@ -78,6 +81,7 @@
       "DefStart": 55,
       "DefEnd": 60,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -96,6 +100,7 @@
       "DefStart": 42,
       "DefEnd": 121,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.Container.Inner",
@@ -114,6 +119,7 @@
       "DefStart": 65,
       "DefEnd": 118,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()mypkg.Container",
@@ -132,6 +138,7 @@
       "DefStart": 149,
       "DefEnd": 157,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -150,6 +157,7 @@
       "DefStart": 136,
       "DefEnd": 650,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.FooClass",
@@ -168,6 +176,7 @@
       "DefStart": 270,
       "DefEnd": 290,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "mypkg.FooClass",
@@ -186,6 +195,7 @@
       "DefStart": 510,
       "DefEnd": 580,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -204,6 +214,7 @@
       "DefStart": 533,
       "DefEnd": 563,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
@@ -220,6 +231,7 @@
       "DefStart": 293,
       "DefEnd": 352,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.util.List\u003cjava.lang.Integer\u003e",
@@ -238,6 +250,7 @@
       "DefStart": 161,
       "DefEnd": 188,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -257,6 +270,7 @@
       "DefStart": 583,
       "DefEnd": 648,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.lang.String",
@@ -275,6 +289,7 @@
       "DefStart": 191,
       "DefEnd": 267,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.lang.String",
@@ -294,6 +309,7 @@
       "DefStart": 233,
       "DefEnd": 252,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
@@ -310,6 +326,7 @@
       "DefStart": 354,
       "DefEnd": 396,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -328,6 +345,7 @@
       "DefStart": 16,
       "DefEnd": 69,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "INTERFACE",
         "TypeExpression": "mypkg.IBar",
@@ -346,6 +364,7 @@
       "DefStart": 41,
       "DefEnd": 67,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(mypkg.IBar)mypkg.FooClass",
@@ -362,6 +381,7 @@
       "DefStart": 57,
       "DefEnd": 65,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "mypkg.IBar",
@@ -378,9 +398,9 @@
       "DefStart": 0,
       "DefEnd": 0,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
-        "TypeExpression": null,
         "Package": "mypkg.subpkg"
       }
     },
@@ -393,6 +413,7 @@
       "DefStart": 35,
       "DefEnd": 42,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -411,6 +432,7 @@
       "DefStart": 23,
       "DefEnd": 61,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "ENUM",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -429,6 +451,7 @@
       "DefStart": 46,
       "DefEnd": 49,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -449,6 +472,7 @@
       "DefStart": 51,
       "DefEnd": 54,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -469,6 +493,7 @@
       "DefStart": 56,
       "DefEnd": 59,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -489,6 +514,7 @@
       "DefStart": 60,
       "DefEnd": 68,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -507,6 +533,7 @@
       "DefStart": 47,
       "DefEnd": 318,
       "Exported": true,
+      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.subpkg.ZipClass",
@@ -525,6 +552,7 @@
       "DefStart": 72,
       "DefEnd": 278,
       "Exported": false,
+      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()void",
@@ -543,6 +571,7 @@
       "DefStart": 95,
       "DefEnd": 125,
       "Exported": false,
+      "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "mypkg.FooClass",

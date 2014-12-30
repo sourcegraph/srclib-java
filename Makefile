@@ -5,7 +5,7 @@ SRC = $(shell find ./src -type f)
 default: install
 
 build/libs/srclib-java-0.0.1-SNAPSHOT.jar: build.gradle ${SRC}
-	gradle jar
+	./gradlew jar
 
 .bin/srclib-java.jar: build/libs/srclib-java-0.0.1-SNAPSHOT.jar
 	cp build/libs/srclib-java-0.0.1-SNAPSHOT.jar .bin/srclib-java.jar

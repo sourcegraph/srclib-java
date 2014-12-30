@@ -1,89 +1,86 @@
 package com.sourcegraph.javagraph;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONStreamAware;
-import org.json.simple.JSONValue;
+import com.google.gson.*;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.LinkedHashMap;
+import java.lang.reflect.Type;
 
-public class Ref implements JSONStreamAware, JSONAware {
-    Symbol.Key symbol;
+public class Ref {
+    DefKey defKey;
+
+    String defRepo;
+    String defUnitType;
+    String defUnit;
 
     String file;
     int start;
     int end;
+    boolean def;
 
-    public Ref(Symbol.Key symbol, String file, int start, int end) {
-        this.symbol = symbol;
-        this.file = file;
-        this.start = start;
-        this.end = end;
+    public void setDefTarget(ResolvedTarget target) {
+        defRepo = target.ToRepoCloneURL;
+        defUnitType = target.ToUnitType;
+        defUnit = target.ToUnit;
     }
 
     @Override
-    public String toJSONString() {
-        StringWriter b = new StringWriter();
-        try {
-            writeJSONString(b);
-        } catch (IOException e) {
-        }
-        return b.toString();
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    @Override
-    public String toString() {
-        return toJSONString();
-    }
+        Ref ref = (Ref) o;
 
-    @Override
-    public void writeJSONString(Writer out) throws IOException {
-        LinkedHashMap<String, Object> obj = new LinkedHashMap<>();
-        if (symbol.origin != null && symbol.origin != "")
-            obj.put("symbolOrigin", symbol.origin);
-        obj.put("symbolPath", symbol.path);
-        obj.put("file", file);
-        obj.put("start", start);
-        obj.put("end", end);
-        JSONValue.writeJSONString(obj, out);
+        if (def != ref.def) return false;
+        if (end != ref.end) return false;
+        if (start != ref.start) return false;
+        if (defKey != null ? !defKey.equals(ref.defKey) : ref.defKey != null) return false;
+        if (defRepo != null ? !defRepo.equals(ref.defRepo) : ref.defRepo != null) return false;
+        if (defUnit != null ? !defUnit.equals(ref.defUnit) : ref.defUnit != null) return false;
+        if (defUnitType != null ? !defUnitType.equals(ref.defUnitType) : ref.defUnitType != null) return false;
+        if (file != null ? !file.equals(ref.file) : ref.file != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + end;
-        result = prime * result + ((file == null) ? 0 : file.hashCode());
-        result = prime * result + start;
-        result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+        int result = defKey != null ? defKey.hashCode() : 0;
+        result = 31 * result + (defRepo != null ? defRepo.hashCode() : 0);
+        result = 31 * result + (defUnitType != null ? defUnitType.hashCode() : 0);
+        result = 31 * result + (defUnit != null ? defUnit.hashCode() : 0);
+        result = 31 * result + (file != null ? file.hashCode() : 0);
+        result = 31 * result + start;
+        result = 31 * result + end;
+        result = 31 * result + (def ? 1 : 0);
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Ref other = (Ref) obj;
-        if (end != other.end)
-            return false;
-        if (file == null) {
-            if (other.file != null)
-                return false;
-        } else if (!file.equals(other.file))
-            return false;
-        if (start != other.start)
-            return false;
-        if (symbol == null) {
-            if (other.symbol != null)
-                return false;
-        } else if (!symbol.equals(other.symbol))
-            return false;
-        return true;
+    public String toString() {
+        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : "") + "}";
+    }
+
+    static class JSONSerializer implements JsonSerializer<Ref> {
+        @Override
+        public JsonElement serialize(Ref ref, Type arg1, JsonSerializationContext arg2) {
+            JsonObject object = new JsonObject();
+
+            if (ref.defKey.getOrigin() != null) {
+                // Add for easier debugging.
+                object.addProperty("_JavaOrigin", ref.defKey.getOrigin().toString());
+            }
+
+            if (ref.defRepo != null) object.add("DefRepo", new JsonPrimitive(ref.defRepo));
+            if (ref.defUnitType != null) object.add("DefUnitType", new JsonPrimitive(ref.defUnitType));
+            if (ref.defUnit != null) object.add("DefUnit", new JsonPrimitive(ref.defUnit));
+            object.add("DefPath", new JsonPrimitive(ref.defKey.formatPath()));
+
+            object.add("File", new JsonPrimitive(ref.file));
+            object.add("Start", new JsonPrimitive(ref.start));
+            object.add("End", new JsonPrimitive(ref.end));
+            object.add("Def", new JsonPrimitive(ref.def));
+
+            return object;
+        }
+
     }
 }
