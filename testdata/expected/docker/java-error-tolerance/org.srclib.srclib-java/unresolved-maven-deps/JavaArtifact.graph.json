@@ -1,40 +1,6 @@
 {
   "Defs": [
     {
-      "Path": "anon-i-1:type",
-      "TreePath": "anon-i-1:type",
-      "Name": "",
-      "Kind": "type",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "DefStart": 123,
-      "DefEnd": 211,
-      "Exported": false,
-      "Local": false,
-      "Data": {
-        "JavaKind": "CLASS",
-        "TypeExpression": "\u003cany?\u003e",
-        "Package": "org.srclib.java",
-        "Modifiers": []
-      }
-    },
-    {
-      "Path": "anon-i-5:type",
-      "TreePath": "anon-i-5:type",
-      "Name": "",
-      "Kind": "type",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "DefStart": 182,
-      "DefEnd": 184,
-      "Exported": false,
-      "Local": false,
-      "Data": {
-        "JavaKind": "CLASS",
-        "TypeExpression": "\u003cany?\u003e",
-        "Package": "org.srclib.java",
-        "Modifiers": []
-      }
-    },
-    {
       "Path": "org/srclib/java",
       "TreePath": "org/srclib/java",
       "Name": "java",
@@ -333,23 +299,6 @@
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "java.lang.String[]",
-        "Package": "org.srclib.java",
-        "Modifiers": []
-      }
-    },
-    {
-      "Path": "unknown-pkg-i-3/u-i-2/test",
-      "TreePath": "unknown-pkg-i-3/u-i-2/test",
-      "Name": "test",
-      "Kind": "func",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "DefStart": 138,
-      "DefEnd": 200,
-      "Exported": false,
-      "Local": false,
-      "Data": {
-        "JavaKind": "METHOD",
-        "TypeExpression": "()void",
         "Package": "org.srclib.java",
         "Modifiers": []
       }
@@ -1334,28 +1283,6 @@
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
       "Start": 8,
       "End": 11
-    },
-    {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
-      "DefPath": "unknown-pkg-i-3/anon-i-4:type",
-      "Def": false,
-      "Repo": "",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "Start": 173,
-      "End": 179
-    },
-    {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
-      "DefPath": "unknown-pkg-i-3/u-i-2/test",
-      "Def": true,
-      "Repo": "",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "Start": 143,
-      "End": 147
     }
   ],
   "Docs": [

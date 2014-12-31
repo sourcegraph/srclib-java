@@ -1,5 +1,6 @@
 package com.sourcegraph.javagraph;
 
+import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
@@ -16,8 +17,8 @@ import java.util.Map;
 public class ElementPath {
     private final List<String> components = new ArrayList<>(5);
 
-    public static ElementPath get(Trees trees, Element e) {
-        return new Visitor(trees).visit(e, new ElementPath());
+    public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
+        return new Visitor(compilationUnit, trees).visit(e, new ElementPath());
     }
 
     @Override
@@ -34,16 +35,18 @@ public class ElementPath {
     private static class Visitor extends
             ElementKindVisitor8<ElementPath, ElementPath> {
         private final Trees trees;
+        private final CompilationUnitTree compilationUnit;
 
-        public Visitor(Trees trees) {
+        public Visitor(CompilationUnitTree compilationUnit, Trees trees) {
             this.trees = trees;
+            this.compilationUnit=compilationUnit;
         }
 
         @Override
         public ElementPath visitPackage(PackageElement e, ElementPath p) {
             String name = e.getQualifiedName().toString();
             if (name.isEmpty()) {
-                name = "unknown-pkg-" + getUniqueID(e);
+                return null;
             }
             p.unshift(name);
             return p;
@@ -58,11 +61,7 @@ public class ElementPath {
                 String fileBasename = new File(filename).getName().replace(".java", "");
                 name = "p-" + fileBasename + "-" + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             } else {
-                // If we can't even get the char pos of this (e.g., it's an instantiation of an unresolvable class), just increment some global counter.
-                if (!anonClasses.containsKey(e)) {
-                    anonClasses.put(e, anonClasses.size() + 1);
-                }
-                name = "i-" + anonClasses.get(e);
+                return null;
             }
             return name;
         }
@@ -81,7 +80,9 @@ public class ElementPath {
             String name = e.getSimpleName().toString();
             Element enclosing = e.getEnclosingElement();
             if (name.isEmpty() || name.equals("<any?>")) {
-             name = "anon-" + getUniqueID(e);
+                String uniqID = getUniqueID(e);
+                if (uniqID == null) return null;
+             name = "anon-" + uniqID;
             }
 
             // Except for top-level package scope, a type and a variable with
