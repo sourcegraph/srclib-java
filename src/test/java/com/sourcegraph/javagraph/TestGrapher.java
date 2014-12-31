@@ -130,12 +130,5 @@ public class TestGrapher extends TestCase {
 		GraphData w = graph("Bar.java", "package foo; public class Bar { private void foo() {  new invalid.pkg.name.MyType() { @Override public void bar() { bar(); } }; } }");
 		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type")).size());
 		assertEquals(1, w.refsTo(new DefKey(null, "foo.Bar:type.foo")).size());
-		String barPath = "unknown-pkg-i-3.u-i-2.bar";
-		//System.err.println("======== Refs:\n" + StringUtils.join(w.refs, "\n") + "\n============\n");
-		// TODO(sqs): should be 2 for the def ref and the bar() call, but it's linking it to the anon class for some reason
-		assertEquals(1, w.refsTo(new DefKey(null, barPath)).size());
-		assertNotNull(w.getSymbolFromKey(new DefKey(null, barPath)));
-		assertNull(w.getSymbolFromKey(new DefKey(null, "..bar")));
-		assertNull(w.getSymbolFromKey(new DefKey(null, "anon:type")));
 	}
 }
