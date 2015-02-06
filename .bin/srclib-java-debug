@@ -1,4 +1,4 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-java -Xmx5g -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044 -jar "$DIR/srclib-java.jar" "$@"
+java -Xmx20g -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044 -jar "$DIR/srclib-java.jar" "$@"
