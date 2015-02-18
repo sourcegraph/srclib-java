@@ -77,12 +77,16 @@ public class Def {
             object.add("DefStart", new JsonPrimitive(sym.defStart));
             object.add("DefEnd", new JsonPrimitive(sym.defEnd));
 
-            if (sym.modifiers != null)
-                object.add("Exported", new JsonPrimitive(sym.modifiers.contains("public")));
-            else
+            boolean exported;
+            if (sym.modifiers != null) {
+                exported = sym.modifiers.contains("public");
+                object.add("Exported", new JsonPrimitive(exported));
+            } else {
+                exported = false;
                 object.add("Exported", new JsonPrimitive(false));
+            }
 
-            object.add("Local", new JsonPrimitive(sym.kind.equals("LOCAL_VARIABLE")));
+            object.add("Local", new JsonPrimitive(!exported && !(sym.kind.equals("PACKAGE") || sym.kind.equals("ENUM") || sym.kind.equals("CLASS") || sym.kind.equals("ANNOTATION_TYPE") || sym.kind.equals("INTERFACE") || sym.kind.equals("ENUM_CONSTANT") || sym.kind.equals("FIELD") || sym.kind.equals("METHOD") || sym.kind.equals("CONSTRUCTOR"))));
 
             switch (sym.kind) {
                 case "ENUM":
