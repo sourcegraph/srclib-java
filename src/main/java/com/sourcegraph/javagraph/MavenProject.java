@@ -91,10 +91,13 @@ public class MavenProject implements Project {
         return locator.getService(RepositorySystem.class);
     }
 
-    private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) {
+    private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) throws IOException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
 
-        LocalRepository localRepo = new LocalRepository("target/local-repo");
+        // Use a directory not inside the repo if in Docker since the Docker source volume is readonly.
+        String repoDir = System.getenv("IN_DOCKER_CONTAINER") != null ? Files.createTempDirectory("srclib-java-m2").toString() : "target/local-repo";
+
+        LocalRepository localRepo = new LocalRepository(repoDir);
         session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
 
         return session;
