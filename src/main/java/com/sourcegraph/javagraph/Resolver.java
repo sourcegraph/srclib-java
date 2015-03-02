@@ -107,6 +107,9 @@ public class Resolver {
                     "https://github.com/douglascrockford/JSON-java");
             put("junit/junit", "https://github.com/junit-team/junit");
             put("org.apache.commons/commons-csv", "https://github.com/apache/commons-csv");
+            put("org.slf4j/slf4j-api", "https://github.com/qos-ch/slf4j");
+            put("org.mongodb.morphia/morphia", "https://github.com/mongodb/morphia");
+            put("com.google.guava/guava", "https://github.com/google/guava");
         }
     };
 
