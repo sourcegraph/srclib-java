@@ -39,3 +39,9 @@ cases in `testdata/case`.
 `make test` - Test in program mode
 
 `make test-gen` - Generate new test data in program mode
+
+
+## TODOs
+
+* Don't emit unresolved refs as refs to the same pkg
+* If running in Docker, use a m2-srclib directory not inside the repo if in Docker since the Docker source volume is readonly.
