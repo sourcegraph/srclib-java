@@ -52,7 +52,7 @@ for POM in $POMS; do
     echo $POM
 
     # reset before munging
-    git checkout -- "$POM"
+    cp "$POM" "$POM".bak
     
     remove_xml_comments "$POM"
     remove_other_compile_goal_plugins "$POM"
@@ -64,7 +64,7 @@ done
 mvn $1 $MVN_OPTS install -DskipTests || echo mvn installed failed but continuing
 
 for POM in $POMS; do
-    git checkout -- "$POM"
+    mv "$POM".bak "$POM"
     echo $POM .. reverted
 done
 
