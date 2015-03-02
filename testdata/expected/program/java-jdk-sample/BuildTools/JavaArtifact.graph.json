@@ -867,12 +867,6 @@
       "End": 1496
     },
     {
-      "DefPath": "build/tools/addjsum",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1234,
-      "End": 1241
-    },
-    {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
@@ -1069,15 +1063,6 @@
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2681,
       "End": 2686
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1256,
-      "End": 1258
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -1294,36 +1279,6 @@
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2021,
       "End": 2028
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util/regex",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1279,
-      "End": 1284
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1274,
-      "End": 1278
-    },
-    {
-      "DefPath": "java",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1251,
-      "End": 1255
-    },
-    {
-      "DefPath": "java",
-      "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1269,
-      "End": 1273
     }
   ],
   "Docs": [
