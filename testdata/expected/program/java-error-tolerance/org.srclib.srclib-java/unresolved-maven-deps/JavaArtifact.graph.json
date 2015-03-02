@@ -884,30 +884,6 @@
       "End": 49
     },
     {
-      "DefPath": "org/srclib/java",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
-      "Start": 19,
-      "End": 23
-    },
-    {
-      "DefPath": "org/srclib/java",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "Start": 19,
-      "End": 23
-    },
-    {
-      "DefPath": "org/srclib",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
-      "Start": 12,
-      "End": 18
-    },
-    {
-      "DefPath": "org/srclib",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
-      "Start": 12,
-      "End": 18
-    },
-    {
       "DefPath": "org",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 223,
