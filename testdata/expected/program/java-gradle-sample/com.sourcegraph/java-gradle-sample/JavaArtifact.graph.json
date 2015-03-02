@@ -1129,40 +1129,22 @@
       "End": 68
     },
     {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 20,
-      "End": 25
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/IBar.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
-      "DefPath": "mypkg",
+      "DefPath": "mypkg/subpkg",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
-      "Start": 8,
-      "End": 13
+      "Start": 14,
+      "End": 20
+    },
+    {
+      "DefPath": "mypkg/subpkg",
+      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
+      "Start": 14,
+      "End": 20
     },
     {
       "DefPath": "mypkg",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 30,
       "End": 35
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 8,
-      "End": 13
     }
   ],
   "Docs": [

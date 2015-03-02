@@ -867,10 +867,10 @@
       "End": 1496
     },
     {
-      "DefPath": "build",
+      "DefPath": "build/tools/addjsum",
       "File": "make/src/classes/build/tools/AddJsum.java",
-      "Start": 1222,
-      "End": 1227
+      "Start": 1234,
+      "End": 1241
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
