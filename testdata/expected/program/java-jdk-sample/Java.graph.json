@@ -61601,12 +61601,6 @@
       "End": 97044
     },
     {
-      "DefPath": "java/math",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1302,
-      "End": 1306
-    },
-    {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",

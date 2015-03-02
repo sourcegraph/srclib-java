@@ -94,8 +94,8 @@ public class MavenProject implements Project {
     private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) throws IOException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
 
-        // Use a directory not inside the repo if in Docker since the Docker source volume is readonly.
-        String repoDir = System.getenv("IN_DOCKER_CONTAINER") != null ? Files.createTempDirectory("srclib-java-m2").toString() : "target/local-repo";
+        // TODO(sqs): If running in Docker, use a directory not inside the repo if in Docker since the Docker source volume is readonly.
+        String repoDir = ".m2-srclib";
 
         LocalRepository localRepo = new LocalRepository(repoDir);
         session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));

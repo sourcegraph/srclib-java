@@ -2,29 +2,25 @@
   "Defs": [
     {
       "Path": "mypkg",
-      "TreePath": "mypkg",
       "Name": "mypkg",
       "Kind": "package",
       "File": "",
       "DefStart": 0,
       "DefEnd": 0,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
         "Package": "mypkg"
-      }
+      },
+      "TreePath": "mypkg"
     },
     {
       "Path": "mypkg/Container/:init",
-      "TreePath": "mypkg/Container/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 219,
       "DefEnd": 228,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -32,18 +28,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container/:init"
     },
     {
       "Path": "mypkg/Container:type",
-      "TreePath": "mypkg/Container:type",
       "Name": "Container",
       "Kind": "type",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 206,
       "DefEnd": 651,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.Container",
@@ -51,18 +46,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type"
     },
     {
       "Path": "mypkg/Container:type/F",
-      "TreePath": "mypkg/Container:type/F",
       "Name": "F",
       "Kind": "func",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 314,
       "DefEnd": 357,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()mypkg.Container.Inner",
@@ -70,18 +64,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type/F"
     },
     {
       "Path": "mypkg/Container:type/G",
-      "TreePath": "mypkg/Container:type/G",
       "Name": "G",
       "Kind": "func",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 360,
       "DefEnd": 649,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()void",
@@ -89,86 +82,81 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type/G"
     },
     {
       "Path": "mypkg/Container:type/G/firstName",
-      "TreePath": "mypkg/Container:type/G/firstName",
       "Name": "firstName",
       "Kind": "var",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 546,
       "DefEnd": 590,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/Container:type/G/firstName"
     },
     {
       "Path": "mypkg/Container:type/G/lastName",
-      "TreePath": "mypkg/Container:type/G/lastName",
       "Name": "lastName",
       "Kind": "var",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 500,
       "DefEnd": 542,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/Container:type/G/lastName"
     },
     {
       "Path": "mypkg/Container:type/G/record",
-      "TreePath": "mypkg/Container:type/G/record",
       "Name": "record",
       "Kind": "var",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 467,
       "DefEnd": 483,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "org.apache.commons.csv.CSVRecord",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/Container:type/G/record"
     },
     {
       "Path": "mypkg/Container:type/G/records",
-      "TreePath": "mypkg/Container:type/G/records",
       "Name": "records",
       "Kind": "var",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 399,
       "DefEnd": 459,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.Iterable\u003corg.apache.commons.csv.CSVRecord\u003e",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/Container:type/G/records"
     },
     {
       "Path": "mypkg/Container:type/Inner/:init",
-      "TreePath": "mypkg/Container:type/Inner/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 245,
       "DefEnd": 250,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -176,18 +164,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type/Inner/:init"
     },
     {
       "Path": "mypkg/Container:type/Inner:type",
-      "TreePath": "mypkg/Container:type/Inner:type",
       "Name": "Inner",
       "Kind": "type",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 232,
       "DefEnd": 311,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.Container.Inner",
@@ -195,18 +182,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type/Inner:type"
     },
     {
       "Path": "mypkg/Container:type/Inner:type/F",
-      "TreePath": "mypkg/Container:type/Inner:type/F",
       "Name": "F",
       "Kind": "func",
       "File": "src/main/java/mypkg/Container.java",
       "DefStart": 255,
       "DefEnd": 308,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()mypkg.Container",
@@ -214,18 +200,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/Container:type/Inner:type/F"
     },
     {
       "Path": "mypkg/FooClass/:init",
-      "TreePath": "mypkg/FooClass/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 149,
       "DefEnd": 157,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -233,18 +218,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass/:init"
     },
     {
       "Path": "mypkg/FooClass:type",
-      "TreePath": "mypkg/FooClass:type",
       "Name": "FooClass",
       "Kind": "type",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 136,
       "DefEnd": 650,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.FooClass",
@@ -252,18 +236,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type"
     },
     {
       "Path": "mypkg/FooClass:type/foo",
-      "TreePath": "mypkg/FooClass:type/foo",
       "Name": "foo",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 270,
       "DefEnd": 290,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "mypkg.FooClass",
@@ -271,18 +254,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/foo"
     },
     {
       "Path": "mypkg/FooClass:type/myInt",
-      "TreePath": "mypkg/FooClass:type/myInt",
       "Name": "myInt",
       "Kind": "func",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 510,
       "DefEnd": 580,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()int",
@@ -290,35 +272,32 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myInt"
     },
     {
       "Path": "mypkg/FooClass:type/myInt/len",
-      "TreePath": "mypkg/FooClass:type/myInt/len",
       "Name": "len",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 533,
       "DefEnd": 563,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "int",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myInt/len"
     },
     {
       "Path": "mypkg/FooClass:type/myIntegers",
-      "TreePath": "mypkg/FooClass:type/myIntegers",
       "Name": "myIntegers",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 293,
       "DefEnd": 352,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "java.util.List\u003cjava.lang.Integer\u003e",
@@ -326,18 +305,17 @@
         "Modifiers": [
           "final"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myIntegers"
     },
     {
       "Path": "mypkg/FooClass:type/myStatic",
-      "TreePath": "mypkg/FooClass:type/myStatic",
       "Name": "myStatic",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 161,
       "DefEnd": 188,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -346,18 +324,17 @@
           "public",
           "static"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myStatic"
     },
     {
       "Path": "mypkg/FooClass:type/myString",
-      "TreePath": "mypkg/FooClass:type/myString",
       "Name": "myString",
       "Kind": "func",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 583,
       "DefEnd": 648,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.lang.String",
@@ -365,18 +342,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myString"
     },
     {
       "Path": "mypkg/FooClass:type/myStringStatic",
-      "TreePath": "mypkg/FooClass:type/myStringStatic",
       "Name": "myStringStatic",
       "Kind": "func",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 191,
       "DefEnd": 267,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()java.lang.String",
@@ -385,35 +361,32 @@
           "public",
           "static"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myStringStatic"
     },
     {
       "Path": "mypkg/FooClass:type/myStringStatic/s",
-      "TreePath": "mypkg/FooClass:type/myStringStatic/s",
       "Name": "s",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 233,
       "DefEnd": 252,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "java.lang.String",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/myStringStatic/s"
     },
     {
       "Path": "mypkg/FooClass:type/numIntegers",
-      "TreePath": "mypkg/FooClass:type/numIntegers",
       "Name": "numIntegers",
       "Kind": "var",
       "File": "src/main/java/mypkg/FooClass.java",
       "DefStart": 354,
       "DefEnd": 396,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "FIELD",
         "TypeExpression": "int",
@@ -421,18 +394,17 @@
         "Modifiers": [
           "final"
         ]
-      }
+      },
+      "TreePath": "mypkg/FooClass:type/numIntegers"
     },
     {
       "Path": "mypkg/IBar:type",
-      "TreePath": "mypkg/IBar:type",
       "Name": "IBar",
       "Kind": "type",
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 16,
       "DefEnd": 69,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "INTERFACE",
         "TypeExpression": "mypkg.IBar",
@@ -440,67 +412,60 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/IBar:type"
     },
     {
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar",
-      "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar",
       "Name": "getFoo",
       "Kind": "func",
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 41,
       "DefEnd": 67,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "(mypkg.IBar)mypkg.FooClass",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar"
     },
     {
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
-      "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
       "Name": "bar",
       "Kind": "var",
       "File": "src/main/java/mypkg/IBar.java",
       "DefStart": 57,
       "DefEnd": 65,
-      "Exported": false,
-      "Local": false,
+      "Local": true,
       "Data": {
         "JavaKind": "PARAMETER",
         "TypeExpression": "mypkg.IBar",
         "Package": "mypkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar"
     },
     {
       "Path": "mypkg/subpkg",
-      "TreePath": "mypkg/subpkg",
       "Name": "subpkg",
       "Kind": "package",
       "File": "",
       "DefStart": 0,
       "DefEnd": 0,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "PACKAGE",
         "Package": "mypkg.subpkg"
-      }
+      },
+      "TreePath": "mypkg/subpkg"
     },
     {
       "Path": "mypkg/subpkg/QuxEnum/:init",
-      "TreePath": "mypkg/subpkg/QuxEnum/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 35,
       "DefEnd": 42,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -508,18 +473,17 @@
         "Modifiers": [
           "private"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/QuxEnum/:init"
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type",
-      "TreePath": "mypkg/subpkg/QuxEnum:type",
       "Name": "QuxEnum",
       "Kind": "type",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 23,
       "DefEnd": 61,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "ENUM",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -527,18 +491,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/QuxEnum:type"
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/AAA",
-      "TreePath": "mypkg/subpkg/QuxEnum:type/AAA",
       "Name": "AAA",
       "Kind": "var",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 46,
       "DefEnd": 49,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -548,18 +511,17 @@
           "static",
           "final"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/QuxEnum:type/AAA"
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/BBB",
-      "TreePath": "mypkg/subpkg/QuxEnum:type/BBB",
       "Name": "BBB",
       "Kind": "var",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 51,
       "DefEnd": 54,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -569,18 +531,17 @@
           "static",
           "final"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/QuxEnum:type/BBB"
     },
     {
       "Path": "mypkg/subpkg/QuxEnum:type/CCC",
-      "TreePath": "mypkg/subpkg/QuxEnum:type/CCC",
       "Name": "CCC",
       "Kind": "var",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "DefStart": 56,
       "DefEnd": 59,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "ENUM_CONSTANT",
         "TypeExpression": "mypkg.subpkg.QuxEnum",
@@ -590,18 +551,17 @@
           "static",
           "final"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/QuxEnum:type/CCC"
     },
     {
       "Path": "mypkg/subpkg/ZipClass/:init",
-      "TreePath": "mypkg/subpkg/ZipClass/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 60,
       "DefEnd": 68,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CONSTRUCTOR",
         "TypeExpression": "()void",
@@ -609,18 +569,17 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/ZipClass/:init"
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type",
-      "TreePath": "mypkg/subpkg/ZipClass:type",
       "Name": "ZipClass",
       "Kind": "type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 47,
       "DefEnd": 318,
       "Exported": true,
-      "Local": false,
       "Data": {
         "JavaKind": "CLASS",
         "TypeExpression": "mypkg.subpkg.ZipClass",
@@ -628,18 +587,16 @@
         "Modifiers": [
           "public"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/ZipClass:type"
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type/zap",
-      "TreePath": "mypkg/subpkg/ZipClass:type/zap",
       "Name": "zap",
       "Kind": "func",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 72,
       "DefEnd": 278,
-      "Exported": false,
-      "Local": false,
       "Data": {
         "JavaKind": "METHOD",
         "TypeExpression": "()void",
@@ -647,24 +604,24 @@
         "Modifiers": [
           "private"
         ]
-      }
+      },
+      "TreePath": "mypkg/subpkg/ZipClass:type/zap"
     },
     {
       "Path": "mypkg/subpkg/ZipClass:type/zap/foo",
-      "TreePath": "mypkg/subpkg/ZipClass:type/zap/foo",
       "Name": "foo",
       "Kind": "var",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "DefStart": 95,
       "DefEnd": 125,
-      "Exported": false,
       "Local": true,
       "Data": {
         "JavaKind": "LOCAL_VARIABLE",
         "TypeExpression": "mypkg.FooClass",
         "Package": "mypkg.subpkg",
         "Modifiers": []
-      }
+      },
+      "TreePath": "mypkg/subpkg/ZipClass:type/zap/foo"
     }
   ],
   "Refs": [
@@ -673,8 +630,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/IOException:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 114,
       "End": 125
@@ -684,8 +639,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/IOException:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 383,
       "End": 394
@@ -695,8 +648,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/InputStreamReader:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 142,
       "End": 159
@@ -706,8 +657,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 605,
       "End": 612
@@ -717,8 +666,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 421,
       "End": 428
@@ -728,8 +675,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 139,
       "End": 146
@@ -739,8 +684,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 177,
       "End": 184
@@ -750,8 +693,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 230,
       "End": 237
@@ -761,8 +702,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io/Reader:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 176,
       "End": 182
@@ -772,8 +711,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 111,
       "End": 113
@@ -783,8 +720,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 139,
       "End": 141
@@ -794,8 +729,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/io",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 173,
       "End": 175
@@ -805,8 +738,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type/toString:int",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 193,
       "End": 201
@@ -816,8 +747,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type/toString:int",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 246,
       "End": 254
@@ -827,8 +756,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 304,
       "End": 311
@@ -838,8 +765,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 340,
       "End": 347
@@ -849,8 +774,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 185,
       "End": 192
@@ -860,8 +783,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Integer:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 238,
       "End": 245
@@ -871,8 +792,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/Iterable:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 399,
       "End": 407
@@ -882,8 +801,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type/length",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 554,
       "End": 560
@@ -893,8 +810,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 500,
       "End": 506
@@ -904,8 +819,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 546,
       "End": 552
@@ -915,8 +828,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 205,
       "End": 211
@@ -926,8 +837,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 233,
       "End": 239
@@ -937,8 +846,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/String:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 590,
       "End": 596
@@ -948,8 +855,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type/out",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 601,
       "End": 604
@@ -959,8 +864,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type/out",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 417,
       "End": 420
@@ -970,8 +873,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type/out",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 135,
       "End": 138
@@ -981,8 +882,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type/out",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 173,
       "End": 176
@@ -992,8 +891,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type/out",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 226,
       "End": 229
@@ -1003,8 +900,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 594,
       "End": 600
@@ -1014,8 +909,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 410,
       "End": 416
@@ -1025,8 +918,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 128,
       "End": 134
@@ -1036,8 +927,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 166,
       "End": 172
@@ -1047,8 +936,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/lang/System:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 219,
       "End": 225
@@ -1058,8 +945,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/net/URL:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 200,
       "End": 203
@@ -1069,8 +954,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/net",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 196,
       "End": 199
@@ -1080,8 +963,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util/ArrayList:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 330,
       "End": 339
@@ -1091,8 +972,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util/ArrayList:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 45,
       "End": 54
@@ -1102,8 +981,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util/List:type/size",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 389,
       "End": 393
@@ -1113,8 +990,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util/List:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 299,
       "End": 303
@@ -1124,8 +999,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util/List:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 73,
       "End": 77
@@ -1135,8 +1008,6 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 40,
       "End": 44
@@ -1146,800 +1017,467 @@
       "DefUnitType": "Java",
       "DefUnit": ".",
       "DefPath": "java/util",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 68,
       "End": 72
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 106,
       "End": 110
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 134,
       "End": 138
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 168,
       "End": 172
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 191,
       "End": 195
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 35,
       "End": 39
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "java",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 63,
       "End": 67
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/F",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 327,
       "End": 328
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/firstName",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 553,
       "End": 562
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/firstName",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 631,
       "End": 640
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/lastName",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 507,
       "End": 515
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/lastName",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 613,
       "End": 621
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/record",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 477,
       "End": 483
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/record",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 518,
       "End": 524
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/record",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 565,
       "End": 571
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/records",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 419,
       "End": 426
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G/records",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 486,
       "End": 493
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/G",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 372,
       "End": 373
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/Inner:type/F",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 272,
       "End": 273
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/Inner:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 245,
       "End": 250
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/Inner:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 321,
       "End": 326
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type/Inner:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 346,
       "End": 351
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 219,
       "End": 228
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 262,
       "End": 271
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/Container:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 292,
       "End": 301
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/foo",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 286,
       "End": 289
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myInt/len",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 537,
       "End": 540
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myInt/len",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 573,
       "End": 576
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myIntegers",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 313,
       "End": 323
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myIntegers",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 378,
       "End": 388
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myInt",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 521,
       "End": 526
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myInt",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 206,
       "End": 211
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStatic",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 179,
       "End": 187
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStatic",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 264,
       "End": 272
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStringStatic/s",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 240,
       "End": 241
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStringStatic/s",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 262,
       "End": 263
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStringStatic",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 212,
       "End": 226
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myStringStatic",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 628,
       "End": 642
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myString",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 543,
       "End": 551
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myString",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 597,
       "End": 605
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/myString",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 151,
       "End": 159
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type/numIntegers",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 364,
       "End": 375
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 149,
       "End": 157
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 277,
       "End": 285
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 619,
       "End": 627
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 41,
       "End": 49
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 114,
       "End": 122
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 255,
       "End": 263
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 36,
       "End": 44
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/FooClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 95,
       "End": 103
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 62,
       "End": 65
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/IBar:type/getFoo:mypkg.IBar",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 50,
       "End": 56
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/IBar:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 33,
       "End": 37
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/IBar:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 57,
       "End": 61
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/QuxEnum:type/AAA",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 46,
       "End": 49
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/QuxEnum:type/BBB",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 51,
       "End": 54
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/QuxEnum:type/CCC",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 56,
       "End": 59
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/QuxEnum:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 35,
       "End": 42
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 104,
       "End": 107
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 147,
       "End": 150
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 202,
       "End": 205
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 307,
       "End": 310
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 85,
       "End": 88
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 296,
       "End": 304
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg/ZipClass:type",
       "Def": true,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 60,
       "End": 68
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 14,
       "End": 20
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg/subpkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 14,
       "End": 20
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 8,
       "End": 13
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 20,
       "End": 25
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 8,
       "End": 13
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
       "Start": 8,
       "End": 13
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 30,
       "End": 35
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "mypkg",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 8,
       "End": 13
@@ -1949,8 +1487,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type/DEFAULT",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 439,
       "End": 446
@@ -1960,8 +1496,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type/parse:java.io.Reader",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 447,
       "End": 452
@@ -1971,8 +1505,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 429,
       "End": 438
@@ -1982,8 +1514,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 46,
       "End": 55
@@ -1993,8 +1523,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 525,
       "End": 528
@@ -2004,8 +1532,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 572,
       "End": 575
@@ -2015,8 +1541,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 408,
       "End": 417
@@ -2026,8 +1550,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 467,
       "End": 476
@@ -2037,8 +1559,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 87,
       "End": 96
@@ -2048,8 +1568,6 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 42,
       "End": 45
@@ -2059,74 +1577,42 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 83,
       "End": 86
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org/apache/commons",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 34,
       "End": 41
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org/apache/commons",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 75,
       "End": 82
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org/apache",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 27,
       "End": 33
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org/apache",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 68,
       "End": 74
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 23,
       "End": 26
     },
     {
-      "DefRepo": "",
-      "DefUnitType": "",
-      "DefUnit": "",
       "DefPath": "org",
-      "Def": false,
-      "Repo": "",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 64,
       "End": 67
@@ -2137,17 +1623,13 @@
       "Path": "mypkg/FooClass:type",
       "Format": "text/html",
       "Data": " FooClass is a class.\n \n @author Fred\n \n",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 0,
-      "End": 0
+      "File": "src/main/java/mypkg/FooClass.java"
     },
     {
       "Path": "mypkg/FooClass:type/myInt",
       "Format": "text/html",
       "Data": " myInt is a method.\n \n @return an awesome int\n",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 0,
-      "End": 0
+      "File": "src/main/java/mypkg/FooClass.java"
     }
   ]
 }

@@ -1435,18 +1435,6 @@
       "End": 68
     },
     {
-      "DefPath": "mypkg/subpkg",
-      "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
-      "Start": 14,
-      "End": 20
-    },
-    {
-      "DefPath": "mypkg/subpkg",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 14,
-      "End": 20
-    },
-    {
       "DefPath": "mypkg",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 8,
