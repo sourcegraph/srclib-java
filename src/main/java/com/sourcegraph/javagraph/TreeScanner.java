@@ -253,8 +253,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     public Void visitCompilationUnit(CompilationUnitTree node, Void p) {
         scanPackageName(node.getPackageName());
 
-        for (Tree t : node.getImports()) {
-            scan(t, p);
+        for (ImportTree t : node.getImports()) {
+            scanPackageName(t);
         }
         for (Tree t : node.getTypeDecls()) {
             scan(t, p);
@@ -274,7 +274,16 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             public void writePackageName(String qualName, String simpleName,
                                          Tree node) {
 // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
-                emitRef(spans.name(simpleName, node), new DefKey(null, qualName), false);
+                TreePath p = getCurrentPath();
+                if (p == null) return;
+                Element e = trees.getElement(p);
+                if (e == null) return;
+                JavaFileObject f = Origins.forElement(e);
+                URI defOrigin = null;
+                if (f != null) {
+                    defOrigin = f.toUri();
+                }
+                emitRef(spans.name(simpleName, node), new DefKey(defOrigin, qualName + ":type"), false);
             }
         }.scan(pkgName, null);
     }
