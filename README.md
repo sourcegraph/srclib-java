@@ -17,6 +17,13 @@ https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.
 for a description of the problem and a workaround. Build instructions for
 OpenJDK 8 are here: http://openjdk.java.net/projects/build-infra/guide.html.
 
+See the Dockerfile for how to check out the right version of jdk8u and
+apply the patch.
+
+You'll probably be able to use your system JDK without this patch on
+most projects; only follow those steps if you see NPEs in the javac
+API.
+
 ## Building
 
 srclib-java can be build and registered with the following two commands:
