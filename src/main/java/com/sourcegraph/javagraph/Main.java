@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         String version = Manifests.read("Javagraph-Version");
-        System.err.println("Using javagraph version '" + version + "'");
+        System.err.println("Using srclib-java version '" + version + "'");
 
         JCommander jc = new JCommander();
 
