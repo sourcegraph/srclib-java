@@ -1,0 +1,34 @@
+[
+  {
+    "Raw": {
+      "groupID": "org.sonatype.mavenbook.multi",
+      "artifactID": "simple-weather",
+      "version": "${project.version}"
+    },
+    "Target": {
+      "ToUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "${project.version}"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "org.apache.geronimo.specs",
+      "artifactID": "geronimo-servlet_2.4_spec",
+      "version": "1.1.1"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://svn.apache.org/repos/asf/geronimo/specs/tags/geronimo-servlet_2.4_spec-1.1.1",
+      "ToUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.1.1"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "ToUnit": ".",
+      "ToUnitType": "Java"
+    }
+  }
+]
