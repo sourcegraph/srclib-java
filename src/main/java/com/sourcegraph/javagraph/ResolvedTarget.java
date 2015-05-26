@@ -48,4 +48,14 @@ class ResolvedTarget {
         result = 31 * result + (ToVersionString != null ? ToVersionString.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ResolvedTarget{" +
+                "ToRepoCloneURL='" + ToRepoCloneURL + '\'' +
+                ", ToUnit='" + ToUnit + '\'' +
+                ", ToUnitType='" + ToUnitType + '\'' +
+                ", ToVersionString='" + ToVersionString + '\'' +
+                '}';
+    }
 }

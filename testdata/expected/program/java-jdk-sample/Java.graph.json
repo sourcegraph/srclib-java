@@ -15291,42 +15291,6 @@
       "DefUnit": ".",
       "DefPath": "java/io",
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1321,
-      "End": 1323
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1349,
-      "End": 1351
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1383,
-      "End": 1385
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1418,
-      "End": 1420
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 154843,
       "End": 154845
     },
@@ -61601,12 +61565,6 @@
       "End": 97044
     },
     {
-      "DefPath": "java/math",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1302,
-      "End": 1306
-    },
-    {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
@@ -61889,15 +61847,6 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
-      "DefPath": "java/util/concurrent",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1507,
-      "End": 1517
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
       "DefPath": "java/util",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 144160,
@@ -61911,33 +61860,6 @@
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 144620,
       "End": 144624
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1452,
-      "End": 1456
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1477,
-      "End": 1481
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1502,
-      "End": 1506
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -61960,36 +61882,6 @@
     {
       "DefPath": "java",
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1297,
-      "End": 1301
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1316,
-      "End": 1320
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1344,
-      "End": 1348
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1378,
-      "End": 1382
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1413,
-      "End": 1417
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 144155,
       "End": 144159
     },
@@ -61998,24 +61890,6 @@
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 144615,
       "End": 144619
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1447,
-      "End": 1451
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1472,
-      "End": 1476
-    },
-    {
-      "DefPath": "java",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1497,
-      "End": 1501
     },
     {
       "DefPath": "java",
@@ -62326,15 +62200,6 @@
       "DefUnit": ".",
       "DefPath": "sun/misc",
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1548,
-      "End": 1552
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "sun/misc",
-      "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 156910,
       "End": 156914
     },
@@ -62348,21 +62213,6 @@
       "End": 157091
     },
     {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "sun/misc",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1578,
-      "End": 1582
-    },
-    {
-      "DefPath": "sun",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1544,
-      "End": 1547
-    },
-    {
       "DefPath": "sun",
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 156906,
@@ -62373,12 +62223,6 @@
       "File": "src/share/classes/java/math/BigInteger.java",
       "Start": 157083,
       "End": 157086
-    },
-    {
-      "DefPath": "sun",
-      "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 1574,
-      "End": 1577
     }
   ],
   "Docs": [

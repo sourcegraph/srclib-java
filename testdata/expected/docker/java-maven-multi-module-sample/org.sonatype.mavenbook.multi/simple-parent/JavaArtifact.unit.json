@@ -1,0 +1,1 @@
+{"Name":"org.sonatype.mavenbook.multi/simple-parent","Type":"JavaArtifact","Repo":"github.com/sgtest/java-maven-multi-module-sample","Dir":".","Dependencies":[{"artifactID":"junit","groupID":"junit","scope":"test","version":"3.8.1"}],"Data":{"POMFile":"./pom.xml"}}

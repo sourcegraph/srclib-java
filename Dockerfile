@@ -6,7 +6,7 @@ RUN apt-get install -qq curl git python-software-properties software-properties-
 
 # Install Java 8 (to bootstrap building our own one, below)
 RUN add-apt-repository ppa:webupd8team/java
-RUN apt-get update -qq
+RUN apt-get update -qq && echo 2015-03-02
 # auto accept oracle jdk license
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN apt-get install -y oracle-java8-installer
@@ -18,6 +18,11 @@ RUN hg clone http://hg.openjdk.java.net/jdk8u/jdk8u /tmp/jdk8u-build
 WORKDIR /tmp/jdk8u-build
 # Really get jdk8u (otherwise get_source.sh gets jdk8 not jdk8u subrepos)
 RUN bash ./get_source.sh
+
+# Apply a patch to fix an issue in the javac API
+ADD ./hg-27bb4-javac-jdk8u-langtools.patch /tmp/hg-27bb4-javac-jdk8u-langtools.patch
+RUN cd langtools && hg pull -r 27bb4c63fd70 && hg update -r 27bb4c63fd70 && patch -p1 < /tmp/hg-27bb4-javac-jdk8u-langtools.patch
+
 RUN apt-get install -qq unzip build-essential zip libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libasound2-dev libfreetype6-dev
 RUN mkdir -p /srclib
 # Explicitly specify freetype dirs due to bug http://mail.openjdk.java.net/pipermail/build-dev/2013-October/010874.html.
