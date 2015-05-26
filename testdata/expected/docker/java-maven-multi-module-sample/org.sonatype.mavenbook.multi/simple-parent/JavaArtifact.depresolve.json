@@ -1,0 +1,23 @@
+[
+  {
+    "Raw": {
+      "groupID": "junit",
+      "artifactID": "junit",
+      "version": "3.8.1",
+      "scope": "test"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/junit-team/junit",
+      "ToUnit": "junit/junit",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.8.1"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "ToUnit": ".",
+      "ToUnitType": "Java"
+    }
+  }
+]

@@ -1,22 +1,21 @@
 package com.sourcegraph.javagraph;
 
-import com.sun.source.tree.IdentifierTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.util.TreePathScanner;
 
+import javax.lang.model.SourceVersion;
+
 public abstract class PackageNameScanner extends TreePathScanner<Void, Void> {
     @Override
-    public Void visitIdentifier(IdentifierTree node, Void p) {
-        writePackageName(node.toString(), node.toString(), node);
-        super.visitIdentifier(node, p);
-        return null;
-    }
-
-    @Override
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
-        writePackageName(node.toString(), node.getIdentifier().toString(), node);
-        super.visitMemberSelect(node, p);
+        if (SourceVersion.isIdentifier(node.getIdentifier())) {
+            try {
+                writePackageName(node.toString(), node.getIdentifier().toString(), node);
+            } catch (Spans.SpanException e) {
+                System.err.println("SpanException: " + e.getMessage());
+            }
+        }
         return null;
     }
 

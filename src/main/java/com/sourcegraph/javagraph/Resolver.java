@@ -4,7 +4,9 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -63,6 +65,7 @@ public class Resolver {
             resolvedOrigins.put(origin, null);
             return null;
         }
+        // System.err.println("## Resolved " + rawDep.toString() + " to " + res.toString());
         resolvedOrigins.put(origin, res.Target);
         return res.Target;
     }
@@ -104,6 +107,9 @@ public class Resolver {
                     "https://github.com/douglascrockford/JSON-java");
             put("junit/junit", "https://github.com/junit-team/junit");
             put("org.apache.commons/commons-csv", "https://github.com/apache/commons-csv");
+            put("org.slf4j/slf4j-api", "https://github.com/qos-ch/slf4j");
+            put("org.mongodb.morphia/morphia", "https://github.com/mongodb/morphia");
+            put("com.google.guava/guava", "https://github.com/google/guava");
         }
     };
 
@@ -126,6 +132,26 @@ public class Resolver {
      * could not be performed.
      */
     public DepResolution resolveRawDep(RawDependency d) {
+        // HACK: Assume that if the groupID of the RawDependency equals the groupID of the current project, then it is from the same repo and shouldn't be resolved externally.
+        if (this.proj instanceof MavenProject) {
+            MavenProject mvnProj = (MavenProject)this.proj;
+            String depGroupID = null;
+            try {
+                depGroupID = mvnProj.getMavenProject().getGroupId();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            }
+            if (depGroupID != null && depGroupID.equals(d.groupID)) {
+                ResolvedTarget target = new ResolvedTarget();
+                target.ToUnit = d.groupID + "/" + d.artifactID;
+                target.ToUnitType = "JavaArtifact";
+                target.ToVersionString = d.version;
+                return new DepResolution(d, target);
+            }
+        }
+
         // Get the url to the POM file for this artifact
         String url = "http://central.maven.org/maven2/"
                 + d.groupID.replace(".", "/") + "/" + d.artifactID + "/"

@@ -17,6 +17,13 @@ https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.
 for a description of the problem and a workaround. Build instructions for
 OpenJDK 8 are here: http://openjdk.java.net/projects/build-infra/guide.html.
 
+See the Dockerfile for how to check out the right version of jdk8u and
+apply the patch.
+
+You'll probably be able to use your system JDK without this patch on
+most projects; only follow those steps if you see NPEs in the javac
+API.
+
 ## Building
 
 srclib-java can be build and registered with the following two commands:
@@ -32,3 +39,9 @@ cases in `testdata/case`.
 `make test` - Test in program mode
 
 `make test-gen` - Generate new test data in program mode
+
+
+## TODOs
+
+* Don't emit unresolved refs as refs to the same pkg
+* If running in Docker, use a m2-srclib directory not inside the repo if in Docker since the Docker source volume is readonly.

@@ -710,33 +710,6 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 111,
-      "End": 113
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 139,
-      "End": 141
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/io",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 173,
-      "End": 175
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
       "DefPath": "java/lang/Integer:type/toString:int",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 193,
@@ -953,15 +926,6 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
-      "DefPath": "java/net",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 196,
-      "End": 199
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
       "DefPath": "java/util/ArrayList:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 330,
@@ -1002,60 +966,6 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 73,
       "End": 77
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 40,
-      "End": 44
-    },
-    {
-      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "DefUnitType": "Java",
-      "DefUnit": ".",
-      "DefPath": "java/util",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 68,
-      "End": 72
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 106,
-      "End": 110
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 134,
-      "End": 138
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 168,
-      "End": 172
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 191,
-      "End": 195
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 35,
-      "End": 39
-    },
-    {
-      "DefPath": "java",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 63,
-      "End": 67
     },
     {
       "DefPath": "mypkg/Container:type/F",
@@ -1435,54 +1345,6 @@
       "End": 68
     },
     {
-      "DefPath": "mypkg/subpkg",
-      "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
-      "Start": 14,
-      "End": 20
-    },
-    {
-      "DefPath": "mypkg/subpkg",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 14,
-      "End": 20
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 20,
-      "End": 25
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/IBar.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 30,
-      "End": 35
-    },
-    {
-      "DefPath": "mypkg",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 8,
-      "End": 13
-    },
-    {
       "DefRepo": "github.com/apache/commons-csv",
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-csv",
@@ -1562,60 +1424,6 @@
       "File": "src/main/java/mypkg/Container.java",
       "Start": 87,
       "End": 96
-    },
-    {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
-      "DefPath": "org/apache/commons/csv",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 42,
-      "End": 45
-    },
-    {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
-      "DefPath": "org/apache/commons/csv",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 83,
-      "End": 86
-    },
-    {
-      "DefPath": "org/apache/commons",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 34,
-      "End": 41
-    },
-    {
-      "DefPath": "org/apache/commons",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 75,
-      "End": 82
-    },
-    {
-      "DefPath": "org/apache",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 27,
-      "End": 33
-    },
-    {
-      "DefPath": "org/apache",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 68,
-      "End": 74
-    },
-    {
-      "DefPath": "org",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 23,
-      "End": 26
-    },
-    {
-      "DefPath": "org",
-      "File": "src/main/java/mypkg/Container.java",
-      "Start": 64,
-      "End": 67
     }
   ],
   "Docs": [

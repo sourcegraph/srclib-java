@@ -31,4 +31,12 @@ class DepResolution {
         result = 31 * result + (Error != null ? this.Error.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DepResolution{" +
+                "Target=" + Target +
+                ", Error='" + Error + '\'' +
+                '}';
+    }
 }

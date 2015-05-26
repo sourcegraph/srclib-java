@@ -15,9 +15,7 @@ import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.impl.DefaultServiceLocator;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.repository.RemoteRepository;
-import org.eclipse.aether.resolution.ArtifactRequest;
-import org.eclipse.aether.resolution.ArtifactResolutionException;
-import org.eclipse.aether.resolution.ArtifactResult;
+import org.eclipse.aether.resolution.*;
 import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
@@ -91,10 +89,13 @@ public class MavenProject implements Project {
         return locator.getService(RepositorySystem.class);
     }
 
-    private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) {
+    private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) throws IOException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
 
-        LocalRepository localRepo = new LocalRepository("target/local-repo");
+        // TODO(sqs): If running in Docker, use a directory not inside the repo if in Docker since the Docker source volume is readonly.
+        String repoDir = ".m2-srclib";
+
+        LocalRepository localRepo = new LocalRepository(repoDir);
         session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
 
         return session;
@@ -133,12 +134,34 @@ public class MavenProject implements Project {
                 System.err.println("Maven: resolving dependency " + d.toString());
 
                 Artifact artifact = new DefaultArtifact(d.getGroupId(), d.getArtifactId(), d.getClassifier(), "jar", d.getVersion());
-                ArtifactRequest artifactRequest = new ArtifactRequest();
-                artifactRequest.setArtifact(artifact);
-                artifactRequest.setRepositories(newRepositories(system, session));
+
+                List<RemoteRepository> repos = newRepositories(system, session);
+
+                try {
+                    VersionRangeResult versionResult = null;
+                    VersionRangeRequest versionRequest = new VersionRangeRequest();
+                    versionRequest.setArtifact(artifact);
+                    versionRequest.setRepositories(repos);
+                    versionResult = system.resolveVersionRange(session, versionRequest);
+                    String resolvedVersion = versionResult.getHighestVersion().toString();
+                    if (!resolvedVersion.equals(artifact.getVersion())) {
+                        System.err.println("Resolved version for artifact " + artifact + ": " + resolvedVersion);
+                        artifact.setVersion(versionResult.getHighestVersion().toString());
+                    }
+                } catch (VersionRangeResolutionException e) {
+                    System.err.println("Failed to resolve version for artifact " + artifact + ": " + e.toString());
+                    continue;
+                }
+
+                if (artifact.getVersion().equals("${project.version}")) {
+                    artifact = artifact.setVersion(getMavenProject().getVersion());
+                }
 
                 ArtifactResult artifactResult = null;
                 try {
+                    ArtifactRequest artifactRequest = new ArtifactRequest();
+                    artifactRequest.setArtifact(artifact);
+                    artifactRequest.setRepositories(repos);
                     artifactResult = system.resolveArtifact(session, artifactRequest);
                 } catch (ArtifactResolutionException e) {
                     System.err.println("Dependency " + artifact + " failed to resolve: " + e.toString());
