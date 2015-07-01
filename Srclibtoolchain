@@ -24,5 +24,21 @@
         "Java"
       ]
     }
-  ]
+  ],
+  "Bundle": {
+    "Paths": [
+      "Srclibtoolchain",
+      ".bin",
+      ".bin/srclib-java",
+      ".bin/srclib-java.jar",
+      "bundled-jdk/"
+    ],
+    "Commands": [
+      "make .bin/srclib-java.jar",
+      "make bundled-jdk"
+    ],
+    "Variants": [
+      {"jdk": "1.8"}
+    ]
+  }
 }
