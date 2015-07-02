@@ -41,7 +41,31 @@ cases in `testdata/case`.
 `make test-gen` - Generate new test data in program mode
 
 
+## Release and packaging
+
+srclib-java requires Java 8 to build and run. To allow it to run on
+systems that don't have Java 8 installed or activated by default, it
+can be bundled with a Java 8 JRE.
+
+Currently this process requires tedious manual effort; fixing it is
+noted as a TODO.
+
+The bundled JREs should be present in the `bundled-jdk` directory. The
+`.bin/srclib-java` script checks for their existence and uses the
+bundled JRE for the current platform, if it exists.
+
+Running `make bundled-jdk` downloads and unarchives the bundled JREs
+from S3. If you are producing a new srclib-java release, then you MUST
+make sure the srclib-java toolchain bundle contains these bundled JREs.
+
+If you need to update the versions of the bundled JREs or add some for
+other platforms, edit the `.bin/srclib-java` script and the
+`Makefile`. These files contain hardcoded lists of platforms and JDK
+versions that you'll need to update.
+
+
 ## TODOs
 
 * Don't emit unresolved refs as refs to the same pkg
 * If running in Docker, use a m2-srclib directory not inside the repo if in Docker since the Docker source volume is readonly.
+* Simplify the Java 8 JRE bundling process
