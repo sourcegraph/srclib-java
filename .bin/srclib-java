@@ -2,4 +2,26 @@
 
 unset CDPATH
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+JDK_VERSION="jdk1.8.0_45" # keep this version string in sync with Makefile
+
+# Use bundled JRE for the current platform if present. Otherwise fall
+# back to the system JRE.
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    OSTYPE_SHORT="linux"
+	JRE_BINDIR="bin"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    OSTYPE_SHORT="darwin"
+	JRE_BINDIR="Contents/Home/bin"
+fi
+if [ -n "$OSTYPE_SHORT" ]; then
+	JRE_DIR="$DIR"/../bundled-jdk/"$JDK_VERSION".ARCH-amd64_OS-"$OSTYPE_SHORT"
+	if [ -d "$JRE_DIR" ]; then
+		PATH="$JRE_DIR"/"$JRE_BINDIR":$PATH
+		>&2 echo "## Using bundled JRE at $JRE_DIR."
+	else
+		>&2 echo "## No bundled JRE found at $JRE_DIR; using system JRE."
+	fi
+fi
+
 java -Xmx4g -jar "$DIR/srclib-java.jar" "$@"
