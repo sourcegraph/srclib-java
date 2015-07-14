@@ -15,6 +15,8 @@ public class ScanCommand {
     public static final String JDK_REPO = "hg.openjdk.java.net/jdk8/jdk8/jdk";
     public static final String JDK_TEST_REPO = "github.com/sgtest/java-jdk-sample";
     public static final String ANDROID_SDK_REPO = "android.googlesource.com/platform/frameworks/base";
+    public static final String TOOLS_JAR_REPO = "http://hg.openjdk.java.net/jdk8/jdk8/langtools";
+    public static final String NASHORN_REPO = "http://hg.openjdk.java.net/jdk8/jdk8/nashorn";
 
 
     public void Execute() {

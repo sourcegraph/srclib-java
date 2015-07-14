@@ -70,7 +70,7 @@ public class Def {
             JsonObject object = new JsonObject();
 
             if (sym.file != null)
-                object.add("File", new JsonPrimitive(sym.file));
+                object.add("File", new JsonPrimitive(PathUtil.normalize(sym.file)));
 
             object.add("Name", new JsonPrimitive(sym.name));
 

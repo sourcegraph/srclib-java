@@ -55,6 +55,7 @@ public class ScanUtil {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     String filename = file.toString();
                     if (filename.endsWith(".java")) {
+                        filename = PathUtil.normalize(filename);
                         if (filename.startsWith("./"))
                             filename = filename.substring(2);
                         files.add(filename);

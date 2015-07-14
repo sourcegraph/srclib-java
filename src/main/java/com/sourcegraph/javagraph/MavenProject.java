@@ -3,8 +3,10 @@ package com.sourcegraph.javagraph;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
+import org.apache.maven.model.Repository;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
+import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
@@ -101,9 +103,15 @@ public class MavenProject implements Project {
         return session;
     }
 
-    private static List<RemoteRepository> newRepositories(RepositorySystem system, RepositorySystemSession session) {
-        // TODO(sqs): get remote repositories specified in pom.xml
-        return new ArrayList<RemoteRepository>(Arrays.asList(newCentralRepository()));
+    private List<RemoteRepository> newRepositories(RepositorySystem system, RepositorySystemSession session)
+            throws IOException, XmlPullParserException {
+        List<RemoteRepository> repositories = new ArrayList<>();
+        repositories.add(newCentralRepository());
+        for (Repository repository : getMavenProject().getRepositories()) {
+            repositories.add(new RemoteRepository.Builder(repository.getId(), "default", repository.getUrl()).
+                    build());
+        }
+        return repositories;
     }
 
     private static RemoteRepository newCentralRepository() {
@@ -130,12 +138,12 @@ public class MavenProject implements Project {
 //        }
 
             List<Dependency> deps = getMavenProject().getDependencies();
+            List<RemoteRepository> repos = newRepositories(system, session);
+
             for (Dependency d : deps) {
                 System.err.println("Maven: resolving dependency " + d.toString());
 
                 Artifact artifact = new DefaultArtifact(d.getGroupId(), d.getArtifactId(), d.getClassifier(), "jar", d.getVersion());
-
-                List<RemoteRepository> repos = newRepositories(system, session);
 
                 try {
                     VersionRangeResult versionResult = null;
@@ -282,16 +290,30 @@ public class MavenProject implements Project {
         final SourceUnit unit = new SourceUnit();
 
         // Add POMFile so we can open the corresponding Maven project.
-        unit.Data.put("POMFile", pomFile.toString());
+        unit.Data.put("POMFile", PathUtil.normalize(pomFile.toString()));
 
         BuildAnalysis.POMAttrs attrs = proj.getPOMAttrs();
         unit.Type = "JavaArtifact";
         unit.Name = attrs.groupID + "/" + attrs.artifactID;
-        unit.Dir = pomFile.getParent().toString();
+        unit.Dir = PathUtil.normalize(pomFile.getParent().toString());
         unit.Data.put("Description", attrs.description);
 
-        // TODO: Java source files can be other places './src'
-        unit.Files = ScanUtil.findAllJavaFiles(pomFile.getParent().resolve("src"));
+        Set<String> files = new HashSet<>();
+        List<String> sourceRoots = proj.getMavenProject().getCompileSourceRoots();
+        Path root = pomFile.getParent().toAbsolutePath().normalize();
+
+        getSourceFiles(files, sourceRoots, root);
+        String sourceRoot = proj.getMavenProject().getBuild().getSourceDirectory();
+        if (!sourceRoots.contains(sourceRoot)) {
+            getSourceFiles(files, Collections.singletonList(sourceRoot), root);
+        }
+        sourceRoots = proj.getMavenProject().getTestCompileSourceRoots();
+        getSourceFiles(files, sourceRoots, root);
+        sourceRoot = proj.getMavenProject().getBuild().getTestSourceDirectory();
+        if (!sourceRoots.contains(sourceRoot)) {
+            getSourceFiles(files, Collections.singletonList(sourceRoot), root);
+        }
+        unit.Files = new LinkedList<>(files);
         unit.sortFiles();
 
         unit.Dependencies = new ArrayList<>(proj.listDeps());
@@ -312,4 +334,31 @@ public class MavenProject implements Project {
         }
         return units;
     }
+
+    /**
+     * Retrieves all source files in Maven project
+     * @param files set to fill with the data
+     * @param sourceRoots list of source roots to search in, i.e. compile source roots, test compile source roots
+     * @param basePath base path to produce relative entries,
+     *                 i.e. basePath = /foo/ and current path = /foo/bar gives "bar"
+     */
+    private static void getSourceFiles(Set<String> files,
+                                       List<String> sourceRoots,
+                                       Path basePath) {
+        for (String sourceRoot: sourceRoots) {
+            if (sourceRoot == null) {
+                continue;
+            }
+            Path path = basePath.resolve(sourceRoot);
+            final DirectoryScanner directoryScanner = new DirectoryScanner();
+            directoryScanner.setIncludes(new String[]{"**/*.java"});
+            directoryScanner.setExcludes(null);
+            directoryScanner.setBasedir(sourceRoot);
+            directoryScanner.scan();
+            for (String fileName : directoryScanner.getIncludedFiles()) {
+                files.add(PathUtil.normalize(basePath.relativize(path.resolve(fileName)).toString()));
+            }
+        }
+    }
+
 }
