@@ -1,5 +1,6 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import java.io.File;
@@ -22,24 +23,29 @@ public class GradleProject implements Project {
         return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).classPath;
     }
 
-    // TODO Merge this function with ‘getGradleDependencies’.
-    public static BuildAnalysis.POMAttrs getGradleAttrs(String repoURI, Path build) throws IOException {
-        BuildAnalysis.POMAttrs attrs = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).attrs;
+    // TODO Merge this function with "getGradleDependencies".
+    public static BuildAnalysis.BuildInfo getGradleAttrs(String repoURI, Path build) throws IOException {
+        BuildAnalysis.BuildInfo ret = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build);
 
         // HACK: fix the project name inside docker containers. By default, the name of a Gradle project is the name
         // of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
         // every Gradle project rooted at the VCS root directory "src". This hack could erroneously change the project
         // name if the name is actually supposed to be "src" (e.g., if the name is set manually).
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null && attrs.artifactID.equals("src")) {
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null && ret.attrs.artifactID.equals("src")) {
             String[] parts = repoURI.split("/");
-            attrs.artifactID = parts[parts.length - 1];
+            ret.attrs.artifactID = parts[parts.length - 1];
         }
 
-        return attrs;
+        return ret;
     }
 
     public static Path getWrapper() {
-        Path result = Paths.get("./gradlew").toAbsolutePath();
+        Path result;
+        if (SystemUtils.IS_OS_WINDOWS) {
+            result = Paths.get("./gradlew.bat").toAbsolutePath();
+        } else {
+            result = Paths.get("./gradlew").toAbsolutePath();
+        }
         File tmp = new File(result.toString());
         if (tmp.exists() && !tmp.isDirectory()) {
             return result;
@@ -68,23 +74,26 @@ public class GradleProject implements Project {
     }
 
     private static SourceUnit createSourceUnit(Path gradleFile, String repoURI) throws IOException, XmlPullParserException {
-        BuildAnalysis.POMAttrs attrs = getGradleAttrs(repoURI, gradleFile);
+        BuildAnalysis.BuildInfo info = getGradleAttrs(repoURI, gradleFile);
 
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";
-        unit.Name = attrs.groupID + "/" + attrs.artifactID;
-        unit.Dir = gradleFile.getParent().toString();
-        unit.Data.put("GradleFile", gradleFile.toString());
-        unit.Data.put("Description", attrs.description);
+        unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
+        unit.Dir = PathUtil.normalize(gradleFile.getParent().toString());
+        unit.Data.put("GradleFile", PathUtil.normalize(gradleFile.toString()));
+        unit.Data.put("Description", info.attrs.description);
 
-        // TODO: Java source files can be other places besides ‘./src’
-        unit.Files = ScanUtil.findAllJavaFiles(gradleFile.getParent().resolve("src"));
+        unit.Files = new LinkedList<>();
+        Path root = gradleFile.getParent().toAbsolutePath().normalize();
+        for (String file : info.sources) {
+            unit.Files.add(PathUtil.normalize(root.relativize(Paths.get(file)).toString()));
+        }
         unit.sortFiles();
 
         // This will list all dependencies, not just direct ones.
         unit.Dependencies = new ArrayList<>(getGradleDependencies(gradleFile));
 
-return unit;
+        return unit;
     }
 
 

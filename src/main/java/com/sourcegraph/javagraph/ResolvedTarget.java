@@ -15,6 +15,22 @@ class ResolvedTarget {
         return target;
     }
 
+    public static ResolvedTarget langtools() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = ScanCommand.TOOLS_JAR_REPO;
+        target.ToUnitType = "Java";
+        target.ToUnit = ".";
+        return target;
+    }
+
+    public static ResolvedTarget nashorn() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = ScanCommand.NASHORN_REPO;
+        target.ToUnitType = "Java";
+        target.ToUnit = ".";
+        return target;
+    }
+
     public static ResolvedTarget androidSDK() {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ScanCommand.ANDROID_SDK_REPO;

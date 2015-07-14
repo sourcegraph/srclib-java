@@ -74,7 +74,7 @@ public class Ref {
             if (ref.defUnit != null) object.add("DefUnit", new JsonPrimitive(ref.defUnit));
             object.add("DefPath", new JsonPrimitive(ref.defKey.formatPath()));
 
-            object.add("File", new JsonPrimitive(ref.file));
+            object.add("File", new JsonPrimitive(PathUtil.normalize(ref.file)));
             object.add("Start", new JsonPrimitive(ref.start));
             object.add("End", new JsonPrimitive(ref.end));
             object.add("Def", new JsonPrimitive(ref.def));

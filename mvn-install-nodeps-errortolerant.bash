@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-POMS=$(find . -type f -name pom.xml)
+POMS=$(/usr/bin/find . -type f -name pom.xml)
 
 MVN_OPTS=-Dmaven.repo.local="$PWD"/.m2-srclib
 

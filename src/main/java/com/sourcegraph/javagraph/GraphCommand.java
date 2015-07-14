@@ -44,7 +44,8 @@ public class GraphCommand {
         Project proj = unit.getProject();
         Resolver rs = new Resolver(proj);
         try {
-            Grapher grapher = new Grapher(StringUtils.join(proj.getClassPath(), ':'), "", rawGraph);
+            String classpath = StringUtils.join(proj.getClassPath(), System.getProperty("path.separator"));
+            Grapher grapher = new Grapher(classpath, StringUtils.EMPTY, rawGraph);
             grapher.graphFilesAndDirs(unit.Files);
             grapher.close();
 
@@ -83,7 +84,7 @@ public class GraphCommand {
             //TODO(rameshvarun): Render javadoc string?
             Format = "text/html";
             Data = def.doc;
-            File = def.file;
+            File = PathUtil.normalize(def.file);
         }
     }
 
