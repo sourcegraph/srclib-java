@@ -99,7 +99,7 @@ public class BuildAnalysis {
                 pb.directory(new File(workDir.toString()));
                 BufferedReader in = null;
                 BuildInfo result = new BuildInfo();
-                result.attrs.artifactID = workDir.normalize().toString();
+                result.attrs.artifactID = workDir.getFileName().toString();
 
                 try {
                     Process process = pb.start();
