@@ -28,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class MavenProject implements Project {
@@ -300,17 +301,32 @@ public class MavenProject implements Project {
 
         Set<String> files = new HashSet<>();
         List<String> sourceRoots = proj.getMavenProject().getCompileSourceRoots();
+        for (int i = 0; i < sourceRoots.size(); i++) {
+            sourceRoots.set(i, Paths.get(sourceRoots.get(i)).toAbsolutePath().toString());
+        }
+
         Path root = pomFile.getParent().toAbsolutePath().normalize();
 
         getSourceFiles(files, sourceRoots, root);
         String sourceRoot = proj.getMavenProject().getBuild().getSourceDirectory();
+        if (sourceRoot == null) {
+            sourceRoot = "src/main";
+        }
+        sourceRoot = root.resolve(sourceRoot).toAbsolutePath().toString();
         if (!sourceRoots.contains(sourceRoot)) {
             getSourceFiles(files, Collections.singletonList(sourceRoot), root);
         }
-        sourceRoots = proj.getMavenProject().getTestCompileSourceRoots();
-        getSourceFiles(files, sourceRoots, root);
+        List<String> testSourceRoots = proj.getMavenProject().getTestCompileSourceRoots();
+        for (int i = 0; i < testSourceRoots.size(); i++) {
+            testSourceRoots.set(i, Paths.get(testSourceRoots.get(i)).toAbsolutePath().toString());
+        }
+        getSourceFiles(files, testSourceRoots, root);
         sourceRoot = proj.getMavenProject().getBuild().getTestSourceDirectory();
-        if (!sourceRoots.contains(sourceRoot)) {
+        if (sourceRoot == null) {
+            sourceRoot = "src/test";
+        }
+        sourceRoot = root.resolve(sourceRoot).toAbsolutePath().toString();
+        if (!sourceRoots.contains(sourceRoot) && !testSourceRoots.contains(sourceRoot)) {
             getSourceFiles(files, Collections.singletonList(sourceRoot), root);
         }
         unit.Files = new LinkedList<>(files);
@@ -350,6 +366,9 @@ public class MavenProject implements Project {
                 continue;
             }
             Path path = basePath.resolve(sourceRoot);
+            if (!path.toFile().exists() || !path.toFile().isDirectory()) {
+                return;
+            }
             final DirectoryScanner directoryScanner = new DirectoryScanner();
             directoryScanner.setIncludes(new String[]{"**/*.java"});
             directoryScanner.setExcludes(null);
