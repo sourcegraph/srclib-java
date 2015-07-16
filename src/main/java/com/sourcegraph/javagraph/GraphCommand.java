@@ -46,7 +46,7 @@ public class GraphCommand {
         try {
             String classpath = StringUtils.join(proj.getClassPath(), System.getProperty("path.separator"));
             Grapher grapher = new Grapher(classpath, StringUtils.EMPTY, rawGraph);
-            grapher.graphFilesAndDirs(unit.Files);
+            grapher.graphFilesAndDirs(unit.Dir, unit.Files);
             grapher.close();
 
             graph.Defs = rawGraph.defs;

@@ -59,23 +59,23 @@ public class Grapher {
         javacOpts.add("-Xbootclasspath:" + bootClasspath);
     }
 
-    public void graphFilesAndDirs(Iterable<String> filePaths) throws IOException {
+    public void graphFilesAndDirs(String dir, Iterable<String> filePaths) throws IOException {
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {
-            File file = new File(filePath);
+            File file = new File(dir, filePath);
             if (!file.exists()) {
                 System.err.println("no such file: " + file.getAbsolutePath());
                 System.exit(1);
             }
             if (file.isFile()) {
-                files.add(filePath);
+                files.add(file.getAbsolutePath());
             } else if (file.isDirectory()) {
                 Files.walkFileTree(file.toPath(),
                         new SimpleFileVisitor<Path>() {
                             @Override
                             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                                 if (attrs.isRegularFile() && file.toString().endsWith(".java")) {
-                                    files.add(file.toString());
+                                    files.add(file.toAbsolutePath().toString());
                                 }
                                 return FileVisitResult.CONTINUE;
                             }
