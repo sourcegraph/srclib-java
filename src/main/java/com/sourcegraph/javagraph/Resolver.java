@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
+import org.apache.maven.model.building.ModelBuildingException;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
@@ -160,9 +161,7 @@ public class Resolver {
             String depGroupID = null;
             try {
                 depGroupID = mvnProj.getMavenProject().getGroupId();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (XmlPullParserException e) {
+            } catch (ModelBuildingException e) {
                 e.printStackTrace();
             }
             if (depGroupID != null && depGroupID.equals(d.groupID)) {
