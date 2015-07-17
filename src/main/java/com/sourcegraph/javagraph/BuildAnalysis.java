@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -15,8 +16,8 @@ public class BuildAnalysis {
 
     public static class POMAttrs {
         public String groupID = "default-group";
-        public String artifactID = "";
-        public String description = "";
+        public String artifactID = StringUtils.EMPTY;
+        public String description = StringUtils.EMPTY;
 
         public POMAttrs() {
         }
@@ -29,16 +30,17 @@ public class BuildAnalysis {
     }
 
     public static class BuildInfo {
-        public String classPath = "";
-        public String version = "";
+        public String version = StringUtils.EMPTY;
         public POMAttrs attrs;
         public HashSet<RawDependency> dependencies;
         public HashSet<String> sources;
+        public HashSet<String> classPath;
 
         public BuildInfo() {
             attrs = new POMAttrs();
             dependencies = new HashSet<>();
             sources = new HashSet<>();
+            classPath = new HashSet<>();
         }
     }
 
@@ -136,7 +138,10 @@ public class BuildAnalysis {
                                 result.version = payload;
                                 break;
                             case "CLASSPATH":
-                                result.classPath = payload;
+                                for (String path: payload.split(SystemUtils.PATH_SEPARATOR)) {
+                                    if (!StringUtils.isEmpty(path))
+                                    result.classPath.add(path);
+                                }
                                 break;
                             case "SOURCEFILE":
                                 result.sources.add(payload);

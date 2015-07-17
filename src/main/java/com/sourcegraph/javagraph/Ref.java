@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import com.google.gson.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 
@@ -56,7 +57,7 @@ public class Ref {
 
     @Override
     public String toString() {
-        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : "") + "}";
+        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : StringUtils.EMPTY) + "}";
     }
 
     static class JSONSerializer implements JsonSerializer<Ref> {
