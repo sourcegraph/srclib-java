@@ -32,7 +32,7 @@ public class Grapher {
     private final GraphWriter emit;
     private final List<String> javacOpts;
 
-    public Grapher(String classpath, String sourcepath, GraphWriter emit) {
+    public Grapher(String classpath, String sourcepath, String sourceVersion, GraphWriter emit) {
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
@@ -51,7 +51,7 @@ public class Grapher {
         javacOpts.add("-XDshouldStopPolicyIfNoError=ATTR");
 
         javacOpts.add("-source");
-        javacOpts.add("1.8");
+        javacOpts.add(sourceVersion);
 
         // This is necessary to produce Elements (and therefore defs and refs) when compilation errors occur. It will still probably fail on syntax errors, but typechecking errors are survivable.
         javacOpts.add("-proc:none");
@@ -77,14 +77,14 @@ public class Grapher {
                 System.exit(1);
             }
             if (file.isFile()) {
-                files.add(file.getAbsolutePath());
+                files.add(file.toPath().normalize().toString());
             } else if (file.isDirectory()) {
                 Files.walkFileTree(file.toPath(),
                         new SimpleFileVisitor<Path>() {
                             @Override
                             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                                 if (attrs.isRegularFile() && file.toString().endsWith(".java")) {
-                                    files.add(file.toAbsolutePath().toString());
+                                    files.add(file.normalize().toString());
                                 }
                                 return FileVisitResult.CONTINUE;
                             }

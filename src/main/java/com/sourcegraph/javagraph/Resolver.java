@@ -24,8 +24,11 @@ public class Resolver {
 
     private final Project proj;
 
+    private Map<String, DepResolution> depsCache;
+
     public Resolver(Project proj) {
         this.proj = proj;
+        this.depsCache = new HashMap<>();
     }
 
     private Map<URI,ResolvedTarget> resolvedOrigins = new HashMap<>();
@@ -157,6 +160,13 @@ public class Resolver {
      * could not be performed.
      */
     public DepResolution resolveRawDep(RawDependency d) {
+
+        String key = d.groupID + ':' + d.artifactID + ':' + d.version + ':' + d.scope;
+        DepResolution resolution = depsCache.get(key);
+        if (resolution != null) {
+            return resolution;
+        }
+
         // HACK: Assume that if the groupID of the RawDependency equals the groupID of the current project, then it is from the same repo and shouldn't be resolved externally.
         if (this.proj instanceof MavenProject) {
             MavenProject mvnProj = (MavenProject)this.proj;
@@ -171,7 +181,9 @@ public class Resolver {
                 target.ToUnit = d.groupID + "/" + d.artifactID;
                 target.ToUnitType = "JavaArtifact";
                 target.ToVersionString = d.version;
-                return new DepResolution(d, target);
+                resolution = new DepResolution(d, target);
+                depsCache.put(key, resolution);
+                return resolution;
             }
         }
 
@@ -216,7 +228,7 @@ public class Resolver {
 
         if (res.Error != null)
             LOGGER.warn("Error in resolving dependency {} - {}", d, res.Error);
-
+        depsCache.put(key, res);
         return res;
     }
 }

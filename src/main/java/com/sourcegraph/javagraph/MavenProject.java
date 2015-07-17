@@ -1,7 +1,9 @@
 package com.sourcegraph.javagraph;
 
+import com.google.common.collect.Iterators;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Dependency;
+import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.building.*;
@@ -21,6 +23,8 @@ import org.eclipse.aether.collection.DependencyCollectionException;
 import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.graph.DependencyNode;
 import org.eclipse.aether.impl.DefaultServiceLocator;
+import org.eclipse.aether.impl.RemoteRepositoryManager;
+import org.eclipse.aether.internal.impl.DefaultRemoteRepositoryManager;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.resolution.*;
@@ -32,7 +36,6 @@ import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -48,12 +51,22 @@ public class MavenProject implements Project {
 
     private Path pomFile;
 
+    private RepositorySystem repositorySystem;
+    private RepositorySystemSession repositorySystemSession;
+
     public MavenProject(SourceUnit unit) {
         this.pomFile = FileSystems.getDefault().getPath((String) unit.Data.get("POMFile")).toAbsolutePath();
+        initRepositorySystem();
     }
 
     public MavenProject(Path pomFile) {
         this.pomFile = pomFile;
+        initRepositorySystem();
+    }
+
+    private void initRepositorySystem() {
+        repositorySystem = newRepositorySystem();
+        repositorySystemSession = newRepositorySystemSession(repositorySystem);
     }
 
     private org.apache.maven.project.MavenProject mavenProject;
@@ -67,7 +80,9 @@ public class MavenProject implements Project {
             ModelBuildingRequest request = new DefaultModelBuildingRequest();
             request.setSystemProperties(System.getProperties());
             request.setPomFile(pomFile.toFile());
-            request.setModelResolver(new MavenModelResolver(pomFile.getParent()));
+            request.setModelResolver(new MavenModelResolver(new DefaultRemoteRepositoryManager(),
+                    repositorySystem,
+                    repositorySystemSession));
             ModelBuildingResult result = factory.newInstance().build(request);
             mavenProject = new org.apache.maven.project.MavenProject(result.getEffectiveModel());
             if (LOGGER.isDebugEnabled()) {
@@ -77,7 +92,7 @@ public class MavenProject implements Project {
         return mavenProject;
     }
 
-    private static RepositorySystem newRepositorySystem() {
+    private RepositorySystem newRepositorySystem() {
         DefaultServiceLocator locator = MavenRepositorySystemUtils.newServiceLocator();
         locator.addService(RepositoryConnectorFactory.class, BasicRepositoryConnectorFactory.class);
         locator.addService(TransporterFactory.class, FileTransporterFactory.class);
@@ -93,7 +108,7 @@ public class MavenProject implements Project {
         return locator.getService(RepositorySystem.class);
     }
 
-    private static DefaultRepositorySystemSession newRepositorySystemSession(RepositorySystem system) throws IOException {
+    private RepositorySystemSession newRepositorySystemSession(RepositorySystem system) {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
 
         String repoDir = getRepoDir();
@@ -104,14 +119,6 @@ public class MavenProject implements Project {
         return session;
     }
 
-    private List<RemoteRepository> newRepositories()
-            throws ModelBuildingException {
-        List<RemoteRepository> repositories = new ArrayList<>();
-        List<Repository> repos = getMavenProject().getRepositories();
-        repositories.addAll(repos.stream().map(ArtifactDescriptorUtils::toRemoteRepository).
-                collect(Collectors.toList()));
-        return repositories;
-    }
     private transient Set<Artifact> mavenDependencyArtifacts;
 
     protected Set<Artifact> resolveMavenDependencyArtifacts() throws ModelBuildingException, IOException {
@@ -122,54 +129,29 @@ public class MavenProject implements Project {
                 LOGGER.debug("Resolving Maven dependency artifacts");
             }
             mavenDependencyArtifacts = new HashSet<>();
-
-            RepositorySystem system = newRepositorySystem();
-            RepositorySystemSession session = newRepositorySystemSession(system);
-
-            List<Dependency> deps = getMavenProject().getDependencies();
-            List<RemoteRepository> repos = newRepositories();
-
-            for (Dependency d : deps) {
-
-                LOGGER.info("Resolving Maven dependency {}", d);
-
-                Artifact artifact = new DefaultArtifact(d.getGroupId(),
-                        d.getArtifactId(),
-                        d.getClassifier(),
-                        "jar",
-                        d.getVersion());
-                try {
-                    artifact = resolveArtifactVersion(artifact, system, session, repos);
-                } catch (VersionRangeResolutionException e) {
-                    LOGGER.warn("Failed to resolve version of {}: {}", d, e.toString());
-                    continue;
-                }
-
-                if (d.getSystemPath() == null) {
-                    artifact = resolveArtifact(artifact, repos, system, session);
-                } else {
-                    File file = new File(d.getSystemPath());
-                    if (file.exists()) {
-                        artifact.setFile(file);
-                    } else {
-                        LOGGER.warn("Failed to resolve dependency {}: {} - missing local file {}", artifact, file);
-                        artifact = null;
-                    }
-                }
-                if (artifact != null) {
-                    LOGGER.info("Resolved Maven dependency {} to {}", d, artifact.getFile());
-                    mavenDependencyArtifacts.add(artifact);
-
-                    // resolving artifact dependencies as well
-                    try {
-                        resolveArtifactDependencies(artifact, system, session, mavenDependencyArtifacts);
-                    } catch (DependencyCollectionException | DependencyResolutionException e) {
-                        LOGGER.warn("Failed to resolve sub-dependencies of {}: {}", artifact, e.toString());
-                    }
-                }
+            Model model = getMavenProject().getModel();
+            Artifact artifact = new DefaultArtifact(model.getGroupId(),
+                    model.getArtifactId(),
+                    StringUtils.EMPTY,
+                    "jar",
+                    model.getVersion());
+            try {
+                resolveArtifactDependencies(artifact, mavenDependencyArtifacts);
+            } catch (DependencyCollectionException | DependencyResolutionException e) {
+                LOGGER.warn("Failed to resolve dependencies of {}: {}", artifact, e.toString());
             }
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Resolved Maven dependency artifacts");
+
+            for (Dependency dependency : getMavenProject().getDependencies()) {
+                try {
+                    artifact = new DefaultArtifact(dependency.getGroupId(),
+                            dependency.getArtifactId(),
+                            dependency.getClassifier(),
+                            "jar",
+                            dependency.getVersion());
+                    resolveArtifactDependencies(artifact, mavenDependencyArtifacts);
+                } catch (DependencyCollectionException | DependencyResolutionException e) {
+                    LOGGER.warn("Failed to resolve dependencies of {}: {}", artifact, e.toString());
+                }
             }
         }
 
@@ -208,6 +190,16 @@ public class MavenProject implements Project {
 
         Set<Artifact> artifacts = resolveMavenDependencyArtifacts();
         return artifacts.stream().map(a -> a.getFile().getAbsolutePath()).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getSourceCodeVersion() throws ModelBuildingException, IOException {
+
+        Properties props = getMavenProject().getProperties();
+        if (props == null) {
+            return DEFAULT_SOURCE_CODE_VERSION;
+        }
+        return props.getProperty("maven.compiler.source", DEFAULT_SOURCE_CODE_VERSION);
     }
 
     @Override
@@ -329,15 +321,16 @@ public class MavenProject implements Project {
 
     /**
      * Retrieves all source files in Maven project
-     * @param files set to fill with the data
+     *
+     * @param files       set to fill with the data
      * @param sourceRoots list of source roots to search in, i.e. compile source roots, test compile source roots
-     * @param basePath base path to produce relative entries,
-     *                 i.e. basePath = /foo/ and current path = /foo/bar gives "bar"
+     * @param basePath    base path to produce relative entries,
+     *                    i.e. basePath = /foo/ and current path = /foo/bar gives "bar"
      */
     private static void getSourceFiles(Set<String> files,
                                        List<String> sourceRoots,
                                        Path basePath) {
-        for (String sourceRoot: sourceRoots) {
+        for (String sourceRoot : sourceRoots) {
             if (sourceRoot == null) {
                 continue;
             }
@@ -371,34 +364,16 @@ public class MavenProject implements Project {
         return REPO_DIR;
     }
 
-    private Artifact resolveArtifact(Artifact source,
-                                     List<RemoteRepository> repos,
-                                     RepositorySystem system,
-                                     RepositorySystemSession session) {
-        try {
-            ArtifactRequest artifactRequest = new ArtifactRequest();
-            artifactRequest.setArtifact(source);
-            artifactRequest.setRepositories(repos);
-            return system.resolveArtifact(session, artifactRequest).getArtifact();
-        } catch (ArtifactResolutionException e) {
-            LOGGER.warn("Failed to resolve artiface {}: {}", source, e.toString());
-            return null;
-        }
-    }
-
     /**
      * Resolves all artifact dependencies for a given artifact
+     *
      * @param artifact artifact to resolve dependencies for
-     * @param system repository system
-     * @param session repository system session
-     * @param targets set to fill with resolved dependencies
+     * @param targets  set to fill with resolved dependencies
      * @throws ModelBuildingException
      * @throws DependencyCollectionException
      * @throws DependencyResolutionException
      */
     private void resolveArtifactDependencies(Artifact artifact,
-                                             RepositorySystem system,
-                                             RepositorySystemSession session,
                                              Set<Artifact> targets) throws
             ModelBuildingException, DependencyCollectionException, DependencyResolutionException {
 
@@ -408,20 +383,18 @@ public class MavenProject implements Project {
 
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setRoot(new org.eclipse.aether.graph.Dependency(artifact, "compile"));
-        List<RemoteRepository> repoz = new ArrayList<>();
-        for (Repository repo : getMavenProject().getRepositories()) {
-            repoz.add(ArtifactDescriptorUtils.toRemoteRepository(repo));
-        }
+        List<RemoteRepository> repoz = getMavenProject().getRepositories().stream().
+                map(ArtifactDescriptorUtils::toRemoteRepository).collect(Collectors.toList());
         collectRequest.setRepositories(repoz);
 
-        DependencyNode node = system.collectDependencies(session, collectRequest).getRoot();
+        DependencyNode node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Collected dependencies for {}", artifact);
         }
 
         DependencyRequest projectDependencyRequest = new DependencyRequest(node, null);
 
-        system.resolveDependencies(session, projectDependencyRequest);
+        repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolved dependencies for {}", artifact);
         }
@@ -438,43 +411,56 @@ public class MavenProject implements Project {
 
     }
 
-    /**
-     * Resolve artifact version
-     * @param artifact artifact to resolve version for
-     * @param system repository system
-     * @param session repository system session
-     * @param repos repositories to use
-     * @return resolved artifact
-     * @throws VersionRangeResolutionException
-     */
-    private Artifact resolveArtifactVersion(Artifact artifact,
-                                            RepositorySystem system,
-                                            RepositorySystemSession session,
-                                            List<RemoteRepository> repos) throws VersionRangeResolutionException {
-        VersionRangeResult versionResult;
-        VersionRangeRequest versionRequest = new VersionRangeRequest();
-        versionRequest.setArtifact(artifact);
-        versionRequest.setRepositories(repos);
-        versionResult = system.resolveVersionRange(session, versionRequest);
-        String resolvedVersion = versionResult.getHighestVersion().toString();
-        if (!resolvedVersion.equals(artifact.getVersion())) {
-            LOGGER.info("Resolved version {} for artifact {}", resolvedVersion, artifact);
-            artifact = artifact.setVersion(versionResult.getHighestVersion().toString());
-        }
-        return artifact;
-    }
-
     private class MavenModelResolver implements ModelResolver {
 
-        private Path root;
+        private static final String POM = "pom";
 
-        MavenModelResolver(Path root) {
-            this.root = root;
+        private Set<String> repositoryKeys;
+        private List<RemoteRepository> repositories;
+
+        private RepositorySystem repositorySystem;
+        private RepositorySystemSession repositorySystemSession;
+
+        private RemoteRepositoryManager remoteRepositoryManager;
+
+        private MavenModelResolver(RemoteRepositoryManager remoteRepositoryManager,
+                                   RepositorySystem repositorySystem,
+                                   RepositorySystemSession repositorySystemSession) {
+            this.repositorySystem = repositorySystem;
+            this.repositorySystemSession = repositorySystemSession;
+            this.remoteRepositoryManager = remoteRepositoryManager;
+            repositoryKeys = new HashSet<>();
+            repositories = new ArrayList<>();
+
+            RemoteRepository central = new RemoteRepository.Builder("central",
+                    "default",
+                    "http://central.maven.org/maven2/").build();
+            repositoryKeys.add(central.getId());
+            repositories.add(central);
         }
 
+        private MavenModelResolver(MavenModelResolver source) {
+            this.repositorySystem = source.repositorySystem;
+            this.repositorySystemSession = source.repositorySystemSession;
+            this.remoteRepositoryManager = source.remoteRepositoryManager;
+            this.repositories = new ArrayList<>(source.repositories);
+            this.repositoryKeys = new HashSet<>(source.repositoryKeys);
+        }
+
+
         @Override
-        public ModelSource resolveModel(String groupId, String artifactId, String version) throws UnresolvableModelException {
-            return null;
+        public ModelSource resolveModel(String groupId, String artifactId, String version)
+                throws UnresolvableModelException {
+
+            Artifact pomArtifact = new DefaultArtifact(groupId, artifactId, StringUtils.EMPTY, POM, version);
+
+            try {
+                ArtifactRequest request = new ArtifactRequest(pomArtifact, repositories, null);
+                pomArtifact = repositorySystem.resolveArtifact(repositorySystemSession, request).getArtifact();
+            } catch (ArtifactResolutionException e) {
+                throw new UnresolvableModelException(e.getMessage(), groupId, artifactId, version, e);
+            }
+            return new FileModelSource(pomArtifact.getFile());
         }
 
         @Override
@@ -482,20 +468,56 @@ public class MavenProject implements Project {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Processing parent model {}", parent.getRelativePath());
             }
-            return new FileModelSource(new File(root.toFile(), parent.getRelativePath()));
+            Artifact artifact = new DefaultArtifact(parent.getGroupId(),
+                    parent.getArtifactId(),
+                    StringUtils.EMPTY,
+                    POM,
+                    parent.getVersion());
+
+            VersionRangeRequest versionRangeRequest = new VersionRangeRequest(artifact, repositories, null);
+
+            try {
+                VersionRangeResult versionRangeResult = repositorySystem.resolveVersionRange(repositorySystemSession,
+                        versionRangeRequest);
+                parent.setVersion(versionRangeResult.getHighestVersion().toString());
+            } catch (VersionRangeResolutionException e) {
+                throw new UnresolvableModelException(e.getMessage(), parent.getGroupId(), parent.getArtifactId(),
+                        parent.getVersion(), e);
+
+            }
+
+            return resolveModel(parent.getGroupId(), parent.getArtifactId(), parent.getVersion());
         }
 
         @Override
         public void addRepository(Repository repository) throws InvalidRepositoryException {
+            addRepository(repository, false);
         }
 
         @Override
         public void addRepository(Repository repository, boolean replace) throws InvalidRepositoryException {
+
+            String id = repository.getId();
+
+            if (repositoryKeys.contains(id)) {
+                if (!replace) {
+                    return;
+                }
+                Iterators.removeIf(repositories.iterator(), input -> input.getId().equals(id));
+            }
+            List<RemoteRepository> additions = Collections.singletonList(
+                    ArtifactDescriptorUtils.toRemoteRepository(repository));
+            repositories =
+                    remoteRepositoryManager.aggregateRepositories(repositorySystemSession,
+                            repositories,
+                            additions,
+                            true);
+            repositoryKeys.add(id);
         }
 
         @Override
         public ModelResolver newCopy() {
-            return new MavenModelResolver(root);
+            return new MavenModelResolver(this);
         }
     }
 

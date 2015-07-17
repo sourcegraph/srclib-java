@@ -1,12 +1,11 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.maven.model.building.ModelBuildingException;
 
+import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class JDKProject implements Project {
     private SourceUnit unit;
@@ -23,6 +22,12 @@ public class JDKProject implements Project {
     @Override
     public List<String> getClassPath() throws Exception {
         return null;
+    }
+
+    @Override
+    public String getSourceCodeVersion() throws ModelBuildingException, IOException {
+
+        return DEFAULT_SOURCE_CODE_VERSION;
     }
 
     @Override

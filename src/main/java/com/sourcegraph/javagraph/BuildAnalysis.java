@@ -35,6 +35,7 @@ public class BuildAnalysis {
         public HashSet<RawDependency> dependencies;
         public HashSet<String> sources;
         public HashSet<String> classPath;
+        public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
 
         public BuildInfo() {
             attrs = new POMAttrs();
@@ -145,6 +146,9 @@ public class BuildAnalysis {
                                 break;
                             case "SOURCEFILE":
                                 result.sources.add(payload);
+                                break;
+                            case "SOURCEVERSION":
+                                result.sourceVersion = payload;
                                 break;
                         }
                     }
