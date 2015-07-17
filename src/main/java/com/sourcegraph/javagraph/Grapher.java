@@ -6,6 +6,8 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.tools.*;
 import java.io.File;
@@ -21,6 +23,9 @@ import java.util.List;
 import java.util.Set;
 
 public class Grapher {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Grapher.class);
+
     private final JavaCompiler compiler;
     private final DiagnosticCollector<JavaFileObject> diags;
     private final StandardJavaFileManager fileManager;
@@ -52,19 +57,23 @@ public class Grapher {
         javacOpts.add("-proc:none");
 
         String bootClasspath = System.getProperty("sun.boot.class.path");
-        if (bootClasspath == null || bootClasspath.isEmpty()) {
-            System.err.println("System property sun.boot.class.path is not set. It is required to load rt.jar.");
+        if (StringUtils.isEmpty(bootClasspath)) {
+            LOGGER.error("System property sun.boot.class.path is not set. It is required to load rt.jar.");
             System.exit(1);
         }
         javacOpts.add("-Xbootclasspath:" + bootClasspath);
     }
 
     public void graphFilesAndDirs(String dir, Iterable<String> filePaths) throws IOException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Collecting source files to graph");
+        }
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {
             File file = new File(dir, filePath);
             if (!file.exists()) {
-                System.err.println("no such file: " + file.getAbsolutePath());
+                LOGGER.error("No such file {}", file.getAbsolutePath());
                 System.exit(1);
             }
             if (file.isFile()) {
@@ -82,15 +91,20 @@ public class Grapher {
                         });
             }
         }
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Collected source files to graph");
+        }
         graphFiles(files);
     }
 
     public void graphFiles(Iterable<String> files) throws IOException {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("javac {} {}", StringUtils.join(javacOpts, ' '), StringUtils.join(files, ' '));
+        }
         graphJavaFiles(fileManager.getJavaFileObjectsFromStrings(files));
     }
 
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
-        System.err.println("javac " + StringUtils.join(javacOpts, ' ') + " " + StringUtils.join(files, ' '));
         final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, null, javacOpts, null, files);
 
         final Trees trees = Trees.instance(task);
@@ -101,6 +115,7 @@ public class Grapher {
             Iterable<? extends CompilationUnitTree> units = task.parse();
             task.analyze();
             for (final CompilationUnitTree unit : units) {
+
                 try {
                     ExpressionTree pkgName = unit.getPackageName();
                     if (pkgName != null && !seenPackages.contains(pkgName.toString())) {
@@ -111,20 +126,18 @@ public class Grapher {
                     TreePath root = new TreePath(unit);
                     new TreeScanner(emit, trees).scan(root, null);
                 } catch (Exception e) {
-                    e.printStackTrace(System.err);
-                    System.err.println("Skipping compilation unit " + unit.getPackageName() + " (" + unit.getSourceFile() + ") due to exception: " + e.toString());
+                    LOGGER.warn("Skipping compilation unit {} ({})", unit.getPackageName(), unit.getSourceFile(), e);
                 }
             }
         } catch (Exception e) {
-            for (Diagnostic<?> diagnostic : diags.getDiagnostics())
-                System.err.format("Error on line %d in %s%n", diagnostic
-                        .getLineNumber(), diagnostic.getSource().toString());
-            e.printStackTrace(System.err);
-            System.err
-                    .println("WARNING: If the stack trace contains \"task.analyze();\", there's a reasonable chance you're using a buggy compiler.\n"
-                            + "As of Nov 7, 2014, the Oracle 8 JDK is one of those compilers.\n"
-                            + "See https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\n"
-                            + "and compile OpenJDK 8 with that workaround. OpenJDK 8 build instructions: http://openjdk.java.net/projects/build-infra/guide.html\nWe can remove this once jdk 8u26+ is released. NOTE that you need to install from the jdk8u hg repo, not jdk8 (as that is frozen when the first version of jdk8 was released).");
+            LOGGER.warn("Compilation failed", e);
+            for (Diagnostic<?> diagnostic : diags.getDiagnostics()) {
+                LOGGER.warn("Error on line {} in {}", diagnostic.getLineNumber(), diagnostic.getSource());
+            }
+            LOGGER.warn("If the stack trace contains \"task.analyze();\", there's a reasonable chance you're using a buggy compiler.\n"
+                    + "As of Nov 7, 2014, the Oracle 8 JDK is one of those compilers.\n"
+                    + "See https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\n"
+                    + "and compile OpenJDK 8 with that workaround. OpenJDK 8 build instructions: http://openjdk.java.net/projects/build-infra/guide.html\nWe can remove this once jdk 8u26+ is released. NOTE that you need to install from the jdk8u hg repo, not jdk8 (as that is frozen when the first version of jdk8 was released).");
             System.exit(1);
         }
     }

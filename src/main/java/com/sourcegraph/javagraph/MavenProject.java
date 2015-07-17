@@ -29,6 +29,8 @@ import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
 import org.eclipse.aether.transport.http.HttpTransporterFactory;
 import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,12 +42,14 @@ import java.util.stream.Collectors;
 
 public class MavenProject implements Project {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MavenProject.class);
+
     private static final String REPO_DIR = ".m2-srclib";
 
     private Path pomFile;
 
     public MavenProject(SourceUnit unit) {
-        this.pomFile = FileSystems.getDefault().getPath((String) unit.Data.get("POMFile"));
+        this.pomFile = FileSystems.getDefault().getPath((String) unit.Data.get("POMFile")).toAbsolutePath();
     }
 
     public MavenProject(Path pomFile) {
@@ -56,7 +60,9 @@ public class MavenProject implements Project {
 
     public org.apache.maven.project.MavenProject getMavenProject() throws ModelBuildingException {
         if (mavenProject == null) {
-
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Building Maven project structure from {}", pomFile);
+            }
             DefaultModelBuilderFactory factory = new DefaultModelBuilderFactory();
             ModelBuildingRequest request = new DefaultModelBuildingRequest();
             request.setSystemProperties(System.getProperties());
@@ -64,6 +70,9 @@ public class MavenProject implements Project {
             request.setModelResolver(new MavenModelResolver(pomFile.getParent()));
             ModelBuildingResult result = factory.newInstance().build(request);
             mavenProject = new org.apache.maven.project.MavenProject(result.getEffectiveModel());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Maven project structure is built", pomFile);
+            }
         }
         return mavenProject;
     }
@@ -77,7 +86,7 @@ public class MavenProject implements Project {
         locator.setErrorHandler(new DefaultServiceLocator.ErrorHandler() {
             @Override
             public void serviceCreationFailed(Class<?> type, Class<?> impl, Throwable exception) {
-                exception.printStackTrace();
+                LOGGER.error("Failed co create service {} using implementation {}", type, impl, exception);
             }
         });
 
@@ -106,7 +115,12 @@ public class MavenProject implements Project {
     private transient Set<Artifact> mavenDependencyArtifacts;
 
     protected Set<Artifact> resolveMavenDependencyArtifacts() throws ModelBuildingException, IOException {
+
         if (mavenDependencyArtifacts == null) {
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Resolving Maven dependency artifacts");
+            }
             mavenDependencyArtifacts = new HashSet<>();
 
             RepositorySystem system = newRepositorySystem();
@@ -116,7 +130,8 @@ public class MavenProject implements Project {
             List<RemoteRepository> repos = newRepositories();
 
             for (Dependency d : deps) {
-                System.err.println("Maven: resolving dependency " + d.toString());
+
+                LOGGER.info("Resolving Maven dependency {}", d);
 
                 Artifact artifact = new DefaultArtifact(d.getGroupId(),
                         d.getArtifactId(),
@@ -126,7 +141,7 @@ public class MavenProject implements Project {
                 try {
                     artifact = resolveArtifactVersion(artifact, system, session, repos);
                 } catch (VersionRangeResolutionException e) {
-                    System.err.println("Failed to resolve version for artifact " + artifact + ": " + e.toString());
+                    LOGGER.warn("Failed to resolve version of {}: {}", d, e.toString());
                     continue;
                 }
 
@@ -137,22 +152,24 @@ public class MavenProject implements Project {
                     if (file.exists()) {
                         artifact.setFile(file);
                     } else {
-                        System.err.println("Dependency " + artifact + " failed to resolve: no such file " + file.getPath());
+                        LOGGER.warn("Failed to resolve dependency {}: {} - missing local file {}", artifact, file);
                         artifact = null;
                     }
                 }
                 if (artifact != null) {
-                    System.err.println("Dependency " + artifact + " resolved:  " + artifact.getFile());
+                    LOGGER.info("Resolved Maven dependency {} to {}", d, artifact.getFile());
                     mavenDependencyArtifacts.add(artifact);
 
                     // resolving artifact dependencies as well
                     try {
                         resolveArtifactDependencies(artifact, system, session, mavenDependencyArtifacts);
                     } catch (DependencyCollectionException | DependencyResolutionException e) {
-                        System.err.println("Failed to resolve artifact sub-dependencies for " + artifact + ": " +
-                                e.toString());
+                        LOGGER.warn("Failed to resolve sub-dependencies of {}: {}", artifact, e.toString());
                     }
                 }
+            }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Resolved Maven dependency artifacts");
             }
         }
 
@@ -161,22 +178,46 @@ public class MavenProject implements Project {
 
     @Override
     public Set<RawDependency> listDeps() throws IOException, ModelBuildingException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieving Maven dependencies");
+        }
+
         Set<RawDependency> deps = new HashSet<>();
         List<Dependency> mavenDeps = getMavenProject().getDependencies();
         for (Dependency d : mavenDeps) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing Maven dependency {}", d);
+            }
             deps.add(new RawDependency(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope()));
         }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieved Maven dependencies");
+        }
+
         return deps;
     }
 
     @Override
     public List<String> getClassPath() throws ModelBuildingException, IOException, ArtifactResolutionException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Assembling Maven class path");
+        }
+
         Set<Artifact> artifacts = resolveMavenDependencyArtifacts();
         return artifacts.stream().map(a -> a.getFile().getAbsolutePath()).collect(Collectors.toList());
     }
 
     @Override
-    public RawDependency getDepForJAR(Path jarFile) throws IOException, ModelBuildingException, ArtifactResolutionException {
+    public RawDependency getDepForJAR(Path jarFile) throws
+            IOException, ModelBuildingException, ArtifactResolutionException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieving dependency for JAR {}", jarFile.toAbsolutePath());
+        }
+
         resolveMavenDependencyArtifacts();
         for (org.eclipse.aether.artifact.Artifact a : mavenDependencyArtifacts) {
             if (a.getFile().toPath().equals(jarFile)) {
@@ -194,6 +235,11 @@ public class MavenProject implements Project {
     }
 
     private static SourceUnit createSourceUnit(Path pomFile) throws IOException, ModelBuildingException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Creating source unit from {}", pomFile.toAbsolutePath());
+        }
+
         MavenProject proj = new MavenProject(pomFile);
         final SourceUnit unit = new SourceUnit();
 
@@ -205,6 +251,10 @@ public class MavenProject implements Project {
         unit.Name = attrs.groupID + "/" + attrs.artifactID;
         unit.Dir = PathUtil.normalize(pomFile.getParent().toString());
         unit.Data.put("Description", attrs.description);
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Collecting source files");
+        }
 
         Set<String> files = new HashSet<>();
         List<String> sourceRoots = proj.getMavenProject().getCompileSourceRoots();
@@ -236,6 +286,11 @@ public class MavenProject implements Project {
         if (!sourceRoots.contains(sourceRoot) && !testSourceRoots.contains(sourceRoot)) {
             getSourceFiles(files, Collections.singletonList(sourceRoot), root);
         }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Source files collected");
+        }
+
         unit.Files = new LinkedList<>(files);
         unit.sortFiles();
 
@@ -245,16 +300,30 @@ public class MavenProject implements Project {
     }
 
     public static Collection<SourceUnit> findAllSourceUnits() throws IOException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieving source units");
+        }
+
         HashSet<Path> pomFiles = ScanUtil.findMatchingFiles("pom.xml");
         List<SourceUnit> units = new ArrayList<>();
         for (Path pomFile : pomFiles) {
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing POM file {}", pomFile.toAbsolutePath());
+            }
             try {
                 SourceUnit unit = createSourceUnit(pomFile);
                 units.add(unit);
             } catch (Exception e) {
-                System.err.println("Error processing pom.xml file " + pomFile + ": " + e.toString());
+                LOGGER.warn("Error processing POM file {}", pomFile.toAbsolutePath(), e);
             }
         }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieved source units");
+        }
+
         return units;
     }
 
@@ -272,10 +341,16 @@ public class MavenProject implements Project {
             if (sourceRoot == null) {
                 continue;
             }
+
             Path path = basePath.resolve(sourceRoot);
             if (!path.toFile().exists() || !path.toFile().isDirectory()) {
                 return;
             }
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Collecting source files from {}", path.toAbsolutePath());
+            }
+
             final DirectoryScanner directoryScanner = new DirectoryScanner();
             directoryScanner.setIncludes(new String[]{"**/*.java"});
             directoryScanner.setExcludes(null);
@@ -284,6 +359,10 @@ public class MavenProject implements Project {
             for (String fileName : directoryScanner.getIncludedFiles()) {
                 files.add(PathUtil.normalize(basePath.relativize(path.resolve(fileName)).toString()));
             }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Collected source files from {}", path.toAbsolutePath());
+            }
+
         }
     }
 
@@ -302,7 +381,7 @@ public class MavenProject implements Project {
             artifactRequest.setRepositories(repos);
             return system.resolveArtifact(session, artifactRequest).getArtifact();
         } catch (ArtifactResolutionException e) {
-            System.err.println("Dependency " + source + " failed to resolve: " + e.toString());
+            LOGGER.warn("Failed to resolve artiface {}: {}", source, e.toString());
             return null;
         }
     }
@@ -322,6 +401,11 @@ public class MavenProject implements Project {
                                              RepositorySystemSession session,
                                              Set<Artifact> targets) throws
             ModelBuildingException, DependencyCollectionException, DependencyResolutionException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolving artifact dependencies for {}", artifact);
+        }
+
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setRoot(new org.eclipse.aether.graph.Dependency(artifact, "compile"));
         List<RemoteRepository> repoz = new ArrayList<>();
@@ -331,15 +415,27 @@ public class MavenProject implements Project {
         collectRequest.setRepositories(repoz);
 
         DependencyNode node = system.collectDependencies(session, collectRequest).getRoot();
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Collected dependencies for {}", artifact);
+        }
+
         DependencyRequest projectDependencyRequest = new DependencyRequest(node, null);
 
         system.resolveDependencies(session, projectDependencyRequest);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolved dependencies for {}", artifact);
+        }
 
         PreorderNodeListGenerator nlg = new PreorderNodeListGenerator();
         node.accept(nlg);
 
         targets.addAll(nlg.getDependencies(true).stream().map(org.eclipse.aether.graph.Dependency::getArtifact).
                 collect(Collectors.toList()));
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolved artifact dependencies for {}", artifact);
+        }
+
     }
 
     /**
@@ -362,7 +458,7 @@ public class MavenProject implements Project {
         versionResult = system.resolveVersionRange(session, versionRequest);
         String resolvedVersion = versionResult.getHighestVersion().toString();
         if (!resolvedVersion.equals(artifact.getVersion())) {
-            System.err.println("Resolved version for artifact " + artifact + ": " + resolvedVersion);
+            LOGGER.info("Resolved version {} for artifact {}", resolvedVersion, artifact);
             artifact = artifact.setVersion(versionResult.getHighestVersion().toString());
         }
         return artifact;
@@ -383,6 +479,9 @@ public class MavenProject implements Project {
 
         @Override
         public ModelSource resolveModel(Parent parent) throws UnresolvableModelException {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing parent model {}", parent.getRelativePath());
+            }
             return new FileModelSource(new File(root.toFile(), parent.getRelativePath()));
         }
 
