@@ -8,24 +8,20 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
-/**
- * Created by sqs on 12/21/14.
- */
 public class GradleProject implements Project {
+
     private SourceUnit unit;
+
+    private static Map<Path, BuildAnalysis.BuildInfo> buildInfoCache = new HashMap<>();
+
     public GradleProject(SourceUnit unit) {
-        this.unit=unit;
+        this.unit = unit;
     }
 
-
-    public static String getGradleClassPath(Path build) throws IOException {
-        return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).classPath;
-    }
-
-    // TODO Merge this function with "getGradleDependencies".
     public static BuildAnalysis.BuildInfo getGradleAttrs(String repoURI, Path build) throws IOException {
-        BuildAnalysis.BuildInfo ret = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build);
+        BuildAnalysis.BuildInfo ret = getBuildInfo(build);
 
         // HACK: fix the project name inside docker containers. By default, the name of a Gradle project is the name
         // of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
@@ -55,17 +51,19 @@ public class GradleProject implements Project {
     }
 
     public static HashSet<RawDependency> getGradleDependencies(Path build) throws IOException {
-        return BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), build).dependencies;
+        return getBuildInfo(build).dependencies;
     }
 
     @Override
     public Set<RawDependency> listDeps() throws Exception {
-        return null;
+        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
+        return info.dependencies;
     }
 
     @Override
     public List<String> getClassPath() throws Exception {
-        return null;
+        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
+        return new ArrayList<>(info.classPath);
     }
 
     @Override
@@ -85,9 +83,8 @@ public class GradleProject implements Project {
 
         unit.Files = new LinkedList<>();
         Path root = gradleFile.getParent().toAbsolutePath().normalize();
-        for (String file : info.sources) {
-            unit.Files.add(PathUtil.normalize(root.relativize(Paths.get(file)).toString()));
-        }
+        unit.Files.addAll(info.sources.stream().map(file ->
+                PathUtil.normalize(root.relativize(Paths.get(file)).toString())).collect(Collectors.toList()));
         unit.sortFiles();
 
         // This will list all dependencies, not just direct ones.
@@ -109,5 +106,14 @@ public class GradleProject implements Project {
             }
         }
         return units;
+    }
+
+    private static BuildAnalysis.BuildInfo getBuildInfo(Path path) throws IOException {
+        BuildAnalysis.BuildInfo ret = buildInfoCache.get(path);
+        if (ret == null) {
+            ret = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), path);
+            buildInfoCache.put(path, ret);
+        }
+        return ret;
     }
 }

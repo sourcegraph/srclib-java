@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,7 +45,7 @@ public class GraphCommand {
         Project proj = unit.getProject();
         Resolver rs = new Resolver(proj);
         try {
-            String classpath = StringUtils.join(proj.getClassPath(), System.getProperty("path.separator"));
+            String classpath = StringUtils.join(proj.getClassPath(), SystemUtils.PATH_SEPARATOR);
             Grapher grapher = new Grapher(classpath, StringUtils.EMPTY, rawGraph);
             grapher.graphFilesAndDirs(unit.Dir, unit.Files);
             grapher.close();
@@ -89,7 +90,7 @@ public class GraphCommand {
     }
 
     static class Graph {
-        List<Def> Defs = new LinkedList<Def>();
+        List<Def> Defs = new LinkedList<>();
         List<Ref> Refs = new LinkedList<>();
         List<Doc> Docs = new LinkedList<>();
     }

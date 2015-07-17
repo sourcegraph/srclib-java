@@ -31,14 +31,14 @@ public class Grapher {
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
-        diags = new DiagnosticCollector<JavaFileObject>();
+        diags = new DiagnosticCollector<>();
         fileManager = compiler.getStandardFileManager(diags, null, null);
 
         javacOpts = new ArrayList<>();
         javacOpts.add("-classpath");
-        javacOpts.add(classpath != null ? classpath : "");
+        javacOpts.add(classpath != null ? classpath : StringUtils.EMPTY);
         javacOpts.add("-sourcepath");
-        javacOpts.add(sourcepath != null ? sourcepath : "");
+        javacOpts.add(sourcepath != null ? sourcepath : StringUtils.EMPTY);
 
         // Speed up compilation by not doing dataflow, code gen, etc.
         javacOpts.add("-XDcompilePolicy=attr");

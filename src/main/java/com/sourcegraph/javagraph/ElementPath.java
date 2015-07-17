@@ -58,7 +58,7 @@ public class ElementPath {
             SourcePositions sp = trees.getSourcePositions();
             if (tp != null) {
                 String filename = tp.getCompilationUnit().getSourceFile().getName();
-                String fileBasename = new File(filename).getName().replace(".java", "");
+                String fileBasename = new File(filename).getName().replace(".java", StringUtils.EMPTY);
                 name = "p-" + fileBasename + "-" + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             } else {
                 return null;

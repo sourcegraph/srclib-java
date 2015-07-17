@@ -1,43 +1,52 @@
-allprojects { task srclibCollectMetaInformation << {
+allprojects {
+    task srclibCollectMetaInformation << {
 
-  	String classpath = ""
-  	if (project.plugins.hasPlugin("java")) {
-   		classpath = configurations.runtime.asPath
-  	}
+        String desc = project.description
+        if (desc == null) {
+            desc = ""
+        }
 
-  	String desc = project.description
-  	if (desc == null) { 
-  		desc = ""
- 	}
+        println "DESCRIPTION $desc"
+        println "GROUP $project.group"
+        println "VERSION $project.version"
+        println "ARTIFACT $project.name"
 
-  	println "DESCRIPTION $desc"
-  	println "GROUP $project.group"
-  	println "VERSION $project.version"
-  	println "ARTIFACT $project.name"
-  	println "CLASSPATH $classpath"
+        try {
+            project.configurations.each {
+                conf ->
+                    conf.resolvedConfiguration.getResolvedArtifacts().each {
+                        String group = it.moduleVersion.id.group
+                        String name = it.moduleVersion.id.name
+                        String version = it.moduleVersion.id.version
+                        String file = it.file
+                        println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                    }
+            }
+        } catch (ignored) {
+        }
 
-  	try {
-   		project.configurations.each { 
-   			conf -> conf.resolvedConfiguration.getResolvedArtifacts().each {
-     			String group = it.moduleVersion.id.group
-     			String name = it.moduleVersion.id.name
-     			String version = it.moduleVersion.id.version
-     			String file = it.file
-     			println "DEPENDENCY $conf.name:$group:$name:$version:$file"
-    		}
-   		}
-  	} catch (Exception e) {}
+        try {
+            plugins.withType(JavaPlugin) {
+                sourceSets.all {
+                    java {
+                        files.each { File file ->
+                            println "SOURCEFILE $file.absolutePath"
+                        }
 
-  	try {
-    	plugins.withType(JavaPlugin) {
-        	sourceSets.all {
-            	java {
-    				files.each {File file ->
-    					println "SOURCEFILE $file.absolutePath"
-    				}
+                    }
+                }
+            }
+        } catch (ignored) {
+        }
 
-            	}
-        	}
-    	}
-  	} catch (Exception e) {}
-}}
+        try {
+            plugins.withType(JavaPlugin) {
+                configurations.each { Configuration config ->
+                    println "CLASSPATH $config.asPath"
+                }
+            }
+        } catch (ignored) {
+        }
+
+    }
+}

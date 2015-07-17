@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.Parameter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ScanCommand {
     public void Execute() {
         try {
             if (repoURI == null) {
-                repoURI = "";
+                repoURI = StringUtils.EMPTY;
             }
             if (subdir == null) {
                 subdir = ".";
