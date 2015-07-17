@@ -5,6 +5,8 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.building.ModelBuildingException;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
@@ -17,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Resolver {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Resolver.class);
+
     private final Project proj;
 
     public Resolver(Project proj) {
@@ -35,7 +40,7 @@ public class Resolver {
         try {
             jarFile = getOriginJARFilePath(origin);
         } catch (URISyntaxException e) {
-            System.err.println("Error getting origin file path for origin: " + origin.toString() + "; exception was " + e.toString());
+            LOGGER.warn("Error getting origin file path for origin: {}", origin, e);
             resolvedOrigins.put(origin, null);
             return null;
         }
@@ -49,7 +54,7 @@ public class Resolver {
         try {
             rawDep = proj.getDepForJAR(jarFile);
         } catch (Exception e) {
-            System.err.println("Error resolving JAR file path " + jarFile + " to dependency: " + e.toString());
+            LOGGER.warn("Error resolving JAR file path {} to dependency", jarFile, e);
         }
         if (rawDep == null) {
             resolvedOrigins.put(origin, null);
@@ -58,11 +63,10 @@ public class Resolver {
 
         DepResolution res = resolveRawDep(rawDep);
         if (res.Error != null) {
-            System.err.println("Error resolving raw dependency " + rawDep.toString() + " to dep target: " + res.Error);
+            LOGGER.warn("Error resolving raw dependency {} to dep taget", rawDep, res.Error);
             resolvedOrigins.put(origin, null);
             return null;
         }
-        // System.err.println("## Resolved " + rawDep.toString() + " to " + res.toString());
         resolvedOrigins.put(origin, res.Target);
         return res.Target;
     }
@@ -160,7 +164,7 @@ public class Resolver {
             try {
                 depGroupID = mvnProj.getMavenProject().getGroupId();
             } catch (ModelBuildingException e) {
-                e.printStackTrace();
+                LOGGER.warn("Failed to build Maven model", e);
             }
             if (depGroupID != null && depGroupID.equals(d.groupID)) {
                 ResolvedTarget target = new ResolvedTarget();
@@ -211,7 +215,7 @@ public class Resolver {
         }
 
         if (res.Error != null)
-            System.err.println("Error in resolving dependency - " + res.Error);
+            LOGGER.warn("Error in resolving dependency {} - {}", d, res.Error);
 
         return res;
     }

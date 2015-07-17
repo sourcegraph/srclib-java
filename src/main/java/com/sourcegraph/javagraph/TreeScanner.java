@@ -7,6 +7,8 @@ import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -21,6 +23,9 @@ import java.util.List;
 import java.util.Set;
 
 public class TreeScanner extends TreePathScanner<Void, Void> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
+
     private final Trees trees;
     private final GraphWriter emit;
     private final SourcePositions srcPos;
@@ -65,8 +70,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         try {
             emit.writeRef(r);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
@@ -104,8 +108,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         try {
             emit.writeDef(s);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
@@ -114,7 +117,12 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     private void error(String message) {
         if (!verbose) return;
         Tree node = getCurrentPath().getLeaf();
-        System.err.println(compilationUnit.getSourceFile().getName() + ":" + srcPos.getStartPosition(compilationUnit, node) + ": " + message + " [node " + node.getKind() + "]");
+
+        LOGGER.warn("{}:{} {} [node {}]",
+                compilationUnit.getSourceFile().getName(),
+                srcPos.getStartPosition(compilationUnit, node),
+                message,
+                node.getKind());
     }
 
     private DefKey currentDefKey() {
@@ -179,15 +187,15 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         if (isCtor) {
             if (isSynthetic) {
                 if (currentElement() == null) {
-                    System.err.println("currentElement() == null (synthetic)");
+                    LOGGER.warn("currentElement() == null (synthetic)");
                     return null;
                 }
                 if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (synthetic)");
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (synthetic)");
                     return null;
                 }
                 if (trees.getPath(currentElement().getEnclosingElement()) == null) {
-                    System.err.println("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
+                    LOGGER.warn("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
                     return null;
                 }
 
@@ -203,15 +211,15 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
             } else {
                 if (spans == null) {
-                    System.err.println("spans == null (non-synthetic)");
+                    LOGGER.warn("spans == null (non-synthetic)");
                     return null;
                 }
                 if (currentElement() == null) {
-                    System.err.println("currentElement() == null (non-synthetic)");
+                    LOGGER.warn("currentElement() == null (non-synthetic)");
                     return null;
                 }
                 if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (non-synthetic)");
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (non-synthetic)");
                     return null;
                 }
 
@@ -264,7 +272,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     public void scanPackageName(Tree node) {
         if (getCurrentPath() == null) {
-            System.err.println("getCurrentPath() == null (scanPackageName)");
+            LOGGER.warn("Current path is null");
             return;
         }
 
@@ -294,7 +302,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             try {
                 emitRef(spans.name(node), false);
             } catch (Spans.SpanException e) {
-                System.err.println("SpanException: " + e.getMessage());
+                LOGGER.warn("Span exception", e);
             }
         }
         super.visitMemberSelect(node, p);

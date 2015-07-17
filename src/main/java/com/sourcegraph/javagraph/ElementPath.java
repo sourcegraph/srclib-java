@@ -5,6 +5,8 @@ import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.element.*;
 import javax.lang.model.util.ElementKindVisitor8;
@@ -15,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ElementPath {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElementPath.class);
+
     private final List<String> components = new ArrayList<>(5);
 
     public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
@@ -107,7 +112,8 @@ public class ElementPath {
 
         @Override
         public ElementPath visitUnknown(Element e, ElementPath p) {
-            System.err.println("Element visitor: unknown element " + e.getSimpleName().toString() + " of type " + e.getKind().toString() + " at " + getSourcePos(e));
+
+            LOGGER.warn("Element visitor: unknown element {} of type {} at {}", e.getSimpleName(), e.getKind(), getSourcePos(e));
             String name = e.getSimpleName().toString();
             if (name.isEmpty()) {
                 name = "u-" + getUniqueID(e);

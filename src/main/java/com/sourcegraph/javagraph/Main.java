@@ -1,21 +1,27 @@
 package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.JCommander;
-import com.jcabi.manifests.Manifests;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Main {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     private static final String VERSION_ENTRY = "Javagraph-Version";
 
     public static void main(String[] args) throws IOException {
-        String version = "development";
-        if (Manifests.exists(VERSION_ENTRY)) {
-            version = Manifests.read(VERSION_ENTRY);
-        }
-        System.err.println("Using srclib-java version '" + version + "'");
+        String version = getVersion();
+
+        LOGGER.info("Using srclib-java version {}", version);
+        LOGGER.info("Current working directory [{}]", SystemUtils.getUserDir());
+        LOGGER.info("Command line arguments [{}]", StringUtils.join(args, ' '));
 
         if (SystemUtils.IS_OS_WINDOWS) {
             args = adjustWindowsArgs(args);
@@ -35,7 +41,7 @@ public class Main {
         try {
             jc.parse(args);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LOGGER.error("Unable to parse command line arguments", e);
             System.exit(1);
         }
 
@@ -50,7 +56,7 @@ public class Main {
                 depresolve.Execute();
                 break;
             default:
-                System.out.println("Unknown command");
+                LOGGER.error("Unknown command {}", jc.getParsedCommand());
                 jc.usage();
                 System.exit(1);
         }
@@ -72,5 +78,20 @@ public class Main {
             ret[i++] = arg;
         }
         return ret;
+    }
+
+    private static String getVersion() {
+        String version = "development";
+        try {
+            InputStream manifestInputStream = Main.class.getResourceAsStream("/META-INF/MANIFEST.MF");
+            if (manifestInputStream != null) {
+                Properties properties = new Properties();
+                properties.load(manifestInputStream);
+                version = properties.getProperty(VERSION_ENTRY, version);
+            }
+        } catch (IOException e) {
+            // ignore
+        }
+        return version;
     }
 }

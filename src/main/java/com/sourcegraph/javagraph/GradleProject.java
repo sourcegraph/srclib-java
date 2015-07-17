@@ -2,6 +2,8 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class GradleProject implements Project {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GradleProject.class);
 
     private SourceUnit unit;
 
@@ -95,15 +99,29 @@ public class GradleProject implements Project {
 
 
     public static Collection<SourceUnit> findAllSourceUnits(String repoURI) throws IOException {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieving source units");
+        }
+
         HashSet<Path> gradleFiles = ScanUtil.findMatchingFiles("build.gradle");
         List<SourceUnit> units = new ArrayList<>();
         for (Path gradleFile : gradleFiles) {
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing Gradle file {}", gradleFile.toAbsolutePath());
+            }
+
             try {
                 SourceUnit unit = createSourceUnit(gradleFile, repoURI);
                 units.add(unit);
             } catch (Exception e) {
-                System.err.println("Error processing Gradle build file " + gradleFile + ": " + e.toString());
+                LOGGER.warn("An error occurred while processing Gradle file {}", gradleFile.toAbsolutePath(), e);
             }
+        }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieved source units");
         }
         return units;
     }
@@ -111,7 +129,13 @@ public class GradleProject implements Project {
     private static BuildAnalysis.BuildInfo getBuildInfo(Path path) throws IOException {
         BuildAnalysis.BuildInfo ret = buildInfoCache.get(path);
         if (ret == null) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Collecting meta information from {}", path.toAbsolutePath());
+            }
             ret = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), path);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Collected meta information from {}", path.toAbsolutePath());
+            }
             buildInfoCache.put(path, ret);
         }
         return ret;
