@@ -27,6 +27,11 @@ public class AndroidSDKProject implements Project {
         return null;
     }
 
+    @Override
+    public String getSourceCodeVersion() throws Exception {
+        return DEFAULT_SOURCE_CODE_VERSION;
+    }
+
     public static SourceUnit createSourceUnit(String subdir) throws Exception {
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";

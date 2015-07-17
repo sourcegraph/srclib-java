@@ -13,7 +13,7 @@ import java.util.List;
 public class TestGrapher extends TestCase {
 	private GraphData graph(String name, String javaSource) {
 		GraphData w = new GraphData();
-		Grapher g = new Grapher(StringUtils.EMPTY, StringUtils.EMPTY, w);
+		Grapher g = new Grapher(StringUtils.EMPTY, StringUtils.EMPTY, Project.DEFAULT_SOURCE_CODE_VERSION, w);
 		List<JavaFileObject> files = new ArrayList<>();
 		files.add(new StringJavaFileObject(name, javaSource));
 		try {

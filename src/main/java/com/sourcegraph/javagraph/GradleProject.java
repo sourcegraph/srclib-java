@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.maven.model.building.ModelBuildingException;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,11 @@ public class GradleProject implements Project {
     public List<String> getClassPath() throws Exception {
         BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
         return new ArrayList<>(info.classPath);
+    }
+
+    public String getSourceCodeVersion() throws ModelBuildingException, IOException {
+        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
+        return info.sourceVersion;
     }
 
     @Override

@@ -28,4 +28,10 @@ public class GenericProject implements Project {
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
         return null;
     }
+
+    @Override
+    public String getSourceCodeVersion() throws Exception {
+        return DEFAULT_SOURCE_CODE_VERSION;
+    }
+
 }

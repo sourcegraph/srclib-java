@@ -10,6 +10,8 @@ allprojects {
         println "GROUP $project.group"
         println "VERSION $project.version"
         println "ARTIFACT $project.name"
+        println "SOURCEVERSION $project.sourceCompatibility"
+
 
         try {
             project.configurations.each {

@@ -62,7 +62,7 @@ public class GraphCommand {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Using classpath [{}]", classpath);
             }
-            Grapher grapher = new Grapher(classpath, StringUtils.EMPTY, rawGraph);
+            Grapher grapher = new Grapher(classpath, StringUtils.EMPTY, proj.getSourceCodeVersion(), rawGraph);
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Starting graph collection");
             }
