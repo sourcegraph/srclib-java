@@ -12,7 +12,11 @@ public interface Project {
 
     public List<String> getClassPath() throws Exception;
 
+    public List<String> getSourcePath() throws Exception;
+
     public RawDependency getDepForJAR(Path jarFile) throws Exception;
 
     public String getSourceCodeVersion() throws Exception;
+
+    public String getSourceCodeEncoding() throws Exception;
 }

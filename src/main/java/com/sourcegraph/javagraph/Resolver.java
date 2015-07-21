@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,6 +18,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Resolver {
 
@@ -25,6 +29,24 @@ public class Resolver {
     private final Project proj;
 
     private Map<String, DepResolution> depsCache;
+
+    private static Map<Pattern, String> overrides;
+
+    static {
+        overrides = new HashMap<>();
+        InputStream is = Resolver.class.getResourceAsStream("/resolver.properties");
+        if (is != null) {
+            try {
+                Properties props = new Properties();
+                props.load(is);
+                for (Object key : props.keySet()) {
+                    overrides.put(Pattern.compile(key.toString()), props.get(key).toString());
+                }
+            } catch (IOException e) {
+                LOGGER.warn("Failed to load substitution properties", e);
+            }
+        }
+    }
 
     public Resolver(Project proj) {
         this.proj = proj;
@@ -48,6 +70,12 @@ public class Resolver {
             return null;
         }
 
+        if (jarFile == null) {
+            // TODO (alexsaveliev) check with sqs what to do in this case (if there is no jar file)
+            resolvedOrigins.put(origin, null);
+            return null;
+        }
+
         ResolvedTarget target = procesSpecialJar(origin, jarFile);
         if (target != null) {
             return target;
@@ -66,7 +94,6 @@ public class Resolver {
 
         DepResolution res = resolveRawDep(rawDep);
         if (res.Error != null) {
-            LOGGER.warn("Error resolving raw dependency {} to dep taget", rawDep, res.Error);
             resolvedOrigins.put(origin, null);
             return null;
         }
@@ -116,39 +143,23 @@ public class Resolver {
                 path = path.substring(0, i);
             }
             return FileSystems.getDefault().getPath(path);
+        } else {
+            // TODO (alexsaveliev) should we report an error or what?
+            //throw new URISyntaxException(origin.toString(), "def origin URI must be a jar:file: URI");
+            return null;
         }
-        throw new URISyntaxException(origin.toString(), "def origin URI must be a jar:file: URI");
     }
-
-    /**
-     * Provide Clone URL overrides for different groupid/artifactid source
-     * units
-     */
-    static HashMap<String, String> overrides = new HashMap<String, String>() {
-        {
-            put("org.hamcrest/", "https://github.com/hamcrest/JavaHamcrest");
-            put("com.badlogicgames.gdx/",
-                    "https://github.com/libgdx/libgdx");
-            put("com.badlogicgames.jglfw/",
-                    "https://github.com/badlogic/jglfw");
-            put("org.json/json",
-                    "https://github.com/douglascrockford/JSON-java");
-            put("junit/junit", "https://github.com/junit-team/junit");
-            put("org.apache.commons/commons-csv", "https://github.com/apache/commons-csv");
-            put("org.slf4j/slf4j-api", "https://github.com/qos-ch/slf4j");
-            put("org.mongodb.morphia/morphia", "https://github.com/mongodb/morphia");
-            put("com.google.guava/guava", "https://github.com/google/guava");
-        }
-    };
 
     /**
      * @param lookup GroupID + "/" + ArtifactID
      * @return A VCS url, if an override was found, null if not.
      */
     public static String checkOverrides(String lookup) {
-        for (String key : overrides.keySet()) {
-            if (lookup.startsWith(key))
-                return overrides.get(key);
+        for (Map.Entry<Pattern, String> entry : overrides.entrySet()) {
+            Matcher m = entry.getKey().matcher(lookup);
+            if (m.find()) {
+                return m.replaceAll(entry.getValue());
+            }
         }
         return null;
     }
@@ -167,24 +178,33 @@ public class Resolver {
             return resolution;
         }
 
+        String depGroupID = null;
+
         // HACK: Assume that if the groupID of the RawDependency equals the groupID of the current project, then it is from the same repo and shouldn't be resolved externally.
         if (this.proj instanceof MavenProject) {
             MavenProject mvnProj = (MavenProject)this.proj;
-            String depGroupID = null;
             try {
                 depGroupID = mvnProj.getMavenProject().getGroupId();
             } catch (ModelBuildingException e) {
                 LOGGER.warn("Failed to build Maven model", e);
             }
-            if (depGroupID != null && depGroupID.equals(d.groupID)) {
-                ResolvedTarget target = new ResolvedTarget();
-                target.ToUnit = d.groupID + "/" + d.artifactID;
-                target.ToUnitType = "JavaArtifact";
-                target.ToVersionString = d.version;
-                resolution = new DepResolution(d, target);
-                depsCache.put(key, resolution);
-                return resolution;
+        } else if (this.proj instanceof GradleProject) {
+            GradleProject gradleProject = (GradleProject) this.proj;
+            try {
+                depGroupID = gradleProject.getAttributes().groupID;
+            } catch (Exception e) {
+                LOGGER.warn("Failed to build Gradle model", e);
             }
+        }
+
+        if (depGroupID != null && depGroupID.equals(d.groupID)) {
+            ResolvedTarget target = new ResolvedTarget();
+            target.ToUnit = d.groupID + "/" + d.artifactID;
+            target.ToUnitType = "JavaArtifact";
+            target.ToVersionString = d.version;
+            resolution = new DepResolution(d, target);
+            depsCache.put(key, resolution);
+            return resolution;
         }
 
         // Get the url to the POM file for this artifact

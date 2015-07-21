@@ -17,6 +17,8 @@ import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
+import org.eclipse.aether.artifact.ArtifactType;
+import org.eclipse.aether.artifact.ArtifactTypeRegistry;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
 import org.eclipse.aether.collection.DependencyCollectionException;
@@ -32,6 +34,7 @@ import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
 import org.eclipse.aether.transport.http.HttpTransporterFactory;
+import org.eclipse.aether.util.artifact.DefaultArtifactTypeRegistry;
 import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,17 +133,18 @@ public class MavenProject implements Project {
             }
             mavenDependencyArtifacts = new HashSet<>();
             Model model = getMavenProject().getModel();
-            Artifact artifact = new DefaultArtifact(model.getGroupId(),
-                    model.getArtifactId(),
-                    StringUtils.EMPTY,
-                    "jar",
-                    model.getVersion());
             try {
-                resolveArtifactDependencies(artifact, mavenDependencyArtifacts);
+                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts, "compile", "jar");
             } catch (DependencyCollectionException | DependencyResolutionException e) {
-                LOGGER.warn("Failed to resolve dependencies of {}: {}", artifact, e.toString());
+                LOGGER.warn("Failed to resolve dependencies of {}", e.toString());
+            }
+            try {
+                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts, "test", "test-jar");
+            } catch (DependencyCollectionException | DependencyResolutionException e) {
+                LOGGER.warn("Failed to resolve dependencies of {}", e.toString());
             }
 
+            /*
             for (Dependency dependency : getMavenProject().getDependencies()) {
                 try {
                     artifact = new DefaultArtifact(dependency.getGroupId(),
@@ -153,6 +157,7 @@ public class MavenProject implements Project {
                     LOGGER.warn("Failed to resolve dependencies of {}: {}", artifact, e.toString());
                 }
             }
+            */
         }
 
         return mavenDependencyArtifacts;
@@ -193,6 +198,12 @@ public class MavenProject implements Project {
     }
 
     @Override
+    public List<String> getSourcePath() throws Exception {
+        // TODO (alexsaveliev) retrieve source path
+        return null;
+    }
+
+    @Override
     public String getSourceCodeVersion() throws ModelBuildingException, IOException {
 
         Properties props = getMavenProject().getProperties();
@@ -200,6 +211,12 @@ public class MavenProject implements Project {
             return DEFAULT_SOURCE_CODE_VERSION;
         }
         return props.getProperty("maven.compiler.source", DEFAULT_SOURCE_CODE_VERSION);
+    }
+
+    @Override
+    public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
+        // TODO (alexsaveliev): retrieve source encoding from pom.xml if there is any
+        return null;
     }
 
     @Override
@@ -373,30 +390,44 @@ public class MavenProject implements Project {
      * @throws DependencyCollectionException
      * @throws DependencyResolutionException
      */
-    private void resolveArtifactDependencies(Artifact artifact,
-                                             Set<Artifact> targets) throws
+    private void resolveArtifactDependencies(List<Dependency> dependencies,
+                                             Set<Artifact> targets,
+                                             String scope,
+                                             String type) throws
             ModelBuildingException, DependencyCollectionException, DependencyResolutionException {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving artifact dependencies for {}", artifact);
+            //LOGGER.debug("Resolving artifact dependencies for {} - {}", artifact, scope);
         }
 
+        List<org.eclipse.aether.graph.Dependency> deps = new ArrayList<>();
+        ArtifactTypeRegistry artifactTypeRegistry = new DefaultArtifactTypeRegistry();
+        for (Dependency dependency :dependencies) {
+            Artifact artifact = new DefaultArtifact(dependency.getGroupId(),
+                    dependency.getArtifactId(),
+                    dependency.getClassifier(),
+                    "jar",
+                    dependency.getVersion(),
+                    artifactTypeRegistry.get(type));
+            deps.add(new org.eclipse.aether.graph.Dependency(artifact, scope));
+        }
         CollectRequest collectRequest = new CollectRequest();
-        collectRequest.setRoot(new org.eclipse.aether.graph.Dependency(artifact, "compile"));
+        collectRequest.setDependencies(deps);
+        //collectRequest.setRoot(new org.eclipse.aether.graph.Dependency(artifact, scope));
         List<RemoteRepository> repoz = getMavenProject().getRepositories().stream().
                 map(ArtifactDescriptorUtils::toRemoteRepository).collect(Collectors.toList());
         collectRequest.setRepositories(repoz);
 
         DependencyNode node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Collected dependencies for {}", artifact);
+            //LOGGER.debug("Collected dependencies for {}", artifact);
         }
 
         DependencyRequest projectDependencyRequest = new DependencyRequest(node, null);
 
         repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved dependencies for {}", artifact);
+            //LOGGER.debug("Resolved dependencies for {}", artifact);
         }
 
         PreorderNodeListGenerator nlg = new PreorderNodeListGenerator();
@@ -406,7 +437,7 @@ public class MavenProject implements Project {
                 collect(Collectors.toList()));
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved artifact dependencies for {}", artifact);
+            //LOGGER.debug("Resolved artifact dependencies for {}", artifact);
         }
 
     }

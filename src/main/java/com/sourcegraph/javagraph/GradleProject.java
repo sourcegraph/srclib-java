@@ -19,61 +19,100 @@ public class GradleProject implements Project {
 
     private SourceUnit unit;
 
-    private static Map<Path, BuildAnalysis.BuildInfo> buildInfoCache = new HashMap<>();
+    private static Map<Path, Map<String, BuildAnalysis.BuildInfo>> buildInfoCache = new HashMap<>();
 
     public GradleProject(SourceUnit unit) {
         this.unit = unit;
     }
 
-    public static BuildAnalysis.BuildInfo getGradleAttrs(String repoURI, Path build) throws IOException {
-        BuildAnalysis.BuildInfo ret = getBuildInfo(build);
+    public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(String repoURI, Path build) throws IOException {
+        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(build);
 
         // HACK: fix the project name inside docker containers. By default, the name of a Gradle project is the name
         // of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
         // every Gradle project rooted at the VCS root directory "src". This hack could erroneously change the project
         // name if the name is actually supposed to be "src" (e.g., if the name is set manually).
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null && ret.attrs.artifactID.equals("src")) {
-            String[] parts = repoURI.split("/");
-            ret.attrs.artifactID = parts[parts.length - 1];
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            ret.values().stream().filter(info -> info.attrs.artifactID.equals("src")).forEach(info -> {
+                String[] parts = repoURI.split("/");
+                info.attrs.artifactID = parts[parts.length - 1];
+            });
         }
 
         return ret;
     }
 
-    public static Path getWrapper() {
-        Path result;
+    private static Path getWrapper(Path gradleFile) {
+        // looking for gradle wrapper from build file's path to current working dir
+        String gradleExe;
         if (SystemUtils.IS_OS_WINDOWS) {
-            result = Paths.get("./gradlew.bat").toAbsolutePath();
+            gradleExe = "gradlew.bat";
         } else {
-            result = Paths.get("./gradlew").toAbsolutePath();
+            gradleExe = "gradlew";
         }
-        File tmp = new File(result.toString());
-        if (tmp.exists() && !tmp.isDirectory()) {
-            return result;
+        Path root = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
+        Path current = gradleFile.toAbsolutePath().getParent().toAbsolutePath().normalize();
+        while (true) {
+            Path p = current.resolve(gradleExe);
+            File exeFile = p.toFile();
+            if (exeFile.exists() && !exeFile.isDirectory()) {
+                return p;
+            }
+            if (current.startsWith(root) && !current.equals(root)) {
+                Path parent = current.getParent();
+                if (parent == null || parent.equals(current)) {
+                    break;
+                }
+                current = parent;
+            } else {
+                break;
+            }
         }
 
         return null;
     }
 
-    public static HashSet<RawDependency> getGradleDependencies(Path build) throws IOException {
-        return getBuildInfo(build).dependencies;
-    }
-
     @Override
     public Set<RawDependency> listDeps() throws Exception {
-        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
+        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
         return info.dependencies;
     }
 
     @Override
     public List<String> getClassPath() throws Exception {
-        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
-        return new ArrayList<>(info.classPath);
+        Path path = Paths.get((String) unit.Data.get("GradleFile"));
+        Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(path);
+        Set<String> ret = new LinkedHashSet<>();
+        for (BuildAnalysis.BuildInfo info : infos) {
+            ret.addAll(info.classPath);
+        }
+        return new ArrayList<>(ret);
     }
 
+    @Override
+    public List<String> getSourcePath() throws Exception {
+        Path path = Paths.get((String) unit.Data.get("GradleFile"));
+        Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(path);
+        List<String> ret = new ArrayList<>();
+        for (BuildAnalysis.BuildInfo info : infos) {
+            if (unit.Name.equals(info.attrs.groupID + '/' + info.attrs.artifactID)) {
+                continue;
+            }
+            ret.addAll(info.sourceDirs);
+        }
+        return ret;
+    }
+
+    @Override
     public String getSourceCodeVersion() throws ModelBuildingException, IOException {
-        BuildAnalysis.BuildInfo info = getBuildInfo(Paths.get((String) unit.Data.get("GradleFile")));
+        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
         return info.sourceVersion;
+    }
+
+    @Override
+    public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
+        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
+        return info.sourceEncoding;
     }
 
     @Override
@@ -81,26 +120,45 @@ public class GradleProject implements Project {
         return null;
     }
 
-    private static SourceUnit createSourceUnit(Path gradleFile, String repoURI) throws IOException, XmlPullParserException {
-        BuildAnalysis.BuildInfo info = getGradleAttrs(repoURI, gradleFile);
+    public BuildAnalysis.POMAttrs getAttributes() throws Exception {
+        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
+        return info.attrs;
+    }
 
-        final SourceUnit unit = new SourceUnit();
-        unit.Type = "JavaArtifact";
-        unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
-        unit.Dir = PathUtil.normalize(gradleFile.getParent().toString());
-        unit.Data.put("GradleFile", PathUtil.normalize(gradleFile.toString()));
-        unit.Data.put("Description", info.attrs.description);
+    private static Collection<SourceUnit> createSourceUnits(
+            Path gradleFile, String repoURI) throws IOException, XmlPullParserException {
+        Map<String, BuildAnalysis.BuildInfo> infos = getGradleAttrs(repoURI, gradleFile);
 
-        unit.Files = new LinkedList<>();
-        Path root = gradleFile.getParent().toAbsolutePath().normalize();
-        unit.Files.addAll(info.sources.stream().map(file ->
-                PathUtil.normalize(root.relativize(Paths.get(file)).toString())).collect(Collectors.toList()));
-        unit.sortFiles();
+        Collection<SourceUnit> ret = new ArrayList<>();
+        for (BuildAnalysis.BuildInfo info : infos.values()) {
+            final SourceUnit unit = new SourceUnit();
+            unit.Type = "JavaArtifact";
+            unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
+            Path projectRoot = Paths.get(info.projectDir);
+            Path relative = Paths.get(info.rootDir).relativize(projectRoot).normalize();
+            unit.Dir = PathUtil.normalize(relative.toString());
+            unit.Data.put("GradleFile", PathUtil.normalize(gradleFile.normalize().toString()));
+            unit.Data.put("Description", info.attrs.description);
+            Set<String> dirs = info.sourceDirs.stream().map(dir ->
+                    PathUtil.normalize(projectRoot.relativize(Paths.get(dir)).toString())).collect(Collectors.toSet());
+            unit.Data.put("SourceDirs", dirs);
 
-        // This will list all dependencies, not just direct ones.
-        unit.Dependencies = new ArrayList<>(getGradleDependencies(gradleFile));
+            Set<String> projectDependencies = info.projectDependencies.stream().map(dependency ->
+                    PathUtil.normalize(projectRoot.relativize(Paths.get(dependency)).toString())).
+                    collect(Collectors.toSet());
+            unit.Data.put("ProjectDependencies", projectDependencies);
 
-        return unit;
+            unit.Files = new LinkedList<>();
+            unit.Files.addAll(info.sources.stream().map(file ->
+                    PathUtil.normalize(projectRoot.relativize(Paths.get(file)).toString())).collect(Collectors.toList()));
+            unit.sortFiles();
+
+            // This will list all dependencies, not just direct ones.
+            unit.Dependencies = new ArrayList<>(info.dependencies);
+            ret.add(unit);
+        }
+        return ret;
+
     }
 
 
@@ -111,7 +169,7 @@ public class GradleProject implements Project {
         }
 
         HashSet<Path> gradleFiles = ScanUtil.findMatchingFiles("build.gradle");
-        List<SourceUnit> units = new ArrayList<>();
+        Set<SourceUnit> units = new LinkedHashSet<>();
         for (Path gradleFile : gradleFiles) {
 
             if (LOGGER.isDebugEnabled()) {
@@ -119,8 +177,7 @@ public class GradleProject implements Project {
             }
 
             try {
-                SourceUnit unit = createSourceUnit(gradleFile, repoURI);
-                units.add(unit);
+                units.addAll(createSourceUnits(gradleFile, repoURI));
             } catch (Exception e) {
                 LOGGER.warn("An error occurred while processing Gradle file {}", gradleFile.toAbsolutePath(), e);
             }
@@ -132,18 +189,55 @@ public class GradleProject implements Project {
         return units;
     }
 
-    private static BuildAnalysis.BuildInfo getBuildInfo(Path path) throws IOException {
-        BuildAnalysis.BuildInfo ret = buildInfoCache.get(path);
+    private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(Path path) throws IOException {
+        Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
         if (ret == null) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collecting meta information from {}", path.toAbsolutePath());
+                LOGGER.debug("Collecting meta information from {}", path.toAbsolutePath().normalize());
             }
-            ret = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(), path);
+            BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(path), path);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collected meta information from {}", path.toAbsolutePath());
+                LOGGER.debug("Collected meta information from {}", path.toAbsolutePath().normalize());
+            }
+            ret = new HashMap<>();
+            for (BuildAnalysis.BuildInfo info : items) {
+                ret.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
             }
             buildInfoCache.put(path, ret);
         }
         return ret;
     }
+
+    private static BuildAnalysis.BuildInfo getBuildInfo(SourceUnit unit) throws IOException {
+        Path path = Paths.get((String) unit.Data.get("GradleFile"));
+        return getBuildInfo(path).get(unit.Name);
+    }
+
+    private static Collection<BuildAnalysis.BuildInfo> collectBuildInfo(Path build) throws IOException {
+        Set<Path> visited = new HashSet<>();
+        Collection<BuildAnalysis.BuildInfo> infos = new LinkedHashSet<>();
+        collectBuildInfo(build, infos, visited);
+        return infos;
+    }
+
+    private static void collectBuildInfo(Path build,
+                                         Collection<BuildAnalysis.BuildInfo> infos,
+                                         Set<Path> visited) throws  IOException {
+        visited.add(build.toAbsolutePath().normalize());
+        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(build);
+        if (ret == null) {
+            return;
+        }
+        for (BuildAnalysis.BuildInfo info : ret.values()) {
+            infos.add(info);
+            for (String gradleFile : info.projectDependencies) {
+                Path root = Paths.get(info.projectDir).toAbsolutePath().normalize();
+                build = root.resolve(gradleFile).toAbsolutePath().normalize();
+                if (!visited.contains(build)) {
+                    collectBuildInfo(build, infos, visited);
+                }
+            }
+        }
+    }
+
 }

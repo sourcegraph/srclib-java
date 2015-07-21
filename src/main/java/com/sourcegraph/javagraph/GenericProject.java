@@ -25,6 +25,11 @@ public class GenericProject implements Project {
     }
 
     @Override
+    public List<String> getSourcePath() throws Exception {
+        return null;
+    }
+
+    @Override
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
         return null;
     }
@@ -32,6 +37,11 @@ public class GenericProject implements Project {
     @Override
     public String getSourceCodeVersion() throws Exception {
         return DEFAULT_SOURCE_CODE_VERSION;
+    }
+
+    @Override
+    public String getSourceCodeEncoding() throws Exception {
+        return null;
     }
 
 }

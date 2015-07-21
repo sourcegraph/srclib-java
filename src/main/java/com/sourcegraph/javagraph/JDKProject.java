@@ -25,9 +25,19 @@ public class JDKProject implements Project {
     }
 
     @Override
+    public List<String> getSourcePath() throws Exception {
+        return null;
+    }
+
+    @Override
     public String getSourceCodeVersion() throws ModelBuildingException, IOException {
 
         return DEFAULT_SOURCE_CODE_VERSION;
+    }
+
+    @Override
+    public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
+        return null;
     }
 
     @Override
