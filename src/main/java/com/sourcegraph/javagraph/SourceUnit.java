@@ -1,6 +1,8 @@
 package com.sourcegraph.javagraph;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,5 +54,18 @@ public class SourceUnit {
 
     public void sortFiles() {
         Files.sort(String::compareTo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Name == null ? 0 : Name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof SourceUnit)) {
+            return false;
+        }
+        return StringUtils.equals(Name, ((SourceUnit) o).Name);
     }
 }

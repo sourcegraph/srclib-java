@@ -275,6 +275,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             LOGGER.warn("Current path is null");
             return;
         }
+        if (node == null) {
+            // no package
+            return;
+        }
 
         TreePath pkgName = new TreePath(getCurrentPath(), node);
         new PackageNameScanner() {

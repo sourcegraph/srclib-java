@@ -6,6 +6,7 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Grapher {
 
@@ -32,7 +30,7 @@ public class Grapher {
     private final GraphWriter emit;
     private final List<String> javacOpts;
 
-    public Grapher(String classpath, String sourcepath, String sourceVersion, GraphWriter emit) {
+    public Grapher(String classpath, Collection<String> sourcepath, String sourceVersion, String sourceEncoding, GraphWriter emit) {
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
@@ -42,8 +40,10 @@ public class Grapher {
         javacOpts = new ArrayList<>();
         javacOpts.add("-classpath");
         javacOpts.add(classpath != null ? classpath : StringUtils.EMPTY);
-        javacOpts.add("-sourcepath");
-        javacOpts.add(sourcepath != null ? sourcepath : StringUtils.EMPTY);
+        if (sourcepath != null && !sourcepath.isEmpty()) {
+            javacOpts.add("-sourcepath");
+            javacOpts.add(StringUtils.join(sourcepath, SystemUtils.PATH_SEPARATOR));
+        }
 
         // Speed up compilation by not doing dataflow, code gen, etc.
         javacOpts.add("-XDcompilePolicy=attr");
@@ -52,6 +52,13 @@ public class Grapher {
 
         javacOpts.add("-source");
         javacOpts.add(sourceVersion);
+
+        javacOpts.add("-implicit:none");
+
+        if (!StringUtils.isEmpty(sourceEncoding)) {
+            javacOpts.add("-encoding");
+            javacOpts.add(sourceEncoding);
+        }
 
         // This is necessary to produce Elements (and therefore defs and refs) when compilation errors occur. It will still probably fail on syntax errors, but typechecking errors are survivable.
         javacOpts.add("-proc:none");

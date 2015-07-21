@@ -1,40 +1,55 @@
 allprojects {
-    task srclibCollectMetaInformation << {
+    task srclibCollectMetaInformation << { task ->
 
-        String desc = project.description
+        String desc = task.project.description
         if (desc == null) {
             desc = ""
         }
 
+        println "ARTIFACT $task.project.name"
         println "DESCRIPTION $desc"
-        println "GROUP $project.group"
-        println "VERSION $project.version"
-        println "ARTIFACT $project.name"
-        println "SOURCEVERSION $project.sourceCompatibility"
+        println "GROUP $task.project.group"
+        println "VERSION $task.project.version"
+        println "PROJECTDIR $task.project.projectDir"
+        println "ROOTDIR $task.project.rootDir"
 
 
         try {
-            project.configurations.each {
+            task.project.configurations.each {
                 conf ->
                     conf.resolvedConfiguration.getResolvedArtifacts().each {
                         String group = it.moduleVersion.id.group
                         String name = it.moduleVersion.id.name
                         String version = it.moduleVersion.id.version
                         String file = it.file
-                        println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                        if (conf.name == "compile" || conf.name == "testCompile") {
+                        	println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                        }
                     }
+
+                    conf.getAllDependencies().each {d ->
+                    	if (d instanceof ProjectDependency) {
+                    		Project p = ((ProjectDependency) d).getDependencyProject()
+                        	if (conf.name == "compile" || conf.name == "testCompile") {
+                    			println "PROJECTDEPENDENCY $p.buildFile.absolutePath"
+                    		}
+                    	}
+                    }
+
             }
         } catch (ignored) {
         }
 
         try {
-            plugins.withType(JavaPlugin) {
+            task.project.plugins.withType(JavaPlugin) {
                 sourceSets.all {
                     java {
                         files.each { File file ->
                             println "SOURCEFILE $file.absolutePath"
                         }
-
+                        srcDirs.each { File file ->
+                            println "SOURCEDIR $file.absolutePath"
+                        }
                     }
                 }
             }
@@ -42,9 +57,24 @@ allprojects {
         }
 
         try {
-            plugins.withType(JavaPlugin) {
+            task.project.plugins.withType(JavaPlugin) {
+            	compileJava {
+					println "SOURCEVERSION $sourceCompatibility"
+            		String encoding = options.encoding
+            		if (encoding == null) {
+            			encoding = "";
+            		}
+            		println("ENCODING $encoding")
+            	}
+            }
+        } catch (ignored) {
+        }
+        try {
+            task.project.plugins.withType(JavaPlugin) {
                 configurations.each { Configuration config ->
-                    println "CLASSPATH $config.asPath"
+                   	if (config.name == "compile" || config.name == "testCompile") {
+                    	println "CLASSPATH $config.asPath"
+                    }
                 }
             }
         } catch (ignored) {
