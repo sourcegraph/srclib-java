@@ -16,11 +16,6 @@ public class AndroidSDKProject implements Project {
     }
 
     @Override
-    public Set<RawDependency> listDeps() throws Exception {
-        return null;
-    }
-
-    @Override
     public List<String> getClassPath() throws Exception {
         return null;
     }

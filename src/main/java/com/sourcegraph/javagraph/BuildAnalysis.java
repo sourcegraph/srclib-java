@@ -46,6 +46,7 @@ public class BuildAnalysis {
         public String sourceEncoding;
         public String projectDir;
         public String rootDir;
+        public String gradleFile;
         public HashSet<String> projectDependencies;
 
         public BuildInfo() {
@@ -117,7 +118,9 @@ public class BuildAnalysis {
                 ProcessBuilder pb = new ProcessBuilder(cmd);
 
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Running {} using working directory {}", StringUtils.join(cmd, ' '), workDir);
+                    LOGGER.debug("Running {} using working directory {}",
+                            StringUtils.join(cmd, ' '),
+                            workDir.normalize());
                 }
 
                 pb.directory(new File(workDir.toString()));
@@ -134,6 +137,7 @@ public class BuildAnalysis {
                     while ((line = in.readLine()) != null) {
                         if ("BUILD FAILED".equals(line)) {
                             LOGGER.error("Failed to process {} - gradle build failed", build);
+                            results.clear();
                             break;
                         }
                         String meta[] = parseMeta(line);
@@ -234,6 +238,12 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 info.projectDependencies.add(payload);
+                                break;
+                            case "GRADLEFILE":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.gradleFile = payload;
                                 break;
                             default:
                                 if (LOGGER.isDebugEnabled()) {

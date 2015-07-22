@@ -8,8 +8,6 @@ public interface Project {
 
     public static final String DEFAULT_SOURCE_CODE_VERSION = "1.8";
 
-    public Set<RawDependency> listDeps() throws Exception;
-
     public List<String> getClassPath() throws Exception;
 
     public List<String> getSourcePath() throws Exception;

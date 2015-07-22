@@ -190,11 +190,7 @@ public class Resolver {
             }
         } else if (this.proj instanceof GradleProject) {
             GradleProject gradleProject = (GradleProject) this.proj;
-            try {
-                depGroupID = gradleProject.getAttributes().groupID;
-            } catch (Exception e) {
-                LOGGER.warn("Failed to build Gradle model", e);
-            }
+            depGroupID = gradleProject.getGroupId();
         }
 
         if (depGroupID != null && depGroupID.equals(d.groupID)) {
@@ -246,8 +242,10 @@ public class Resolver {
             res.Error = "Could not download file " + e.getMessage();
         }
 
-        if (res.Error != null)
-            LOGGER.warn("Error in resolving dependency {} - {}", d, res.Error);
+        if (res.Error != null) {
+            // TODO (alexsaveliev) should we consider this situation as a warning or a normal one?
+            LOGGER.info("Unable to resolve dependency {} - {}", d, res.Error);
+        }
         depsCache.put(key, res);
         return res;
     }

@@ -24,7 +24,7 @@ public class ScanUtil {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 if (matcher.matches(file))
-                    result.add(file);
+                    result.add(file.toAbsolutePath().normalize());
 
                 return FileVisitResult.CONTINUE;
             }

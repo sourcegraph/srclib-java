@@ -14,6 +14,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
@@ -181,7 +182,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     @Override
     public Void visitMethod(MethodTree node, Void p) {
-        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == -1;
+        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == Diagnostic.NOPOS;
         boolean isCtor = TreeInfo.isConstructor((JCTree) node);
         int[] nameSpan, defSpan;
         if (isCtor) {
@@ -304,7 +305,16 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
         if (SourceVersion.isIdentifier(node.getIdentifier())) {
             try {
-                emitRef(spans.name(node), false);
+                if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
+                    // TODO (alexsaveliev) otherwise fails on the following block (@result)
+                    /*
+                            callback = (result,processorId)->{
+                                outputQueue.put(result.id, result.item);
+                                idleProcessors.add(processorId);
+                            };
+                     */
+                    emitRef(spans.name(node), false);
+                }
             } catch (Spans.SpanException e) {
                 LOGGER.warn("Span exception", e);
             }
@@ -317,7 +327,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         int[] span = new int[]{
                 (int) srcPos.getStartPosition(compilationUnit, node),
                 (int) srcPos.getEndPosition(compilationUnit, node)};
-        if (span[1] == -1)
+        if (span[1] == Diagnostic.NOPOS)
             return null;
         return span;
     }

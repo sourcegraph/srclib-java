@@ -59,9 +59,6 @@ public class GraphCommand {
                 LOGGER.debug("Resolving classpath");
             }
             String classpath = StringUtils.join(proj.getClassPath(), SystemUtils.PATH_SEPARATOR);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Using classpath [{}]", classpath);
-            }
             Grapher grapher = new Grapher(classpath,
                     proj.getSourcePath(),
                     proj.getSourceCodeVersion(),

@@ -55,6 +55,9 @@ public class Grapher {
 
         javacOpts.add("-implicit:none");
 
+        // turn off warnings
+        javacOpts.add("-Xlint:none");
+
         if (!StringUtils.isEmpty(sourceEncoding)) {
             javacOpts.add("-encoding");
             javacOpts.add(sourceEncoding);
@@ -112,7 +115,12 @@ public class Grapher {
     }
 
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
-        final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, null, javacOpts, null, files);
+        final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, new DiagnosticListener<JavaFileObject>() {
+            @Override
+            public void report(Diagnostic<? extends JavaFileObject> diagnostic) {
+                LOGGER.warn("javac: {}", diagnostic);
+            }
+        }, javacOpts, null, files);
 
         final Trees trees = Trees.instance(task);
 
