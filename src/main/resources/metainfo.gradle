@@ -12,6 +12,7 @@ allprojects {
         println "VERSION $task.project.version"
         println "PROJECTDIR $task.project.projectDir"
         println "ROOTDIR $task.project.rootDir"
+        println "GRADLEFILE $task.project.buildFile.absolutePath"
 
 
         try {

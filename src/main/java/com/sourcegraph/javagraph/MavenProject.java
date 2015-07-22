@@ -163,7 +163,6 @@ public class MavenProject implements Project {
         return mavenDependencyArtifacts;
     }
 
-    @Override
     public Set<RawDependency> listDeps() throws IOException, ModelBuildingException {
 
         if (LOGGER.isDebugEnabled()) {

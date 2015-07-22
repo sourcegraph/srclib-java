@@ -1,5 +1,6 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.building.ModelBuildingException;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -73,46 +74,25 @@ public class GradleProject implements Project {
     }
 
     @Override
-    public Set<RawDependency> listDeps() throws Exception {
-        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
-        return info.dependencies;
-    }
-
-    @Override
+    @SuppressWarnings("unchecked")
     public List<String> getClassPath() throws Exception {
-        Path path = Paths.get((String) unit.Data.get("GradleFile"));
-        Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(path);
-        Set<String> ret = new LinkedHashSet<>();
-        for (BuildAnalysis.BuildInfo info : infos) {
-            ret.addAll(info.classPath);
-        }
-        return new ArrayList<>(ret);
+        return (List<String>) unit.Data.get("ClassPath");
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<String> getSourcePath() throws Exception {
-        Path path = Paths.get((String) unit.Data.get("GradleFile"));
-        Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(path);
-        List<String> ret = new ArrayList<>();
-        for (BuildAnalysis.BuildInfo info : infos) {
-            if (unit.Name.equals(info.attrs.groupID + '/' + info.attrs.artifactID)) {
-                continue;
-            }
-            ret.addAll(info.sourceDirs);
-        }
-        return ret;
+        return (List<String>) unit.Data.get("SourcePath");
     }
 
     @Override
     public String getSourceCodeVersion() throws ModelBuildingException, IOException {
-        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
-        return info.sourceVersion;
+        return (String) unit.Data.get("SourceVersion");
     }
 
     @Override
     public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
-        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
-        return info.sourceEncoding;
+        return (String) unit.Data.get("SourceEncoding");
     }
 
     @Override
@@ -120,33 +100,44 @@ public class GradleProject implements Project {
         return null;
     }
 
-    public BuildAnalysis.POMAttrs getAttributes() throws Exception {
-        BuildAnalysis.BuildInfo info = getBuildInfo(unit);
-        return info.attrs;
+    public String getGroupId() {
+        return (String) unit.Data.get("GroupId");
     }
 
-    private static Collection<SourceUnit> createSourceUnits(
-            Path gradleFile, String repoURI) throws IOException, XmlPullParserException {
+    private static Collection<SourceUnit> createSourceUnits(Path gradleFile,
+                                                            String repoURI,
+                                                            Set<Path> visited)
+            throws IOException, XmlPullParserException {
         Map<String, BuildAnalysis.BuildInfo> infos = getGradleAttrs(repoURI, gradleFile);
 
         Collection<SourceUnit> ret = new ArrayList<>();
         for (BuildAnalysis.BuildInfo info : infos.values()) {
+
+            for (String projectDependency : info.projectDependencies) {
+                Path p = Paths.get(projectDependency).toAbsolutePath().normalize();
+                visited.add(p);
+            }
+
+            if (info.sources.isEmpty()) {
+                // excluding units without sources
+                continue;
+            }
             final SourceUnit unit = new SourceUnit();
             unit.Type = "JavaArtifact";
             unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
             Path projectRoot = Paths.get(info.projectDir);
             Path relative = Paths.get(info.rootDir).relativize(projectRoot).normalize();
             unit.Dir = PathUtil.normalize(relative.toString());
-            unit.Data.put("GradleFile", PathUtil.normalize(gradleFile.normalize().toString()));
+            unit.Data.put("GradleFile", PathUtil.normalize(
+                    projectRoot.relativize(Paths.get(info.gradleFile)).normalize().toString()));
             unit.Data.put("Description", info.attrs.description);
-            Set<String> dirs = info.sourceDirs.stream().map(dir ->
-                    PathUtil.normalize(projectRoot.relativize(Paths.get(dir)).toString())).collect(Collectors.toSet());
-            unit.Data.put("SourceDirs", dirs);
-
-            Set<String> projectDependencies = info.projectDependencies.stream().map(dependency ->
-                    PathUtil.normalize(projectRoot.relativize(Paths.get(dependency)).toString())).
-                    collect(Collectors.toSet());
-            unit.Data.put("ProjectDependencies", projectDependencies);
+            unit.Data.put("GroupId", info.attrs.groupID);
+            if (!StringUtils.isEmpty(info.sourceVersion)) {
+                unit.Data.put("SourceVersion", info.sourceVersion);
+            }
+            if (!StringUtils.isEmpty(info.sourceEncoding)) {
+                unit.Data.put("SourceEncoding", info.sourceEncoding);
+            }
 
             unit.Files = new LinkedList<>();
             unit.Files.addAll(info.sources.stream().map(file ->
@@ -155,6 +146,7 @@ public class GradleProject implements Project {
 
             // This will list all dependencies, not just direct ones.
             unit.Dependencies = new ArrayList<>(info.dependencies);
+
             ret.add(unit);
         }
         return ret;
@@ -168,19 +160,47 @@ public class GradleProject implements Project {
             LOGGER.debug("Retrieving source units");
         }
 
-        HashSet<Path> gradleFiles = ScanUtil.findMatchingFiles("build.gradle");
+        // putting root gradle file first, it may contain references to all the subprojects
+        Set<Path> gradleFiles = new LinkedHashSet<>();
+        File rootGradleFile = new File("build.gradle");
+        if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
+            gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
+        }
+        gradleFiles.addAll(ScanUtil.findMatchingFiles("build.gradle"));
         Set<SourceUnit> units = new LinkedHashSet<>();
+        Set<Path> visited = new HashSet<>();
         for (Path gradleFile : gradleFiles) {
 
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing Gradle file {}", gradleFile.toAbsolutePath());
+            gradleFile = gradleFile.toAbsolutePath().normalize();
+
+            if (visited.contains(gradleFile)) {
+                continue;
             }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing Gradle file {}", gradleFile);
+            }
+            visited.add(gradleFile);
 
             try {
-                units.addAll(createSourceUnits(gradleFile, repoURI));
+                units.addAll(createSourceUnits(gradleFile, repoURI, visited));
             } catch (Exception e) {
-                LOGGER.warn("An error occurred while processing Gradle file {}", gradleFile.toAbsolutePath(), e);
+                LOGGER.warn("An error occurred while processing Gradle file {}",
+                        gradleFile, e);
             }
+        }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolving source unit dependencies");
+        }
+
+        try {
+            collectSourceUnitsDependencies(units);
+        } catch (Exception e) {
+            LOGGER.warn("An error occurred while resolving source unit dependencies", e);
+        }
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolved source unit dependencies");
         }
 
         if (LOGGER.isDebugEnabled()) {
@@ -190,27 +210,33 @@ public class GradleProject implements Project {
     }
 
     private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(Path path) throws IOException {
+        path = path.toAbsolutePath().normalize();
         Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
         if (ret == null) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collecting meta information from {}", path.toAbsolutePath().normalize());
+                LOGGER.debug("Collecting meta information from {}", path);
             }
             BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(path), path);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collected meta information from {}", path.toAbsolutePath().normalize());
+                LOGGER.debug("Collected meta information from {}", path);
             }
             ret = new HashMap<>();
             for (BuildAnalysis.BuildInfo info : items) {
+                // updating cache for sub-projects too
+                Path subProjectPath = Paths.get(info.gradleFile).toAbsolutePath().normalize();
+                if (!subProjectPath.equals(path)) {
+                    Map<String, BuildAnalysis.BuildInfo> map = buildInfoCache.get(subProjectPath);
+                    if (map == null) {
+                        map = new HashMap<>();
+                        buildInfoCache.put(subProjectPath, map);
+                    }
+                    map.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
+                }
                 ret.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
             }
             buildInfoCache.put(path, ret);
         }
         return ret;
-    }
-
-    private static BuildAnalysis.BuildInfo getBuildInfo(SourceUnit unit) throws IOException {
-        Path path = Paths.get((String) unit.Data.get("GradleFile"));
-        return getBuildInfo(path).get(unit.Name);
     }
 
     private static Collection<BuildAnalysis.BuildInfo> collectBuildInfo(Path build) throws IOException {
@@ -228,6 +254,12 @@ public class GradleProject implements Project {
         if (ret == null) {
             return;
         }
+
+        for (BuildAnalysis.BuildInfo info : ret.values()) {
+            infos.add(info);
+            // mark as visited all sub projects encountered in current gradle file
+            visited.add(Paths.get(info.gradleFile).toAbsolutePath().normalize());
+        }
         for (BuildAnalysis.BuildInfo info : ret.values()) {
             infos.add(info);
             for (String gradleFile : info.projectDependencies) {
@@ -237,6 +269,26 @@ public class GradleProject implements Project {
                     collectBuildInfo(build, infos, visited);
                 }
             }
+        }
+    }
+
+    private static void collectSourceUnitsDependencies(Collection<SourceUnit> units) throws IOException {
+        for (SourceUnit unit : units) {
+            Path gradlePath = Paths.get(unit.Dir, (String) unit.Data.get("GradleFile")).toAbsolutePath().normalize();
+            Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(gradlePath);
+            Collection<String> classpath = new LinkedHashSet<>();
+            Collection<String> sourcepath = new LinkedHashSet<>();
+            for (BuildAnalysis.BuildInfo info : infos) {
+                Path root = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
+                classpath.addAll(info.classPath.stream().map(classPathElement -> PathUtil.normalize(
+                        root.relativize(Paths.get(classPathElement)).normalize().toString())).
+                        collect(Collectors.toList()));
+                sourcepath.addAll(info.sourceDirs.stream().map(sourceDirElement -> PathUtil.normalize(
+                        root.relativize(Paths.get(sourceDirElement)).normalize().toString())).
+                        collect(Collectors.toList()));
+            }
+            unit.Data.put("ClassPath", classpath);
+            unit.Data.put("SourcePath", sourcepath);
         }
     }
 
