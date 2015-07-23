@@ -175,7 +175,7 @@ public class MavenProject implements Project {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Processing Maven dependency {}", d);
             }
-            deps.add(new RawDependency(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope()));
+            deps.add(new RawDependency(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope(), null));
         }
 
         if (LOGGER.isDebugEnabled()) {
@@ -229,7 +229,7 @@ public class MavenProject implements Project {
         resolveMavenDependencyArtifacts();
         for (org.eclipse.aether.artifact.Artifact a : mavenDependencyArtifacts) {
             if (a.getFile().toPath().equals(jarFile)) {
-                return new RawDependency(a.getGroupId(), a.getArtifactId(), a.getVersion(), StringUtils.EMPTY);
+                return new RawDependency(a.getGroupId(), a.getArtifactId(), a.getVersion(), StringUtils.EMPTY, null);
             }
         }
         return null;

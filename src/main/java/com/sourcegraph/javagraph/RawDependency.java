@@ -9,12 +9,14 @@ public class RawDependency {
     String artifactID;
     String version;
     String scope;
+    String file;
 
-    public RawDependency(String groupID, String artifactID, String version, String scope) {
+    public RawDependency(String groupID, String artifactID, String version, String scope, String file) {
         this.groupID = groupID;
         this.artifactID = artifactID;
         this.version = version;
         this.scope = scope;
+        this.file = file;
     }
 
     @Override

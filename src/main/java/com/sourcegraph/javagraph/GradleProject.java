@@ -128,8 +128,12 @@ public class GradleProject implements Project {
             Path projectRoot = Paths.get(info.projectDir);
             Path relative = Paths.get(info.rootDir).relativize(projectRoot).normalize();
             unit.Dir = PathUtil.normalize(relative.toString());
-            unit.Data.put("GradleFile", PathUtil.normalize(
-                    projectRoot.relativize(Paths.get(info.gradleFile)).normalize().toString()));
+            if (info.gradleFile != null) {
+                unit.Data.put("GradleFile", PathUtil.normalize(
+                        projectRoot.relativize(Paths.get(info.gradleFile)).normalize().toString()));
+            } else {
+                unit.Data.put("GradleFile", StringUtils.EMPTY);
+            }
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("GroupId", info.attrs.groupID);
             if (!StringUtils.isEmpty(info.sourceVersion)) {
@@ -223,14 +227,16 @@ public class GradleProject implements Project {
             ret = new HashMap<>();
             for (BuildAnalysis.BuildInfo info : items) {
                 // updating cache for sub-projects too
-                Path subProjectPath = Paths.get(info.gradleFile).toAbsolutePath().normalize();
-                if (!subProjectPath.equals(path)) {
-                    Map<String, BuildAnalysis.BuildInfo> map = buildInfoCache.get(subProjectPath);
-                    if (map == null) {
-                        map = new HashMap<>();
-                        buildInfoCache.put(subProjectPath, map);
+                if (info.gradleFile != null) {
+                    Path subProjectPath = Paths.get(info.gradleFile).toAbsolutePath().normalize();
+                    if (!subProjectPath.equals(path)) {
+                        Map<String, BuildAnalysis.BuildInfo> map = buildInfoCache.get(subProjectPath);
+                        if (map == null) {
+                            map = new HashMap<>();
+                            buildInfoCache.put(subProjectPath, map);
+                        }
+                        map.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
                     }
-                    map.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
                 }
                 ret.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
             }
@@ -258,7 +264,9 @@ public class GradleProject implements Project {
         for (BuildAnalysis.BuildInfo info : ret.values()) {
             infos.add(info);
             // mark as visited all sub projects encountered in current gradle file
-            visited.add(Paths.get(info.gradleFile).toAbsolutePath().normalize());
+            if (info.gradleFile != null) {
+                visited.add(Paths.get(info.gradleFile).toAbsolutePath().normalize());
+            }
         }
         for (BuildAnalysis.BuildInfo info : ret.values()) {
             infos.add(info);
@@ -282,6 +290,10 @@ public class GradleProject implements Project {
                 Path root = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
                 classpath.addAll(info.classPath.stream().map(classPathElement -> PathUtil.normalize(
                         root.relativize(Paths.get(classPathElement)).normalize().toString())).
+                        collect(Collectors.toList()));
+                classpath.addAll(info.dependencies.stream().filter(dependency ->
+                        !StringUtils.isEmpty(dependency.file)).map(dependency ->
+                        PathUtil.normalize(root.relativize(Paths.get(dependency.file)).normalize().toString())).
                         collect(Collectors.toList()));
                 sourcepath.addAll(info.sourceDirs.stream().map(sourceDirElement -> PathUtil.normalize(
                         root.relativize(Paths.get(sourceDirElement)).normalize().toString())).

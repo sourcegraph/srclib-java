@@ -12,33 +12,39 @@ allprojects {
         println "VERSION $task.project.version"
         println "PROJECTDIR $task.project.projectDir"
         println "ROOTDIR $task.project.rootDir"
-        println "GRADLEFILE $task.project.buildFile.absolutePath"
+        if (task.project.buildFile) {
+            println "GRADLEFILE $task.project.buildFile.absolutePath"
+        }
 
 
         try {
-            task.project.configurations.each {
-                conf ->
-                    conf.resolvedConfiguration.getResolvedArtifacts().each {
+            task.project.configurations.each { conf ->
+                conf.resolvedConfiguration.getResolvedArtifacts().each {
+                    try {
                         String group = it.moduleVersion.id.group
                         String name = it.moduleVersion.id.name
                         String version = it.moduleVersion.id.version
                         String file = it.file
                         if (conf.name == "compile" || conf.name == "testCompile") {
-                        	println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                            println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                        }
+                    } catch (Exception e) {
+                        println "WARNING $e"
+                    }
+                }
+
+                conf.getAllDependencies().each { d ->
+                    if (d instanceof ProjectDependency) {
+                        Project p = ((ProjectDependency) d).getDependencyProject()
+                        if (conf.name == "compile" || conf.name == "testCompile") {
+                            println "PROJECTDEPENDENCY $p.buildFile.absolutePath"
                         }
                     }
-
-                    conf.getAllDependencies().each {d ->
-                    	if (d instanceof ProjectDependency) {
-                    		Project p = ((ProjectDependency) d).getDependencyProject()
-                        	if (conf.name == "compile" || conf.name == "testCompile") {
-                    			println "PROJECTDEPENDENCY $p.buildFile.absolutePath"
-                    		}
-                    	}
-                    }
+                }
 
             }
-        } catch (ignored) {
+        } catch (e) {
+            println "WARNING $e"
         }
 
         try {
@@ -54,31 +60,35 @@ allprojects {
                     }
                 }
             }
-        } catch (ignored) {
+        } catch (e) {
+            println "WARNING $e"
         }
 
         try {
             task.project.plugins.withType(JavaPlugin) {
-            	compileJava {
-					println "SOURCEVERSION $sourceCompatibility"
-            		String encoding = options.encoding
-            		if (encoding == null) {
-            			encoding = "";
-            		}
-            		println("ENCODING $encoding")
-            	}
+                compileJava {
+                    println "SOURCEVERSION $sourceCompatibility"
+                    String encoding = options.encoding
+                    if (encoding == null) {
+                        encoding = "";
+                    }
+                    println("ENCODING $encoding")
+                }
             }
-        } catch (ignored) {
+        } catch (e) {
+            println "WARNING $e"
         }
+
         try {
             task.project.plugins.withType(JavaPlugin) {
                 configurations.each { Configuration config ->
-                   	if (config.name == "compile" || config.name == "testCompile") {
-                    	println "CLASSPATH $config.asPath"
+                    if (config.name == "compile" || config.name == "testCompile") {
+                        println "CLASSPATH $config.asPath"
                     }
                 }
             }
-        } catch (ignored) {
+        } catch (e) {
+            println "WARNING $e"
         }
 
     }
