@@ -49,6 +49,7 @@ public class BuildAnalysis {
         public String gradleFile;
         public HashSet<String> projectDependencies;
 
+
         public BuildInfo() {
             attrs = new POMAttrs();
             dependencies = new HashSet<>();
@@ -167,12 +168,13 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                String[] parts = payload.split(":");
+                                String[] parts = payload.split(":", 5);
                                 info.dependencies.add(new RawDependency(
                                         parts[1], // GroupID
                                         parts[2], // ArtifactID
                                         parts[3], // Version
-                                        parts[0] // Scope
+                                        parts[0], // Scope
+                                        parts.length > 4 ? parts[4] : null // file
                                 ));
                                 break;
                             case "DESCRIPTION":
@@ -191,7 +193,7 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                for (String path: payload.split(SystemUtils.PATH_SEPARATOR)) {
+                                for (String path : payload.split(SystemUtils.PATH_SEPARATOR)) {
                                     if (!StringUtils.isEmpty(path)) {
                                         info.classPath.add(path);
                                     }
@@ -213,7 +215,9 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                info.sourceVersion = payload;
+                                if (info.sourceVersion == null || info.sourceVersion.compareTo(payload) < 0) {
+                                    info.sourceVersion = payload;
+                                }
                                 break;
                             case "PROJECTDIR":
                                 if (info == null) {
