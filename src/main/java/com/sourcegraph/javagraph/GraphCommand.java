@@ -67,7 +67,7 @@ public class GraphCommand {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Starting graph collection");
             }
-            grapher.graphFilesAndDirs(unit.Dir, unit.Files);
+            grapher.graphFilesAndDirs(unit.Files);
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Graph collection complete");
             }
@@ -87,7 +87,7 @@ public class GraphCommand {
                 LOGGER.debug("Collecting refs");
             }
             for (Ref ref : rawGraph.refs) {
-                ResolvedTarget target = rs.resolveOrigin(ref.defKey.getOrigin());
+                ResolvedTarget target = rs.resolveOrigin(ref.defKey.getOrigin(), unit);
                 if (target != null) {
                     ref.setDefTarget(target);
                 }
@@ -104,6 +104,7 @@ public class GraphCommand {
     }
 
     static class Doc {
+
         String Path;
         String Format;
         String Data;
@@ -115,7 +116,7 @@ public class GraphCommand {
             //TODO(rameshvarun): Render javadoc string?
             Format = "text/html";
             Data = def.doc;
-            File = PathUtil.normalize(def.file);
+            File = PathUtil.relativizeCwd(def.file);
         }
     }
 

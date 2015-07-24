@@ -1,6 +1,8 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.building.ModelBuildingException;
@@ -17,6 +19,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -55,7 +58,7 @@ public class Resolver {
 
     private Map<URI,ResolvedTarget> resolvedOrigins = new HashMap<>();
 
-    public ResolvedTarget resolveOrigin(URI origin) throws Exception {
+    public ResolvedTarget resolveOrigin(URI origin, SourceUnit unit) throws Exception {
         if (origin == null) return null;
         if (resolvedOrigins.containsKey(origin)) {
             return resolvedOrigins.get(origin);
@@ -71,9 +74,10 @@ public class Resolver {
         }
 
         if (jarFile == null) {
-            // TODO (alexsaveliev) check with sqs what to do in this case (if there is no jar file)
-            resolvedOrigins.put(origin, null);
-            return null;
+            // trying to resolve origin based on source directories
+            ResolvedTarget target = resolveFileOrigin(origin, unit);
+            resolvedOrigins.put(origin, target);
+            return target;
         }
 
         ResolvedTarget target = procesSpecialJar(origin, jarFile);
@@ -249,4 +253,35 @@ public class Resolver {
         depsCache.put(key, res);
         return res;
     }
+
+    @SuppressWarnings("unchecked")
+    private ResolvedTarget resolveFileOrigin(URI origin, SourceUnit unit) {
+        if (!origin.getScheme().equals("file")) {
+            return null;
+        }
+        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
+        if (sourceDirs == null) {
+            return null;
+        }
+        File file = new File(origin);
+        File cwd = SystemUtils.getUserDir();
+        for (List<String> dir : sourceDirs) {
+            File root = new File(cwd, dir.get(2));
+            try {
+                if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
+                    ResolvedTarget target = new ResolvedTarget();
+                    target.ToRepoCloneURL = unit.Repo;
+                    target.ToUnit = dir.get(0);
+                    target.ToUnitType = "JavaArtifact";
+                    target.ToVersionString = dir.get(1);
+                    return target;
+                }
+            } catch (IOException e) {
+                LOGGER.warn("I/O error while resolving local file origin for {} in {}", file, root, e);
+            }
+        }
+        return null;
+    }
+
+
 }

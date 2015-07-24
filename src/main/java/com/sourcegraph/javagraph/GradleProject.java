@@ -51,7 +51,6 @@ public class GradleProject implements Project {
         } else {
             gradleExe = "gradlew";
         }
-        Path root = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
         Path current = gradleFile.toAbsolutePath().getParent().toAbsolutePath().normalize();
         while (true) {
             Path p = current.resolve(gradleExe);
@@ -59,7 +58,7 @@ public class GradleProject implements Project {
             if (exeFile.exists() && !exeFile.isDirectory()) {
                 return p;
             }
-            if (current.startsWith(root) && !current.equals(root)) {
+            if (current.startsWith(PathUtil.CWD) && !current.equals(PathUtil.CWD)) {
                 Path parent = current.getParent();
                 if (parent == null || parent.equals(current)) {
                     break;
@@ -82,7 +81,8 @@ public class GradleProject implements Project {
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getSourcePath() throws Exception {
-        return (List<String>) unit.Data.get("SourcePath");
+        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
+        return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());
     }
 
     @Override
@@ -111,6 +111,7 @@ public class GradleProject implements Project {
         Map<String, BuildAnalysis.BuildInfo> infos = getGradleAttrs(repoURI, gradleFile);
 
         Collection<SourceUnit> ret = new ArrayList<>();
+
         for (BuildAnalysis.BuildInfo info : infos.values()) {
 
             for (String projectDependency : info.projectDependencies) {
@@ -126,8 +127,7 @@ public class GradleProject implements Project {
             unit.Type = "JavaArtifact";
             unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
             Path projectRoot = Paths.get(info.projectDir);
-            Path relative = Paths.get(info.rootDir).relativize(projectRoot).normalize();
-            unit.Dir = PathUtil.normalize(relative.toString());
+            unit.Dir = PathUtil.relativizeCwd(info.projectDir);
             if (info.gradleFile != null) {
                 unit.Data.put("GradleFile", PathUtil.normalize(
                         projectRoot.relativize(Paths.get(info.gradleFile)).normalize().toString()));
@@ -144,8 +144,13 @@ public class GradleProject implements Project {
             }
 
             unit.Files = new LinkedList<>();
-            unit.Files.addAll(info.sources.stream().map(file ->
-                    PathUtil.normalize(projectRoot.relativize(Paths.get(file)).toString())).collect(Collectors.toList()));
+            for (String sourceFile :info.sources) {
+                File f = new File(sourceFile);
+                if (f.exists() && !f.isDirectory()) {
+                    // including only existing files to make 'make' tool happy
+                    unit.Files.add(PathUtil.relativizeCwd(sourceFile));
+                }
+            }
             unit.sortFiles();
 
             // This will list all dependencies, not just direct ones.
@@ -285,19 +290,20 @@ public class GradleProject implements Project {
             Path gradlePath = Paths.get(unit.Dir, (String) unit.Data.get("GradleFile")).toAbsolutePath().normalize();
             Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(gradlePath);
             Collection<String> classpath = new LinkedHashSet<>();
-            Collection<String> sourcepath = new LinkedHashSet<>();
+
+            Collection<String[]> sourcepath = new ArrayList<>();
             for (BuildAnalysis.BuildInfo info : infos) {
-                Path root = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
-                classpath.addAll(info.classPath.stream().map(classPathElement -> PathUtil.normalize(
-                        root.relativize(Paths.get(classPathElement)).normalize().toString())).
+                classpath.addAll(info.classPath.stream().map(PathUtil::relativizeCwd).
                         collect(Collectors.toList()));
                 classpath.addAll(info.dependencies.stream().filter(dependency ->
                         !StringUtils.isEmpty(dependency.file)).map(dependency ->
-                        PathUtil.normalize(root.relativize(Paths.get(dependency.file)).normalize().toString())).
+                        PathUtil.relativizeCwd(dependency.file)).
                         collect(Collectors.toList()));
-                sourcepath.addAll(info.sourceDirs.stream().map(sourceDirElement -> PathUtil.normalize(
-                        root.relativize(Paths.get(sourceDirElement)).normalize().toString())).
-                        collect(Collectors.toList()));
+                for (String sourceDir[] : info.sourceDirs) {
+                    sourcepath.add(new String[]{sourceDir[0],
+                            sourceDir[1],
+                            PathUtil.relativizeCwd(sourceDir[2])});
+                }
             }
             unit.Data.put("ClassPath", classpath);
             unit.Data.put("SourcePath", sourcepath);

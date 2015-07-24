@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class BuildAnalysis {
@@ -40,7 +37,7 @@ public class BuildAnalysis {
         public POMAttrs attrs;
         public HashSet<RawDependency> dependencies;
         public HashSet<String> sources;
-        public HashSet<String> sourceDirs;
+        public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
         public HashSet<String> classPath;
         public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
         public String sourceEncoding;
@@ -54,7 +51,7 @@ public class BuildAnalysis {
             attrs = new POMAttrs();
             dependencies = new HashSet<>();
             sources = new HashSet<>();
-            sourceDirs = new HashSet<>();
+            sourceDirs = new ArrayList<>();
             classPath = new HashSet<>();
             projectDependencies = new HashSet<>();
         }
@@ -209,7 +206,9 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                info.sourceDirs.add(payload);
+                                String tokens[] = payload.split(":", 4);
+                                String unitName = tokens[0] + '/' + tokens[1];
+                                info.sourceDirs.add(new String[] {unitName, tokens[2], tokens[3]});
                                 break;
                             case "SOURCEVERSION":
                                 if (info == null) {
