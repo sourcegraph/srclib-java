@@ -74,14 +74,16 @@ public class Grapher {
         javacOpts.add("-Xbootclasspath:" + bootClasspath);
     }
 
-    public void graphFilesAndDirs(String dir, Iterable<String> filePaths) throws IOException {
+    public void graphFilesAndDirs(Iterable<String> filePaths) throws IOException {
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Collecting source files to graph");
         }
+        File root = SystemUtils.getUserDir();
+
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {
-            File file = new File(dir, filePath);
+            File file = new File(root, filePath);
             if (!file.exists()) {
                 LOGGER.error("No such file {}", file.getAbsolutePath());
                 System.exit(1);

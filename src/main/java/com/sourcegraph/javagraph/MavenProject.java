@@ -352,7 +352,7 @@ public class MavenProject implements Project {
             }
 
             Path path = basePath.resolve(sourceRoot);
-            if (!path.toFile().exists() || !path.toFile().isDirectory()) {
+            if (!path.toFile().isDirectory()) {
                 return;
             }
 
