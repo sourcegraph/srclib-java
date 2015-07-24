@@ -55,7 +55,7 @@ allprojects {
                             println "SOURCEFILE $file.absolutePath"
                         }
                         srcDirs.each { File file ->
-                            println "SOURCEDIR $task.project.name:$task.project.group:$task.project.version:$file.absolutePath"
+                            println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
                         }
                     }
                 }
