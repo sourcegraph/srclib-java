@@ -134,7 +134,7 @@ public class MavenProject implements Project {
             try {
                 resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts);
             } catch (DependencyCollectionException | DependencyResolutionException e) {
-                LOGGER.warn("Failed to resolve dependencies", e.toString());
+                LOGGER.warn("Failed to resolve dependencies {}", e.toString());
             }
         }
 
