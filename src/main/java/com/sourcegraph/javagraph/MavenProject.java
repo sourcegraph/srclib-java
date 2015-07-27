@@ -3,8 +3,8 @@ package com.sourcegraph.javagraph;
 import com.google.common.collect.Iterators;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Dependency;
-import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
+import org.apache.maven.model.Plugin;
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.building.*;
 import org.apache.maven.model.resolution.InvalidRepositoryException;
@@ -13,11 +13,11 @@ import org.apache.maven.model.resolution.UnresolvableModelException;
 import org.apache.maven.repository.internal.ArtifactDescriptorUtils;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.codehaus.plexus.util.DirectoryScanner;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.artifact.ArtifactType;
 import org.eclipse.aether.artifact.ArtifactTypeRegistry;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
@@ -34,7 +34,6 @@ import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
 import org.eclipse.aether.transport.http.HttpTransporterFactory;
-import org.eclipse.aether.util.artifact.DefaultArtifactTypeRegistry;
 import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -132,32 +131,11 @@ public class MavenProject implements Project {
                 LOGGER.debug("Resolving Maven dependency artifacts");
             }
             mavenDependencyArtifacts = new HashSet<>();
-            Model model = getMavenProject().getModel();
             try {
-                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts, "compile", "jar");
+                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts);
             } catch (DependencyCollectionException | DependencyResolutionException e) {
-                LOGGER.warn("Failed to resolve dependencies of {}", e.toString());
+                LOGGER.warn("Failed to resolve dependencies", e.toString());
             }
-            try {
-                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts, "test", "test-jar");
-            } catch (DependencyCollectionException | DependencyResolutionException e) {
-                LOGGER.warn("Failed to resolve dependencies of {}", e.toString());
-            }
-
-            /*
-            for (Dependency dependency : getMavenProject().getDependencies()) {
-                try {
-                    artifact = new DefaultArtifact(dependency.getGroupId(),
-                            dependency.getArtifactId(),
-                            dependency.getClassifier(),
-                            "jar",
-                            dependency.getVersion());
-                    resolveArtifactDependencies(artifact, mavenDependencyArtifacts);
-                } catch (DependencyCollectionException | DependencyResolutionException e) {
-                    LOGGER.warn("Failed to resolve dependencies of {}: {}", artifact, e.toString());
-                }
-            }
-            */
         }
 
         return mavenDependencyArtifacts;
@@ -205,17 +183,32 @@ public class MavenProject implements Project {
     @Override
     public String getSourceCodeVersion() throws ModelBuildingException, IOException {
 
-        Properties props = getMavenProject().getProperties();
-        if (props == null) {
+        Plugin compile = getMavenProject().getPlugin("org.apache.maven.plugins:maven-compiler-plugin");
+        if (compile == null) {
             return DEFAULT_SOURCE_CODE_VERSION;
         }
-        return props.getProperty("maven.compiler.source", DEFAULT_SOURCE_CODE_VERSION);
+        Object configuration = compile.getConfiguration();
+        if (configuration == null || !(configuration instanceof Xpp3Dom)) {
+            return DEFAULT_SOURCE_CODE_VERSION;
+        }
+        Xpp3Dom xmlConfiguration = (Xpp3Dom) configuration;
+        Xpp3Dom source = xmlConfiguration.getChild("source");
+        return source == null ? DEFAULT_SOURCE_CODE_VERSION : source.getValue();
     }
 
     @Override
     public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
-        // TODO (alexsaveliev): retrieve source encoding from pom.xml if there is any
-        return null;
+        Plugin compile = getMavenProject().getPlugin("org.apache.maven.plugins:maven-compiler-plugin");
+        if (compile == null) {
+            return null;
+        }
+        Object configuration = compile.getConfiguration();
+        if (configuration == null || !(configuration instanceof Xpp3Dom)) {
+            return null;
+        }
+        Xpp3Dom xmlConfiguration = (Xpp3Dom) configuration;
+        Xpp3Dom encoding = xmlConfiguration.getChild("encoding");
+        return encoding == null ? null : encoding.getValue();
     }
 
     @Override
@@ -272,27 +265,27 @@ public class MavenProject implements Project {
 
         Path root = pomFile.getParent().toAbsolutePath().normalize();
 
-        getSourceFiles(files, sourceRoots, root);
+        getSourceFiles(files, sourceRoots);
         String sourceRoot = proj.getMavenProject().getBuild().getSourceDirectory();
         if (sourceRoot == null) {
             sourceRoot = "src/main";
         }
         sourceRoot = root.resolve(sourceRoot).toAbsolutePath().normalize().toString();
         if (!sourceRoots.contains(sourceRoot)) {
-            getSourceFiles(files, Collections.singletonList(sourceRoot), root);
+            getSourceFiles(files, Collections.singletonList(sourceRoot));
         }
         List<String> testSourceRoots = proj.getMavenProject().getTestCompileSourceRoots();
         for (int i = 0; i < testSourceRoots.size(); i++) {
             testSourceRoots.set(i, Paths.get(testSourceRoots.get(i)).toAbsolutePath().normalize().toString());
         }
-        getSourceFiles(files, testSourceRoots, root);
+        getSourceFiles(files, testSourceRoots);
         sourceRoot = proj.getMavenProject().getBuild().getTestSourceDirectory();
         if (sourceRoot == null) {
             sourceRoot = "src/test";
         }
         sourceRoot = root.resolve(sourceRoot).toAbsolutePath().normalize().toString();
         if (!sourceRoots.contains(sourceRoot) && !testSourceRoots.contains(sourceRoot)) {
-            getSourceFiles(files, Collections.singletonList(sourceRoot), root);
+            getSourceFiles(files, Collections.singletonList(sourceRoot));
         }
 
         if (LOGGER.isDebugEnabled()) {
@@ -340,18 +333,15 @@ public class MavenProject implements Project {
      *
      * @param files       set to fill with the data
      * @param sourceRoots list of source roots to search in, i.e. compile source roots, test compile source roots
-     * @param basePath    base path to produce relative entries,
-     *                    i.e. basePath = /foo/ and current path = /foo/bar gives "bar"
      */
     private static void getSourceFiles(Set<String> files,
-                                       List<String> sourceRoots,
-                                       Path basePath) {
+                                       List<String> sourceRoots) {
         for (String sourceRoot : sourceRoots) {
             if (sourceRoot == null) {
                 continue;
             }
 
-            Path path = basePath.resolve(sourceRoot);
+            Path path = Paths.get(sourceRoot);
             if (!path.toFile().isDirectory()) {
                 return;
             }
@@ -366,7 +356,7 @@ public class MavenProject implements Project {
             directoryScanner.setBasedir(sourceRoot);
             directoryScanner.scan();
             for (String fileName : directoryScanner.getIncludedFiles()) {
-                files.add(PathUtil.normalize(basePath.relativize(path.resolve(fileName)).toString()));
+                files.add(PathUtil.relativizeCwd(Paths.get(sourceRoot, fileName).toString()));
             }
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collected source files from {}", path.toAbsolutePath());
@@ -381,52 +371,47 @@ public class MavenProject implements Project {
     }
 
     /**
-     * Resolves all artifact dependencies for a given artifact
-     *
-     * @param artifact artifact to resolve dependencies for
-     * @param targets  set to fill with resolved dependencies
+     * Resolves artifact dependencies
+     * @param dependencies dependencies to check
+     * @param targets set to fill with data
      * @throws ModelBuildingException
      * @throws DependencyCollectionException
      * @throws DependencyResolutionException
      */
     private void resolveArtifactDependencies(List<Dependency> dependencies,
-                                             Set<Artifact> targets,
-                                             String scope,
-                                             String type) throws
+                                             Set<Artifact> targets) throws
             ModelBuildingException, DependencyCollectionException, DependencyResolutionException {
 
         if (LOGGER.isDebugEnabled()) {
-            //LOGGER.debug("Resolving artifact dependencies for {} - {}", artifact, scope);
+            LOGGER.debug("Resolving artifact dependencies");
         }
 
         List<org.eclipse.aether.graph.Dependency> deps = new ArrayList<>();
-        ArtifactTypeRegistry artifactTypeRegistry = new DefaultArtifactTypeRegistry();
+        ArtifactTypeRegistry artifactTypeRegistry = repositorySystemSession.getArtifactTypeRegistry();
         for (Dependency dependency :dependencies) {
             Artifact artifact = new DefaultArtifact(dependency.getGroupId(),
                     dependency.getArtifactId(),
                     dependency.getClassifier(),
                     "jar",
                     dependency.getVersion(),
-                    artifactTypeRegistry.get(type));
-            deps.add(new org.eclipse.aether.graph.Dependency(artifact, scope));
+                    artifactTypeRegistry.get(dependency.getType()));
+            deps.add(new org.eclipse.aether.graph.Dependency(artifact, dependency.getScope()));
         }
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setDependencies(deps);
-        //collectRequest.setRoot(new org.eclipse.aether.graph.Dependency(artifact, scope));
         List<RemoteRepository> repoz = getMavenProject().getRepositories().stream().
                 map(ArtifactDescriptorUtils::toRemoteRepository).collect(Collectors.toList());
         collectRequest.setRepositories(repoz);
 
         DependencyNode node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         if (LOGGER.isDebugEnabled()) {
-            //LOGGER.debug("Collected dependencies for {}", artifact);
+            LOGGER.debug("Collected dependencies");
         }
 
         DependencyRequest projectDependencyRequest = new DependencyRequest(node, null);
-
         repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
         if (LOGGER.isDebugEnabled()) {
-            //LOGGER.debug("Resolved dependencies for {}", artifact);
+            LOGGER.debug("Resolved dependencies");
         }
 
         PreorderNodeListGenerator nlg = new PreorderNodeListGenerator();
@@ -436,7 +421,7 @@ public class MavenProject implements Project {
                 collect(Collectors.toList()));
 
         if (LOGGER.isDebugEnabled()) {
-            //LOGGER.debug("Resolved artifact dependencies for {}", artifact);
+            LOGGER.debug("Resolved artifact dependencies");
         }
 
     }
