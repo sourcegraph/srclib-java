@@ -38,6 +38,7 @@ import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -131,11 +132,7 @@ public class MavenProject implements Project {
                 LOGGER.debug("Resolving Maven dependency artifacts");
             }
             mavenDependencyArtifacts = new HashSet<>();
-            try {
-                resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts);
-            } catch (DependencyCollectionException | DependencyResolutionException e) {
-                LOGGER.warn("Failed to resolve dependencies {}", e.toString());
-            }
+            resolveArtifactDependencies(getMavenProject().getDependencies(), mavenDependencyArtifacts);
         }
 
         return mavenDependencyArtifacts;
@@ -171,7 +168,14 @@ public class MavenProject implements Project {
         }
 
         Set<Artifact> artifacts = resolveMavenDependencyArtifacts();
-        return artifacts.stream().map(a -> a.getFile().getAbsolutePath()).collect(Collectors.toList());
+        List<String> ret = new ArrayList<>();
+        for (Artifact artifact : artifacts) {
+            File file = artifact.getFile();
+            if (file != null) {
+                ret.add(file.getAbsolutePath());
+            }
+        }
+        return ret;
     }
 
     @Override
@@ -221,7 +225,7 @@ public class MavenProject implements Project {
 
         resolveMavenDependencyArtifacts();
         for (org.eclipse.aether.artifact.Artifact a : mavenDependencyArtifacts) {
-            if (a.getFile().toPath().equals(jarFile)) {
+            if (a.getFile() != null && a.getFile().toPath().equals(jarFile)) {
                 return new RawDependency(a.getGroupId(), a.getArtifactId(), a.getVersion(), StringUtils.EMPTY, null);
             }
         }
@@ -375,12 +379,9 @@ public class MavenProject implements Project {
      * @param dependencies dependencies to check
      * @param targets set to fill with data
      * @throws ModelBuildingException
-     * @throws DependencyCollectionException
-     * @throws DependencyResolutionException
      */
     private void resolveArtifactDependencies(List<Dependency> dependencies,
-                                             Set<Artifact> targets) throws
-            ModelBuildingException, DependencyCollectionException, DependencyResolutionException {
+                                             Set<Artifact> targets) throws ModelBuildingException {
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolving artifact dependencies");
@@ -403,13 +404,27 @@ public class MavenProject implements Project {
                 map(ArtifactDescriptorUtils::toRemoteRepository).collect(Collectors.toList());
         collectRequest.setRepositories(repoz);
 
-        DependencyNode node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
+        DependencyNode node;
+        try {
+            node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
+        } catch (DependencyCollectionException e) {
+            LOGGER.warn("Failed to collect dependencies - {}", e.getMessage());
+            node = e.getResult().getRoot();
+        }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Collected dependencies");
         }
+        if (node == null) {
+            LOGGER.warn("Failed to collect dependencies - no dependencies were collected");
+            return;
+        }
 
         DependencyRequest projectDependencyRequest = new DependencyRequest(node, null);
-        repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
+        try {
+            repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
+        } catch (DependencyResolutionException e) {
+            LOGGER.warn("Failed to resolve dependencies - {}", e.getMessage());
+        }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolved dependencies");
         }
