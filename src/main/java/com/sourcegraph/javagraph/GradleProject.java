@@ -304,6 +304,14 @@ public class GradleProject implements Project {
                             sourceDir[1],
                             PathUtil.relativizeCwd(sourceDir[2])});
                 }
+                for (String path : info.classPath) {
+                    File file = new File(path);
+                    if (file.isDirectory()) {
+                        sourcepath.add(new String[]{unit.Name,
+                                info.version,
+                                PathUtil.relativizeCwd(path)});
+                    }
+                }
             }
             unit.Data.put("ClassPath", classpath);
             unit.Data.put("SourcePath", sourcepath);
