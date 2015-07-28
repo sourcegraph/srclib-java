@@ -177,7 +177,15 @@ public class GradleProject implements Project {
         File rootGradleFile = new File("build.gradle");
         if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
             gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
+        }else {
+            // alexsaveliev: trying settings.gradle - build file name may be custom one
+            // (see https://github.com/Netflix/archaius)
+            rootGradleFile = new File("settings.gradle");
+            if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
+                gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
+            }
         }
+
         gradleFiles.addAll(ScanUtil.findMatchingFiles("build.gradle"));
         Set<SourceUnit> units = new LinkedHashSet<>();
         Set<Path> visited = new HashSet<>();
