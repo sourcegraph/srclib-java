@@ -1,4 +1,4 @@
-SRC = $(shell find ./src -type f)
+SRC = $(shell /usr/bin/find ./src -type f)
 
 .PHONY: default install test test-gen clean dist upload-bundled-jdk
 

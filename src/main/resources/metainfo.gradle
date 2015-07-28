@@ -1,0 +1,129 @@
+def isConfigSupported(conf) {
+	return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" ||  conf.name == "compileOnly");
+}
+
+allprojects {
+
+    task srclibCollectMetaInformation << { task ->
+
+        String desc = task.project.description
+        if (desc == null) {
+            desc = ""
+        }
+
+        println "ARTIFACT $task.project.name"
+        println "DESCRIPTION $desc"
+        println "GROUP $task.project.group"
+        println "VERSION $task.project.version"
+        println "PROJECTDIR $task.project.projectDir"
+        println "ROOTDIR $task.project.rootDir"
+        if (task.project.buildFile) {
+            println "GRADLEFILE $task.project.buildFile.absolutePath"
+        }
+
+
+        try {
+            task.project.configurations.each { conf ->
+                conf.resolvedConfiguration.getResolvedArtifacts().each {
+                    try {
+                        String group = it.moduleVersion.id.group
+                        String name = it.moduleVersion.id.name
+                        String version = it.moduleVersion.id.version
+                        String file = it.file
+                        if (isConfigSupported(conf)) {
+                            println "DEPENDENCY $conf.name:$group:$name:$version:$file"
+                        }
+                    } catch (Exception e) {
+                        println "WARNING $e"
+                    }
+                }
+
+                conf.getAllDependencies().each { d ->
+                    if (d instanceof ProjectDependency) {
+                        Project p = ((ProjectDependency) d).getDependencyProject()
+                        if (isConfigSupported(conf)) {
+                            if (p.buildFile) {
+                                println "PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
+                            } else {
+                                println "PROJECTDEPENDENCY $p.name:$p.group:"
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        } catch (e) {
+            println "WARNING $e"
+        }
+
+        try {
+            task.project.plugins.withType(JavaPlugin) {
+
+                compileJava {
+                    source.each {File file ->
+                        println "SOURCEFILE $file.absolutePath"
+                    }
+                }
+
+                compileTestJava {
+                    source.each {File file ->
+                        println "SOURCEFILE $file.absolutePath"
+                    }
+                }
+
+                try {
+                    sourceSets.getByName("main") {
+                        java {
+                            srcDirs.each { File file ->
+                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+                            }
+                        }
+                    }
+                } catch (UnknownDomainObjectException ignored) {
+                }
+
+                try {
+                    sourceSets.getByName("test") {
+                        java {
+                            srcDirs.each { File file ->
+                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+                            }
+                        }
+                    }
+                } catch (UnknownDomainObjectException ignored) {
+                }
+            }
+        } catch (e) {
+            println "WARNING $e"
+        }
+
+        try {
+            task.project.plugins.withType(JavaPlugin) {
+                compileJava {
+                    println "SOURCEVERSION $sourceCompatibility"
+                    String encoding = options.encoding
+                    if (encoding == null) {
+                        encoding = "";
+                    }
+                    println("ENCODING $encoding")
+                }
+            }
+        } catch (e) {
+            println "WARNING $e"
+        }
+
+        try {
+            task.project.plugins.withType(JavaPlugin) {
+                configurations.each { Configuration config ->
+                    if (isConfigSupported(config)) {
+                        println "CLASSPATH $config.asPath"
+                    }
+                }
+            }
+        } catch (e) {
+            println "WARNING $e"
+        }
+
+    }
+}

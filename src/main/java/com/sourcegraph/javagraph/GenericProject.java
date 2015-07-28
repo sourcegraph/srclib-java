@@ -15,12 +15,12 @@ public class GenericProject implements Project {
     }
 
     @Override
-    public Set<RawDependency> listDeps() throws Exception {
+    public List<String> getClassPath() throws Exception {
         return null;
     }
 
     @Override
-    public List<String> getClassPath() throws Exception {
+    public List<String> getSourcePath() throws Exception {
         return null;
     }
 
@@ -28,4 +28,15 @@ public class GenericProject implements Project {
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
         return null;
     }
+
+    @Override
+    public String getSourceCodeVersion() throws Exception {
+        return DEFAULT_SOURCE_CODE_VERSION;
+    }
+
+    @Override
+    public String getSourceCodeEncoding() throws Exception {
+        return null;
+    }
+
 }

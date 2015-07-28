@@ -1,5 +1,8 @@
 package com.sourcegraph.javagraph;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -8,10 +11,10 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by sqs on 12/21/14.
- */
 public class ScanUtil {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScanUtil.class);
+
     public static HashSet<Path> findMatchingFiles(String fileName) throws IOException {
         String pat = "glob:**/" + fileName;
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pat);
@@ -21,7 +24,7 @@ public class ScanUtil {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 if (matcher.matches(file))
-                    result.add(file);
+                    result.add(file.toAbsolutePath().normalize());
 
                 return FileVisitResult.CONTINUE;
             }
@@ -47,7 +50,7 @@ public class ScanUtil {
 
     // Recursively find .java files under a given source path
     public static List<String> scanFiles(String sourcePath) throws IOException {
-        final List<String> files = new LinkedList<String>();
+        final List<String> files = new LinkedList<>();
 
         if (Files.exists(Paths.get(sourcePath))) {
             Files.walkFileTree(Paths.get(sourcePath), new SimpleFileVisitor<Path>() {
@@ -55,6 +58,7 @@ public class ScanUtil {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     String filename = file.toString();
                     if (filename.endsWith(".java")) {
+                        filename = PathUtil.normalize(filename);
                         if (filename.startsWith("./"))
                             filename = filename.substring(2);
                         files.add(filename);
@@ -63,14 +67,14 @@ public class ScanUtil {
                 }
             });
         } else {
-            System.err.println(sourcePath + " does not exist... Skipping...");
+            LOGGER.warn("{} does not exist, skipping", sourcePath);
         }
 
         return files;
     }
 
     public static List<String> scanFiles(Collection<String> sourcePaths) throws IOException {
-        final LinkedList<String> files = new LinkedList<String>();
+        final LinkedList<String> files = new LinkedList<>();
         for (String sourcePath : sourcePaths)
             files.addAll(scanFiles(sourcePath));
         return files;

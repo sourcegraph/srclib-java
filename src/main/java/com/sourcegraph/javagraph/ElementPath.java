@@ -5,6 +5,8 @@ import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.element.*;
 import javax.lang.model.util.ElementKindVisitor8;
@@ -15,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ElementPath {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElementPath.class);
+
     private final List<String> components = new ArrayList<>(5);
 
     public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
@@ -58,7 +63,7 @@ public class ElementPath {
             SourcePositions sp = trees.getSourcePositions();
             if (tp != null) {
                 String filename = tp.getCompilationUnit().getSourceFile().getName();
-                String fileBasename = new File(filename).getName().replace(".java", "");
+                String fileBasename = new File(filename).getName().replace(".java", StringUtils.EMPTY);
                 name = "p-" + fileBasename + "-" + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             } else {
                 return null;
@@ -72,7 +77,7 @@ public class ElementPath {
             if (tp != null) {
                 return tp.getCompilationUnit().getSourceFile().getName() + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             }
-            return "(unknown file)";
+            return compilationUnit.getSourceFile().getName();
         }
 
         @Override
@@ -107,7 +112,12 @@ public class ElementPath {
 
         @Override
         public ElementPath visitUnknown(Element e, ElementPath p) {
-            System.err.println("Element visitor: unknown element " + e.getSimpleName().toString() + " of type " + e.getKind().toString() + " at " + getSourcePos(e));
+
+            LOGGER.warn("Element visitor: unknown element {} of type {} at {} while processing [{}]",
+                    e.getSimpleName(),
+                    e.getKind(),
+                    getSourcePos(e),
+                    p.toString());
             String name = e.getSimpleName().toString();
             if (name.isEmpty()) {
                 name = "u-" + getUniqueID(e);
