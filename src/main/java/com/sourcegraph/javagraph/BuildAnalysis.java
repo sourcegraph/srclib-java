@@ -286,6 +286,9 @@ public class BuildAnalysis {
                                 }
                                 info.gradleFile = payload;
                                 break;
+                            case "WARNING":
+                                LOGGER.warn("gradle: {}", payload);
+                                break;
                             default:
                                 if (LOGGER.isDebugEnabled()) {
                                     LOGGER.debug("gradle: {}", line);
