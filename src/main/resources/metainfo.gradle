@@ -37,7 +37,12 @@ allprojects {
                     if (d instanceof ProjectDependency) {
                         Project p = ((ProjectDependency) d).getDependencyProject()
                         if (conf.name == "compile" || conf.name == "testCompile") {
-                            println "PROJECTDEPENDENCY $p.buildFile.absolutePath"
+                            if (p.buildFile) {
+                                println "PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
+                            } else {
+                                println "PROJECTDEPENDENCY $p.name:$p.group:"
+                            }
+
                         }
                     }
                 }
@@ -49,15 +54,39 @@ allprojects {
 
         try {
             task.project.plugins.withType(JavaPlugin) {
-                sourceSets.all {
-                    java {
-                        files.each { File file ->
-                            println "SOURCEFILE $file.absolutePath"
-                        }
-                        srcDirs.each { File file ->
-                            println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+
+                compileJava {
+                    source.each {File file ->
+                        println "SOURCEFILE $file.absolutePath"
+                    }
+                }
+
+                compileTestJava {
+                    source.each {File file ->
+                        println "SOURCEFILE $file.absolutePath"
+                    }
+                }
+
+                try {
+                    sourceSets.getByName("main") {
+                        java {
+                            srcDirs.each { File file ->
+                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+                            }
                         }
                     }
+                } catch (UnknownDomainObjectException ignored) {
+                }
+
+                try {
+                    sourceSets.getByName("test") {
+                        java {
+                            srcDirs.each { File file ->
+                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+                            }
+                        }
+                    }
+                } catch (UnknownDomainObjectException ignored) {
                 }
             }
         } catch (e) {

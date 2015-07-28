@@ -21,6 +21,7 @@ public class GradleProject implements Project {
     private SourceUnit unit;
 
     private static Map<Path, Map<String, BuildAnalysis.BuildInfo>> buildInfoCache = new HashMap<>();
+    private static Map<String, BuildAnalysis.BuildInfo> unitCache = new HashMap<>();
 
     public GradleProject(SourceUnit unit) {
         this.unit = unit;
@@ -114,9 +115,11 @@ public class GradleProject implements Project {
 
         for (BuildAnalysis.BuildInfo info : infos.values()) {
 
-            for (String projectDependency : info.projectDependencies) {
-                Path p = Paths.get(projectDependency).toAbsolutePath().normalize();
-                visited.add(p);
+            for (BuildAnalysis.ProjectDependency projectDependency : info.projectDependencies) {
+                if (!StringUtils.isEmpty(projectDependency.gradleFile)) {
+                    Path p = Paths.get(projectDependency.gradleFile).toAbsolutePath().normalize();
+                    visited.add(p);
+                }
             }
 
             if (info.sources.isEmpty()) {
@@ -231,6 +234,7 @@ public class GradleProject implements Project {
             }
             ret = new HashMap<>();
             for (BuildAnalysis.BuildInfo info : items) {
+                String unitId= info.attrs.groupID + '/' + info.attrs.artifactID;
                 // updating cache for sub-projects too
                 if (info.gradleFile != null) {
                     Path subProjectPath = Paths.get(info.gradleFile).toAbsolutePath().normalize();
@@ -240,55 +244,45 @@ public class GradleProject implements Project {
                             map = new HashMap<>();
                             buildInfoCache.put(subProjectPath, map);
                         }
-                        map.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
+                        map.put(unitId, info);
                     }
                 }
-                ret.put(info.attrs.groupID + '/' + info.attrs.artifactID, info);
+                ret.put(unitId, info);
+                unitCache.put(unitId, info);
             }
             buildInfoCache.put(path, ret);
         }
         return ret;
     }
 
-    private static Collection<BuildAnalysis.BuildInfo> collectBuildInfo(Path build) throws IOException {
-        Set<Path> visited = new HashSet<>();
+    private static Collection<BuildAnalysis.BuildInfo> collectBuildInfo(String unitId) throws IOException {
+        Set<String> visited = new HashSet<>();
         Collection<BuildAnalysis.BuildInfo> infos = new LinkedHashSet<>();
-        collectBuildInfo(build, infos, visited);
+        collectBuildInfo(unitId, infos, visited);
         return infos;
     }
 
-    private static void collectBuildInfo(Path build,
+    private static void collectBuildInfo(String unitId,
                                          Collection<BuildAnalysis.BuildInfo> infos,
-                                         Set<Path> visited) throws  IOException {
-        visited.add(build.toAbsolutePath().normalize());
-        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(build);
-        if (ret == null) {
+                                         Set<String> visited) throws  IOException {
+        visited.add(unitId);
+        BuildAnalysis.BuildInfo info = unitCache.get(unitId);
+        if (info == null) {
             return;
         }
+        infos.add(info);
 
-        for (BuildAnalysis.BuildInfo info : ret.values()) {
-            infos.add(info);
-            // mark as visited all sub projects encountered in current gradle file
-            if (info.gradleFile != null) {
-                visited.add(Paths.get(info.gradleFile).toAbsolutePath().normalize());
-            }
-        }
-        for (BuildAnalysis.BuildInfo info : ret.values()) {
-            infos.add(info);
-            for (String gradleFile : info.projectDependencies) {
-                Path root = Paths.get(info.projectDir).toAbsolutePath().normalize();
-                build = root.resolve(gradleFile).toAbsolutePath().normalize();
-                if (!visited.contains(build)) {
-                    collectBuildInfo(build, infos, visited);
-                }
+        for (BuildAnalysis.ProjectDependency projectDependency : info.projectDependencies) {
+            String depId = projectDependency.artifactID + '/' + projectDependency.groupID;
+            if (!visited.contains(depId)) {
+                collectBuildInfo(depId, infos, visited);
             }
         }
     }
 
     private static void collectSourceUnitsDependencies(Collection<SourceUnit> units) throws IOException {
         for (SourceUnit unit : units) {
-            Path gradlePath = Paths.get(unit.Dir, (String) unit.Data.get("GradleFile")).toAbsolutePath().normalize();
-            Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(gradlePath);
+            Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(unit.Name);
             Collection<String> classpath = new LinkedHashSet<>();
 
             Collection<String[]> sourcepath = new ArrayList<>();

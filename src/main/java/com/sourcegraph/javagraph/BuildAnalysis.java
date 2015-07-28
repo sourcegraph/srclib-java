@@ -32,6 +32,41 @@ public class BuildAnalysis {
         }
     }
 
+    public static class ProjectDependency {
+        public String groupID;
+        public String artifactID;
+        public String gradleFile;
+
+        public ProjectDependency(String groupID, String artifactID, String gradleFile) {
+            this.groupID = groupID;
+            this.artifactID = artifactID;
+            if (gradleFile == null) {
+                gradleFile = StringUtils.EMPTY;
+            }
+            this.gradleFile = gradleFile;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = groupID.hashCode() * 31;
+            result = result * 31 + artifactID.hashCode();
+            result = result * 31 + gradleFile.hashCode();
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || !(o instanceof ProjectDependency)) {
+                return false;
+            }
+            ProjectDependency projectDependency = (ProjectDependency) o;
+            return groupID.equals(projectDependency.groupID) &&
+                    artifactID.equals(projectDependency.artifactID) &&
+                    gradleFile.equals(projectDependency.gradleFile);
+        }
+
+    }
+
     public static class BuildInfo {
         public String version = StringUtils.EMPTY;
         public POMAttrs attrs;
@@ -44,7 +79,7 @@ public class BuildAnalysis {
         public String projectDir;
         public String rootDir;
         public String gradleFile;
-        public HashSet<String> projectDependencies;
+        public HashSet<ProjectDependency> projectDependencies;
 
 
         public BuildInfo() {
@@ -240,7 +275,10 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                info.projectDependencies.add(payload);
+                                String depTokens[] = payload.split(":", 3);
+                                info.projectDependencies.add(new ProjectDependency(depTokens[0],
+                                        depTokens[1],
+                                        depTokens[2]));
                                 break;
                             case "GRADLEFILE":
                                 if (info == null) {
