@@ -2,10 +2,7 @@ package com.sourcegraph.javagraph;
 
 import com.google.common.collect.Iterators;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.Parent;
-import org.apache.maven.model.Plugin;
-import org.apache.maven.model.Repository;
+import org.apache.maven.model.*;
 import org.apache.maven.model.building.*;
 import org.apache.maven.model.resolution.InvalidRepositoryException;
 import org.apache.maven.model.resolution.ModelResolver;
@@ -181,7 +178,34 @@ public class MavenProject implements Project {
     @Override
     public List<String> getSourcePath() throws Exception {
         // TODO (alexsaveliev) retrieve source path
-        return null;
+        Plugin buildHelper = getMavenProject().getPlugin("org.codehaus.mojo:build-helper-maven-plugin");
+        if (buildHelper == null) {
+            return null;
+        }
+        Path root = pomFile.getParent().toAbsolutePath().normalize();
+        List<String> ret = new ArrayList<>();
+        for (PluginExecution pluginExecution : buildHelper.getExecutions()) {
+            Object configuration = pluginExecution.getConfiguration();
+            if (configuration == null || !(configuration instanceof Xpp3Dom)) {
+                continue;
+            }
+            Xpp3Dom xmlConfiguration = (Xpp3Dom) configuration;
+            Xpp3Dom sourcesList[] = xmlConfiguration.getChildren("sources");
+            if (sourcesList == null) {
+                continue;
+            }
+            for (Xpp3Dom sources : sourcesList) {
+                Xpp3Dom sourceList[] = sources.getChildren("source");
+                if (sourceList == null) {
+                    continue;
+                }
+                for (Xpp3Dom source : sourceList) {
+                    ret.add(root.resolve(source.getValue()).toAbsolutePath().normalize().toString());
+                }
+            }
+        }
+        return ret;
+
     }
 
     @Override
