@@ -1,4 +1,9 @@
+def isConfigSupported(conf) {
+	return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" ||  conf.name == "compileOnly");
+}
+
 allprojects {
+
     task srclibCollectMetaInformation << { task ->
 
         String desc = task.project.description
@@ -25,7 +30,7 @@ allprojects {
                         String name = it.moduleVersion.id.name
                         String version = it.moduleVersion.id.version
                         String file = it.file
-                        if (conf.name == "compile" || conf.name == "testCompile") {
+                        if (isConfigSupported(conf)) {
                             println "DEPENDENCY $conf.name:$group:$name:$version:$file"
                         }
                     } catch (Exception e) {
@@ -36,7 +41,7 @@ allprojects {
                 conf.getAllDependencies().each { d ->
                     if (d instanceof ProjectDependency) {
                         Project p = ((ProjectDependency) d).getDependencyProject()
-                        if (conf.name == "compile" || conf.name == "testCompile") {
+                        if (isConfigSupported(conf)) {
                             if (p.buildFile) {
                                 println "PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
                             } else {
@@ -111,7 +116,7 @@ allprojects {
         try {
             task.project.plugins.withType(JavaPlugin) {
                 configurations.each { Configuration config ->
-                    if (config.name == "compile" || config.name == "testCompile") {
+                    if (isConfigSupported(config)) {
                         println "CLASSPATH $config.asPath"
                     }
                 }

@@ -77,7 +77,7 @@ public class ElementPath {
             if (tp != null) {
                 return tp.getCompilationUnit().getSourceFile().getName() + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             }
-            return "(unknown file)";
+            return compilationUnit.getSourceFile().getName();
         }
 
         @Override
@@ -113,7 +113,11 @@ public class ElementPath {
         @Override
         public ElementPath visitUnknown(Element e, ElementPath p) {
 
-            LOGGER.warn("Element visitor: unknown element {} of type {} at {}", e.getSimpleName(), e.getKind(), getSourcePos(e));
+            LOGGER.warn("Element visitor: unknown element {} of type {} at {} while processing [{}]",
+                    e.getSimpleName(),
+                    e.getKind(),
+                    getSourcePos(e),
+                    p.toString());
             String name = e.getSimpleName().toString();
             if (name.isEmpty()) {
                 name = "u-" + getUniqueID(e);
