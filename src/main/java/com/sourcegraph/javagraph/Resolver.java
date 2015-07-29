@@ -5,7 +5,6 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
-import org.apache.maven.model.building.ModelBuildingException;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +29,7 @@ public class Resolver {
     private static final Logger LOGGER = LoggerFactory.getLogger(Resolver.class);
 
     private final Project proj;
+    private final SourceUnit unit;
 
     private Map<String, DepResolution> depsCache;
 
@@ -51,8 +51,9 @@ public class Resolver {
         }
     }
 
-    public Resolver(Project proj) {
+    public Resolver(Project proj, SourceUnit unit) {
         this.proj = proj;
+        this.unit = unit;
         this.depsCache = new HashMap<>();
     }
 
@@ -182,26 +183,26 @@ public class Resolver {
             return resolution;
         }
 
-        String depGroupID = null;
-
-        // HACK: Assume that if the groupID of the RawDependency equals the groupID of the current project, then it is from the same repo and shouldn't be resolved externally.
-        if (this.proj instanceof MavenProject) {
-            MavenProject mvnProj = (MavenProject)this.proj;
-            try {
-                depGroupID = mvnProj.getMavenProject().getGroupId();
-            } catch (ModelBuildingException e) {
-                LOGGER.warn("Failed to build Maven model", e);
-            }
-        } else if (this.proj instanceof GradleProject) {
-            GradleProject gradleProject = (GradleProject) this.proj;
-            depGroupID = gradleProject.getGroupId();
-        }
-
-        if (depGroupID != null && depGroupID.equals(d.groupID)) {
+        // HACK: Assume that if groupID of the RawDependency equals the groupID
+        // of the current project, then it is from the same repo and shouldn't be resolved externally.
+        if (unit.Name.substring(0, this.unit.Name.indexOf('/')).equals(d.groupID)) {
             ResolvedTarget target = new ResolvedTarget();
             target.ToUnit = d.groupID + "/" + d.artifactID;
             target.ToUnitType = "JavaArtifact";
             target.ToVersionString = d.version;
+            target.ToRepoCloneURL = unit.Repo;
+            resolution = new DepResolution(d, target);
+            depsCache.put(key, resolution);
+            return resolution;
+        }
+
+        // We may know repo URI already
+        if (d.repoURI != null) {
+            ResolvedTarget target = new ResolvedTarget();
+            target.ToUnit = d.groupID + "/" + d.artifactID;
+            target.ToUnitType = "JavaArtifact";
+            target.ToVersionString = d.version;
+            target.ToRepoCloneURL = d.repoURI;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
