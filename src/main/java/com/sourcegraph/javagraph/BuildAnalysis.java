@@ -35,22 +35,22 @@ public class BuildAnalysis {
     public static class ProjectDependency {
         public String groupID;
         public String artifactID;
-        public String gradleFile;
+        public String buildFile;
 
-        public ProjectDependency(String groupID, String artifactID, String gradleFile) {
+        public ProjectDependency(String groupID, String artifactID, String buildFile) {
             this.groupID = groupID;
             this.artifactID = artifactID;
-            if (gradleFile == null) {
-                gradleFile = StringUtils.EMPTY;
+            if (buildFile == null) {
+                buildFile = StringUtils.EMPTY;
             }
-            this.gradleFile = gradleFile;
+            this.buildFile = buildFile;
         }
 
         @Override
         public int hashCode() {
             int result = groupID.hashCode() * 31;
             result = result * 31 + artifactID.hashCode();
-            result = result * 31 + gradleFile.hashCode();
+            result = result * 31 + buildFile.hashCode();
             return result;
         }
 
@@ -62,7 +62,7 @@ public class BuildAnalysis {
             ProjectDependency projectDependency = (ProjectDependency) o;
             return groupID.equals(projectDependency.groupID) &&
                     artifactID.equals(projectDependency.artifactID) &&
-                    gradleFile.equals(projectDependency.gradleFile);
+                    buildFile.equals(projectDependency.buildFile);
         }
 
     }
@@ -70,16 +70,16 @@ public class BuildAnalysis {
     public static class BuildInfo {
         public String version = StringUtils.EMPTY;
         public POMAttrs attrs;
-        public HashSet<RawDependency> dependencies;
-        public HashSet<String> sources;
+        public Collection<RawDependency> dependencies;
+        public Collection<String> sources;
         public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
-        public HashSet<String> classPath;
+        public Collection<String> classPath;
         public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
         public String sourceEncoding;
         public String projectDir;
         public String rootDir;
-        public String gradleFile;
-        public HashSet<ProjectDependency> projectDependencies;
+        public String buildFile;
+        public Collection<ProjectDependency> projectDependencies;
 
 
         public BuildInfo() {
@@ -89,6 +89,10 @@ public class BuildAnalysis {
             sourceDirs = new ArrayList<>();
             classPath = new HashSet<>();
             projectDependencies = new HashSet<>();
+        }
+
+        public String getName() {
+            return attrs.groupID + '/' + attrs.artifactID;
         }
     }
 
@@ -284,7 +288,7 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                info.gradleFile = payload;
+                                info.buildFile = payload;
                                 break;
                             case "WARNING":
                                 LOGGER.warn("gradle: {}", payload);

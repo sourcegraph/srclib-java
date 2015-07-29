@@ -101,10 +101,6 @@ public class GradleProject implements Project {
         return null;
     }
 
-    public String getGroupId() {
-        return (String) unit.Data.get("GroupId");
-    }
-
     private static Collection<SourceUnit> createSourceUnits(Path gradleFile,
                                                             String repoURI,
                                                             Set<Path> visited)
@@ -116,8 +112,8 @@ public class GradleProject implements Project {
         for (BuildAnalysis.BuildInfo info : infos.values()) {
 
             for (BuildAnalysis.ProjectDependency projectDependency : info.projectDependencies) {
-                if (!StringUtils.isEmpty(projectDependency.gradleFile)) {
-                    Path p = Paths.get(projectDependency.gradleFile).toAbsolutePath().normalize();
+                if (!StringUtils.isEmpty(projectDependency.buildFile)) {
+                    Path p = Paths.get(projectDependency.buildFile).toAbsolutePath().normalize();
                     visited.add(p);
                 }
             }
@@ -128,17 +124,16 @@ public class GradleProject implements Project {
             }
             final SourceUnit unit = new SourceUnit();
             unit.Type = "JavaArtifact";
-            unit.Name = info.attrs.groupID + "/" + info.attrs.artifactID;
+            unit.Name = info.getName();
             Path projectRoot = Paths.get(info.projectDir);
             unit.Dir = info.projectDir;
-            if (info.gradleFile != null) {
+            if (info.buildFile != null) {
                 unit.Data.put("GradleFile", PathUtil.normalize(
-                        projectRoot.relativize(Paths.get(info.gradleFile)).normalize().toString()));
+                        projectRoot.relativize(Paths.get(info.buildFile)).normalize().toString()));
             } else {
                 unit.Data.put("GradleFile", StringUtils.EMPTY);
             }
             unit.Data.put("Description", info.attrs.description);
-            unit.Data.put("GroupId", info.attrs.groupID);
             if (!StringUtils.isEmpty(info.sourceVersion)) {
                 unit.Data.put("SourceVersion", info.sourceVersion);
             }
@@ -240,10 +235,10 @@ public class GradleProject implements Project {
             }
             ret = new HashMap<>();
             for (BuildAnalysis.BuildInfo info : items) {
-                String unitId= info.attrs.groupID + '/' + info.attrs.artifactID;
+                String unitId = info.getName();
                 // updating cache for sub-projects too
-                if (info.gradleFile != null) {
-                    Path subProjectPath = Paths.get(info.gradleFile).toAbsolutePath().normalize();
+                if (info.buildFile != null) {
+                    Path subProjectPath = Paths.get(info.buildFile).toAbsolutePath().normalize();
                     if (!subProjectPath.equals(path)) {
                         Map<String, BuildAnalysis.BuildInfo> map = buildInfoCache.get(subProjectPath);
                         if (map == null) {

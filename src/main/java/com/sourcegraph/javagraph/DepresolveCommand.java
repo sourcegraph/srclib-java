@@ -42,7 +42,7 @@ public class DepresolveCommand {
             System.exit(1);
         }
 
-        Resolver rs = new Resolver(unit.getProject());
+        Resolver rs = new Resolver(unit.getProject(), unit);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolving deps");

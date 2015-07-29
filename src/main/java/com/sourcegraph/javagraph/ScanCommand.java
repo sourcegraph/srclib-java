@@ -61,7 +61,7 @@ public class ScanCommand {
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Collecting Maven source units");
                     }
-                    units.addAll(MavenProject.findAllSourceUnits());
+                    units.addAll(MavenProject.findAllSourceUnits(repoURI));
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Collecting Gradle source units");
                     }
@@ -110,7 +110,7 @@ public class ScanCommand {
                 unit.Data.put("POMFile", PathUtil.relativizeCwd((String) unit.Data.get("POMFile")));
             }
             if (unit.Data.containsKey("ClassPath")) {
-                List<String> classPath = (List<String>) unit.Data.get("ClassPath");
+                Collection<String> classPath = (Collection<String>) unit.Data.get("ClassPath");
                 classPath = classPath.stream().
                         map(PathUtil::relativizeCwd).
                         sorted().
@@ -118,7 +118,7 @@ public class ScanCommand {
                 unit.Data.put("ClassPath", classPath);
             }
             if (unit.Data.containsKey("SourcePath")) {
-                List<String[]> sourcePath = (List<String[]>) unit.Data.get("SourcePath");
+                Collection<String[]> sourcePath = (Collection<String[]>) unit.Data.get("SourcePath");
                 sourcePath = sourcePath.stream().
                         map(sourcePathElement -> {
                             sourcePathElement[2] = PathUtil.relativizeCwd(sourcePathElement[2]);

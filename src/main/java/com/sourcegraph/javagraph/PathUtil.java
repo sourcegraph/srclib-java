@@ -18,6 +18,6 @@ public class PathUtil {
     }
 
     public static String relativizeCwd(String path) {
-        return normalize(CWD.relativize(Paths.get(path)).normalize().toString());
+        return normalize(CWD.relativize(Paths.get(path).toAbsolutePath()).normalize().toString());
     }
 }

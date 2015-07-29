@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.Set;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,7 +33,9 @@ public class TestMavenProject {
 	@Test
 	public void testResolveMavenDependencyArtifacts() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-dependencies.xml"));
-		Set<Artifact> artifacts = project.resolveMavenDependencyArtifacts();
+		Collection<Artifact> artifacts = MavenProject.resolveArtifactDependencies(project.listDeps(),
+				project.getMavenProject().getRepositories(),
+				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
 		assertEquals("Some artifacts were unresolved", 14, artifacts.size());
 	}
@@ -44,7 +46,9 @@ public class TestMavenProject {
 	@Test
 	public void testRepositories() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-repositories.xml"));
-		Set<Artifact> artifacts = project.resolveMavenDependencyArtifacts();
+		Collection<Artifact> artifacts = MavenProject.resolveArtifactDependencies(project.listDeps(),
+				project.getMavenProject().getRepositories(),
+				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
 		assertEquals("Some artifacts were unresolved, probably repository was not resolved", 6, artifacts.size());
 	}

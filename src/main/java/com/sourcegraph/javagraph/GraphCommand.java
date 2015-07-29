@@ -53,7 +53,7 @@ public class GraphCommand {
         }
 
         Project proj = unit.getProject();
-        Resolver rs = new Resolver(proj);
+        Resolver rs = new Resolver(proj, unit);
         try {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Resolving classpath");
