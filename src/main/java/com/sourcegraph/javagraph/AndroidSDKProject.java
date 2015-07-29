@@ -46,7 +46,6 @@ public class AndroidSDKProject implements Project {
         unit.Dir = subdir;
         unit.Files = ScanUtil.findAllJavaFiles(FileSystems.getDefault().getPath(subdir));
         unit.Data.put("AndroidSDKSubdir", subdir);
-        unit.sortFiles();
         return unit;
     }
 }

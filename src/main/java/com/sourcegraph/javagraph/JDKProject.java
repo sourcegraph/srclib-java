@@ -69,7 +69,6 @@ public class JDKProject implements Project {
         unit.Dir = "src/";
         unit.Files = ScanUtil.scanFiles(getJDKSourcePaths());
         unit.Data.put("JDK", true);
-        unit.sortFiles();
         units.add(unit);
 
         // Build tools source unit
@@ -78,7 +77,6 @@ public class JDKProject implements Project {
         toolsUnit.Name = "BuildTools";
         toolsUnit.Dir = "make/src/classes/";
         toolsUnit.Files = ScanUtil.scanFiles("make/src/classes/");
-        toolsUnit.sortFiles();
         units.add(toolsUnit);
 
         return units;

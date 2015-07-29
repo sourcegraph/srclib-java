@@ -273,12 +273,12 @@ public class MavenProject implements Project {
         final SourceUnit unit = new SourceUnit();
 
         // Add POMFile so we can open the corresponding Maven project.
-        unit.Data.put("POMFile", PathUtil.normalize(pomFile.toString()));
+        unit.Data.put("POMFile", pomFile.toString());
 
         BuildAnalysis.POMAttrs attrs = proj.getPOMAttrs();
         unit.Type = "JavaArtifact";
         unit.Name = attrs.groupID + "/" + attrs.artifactID;
-        unit.Dir = PathUtil.normalize(pomFile.getParent().toString());
+        unit.Dir = pomFile.getParent().toString();
         unit.Data.put("Description", attrs.description);
 
         if (LOGGER.isDebugEnabled()) {
@@ -321,7 +321,6 @@ public class MavenProject implements Project {
         }
 
         unit.Files = new LinkedList<>(files);
-        unit.sortFiles();
 
         unit.Dependencies = new ArrayList<>(proj.listDeps());
 
@@ -384,7 +383,7 @@ public class MavenProject implements Project {
             directoryScanner.setBasedir(sourceRoot);
             directoryScanner.scan();
             for (String fileName : directoryScanner.getIncludedFiles()) {
-                files.add(PathUtil.relativizeCwd(Paths.get(sourceRoot, fileName).toString()));
+                files.add(Paths.get(sourceRoot, fileName).toString());
             }
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collected source files from {}", path.toAbsolutePath());
