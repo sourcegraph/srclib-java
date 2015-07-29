@@ -49,10 +49,6 @@ public class SourceUnit {
         return new GenericProject(this);
     }
 
-    public void sortFiles() {
-        Files.sort(String::compareTo);
-    }
-
     @Override
     public int hashCode() {
         return Name == null ? 0 : Name.hashCode();
