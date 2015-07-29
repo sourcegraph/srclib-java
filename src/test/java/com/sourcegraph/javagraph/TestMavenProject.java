@@ -37,7 +37,7 @@ public class TestMavenProject {
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
-		assertEquals("Some artifacts were unresolved", 14, artifacts.size());
+		assertEquals("Some artifacts were unresolved", 9, artifacts.size());
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class TestMavenProject {
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
-		assertEquals("Some artifacts were unresolved, probably repository was not resolved", 6, artifacts.size());
+		assertEquals("Some artifacts were unresolved, probably repository was not resolved", 3, artifacts.size());
 	}
 
 }
