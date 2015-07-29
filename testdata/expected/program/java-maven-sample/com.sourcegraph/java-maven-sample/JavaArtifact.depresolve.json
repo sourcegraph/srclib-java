@@ -3,10 +3,13 @@
     "Raw": {
       "groupID": "org.apache.commons",
       "artifactID": "commons-csv",
-      "version": "1.0"
+      "version": "1.0",
+      "scope": "compile",
+      "type": "jar",
+      "repoURI": "http://svn.apache.org/viewvc/commons/proper/csv/tags/CSV_1.0"
     },
     "Target": {
-      "ToRepoCloneURL": "https://github.com/apache/commons-csv",
+      "ToRepoCloneURL": "http://svn.apache.org/viewvc/commons/proper/csv/tags/CSV_1.0",
       "ToUnit": "org.apache.commons/commons-csv",
       "ToUnitType": "JavaArtifact",
       "ToVersionString": "1.0"

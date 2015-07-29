@@ -81,14 +81,16 @@ public class ScanCommand {
     private void normalize(Collection<SourceUnit> units) {
 
         Comparator<RawDependency> dependencyComparator = Comparator.comparing(dependency -> dependency.artifactID);
-        dependencyComparator.thenComparing(dependency -> dependency.groupID);
-        dependencyComparator.thenComparing(dependency -> dependency.version);
-        dependencyComparator.thenComparing(dependency -> dependency.scope);
-        dependencyComparator.thenComparing(dependency -> dependency.file);
+        dependencyComparator = dependencyComparator.
+                thenComparing(dependency -> dependency.groupID).
+                thenComparing(dependency -> dependency.version).
+                thenComparing(dependency -> dependency.scope).
+                thenComparing(dependency -> dependency.file);
 
         Comparator<String[]> sourcePathComparator = Comparator.comparing(sourcePathElement -> sourcePathElement[0]);
-        sourcePathComparator.thenComparing(sourcePathElement -> sourcePathElement[1]);
-        sourcePathComparator.thenComparing(sourcePathElement -> sourcePathElement[2]);
+        sourcePathComparator = sourcePathComparator.
+                thenComparing(sourcePathElement -> sourcePathElement[1]).
+                thenComparing(sourcePathElement -> sourcePathElement[2]);
 
         for (SourceUnit unit : units) {
             unit.Dir = PathUtil.relativizeCwd(unit.Dir);
