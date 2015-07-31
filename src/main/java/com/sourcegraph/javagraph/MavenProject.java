@@ -165,6 +165,12 @@ public class MavenProject implements Project {
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<String> getBootClassPath() throws Exception {
+        return (List<String>) unit.Data.get("BootClassPath");
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<String> getSourcePath() {
         List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
         return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());

@@ -9,6 +9,8 @@ public interface Project {
 
     public List<String> getClassPath() throws Exception;
 
+    public List<String> getBootClassPath() throws Exception;
+
     public List<String> getSourcePath() throws Exception;
 
     public RawDependency getDepForJAR(Path jarFile) throws Exception;

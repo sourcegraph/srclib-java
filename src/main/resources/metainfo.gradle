@@ -2,6 +2,26 @@ def isConfigSupported(conf) {
 	return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" ||  conf.name == "compileOnly");
 }
 
+def listSourceFiles(task) {
+
+    task.source.each {File file ->
+        println "SOURCEFILE $file.absolutePath"
+    }
+}
+
+def listSourceDirs(task, sourceSetsHolder, sourceSetName) {
+    try {
+        Object ss = sourceSetsHolder.sourceSets.getByName(sourceSetName);
+        if (!ss) {
+            return
+        }
+        ss.java.srcDirs.each{File file ->
+                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+        }
+    } catch (UnknownDomainObjectException ignored) {
+    }
+}
+
 allprojects {
 
     task srclibCollectMetaInformation << { task ->
@@ -21,6 +41,13 @@ allprojects {
             println "GRADLEFILE $task.project.buildFile.absolutePath"
         }
 
+
+        boolean android = false
+
+        task.project.plugins.any {p ->
+            android = p.getClass().getName().startsWith("com.android.build.gradle")
+            return android
+        }
 
         try {
             task.project.configurations.each { conf ->
@@ -58,41 +85,12 @@ allprojects {
         }
 
         try {
-            task.project.plugins.withType(JavaPlugin) {
+            task.project.plugins.withType(JavaPlugin) {plugin ->
+                listSourceFiles(compileJava)
+                listSourceFiles(compileTestJava)
 
-                compileJava {
-                    source.each {File file ->
-                        println "SOURCEFILE $file.absolutePath"
-                    }
-                }
-
-                compileTestJava {
-                    source.each {File file ->
-                        println "SOURCEFILE $file.absolutePath"
-                    }
-                }
-
-                try {
-                    sourceSets.getByName("main") {
-                        java {
-                            srcDirs.each { File file ->
-                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
-                            }
-                        }
-                    }
-                } catch (UnknownDomainObjectException ignored) {
-                }
-
-                try {
-                    sourceSets.getByName("test") {
-                        java {
-                            srcDirs.each { File file ->
-                                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
-                            }
-                        }
-                    }
-                } catch (UnknownDomainObjectException ignored) {
-                }
+                listSourceDirs(task, plugin, "main")
+                listSourceDirs(task, plugin, "test")
             }
         } catch (e) {
             println "WARNING $e"
@@ -123,6 +121,20 @@ allprojects {
             }
         } catch (e) {
             println "WARNING $e"
+        }
+
+        if (android) {
+            println "ANDROID-SDK $task.project.extensions.android.compileSdkVersion"
+            String bootClasspath = task.project.extensions.android.bootClasspath.join(File.pathSeparator)
+            println "BOOTCLASSPATH $bootClasspath"
+
+            listSourceFiles(task.project.tasks.compileDebugJava)
+            listSourceFiles(task.project.tasks.compileDebugUnitTestJava)
+            listSourceFiles(task.project.tasks.compileReleaseJava)
+            listSourceFiles(task.project.tasks.compileReleaseUnitTestJava)
+
+            listSourceDirs(task, project.android, "main")
+            listSourceDirs(task, project.android, "test")
         }
 
     }

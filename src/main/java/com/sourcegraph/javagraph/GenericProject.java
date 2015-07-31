@@ -2,7 +2,6 @@ package com.sourcegraph.javagraph;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by sqs on 12/21/14.
@@ -12,6 +11,11 @@ public class GenericProject implements Project {
 
     public GenericProject(SourceUnit unit) {
         this.unit=unit;
+    }
+
+    @Override
+    public List<String> getBootClassPath() throws Exception {
+        return null;
     }
 
     @Override
