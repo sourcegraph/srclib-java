@@ -75,6 +75,12 @@ public class GradleProject implements Project {
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<String> getBootClassPath() throws Exception {
+        return (List<String>) unit.Data.get("BootClassPath");
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<String> getClassPath() throws Exception {
         return (List<String>) unit.Data.get("ClassPath");
     }
@@ -141,7 +147,11 @@ public class GradleProject implements Project {
                 unit.Data.put("SourceEncoding", info.sourceEncoding);
             }
 
-            // relativize files and leave only existing ones
+            if (info.androidSdk != null) {
+                unit.Data.put("AndroidSDK", info.androidSdk);
+            }
+
+            // leave only existing files
             unit.Files = new LinkedList<>();
             for (String sourceFile :info.sources) {
                 File f = new File(sourceFile);
@@ -151,7 +161,7 @@ public class GradleProject implements Project {
                 }
             }
             unit.Dependencies = new ArrayList<>(info.dependencies);
-
+            unit.Data.put("BootClassPath", new ArrayList<>(info.bootClassPath));
             ret.add(unit);
         }
         return ret;

@@ -15,6 +15,11 @@ public class JDKProject implements Project {
     }
 
     @Override
+    public List<String> getBootClassPath() throws Exception {
+        return null;
+    }
+
+    @Override
     public List<String> getClassPath() throws Exception {
         return null;
     }

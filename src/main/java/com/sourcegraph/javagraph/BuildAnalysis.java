@@ -74,12 +74,14 @@ public class BuildAnalysis {
         public Collection<String> sources;
         public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
         public Collection<String> classPath;
+        public Collection<String> bootClassPath;
         public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
         public String sourceEncoding;
         public String projectDir;
         public String rootDir;
         public String buildFile;
         public Collection<ProjectDependency> projectDependencies;
+        public String androidSdk;
 
 
         public BuildInfo() {
@@ -88,6 +90,7 @@ public class BuildAnalysis {
             sources = new HashSet<>();
             sourceDirs = new ArrayList<>();
             classPath = new HashSet<>();
+            bootClassPath = new HashSet<>();
             projectDependencies = new HashSet<>();
         }
 
@@ -235,6 +238,16 @@ public class BuildAnalysis {
                                     }
                                 }
                                 break;
+                            case "BOOTCLASSPATH":
+                                if (info == null) {
+                                    continue;
+                                }
+                                for (String path : payload.split(SystemUtils.PATH_SEPARATOR)) {
+                                    if (!StringUtils.isEmpty(path)) {
+                                        info.bootClassPath.add(path);
+                                    }
+                                }
+                                break;
                             case "SOURCEFILE":
                                 if (info == null) {
                                     continue;
@@ -289,6 +302,12 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 info.buildFile = payload;
+                                break;
+                            case "ANDROID-SDK":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.androidSdk = payload;
                                 break;
                             case "WARNING":
                                 LOGGER.warn("gradle: {}", payload);

@@ -3,7 +3,6 @@ package com.sourcegraph.javagraph;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,14 +54,7 @@ public class GraphCommand {
         Project proj = unit.getProject();
         Resolver rs = new Resolver(proj, unit);
         try {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Resolving classpath");
-            }
-            String classpath = StringUtils.join(proj.getClassPath(), SystemUtils.PATH_SEPARATOR);
-            Grapher grapher = new Grapher(classpath,
-                    proj.getSourcePath(),
-                    proj.getSourceCodeVersion(),
-                    proj.getSourceCodeEncoding(),
+            Grapher grapher = new Grapher(proj,
                     rawGraph);
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Starting graph collection");

@@ -30,7 +30,8 @@ public class Grapher {
     private final GraphWriter emit;
     private final List<String> javacOpts;
 
-    public Grapher(String classpath, Collection<String> sourcepath, String sourceVersion, String sourceEncoding, GraphWriter emit) {
+    public Grapher(Project project,
+                   GraphWriter emit) throws Exception {
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
@@ -39,10 +40,17 @@ public class Grapher {
 
         javacOpts = new ArrayList<>();
         javacOpts.add("-classpath");
-        javacOpts.add(classpath != null ? classpath : StringUtils.EMPTY);
-        if (sourcepath != null && !sourcepath.isEmpty()) {
+
+        Collection<String> classPath = project.getClassPath();
+        if (classPath != null && !classPath.isEmpty()) {
+            javacOpts.add(StringUtils.join(ClassPathUtil.transformClassPath(classPath), SystemUtils.PATH_SEPARATOR));
+        } else {
+            javacOpts.add(StringUtils.EMPTY);
+        }
+        Collection<String> sourcePath = project.getSourcePath();
+        if (sourcePath != null && !sourcePath.isEmpty()) {
             javacOpts.add("-sourcepath");
-            javacOpts.add(StringUtils.join(sourcepath, SystemUtils.PATH_SEPARATOR));
+            javacOpts.add(StringUtils.join(sourcePath, SystemUtils.PATH_SEPARATOR));
         }
 
         // Speed up compilation by not doing dataflow, code gen, etc.
@@ -50,14 +58,18 @@ public class Grapher {
         javacOpts.add("-XDshouldStopPolicyIfError=ATTR");
         javacOpts.add("-XDshouldStopPolicyIfNoError=ATTR");
 
-        javacOpts.add("-source");
-        javacOpts.add(sourceVersion);
+        String sourceVersion = project.getSourceCodeVersion();
+        if (!StringUtils.isEmpty(sourceVersion)) {
+            javacOpts.add("-source");
+            javacOpts.add(sourceVersion);
+        }
 
         javacOpts.add("-implicit:none");
 
         // turn off warnings
         javacOpts.add("-Xlint:none");
 
+        String sourceEncoding = project.getSourceCodeEncoding();
         if (!StringUtils.isEmpty(sourceEncoding)) {
             javacOpts.add("-encoding");
             javacOpts.add(sourceEncoding);
@@ -66,9 +78,15 @@ public class Grapher {
         // This is necessary to produce Elements (and therefore defs and refs) when compilation errors occur. It will still probably fail on syntax errors, but typechecking errors are survivable.
         javacOpts.add("-proc:none");
 
-        String bootClasspath = System.getProperty("sun.boot.class.path");
+        String bootClasspath;
+        Collection<String> bootCp = project.getBootClassPath();
+        if (bootCp != null && !bootCp.isEmpty()) {
+            bootClasspath = StringUtils.join(bootCp, SystemUtils.PATH_SEPARATOR);
+        } else {
+            bootClasspath = System.getProperty("sun.boot.class.path");
+        }
         if (StringUtils.isEmpty(bootClasspath)) {
-            LOGGER.error("System property sun.boot.class.path is not set. It is required to load rt.jar.");
+            LOGGER.error("Neither system property sun.boot.class.path nor unit-specific boot classpath is set. It is required to load rt.jar.");
             System.exit(1);
         }
         javacOpts.add("-Xbootclasspath:" + bootClasspath);
@@ -117,12 +135,12 @@ public class Grapher {
     }
 
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
-        final JavacTask task = (JavacTask) compiler.getTask(null, fileManager, new DiagnosticListener<JavaFileObject>() {
-            @Override
-            public void report(Diagnostic<? extends JavaFileObject> diagnostic) {
-                LOGGER.warn("javac: {}", diagnostic);
-            }
-        }, javacOpts, null, files);
+        final JavacTask task = (JavacTask) compiler.getTask(null,
+                fileManager,
+                diagnostic -> LOGGER.warn("javac: {}", diagnostic),
+                javacOpts,
+                null,
+                files);
 
         final Trees trees = Trees.instance(task);
 
