@@ -43,6 +43,9 @@ public class SourceUnit {
         if (Data.containsKey("AndroidSDKSubdir")) {
             return new AndroidSDKProject(this);
         }
+        if (Data.containsKey("AndroidCoreSubdir")) {
+            return new AndroidCoreProject(this);
+        }
         if (Data.containsKey("JDK")) {
             return new JDKProject(this);
         }
