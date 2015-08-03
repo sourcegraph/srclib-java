@@ -5,18 +5,18 @@ def isConfigSupported(conf) {
 def listSourceFiles(task) {
 
     task.source.each {File file ->
-        println "SOURCEFILE $file.absolutePath"
+        println "SRCLIB-SOURCEFILE $file.absolutePath"
     }
 }
 
-def listSourceDirs(task, sourceSetsHolder, sourceSetName) {
+def listSourceDirs(task, sourceSets, sourceSetName) {
     try {
-        Object ss = sourceSetsHolder.sourceSets.getByName(sourceSetName);
+        Object ss = sourceSets.getByName(sourceSetName);
         if (!ss) {
             return
         }
         ss.java.srcDirs.each{File file ->
-                println "SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+                println "SRCLIB-SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
         }
     } catch (UnknownDomainObjectException ignored) {
     }
@@ -24,118 +24,144 @@ def listSourceDirs(task, sourceSetsHolder, sourceSetName) {
 
 allprojects {
 
-    task srclibCollectMetaInformation << { task ->
+    afterEvaluate { project ->
 
-        String desc = task.project.description
-        if (desc == null) {
-            desc = ""
-        }
+        task srclibCollectMetaInformation << { task ->
 
-        println "ARTIFACT $task.project.name"
-        println "DESCRIPTION $desc"
-        println "GROUP $task.project.group"
-        println "VERSION $task.project.version"
-        println "PROJECTDIR $task.project.projectDir"
-        println "ROOTDIR $task.project.rootDir"
-        if (task.project.buildFile) {
-            println "GRADLEFILE $task.project.buildFile.absolutePath"
-        }
+            String desc = project.description
+            if (desc == null) {
+                desc = ""
+            }
+
+            println "SRCLIB-ARTIFACT $project.name"
+            println "SRCLIB-DESCRIPTION $desc"
+            println "SRCLIB-GROUP $project.group"
+            println "SRCLIB-VERSION $project.version"
+            println "SRCLIB-PROJECTDIR $project.projectDir"
+            println "SRCLIB-ROOTDIR $project.rootDir"
+            if (project.buildFile) {
+                println "SRCLIB-GRADLEFILE $project.buildFile.absolutePath"
+            }
 
 
-        boolean android = false
+            boolean android = false
 
-        task.project.plugins.any {p ->
-            android = p.getClass().getName().startsWith("com.android.build.gradle")
-            return android
-        }
+            project.plugins.any { p ->
+                android = p.getClass().getName().startsWith("com.android.build.gradle")
+                return android
+            }
 
-        try {
-            task.project.configurations.each { conf ->
-                conf.resolvedConfiguration.getResolvedArtifacts().each {
-                    try {
-                        String group = it.moduleVersion.id.group
-                        String name = it.moduleVersion.id.name
-                        String version = it.moduleVersion.id.version
-                        String file = it.file
-                        if (isConfigSupported(conf)) {
-                            println "DEPENDENCY $conf.name:$group:$name:$version:$file"
-                        }
-                    } catch (Exception e) {
-                        println "WARNING $e"
-                    }
-                }
-
-                conf.getAllDependencies().each { d ->
-                    if (d instanceof ProjectDependency) {
-                        Project p = ((ProjectDependency) d).getDependencyProject()
-                        if (isConfigSupported(conf)) {
-                            if (p.buildFile) {
-                                println "PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
-                            } else {
-                                println "PROJECTDEPENDENCY $p.name:$p.group:"
+            try {
+                project.configurations.each { conf ->
+                    conf.resolvedConfiguration.getResolvedArtifacts().each {
+                        try {
+                            String group = it.moduleVersion.id.group
+                            String name = it.moduleVersion.id.name
+                            String version = it.moduleVersion.id.version
+                            String file = it.file
+                            if (isConfigSupported(conf)) {
+                                println "SRCLIB-DEPENDENCY $conf.name:$group:$name:$version:$file"
                             }
+                        } catch (Exception e) {
+                            println "SRCLIB-WARNING $e"
+                        }
+                    }
 
+                    conf.getAllDependencies().each { d ->
+                        if (d instanceof ProjectDependency) {
+                            Project p = ((ProjectDependency) d).getDependencyProject()
+                            if (isConfigSupported(conf)) {
+                                if (p.buildFile) {
+                                    println "SRCLIB-PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
+                                } else {
+                                    println "PROJECTDEPENDENCY $p.name:$p.group:"
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    listSourceFiles(compileJava)
+                    listSourceFiles(compileTestJava)
+					if (hasProperty("sourceSets")) {
+                    	listSourceDirs(task, sourceSets, "main")
+                    	listSourceDirs(task, sourceSets, "test")
+                    }
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    compileJava {
+                        println "SOURCEVERSION $sourceCompatibility"
+                        String encoding = options.encoding
+                        if (encoding == null) {
+                            encoding = "";
+                        }
+                        println("ENCODING $encoding")
+                    }
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    configurations.each { Configuration config ->
+                        if (isConfigSupported(config)) {
+                            println "SRCLIB-CLASSPATH $config.asPath"
                         }
                     }
                 }
-
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
             }
-        } catch (e) {
-            println "WARNING $e"
-        }
 
-        try {
-            task.project.plugins.withType(JavaPlugin) {plugin ->
-                listSourceFiles(compileJava)
-                listSourceFiles(compileTestJava)
-
-                listSourceDirs(task, plugin, "main")
-                listSourceDirs(task, plugin, "test")
-            }
-        } catch (e) {
-            println "WARNING $e"
-        }
-
-        try {
-            task.project.plugins.withType(JavaPlugin) {
-                compileJava {
-                    println "SOURCEVERSION $sourceCompatibility"
-                    String encoding = options.encoding
-                    if (encoding == null) {
-                        encoding = "";
-                    }
-                    println("ENCODING $encoding")
+            if (android) {
+            	if (project.extensions.android.hasProperty("compileSdkVersion")) {
+                	println "SRCLIB-ANDROID-SDK $project.extensions.android.compileSdkVersion"
                 }
-            }
-        } catch (e) {
-            println "WARNING $e"
-        }
 
-        try {
-            task.project.plugins.withType(JavaPlugin) {
-                configurations.each { Configuration config ->
-                    if (isConfigSupported(config)) {
-                        println "CLASSPATH $config.asPath"
-                    }
+            	if (project.extensions.android.hasProperty("bootClasspath")) {
+                	String bootClasspath = project.extensions.android.bootClasspath.join(File.pathSeparator)
+                	println "SRCLIB-BOOTCLASSPATH $bootClasspath"
                 }
+
+                if (project.tasks.hasProperty("compileDebugJava")) {
+                	listSourceFiles(project.tasks.compileDebugJava)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugJava.classpath.asPath"
+                }
+                if (project.tasks.hasProperty("compileDebugUnitTestJava")) {
+                	listSourceFiles(project.tasks.compileDebugUnitTestJava)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
+                }
+
+                if (project.android.hasProperty("sourceSets")) {
+                	listSourceDirs(task, project.android.sourceSets, "main")
+                	listSourceDirs(task, project.android.sourceSets, "test")
+				}
             }
-        } catch (e) {
-            println "WARNING $e"
+
         }
 
-        if (android) {
-            println "ANDROID-SDK $task.project.extensions.android.compileSdkVersion"
-            String bootClasspath = task.project.extensions.android.bootClasspath.join(File.pathSeparator)
-            println "BOOTCLASSPATH $bootClasspath"
-
-            listSourceFiles(task.project.tasks.compileDebugJava)
-            listSourceFiles(task.project.tasks.compileDebugUnitTestJava)
-            listSourceFiles(task.project.tasks.compileReleaseJava)
-            listSourceFiles(task.project.tasks.compileReleaseUnitTestJava)
-
-            listSourceDirs(task, project.android, "main")
-            listSourceDirs(task, project.android, "test")
+        project.plugins.any { p ->
+            if (p.getClass().getName().startsWith("com.android.build.gradle")) {
+            	if (project.tasks.findByPath("assembleDebug")) {
+                	srclibCollectMetaInformation.dependsOn("assembleDebug")
+                }
+                return true
+            }
+            return false
         }
-
     }
+
 }
