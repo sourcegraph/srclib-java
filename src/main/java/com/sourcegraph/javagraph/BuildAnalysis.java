@@ -131,7 +131,7 @@ public class BuildAnalysis {
                 }
 
                 String[] gradleArgs = new String[]{
-                        "--gradle-user-home", new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath(),
+                        //"--gradle-user-home", new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath(),
                         "-I", modifiedGradleScriptFile.toString(),
                         "--project-cache-dir", gradleCacheDir.toString(),
                         "srclibCollectMetaInformation"};
@@ -190,12 +190,12 @@ public class BuildAnalysis {
                         String prefix = meta[0];
                         String payload = meta[1];
                         switch (prefix) {
-                            case "ARTIFACT":
+                            case "SRCLIB-ARTIFACT":
                                 info = new BuildInfo();
                                 results.add(info);
                                 info.attrs.artifactID = payload;
                                 break;
-                            case "GROUP":
+                            case "SRCLIB-GROUP":
                                 if (info == null) {
                                     continue;
                                 }
@@ -203,7 +203,7 @@ public class BuildAnalysis {
                                     info.attrs.groupID = payload;
                                 }
                                 break;
-                            case "DEPENDENCY":
+                            case "SRCLIB-DEPENDENCY":
                                 if (info == null) {
                                     continue;
                                 }
@@ -216,19 +216,19 @@ public class BuildAnalysis {
                                         parts.length > 4 ? parts[4] : null // file
                                 ));
                                 break;
-                            case "DESCRIPTION":
+                            case "SRCLIB-DESCRIPTION":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.attrs.description = payload;
                                 break;
-                            case "VERSION":
+                            case "SRCLIB-VERSION":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.version = payload;
                                 break;
-                            case "CLASSPATH":
+                            case "SRCLIB-CLASSPATH":
                                 if (info == null) {
                                     continue;
                                 }
@@ -238,7 +238,7 @@ public class BuildAnalysis {
                                     }
                                 }
                                 break;
-                            case "BOOTCLASSPATH":
+                            case "SRCLIB-BOOTCLASSPATH":
                                 if (info == null) {
                                     continue;
                                 }
@@ -248,13 +248,13 @@ public class BuildAnalysis {
                                     }
                                 }
                                 break;
-                            case "SOURCEFILE":
+                            case "SRCLIB-SOURCEFILE":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.sources.add(payload);
                                 break;
-                            case "SOURCEDIR":
+                            case "SRCLIB-SOURCEDIR":
                                 if (info == null) {
                                     continue;
                                 }
@@ -262,7 +262,7 @@ public class BuildAnalysis {
                                 String unitName = tokens[0] + '/' + tokens[1];
                                 info.sourceDirs.add(new String[] {unitName, tokens[2], tokens[3]});
                                 break;
-                            case "SOURCEVERSION":
+                            case "SRCLIB-SOURCEVERSION":
                                 if (info == null) {
                                     continue;
                                 }
@@ -270,25 +270,25 @@ public class BuildAnalysis {
                                     info.sourceVersion = payload;
                                 }
                                 break;
-                            case "PROJECTDIR":
+                            case "SRCLIB-PROJECTDIR":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.projectDir = payload;
                                 break;
-                            case "ROOTDIR":
+                            case "SRCLIB-ROOTDIR":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.rootDir = payload;
                                 break;
-                            case "ENCODING":
+                            case "SRCLIB-ENCODING":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.sourceEncoding = payload;
                                 break;
-                            case "PROJECTDEPENDENCY":
+                            case "SRCLIB-PROJECTDEPENDENCY":
                                 if (info == null) {
                                     continue;
                                 }
@@ -297,19 +297,19 @@ public class BuildAnalysis {
                                         depTokens[1],
                                         depTokens[2]));
                                 break;
-                            case "GRADLEFILE":
+                            case "SRCLIB-GRADLEFILE":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.buildFile = payload;
                                 break;
-                            case "ANDROID-SDK":
+                            case "SRCLIB-ANDROID-SDK":
                                 if (info == null) {
                                     continue;
                                 }
                                 info.androidSdk = payload;
                                 break;
-                            case "WARNING":
+                            case "SRCLIB-WARNING":
                                 LOGGER.warn("gradle: {}", payload);
                                 break;
                             default:
