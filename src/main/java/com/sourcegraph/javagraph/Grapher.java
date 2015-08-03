@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Grapher {
 
@@ -39,14 +40,30 @@ public class Grapher {
         fileManager = compiler.getStandardFileManager(diags, null, null);
 
         javacOpts = new ArrayList<>();
-        javacOpts.add("-classpath");
+
+        Collection<String> bootClassPath = project.getBootClassPath();
+        if (bootClassPath == null) {
+            String envBootClasspath = System.getProperty("sun.boot.class.path");
+            if (StringUtils.isEmpty(envBootClasspath)) {
+                LOGGER.error("System property sun.boot.class.path is not set. It is required to load rt.jar.");
+                System.exit(1);
+            }
+            bootClassPath = Arrays.asList(envBootClasspath.split(SystemUtils.PATH_SEPARATOR));
+        }
+        Collection<File> bootClasspathFiles = bootClassPath.stream().map(File::new).collect(Collectors.toList());
+        fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, bootClasspathFiles);
+        javacOpts.add("-Xbootclasspath:" + StringUtils.join(bootClassPath, SystemUtils.PATH_SEPARATOR));
 
         Collection<String> classPath = project.getClassPath();
-        if (classPath != null && !classPath.isEmpty()) {
-            javacOpts.add(StringUtils.join(ClassPathUtil.transformClassPath(classPath), SystemUtils.PATH_SEPARATOR));
-        } else {
-            javacOpts.add(StringUtils.EMPTY);
+        if (classPath == null) {
+            classPath = Collections.emptyList();
         }
+
+        Collection<File> classpathFiles = classPath.stream().map(File::new).collect(Collectors.toList());
+        fileManager.setLocation(StandardLocation.CLASS_PATH, classpathFiles);
+        javacOpts.add("-classpath");
+        javacOpts.add(StringUtils.join(classPath, SystemUtils.PATH_SEPARATOR));
+
         Collection<String> sourcePath = project.getSourcePath();
         if (sourcePath != null && !sourcePath.isEmpty()) {
             javacOpts.add("-sourcepath");
@@ -78,18 +95,6 @@ public class Grapher {
         // This is necessary to produce Elements (and therefore defs and refs) when compilation errors occur. It will still probably fail on syntax errors, but typechecking errors are survivable.
         javacOpts.add("-proc:none");
 
-        String bootClasspath;
-        Collection<String> bootCp = project.getBootClassPath();
-        if (bootCp != null && !bootCp.isEmpty()) {
-            bootClasspath = StringUtils.join(bootCp, SystemUtils.PATH_SEPARATOR);
-        } else {
-            bootClasspath = System.getProperty("sun.boot.class.path");
-        }
-        if (StringUtils.isEmpty(bootClasspath)) {
-            LOGGER.error("Neither system property sun.boot.class.path nor unit-specific boot classpath is set. It is required to load rt.jar.");
-            System.exit(1);
-        }
-        javacOpts.add("-Xbootclasspath:" + bootClasspath);
     }
 
     public void graphFilesAndDirs(Iterable<String> filePaths) throws IOException {
@@ -141,7 +146,6 @@ public class Grapher {
                 javacOpts,
                 null,
                 files);
-
         final Trees trees = Trees.instance(task);
 
         final Set<String> seenPackages = new HashSet<>();
