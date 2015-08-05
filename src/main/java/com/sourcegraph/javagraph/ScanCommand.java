@@ -98,7 +98,7 @@ public class ScanCommand {
                 thenComparing(dependency -> dependency.groupID).
                 thenComparing(dependency -> dependency.version).
                 thenComparing(dependency -> dependency.scope).
-                thenComparing(dependency -> dependency.file);
+                thenComparing(dependency -> dependency.file == null ? StringUtils.EMPTY : dependency.file);
 
         Comparator<String[]> sourcePathComparator = Comparator.comparing(sourcePathElement -> sourcePathElement[0]);
         sourcePathComparator = sourcePathComparator.
