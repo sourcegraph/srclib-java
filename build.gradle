@@ -30,6 +30,8 @@ dependencies {
 	compile	'org.eclipse.aether:aether-connector-basic:0.9.0.M4'
 	compile	'org.eclipse.aether:aether-transport-file:0.9.0.M4'
 
+	compile 'com.google.guava:guava:18.0'
+
 	compile 'org.slf4j:slf4j-api:1.7.12'
 
 	compile files("${System.properties['java.home']}/../lib/tools.jar")

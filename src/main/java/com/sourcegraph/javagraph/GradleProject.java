@@ -161,7 +161,9 @@ public class GradleProject implements Project {
                 }
             }
             unit.Dependencies = new ArrayList<>(info.dependencies);
-            unit.Data.put("BootClassPath", new ArrayList<>(info.bootClassPath));
+            if (!info.bootClassPath.isEmpty()) {
+                unit.Data.put("BootClassPath", new ArrayList<>(info.bootClassPath));
+            }
             ret.add(unit);
         }
         return ret;
