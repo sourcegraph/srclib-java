@@ -68,6 +68,8 @@ public class Grapher {
         if (sourcePath != null && !sourcePath.isEmpty()) {
             javacOpts.add("-sourcepath");
             javacOpts.add(StringUtils.join(sourcePath, SystemUtils.PATH_SEPARATOR));
+            fileManager.setLocation(StandardLocation.SOURCE_PATH,
+                    sourcePath.stream().map(File::new).collect(Collectors.toList()));
         }
 
         // Speed up compilation by not doing dataflow, code gen, etc.
@@ -142,7 +144,9 @@ public class Grapher {
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
         final JavacTask task = (JavacTask) compiler.getTask(null,
                 fileManager,
-                diagnostic -> LOGGER.warn("javac: {}", diagnostic),
+                diagnostic -> {
+                    LOGGER.warn("javac: {}", diagnostic);
+                },
                 javacOpts,
                 null,
                 files);

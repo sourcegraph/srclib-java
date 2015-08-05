@@ -25,8 +25,8 @@ public class ScanCommand {
     public static final String JDK_TEST_REPO = "github.com/sgtest/java-jdk-sample";
     public static final String ANDROID_SDK_REPO = "android.googlesource.com/platform/frameworks/base";
     public static final String ANDROID_CORE_REPO = "android.googlesource.com/platform/libcore";
-    public static final String TOOLS_JAR_REPO = "http://hg.openjdk.java.net/jdk8/jdk8/langtools";
-    public static final String NASHORN_REPO = "http://hg.openjdk.java.net/jdk8/jdk8/nashorn";
+    public static final String TOOLS_JAR_REPO = "hg.openjdk.java.net/jdk8/jdk8/langtools";
+    public static final String NASHORN_REPO = "hg.openjdk.java.net/jdk8/jdk8/nashorn";
 
 
     public void Execute() {
@@ -44,7 +44,6 @@ public class ScanCommand {
             // Scan for source units.
             List<SourceUnit> units = new ArrayList<>();
             switch (repoURI) {
-                case JDK_REPO:
                 case JDK_TEST_REPO:
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Collecting JDK source units");
@@ -64,6 +63,13 @@ public class ScanCommand {
                     units.add(AndroidCoreProject.createSourceUnit(subdir));
                     break;
                 default:
+                    if (repoURI.startsWith("hg.openjdk.java.net/jdk8/jdk8")) {
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("Collecting JDK source units");
+                        }
+                        units.addAll(JDKProject.standardSourceUnits());
+                        break;
+                    }
                     // Recursively find all Maven and Gradle projects.
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Collecting Maven source units");
