@@ -19,7 +19,13 @@ public class PathUtil {
     }
 
     public static String relativizeCwd(String path) {
-        return normalize(CWD.relativize(Paths.get(path).toAbsolutePath()).normalize().toString());
+        Path p = Paths.get(path).toAbsolutePath();
+        if (p.startsWith(CWD)) {
+            return normalize(CWD.relativize(p).normalize().toString());
+        } else {
+            // for example, Android projects may refer to a directory on other drive
+            return normalize(p.normalize().toString());
+        }
     }
 
     public static Path concat(Path parent, Path child) {
