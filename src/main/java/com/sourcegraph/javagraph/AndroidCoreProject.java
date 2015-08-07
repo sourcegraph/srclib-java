@@ -1,15 +1,15 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.io.Charsets;
 import org.apache.maven.model.building.ModelBuildingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class AndroidCoreProject implements Project {
 
@@ -30,6 +30,13 @@ public class AndroidCoreProject implements Project {
 
     @Override
     public List<String> getSourcePath() throws Exception {
+        // if there is ICU available, let's use it
+        File icuDir = new File("../external/icu/icu4j/main/classes");
+        if (icuDir.isDirectory()) {
+            List<String> icuSrcDirs = new ArrayList<>();
+            Files.walkFileTree(icuDir.toPath(), new ICUDirectoriesCollector(icuSrcDirs));
+            return icuSrcDirs;
+        }
         return null;
     }
 
@@ -45,7 +52,7 @@ public class AndroidCoreProject implements Project {
 
     @Override
     public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
-        return null;
+        return Charsets.UTF_8.name();
     }
 
     public static SourceUnit createSourceUnit(String subdir) throws Exception {
@@ -89,5 +96,23 @@ public class AndroidCoreProject implements Project {
             LOGGER.warn("{} does not exist, skipping", root);
         }
         return files;
+    }
+
+    private static final class ICUDirectoriesCollector extends SimpleFileVisitor<Path> {
+
+        private Collection<String> dirs;
+
+        ICUDirectoriesCollector(Collection<String> dirs) {
+            this.dirs = dirs;
+        }
+
+        @Override
+        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+            if (dir.getFileName().toString().equals("src")) {
+                dirs.add(dir.toAbsolutePath().normalize().toString());
+                return FileVisitResult.SKIP_SUBTREE;
+            }
+            return FileVisitResult.CONTINUE;
+        }
     }
 }
