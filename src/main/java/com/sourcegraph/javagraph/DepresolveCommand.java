@@ -62,7 +62,12 @@ public class DepresolveCommand {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Adding JDK dep");
             }
-            resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
+            if (unit.Data.containsKey("Android")) {
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
+            } else {
+                resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
+            }
         }
 
         LOGGER.info("Dependencies resolved");

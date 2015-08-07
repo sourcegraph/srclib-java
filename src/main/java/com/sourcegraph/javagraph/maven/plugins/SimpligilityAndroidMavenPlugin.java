@@ -1,7 +1,9 @@
 package com.sourcegraph.javagraph.maven.plugins;
 
 import com.sourcegraph.javagraph.PathUtil;
+import com.sourcegraph.javagraph.Project;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
@@ -34,6 +36,7 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
         // Let's create generated source file such as R.java, BuildConfig.java and AIDL-based ones
         doGenerateSources(project.getModel().getPomFile(), repoDir);
         project.getCompileSourceRoots().add(getGeneratedSourceDirectory(project));
+        project.getProperties().setProperty(Project.ANDROID_PROPERTY, StringUtils.EMPTY);
     }
 
     private static void doGenerateSources(File pomFile, File repoDir) {
