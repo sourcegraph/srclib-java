@@ -28,7 +28,7 @@ public class GradleProject implements Project {
     }
 
     public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(String repoURI, Path build) throws IOException {
-        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(build);
+        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(repoURI, build);
 
         // HACK: fix the project name inside docker containers. By default, the name of a Gradle project is the name
         // of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
@@ -155,9 +155,9 @@ public class GradleProject implements Project {
             unit.Files = new LinkedList<>();
             for (String sourceFile :info.sources) {
                 File f = new File(sourceFile);
-                if (f.exists() && !f.isDirectory()) {
+                if (f.isFile()) {
                     // including only existing files to make 'make' tool happy
-                    unit.Files.add(sourceFile);
+                    unit.Files.add(f.getAbsolutePath());
                 }
             }
             unit.Dependencies = new ArrayList<>(info.dependencies);
@@ -234,14 +234,16 @@ public class GradleProject implements Project {
         return units;
     }
 
-    private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(Path path) throws IOException {
+    private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(String repoUri, Path path) throws IOException {
         path = path.toAbsolutePath().normalize();
         Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
         if (ret == null) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collecting meta information from {}", path);
             }
-            BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(path), path);
+            BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(repoUri,
+                    getWrapper(path),
+                    path);
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collected meta information from {}", path);
             }

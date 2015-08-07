@@ -108,7 +108,7 @@ public class Grapher {
 
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {
-            File file = new File(root, filePath);
+            File file = PathUtil.concat(root, filePath);
             if (!file.exists()) {
                 LOGGER.error("No such file {}", file.getAbsolutePath());
                 System.exit(1);
