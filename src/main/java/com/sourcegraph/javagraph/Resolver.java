@@ -196,13 +196,15 @@ public class Resolver {
             return resolution;
         }
 
+        String cloneURL = checkOverrides(d.groupID + '/' + d.artifactID);
+
         // We may know repo URI already
-        if (d.repoURI != null) {
+        if (cloneURL != null || d.repoURI != null) {
             ResolvedTarget target = new ResolvedTarget();
             target.ToUnit = d.groupID + "/" + d.artifactID;
             target.ToUnitType = "JavaArtifact";
             target.ToVersionString = d.version;
-            target.ToRepoCloneURL = d.repoURI;
+            target.ToRepoCloneURL = cloneURL == null ? d.repoURI : cloneURL;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
@@ -216,17 +218,16 @@ public class Resolver {
         DepResolution res = new DepResolution(d, null);
 
         try {
-            String cloneURL = checkOverrides(d.groupID + "/" + d.artifactID);
 
-            if (cloneURL == null) {
-                InputStream input = new BOMInputStream(new URL(url).openStream());
+            InputStream input = new BOMInputStream(new URL(url).openStream());
 
-                MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-                Model model = xpp3Reader.read(input);
-                input.close();
+            MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
+            Model model = xpp3Reader.read(input);
+            input.close();
 
-                Scm scm = model.getScm();
-                if (scm != null) cloneURL = scm.getUrl();
+            Scm scm = model.getScm();
+            if (scm != null) {
+                cloneURL = scm.getUrl();
             }
 
             if (cloneURL != null) {

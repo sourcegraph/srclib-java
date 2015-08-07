@@ -35,9 +35,18 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ScanCommand.ANDROID_SDK_REPO;
         target.ToUnitType = "JavaArtifact";
-        target.ToUnit = ".";
+        target.ToUnit = "AndroidSDK";
         return target;
     }
+
+    public static ResolvedTarget androidCore() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = ScanCommand.ANDROID_CORE_REPO;
+        target.ToUnitType = "JavaArtifact";
+        target.ToUnit = "AndroidCore";
+        return target;
+    }
+
 
     @Override
     public boolean equals(Object o) {

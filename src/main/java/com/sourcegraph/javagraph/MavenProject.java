@@ -48,9 +48,6 @@ import java.util.stream.Collectors;
 
 public class MavenProject implements Project {
 
-    public static final String SOURCE_CODE_VERSION_PROPERTY = "srclib-source-code-version";
-    public static final String SOURCE_CODE_ENCODING_PROPERTY = "srclib-source-code-encoding";
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MavenProject.class);
 
     private static final String REPO_DIR = ".m2-srclib";
@@ -263,6 +260,7 @@ public class MavenProject implements Project {
         info.sourceEncoding = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_ENCODING_PROPERTY);
         info.sourceVersion = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_VERSION_PROPERTY,
                 DEFAULT_SOURCE_CODE_VERSION);
+        info.androidSdk = proj.getMavenProject().getProperties().getProperty(ANDROID_PROPERTY);
 
         return info;
     }
@@ -353,6 +351,9 @@ public class MavenProject implements Project {
             }
             unit.Data.put("ClassPath", classPath);
             unit.Data.put("SourcePath", sourcePath);
+            if (info.androidSdk != null) {
+                unit.Data.put("Android", true);
+            }
             ret.add(unit);
         }
 
