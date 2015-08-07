@@ -22,6 +22,30 @@ def listSourceDirs(task, sourceSets, sourceSetName) {
     }
 }
 
+def displayAndroidInfo(project, root, isAndroidSupportFramework) {
+
+	String sdkVersion = "current"
+
+    if (root.hasProperty("compileSdkVersion")) {
+    	sdkVersion = root.compileSdkVersion
+        if (sdkVersion.startsWith("android-")) {
+            // leaving only number
+            sdkVersion = sdkVersion.substring(8)
+        }
+    }
+    println "SRCLIB-ANDROID-SDK $sdkVersion"
+
+    if (root.hasProperty("bootClasspath")) {
+    	String bootClasspath = root.bootClasspath.join(File.pathSeparator)
+	    println "SRCLIB-BOOTCLASSPATH $bootClasspath"
+    } else if (isAndroidSupportFramework) {
+    	File androidJar = new File("$project.rootDir/../../prebuilts/sdk/$sdkVersion/android.jar")
+    	if (androidJar.isFile()) {
+ 	   		println "SRCLIB-BOOTCLASSPATH $androidJar.canonicalPath"
+ 	   	}
+    }
+}
+
 allprojects {
 
     afterEvaluate { project ->
@@ -45,9 +69,11 @@ allprojects {
 
 
             boolean android = false
+            boolean androidSupportFramework = false
 
             project.plugins.any { p ->
                 android = p.getClass().getName().startsWith("com.android.build.gradle")
+                androidSupportFramework = project.group == "com.android.support"
                 return android
             }
 
@@ -74,7 +100,7 @@ allprojects {
                                 if (p.buildFile) {
                                     println "SRCLIB-PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
                                 } else {
-                                    println "PROJECTDEPENDENCY $p.name:$p.group:"
+                                    println "SRCLIB-PROJECTDEPENDENCY $p.name:$p.group:"
                                 }
 
                             }
@@ -102,12 +128,12 @@ allprojects {
             try {
                 project.plugins.withType(JavaPlugin) {
                     compileJava {
-                        println "SOURCEVERSION $sourceCompatibility"
+                        println "SRCLIB-SOURCEVERSION $sourceCompatibility"
                         String encoding = options.encoding
                         if (encoding == null) {
                             encoding = "";
                         }
-                        println("ENCODING $encoding")
+                        println("SRCLIB-ENCODING $encoding")
                     }
                 }
             } catch (e) {
@@ -127,14 +153,18 @@ allprojects {
             }
 
             if (android) {
-            	if (project.extensions.android.hasProperty("compileSdkVersion")) {
-                	println "SRCLIB-ANDROID-SDK $project.extensions.android.compileSdkVersion"
-                }
 
-            	if (project.extensions.android.hasProperty("bootClasspath")) {
-                	String bootClasspath = project.extensions.android.bootClasspath.join(File.pathSeparator)
-                	println "SRCLIB-BOOTCLASSPATH $bootClasspath"
-                }
+            	if (project.extensions.hasProperty("android")) {
+            		displayAndroidInfo(project, project.extensions.android, false)
+            	} else if (project.hasProperty("android")) {            		
+
+            		// Android Support Framework
+            		displayAndroidInfo(project, project.android, androidSupportFramework)
+                    if (project.android.hasProperty("sourceSets")) {
+                    	listSourceDirs(task, project.android.sourceSets, "main")
+                    	listSourceDirs(task, project.android.sourceSets, "test")
+    				}
+            	}
 
                 if (project.tasks.hasProperty("compileDebugJava")) {
                 	listSourceFiles(project.tasks.compileDebugJava)
@@ -145,18 +175,23 @@ allprojects {
                 	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
                 }
 
-                if (project.android.hasProperty("sourceSets")) {
-                	listSourceDirs(task, project.android.sourceSets, "main")
-                	listSourceDirs(task, project.android.sourceSets, "test")
-				}
             }
 
         }
 
         project.plugins.any { p ->
             if (p.getClass().getName().startsWith("com.android.build.gradle")) {
-            	if (project.tasks.findByPath("assembleDebug")) {
-                	srclibCollectMetaInformation.dependsOn("assembleDebug")
+                if (project.group == "com.android.support") {
+                    // Android Support Framework
+                    if (project.tasks.findByPath("generateDebugSources")) {
+                        srclibCollectMetaInformation.dependsOn(":$project.name:generateDebugSources")
+                    } else if (project.tasks.findByPath("assembleDebug")) {
+                        srclibCollectMetaInformation.dependsOn(":$project.name:assembleDebug")
+                    }
+                } else {
+                    if (project.tasks.findByPath("assembleDebug")) {
+                        srclibCollectMetaInformation.dependsOn("assembleDebug")
+                    }
                 }
                 return true
             }

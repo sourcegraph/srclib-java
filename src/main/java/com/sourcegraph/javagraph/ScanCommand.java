@@ -27,6 +27,7 @@ public class ScanCommand {
     public static final String ANDROID_CORE_REPO = "android.googlesource.com/platform/libcore";
     public static final String TOOLS_JAR_REPO = "hg.openjdk.java.net/jdk8/jdk8/langtools";
     public static final String NASHORN_REPO = "hg.openjdk.java.net/jdk8/jdk8/nashorn";
+    public static final String ANDROID_SUPPORT_FRAMEWORK_REPO = "android.googlesource.com/platform/frameworks/support";
 
 
     public void Execute() {
@@ -116,7 +117,6 @@ public class ScanCommand {
                     })
                     .sorted(dependencyComparator)
                     .collect(Collectors.toList());
-
             unit.Files = unit.Files.stream()
                     .map(PathUtil::relativizeCwd)
                     .sorted()
@@ -131,6 +131,14 @@ public class ScanCommand {
                         sorted().
                         collect(Collectors.toList());
                 unit.Data.put("ClassPath", classPath);
+            }
+            if (unit.Data.containsKey("BootClassPath")) {
+                Collection<String> classPath = (Collection<String>) unit.Data.get("BootClassPath");
+                classPath = classPath.stream().
+                        map(PathUtil::relativizeCwd).
+                        sorted().
+                        collect(Collectors.toList());
+                unit.Data.put("BootClassPath", classPath);
             }
             if (unit.Data.containsKey("SourcePath")) {
                 Collection<String[]> sourcePath = (Collection<String[]>) unit.Data.get("SourcePath");

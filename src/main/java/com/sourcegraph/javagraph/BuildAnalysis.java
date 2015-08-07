@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class BuildAnalysis {
 
@@ -111,7 +113,7 @@ public class BuildAnalysis {
 
         private static final String REPO_DIR = ".gradle-srclib";
 
-        public static BuildInfo[] collectMetaInformation(Path wrapper, Path build) throws IOException {
+        public static BuildInfo[] collectMetaInformation(String repoUri, Path wrapper, Path build) throws IOException {
             Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
             Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
@@ -130,36 +132,40 @@ public class BuildAnalysis {
                     wrapperPath = wrapper.toAbsolutePath().toString();
                 }
 
-                String[] gradleArgs = new String[]{
-                        //"--gradle-user-home", new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath(),
-                        "-I", modifiedGradleScriptFile.toString(),
-                        "--project-cache-dir", gradleCacheDir.toString(),
-                        "srclibCollectMetaInformation"};
-                String gradleCmd[];
+                List<String> gradleArgs = new ArrayList<>();
+                // TODO alexsaveliev: uncomment some day
+                //gradleArgs.add("--gradle-user-home");
+                //gradleArgs.add(new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath());
+                gradleArgs.add("-I");
+                gradleArgs.add(modifiedGradleScriptFile.toString());
+                if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
+                    // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
+                    gradleArgs.add("--project-cache-dir");
+                    gradleArgs.add(gradleCacheDir.toString());
+                }
+                gradleArgs.add("srclibCollectMetaInformation");
 
                 if (SystemUtils.IS_OS_WINDOWS) {
                     if (wrapper == null) {
-                        gradleCmd = new String[] {GRADLE_CMD_WINDOWS};
+                        gradleArgs.add(0, GRADLE_CMD_WINDOWS);
                     } else {
-                        gradleCmd = new String[] {wrapperPath};
+                        gradleArgs.add(0, wrapperPath);
                     }
                 } else {
                     if (wrapper == null) {
-                        gradleCmd = new String[] {GRADLE_CMD_OTHER};
+                        gradleArgs.add(0, GRADLE_CMD_OTHER);
                     } else {
-                        gradleCmd = new String[] {"bash", wrapperPath};
+                        gradleArgs.add(0, wrapperPath);
+                        gradleArgs.add(0, "bash");
                     }
                 }
 
-                String[] cmd = Stream.concat(Arrays.stream(gradleCmd), Arrays.stream(gradleArgs))
-                        .toArray(String[]::new);
-
                 Path workDir = build.toAbsolutePath().getParent();
-                ProcessBuilder pb = new ProcessBuilder(cmd);
+                ProcessBuilder pb = new ProcessBuilder(gradleArgs);
 
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Running {} using working directory {}",
-                            StringUtils.join(cmd, ' '),
+                            StringUtils.join(gradleArgs, ' '),
                             workDir.normalize());
                 }
 
@@ -252,7 +258,10 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                info.sources.add(payload);
+                                File file = new File(payload);
+                                if (file.isFile()) {
+                                    info.sources.add(file.getAbsolutePath());
+                                }
                                 break;
                             case "SRCLIB-SOURCEDIR":
                                 if (info == null) {
