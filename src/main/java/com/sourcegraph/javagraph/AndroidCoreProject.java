@@ -60,13 +60,14 @@ public class AndroidCoreProject implements Project {
         unit.Type = "JavaArtifact";
         unit.Name = "AndroidCore";
         unit.Dir = subdir;
-        unit.Files = getSourceFiles(Paths.get(subdir));
+        List<String> directories = new ArrayList<>();
+        getSourceFilesAndDirectories(Paths.get(subdir), unit.Files, directories);
         unit.Data.put("AndroidCoreSubdir", subdir);
         return unit;
     }
 
-    private static List<String> getSourceFiles(Path root) throws IOException {
-        final List<String> files = new LinkedList<>();
+    static List<String> getSourceFilesAndDirectories(Path root, List<String> files, List<String> directories)
+            throws IOException {
 
         if (Files.exists(root)) {
             Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
@@ -77,6 +78,7 @@ public class AndroidCoreProject implements Project {
                             dir.endsWith("tzdata")) {
                         return FileVisitResult.SKIP_SUBTREE;
                     }
+                    directories.add(PathUtil.normalize(dir.toString()));
                     return FileVisitResult.CONTINUE;
                 }
 
