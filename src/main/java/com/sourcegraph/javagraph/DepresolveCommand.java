@@ -62,7 +62,12 @@ public class DepresolveCommand {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Adding JDK dep");
             }
-            if (unit.Data.containsKey("Android")) {
+            if (unit.Repo.equals(ScanCommand.ANDROID_CORE_REPO)) {
+                // no dependencies
+            } else if (unit.Repo.equals(ScanCommand.ANDROID_SDK_REPO)) {
+                // only Android Core
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
+            }else if (unit.Data.containsKey("Android")) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
             } else {
