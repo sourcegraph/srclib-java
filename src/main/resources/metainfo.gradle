@@ -116,9 +116,9 @@ allprojects {
                 project.plugins.withType(JavaPlugin) {
                     listSourceFiles(compileJava)
                     listSourceFiles(compileTestJava)
-					if (hasProperty("sourceSets")) {
-                    	listSourceDirs(task, sourceSets, "main")
-                    	listSourceDirs(task, sourceSets, "test")
+					if (project.hasProperty("sourceSets")) {
+                    	listSourceDirs(task, project.sourceSets, "main")
+                    	listSourceDirs(task, project.sourceSets, "test")
                     }
                 }
             } catch (e) {
