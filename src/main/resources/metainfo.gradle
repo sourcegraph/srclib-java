@@ -46,6 +46,111 @@ def displayAndroidInfo(project, root, isAndroidSupportFramework) {
     }
 }
 
+def isStandardTask(project, name) {
+	if (isStandardJavaTask(name)) {
+		return true
+	}
+	if (isStandardScalaTask(name)) {
+		return true
+	}
+	if (isStandardGroovyTask(name)) {
+		return true
+	}
+	if (isStandardSourceSetTask(project, name)) {
+		return true
+	}
+	if (isStandardLifecycleTask(project, name)) {
+		return true
+	}
+	if (isStandardConfigurationLifecycleTask(project, name)) {
+		return true
+	}
+	return false
+}
+
+def isStandardJavaTask(name) {
+    return name in ["compileJava",
+                    "compileTestJava",
+                    "processResources",
+                    "processTestResources",
+                    "classes",
+                    "testClasses",
+                    "jar",
+                    "javadoc",
+                    "test",
+                    "uploadArchives",
+                    "clean",
+                    "cleanCompileJava",
+                    "cleanCompileTestJava",
+                    "cleanProcessResources",
+                    "cleanProcessTestResources",
+                    "cleanClasses",
+                    "cleanTestClasses",
+                    "cleanJar",
+                    "cleanJavadoc",
+                    "cleanTest",
+                    "cleanUploadArchives"]
+}
+
+def isStandardScalaTask(name) {
+	return name in ["compileScala", "compileTestScala", "scaladoc"]
+}
+
+def isStandardGroovyTask(name) {
+	return name in ["compileGroovy", "compileTestGroovy", "groovydoc"]
+}
+
+
+def isStandardSourceSetTask(project, name) {
+	if (!project.hasProperty("sourceSets")) {
+		return false
+	}
+	project.sourceSets.each { ss ->
+        String sName = ss.name.capitalize()
+        if (name == "compile${sName}Java" ||
+                name == "compile${sName}Scala" ||
+                name == "compile${sName}Groovy" ||
+                name == "process${sName}Resources" ||
+                name == "${ss.name}Classes") {
+            return true
+        }
+    }
+	return false
+}
+
+def isStandardLifecycleTask(project, name) {
+	if (name in ["assemble",
+		"check",
+		"build",
+		"buildNeeded",
+		"buildDependents"]) {
+		return true
+	}
+	return isStandardConfigurationLifecycleTask(project, name)
+}
+
+def isStandardConfigurationLifecycleTask(project, name) {
+	project.configurations.each { conf ->
+		String cName = conf.name.capitalize()
+		if (name == "build${cName}" ||
+			name == "upload${cName}") {
+			return true				
+		}
+	}
+	return false
+}
+
+def collectBuildableDependencies(project, task, dependency, target) {
+	Object o = dependency.getBuildDependencies()
+	if (o instanceof TaskDependency) {
+        o.getDependencies(task).each { taskdep ->
+			if ((taskdep instanceof Task) && !isStandardTask(project, taskdep.name)) {
+				target.dependsOn(taskdep)
+			}
+        }
+	}
+}
+
 allprojects {
 
     afterEvaluate { project ->
@@ -197,6 +302,46 @@ allprojects {
             }
             return false
         }
+
+        // collect meta information task depends on any tasks (well, any not Buildable')
+        // compileJava / compileTestJava depends on
+        try {
+            project.plugins.withType(JavaPlugin) {
+                compileJava { 
+                    dependsOn.each {dependency ->
+                        if (!(dependency instanceof Buildable)) {
+                            srclibCollectMetaInformation.dependsOn(dependency)
+                        } else {
+                        	collectBuildableDependencies(project, compileJava, dependency, srclibCollectMetaInformation)
+                        }
+                    }
+                }
+                compileTestJava {
+                    dependsOn.each {dependency ->
+                        if (!(dependency instanceof Buildable)) {
+                            srclibCollectMetaInformation.dependsOn(dependency)
+                        } else {
+                        	collectBuildableDependencies(project, compileTestJava, dependency, srclibCollectMetaInformation)
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            println "SRCLIB-WARNING $e"
+        }
+        try {
+            Task compileTask = project.tasks.findByPath("compile")
+			if (compileTask) {
+                compileTask.dependsOn.each {dependency ->
+                    if ((dependency instanceof Task) && !isStandardTask(project, dependency.name)) {
+                    	srclibCollectMetaInformation.dependsOn(dependency)
+                    }
+                }
+			}
+        } catch (e) {
+            println "SRCLIB-WARNING $e"
+        }
+
     }
 
 }
