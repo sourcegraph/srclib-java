@@ -143,6 +143,8 @@ public class BuildAnalysis {
                     gradleArgs.add("--project-cache-dir");
                     gradleArgs.add(gradleCacheDir.toString());
                 }
+                // disabling parallel builds
+                gradleArgs.add("-Dorg.gradle.parallel=false");
                 gradleArgs.add("srclibCollectMetaInformation");
 
                 if (SystemUtils.IS_OS_WINDOWS) {
