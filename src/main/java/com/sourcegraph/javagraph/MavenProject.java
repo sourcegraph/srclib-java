@@ -309,7 +309,7 @@ public class MavenProject implements Project {
             externalDeps.addAll(info.dependencies.stream().filter(dep ->
                     !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
                     collect(Collectors.toList()));
-            Collection<Artifact> resolvedArtifacts = resolveArtifactDependencies(externalDeps, repositories, "jar");
+            Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(externalDeps, repositories, "jar");
             List<String> classPath = new ArrayList<>();
             for (Artifact artifact : resolvedArtifacts) {
                 File file = artifact.getFile();
@@ -403,15 +403,15 @@ public class MavenProject implements Project {
     }
 
     /**
-     * Resolves artifact dependencies
+     * Resolves dependency artifacts
      * @param dependencies dependencies to check
      */
-    static Collection<Artifact> resolveArtifactDependencies(Collection<RawDependency> dependencies,
-                                                            Collection<Repository> repositories,
-                                                            String extension) {
+    static Collection<Artifact> resolveDependencyArtifacts(Collection<RawDependency> dependencies,
+                                                           Collection<Repository> repositories,
+                                                           String extension) {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving artifact dependencies");
+            LOGGER.debug("Resolving dependency artifacts");
         }
 
         Collection<Artifact> ret = new HashSet<>();
@@ -465,7 +465,7 @@ public class MavenProject implements Project {
                 collect(Collectors.toList()));
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved artifact dependencies");
+            LOGGER.debug("Resolved dependency artifacts");
         }
 
         return ret;
@@ -565,7 +565,7 @@ public class MavenProject implements Project {
     private static void retrieveRepoUri(Collection<RawDependency> dependencies,
                                         Collection<Repository> repositories) {
 
-        Collection<Artifact> pomArtifacts = resolveArtifactDependencies(dependencies, repositories, "pom");
+        Collection<Artifact> pomArtifacts = resolveDependencyArtifacts(dependencies, repositories, "pom");
 
         for (Artifact artifact : pomArtifacts) {
             File file = artifact.getFile();

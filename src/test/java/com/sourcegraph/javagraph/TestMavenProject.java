@@ -33,7 +33,7 @@ public class TestMavenProject {
 	@Test
 	public void testResolveMavenDependencyArtifacts() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-dependencies.xml"));
-		Collection<Artifact> artifacts = MavenProject.resolveArtifactDependencies(project.listDeps(),
+		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(project.listDeps(),
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
@@ -46,7 +46,7 @@ public class TestMavenProject {
 	@Test
 	public void testRepositories() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-repositories.xml"));
-		Collection<Artifact> artifacts = MavenProject.resolveArtifactDependencies(project.listDeps(),
+		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(project.listDeps(),
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
