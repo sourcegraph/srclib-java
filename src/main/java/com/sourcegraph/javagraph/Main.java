@@ -19,9 +19,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String version = getVersion();
 
-        LOGGER.info("Using srclib-java version {}", version);
-        LOGGER.info("Current working directory [{}]", SystemUtils.getUserDir());
-        LOGGER.info("Command line arguments [{}]", StringUtils.join(args, ' '));
+        LOGGER.info("srclib-java version {}", version);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Current working directory [{}]", SystemUtils.getUserDir());
+            LOGGER.debug("Command line arguments [{}]", StringUtils.join(args, ' '));
+        }
 
         if (SystemUtils.IS_OS_WINDOWS) {
             args = adjustWindowsArgs(args);
