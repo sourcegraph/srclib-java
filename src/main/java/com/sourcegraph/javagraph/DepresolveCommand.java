@@ -22,8 +22,6 @@ public class DepresolveCommand {
 
     public void Execute() {
 
-        LOGGER.info("Resolving dependencies");
-
         SourceUnit unit = null;
         try {
             Reader r;
@@ -41,6 +39,7 @@ public class DepresolveCommand {
             LOGGER.error("Failed to read source unit data", e);
             System.exit(1);
         }
+        LOGGER.info("Resolving dependencies of {}", unit.Name);
 
         Resolver rs = new Resolver(unit.getProject(), unit);
 
@@ -74,8 +73,6 @@ public class DepresolveCommand {
                 resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
             }
         }
-
-        LOGGER.info("Dependencies resolved");
 
         JSONUtil.writeJSON(resolutions);
     }

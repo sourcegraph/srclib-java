@@ -82,7 +82,6 @@ public class ScanCommand {
                     units.addAll(GradleProject.findAllSourceUnits(repoURI));
                     break;
             }
-            LOGGER.info("Source units collected");
             normalize(units);
             JSONUtil.writeJSON(units);
         } catch (Exception e) {

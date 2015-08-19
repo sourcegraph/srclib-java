@@ -29,8 +29,6 @@ public class GraphCommand {
 
     public void Execute() {
 
-        LOGGER.info("Building graph");
-
         final Graph graph = new Graph(); // Final graphJavaFiles object that is serialized to stdout
         final GraphData rawGraph = new GraphData(); // Raw graphJavaFiles from the tree traversal
 
@@ -50,6 +48,7 @@ public class GraphCommand {
             LOGGER.error("Failed to read source unit data", e);
             System.exit(1);
         }
+        LOGGER.info("Building graph for {}", unit.Name);
 
         Project proj = unit.getProject();
         Resolver rs = new Resolver(proj, unit);
@@ -89,8 +88,6 @@ public class GraphCommand {
             LOGGER.error("Unexpected error occurred while building graph", e);
             System.exit(1);
         }
-
-        LOGGER.info("Graph built");
 
         JSONUtil.writeJSON(graph);
     }
