@@ -102,7 +102,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         s.defEnd = defSpan[1];
         s.file = compilationUnit.getSourceFile().getName();
         s.pkg = compilationUnit.getPackageName().toString();
-        s.typeExpr = currentTypeMirror().toString();
+        TypeMirror typeMirror = currentTypeMirror();
+        if (typeMirror != null) {
+            s.typeExpr = typeMirror.toString();
+        }
         s.modifiers = modifiers;
         s.doc = trees.getDocComment(getCurrentPath());
 
