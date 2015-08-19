@@ -127,7 +127,6 @@ public class ScanCommand {
                 Collection<String> classPath = (Collection<String>) unit.Data.get("ClassPath");
                 classPath = classPath.stream().
                         map(PathUtil::relativizeCwd).
-                        sorted().
                         collect(Collectors.toList());
                 unit.Data.put("ClassPath", classPath);
             }
