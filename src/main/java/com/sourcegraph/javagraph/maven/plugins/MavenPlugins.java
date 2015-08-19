@@ -46,6 +46,9 @@ public class MavenPlugins {
     public void apply(MavenProject project, File repoDir) {
         for (MavenPlugin plugin : getPlugins()) {
             if (plugin.isApplicable(project)) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Applying Maven plugin {}", plugin.getClass());
+                }
                 plugin.apply(project, repoDir);
             }
         }

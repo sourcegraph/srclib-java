@@ -58,7 +58,7 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
 
     private static String getDefaultGeneratedSourceDirectory(MavenProject project) {
         File root = PathUtil.concat(project.getModel().getProjectDirectory(), project.getBuild().getDirectory());
-        return PathUtil.concat(root, "/generated-sources/antlr4").toString();
+        return PathUtil.concat(root, "generated-sources/antlr4").toString();
     }
 
 }

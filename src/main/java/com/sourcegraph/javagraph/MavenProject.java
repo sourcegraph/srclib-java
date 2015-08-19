@@ -158,9 +158,6 @@ public class MavenProject implements Project {
         Set<RawDependency> deps = new HashSet<>();
         List<Dependency> mavenDeps = getMavenProject().getDependencies();
         for (Dependency d : mavenDeps) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing Maven dependency {}", d);
-            }
             RawDependency rawDependency = new RawDependency(d.getGroupId(),
                     d.getArtifactId(),
                     d.getVersion(),
@@ -299,9 +296,6 @@ public class MavenProject implements Project {
 
         // step 2: resolve dependencies
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving dependencies");
-        }
         for (BuildAnalysis.BuildInfo info : infos) {
             Collection<RawDependency> externalDeps = new ArrayList<>();
             // if source unit depends on another source units, let's exclude them from the list before
@@ -312,9 +306,6 @@ public class MavenProject implements Project {
             // reading POM files to retrieve SCM repositories
             retrieveRepoUri(externalDeps, repositories);
 
-        }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved dependencies");
         }
 
         // step 3: resolving dependencies between units and updating source path and class path
@@ -345,7 +336,13 @@ public class MavenProject implements Project {
             externalDeps.addAll(allDependencies.stream().filter(dep ->
                     !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
                     collect(Collectors.toList()));
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Resolving artifacts for {} [{}]", unit.Name, info.buildFile);
+            }
             Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(externalDeps, repositories, "jar");
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Resolved artifacts for {} [{}]", unit.Name, info.buildFile);
+            }
             List<String> classPath = new ArrayList<>();
             for (Artifact artifact : resolvedArtifacts) {
                 File file = artifact.getFile();
@@ -489,12 +486,18 @@ public class MavenProject implements Project {
         for (String sourceRoot : proj.getMavenProject().getCompileSourceRoots()) {
             File f = PathUtil.concat(root, sourceRoot);
             if (f.isDirectory()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Adding source root {}", f);
+                }
                 sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
             }
         }
         for (String sourceRoot : proj.getMavenProject().getTestCompileSourceRoots()) {
             File f = PathUtil.concat(root, sourceRoot);
             if (f.isDirectory()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Adding source root {}", f);
+                }
                 sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
             }
         }
@@ -505,6 +508,9 @@ public class MavenProject implements Project {
         }
         File f = PathUtil.concat(root, sourceRoot);
         if (f.isDirectory()) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Adding source root {}", f);
+            }
             sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
         }
 
@@ -514,6 +520,9 @@ public class MavenProject implements Project {
         }
         f = PathUtil.concat(root, sourceRoot);
         if (f.isDirectory()) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Adding source root {}", f);
+            }
             sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
         }
 

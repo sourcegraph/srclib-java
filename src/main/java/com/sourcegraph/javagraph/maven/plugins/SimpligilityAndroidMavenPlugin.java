@@ -4,6 +4,8 @@ import com.sourcegraph.javagraph.PathUtil;
 import com.sourcegraph.javagraph.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.project.MavenProject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -12,6 +14,8 @@ import java.io.File;
  * Generates source files and updates compile source roots to include directories with generated files
  */
 public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpligilityAndroidMavenPlugin.class);
 
     @Override
     public String getGroupId() {
@@ -27,8 +31,12 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
     public void apply(MavenProject project,
                       File repoDir) {
         // Let's create generated source file such as R.java, BuildConfig.java and AIDL-based ones
-        runMavenGoal(project.getModel().getPomFile(), repoDir, "generate-test-sources");
-        project.getCompileSourceRoots().add(getGeneratedSourceDirectory(project));
+        runMavenGoal(project.getModel().getPomFile(), repoDir, "generate-sources");
+        String sourceRoot = getGeneratedSourceDirectory(project);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Registering source root {}", sourceRoot);
+        }
+        project.getCompileSourceRoots().add(sourceRoot);
         project.getProperties().setProperty(Project.ANDROID_PROPERTY, StringUtils.EMPTY);
     }
 
@@ -43,7 +51,7 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
 
     private static String getDefaultGeneratedSourceDirectory(MavenProject project) {
         File root = PathUtil.concat(project.getModel().getProjectDirectory(), project.getBuild().getDirectory());
-        return PathUtil.concat(root, "/generated-sources/r").toString();
+        return PathUtil.concat(root, "generated-sources/r").toString();
     }
 
 }
