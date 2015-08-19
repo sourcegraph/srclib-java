@@ -29,6 +29,11 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
     }
 
     @Override
+    public boolean isStandard() {
+        return false;
+    }
+
+    @Override
     public void apply(MavenProject project,
                       File repoDir) {
         // Let's create generated source files from ANTLR grammar

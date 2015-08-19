@@ -23,6 +23,11 @@ public class MavenCompilerPlugin extends AbstractMavenPlugin {
     }
 
     @Override
+    public boolean isStandard() {
+        return true;
+    }
+
+    @Override
     public void apply(MavenProject project,
                       File repoDir) {
         Plugin compile = getPlugin(project);
@@ -39,6 +44,12 @@ public class MavenCompilerPlugin extends AbstractMavenPlugin {
     private static void extractSourceCodeVersion(MavenProject project, Xpp3Dom xmlConfiguration) {
         Xpp3Dom source = xmlConfiguration.getChild("source");
         if (source == null) {
+            String propertyValue = project.getProperties().getProperty("maven.compiler.source");
+            if (propertyValue != null) {
+                project.getProperties().setProperty(
+                        com.sourcegraph.javagraph.MavenProject.SOURCE_CODE_VERSION_PROPERTY,
+                        propertyValue);
+            }
             return;
         }
         project.getProperties().setProperty(

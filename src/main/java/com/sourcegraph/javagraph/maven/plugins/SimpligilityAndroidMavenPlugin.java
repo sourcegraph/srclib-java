@@ -28,6 +28,11 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
     }
 
     @Override
+    public boolean isStandard() {
+        return false;
+    }
+
+    @Override
     public void apply(MavenProject project,
                       File repoDir) {
         // Let's create generated source file such as R.java, BuildConfig.java and AIDL-based ones
