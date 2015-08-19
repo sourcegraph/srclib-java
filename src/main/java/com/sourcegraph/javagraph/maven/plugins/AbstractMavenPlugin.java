@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph.maven.plugins;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.project.MavenProject;
@@ -57,7 +58,7 @@ public abstract class AbstractMavenPlugin implements MavenPlugin {
             pb.redirectOutput(log);
 
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Starting {} and logging results into {}", cmd, log);
+                LOGGER.debug("Starting [{}] and logging results into {}", StringUtils.join(cmd, ' '), log);
             }
             Process p = pb.start();
             int status = p.waitFor();
@@ -65,10 +66,10 @@ public abstract class AbstractMavenPlugin implements MavenPlugin {
                 LOGGER.debug("Maven output was {}", FileUtils.readFileToString(log));
             }
             if (status != 0) {
-                LOGGER.warn("Exit status of {} was {}", cmd, status);
+                LOGGER.warn("Exit status of [{}] was {}", StringUtils.join(cmd, ' '), status);
             }
         } catch (IOException | InterruptedException e) {
-            LOGGER.warn("Unable to compile Maven project using command {}", cmd, e);
+            LOGGER.warn("Unable to compile Maven project using command [{}]", StringUtils.join(cmd, ' '), e);
         } finally {
             FileUtils.deleteQuietly(log);
         }
