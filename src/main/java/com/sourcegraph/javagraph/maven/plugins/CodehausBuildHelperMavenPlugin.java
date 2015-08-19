@@ -28,6 +28,11 @@ public class CodehausBuildHelperMavenPlugin extends AbstractMavenPlugin {
     }
 
     @Override
+    public boolean isStandard() {
+        return false;
+    }
+
+    @Override
     public void apply(MavenProject project,
                       File repoDir) {
 

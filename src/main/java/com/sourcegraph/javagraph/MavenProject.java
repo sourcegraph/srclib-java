@@ -50,6 +50,11 @@ public class MavenProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MavenProject.class);
 
+    /**
+     * Maven default source setting is 1.5, see http://maven.apache.org/plugins/maven-compiler-plugin/
+     */
+    private static final String DEFAULT_SOURCE_CODE_VERSION = "1.5";
+
     private static final String REPO_DIR = ".m2-srclib";
 
     private Path pomFile;

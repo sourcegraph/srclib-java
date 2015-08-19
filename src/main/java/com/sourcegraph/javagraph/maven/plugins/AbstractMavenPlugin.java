@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Plugin;
+import org.apache.maven.model.PluginManagement;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,13 @@ public abstract class AbstractMavenPlugin implements MavenPlugin {
 
     public abstract String getArtifactId();
 
+    /**
+     * Some plugins are standard ones and should be applied anyway, regardless if they were listed in subproject's POM
+     * For example, compiler plugin may be omitted in plugins section
+     * @return true if we should search for a given plugin in plugin management section as well
+     */
+    public abstract boolean isStandard();
+
     private static String mavenCmd;
 
     public boolean isApplicable(MavenProject project) {
@@ -28,6 +36,25 @@ public abstract class AbstractMavenPlugin implements MavenPlugin {
 
     protected Plugin getPlugin(MavenProject project) {
         List<Plugin> plugins = project.getBuildPlugins();
+        if (plugins == null) {
+            return isStandard() ? getPluginFromManagement(project) : null;
+        }
+        Plugin p = getMatching(project.getBuildPlugins());
+        if (p == null) {
+            return isStandard() ? getPluginFromManagement(project) : null;
+        }
+        return p;
+    }
+
+    protected Plugin getPluginFromManagement(MavenProject project) {
+        PluginManagement management = project.getPluginManagement();
+        if (management == null) {
+            return null;
+        }
+        return getMatching(management.getPlugins());
+    }
+
+    protected Plugin getMatching(List<Plugin> plugins) {
         if (plugins == null) {
             return null;
         }
