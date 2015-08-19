@@ -309,16 +309,6 @@ public class MavenProject implements Project {
             externalDeps.addAll(info.dependencies.stream().filter(dep ->
                     !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
                     collect(Collectors.toList()));
-            Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(externalDeps, repositories, "jar");
-            List<String> classPath = new ArrayList<>();
-            for (Artifact artifact : resolvedArtifacts) {
-                File file = artifact.getFile();
-                if (file != null) {
-                    classPath.add(file.getAbsolutePath());
-                }
-            }
-            info.classPath = classPath;
-
             // reading POM files to retrieve SCM repositories
             retrieveRepoUri(externalDeps, repositories);
 
@@ -344,10 +334,24 @@ public class MavenProject implements Project {
             unit.Data.put("SourceEncoding", info.sourceEncoding);
             Collection<BuildAnalysis.BuildInfo> dependencies = collectDependencies(info.getName(), artifacts);
             Set<String[]> sourcePath = new HashSet<>();
-            Collection<String> classPath = new HashSet<>();
+            Collection<RawDependency> allDependencies = new ArrayList<>();
             for (BuildAnalysis.BuildInfo dependency : dependencies) {
+                allDependencies.addAll(dependency.dependencies);
                 sourcePath.addAll(dependency.sourceDirs);
-                classPath.addAll(dependency.classPath);
+            }
+            Collection<RawDependency> externalDeps = new ArrayList<>();
+            // if source unit depends on another source units, let's exclude them from the list before
+            // trying to resolve, otherwise request may fail
+            externalDeps.addAll(allDependencies.stream().filter(dep ->
+                    !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
+                    collect(Collectors.toList()));
+            Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(externalDeps, repositories, "jar");
+            List<String> classPath = new ArrayList<>();
+            for (Artifact artifact : resolvedArtifacts) {
+                File file = artifact.getFile();
+                if (file != null) {
+                    classPath.add(file.getAbsolutePath());
+                }
             }
             unit.Data.put("ClassPath", classPath);
             unit.Data.put("SourcePath", sourcePath);
