@@ -250,10 +250,20 @@ public class MavenProject implements Project {
         BuildAnalysis.BuildInfo info = new BuildAnalysis.BuildInfo();
 
         info.attrs = proj.getPOMAttrs();
-        info.buildFile = proj.pomFile.toString();
+        info.buildFile = proj.pomFile.toAbsolutePath().normalize().toString();
         info.dependencies = proj.listDeps();
         info.version = proj.getMavenProject().getVersion();
         info.projectDir = proj.pomFile.getParent().toString();
+        info.projectDependencies = new ArrayList<>();
+        for (String module: proj.getMavenProject().getModules()) {
+            info.projectDependencies.add(new BuildAnalysis.ProjectDependency(StringUtils.EMPTY,
+                    StringUtils.EMPTY,
+                    PathUtil.concat(proj.pomFile.getParent(), Paths.get(module)).
+                            resolve("pom.xml").
+                            toAbsolutePath().
+                            normalize().
+                            toString()));
+        }
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
         info.sourceDirs = sourceRoots.stream().map(sourceRoot ->
@@ -275,7 +285,8 @@ public class MavenProject implements Project {
 
         // step 1 : process all pom.xml files
         Collection<Path> pomFiles = ScanUtil.findMatchingFiles("pom.xml");
-        Map<String, BuildAnalysis.BuildInfo> artifacts = new HashMap<>();
+        Map<String, BuildAnalysis.BuildInfo> artifactsByUnitId = new HashMap<>();
+        Map<String, String> unitsByPomFile = new HashMap<>();
 
         Collection<BuildAnalysis.BuildInfo> infos = new ArrayList<>();
         Collection<Repository> repositories = new HashSet<>();
@@ -288,7 +299,8 @@ public class MavenProject implements Project {
                 MavenProject project = new MavenProject(pomFile);
                 BuildAnalysis.BuildInfo info = createBuildInfo(project);
                 infos.add(info);
-                artifacts.put(info.getName(), info);
+                artifactsByUnitId.put(info.getName() + '/' + info.version, info);
+                unitsByPomFile.put(info.buildFile, info.getName() + '/' + info.version);
                 repositories.addAll(project.getMavenProject().getRepositories());
             } catch (Exception e) {
                 LOGGER.warn("Error processing POM file {}", pomFile.toAbsolutePath(), e);
@@ -306,7 +318,7 @@ public class MavenProject implements Project {
             // if source unit depends on another source units, let's exclude them from the list before
             // trying to resolve, otherwise request may fail
             externalDeps.addAll(info.dependencies.stream().filter(dep ->
-                    !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
+                    !artifactsByUnitId.containsKey(dep.groupID + '/' + dep.artifactID + '/' + dep.version)).
                     collect(Collectors.toList()));
             // reading POM files to retrieve SCM repositories
             retrieveRepoUri(externalDeps, repositories);
@@ -328,7 +340,9 @@ public class MavenProject implements Project {
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("SourceVersion", info.sourceVersion);
             unit.Data.put("SourceEncoding", info.sourceEncoding);
-            Collection<BuildAnalysis.BuildInfo> dependencies = collectDependencies(info.getName(), artifacts);
+            Collection<BuildAnalysis.BuildInfo> dependencies = collectDependencies(info.getName() + '/' + info.version,
+                    artifactsByUnitId,
+                    unitsByPomFile);
             Set<String[]> sourcePath = new HashSet<>();
             Collection<RawDependency> allDependencies = new ArrayList<>();
             for (BuildAnalysis.BuildInfo dependency : dependencies) {
@@ -339,7 +353,7 @@ public class MavenProject implements Project {
             // if source unit depends on another source units, let's exclude them from the list before
             // trying to resolve, otherwise request may fail
             externalDeps.addAll(allDependencies.stream().filter(dep ->
-                    !artifacts.containsKey(dep.groupID + '/' + dep.artifactID)).
+                    !artifactsByUnitId.containsKey(dep.groupID + '/' + dep.artifactID + '/' + dep.version)).
                     collect(Collectors.toList()));
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Resolving artifacts for {} [{}]", unit.Name, info.buildFile);
@@ -537,40 +551,54 @@ public class MavenProject implements Project {
     /**
      * Gathers BuildInfo objects that represent dependencies of specific artifact.
      * If dependency has sub-dependencies, they will be collected as well resursively
-     * @param unitId source unit identifier (group/artifact)
-     * @param cache cache that contains build info objects (unitid => buildindo)
+     * @param unitId source unit identifier (group/artifact/version)
+     * @param unitCache cache that contains build info objects (unitid => buildindo)
+     * @param pomCache cache that contains build info objects (POM file => unitid)
      * @return collected objects
      */
-    private static Collection<BuildAnalysis.BuildInfo> collectDependencies(String unitId,
-                                                              Map<String, BuildAnalysis.BuildInfo> cache) {
+    private static Collection<BuildAnalysis.BuildInfo> collectDependencies(
+            String unitId,
+            Map<String, BuildAnalysis.BuildInfo> unitCache,
+            Map<String, String> pomCache) {
         Set<String> visited = new HashSet<>();
         Collection<BuildAnalysis.BuildInfo> infos = new LinkedHashSet<>();
-        collectDependencies(unitId, infos, cache, visited);
+        collectDependencies(unitId, infos, unitCache, pomCache, visited);
         return infos;
     }
 
     /**
      * Recursively collects dependencies of a given unit
-     * @param unitId source unit ID to process (group/artifact)
+     * @param unitId source unit ID to process (group/artifact/version)
      * @param infos collection to fill with data
-     * @param cache cache that contains build info objects (unitid => buildindo)
+     * @param unitCache cache that contains build info objects (unitid => buildindo)
+     * @param pomCache cache that contains build info objects (POM file => unitid)
      * @param visited marks visited units to avoid infinite loops
      */
     private static void collectDependencies(String unitId,
                                             Collection<BuildAnalysis.BuildInfo> infos,
-                                            Map<String, BuildAnalysis.BuildInfo> cache,
+                                            Map<String, BuildAnalysis.BuildInfo> unitCache,
+                                            Map<String, String> pomCache,
                                             Set<String> visited) {
         visited.add(unitId);
-        BuildAnalysis.BuildInfo info = cache.get(unitId);
+        BuildAnalysis.BuildInfo info = unitCache.get(unitId);
         if (info == null) {
             return;
         }
         infos.add(info);
 
         for (RawDependency dependency : info.dependencies) {
-            String depId = dependency.groupID + '/' + dependency.artifactID;
+            String depId = dependency.groupID + '/' + dependency.artifactID + '/' + dependency.version;
             if (!visited.contains(depId)) {
-                collectDependencies(depId, infos, cache, visited);
+                collectDependencies(depId, infos, unitCache, pomCache, visited);
+            }
+        }
+
+        for (BuildAnalysis.ProjectDependency dependency : info.projectDependencies) {
+            unitId = pomCache.get(dependency.buildFile);
+            if (unitId != null) {
+                if (!visited.contains(unitId)) {
+                    collectDependencies(unitId, infos, unitCache, pomCache, visited);
+                }
             }
         }
     }
