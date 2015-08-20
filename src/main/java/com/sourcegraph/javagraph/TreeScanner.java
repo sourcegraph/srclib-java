@@ -18,16 +18,12 @@ import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TreeScanner extends TreePathScanner<Void, Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
 
-    private final Trees trees;
     private final GraphWriter emit;
     private final SourcePositions srcPos;
     // We sometimes emit defs or refs multiple times because Spans will
@@ -36,7 +32,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     private final Set<DefKey> seenDefs = new HashSet<>();
     private final Set<Ref> seenRefs = new HashSet<>();
     private Spans spans;
-    private CompilationUnitTree compilationUnit;
+
+    CompilationUnitTree compilationUnit;
+    final Trees trees;
+    Stack<Long> parameterizedPositions = new Stack<>();
 
     public TreeScanner(GraphWriter emit, Trees trees) {
         this.emit = emit;
@@ -167,7 +166,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     @Override
     public Void scan(TreePath root, Void p) {
         this.compilationUnit = root.getCompilationUnit();
-        this.spans = new Spans(this.compilationUnit, this.trees);
+        this.spans = new Spans(this);
         return super.scan(root, p);
     }
 
@@ -302,6 +301,19 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
                 emitRef(spans.name(simpleName, node), new DefKey(defOrigin, qualName + ":type"), false);
             }
         }.scan(pkgName, null);
+    }
+
+    @Override
+    public Void visitParameterizedType(ParameterizedTypeTree node, Void p) {
+        if (node instanceof JCTree.JCTypeApply) {
+            long pos = ((JCTree.JCTypeApply) node).pos;
+            parameterizedPositions.push(pos);
+        } else {
+            parameterizedPositions.push(srcPos.getStartPosition(compilationUnit, node));
+        }
+        super.visitParameterizedType(node, p);
+        parameterizedPositions.pop();
+        return null;
     }
 
     @Override
