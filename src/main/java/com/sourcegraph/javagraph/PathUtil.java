@@ -1,5 +1,6 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
@@ -21,7 +22,11 @@ public class PathUtil {
     public static String relativizeCwd(String path) {
         Path p = Paths.get(path).toAbsolutePath();
         if (p.startsWith(CWD)) {
-            return normalize(CWD.relativize(p).normalize().toString());
+            Path rel = CWD.relativize(p);
+            if (rel.toString().isEmpty()) {
+                return StringUtils.EMPTY;
+            }
+            return normalize(rel.normalize().toString());
         } else {
             // for example, Android projects may refer to a directory on other drive
             return normalize(p.normalize().toString());
