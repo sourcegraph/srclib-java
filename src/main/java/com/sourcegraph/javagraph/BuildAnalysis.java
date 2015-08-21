@@ -133,9 +133,8 @@ public class BuildAnalysis {
                 }
 
                 List<String> gradleArgs = new ArrayList<>();
-                // TODO alexsaveliev: uncomment some day
-                //gradleArgs.add("--gradle-user-home");
-                //gradleArgs.add(new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath());
+                gradleArgs.add("--gradle-user-home");
+                gradleArgs.add(new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath());
                 gradleArgs.add("-I");
                 gradleArgs.add(modifiedGradleScriptFile.toString());
                 if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
