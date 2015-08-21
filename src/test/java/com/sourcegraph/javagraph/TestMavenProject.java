@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.aether.artifact.Artifact;
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +34,8 @@ public class TestMavenProject {
 	@Test
 	public void testResolveMavenDependencyArtifacts() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-dependencies.xml"));
-		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(project.listDeps(),
+		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(StringUtils.EMPTY,
+				project.listDeps(),
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
@@ -46,7 +48,8 @@ public class TestMavenProject {
 	@Test
 	public void testRepositories() throws Exception {
 		MavenProject project = new MavenProject(Paths.get("src/test/resources/pom-repositories.xml"));
-		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(project.listDeps(),
+		Collection<Artifact> artifacts = MavenProject.resolveDependencyArtifacts(StringUtils.EMPTY,
+				project.listDeps(),
 				project.getMavenProject().getRepositories(),
 				"jar");
 		// alexsaveliev: please note, that transient artifacts are included too
