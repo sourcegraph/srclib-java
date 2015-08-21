@@ -25,7 +25,7 @@
       "repoURI": "http://junit.cvs.sourceforge.net/junit/"
     },
     "Target": {
-      "ToRepoCloneURL": "http://junit.cvs.sourceforge.net/junit/",
+      "ToRepoCloneURL": "https://github.com/junit-team/junit",
       "ToUnit": "junit/junit",
       "ToUnitType": "JavaArtifact",
       "ToVersionString": "3.8.1"
