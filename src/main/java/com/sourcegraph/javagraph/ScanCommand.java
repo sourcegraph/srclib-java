@@ -21,12 +21,9 @@ public class ScanCommand {
     @Parameter(names = {"--subdir"}, description = "The path of the current directory (in which the scanner is run), relative to the root directory of the repository being scanned (this is typically the root, \".\", as it is most useful to scan the entire repository)")
     String subdir;
 
-    public static final String JDK_REPO = "hg.openjdk.java.net/jdk8/jdk8/jdk";
     public static final String JDK_TEST_REPO = "github.com/sgtest/java-jdk-sample";
     public static final String ANDROID_SDK_REPO = "android.googlesource.com/platform/frameworks/base";
     public static final String ANDROID_CORE_REPO = "android.googlesource.com/platform/libcore";
-    public static final String TOOLS_JAR_REPO = "hg.openjdk.java.net/jdk8/jdk8/langtools";
-    public static final String NASHORN_REPO = "hg.openjdk.java.net/jdk8/jdk8/nashorn";
     public static final String ANDROID_SUPPORT_FRAMEWORK_REPO = "android.googlesource.com/platform/frameworks/support";
 
 
@@ -64,7 +61,7 @@ public class ScanCommand {
                     units.add(AndroidCoreProject.createSourceUnit(subdir));
                     break;
                 default:
-                    if (repoURI.startsWith("hg.openjdk.java.net/jdk8/jdk8")) {
+                    if (repoURI.startsWith(JDKProject.OPENJDK_REPO_ROOT)) {
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug("Collecting JDK source units");
                         }

@@ -14,6 +14,13 @@ import java.util.stream.Collectors;
 
 public class JDKProject implements Project {
 
+    public static final String OPENJDK_REPO_ROOT = "hg.openjdk.java.net/jdk8/jdk8/";
+
+    public static final String JDK_REPO = OPENJDK_REPO_ROOT + "jdk";
+    public static final String TOOLS_JAR_REPO = OPENJDK_REPO_ROOT + "langtools";
+    public static final String NASHORN_REPO = OPENJDK_REPO_ROOT + "nashorn";
+
+
     private SourceUnit unit;
 
     public JDKProject(SourceUnit unit) {
@@ -22,7 +29,7 @@ public class JDKProject implements Project {
 
     @Override
     public List<String> getBootClassPath() throws Exception {
-        if (unit.Repo.equals(ScanCommand.JDK_REPO)) {
+        if (unit.Repo.equals(JDK_REPO)) {
             return Collections.emptyList();
         }
         return null;
@@ -60,10 +67,20 @@ public class JDKProject implements Project {
             sourcePaths.add("src/macosx/classes/");
         } else if (SystemUtils.IS_OS_LINUX) {
             sourcePaths.add("src/linux/classes/");
+            sourcePaths.add("src/solaris/classes/");
         } else if (SystemUtils.IS_OS_FREE_BSD || SystemUtils.IS_OS_NET_BSD || SystemUtils.IS_OS_OPEN_BSD) {
             sourcePaths.add("src/bsd/classes/");
+            sourcePaths.add("src/solaris/classes/");
         } else if (SystemUtils.IS_OS_SOLARIS) {
             sourcePaths.add("src/solaris/classes/");
+        }
+
+        // adding project's generated sources dir, if any
+        if (unit.Repo.startsWith(OPENJDK_REPO_ROOT)) {
+            // TODO (alexsaveliev) support other build configurations?
+            String project = unit.Repo.substring(OPENJDK_REPO_ROOT.length());
+            sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/gensrc");
+            sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/impsrc");
         }
 
         return sourcePaths.stream().filter(element -> new File(element).isDirectory()).collect(Collectors.toList());

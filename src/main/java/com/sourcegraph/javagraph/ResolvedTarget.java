@@ -9,7 +9,7 @@ class ResolvedTarget {
 
     public static ResolvedTarget jdk() {
         ResolvedTarget target = new ResolvedTarget();
-        target.ToRepoCloneURL = ScanCommand.JDK_REPO;
+        target.ToRepoCloneURL = JDKProject.JDK_REPO;
         target.ToUnitType = "Java";
         target.ToUnit = ".";
         return target;
@@ -17,7 +17,7 @@ class ResolvedTarget {
 
     public static ResolvedTarget langtools() {
         ResolvedTarget target = new ResolvedTarget();
-        target.ToRepoCloneURL = ScanCommand.TOOLS_JAR_REPO;
+        target.ToRepoCloneURL = JDKProject.TOOLS_JAR_REPO;
         target.ToUnitType = "Java";
         target.ToUnit = ".";
         return target;
@@ -25,7 +25,7 @@ class ResolvedTarget {
 
     public static ResolvedTarget nashorn() {
         ResolvedTarget target = new ResolvedTarget();
-        target.ToRepoCloneURL = ScanCommand.NASHORN_REPO;
+        target.ToRepoCloneURL = JDKProject.NASHORN_REPO;
         target.ToUnitType = "Java";
         target.ToUnit = ".";
         return target;
