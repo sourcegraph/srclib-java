@@ -438,7 +438,7 @@ public class MavenProject implements Project {
             LOGGER.debug("Resolving dependency artifacts");
         }
 
-        Collection<Artifact> ret = new HashSet<>();
+        Collection<Artifact> ret = new ArrayList<>();
 
         List<org.eclipse.aether.graph.Dependency> deps = new ArrayList<>();
         ArtifactTypeRegistry artifactTypeRegistry = repositorySystemSession.getArtifactTypeRegistry();
