@@ -9,7 +9,7 @@
       "repoURI": "http://svn.apache.org/viewvc/commons/proper/csv/tags/CSV_1.0"
     },
     "Target": {
-      "ToRepoCloneURL": "http://svn.apache.org/viewvc/commons/proper/csv/tags/CSV_1.0",
+      "ToRepoCloneURL": "https://github.com/apache/commons-csv",
       "ToUnit": "org.apache.commons/commons-csv",
       "ToUnitType": "JavaArtifact",
       "ToVersionString": "1.0"
