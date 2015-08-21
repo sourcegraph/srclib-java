@@ -321,7 +321,7 @@ public class MavenProject implements Project {
                     !artifactsByUnitId.containsKey(dep.groupID + '/' + dep.artifactID + '/' + dep.version)).
                     collect(Collectors.toList()));
             // reading POM files to retrieve SCM repositories
-            retrieveRepoUri(externalDeps, repositories);
+            retrieveRepoUri(info.attrs.groupID + '/' + info.attrs.artifactID, externalDeps, repositories);
 
         }
 
@@ -358,7 +358,10 @@ public class MavenProject implements Project {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Resolving artifacts for {} [{}]", unit.Name, info.buildFile);
             }
-            Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(externalDeps, repositories, "jar");
+            Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(unit.Name,
+                    externalDeps,
+                    repositories,
+                    "jar");
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Resolved artifacts for {} [{}]", unit.Name, info.buildFile);
             }
@@ -426,7 +429,8 @@ public class MavenProject implements Project {
      * Resolves dependency artifacts
      * @param dependencies dependencies to check
      */
-    static Collection<Artifact> resolveDependencyArtifacts(Collection<RawDependency> dependencies,
+    static Collection<Artifact> resolveDependencyArtifacts(String unitId,
+                                                           Collection<RawDependency> dependencies,
                                                            Collection<Repository> repositories,
                                                            String extension) {
 
@@ -457,14 +461,14 @@ public class MavenProject implements Project {
         try {
             node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         } catch (DependencyCollectionException e) {
-            LOGGER.warn("Failed to collect dependencies - {}", e.getMessage());
+            LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage());
             node = e.getResult().getRoot();
         }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Collected dependencies");
         }
         if (node == null) {
-            LOGGER.warn("Failed to collect dependencies - no dependencies were collected");
+            LOGGER.warn("Failed to collect dependencies for {} - no dependencies were collected", unitId);
             return ret;
         }
 
@@ -472,7 +476,7 @@ public class MavenProject implements Project {
         try {
             repositorySystem.resolveDependencies(repositorySystemSession, projectDependencyRequest);
         } catch (DependencyResolutionException e) {
-            LOGGER.warn("Failed to resolve dependencies - {}", e.getMessage());
+            LOGGER.warn("Failed to resolve dependencies for {} - {}", unitId, e.getMessage());
         }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolved dependencies");
@@ -608,10 +612,11 @@ public class MavenProject implements Project {
      * @param dependencies list of dependencies to collect URI for
      * @param repositories repositories to use when looking for external files
      */
-    private static void retrieveRepoUri(Collection<RawDependency> dependencies,
+    private static void retrieveRepoUri(String unitId,
+                                        Collection<RawDependency> dependencies,
                                         Collection<Repository> repositories) {
 
-        Collection<Artifact> pomArtifacts = resolveDependencyArtifacts(dependencies, repositories, "pom");
+        Collection<Artifact> pomArtifacts = resolveDependencyArtifacts(unitId, dependencies, repositories, "pom");
 
         for (Artifact artifact : pomArtifacts) {
             File file = artifact.getFile();
