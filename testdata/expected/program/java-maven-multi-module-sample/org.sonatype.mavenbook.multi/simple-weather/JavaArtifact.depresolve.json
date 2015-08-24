@@ -1,9 +1,28 @@
 [
   {
     "Raw": {
+      "groupID": "org.apache.commons",
+      "artifactID": "commons-io",
+      "version": "1.3.2",
+      "scope": "test",
+      "type": "jar",
+      "repoURI": ""
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/apache/commons-io",
+      "ToUnit": "org.apache.commons/commons-io",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.3.2"
+    }
+  },
+  {
+    "Raw": {
       "groupID": "dom4j",
       "artifactID": "dom4j",
-      "version": "1.6.1"
+      "version": "1.6.1",
+      "scope": "compile",
+      "type": "jar",
+      "repoURI": "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dom4j/dom4j/"
     },
     "Target": {
       "ToRepoCloneURL": "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dom4j/dom4j/",
@@ -16,7 +35,10 @@
     "Raw": {
       "groupID": "jaxen",
       "artifactID": "jaxen",
-      "version": "1.1.1"
+      "version": "1.1.1",
+      "scope": "compile",
+      "type": "jar",
+      "repoURI": "http://cvs.jaxen.codehaus.org"
     },
     "Target": {
       "ToRepoCloneURL": "http://cvs.jaxen.codehaus.org",
@@ -27,9 +49,28 @@
   },
   {
     "Raw": {
+      "groupID": "junit",
+      "artifactID": "junit",
+      "version": "3.8.1",
+      "scope": "test",
+      "type": "jar",
+      "repoURI": "http://junit.cvs.sourceforge.net/junit/"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/junit-team/junit",
+      "ToUnit": "junit/junit",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.8.1"
+    }
+  },
+  {
+    "Raw": {
       "groupID": "log4j",
       "artifactID": "log4j",
-      "version": "1.2.14"
+      "version": "1.2.14",
+      "scope": "compile",
+      "type": "jar",
+      "repoURI": "http://svn.apache.org/viewcvs.cgi/logging/log4j/tags/v1_2_14/"
     },
     "Target": {
       "ToRepoCloneURL": "http://svn.apache.org/viewcvs.cgi/logging/log4j/tags/v1_2_14/",
@@ -42,7 +83,10 @@
     "Raw": {
       "groupID": "velocity",
       "artifactID": "velocity",
-      "version": "1.5"
+      "version": "1.5",
+      "scope": "compile",
+      "type": "jar",
+      "repoURI": "http://svn.apache.org/viewvc/velocity/engine/tags/Velocity_1.5"
     },
     "Target": {
       "ToRepoCloneURL": "http://svn.apache.org/viewvc/velocity/engine/tags/Velocity_1.5",
@@ -50,15 +94,6 @@
       "ToUnitType": "JavaArtifact",
       "ToVersionString": "1.5"
     }
-  },
-  {
-    "Raw": {
-      "groupID": "org.apache.commons",
-      "artifactID": "commons-io",
-      "version": "1.3.2",
-      "scope": "test"
-    },
-    "Error": "commons-io does not have an associated SCM repository."
   },
   {
     "Target": {

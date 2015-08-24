@@ -492,96 +492,68 @@
       "End": 403
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type/DEFAULT",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 906,
       "End": 913
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type/parse:java.io.Reader",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 914,
       "End": 919
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 246,
       "End": 255
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVFormat:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 896,
       "End": 905
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1007,
       "End": 1010
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1063,
       "End": 1066
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 287,
       "End": 296
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 782,
       "End": 791
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 875,
       "End": 884
     },
     {
-      "DefRepo": "github.com/apache/commons-csv",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.apache.commons/commons-csv",
       "DefPath": "org/apache/commons/csv/CSVRecord:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 940,
       "End": 949
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -589,12 +561,16 @@
       "End": 788
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 854,
       "End": 855
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -602,18 +578,24 @@
       "End": 1053
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1131,
       "End": 1140
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1113,
       "End": 1121
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -621,12 +603,16 @@
       "End": 997
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1183,
       "End": 1184
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -634,31 +620,24 @@
       "End": 843
     },
     {
-      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
-      "Def": true,
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
-      "Start": 886,
-      "End": 893
-    },
-    {
-      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
-      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
-      "Start": 959,
-      "End": 966
-    },
-    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1000,
       "End": 1006
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1056,
       "End": 1062
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -666,12 +645,33 @@
       "End": 956
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 886,
+      "End": 893
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 959,
+      "End": 966
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1143,
       "End": 1144
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -679,6 +679,8 @@
       "End": 780
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -686,6 +688,8 @@
       "End": 774
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/main:java.lang.String[]/args",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -693,6 +697,8 @@
       "End": 495
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type/main:java.lang.String[]",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -700,6 +706,8 @@
       "End": 480
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/App:type",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
@@ -707,6 +715,8 @@
       "End": 449
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]/args",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
@@ -714,6 +724,8 @@
       "End": 94
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
@@ -721,6 +733,8 @@
       "End": 80
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
       "DefPath": "org/srclib/java/JDK8062359:type",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",

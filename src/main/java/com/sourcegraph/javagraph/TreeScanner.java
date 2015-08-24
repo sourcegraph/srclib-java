@@ -7,21 +7,23 @@ import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TreeScanner extends TreePathScanner<Void, Void> {
-    private final Trees trees;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
+
     private final GraphWriter emit;
     private final SourcePositions srcPos;
     // We sometimes emit defs or refs multiple times because Spans will
@@ -30,7 +32,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     private final Set<DefKey> seenDefs = new HashSet<>();
     private final Set<Ref> seenRefs = new HashSet<>();
     private Spans spans;
-    private CompilationUnitTree compilationUnit;
+
+    CompilationUnitTree compilationUnit;
+    final Trees trees;
+    Stack<Long> parameterizedPositions = new Stack<>();
 
     public TreeScanner(GraphWriter emit, Trees trees) {
         this.emit = emit;
@@ -65,8 +70,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         try {
             emit.writeRef(r);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
@@ -97,15 +101,17 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         s.defEnd = defSpan[1];
         s.file = compilationUnit.getSourceFile().getName();
         s.pkg = compilationUnit.getPackageName().toString();
-        s.typeExpr = currentTypeMirror().toString();
+        TypeMirror typeMirror = currentTypeMirror();
+        if (typeMirror != null) {
+            s.typeExpr = typeMirror.toString();
+        }
         s.modifiers = modifiers;
         s.doc = trees.getDocComment(getCurrentPath());
 
         try {
             emit.writeDef(s);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
@@ -114,7 +120,12 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     private void error(String message) {
         if (!verbose) return;
         Tree node = getCurrentPath().getLeaf();
-        System.err.println(compilationUnit.getSourceFile().getName() + ":" + srcPos.getStartPosition(compilationUnit, node) + ": " + message + " [node " + node.getKind() + "]");
+
+        LOGGER.warn("{}:{} {} [node {}]",
+                compilationUnit.getSourceFile().getName(),
+                srcPos.getStartPosition(compilationUnit, node),
+                message,
+                node.getKind());
     }
 
     private DefKey currentDefKey() {
@@ -155,7 +166,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     @Override
     public Void scan(TreePath root, Void p) {
         this.compilationUnit = root.getCompilationUnit();
-        this.spans = new Spans(this.compilationUnit, this.trees);
+        this.spans = new Spans(this);
         return super.scan(root, p);
     }
 
@@ -173,21 +184,21 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     @Override
     public Void visitMethod(MethodTree node, Void p) {
-        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == -1;
+        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == Diagnostic.NOPOS;
         boolean isCtor = TreeInfo.isConstructor((JCTree) node);
         int[] nameSpan, defSpan;
         if (isCtor) {
             if (isSynthetic) {
                 if (currentElement() == null) {
-                    System.err.println("currentElement() == null (synthetic)");
+                    LOGGER.warn("currentElement() == null (synthetic)");
                     return null;
                 }
                 if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (synthetic)");
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (synthetic)");
                     return null;
                 }
                 if (trees.getPath(currentElement().getEnclosingElement()) == null) {
-                    System.err.println("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
+                    LOGGER.warn("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
                     return null;
                 }
 
@@ -203,15 +214,15 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
             } else {
                 if (spans == null) {
-                    System.err.println("spans == null (non-synthetic)");
+                    LOGGER.warn("spans == null (non-synthetic)");
                     return null;
                 }
                 if (currentElement() == null) {
-                    System.err.println("currentElement() == null (non-synthetic)");
+                    LOGGER.warn("currentElement() == null (non-synthetic)");
                     return null;
                 }
                 if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (non-synthetic)");
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (non-synthetic)");
                     return null;
                 }
 
@@ -264,7 +275,11 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     public void scanPackageName(Tree node) {
         if (getCurrentPath() == null) {
-            System.err.println("getCurrentPath() == null (scanPackageName)");
+            LOGGER.warn("Current path is null");
+            return;
+        }
+        if (node == null) {
+            // no package
             return;
         }
 
@@ -289,12 +304,34 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     @Override
+    public Void visitParameterizedType(ParameterizedTypeTree node, Void p) {
+        if (node instanceof JCTree.JCTypeApply) {
+            long pos = ((JCTree.JCTypeApply) node).pos;
+            parameterizedPositions.push(pos);
+        } else {
+            parameterizedPositions.push(srcPos.getStartPosition(compilationUnit, node));
+        }
+        super.visitParameterizedType(node, p);
+        parameterizedPositions.pop();
+        return null;
+    }
+
+    @Override
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
         if (SourceVersion.isIdentifier(node.getIdentifier())) {
             try {
-                emitRef(spans.name(node), false);
+                if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
+                    // TODO (alexsaveliev) otherwise fails on the following block (@result)
+                    /*
+                            callback = (result,processorId)->{
+                                outputQueue.put(result.id, result.item);
+                                idleProcessors.add(processorId);
+                            };
+                     */
+                    emitRef(spans.name(node), false);
+                }
             } catch (Spans.SpanException e) {
-                System.err.println("SpanException: " + e.getMessage());
+                LOGGER.warn("Span exception", e);
             }
         }
         super.visitMemberSelect(node, p);
@@ -305,7 +342,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         int[] span = new int[]{
                 (int) srcPos.getStartPosition(compilationUnit, node),
                 (int) srcPos.getEndPosition(compilationUnit, node)};
-        if (span[1] == -1)
+        if (span[1] == Diagnostic.NOPOS)
             return null;
         return span;
     }

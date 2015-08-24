@@ -14,11 +14,13 @@ public final class Spans {
     private final CompilationUnitTree compilationUnit;
     private final Trees trees;
     private final SourcePositions srcPos;
+    private final TreeScanner scanner;
 
-    public Spans(CompilationUnitTree compilationUnit, Trees trees) {
-        this.compilationUnit = compilationUnit;
-        this.srcPos = trees.getSourcePositions();
-        this.trees = trees;
+    public Spans(TreeScanner scanner) {
+        this.scanner = scanner;
+        this.compilationUnit = scanner.compilationUnit;
+        this.srcPos = scanner.trees.getSourcePositions();
+        this.trees = scanner.trees;
     }
 
     public int[] name(ClassTree c) throws SpanException {
@@ -87,8 +89,20 @@ public final class Spans {
 
         String treeSrc = src.substring(treeStart, treeEnd);
         int nameStart = treeSrc.indexOf(name);
-        if (nameStart == -1)
-            throw new SpanException("No nameStart found for " + t.toString() + "at " + compilationUnit.getSourceFile().getName() + ":+" + treeStart + "-" + treeEnd);
+        if (nameStart == -1) {
+            // alexsaveliev. the following guava's TypeTokenResolutionTest.java code
+            // new Owner<Integer>().new Inner<String>() {}.getOwnerType());
+            // gives treeSrc = "<String>() {}"
+            // let's try to resolve it using stacked positions
+            if (!scanner.parameterizedPositions.isEmpty()) {
+                treeStart = scanner.parameterizedPositions.peek().intValue();
+                treeSrc = src.substring(treeStart, treeEnd);
+                nameStart = treeSrc.indexOf(name);
+            }
+            if (nameStart == -1) {
+                throw new SpanException("No nameStart found for " + t.toString() + " at " + compilationUnit.getSourceFile().getName() + ":+" + treeStart + "-" + treeEnd);
+            }
+        }
         return new int[]{treeStart + nameStart, treeStart + nameStart + name.length()};
     }
 

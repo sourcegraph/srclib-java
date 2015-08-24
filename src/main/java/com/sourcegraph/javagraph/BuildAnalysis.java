@@ -1,19 +1,28 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.codehaus.plexus.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 public class BuildAnalysis {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BuildAnalysis.class);
+
     public static class POMAttrs {
         public String groupID = "default-group";
-        public String artifactID = "";
-        public String description = "";
+        public String artifactID = StringUtils.EMPTY;
+        public String description = StringUtils.EMPTY;
 
         public POMAttrs() {
         }
@@ -25,141 +34,322 @@ public class BuildAnalysis {
         }
     }
 
-    ;
+    public static class ProjectDependency {
+        public String groupID;
+        public String artifactID;
+        public String buildFile;
+
+        public ProjectDependency(String groupID, String artifactID, String buildFile) {
+            this.groupID = groupID;
+            this.artifactID = artifactID;
+            if (buildFile == null) {
+                buildFile = StringUtils.EMPTY;
+            }
+            this.buildFile = buildFile;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = groupID.hashCode() * 31;
+            result = result * 31 + artifactID.hashCode();
+            result = result * 31 + buildFile.hashCode();
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || !(o instanceof ProjectDependency)) {
+                return false;
+            }
+            ProjectDependency projectDependency = (ProjectDependency) o;
+            return groupID.equals(projectDependency.groupID) &&
+                    artifactID.equals(projectDependency.artifactID) &&
+                    buildFile.equals(projectDependency.buildFile);
+        }
+
+    }
 
     public static class BuildInfo {
-        public String classPath = "";
-        public String version = "";
+        public String version = StringUtils.EMPTY;
         public POMAttrs attrs;
-        public HashSet<RawDependency> dependencies;
+        public Collection<RawDependency> dependencies;
+        public Collection<String> sources;
+        public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
+        public Collection<String> classPath;
+        public Collection<String> bootClassPath;
+        public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
+        public String sourceEncoding;
+        public String projectDir;
+        public String rootDir;
+        public String buildFile;
+        public Collection<ProjectDependency> projectDependencies;
+        public String androidSdk;
+
 
         public BuildInfo() {
             attrs = new POMAttrs();
-            dependencies = new HashSet<RawDependency>();
+            dependencies = new HashSet<>();
+            sources = new HashSet<>();
+            sourceDirs = new ArrayList<>();
+            classPath = new HashSet<>();
+            bootClassPath = new HashSet<>();
+            projectDependencies = new HashSet<>();
         }
 
-        public BuildInfo(POMAttrs a, String cp, String v, HashSet<RawDependency> deps) {
-            attrs = a;
-            classPath = cp;
-            version = v;
-            dependencies = deps;
+        public String getName() {
+            return attrs.groupID + '/' + attrs.artifactID;
         }
     }
 
-    ;
-
     public static class Gradle {
 
-        static String taskCode = "" + "allprojects {" + " task srclibCollectMetaInformation << {\n"
-                + "  String classpath = ''\n" + "  if (project.plugins.hasPlugin('java')) {\n"
-                + "   classpath = configurations.runtime.asPath\n" + "  }\n" + "\n"
-                + "  String desc = project.description\n" + "  if (desc == null) { desc = \"\" }\n" + "\n"
-                + "  println \"DESCRIPTION $desc\"\n" + "  println \"GROUP $project.group\"\n"
-                + "  println \"VERSION $project.version\"\n" + "  println \"ARTIFACT $project.name\"\n"
-                + "  println \"CLASSPATH $classpath\"\n" + "\n" + "  try {\n"
-                + "   project.configurations.each { conf ->\n"
-                + "    conf.resolvedConfiguration.getResolvedArtifacts().each {\n"
-                + "     String group = it.moduleVersion.id.group\n" + "     String name = it.moduleVersion.id.name\n"
-                + "     String version = it.moduleVersion.id.version\n" + "     String file = it.file\n"
-                + "     println \"DEPENDENCY $conf.name:$group:$name:$version:$file\"\n" + "    }\n" + "   }\n"
-                + "  }\n" + "  catch (Exception e) {}\n" + " }\n" + "}\n";
+        /**
+         * Gradle tasks to collect meta information
+         */
+        private static final String TASK_CODE_RESOURCE = "/metainfo.gradle";
 
-        private static String homedir = System.getProperty("user.home");
+        private static final String GRADLE_CMD_WINDOWS = "gradle.bat";
+        private static final String GRADLE_CMD_OTHER = "gradle";
 
-        public static String extractPayloadFromPrefixedLine(String prefix, String line) {
-            int idx = line.indexOf(prefix);
-            if (-1 == idx)
-                return null;
-            int offset = idx + prefix.length();
-            return line.substring(offset).trim();
-        }
+        private static final String REPO_DIR = ".gradle-srclib";
 
-        public static BuildInfo collectMetaInformation(Path wrapper, Path build) throws IOException {
+        public static BuildInfo[] collectMetaInformation(String repoUri, Path wrapper, Path build) throws IOException {
             Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
             Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
             try {
-                FileWriter fw = new FileWriter(modifiedGradleScriptFile.toString(), false);
-
+                InputStream inputStream = Gradle.class.getResourceAsStream(TASK_CODE_RESOURCE);
+                OutputStream outputStream = new FileOutputStream(modifiedGradleScriptFile.toString(), false);
                 try {
-                    fw.write(taskCode);
+                    IOUtils.copy(inputStream, outputStream);
                 } finally {
-                    fw.close();
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(outputStream);
                 }
-
-                String[] prefix = {"DESCRIPTION", "GROUP", "VERSION", "ARTIFACT", "CLASSPATH", "DEPENDENCY"};
 
                 String wrapperPath = "INTERNAL_ERROR";
                 if (wrapper != null) {
                     wrapperPath = wrapper.toAbsolutePath().toString();
                 }
 
-                String[] gradlewArgs = {"bash", wrapperPath, "-I", modifiedGradleScriptFile.toString(),
-                        "--project-cache-dir", gradleCacheDir.toString(), "srclibCollectMetaInformation"};
+                List<String> gradleArgs = new ArrayList<>();
+                gradleArgs.add("--gradle-user-home");
+                gradleArgs.add(new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath());
+                gradleArgs.add("-I");
+                gradleArgs.add(modifiedGradleScriptFile.toString());
+                if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
+                    // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
+                    gradleArgs.add("--project-cache-dir");
+                    gradleArgs.add(gradleCacheDir.toString());
+                }
+                // disabling parallel builds
+                gradleArgs.add("-Dorg.gradle.parallel=false");
+                gradleArgs.add("srclibCollectMetaInformation");
 
-                String[] gradleArgs = {"gradle", "-I", modifiedGradleScriptFile.toString(), "--project-cache-dir",
-                        gradleCacheDir.toString(), "srclibCollectMetaInformation"};
-
-                String[] cmd = (wrapper == null) ? gradleArgs : gradlewArgs;
-                Path workDir = build.toAbsolutePath().getParent();
-
-                if (wrapper != null) {
-                    System.err.println("Using gradle wrapper script:" + wrapper.toString());
+                if (SystemUtils.IS_OS_WINDOWS) {
+                    if (wrapper == null) {
+                        gradleArgs.add(0, GRADLE_CMD_WINDOWS);
+                    } else {
+                        gradleArgs.add(0, wrapperPath);
+                    }
+                } else {
+                    if (wrapper == null) {
+                        gradleArgs.add(0, GRADLE_CMD_OTHER);
+                    } else {
+                        gradleArgs.add(0, wrapperPath);
+                        gradleArgs.add(0, "bash");
+                    }
                 }
 
-                ProcessBuilder pb = new ProcessBuilder(cmd);
+                Path workDir = build.toAbsolutePath().getParent();
+                ProcessBuilder pb = new ProcessBuilder(gradleArgs);
+
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Running {} using working directory {}",
+                            StringUtils.join(gradleArgs, ' '),
+                            workDir.normalize());
+                }
+
                 pb.directory(new File(workDir.toString()));
+                pb.redirectErrorStream(true);
                 BufferedReader in = null;
-                BuildInfo result = new BuildInfo();
-                result.attrs.artifactID = workDir.normalize().toString();
+                Collection<BuildInfo> results = new ArrayList<>();
+                BuildInfo info = null;
 
                 try {
                     Process process = pb.start();
                     in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-                    IOUtils.copy(process.getErrorStream(), System.err);
-
-                    String line = null;
+                    String line;
                     while ((line = in.readLine()) != null) {
-
-                        String groupPayload = extractPayloadFromPrefixedLine("GROUP", line);
-                        String artifactPayload = extractPayloadFromPrefixedLine("ARTIFACT", line);
-                        String descriptionPayload = extractPayloadFromPrefixedLine("DESCRIPTION", line);
-                        String versionPayload = extractPayloadFromPrefixedLine("VERSION", line);
-                        String classPathPayload = extractPayloadFromPrefixedLine("CLASSPATH", line);
-                        String dependencyPayload = extractPayloadFromPrefixedLine("DEPENDENCY", line);
-
-                        if (null != groupPayload)
-                            result.attrs.groupID = groupPayload;
-                        if (null != artifactPayload)
-                            result.attrs.artifactID = artifactPayload;
-                        if (null != descriptionPayload)
-                            result.attrs.description = descriptionPayload;
-                        if (null != versionPayload)
-                            result.version = versionPayload;
-                        if (null != classPathPayload)
-                            result.classPath = classPathPayload;
-                        if (null != dependencyPayload) {
-                            String[] parts = dependencyPayload.split(":");
-                            result.dependencies.add(new RawDependency(
-                                    parts[1], // GroupID
-                                    parts[2], // ArtifactID
-                                    parts[3], // Version
-                                    parts[0] // Scope
-                            ));
+                        if ("BUILD FAILED".equals(line)) {
+                            LOGGER.error("Failed to process {} - gradle build failed", build);
+                            results.clear();
+                            break;
+                        }
+                        String meta[] = parseMeta(line);
+                        if (meta == null) {
+                            if (LOGGER.isDebugEnabled()) {
+                                LOGGER.debug("gradle: {}", line);
+                            }
+                            continue;
+                        }
+                        String prefix = meta[0];
+                        String payload = meta[1];
+                        switch (prefix) {
+                            case "SRCLIB-ARTIFACT":
+                                info = new BuildInfo();
+                                results.add(info);
+                                info.attrs.artifactID = payload;
+                                break;
+                            case "SRCLIB-GROUP":
+                                if (info == null) {
+                                    continue;
+                                }
+                                if (!StringUtils.isEmpty(payload)) {
+                                    info.attrs.groupID = payload;
+                                }
+                                break;
+                            case "SRCLIB-DEPENDENCY":
+                                if (info == null) {
+                                    continue;
+                                }
+                                String[] parts = payload.split(":", 5);
+                                info.dependencies.add(new RawDependency(
+                                        parts[1], // GroupID
+                                        parts[2], // ArtifactID
+                                        parts[3], // Version
+                                        parts[0], // Scope
+                                        parts.length > 4 ? parts[4] : null // file
+                                ));
+                                break;
+                            case "SRCLIB-DESCRIPTION":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.attrs.description = payload;
+                                break;
+                            case "SRCLIB-VERSION":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.version = payload;
+                                break;
+                            case "SRCLIB-CLASSPATH":
+                                if (info == null) {
+                                    continue;
+                                }
+                                for (String path : payload.split(SystemUtils.PATH_SEPARATOR)) {
+                                    if (!StringUtils.isEmpty(path)) {
+                                        info.classPath.add(path);
+                                    }
+                                }
+                                break;
+                            case "SRCLIB-BOOTCLASSPATH":
+                                if (info == null) {
+                                    continue;
+                                }
+                                for (String path : payload.split(SystemUtils.PATH_SEPARATOR)) {
+                                    if (!StringUtils.isEmpty(path)) {
+                                        info.bootClassPath.add(path);
+                                    }
+                                }
+                                break;
+                            case "SRCLIB-SOURCEFILE":
+                                if (info == null) {
+                                    continue;
+                                }
+                                File file = new File(payload);
+                                if (file.isFile()) {
+                                    info.sources.add(file.getAbsolutePath());
+                                }
+                                break;
+                            case "SRCLIB-SOURCEDIR":
+                                if (info == null) {
+                                    continue;
+                                }
+                                String tokens[] = payload.split(":", 4);
+                                String unitName = tokens[0] + '/' + tokens[1];
+                                info.sourceDirs.add(new String[] {unitName, tokens[2], tokens[3]});
+                                break;
+                            case "SRCLIB-SOURCEVERSION":
+                                if (info == null) {
+                                    continue;
+                                }
+                                if (info.sourceVersion == null || info.sourceVersion.compareTo(payload) < 0) {
+                                    info.sourceVersion = payload;
+                                }
+                                break;
+                            case "SRCLIB-PROJECTDIR":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.projectDir = payload;
+                                break;
+                            case "SRCLIB-ROOTDIR":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.rootDir = payload;
+                                break;
+                            case "SRCLIB-ENCODING":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.sourceEncoding = payload;
+                                break;
+                            case "SRCLIB-PROJECTDEPENDENCY":
+                                if (info == null) {
+                                    continue;
+                                }
+                                String depTokens[] = payload.split(":", 3);
+                                info.projectDependencies.add(new ProjectDependency(depTokens[0],
+                                        depTokens[1],
+                                        depTokens[2]));
+                                break;
+                            case "SRCLIB-GRADLEFILE":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.buildFile = payload;
+                                break;
+                            case "SRCLIB-ANDROID-SDK":
+                                if (info == null) {
+                                    continue;
+                                }
+                                info.androidSdk = payload;
+                                break;
+                            case "SRCLIB-WARNING":
+                                LOGGER.warn("gradle: {}", payload);
+                                break;
+                            default:
+                                if (LOGGER.isDebugEnabled()) {
+                                    LOGGER.debug("gradle: {}", line);
+                                }
                         }
                     }
                 } finally {
-                    if (in != null) {
-                        in.close();
-                    }
+                    IOUtils.closeQuietly(in);
                 }
 
-                return result;
+                return results.toArray(new BuildInfo[results.size()]);
             } finally {
                 FileUtils.deleteDirectory(gradleCacheDir.toString());
                 Files.deleteIfExists(modifiedGradleScriptFile);
             }
         }
+
+        /**
+         * Parses metadata line, expected format is PREFIX-SPACE-CONTENT
+         * @param line line to parse
+         * @return two-elements array, where first item is a prefix and second item is content
+         */
+        private static String[] parseMeta(String line) {
+            int idx = line.indexOf(' ');
+            if (-1 == idx)
+                return null;
+            return new String[] {line.substring(0, idx), line.substring(idx + 1).trim()};
+        }
+
     }
 }

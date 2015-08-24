@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import com.google.gson.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 
@@ -56,10 +57,11 @@ public class Ref {
 
     @Override
     public String toString() {
-        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : "") + "}";
+        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : StringUtils.EMPTY) + "}";
     }
 
     static class JSONSerializer implements JsonSerializer<Ref> {
+
         @Override
         public JsonElement serialize(Ref ref, Type arg1, JsonSerializationContext arg2) {
             JsonObject object = new JsonObject();
@@ -74,7 +76,7 @@ public class Ref {
             if (ref.defUnit != null) object.add("DefUnit", new JsonPrimitive(ref.defUnit));
             object.add("DefPath", new JsonPrimitive(ref.defKey.formatPath()));
 
-            object.add("File", new JsonPrimitive(ref.file));
+            object.add("File", new JsonPrimitive(PathUtil.relativizeCwd(ref.file)));
             object.add("Start", new JsonPrimitive(ref.start));
             object.add("End", new JsonPrimitive(ref.end));
             object.add("Def", new JsonPrimitive(ref.def));

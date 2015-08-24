@@ -9,7 +9,23 @@ class ResolvedTarget {
 
     public static ResolvedTarget jdk() {
         ResolvedTarget target = new ResolvedTarget();
-        target.ToRepoCloneURL = ScanCommand.JDK_REPO;
+        target.ToRepoCloneURL = JDKProject.JDK_REPO;
+        target.ToUnitType = "Java";
+        target.ToUnit = ".";
+        return target;
+    }
+
+    public static ResolvedTarget langtools() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = JDKProject.TOOLS_JAR_REPO;
+        target.ToUnitType = "Java";
+        target.ToUnit = ".";
+        return target;
+    }
+
+    public static ResolvedTarget nashorn() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = JDKProject.NASHORN_REPO;
         target.ToUnitType = "Java";
         target.ToUnit = ".";
         return target;
@@ -19,9 +35,18 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ScanCommand.ANDROID_SDK_REPO;
         target.ToUnitType = "JavaArtifact";
-        target.ToUnit = ".";
+        target.ToUnit = "AndroidSDK";
         return target;
     }
+
+    public static ResolvedTarget androidCore() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = ScanCommand.ANDROID_CORE_REPO;
+        target.ToUnitType = "JavaArtifact";
+        target.ToUnit = "AndroidCore";
+        return target;
+    }
+
 
     @Override
     public boolean equals(Object o) {

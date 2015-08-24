@@ -65,12 +65,14 @@ public class Def {
     }
 
     static class JSONSerializer implements JsonSerializer<Def> {
+
         @Override
         public JsonElement serialize(Def sym, Type arg1, JsonSerializationContext arg2) {
             JsonObject object = new JsonObject();
 
-            if (sym.file != null)
-                object.add("File", new JsonPrimitive(sym.file));
+            if (sym.file != null) {
+                object.add("File", new JsonPrimitive(PathUtil.relativizeCwd(sym.file)));
+            }
 
             object.add("Name", new JsonPrimitive(sym.name));
 
@@ -86,7 +88,16 @@ public class Def {
                 object.add("Exported", new JsonPrimitive(false));
             }
 
-            object.add("Local", new JsonPrimitive(!exported && !(sym.kind.equals("PACKAGE") || sym.kind.equals("ENUM") || sym.kind.equals("CLASS") || sym.kind.equals("ANNOTATION_TYPE") || sym.kind.equals("INTERFACE") || sym.kind.equals("ENUM_CONSTANT") || sym.kind.equals("FIELD") || sym.kind.equals("METHOD") || sym.kind.equals("CONSTRUCTOR"))));
+            object.add("Local", new JsonPrimitive(!exported &&
+                    !(sym.kind.equals("PACKAGE") ||
+                            sym.kind.equals("ENUM") ||
+                            sym.kind.equals("CLASS") ||
+                            sym.kind.equals("ANNOTATION_TYPE") ||
+                            sym.kind.equals("INTERFACE") ||
+                            sym.kind.equals("ENUM_CONSTANT") ||
+                            sym.kind.equals("FIELD") ||
+                            sym.kind.equals("METHOD") ||
+                            sym.kind.equals("CONSTRUCTOR"))));
 
             switch (sym.kind) {
                 case "ENUM":
