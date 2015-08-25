@@ -16,11 +16,21 @@ public final class Spans {
     private final SourcePositions srcPos;
     private final TreeScanner scanner;
 
+    private String src;
+
     public Spans(TreeScanner scanner) {
         this.scanner = scanner;
         this.compilationUnit = scanner.compilationUnit;
         this.srcPos = scanner.trees.getSourcePositions();
         this.trees = scanner.trees;
+
+        try {
+            src = compilationUnit.getSourceFile().getCharContent(true).toString();
+        } catch (IOException e) {
+            src = null;
+        }
+
+
     }
 
     public int[] name(ClassTree c) throws SpanException {
@@ -69,15 +79,13 @@ public final class Spans {
     }
 
     public int[] name(String name, Tree t) throws SpanException {
-        if (!SourceVersion.isIdentifier(name)) {
-            throw new SpanException("Name '" + name.toString() + "' is not an identifier");
+
+        if (src == null) {
+            return null;
         }
 
-        String src;
-        try {
-            src = compilationUnit.getSourceFile().getCharContent(true).toString();
-        } catch (IOException e) {
-            return null;
+        if (!SourceVersion.isIdentifier(name)) {
+            throw new SpanException("Name '" + name + "' is not an identifier");
         }
 
         int treeStart = (int) srcPos.getStartPosition(compilationUnit, t);
