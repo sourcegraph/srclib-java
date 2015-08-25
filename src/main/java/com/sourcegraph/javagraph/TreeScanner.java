@@ -19,6 +19,7 @@ import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TreeScanner extends TreePathScanner<Void, Void> {
 
@@ -91,8 +92,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             return;
         seenDefs.add(s.defKey);
 
-        s.name = currentElement().getSimpleName().toString();
-        s.kind = currentElement().getKind().toString();
+        Element current = currentElement();
+        s.name = current.getSimpleName().toString();
+        s.kind = current.getKind().toString();
         if (nameSpan != null) {
             s.identStart = nameSpan[0];
             s.identEnd = nameSpan[1];
@@ -188,22 +190,23 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         boolean isCtor = TreeInfo.isConstructor((JCTree) node);
         int[] nameSpan, defSpan;
         if (isCtor) {
+            Element current = currentElement();
             if (isSynthetic) {
-                if (currentElement() == null) {
+                if (current == null) {
                     LOGGER.warn("currentElement() == null (synthetic)");
                     return null;
                 }
-                if (currentElement().getEnclosingElement() == null) {
+                if (current.getEnclosingElement() == null) {
                     LOGGER.warn("currentElement().getEnclosingElement() == null (synthetic)");
                     return null;
                 }
-                if (trees.getPath(currentElement().getEnclosingElement()) == null) {
+                if (trees.getPath(current.getEnclosingElement()) == null) {
                     LOGGER.warn("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
                     return null;
                 }
 
                 ClassTree klass = (ClassTree) trees.getPath(
-                        currentElement().getEnclosingElement()).getLeaf();
+                        current.getEnclosingElement()).getLeaf();
                 if (klass.getSimpleName().toString().isEmpty()) {
                     // TODO(sqs): why is there an anonymous synthetic node? what
                     // does that even mean?
@@ -217,16 +220,16 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
                     LOGGER.warn("spans == null (non-synthetic)");
                     return null;
                 }
-                if (currentElement() == null) {
+                if (current == null) {
                     LOGGER.warn("currentElement() == null (non-synthetic)");
                     return null;
                 }
-                if (currentElement().getEnclosingElement() == null) {
+                if (current.getEnclosingElement() == null) {
                     LOGGER.warn("currentElement().getEnclosingElement() == null (non-synthetic)");
                     return null;
                 }
 
-                nameSpan = spans.name(currentElement().getEnclosingElement()
+                nameSpan = spans.name(current.getEnclosingElement()
                         .getSimpleName().toString(), node);
                 defSpan = treeSpan(node);
             }
@@ -264,12 +267,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     public Void visitCompilationUnit(CompilationUnitTree node, Void p) {
         scanPackageName(node.getPackageName());
 
-        for (ImportTree t : node.getImports()) {
-            scanPackageName(t);
-        }
-        for (Tree t : node.getTypeDecls()) {
-            scan(t, p);
-        }
+        node.getImports().forEach(this::scanPackageName);
+        node.getTypeDecls().forEach(t -> scan(t, p));
         return null;
     }
 
@@ -348,10 +347,6 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     private List<String> modifiersList(ModifiersTree node) {
-        List<String> mods = new ArrayList<>();
-        for (Modifier m : node.getFlags()) {
-            mods.add(m.toString());
-        }
-        return mods;
+        return node.getFlags().stream().map(Modifier::toString).collect(Collectors.toList());
     }
 }
