@@ -32,6 +32,7 @@ public class MavenPlugins {
 
     /**
      * Registers new plugin
+     *
      * @param plugin plugin to register
      */
     public void addPlugin(MavenPlugin plugin) {
@@ -40,15 +41,14 @@ public class MavenPlugins {
 
     /**
      * Applies all registered plugins to a project
+     *
      * @param project project to apply plugins for
      * @param repoDir Maven repository dir to use
      */
     public void apply(MavenProject project, File repoDir) {
         for (MavenPlugin plugin : getPlugins()) {
             if (plugin.isApplicable(project)) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Applying Maven plugin {}", plugin.getClass());
-                }
+                LOGGER.debug("Applying Maven plugin {}", plugin.getClass());
                 plugin.apply(project, repoDir);
             }
         }
@@ -71,9 +71,7 @@ public class MavenPlugins {
                     }
                     if (MavenPlugin.class.isAssignableFrom(c)) {
                         try {
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("Registering Maven plugin " + info.getName());
-                            }
+                            LOGGER.debug("Registering Maven plugin {}", info);
                             plugins.add((MavenPlugin) c.newInstance());
                         } catch (InstantiationException | IllegalAccessException e) {
                             LOGGER.warn("Failed to register Maven plugin " + info.getName());

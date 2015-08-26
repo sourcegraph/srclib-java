@@ -32,7 +32,7 @@ public class AndroidSDKProject implements Project {
     @Override
     public List<String> getClassPath() throws Exception {
         // including
-        return getLibraries(new String[] {
+        return getLibraries(new String[]{
                 "../../out/target/common/obj/JAVA_LIBRARIES/conscrypt_intermediates/classes.jar",
                 "../../out/target/common/obj/JAVA_LIBRARIES/okhttp_intermediates/classes.jar",
                 "../../out/target/common/obj/JAVA_LIBRARIES/ext_intermediates/classes.jar",
@@ -99,9 +99,7 @@ public class AndroidSDKProject implements Project {
 
     private static String getAidlCommand() {
         File buildToolsDir = getLatestBuildToolsDir();
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Using Android SDK build tools {}", buildToolsDir);
-        }
+        LOGGER.debug("Using Android SDK build tools {}", buildToolsDir);
         if (buildToolsDir == null) {
             return null;
         }
@@ -132,19 +130,13 @@ public class AndroidSDKProject implements Project {
         }
         File sdkHome = getAndroidSdkHome();
         if (sdkHome == null) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Android SDK home is not found");
-            }
+            LOGGER.debug("Android SDK home is not found");
             return null;
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Using Android SDK home {}", sdkHome);
-        }
+        LOGGER.debug("Using Android SDK home {}", sdkHome);
         File buildTools = new File(sdkHome, "build-tools");
         if (!buildTools.isDirectory()) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Android SDK build tools {} does not exist or not a directory", buildTools);
-            }
+            LOGGER.debug("Android SDK build tools {} does not exist or not a directory", buildTools);
             return null;
 
         }
@@ -178,14 +170,10 @@ public class AndroidSDKProject implements Project {
     private static void processAidlFiles() throws IOException {
         String aidlCommand = getAidlCommand();
         if (aidlCommand == null) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("aidl command is not found");
-            }
+            LOGGER.debug("aidl command is not found");
             return;
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Using aidl command {}", aidlCommand);
-        }
+        LOGGER.debug("Using aidl command {}", aidlCommand);
 
         List<String> aidlFiles = collectFiles("aidl");
         // collect include locations
@@ -210,9 +198,7 @@ public class AndroidSDKProject implements Project {
         if (target.exists()) {
             return;
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Processing AIDL file {}", source);
-        }
+        LOGGER.debug("Processing AIDL file {}", source);
         ProcessBuilder pb = new ProcessBuilder();
         File workingDir = getAidlWorkingDir(source.toPath()).getAbsoluteFile();
         List<String> args = new ArrayList<>(cmdArgs);

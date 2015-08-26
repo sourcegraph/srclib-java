@@ -86,14 +86,13 @@ public class MavenProject implements Project {
 
     /**
      * Fetches and parses POM file if necessary, applies processing plugins
+     *
      * @return maven project data
      * @throws ModelBuildingException
      */
     protected org.apache.maven.project.MavenProject getMavenProject() throws ModelBuildingException {
         if (mavenProject == null) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Building Maven project structure from {}", pomFile);
-            }
+            LOGGER.debug("Building Maven project structure from {}", pomFile);
             DefaultModelBuilderFactory factory = new DefaultModelBuilderFactory();
             ModelBuildingRequest request = new DefaultModelBuildingRequest();
             request.setSystemProperties(System.getProperties());
@@ -104,9 +103,7 @@ public class MavenProject implements Project {
                     repositorySystemSession));
             ModelBuildingResult result = factory.newInstance().build(request);
             mavenProject = new org.apache.maven.project.MavenProject(result.getEffectiveModel());
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Maven project structure is built", pomFile);
-            }
+            LOGGER.debug("Maven project structure is built", pomFile);
             // applying all registered plugins to adjust project data
             MavenPlugins.getInstance().apply(mavenProject, PathUtil.CWD.resolve(getRepoDir()).toFile());
         }
@@ -115,6 +112,7 @@ public class MavenProject implements Project {
 
     /**
      * Initializes repository system
+     *
      * @return repository system
      */
     private static RepositorySystem newRepositorySystem() {
@@ -135,6 +133,7 @@ public class MavenProject implements Project {
 
     /**
      * Initializes repository system session
+     *
      * @param system repository system to use
      * @return repository system session
      */
@@ -156,9 +155,7 @@ public class MavenProject implements Project {
      */
     public Set<RawDependency> listDeps() throws IOException, ModelBuildingException {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieving Maven dependencies");
-        }
+        LOGGER.debug("Retrieving Maven dependencies");
 
         Set<RawDependency> deps = new HashSet<>();
         List<Dependency> mavenDeps = getMavenProject().getDependencies();
@@ -174,9 +171,7 @@ public class MavenProject implements Project {
             deps.add(rawDependency);
         }
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieved Maven dependencies");
-        }
+        LOGGER.debug("Retrieved Maven dependencies");
 
         return deps;
     }
@@ -235,6 +230,7 @@ public class MavenProject implements Project {
 
     /**
      * Converts Maven project into BuildInfo
+     *
      * @param proj project to convert
      * @return BuildInfo structure
      * @throws IOException
@@ -255,7 +251,7 @@ public class MavenProject implements Project {
         info.version = proj.getMavenProject().getVersion();
         info.projectDir = proj.pomFile.getParent().toString();
         info.projectDependencies = new ArrayList<>();
-        for (String module: proj.getMavenProject().getModules()) {
+        for (String module : proj.getMavenProject().getModules()) {
             info.projectDependencies.add(new BuildAnalysis.ProjectDependency(StringUtils.EMPTY,
                     StringUtils.EMPTY,
                     PathUtil.concat(proj.pomFile.getParent(), Paths.get(module)).
@@ -267,7 +263,7 @@ public class MavenProject implements Project {
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
         info.sourceDirs = sourceRoots.stream().map(sourceRoot ->
-                new String[] {info.getName(), info.version, sourceRoot}).collect(Collectors.toList());
+                new String[]{info.getName(), info.version, sourceRoot}).collect(Collectors.toList());
         info.sources = collectSourceFiles(sourceRoots);
         info.sourceEncoding = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_ENCODING_PROPERTY);
         info.sourceVersion = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_VERSION_PROPERTY,
@@ -279,9 +275,7 @@ public class MavenProject implements Project {
 
     public static Collection<SourceUnit> findAllSourceUnits(String repoUri) throws IOException {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieving source units");
-        }
+        LOGGER.debug("Retrieving source units");
 
         // step 1 : process all pom.xml files
         Collection<Path> pomFiles = ScanUtil.findMatchingFiles("pom.xml");
@@ -307,9 +301,7 @@ public class MavenProject implements Project {
             }
         }
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieved source units");
-        }
+        LOGGER.debug("Retrieved source units");
 
         // step 2: resolve dependencies
 
@@ -328,7 +320,7 @@ public class MavenProject implements Project {
         // step 3: resolving dependencies between units and updating source path and class path
 
         Collection<SourceUnit> ret = new ArrayList<>();
-        for (BuildAnalysis.BuildInfo info: infos) {
+        for (BuildAnalysis.BuildInfo info : infos) {
             SourceUnit unit = new SourceUnit();
             unit.Name = info.getName();
             unit.Dir = info.projectDir;
@@ -355,16 +347,12 @@ public class MavenProject implements Project {
             externalDeps.addAll(allDependencies.stream().filter(dep ->
                     !artifactsByUnitId.containsKey(dep.groupID + '/' + dep.artifactID + '/' + dep.version)).
                     collect(Collectors.toList()));
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Resolving artifacts for {} [{}]", unit.Name, info.buildFile);
-            }
+            LOGGER.debug("Resolving artifacts for {} [{}]", unit.Name, info.buildFile);
             Collection<Artifact> resolvedArtifacts = resolveDependencyArtifacts(unit.Name,
                     externalDeps,
                     repositories,
                     "jar");
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Resolved artifacts for {} [{}]", unit.Name, info.buildFile);
-            }
+            LOGGER.debug("Resolved artifacts for {} [{}]", unit.Name, info.buildFile);
             List<String> classPath = new ArrayList<>();
             for (Artifact artifact : resolvedArtifacts) {
                 File file = artifact.getFile();
@@ -385,6 +373,7 @@ public class MavenProject implements Project {
 
     /**
      * Retrieves all source files in Maven project
+     *
      * @param sourceRoots source roots to search in, i.e. compile source roots, test compile source roots
      */
     private static Set<String> collectSourceFiles(Collection<String> sourceRoots) {
@@ -427,6 +416,7 @@ public class MavenProject implements Project {
 
     /**
      * Resolves dependency artifacts
+     *
      * @param dependencies dependencies to check
      */
     static Collection<Artifact> resolveDependencyArtifacts(String unitId,
@@ -434,9 +424,7 @@ public class MavenProject implements Project {
                                                            Collection<Repository> repositories,
                                                            String extension) {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving dependency artifacts");
-        }
+        LOGGER.debug("Resolving dependency artifacts");
 
         Collection<Artifact> ret = new ArrayList<>();
 
@@ -464,9 +452,7 @@ public class MavenProject implements Project {
             LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage());
             node = e.getResult().getRoot();
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Collected dependencies");
-        }
+        LOGGER.debug("Collected dependencies");
         if (node == null) {
             LOGGER.warn("Failed to collect dependencies for {} - no dependencies were collected", unitId);
             return ret;
@@ -478,9 +464,7 @@ public class MavenProject implements Project {
         } catch (DependencyResolutionException e) {
             LOGGER.warn("Failed to resolve dependencies for {} - {}", unitId, e.getMessage());
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved dependencies");
-        }
+        LOGGER.debug("Resolved dependencies");
 
         PreorderNodeListGenerator nlg = new PreorderNodeListGenerator();
         node.accept(nlg);
@@ -488,17 +472,16 @@ public class MavenProject implements Project {
         ret.addAll(nlg.getDependencies(true).stream().map(org.eclipse.aether.graph.Dependency::getArtifact).
                 collect(Collectors.toList()));
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved dependency artifacts");
-        }
+        LOGGER.debug("Resolved dependency artifacts");
 
         return ret;
     }
 
     /**
      * Collects unique project source directories
+     *
      * @param pomFile POM file to process
-     * @param proj current project
+     * @param proj    current project
      * @return collection of source roots of given project, each entry is relative to CWD
      * @throws ModelBuildingException
      */
@@ -509,18 +492,14 @@ public class MavenProject implements Project {
         for (String sourceRoot : proj.getMavenProject().getCompileSourceRoots()) {
             File f = PathUtil.concat(root, sourceRoot);
             if (f.isDirectory()) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Adding source root {}", f);
-                }
+                LOGGER.debug("Adding source root {}", f);
                 sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
             }
         }
         for (String sourceRoot : proj.getMavenProject().getTestCompileSourceRoots()) {
             File f = PathUtil.concat(root, sourceRoot);
             if (f.isDirectory()) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Adding source root {}", f);
-                }
+                LOGGER.debug("Adding source root {}", f);
                 sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
             }
         }
@@ -531,9 +510,7 @@ public class MavenProject implements Project {
         }
         File f = PathUtil.concat(root, sourceRoot);
         if (f.isDirectory()) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Adding source root {}", f);
-            }
+            LOGGER.debug("Adding source root {}", f);
             sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
         }
 
@@ -543,9 +520,7 @@ public class MavenProject implements Project {
         }
         f = PathUtil.concat(root, sourceRoot);
         if (f.isDirectory()) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Adding source root {}", f);
-            }
+            LOGGER.debug("Adding source root {}", f);
             sourceRoots.add(PathUtil.relativizeCwd(f.toString()));
         }
 
@@ -555,9 +530,10 @@ public class MavenProject implements Project {
     /**
      * Gathers BuildInfo objects that represent dependencies of specific artifact.
      * If dependency has sub-dependencies, they will be collected as well resursively
-     * @param unitId source unit identifier (group/artifact/version)
+     *
+     * @param unitId    source unit identifier (group/artifact/version)
      * @param unitCache cache that contains build info objects (unitid => buildindo)
-     * @param pomCache cache that contains build info objects (POM file => unitid)
+     * @param pomCache  cache that contains build info objects (POM file => unitid)
      * @return collected objects
      */
     private static Collection<BuildAnalysis.BuildInfo> collectDependencies(
@@ -572,11 +548,12 @@ public class MavenProject implements Project {
 
     /**
      * Recursively collects dependencies of a given unit
-     * @param unitId source unit ID to process (group/artifact/version)
-     * @param infos collection to fill with data
+     *
+     * @param unitId    source unit ID to process (group/artifact/version)
+     * @param infos     collection to fill with data
      * @param unitCache cache that contains build info objects (unitid => buildindo)
-     * @param pomCache cache that contains build info objects (POM file => unitid)
-     * @param visited marks visited units to avoid infinite loops
+     * @param pomCache  cache that contains build info objects (POM file => unitid)
+     * @param visited   marks visited units to avoid infinite loops
      */
     private static void collectDependencies(String unitId,
                                             Collection<BuildAnalysis.BuildInfo> infos,
@@ -609,6 +586,7 @@ public class MavenProject implements Project {
 
     /**
      * Fetches POM files for specified dependencies and extract SCM URI if there are any
+     *
      * @param dependencies list of dependencies to collect URI for
      * @param repositories repositories to use when looking for external files
      */

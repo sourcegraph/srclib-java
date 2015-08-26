@@ -101,9 +101,7 @@ public class Grapher {
 
     public void graphFilesAndDirs(Iterable<String> filePaths) throws IOException {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Collecting source files to graph");
-        }
+        LOGGER.debug("Collecting source files to graph");
         File root = SystemUtils.getUserDir();
 
         final List<String> files = new ArrayList<>();
@@ -128,9 +126,7 @@ public class Grapher {
                         });
             }
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Collected source files to graph");
-        }
+        LOGGER.debug("Collected source files to graph");
         graphFiles(files);
     }
 

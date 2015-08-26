@@ -43,39 +43,27 @@ public class ScanCommand {
             List<SourceUnit> units = new ArrayList<>();
             switch (repoURI) {
                 case JDK_TEST_REPO:
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Collecting JDK source units");
-                    }
+                    LOGGER.debug("Collecting JDK source units");
                     units.addAll(JDKProject.standardSourceUnits());
                     break;
                 case ANDROID_SDK_REPO:
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Collecting Android SDK source units");
-                    }
+                    LOGGER.debug("Collecting Android SDK source units");
                     units.add(AndroidSDKProject.createSourceUnit(subdir));
                     break;
                 case ANDROID_CORE_REPO:
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Collecting Android core source units");
-                    }
+                    LOGGER.debug("Collecting Android core source units");
                     units.add(AndroidCoreProject.createSourceUnit(subdir));
                     break;
                 default:
                     if (repoURI.startsWith(JDKProject.OPENJDK_REPO_ROOT)) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Collecting JDK source units");
-                        }
+                        LOGGER.debug("Collecting JDK source units");
                         units.addAll(JDKProject.standardSourceUnits());
                         break;
                     }
                     // Recursively find all Maven and Gradle projects.
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Collecting Maven source units");
-                    }
+                    LOGGER.debug("Collecting Maven source units");
                     units.addAll(MavenProject.findAllSourceUnits(repoURI));
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Collecting Gradle source units");
-                    }
+                    LOGGER.debug("Collecting Gradle source units");
                     units.addAll(GradleProject.findAllSourceUnits(repoURI));
                     break;
             }
