@@ -57,6 +57,10 @@ public class MavenPlugins {
     private MavenPlugins() {
     }
 
+    /**
+     * Lazy initialization of registered plugins
+     * @return list of registered plugins, instantiates them if needed
+     */
     private Collection<MavenPlugin> getPlugins() {
         if (plugins == null) {
             plugins = new ArrayList<>();

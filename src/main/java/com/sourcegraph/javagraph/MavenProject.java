@@ -48,6 +48,10 @@ import java.util.stream.Collectors;
 
 public class MavenProject implements Project {
 
+    public static final String SOURCE_CODE_VERSION_PROPERTY = "srclib-source-code-version";
+    public static final String SOURCE_CODE_ENCODING_PROPERTY = "srclib-source-code-encoding";
+    public static final String ANDROID_PROPERTY = "srclib-android";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MavenProject.class);
 
     /**
@@ -77,6 +81,9 @@ public class MavenProject implements Project {
         this.pomFile = pomFile;
     }
 
+    /**
+     * Initializes Maven's local repository system and session
+     */
     private static void initRepositorySystem() {
         repositorySystem = newRepositorySystem();
         repositorySystemSession = newRepositorySystemSession(repositorySystem);
@@ -185,7 +192,7 @@ public class MavenProject implements Project {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getBootClassPath() throws Exception {
+    public List<String> getBootClassPath() {
         // simply looking in the unit's data, bootsrap classpath was collected at the "scan" phase
         return (List<String>) unit.Data.get("BootClassPath");
     }
@@ -211,8 +218,7 @@ public class MavenProject implements Project {
     }
 
     @Override
-    public RawDependency getDepForJAR(Path jarFile) throws
-            IOException, ModelBuildingException {
+    public RawDependency getDepForJAR(Path jarFile) {
         return null;
 
     }
@@ -273,6 +279,13 @@ public class MavenProject implements Project {
         return info;
     }
 
+    /**
+     * Retrieves all source units from current working directory by scanning for pom.xml files and processing them
+     *
+     * @param repoUri repository URI
+     * @return all source units collected
+     * @throws IOException
+     */
     public static Collection<SourceUnit> findAllSourceUnits(String repoUri) throws IOException {
 
         LOGGER.debug("Retrieving source units");
@@ -409,6 +422,9 @@ public class MavenProject implements Project {
         return sourceFiles;
     }
 
+    /**
+     * @return location of Maven's local repository
+     */
     protected static String getRepoDir() {
         // TODO(sqs): If running in Docker, use a directory not inside the repo if in Docker since the Docker source volume is readonly.
         return REPO_DIR;
@@ -417,7 +433,10 @@ public class MavenProject implements Project {
     /**
      * Resolves dependency artifacts
      *
+     * @param unitId       source unit ID
      * @param dependencies dependencies to check
+     * @param repositories repositories to search artifacts in
+     * @param extension    artifact extension (jar, pom, etc)
      */
     static Collection<Artifact> resolveDependencyArtifacts(String unitId,
                                                            Collection<RawDependency> dependencies,
@@ -620,6 +639,9 @@ public class MavenProject implements Project {
         }
     }
 
+    /**
+     * Resolves Maven models
+     */
     private class MavenModelResolver implements ModelResolver {
 
         private static final String POM = "pom";

@@ -1,7 +1,6 @@
 package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.Charsets;
-import org.apache.maven.model.building.ModelBuildingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,8 +8,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
+/**
+ * Set of rules to compile Android's libcore (https://android.googlesource.com/platform/libcore/)
+ * - no bootstrap classpath
+ * - empty classpath
+ * - include ICU4J classes if found into source path
+ */
 public class AndroidCoreProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidCoreProject.class);
@@ -18,16 +26,25 @@ public class AndroidCoreProject implements Project {
     public AndroidCoreProject(SourceUnit unit) {
     }
 
+    /**
+     * @return empty list because we are compiling JDK
+     */
     @Override
-    public List<String> getBootClassPath() throws Exception {
+    public List<String> getBootClassPath() {
         return Collections.emptyList();
     }
 
+    /**
+     * @return empty classpath
+     */
     @Override
-    public List<String> getClassPath() throws Exception {
+    public List<String> getClassPath() {
         return null;
     }
 
+    /**
+     * @return ICU4J directories if found, because libcore depends on ICU4J
+     */
     @Override
     public List<String> getSourcePath() throws Exception {
         // if there is ICU available, let's use it
@@ -41,20 +58,32 @@ public class AndroidCoreProject implements Project {
     }
 
     @Override
-    public RawDependency getDepForJAR(Path jarFile) throws Exception {
+    public RawDependency getDepForJAR(Path jarFile) {
         return null;
     }
 
+    /**
+     * @return 1.8
+     */
     @Override
-    public String getSourceCodeVersion() throws Exception {
+    public String getSourceCodeVersion() {
         return DEFAULT_SOURCE_CODE_VERSION;
     }
 
+    /**
+     * @return "UTF-8"
+     */
     @Override
-    public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
+    public String getSourceCodeEncoding() {
         return Charsets.UTF_8.name();
     }
 
+    /**
+     * Creates source unit from a given directory
+     * @param subdir sub-directory inside current working dir to search for sources in
+     * @return source unit
+     * @throws Exception
+     */
     public static SourceUnit createSourceUnit(String subdir) throws Exception {
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";
@@ -66,6 +95,15 @@ public class AndroidCoreProject implements Project {
         return unit;
     }
 
+    /**
+     * Walks file tree starting from specific root and collects java files and source directories of libcore,
+     * excluding useless ones
+     * @param root location to start walking filetree
+     * @param files holder to keep found files
+     * @param directories holder to keep found directories
+     * @return list of files collected
+     * @throws IOException
+     */
     static List<String> getSourceFilesAndDirectories(Path root, List<String> files, List<String> directories)
             throws IOException {
 
@@ -100,6 +138,9 @@ public class AndroidCoreProject implements Project {
         return files;
     }
 
+    /**
+     * Walks file tree and collects ICU4J source directories if there are any
+     */
     private static final class ICUDirectoriesCollector extends SimpleFileVisitor<Path> {
 
         private Collection<String> dirs;

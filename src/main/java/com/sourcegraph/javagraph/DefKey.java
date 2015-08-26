@@ -4,6 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
 
+/**
+ * Definition key
+ */
 public class DefKey {
     private final URI origin;
     private final String path;

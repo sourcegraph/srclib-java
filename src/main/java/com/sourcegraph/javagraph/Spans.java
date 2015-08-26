@@ -10,6 +10,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import java.io.IOException;
 
+/**
+ * Produces spans (start, end) of expression tree nodes in current compilation unit
+ */
 public final class Spans {
     private final CompilationUnitTree compilationUnit;
     private final Trees trees;
@@ -18,6 +21,10 @@ public final class Spans {
 
     private String src;
 
+    /**
+     * Constructs new span object
+     * @param scanner expression tree scanner
+     */
     public Spans(TreeScanner scanner) {
         this.scanner = scanner;
         this.compilationUnit = scanner.compilationUnit;
@@ -33,10 +40,20 @@ public final class Spans {
 
     }
 
+    /**
+     * @param c class node
+     * @return name span of class node in current compilation unit
+     * @throws SpanException
+     */
     public int[] name(ClassTree c) throws SpanException {
         return name(c.getSimpleName().toString(), c);
     }
 
+    /**
+     * @param method method node
+     * @return name span of method node in current compilation unit
+     * @throws SpanException
+     */
     public int[] name(MethodTree method) throws SpanException {
         String name;
 
@@ -62,22 +79,43 @@ public final class Spans {
         return name(name, method);
     }
 
+    /**
+     * @param file compilation unit node
+     * @return name span of compilation unit node in current compilation unit
+     * @throws SpanException
+     */
     public int[] name(CompilationUnitTree file) throws SpanException {
         String pkgName = file.getPackageName().toString();
         String rightName = pkgName.substring(pkgName.lastIndexOf('.') + 1);
         return name(rightName, file);
     }
 
+    /**
+     * @param var variable node
+     * @return name span of variable node in current compilation unit
+     * @throws SpanException
+     */
     public int[] name(VariableTree var) throws SpanException {
         return name(var.getName().toString(), var);
     }
 
+    /**
+     * @param mst member select node
+     * @return name span of member select node in current compilation unit
+     * @throws SpanException
+     */
     public int[] name(MemberSelectTree mst) throws SpanException {
         // TODO(sqs): specify offset in case the identifier name is repeated in
         // the MemberSelect LHS expression.
         return name(mst.getIdentifier().toString(), mst);
     }
 
+    /**
+     * @param name name to produce span for
+     * @param t tree node to look for name span
+     * @return name span of a given name inside span defined by given tree node
+     * @throws SpanException
+     */
     public int[] name(String name, Tree t) throws SpanException {
 
         if (src == null) {

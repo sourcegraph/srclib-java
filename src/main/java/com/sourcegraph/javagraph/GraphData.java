@@ -6,12 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implementation of graph writer that collects references and definitions and then writes them as JSON
+ */
 public class GraphData implements GraphWriter {
     public final List<Ref> refs = new ArrayList<>();
     public final List<Def> defs = new ArrayList<>();
 
     public final Map<DefKey, Def> keyToSymbol = new HashMap<DefKey, Def>();
 
+    /**
+     * @param defKey definition key
+     * @return list of references to given definition key
+     */
     public List<Ref> refsTo(DefKey defKey) {
         List<Ref> refs = new ArrayList<>();
         for (Ref r : this.refs) {

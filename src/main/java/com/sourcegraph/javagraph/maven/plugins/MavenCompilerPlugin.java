@@ -27,6 +27,9 @@ public class MavenCompilerPlugin extends AbstractMavenPlugin {
         return true;
     }
 
+    /**
+     * Extracts source code version and encoding from compiler plugin configuration
+     */
     @Override
     public void apply(MavenProject project,
                       File repoDir) {
@@ -41,6 +44,11 @@ public class MavenCompilerPlugin extends AbstractMavenPlugin {
         extractSourceCodeVersion(project, xmlConfiguration);
     }
 
+    /**
+     * Extracts source code version from plugin configuration
+     * @param project Maven project
+     * @param xmlConfiguration XML configuration object to search for data
+     */
     private static void extractSourceCodeVersion(MavenProject project, Xpp3Dom xmlConfiguration) {
         Xpp3Dom source = xmlConfiguration.getChild("source");
         if (source == null) {
@@ -57,6 +65,11 @@ public class MavenCompilerPlugin extends AbstractMavenPlugin {
                 source.getValue());
     }
 
+    /**
+     * Extracts source code encoding from plugin configuration
+     * @param project Maven project
+     * @param xmlConfiguration XML configuration object to search for data
+     */
     private static void extractSourceCodeEncoding(MavenProject project, Xpp3Dom xmlConfiguration) {
         Xpp3Dom source = xmlConfiguration.getChild("encoding");
         if (source == null) {

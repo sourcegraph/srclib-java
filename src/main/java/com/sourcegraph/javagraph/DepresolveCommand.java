@@ -20,6 +20,9 @@ public class DepresolveCommand {
     @Parameter(names = {"--debug-unit-file"}, description = "The path to a source unit input file, which will be read as though it came from stdin. Used to mimic stdin when you can't actually pipe to stdin (e.g., in IntelliJ run configurations).")
     String debugUnitFile;
 
+    /**
+     * Main method
+     */
     public void Execute() {
 
         SourceUnit unit = null;

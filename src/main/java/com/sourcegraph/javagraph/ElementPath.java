@@ -12,16 +12,25 @@ import javax.lang.model.element.*;
 import javax.lang.model.util.ElementKindVisitor8;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
+/**
+ * Path to java program element
+ */
 public class ElementPath {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ElementPath.class);
 
     private final List<String> components = new ArrayList<>(5);
 
+    /**
+     * Traverses tree to produce a path to a given program element
+     * @param compilationUnit compilation unit
+     * @param trees trees object
+     * @param e target element
+     * @return path to target element
+     */
     public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
         return new Visitor(compilationUnit, trees).visit(e, new ElementPath());
     }
@@ -34,8 +43,6 @@ public class ElementPath {
     public void unshift(String name) {
         components.add(0, name);
     }
-
-    private static Map<Element, Integer> anonClasses = new HashMap<>();
 
     private static class Visitor extends
             ElementKindVisitor8<ElementPath, ElementPath> {
@@ -151,11 +158,10 @@ public class ElementPath {
         }
 
         private List<String> getParameters(ExecutableElement e) {
-            final List<String> result = new ArrayList<String>();
-            for (VariableElement ve : e.getParameters()) {
-                result.add(ve.asType().toString().replaceAll("\\.", "\\$"));
-            }
-            return result;
+            return e.getParameters().
+                    stream().
+                    map(ve -> ve.asType().toString().replaceAll("\\.", "\\$")).
+                    collect(Collectors.toList());
         }
     }
 }

@@ -12,6 +12,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Set of rules to compile OpenJDK projects (hg.openjdk.java.net/jdk8/jdk8/*)
+ * - no bootstrap classpath for OpenJDK's JDK
+ * - include tools.jar into classpath
+ * - include generated files if found into source path
+ */
 public class JDKProject implements Project {
 
     public static final String OPENJDK_REPO_ROOT = "hg.openjdk.java.net/jdk8/jdk8/";
@@ -27,16 +33,23 @@ public class JDKProject implements Project {
         this.unit = unit;
     }
 
+
+    /**
+     * @return empty list (no boot class path) when graphing OpenJDK's JDK
+     */
     @Override
-    public List<String> getBootClassPath() throws Exception {
+    public List<String> getBootClassPath() {
         if (unit.Repo.equals(JDK_REPO)) {
             return Collections.emptyList();
         }
         return null;
     }
 
+    /**
+     * @return tools.jar
+     */
     @Override
-    public List<String> getClassPath() throws Exception {
+    public List<String> getClassPath() {
         File javaHome = SystemUtils.getJavaHome();
         if (javaHome.isDirectory()) {
             File toolsJar = new File(javaHome, "lib/tools.jar");

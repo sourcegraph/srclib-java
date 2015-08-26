@@ -27,6 +27,9 @@ public class ScanCommand {
     public static final String ANDROID_SUPPORT_FRAMEWORK_REPO = "android.googlesource.com/platform/frameworks/support";
 
 
+    /**
+     * Main method
+     */
     public void Execute() {
 
         LOGGER.info("Collecting source units");
@@ -75,6 +78,10 @@ public class ScanCommand {
         }
     }
 
+    /**
+     * Normalizes source units produces by scan command (sorts, relativizes file paths etc)
+     * @param units source units to normalize
+     */
     @SuppressWarnings("unchecked")
     private void normalize(Collection<SourceUnit> units) {
 

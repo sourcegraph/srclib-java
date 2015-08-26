@@ -5,16 +5,49 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 
+/**
+ * Reference to a definition object
+ */
 public class Ref {
+
+    /**
+     * Definition key
+     */
     DefKey defKey;
 
+    /**
+     * Definition's repository
+     */
     String defRepo;
+
+    /**
+     * Definitions's unit type
+     */
     String defUnitType;
+
+    /**
+     * Defitinion's unit name
+     */
     String defUnit;
 
+    /**
+     * File that holds a reference
+     */
     String file;
+
+    /**
+     * Start offset in file
+     */
     int start;
+
+    /**
+     * End offset in file
+     */
     int end;
+
+    /**
+     * If reference is also a definition
+     */
     boolean def;
 
     public void setDefTarget(ResolvedTarget target) {
@@ -60,6 +93,9 @@ public class Ref {
         return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : StringUtils.EMPTY) + "}";
     }
 
+    /**
+     * JSON serialization rules for reference objects
+     */
     static class JSONSerializer implements JsonSerializer<Ref> {
 
         @Override

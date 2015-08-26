@@ -1,7 +1,6 @@
 package com.sourcegraph.javagraph.maven.plugins;
 
 import com.sourcegraph.javagraph.PathUtil;
-import com.sourcegraph.javagraph.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
@@ -32,6 +31,10 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
         return false;
     }
 
+    /**
+     * Invokes 'generate-sources' Maven goal, updates project compile source roots with generated source directories,
+     * and marks presence of Android SDK in current source unit
+     */
     @Override
     public void apply(MavenProject project,
                       File repoDir) {
@@ -40,9 +43,14 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
         String sourceRoot = getGeneratedSourceDirectory(project);
         LOGGER.debug("Registering source root {}", sourceRoot);
         project.getCompileSourceRoots().add(sourceRoot);
-        project.getProperties().setProperty(Project.ANDROID_PROPERTY, StringUtils.EMPTY);
+        project.getProperties().setProperty(com.sourcegraph.javagraph.MavenProject.ANDROID_PROPERTY, StringUtils.EMPTY);
     }
 
+    /**
+     *
+     * @param project Maven project
+     * @return project's generated sources directory
+     */
     private String getGeneratedSourceDirectory(MavenProject project) {
         String genDirectory = project.getProperties().getProperty("android.genDirectory");
         if (genDirectory == null) {
@@ -52,6 +60,11 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
         }
     }
 
+    /**
+     *
+     * @param project Maven project
+     * @return project's default generated sources directory
+     */
     private static String getDefaultGeneratedSourceDirectory(MavenProject project) {
         File root = PathUtil.concat(project.getModel().getProjectDirectory(), project.getBuild().getDirectory());
         return PathUtil.concat(root, "generated-sources/r").toString();
