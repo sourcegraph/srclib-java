@@ -15,10 +15,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Extracts build meta information from source unit build file (pom.xml or .gradle)
+ */
 public class BuildAnalysis {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildAnalysis.class);
 
+    /**
+     * POM attributes, holds group ID, artifact ID, and description
+     */
     public static class POMAttrs {
         public String groupID = "default-group";
         public String artifactID = StringUtils.EMPTY;
@@ -34,11 +40,20 @@ public class BuildAnalysis {
         }
     }
 
+    /**
+     * Project's dependency (reference to another sub-project or module that produces artifact A in group G by build file B)
+     */
     public static class ProjectDependency {
         public String groupID;
         public String artifactID;
         public String buildFile;
 
+        /**
+         * Constructs new project dependency
+         * @param groupID group ID
+         * @param artifactID artifact ID
+         * @param buildFile sub-project's or module's build file used to build artifact, may ne null
+         */
         public ProjectDependency(String groupID, String artifactID, String buildFile) {
             this.groupID = groupID;
             this.artifactID = artifactID;
@@ -69,20 +84,71 @@ public class BuildAnalysis {
 
     }
 
+    /**
+     * Raw information about source unit, we later transforming it into SourceUnit objects
+     */
     public static class BuildInfo {
+        /**
+         * Artifact version
+         */
         public String version = StringUtils.EMPTY;
+        /**
+         * POM attributes
+         */
         public POMAttrs attrs;
+        /**
+         * List of dependencies (from external artifacts)
+         */
         public Collection<RawDependency> dependencies;
+
+        /**
+         * List of source files
+         */
         public Collection<String> sources;
+
+        /**
+         * List of source directories
+         */
         public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
+
+        /**
+         * Classpath used to compile module
+         */
         public Collection<String> classPath;
+
+        /**
+         * Bootstrap classpath used to compile module
+         */
         public Collection<String> bootClassPath;
+
+        /**
+         * Source code version (language level)
+         */
         public String sourceVersion = Project.DEFAULT_SOURCE_CODE_VERSION;
+        /**
+         * Source code encoding
+         */
         public String sourceEncoding;
+        /**
+         * Module or sub-project directory
+         */
         public String projectDir;
+        /**
+         * Root project directory
+         */
         public String rootDir;
+        /**
+         * Location of build file used to build project
+         */
         public String buildFile;
+        /**
+         * Project dependencies (references to another sub-projects or modules in the same repo that produce artifacts
+         * current module depends on)
+         */
         public Collection<ProjectDependency> projectDependencies;
+        /**
+         * Android SDK version
+         */
         public String androidSdk;
 
 
@@ -101,6 +167,9 @@ public class BuildAnalysis {
         }
     }
 
+    /**
+     * Extracts meta information from Gradle file by running gradle command and passing special init script to it
+     */
     public static class Gradle {
 
         /**
@@ -113,6 +182,15 @@ public class BuildAnalysis {
 
         private static final String REPO_DIR = ".gradle-srclib";
 
+        /**
+         * Collects meta information from a gradle build file
+         * @param repoUri repository URI
+         * @param wrapper gradle command (gradlew, gradlew.bat, gradle, gradle.bat)
+         * @param build path to build file or directory
+         * @return list of build info objects extracted from Gradle file. Returns empty list if no source units were
+         * found or gradle command failed
+         * @throws IOException
+         */
         public static BuildInfo[] collectMetaInformation(String repoUri, Path wrapper, Path build) throws IOException {
             Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
             Path gradleCacheDir = Files.createTempDirectory("gradle-cache");

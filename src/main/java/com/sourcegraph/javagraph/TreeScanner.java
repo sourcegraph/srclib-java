@@ -21,6 +21,9 @@ import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Scans expression tree and emits references and definitions
+ */
 public class TreeScanner extends TreePathScanner<Void, Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
@@ -38,12 +41,22 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     final Trees trees;
     Stack<Long> parameterizedPositions = new Stack<>();
 
+    /**
+     * Constructs new scanner
+     * @param emit graph writer that will process all refs and defs encountered
+     * @param trees trees object
+     */
     public TreeScanner(GraphWriter emit, Trees trees) {
         this.emit = emit;
         this.srcPos = trees.getSourcePositions();
         this.trees = trees;
     }
 
+    /**
+     * Emits reference
+     * @param span name span
+     * @param def true if current ref is a definition as well
+     */
     public void emitRef(int[] span, boolean def) {
         if (span == null) {
             error("Ref span is null");
@@ -57,6 +70,12 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         emitRef(span, defKey, def);
     }
 
+    /**
+     * Emits reference
+     * @param span name span
+     * @param defKey definition key
+     * @param def true if current ref is a definition as well
+     */
     public void emitRef(int[] span, DefKey defKey, boolean def) {
         Ref r = new Ref();
         r.defKey = defKey;
@@ -75,11 +94,23 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         }
     }
 
+    /**
+     * Emits definition
+     * @param node current node of expression tree
+     * @param nameSpan name span
+     * @param modifiers definition modifiers (for example, public static final)
+     */
     public void emitDef(Tree node, int[] nameSpan, List<String> modifiers) {
         int[] defSpan = treeSpan(node);
         emitDef(nameSpan, defSpan, modifiers);
     }
 
+    /**
+     * Emits definition
+     * @param nameSpan name span
+     * @param defSpan definition span
+     * @param modifiers definition modifiers (for example, public static final)
+     */
     public void emitDef(int[] nameSpan, int[] defSpan, List<String> modifiers) {
         Def s = new Def();
         s.defKey = currentDefKey();
@@ -119,6 +150,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     public boolean verbose = false;
 
+    /**
+     * Reports error
+     * @param message error message
+     */
     private void error(String message) {
         if (!verbose) return;
         Tree node = getCurrentPath().getLeaf();
@@ -130,6 +165,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
                 node.getKind());
     }
 
+    /**
+     * @return current definition key
+     */
     private DefKey currentDefKey() {
         Element cur = currentElement();
         if (cur == null) {
@@ -152,6 +190,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return new DefKey(defOrigin, path.toString());
     }
 
+    /**
+     * @return current java program element
+     */
     private Element currentElement() {
         TreePath curPath = getCurrentPath();
         if (curPath == null) {
@@ -161,10 +202,17 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return trees.getElement(curPath);
     }
 
+    /**
+     * @return current type mirror
+     */
     private TypeMirror currentTypeMirror() {
         return trees.getTypeMirror(getCurrentPath());
     }
 
+    /**
+     * Scans given expression tree path
+     * @param root expression tree path to scan
+     */
     @Override
     public Void scan(TreePath root, Void p) {
         this.compilationUnit = root.getCompilationUnit();
@@ -337,6 +385,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return null;
     }
 
+    /**
+     * @param node expression tree node
+     * @return node span in current compilation unit
+     */
     private int[] treeSpan(Tree node) {
         int[] span = new int[]{
                 (int) srcPos.getStartPosition(compilationUnit, node),
@@ -346,6 +398,10 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return span;
     }
 
+    /**
+     * @param node expression tree
+     * @return list of node modifiers as a string (for example, "public", "static", "final"
+     */
     private List<String> modifiersList(ModifiersTree node) {
         return node.getFlags().stream().map(Modifier::toString).collect(Collectors.toList());
     }

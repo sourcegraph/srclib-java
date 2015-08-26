@@ -27,6 +27,9 @@ public class GraphCommand {
      */
     public static SourceUnit unit;
 
+    /**
+     * Main method
+     */
     public void Execute() {
 
         final Graph graph = new Graph(); // Final graphJavaFiles object that is serialized to stdout
@@ -82,11 +85,26 @@ public class GraphCommand {
         JSONUtil.writeJSON(graph);
     }
 
+    /**
+     * Javadoc object
+     */
     static class Doc {
 
+        /**
+         * Path to java doc element (definition key)
+         */
         String Path;
+        /**
+         * Format
+         */
         String Format;
+        /**
+         * Javadoc content
+         */
         String Data;
+        /**
+         * Source file
+         */
         String File;
 
         public Doc(Def def) {
@@ -99,6 +117,9 @@ public class GraphCommand {
         }
     }
 
+    /**
+     * Graph object that keeps definitions, references, and docs
+     */
     static class Graph {
         List<Def> Defs = new LinkedList<>();
         List<Ref> Refs = new LinkedList<>();

@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Created by sqs on 12/21/14.
+ * Generic java project, defines no specific javac options
  */
 public class GenericProject implements Project {
     private SourceUnit unit;

@@ -5,17 +5,54 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * Definition object
+ */
 public class Def {
+
+    /**
+     * Definition key
+     */
     DefKey defKey;
+
+    /**
+     * Definition kind
+     */
     String kind;
+
+    /**
+     * Definition name
+     */
     String name;
 
+    /**
+     * Source file
+     */
     String file;
+
+    /**
+     * Ident start
+     */
     int identStart;
+
+    /**
+     * Ident end
+     */
     int identEnd;
+
+    /**
+     * Definition start
+     */
     int defStart;
+
+    /**
+     * Definition end
+     */
     int defEnd;
 
+    /**
+     * Modifiers
+     */
     List<String> modifiers;
 
     String pkg;
@@ -64,6 +101,9 @@ public class Def {
         return result;
     }
 
+    /**
+     * JSON serialization rules for definition objects
+     */
     static class JSONSerializer implements JsonSerializer<Def> {
 
         @Override

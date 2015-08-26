@@ -11,15 +11,46 @@ import java.util.*;
  * Gradle project.
  */
 public class SourceUnit {
+
+    /**
+     * Source unit name
+     */
     String Name;
+
+    /**
+     * Source unit type
+     */
     String Type;
+
+    /**
+     * Repo URI
+     */
     String Repo;
+
+    /**
+     * List of files that produce source units
+     */
     List<String> Files = new LinkedList<>();
+
+    /**
+     * Source unit directory
+     */
     String Dir;
+
+    /**
+     * Source unit dependencies
+     */
     List<RawDependency> Dependencies = new LinkedList<>();
 
     // TODO(rameshvarun): Globs entry
+    /**
+     * Source unit raw data
+     */
     Map<String, Object> Data = new HashMap<>();
+
+    /**
+     * Source unit ops data
+     */
     Map<String, String> Ops = new HashMap<>();
 
     {
@@ -31,8 +62,10 @@ public class SourceUnit {
 
     }
 
+    /**
+     * @return project (aka compiler settings) based on source unit data
+     */
     // TODO(rameshvarun): Info field
-
     public Project getProject() {
         if (Data.containsKey("POMFile")) {
             return new MavenProject(this);

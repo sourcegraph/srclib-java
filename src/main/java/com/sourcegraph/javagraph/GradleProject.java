@@ -2,7 +2,6 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.maven.model.building.ModelBuildingException;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,19 +13,37 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * List of rules to compile and graph Gradle-based project. All settings are extracted at the 'scan' phase and stored in
+ * the unit's data. Later, at the 'graph' phase they are extracted from cached data
+ */
 public class GradleProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GradleProject.class);
 
     private SourceUnit unit;
 
+    /**
+     * Maps gradle build files path to list of build info associated with a given build file. Each build file refers
+     * to map source unit name -> build info.
+     */
     private static Map<Path, Map<String, BuildAnalysis.BuildInfo>> buildInfoCache = new HashMap<>();
+    /**
+     * Maps source unit name to build info
+     */
     private static Map<String, BuildAnalysis.BuildInfo> unitCache = new HashMap<>();
 
     public GradleProject(SourceUnit unit) {
         this.unit = unit;
     }
 
+    /**
+     * Extracts all artifacts from a given Gradle build file
+     * @param repoURI repository URI
+     * @param build Gradle build file location
+     * @return map unit name -> build info
+     * @throws IOException
+     */
     public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(String repoURI, Path build) throws IOException {
         Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(repoURI, build);
 
@@ -44,6 +61,10 @@ public class GradleProject implements Project {
         return ret;
     }
 
+    /**
+     * @param gradleFile Gradle build file to process
+     * @return best suitable Gradle command (gradlew in top directory if there is any or regular gradle)
+     */
     private static Path getWrapper(Path gradleFile) {
         // looking for gradle wrapper from build file's path to current working dir
         String gradleExe;
@@ -73,32 +94,47 @@ public class GradleProject implements Project {
         return null;
     }
 
+    /**
+     * @return cached bootstrap class path from unit data
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getBootClassPath() throws Exception {
+    public List<String> getBootClassPath() {
         return (List<String>) unit.Data.get("BootClassPath");
     }
 
+    /**
+     * @return cached class path from unit data
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getClassPath() throws Exception {
+    public List<String> getClassPath() {
         return (List<String>) unit.Data.get("ClassPath");
     }
 
+    /**
+     * @return cached source path from unit data
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getSourcePath() throws Exception {
+    public List<String> getSourcePath() {
         List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
         return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());
     }
 
+    /**
+     * @return cached source code version
+     */
     @Override
-    public String getSourceCodeVersion() throws ModelBuildingException, IOException {
+    public String getSourceCodeVersion() {
         return (String) unit.Data.get("SourceVersion");
     }
 
+    /**
+     * @return cached source code encoding
+     */
     @Override
-    public String getSourceCodeEncoding() throws ModelBuildingException, IOException {
+    public String getSourceCodeEncoding() {
         return (String) unit.Data.get("SourceEncoding");
     }
 
@@ -107,6 +143,16 @@ public class GradleProject implements Project {
         return null;
     }
 
+    /**
+     * Collects all source units in a given Gradle build file
+     * @param gradleFile Gradle build file to process
+     * @param repoURI repository URI
+     * @param visited holds all visited build files to avoid infinite loops when we scanning repository for build files
+     * because some build files may be already taken into account by including them in parent's build file
+     * @return list of source units collected
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private static Collection<SourceUnit> createSourceUnits(Path gradleFile,
                                                             String repoURI,
                                                             Set<Path> visited)
@@ -171,6 +217,12 @@ public class GradleProject implements Project {
     }
 
 
+    /**
+     * Collects all source units from all Gradle build files in current working directory
+     * @param repoURI repository URI
+     * @return collection of source units
+     * @throws IOException
+     */
     public static Collection<SourceUnit> findAllSourceUnits(String repoURI) throws IOException {
 
         LOGGER.debug("Retrieving source units");
@@ -224,6 +276,13 @@ public class GradleProject implements Project {
         return units;
     }
 
+    /**
+     * Retrieving build information from a given build file
+     * @param repoUri repository URI
+     * @param path path to build file
+     * @return map (source unit id -> build info) extracted by meta information script
+     * @throws IOException
+     */
     private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(String repoUri, Path path) throws IOException {
         path = path.toAbsolutePath().normalize();
         Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
@@ -256,6 +315,12 @@ public class GradleProject implements Project {
         return ret;
     }
 
+    /**
+     * Collects all build info from given source unit and its dependencies
+     * @param unitId unit ID to collect all dependencies for
+     * @return list of build info that includes self and all dependencies
+     * @throws IOException
+     */
     private static Collection<BuildAnalysis.BuildInfo> collectBuildInfo(String unitId) throws IOException {
         Set<String> visited = new HashSet<>();
         Collection<BuildAnalysis.BuildInfo> infos = new LinkedHashSet<>();
@@ -263,6 +328,13 @@ public class GradleProject implements Project {
         return infos;
     }
 
+    /**
+     * Collects all build info from given source unit and its dependencies
+     * @param unitId unit ID to collect all dependencies for
+     * @param infos collection to fill with found information
+     * @param visited set to control visited source units to avoid infinite loops
+     * @throws IOException
+     */
     private static void collectBuildInfo(String unitId,
                                          Collection<BuildAnalysis.BuildInfo> infos,
                                          Set<String> visited) throws IOException {
@@ -281,6 +353,11 @@ public class GradleProject implements Project {
         }
     }
 
+    /**
+     * Collects source unit dependencies, updates classpath and sourcepath of each source unit based on dependencies
+     * @param units units to process
+     * @throws IOException
+     */
     private static void collectSourceUnitsDependencies(Collection<SourceUnit> units) throws IOException {
         for (SourceUnit unit : units) {
             Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(unit.Name);

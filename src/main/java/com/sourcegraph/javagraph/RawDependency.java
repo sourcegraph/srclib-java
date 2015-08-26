@@ -3,17 +3,41 @@ package com.sourcegraph.javagraph;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * A Raw, unresolved Maven Dependency.
+ * A Raw, unresolved source unit dependency.
  */
 public class RawDependency {
 
+    /**
+     * Artifact group ID
+     */
     String groupID;
+    /**
+     * Artifact ID
+     */
     String artifactID;
+    /**
+     * Artifact version
+     */
     String version;
+    /**
+     * Dependency scope
+     */
     String scope;
+    /**
+     * Artifact file
+     */
     String file;
+    /**
+     * Classifier
+     */
     String classifier;
+    /**
+     * Type (jar, pom, etc)
+     */
     String type;
+    /**
+     * SCM URI
+     */
     String repoURI;
 
     public RawDependency(String groupID, String artifactID, String version, String scope, String file) {

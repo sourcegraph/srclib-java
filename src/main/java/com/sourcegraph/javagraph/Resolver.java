@@ -24,6 +24,9 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Resolves URI to {@code}ResolvedTarget{@code}
+ */
 public class Resolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Resolver.class);
@@ -51,6 +54,11 @@ public class Resolver {
         }
     }
 
+    /**
+     * Constructs new resolver object
+     * @param proj project to use
+     * @param unit source unit
+     */
     public Resolver(Project proj, SourceUnit unit) {
         this.proj = proj;
         this.unit = unit;
@@ -59,6 +67,13 @@ public class Resolver {
 
     private Map<URI,ResolvedTarget> resolvedOrigins = new HashMap<>();
 
+    /**
+     * Resolves URI to target
+     * @param origin SCM URI
+     * @param unit source unit
+     * @return resolved target or null if URI cannot be resolved to known repository / unit
+     * @throws Exception
+     */
     public ResolvedTarget resolveOrigin(URI origin, SourceUnit unit) throws Exception {
         if (origin == null) return null;
         if (resolvedOrigins.containsKey(origin)) {
@@ -256,6 +271,12 @@ public class Resolver {
         return res;
     }
 
+    /**
+     * Resolves file-based URI to origin
+     * @param origin file-based URI
+     * @param unit source unit
+     * @return resolved target or null if resolution failed
+     */
     @SuppressWarnings("unchecked")
     private ResolvedTarget resolveFileOrigin(URI origin, SourceUnit unit) {
         if (!origin.getScheme().equals("file")) {

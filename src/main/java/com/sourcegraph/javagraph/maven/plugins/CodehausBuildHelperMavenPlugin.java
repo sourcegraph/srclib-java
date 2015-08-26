@@ -32,6 +32,9 @@ public class CodehausBuildHelperMavenPlugin extends AbstractMavenPlugin {
         return false;
     }
 
+    /**
+     * Updates project compile source roots with "sources" of Codehaus buold helper plugin configuration
+     */
     @Override
     public void apply(MavenProject project,
                       File repoDir) {

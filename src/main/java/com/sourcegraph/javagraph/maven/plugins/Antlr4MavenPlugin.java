@@ -33,6 +33,9 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
         return false;
     }
 
+    /**
+     * Invokes Maven goal generate-sources and updates project's source roots with generated source directories
+     */
     @Override
     public void apply(MavenProject project,
                       File repoDir) {
@@ -41,6 +44,10 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
         project.getCompileSourceRoots().add(getGeneratedSourceDirectory(project));
     }
 
+    /**
+     * @param project Maven project
+     * @return generated sources directory retrieved from ANTLR plugin's configuration
+     */
     private String getGeneratedSourceDirectory(MavenProject project) {
         Plugin buildHelper = getPlugin(project);
         if (buildHelper == null) {
@@ -61,6 +68,10 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
         return getDefaultGeneratedSourceDirectory(project);
     }
 
+    /**
+     * @param project Maven project
+     * @return default location of generated source files
+     */
     private static String getDefaultGeneratedSourceDirectory(MavenProject project) {
         File root = PathUtil.concat(project.getModel().getProjectDirectory(), project.getBuild().getDirectory());
         return PathUtil.concat(root, "generated-sources/antlr4").toString();
