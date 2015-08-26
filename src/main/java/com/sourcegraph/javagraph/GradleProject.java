@@ -140,6 +140,11 @@ public class GradleProject implements Project {
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
+        for (RawDependency dependency : unit.Dependencies) {
+            if (dependency.file != null && jarFile.equals(Paths.get(dependency.file))) {
+                return dependency;
+            }
+        }
         return null;
     }
 

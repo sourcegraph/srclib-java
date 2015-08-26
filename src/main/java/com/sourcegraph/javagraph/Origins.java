@@ -39,8 +39,8 @@ public class Origins {
     public static JavaFileObject forClass(ClassSymbol s) {
         // alexsaveliev: we keeping last resolved java file object to use it when requested resolution of package's
         // java file object, because we can't reach forElement(package) without reaching forClass() first
-        lastElementObject = s.classfile;
-        return s.classfile;
+        lastElementObject = s.classfile == null ? s.sourcefile : s.classfile;
+        return lastElementObject;
     }
 
 }

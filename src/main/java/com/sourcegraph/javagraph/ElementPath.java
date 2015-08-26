@@ -26,9 +26,10 @@ public class ElementPath {
 
     /**
      * Traverses tree to produce a path to a given program element
+     *
      * @param compilationUnit compilation unit
-     * @param trees trees object
-     * @param e target element
+     * @param trees           trees object
+     * @param e               target element
      * @return path to target element
      */
     public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
@@ -51,7 +52,7 @@ public class ElementPath {
 
         public Visitor(CompilationUnitTree compilationUnit, Trees trees) {
             this.trees = trees;
-            this.compilationUnit=compilationUnit;
+            this.compilationUnit = compilationUnit;
         }
 
         @Override
@@ -94,7 +95,7 @@ public class ElementPath {
             if (name.isEmpty() || name.equals("<any?>")) {
                 String uniqID = getUniqueID(e);
                 if (uniqID == null) return null;
-             name = "anon-" + uniqID;
+                name = "anon-" + uniqID;
             }
 
             // Except for top-level package scope, a type and a variable with

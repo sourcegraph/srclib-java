@@ -787,8 +787,6 @@
       "End": 77
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/Container:type/F",
       "Def": true,
       "File": "src/main/java/mypkg/Container.java",
@@ -822,16 +820,12 @@
       "End": 60
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/Container:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 102,
       "End": 111
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/Container:type",
       "Def": true,
       "File": "src/main/java/mypkg/Container.java",
@@ -839,16 +833,12 @@
       "End": 38
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/Container:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 72,
       "End": 81
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/foo",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -856,8 +846,6 @@
       "End": 289
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myInt/len",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -865,33 +853,12 @@
       "End": 540
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myInt/len",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 573,
       "End": 576
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
-      "DefPath": "mypkg/FooClass:type/myInt",
-      "Def": true,
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 521,
-      "End": 526
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
-      "DefPath": "mypkg/FooClass:type/myInt",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 206,
-      "End": 211
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myIntegers",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -899,16 +866,25 @@
       "End": 323
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myIntegers",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 378,
       "End": 388
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
+      "DefPath": "mypkg/FooClass:type/myInt",
+      "Def": true,
+      "File": "src/main/java/mypkg/FooClass.java",
+      "Start": 521,
+      "End": 526
+    },
+    {
+      "DefPath": "mypkg/FooClass:type/myInt",
+      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
+      "Start": 206,
+      "End": 211
+    },
+    {
       "DefPath": "mypkg/FooClass:type/myStatic",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -916,41 +892,12 @@
       "End": 187
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myStatic",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 264,
       "End": 272
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
-      "DefPath": "mypkg/FooClass:type/myString",
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 543,
-      "End": 551
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
-      "DefPath": "mypkg/FooClass:type/myString",
-      "Def": true,
-      "File": "src/main/java/mypkg/FooClass.java",
-      "Start": 597,
-      "End": 605
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
-      "DefPath": "mypkg/FooClass:type/myString",
-      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
-      "Start": 151,
-      "End": 159
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myStringStatic/s",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -958,16 +905,12 @@
       "End": 241
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myStringStatic/s",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 262,
       "End": 263
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myStringStatic",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -975,16 +918,31 @@
       "End": 226
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type/myStringStatic",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 628,
       "End": 642
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
+      "DefPath": "mypkg/FooClass:type/myString",
+      "File": "src/main/java/mypkg/FooClass.java",
+      "Start": 543,
+      "End": 551
+    },
+    {
+      "DefPath": "mypkg/FooClass:type/myString",
+      "Def": true,
+      "File": "src/main/java/mypkg/FooClass.java",
+      "Start": 597,
+      "End": 605
+    },
+    {
+      "DefPath": "mypkg/FooClass:type/myString",
+      "File": "src/main/java/mypkg/subpkg/ZipClass.java",
+      "Start": 151,
+      "End": 159
+    },
+    {
       "DefPath": "mypkg/FooClass:type/numIntegers",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -992,8 +950,6 @@
       "End": 375
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "Def": true,
       "File": "src/main/java/mypkg/FooClass.java",
@@ -1001,64 +957,48 @@
       "End": 157
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 277,
       "End": 285
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 619,
       "End": 627
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 41,
       "End": 49
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 114,
       "End": 122
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 255,
       "End": 263
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 36,
       "End": 44
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/FooClass:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 95,
       "End": 103
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
       "Def": true,
       "File": "src/main/java/mypkg/IBar.java",
@@ -1066,8 +1006,6 @@
       "End": 65
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/IBar:type/getFoo:mypkg.IBar",
       "Def": true,
       "File": "src/main/java/mypkg/IBar.java",
@@ -1075,8 +1013,6 @@
       "End": 56
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/IBar:type",
       "Def": true,
       "File": "src/main/java/mypkg/IBar.java",
@@ -1084,16 +1020,12 @@
       "End": 37
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/IBar:type",
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 57,
       "End": 61
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/QuxEnum:type/AAA",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
@@ -1101,8 +1033,6 @@
       "End": 49
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/QuxEnum:type/BBB",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
@@ -1110,8 +1040,6 @@
       "End": 54
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/QuxEnum:type/CCC",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
@@ -1119,8 +1047,6 @@
       "End": 59
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/QuxEnum:type",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/QuxEnum.java",
@@ -1128,8 +1054,6 @@
       "End": 42
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
@@ -1137,32 +1061,24 @@
       "End": 107
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 147,
       "End": 150
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap/foo",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 202,
       "End": 205
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 307,
       "End": 310
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type/zap",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
@@ -1170,16 +1086,12 @@
       "End": 88
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 296,
       "End": 304
     },
     {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "com.sourcegraph/java-gradle-sample",
       "DefPath": "mypkg/subpkg/ZipClass:type",
       "Def": true,
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",

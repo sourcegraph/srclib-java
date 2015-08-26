@@ -1,15 +1,13 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.building.ModelBuildingException;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -66,7 +64,7 @@ public class JDKProject implements Project {
     }
 
     @Override
-    public List<String> getSourcePath() throws Exception {
+    public List<String> getSourcePath() {
         List<String> sourcePaths = new ArrayList<>();
         sourcePaths.add("src/share/classes/");
         sourcePaths.add("src/share/jaxws_classes/");
@@ -150,8 +148,14 @@ public class JDKProject implements Project {
         unit.Type = "Java";
         unit.Name = ".";
         unit.Dir = "src/";
-        unit.Files = ScanUtil.scanFiles(getJDKSourcePaths());
+        List<String> sourcePaths = getJDKSourcePaths();
+        unit.Files = ScanUtil.scanFiles(sourcePaths);
         unit.Data.put("JDK", true);
+        Set<String[]> sourcePathSet = new HashSet<>();
+        for (String sourcePath : sourcePaths) {
+            sourcePathSet.add(new String[]{unit.Name, StringUtils.EMPTY, sourcePath});
+        }
+        unit.Data.put("SourcePath", sourcePathSet);
         units.add(unit);
 
         addKnownSourceUnit(units, "make/src/classes/");
@@ -170,6 +174,9 @@ public class JDKProject implements Project {
             toolsUnit.Dir = directory;
             toolsUnit.Files = ScanUtil.scanFiles(directory);
             toolsUnit.Data.put("JDK", true);
+            Set<String[]> sourcePath = new HashSet<>();
+            sourcePath.add(new String[] {toolsUnit.Name, StringUtils.EMPTY, directory});
+            toolsUnit.Data.put("SourcePath", sourcePath);
             units.add(toolsUnit);
         }
     }

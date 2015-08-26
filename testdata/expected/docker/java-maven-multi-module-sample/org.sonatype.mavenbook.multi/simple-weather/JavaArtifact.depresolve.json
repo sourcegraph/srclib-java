@@ -20,6 +20,7 @@
       "artifactID": "dom4j",
       "version": "1.6.1",
       "scope": "compile",
+      "file": ".m2-srclib/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar",
       "type": "jar",
       "repoURI": "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dom4j/dom4j/"
     },
@@ -36,6 +37,7 @@
       "artifactID": "jaxen",
       "version": "1.1.1",
       "scope": "compile",
+      "file": ".m2-srclib/jaxen/jaxen/1.1.1/jaxen-1.1.1.jar",
       "type": "jar",
       "repoURI": "http://cvs.jaxen.codehaus.org"
     },
@@ -52,6 +54,7 @@
       "artifactID": "junit",
       "version": "3.8.1",
       "scope": "test",
+      "file": ".m2-srclib/junit/junit/3.8.1/junit-3.8.1.jar",
       "type": "jar",
       "repoURI": "http://junit.cvs.sourceforge.net/junit/"
     },
@@ -68,6 +71,7 @@
       "artifactID": "log4j",
       "version": "1.2.14",
       "scope": "compile",
+      "file": ".m2-srclib/log4j/log4j/1.2.14/log4j-1.2.14.jar",
       "type": "jar",
       "repoURI": "http://svn.apache.org/viewcvs.cgi/logging/log4j/tags/v1_2_14/"
     },
@@ -84,6 +88,7 @@
       "artifactID": "velocity",
       "version": "1.5",
       "scope": "compile",
+      "file": ".m2-srclib/velocity/velocity/1.5/velocity-1.5.jar",
       "type": "jar",
       "repoURI": "http://svn.apache.org/viewvc/velocity/engine/tags/Velocity_1.5"
     },
