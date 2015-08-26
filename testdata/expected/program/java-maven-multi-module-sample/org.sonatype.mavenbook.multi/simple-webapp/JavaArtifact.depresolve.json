@@ -37,8 +37,7 @@
       "artifactID": "simple-weather",
       "version": "0.0.1-SNAPSHOT",
       "scope": "compile",
-      "type": "jar",
-      "repoURI": ""
+      "type": "jar"
     },
     "Target": {
       "ToRepoCloneURL": "github.com/sgtest/java-maven-multi-module-sample",

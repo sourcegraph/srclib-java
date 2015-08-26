@@ -21,15 +21,9 @@
       "artifactID": "some-artifact-that-doesnt-exist",
       "version": "1.2.3",
       "scope": "compile",
-      "type": "jar",
-      "repoURI": ""
+      "type": "jar"
     },
-    "Target": {
-      "ToRepoCloneURL": "",
-      "ToUnit": "some-group-that-doesnt-exist/some-artifact-that-doesnt-exist",
-      "ToUnitType": "JavaArtifact",
-      "ToVersionString": "1.2.3"
-    }
+    "Error": "Could not download file http://central.maven.org/maven2/some-group-that-doesnt-exist/some-artifact-that-doesnt-exist/1.2.3/some-artifact-that-doesnt-exist-1.2.3.pom"
   },
   {
     "Target": {

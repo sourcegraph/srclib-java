@@ -174,7 +174,7 @@ public class MavenProject implements Project {
                     null);
             rawDependency.classifier = d.getClassifier();
             rawDependency.type = d.getType();
-            rawDependency.repoURI = StringUtils.EMPTY;
+            rawDependency.repoURI = null;
             deps.add(rawDependency);
         }
 

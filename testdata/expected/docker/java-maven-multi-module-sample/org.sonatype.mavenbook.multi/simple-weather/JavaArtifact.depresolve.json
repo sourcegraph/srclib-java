@@ -5,8 +5,7 @@
       "artifactID": "commons-io",
       "version": "1.3.2",
       "scope": "test",
-      "type": "jar",
-      "repoURI": ""
+      "type": "jar"
     },
     "Target": {
       "ToRepoCloneURL": "https://github.com/apache/commons-io",
