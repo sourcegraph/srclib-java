@@ -86,7 +86,7 @@ If some parts of your code is generated using third party tool or plugin, we may
 
 If your project is Maven-based, we are aware about existence of *org.antlr:antlr4-maven-plugin* and will try to generate java files from ANTLR grammar but please make sure that your directory structure matches java package names, i.e. don't put generated classes from foo.bar.baz package to *src/generated*, use *src/generated/foo/bar/baz*. Also please make sure that your ANTLR-based subproject compiles by running `mvn -f SUBPROJECT-DIR/pom.xml generate-sources` command.
 
-If your project is Android-based, we are trying to generate *R.java*, *BuildConfig.java* and aidl-based java files using:
+If your project is Android-based, we are trying to generate *R.java*, *BuildConfig.java* and AIDL-based java files using:
  * with  Maven: `mvn -f SUBPROJECT-DIR/pom.xml generate-sources`
  * with Gradle: run `:PROJECT:generateDebugSources` or `:PROJECT:assembleDebug` before extracting meta information from Gradle build files.
  
@@ -174,6 +174,6 @@ If you'd like to graph Anroid libraries, you have the following options
   * Graphing `frameworks/support` is a little bit tricky
     * Edit `v4/build.gradle` and replace there `compileSdkVersion 4` with     `compileSdkVersion "current"`
     * Backup `prebuilts/sdk/current` and replace it with the content of platform-22 directory from Android SDK
-    *  Make a symlinks for `aapt` and `llvm-rs-cc` in `prebuilts/sdk/tools/linux` to point to matching files in `prebuilts/sdk/tools/linux/bin` (similar as done for aidl)
+    *  Make a symlinks for `aapt` and `llvm-rs-cc` in `prebuilts/sdk/tools/linux` to point to matching files in `prebuilts/sdk/tools/linux/bin` (similar as done for aidl command)
     * Run `src config && src make` in `frameworks/support`
 
