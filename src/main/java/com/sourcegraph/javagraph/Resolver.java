@@ -70,12 +70,14 @@ public class Resolver {
     /**
      * Resolves URI to target
      * @param origin SCM URI
-     * @param unit source unit
      * @return resolved target or null if URI cannot be resolved to known repository / unit
      * @throws Exception
      */
-    public ResolvedTarget resolveOrigin(URI origin, SourceUnit unit) throws Exception {
-        if (origin == null) return null;
+    public ResolvedTarget resolveOrigin(URI origin) throws Exception {
+        if (origin == null) {
+            return null;
+        }
+        origin = normalizeOrigin(origin);
         if (resolvedOrigins.containsKey(origin)) {
             return resolvedOrigins.get(origin);
         }
@@ -91,7 +93,7 @@ public class Resolver {
 
         if (jarFile == null) {
             // trying to resolve origin based on source directories
-            ResolvedTarget target = resolveFileOrigin(origin, unit);
+            ResolvedTarget target = resolveFileOrigin(origin);
             resolvedOrigins.put(origin, target);
             return target;
         }
@@ -274,11 +276,10 @@ public class Resolver {
     /**
      * Resolves file-based URI to origin
      * @param origin file-based URI
-     * @param unit source unit
      * @return resolved target or null if resolution failed
      */
     @SuppressWarnings("unchecked")
-    private ResolvedTarget resolveFileOrigin(URI origin, SourceUnit unit) {
+    private ResolvedTarget resolveFileOrigin(URI origin) {
         if (!origin.getScheme().equals("file")) {
             return null;
         }
@@ -289,7 +290,7 @@ public class Resolver {
         File file = new File(origin);
         File cwd = SystemUtils.getUserDir();
         for (List<String> dir : sourceDirs) {
-            File root = new File(cwd, dir.get(2));
+            File root = PathUtil.concat(cwd, dir.get(2));
             try {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
@@ -304,6 +305,30 @@ public class Resolver {
             }
         }
         return null;
+    }
+
+    /**
+     * Removes !.... from jar URI
+     * @param origin origin to normalize
+     * @return origin with stripped !... tail for jar URI, or unchanged origin otherwise
+     */
+    private static URI normalizeOrigin(URI origin) {
+        if (origin.getScheme().equals("jar")) {
+            String s = origin.toString();
+            int pos = s.lastIndexOf('!');
+            if (pos != -1) {
+                s = s.substring(0, pos);
+                try {
+                    return new URI(s);
+                } catch (URISyntaxException e) {
+                    return origin;
+                }
+            } else {
+                return origin;
+            }
+        } else {
+            return origin;
+        }
     }
 
 

@@ -219,8 +219,12 @@ public class MavenProject implements Project {
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
+        for (RawDependency dependency : unit.Dependencies) {
+            if (dependency.file != null && jarFile.equals(Paths.get(dependency.file).toAbsolutePath())) {
+                return dependency;
+            }
+        }
         return null;
-
     }
 
     /**
@@ -371,6 +375,15 @@ public class MavenProject implements Project {
                 File file = artifact.getFile();
                 if (file != null) {
                     classPath.add(file.getAbsolutePath());
+                    // updating unit dependencies with files after resolution
+                    for (RawDependency rawDependency : unit.Dependencies) {
+                        if (rawDependency.artifactID.equals(artifact.getArtifactId()) &&
+                                rawDependency.groupID.equals(artifact.getGroupId()) &&
+                                rawDependency.version.equals(artifact.getVersion())) {
+                            rawDependency.file = file.toString();
+                            break;
+                        }
+                    }
                 }
             }
             unit.Data.put("ClassPath", classPath);
