@@ -38,9 +38,7 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
         // Let's create generated source file such as R.java, BuildConfig.java and AIDL-based ones
         runMavenGoal(project.getModel().getPomFile(), repoDir, "generate-sources");
         String sourceRoot = getGeneratedSourceDirectory(project);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Registering source root {}", sourceRoot);
-        }
+        LOGGER.debug("Registering source root {}", sourceRoot);
         project.getCompileSourceRoots().add(sourceRoot);
         project.getProperties().setProperty(Project.ANDROID_PROPERTY, StringUtils.EMPTY);
     }

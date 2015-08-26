@@ -26,9 +26,7 @@ public class DepresolveCommand {
         try {
             Reader r;
             if (!StringUtils.isEmpty(debugUnitFile)) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
-                }
+                LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
                 r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
             } else {
                 r = new InputStreamReader(System.in);
@@ -43,30 +41,24 @@ public class DepresolveCommand {
 
         Resolver rs = new Resolver(unit.getProject(), unit);
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving deps");
-        }
+        LOGGER.debug("Resolving deps");
         // Resolve all raw dependencies.
         final ArrayList<DepResolution> resolutions = new ArrayList<>();
         for (RawDependency rawDep : unit.Dependencies) {
             DepResolution res = rs.resolveRawDep(rawDep);
             resolutions.add(res);
         }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Deps resolved");
-        }
+        LOGGER.debug("Deps resolved");
 
         // All units but the JDK itself depend on the JDK.
         if (!(unit.getProject() instanceof JDKProject)) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Adding JDK dep");
-            }
+            LOGGER.debug("Adding JDK dep");
             if (unit.Repo.equals(ScanCommand.ANDROID_CORE_REPO)) {
                 // no dependencies
             } else if (unit.Repo.equals(ScanCommand.ANDROID_SDK_REPO)) {
                 // only Android Core
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
-            }else if (unit.Data.containsKey("Android")) {
+            } else if (unit.Data.containsKey("Android")) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
             } else {

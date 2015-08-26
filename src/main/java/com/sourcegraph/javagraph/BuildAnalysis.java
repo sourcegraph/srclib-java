@@ -189,9 +189,7 @@ public class BuildAnalysis {
                         }
                         String meta[] = parseMeta(line);
                         if (meta == null) {
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("gradle: {}", line);
-                            }
+                            LOGGER.debug("gradle: {}", line);
                             continue;
                         }
                         String prefix = meta[0];
@@ -270,7 +268,7 @@ public class BuildAnalysis {
                                 }
                                 String tokens[] = payload.split(":", 4);
                                 String unitName = tokens[0] + '/' + tokens[1];
-                                info.sourceDirs.add(new String[] {unitName, tokens[2], tokens[3]});
+                                info.sourceDirs.add(new String[]{unitName, tokens[2], tokens[3]});
                                 break;
                             case "SRCLIB-SOURCEVERSION":
                                 if (info == null) {
@@ -323,9 +321,7 @@ public class BuildAnalysis {
                                 LOGGER.warn("gradle: {}", payload);
                                 break;
                             default:
-                                if (LOGGER.isDebugEnabled()) {
-                                    LOGGER.debug("gradle: {}", line);
-                                }
+                                LOGGER.debug("gradle: {}", line);
                         }
                     }
                 } finally {
@@ -341,6 +337,7 @@ public class BuildAnalysis {
 
         /**
          * Parses metadata line, expected format is PREFIX-SPACE-CONTENT
+         *
          * @param line line to parse
          * @return two-elements array, where first item is a prefix and second item is content
          */
@@ -348,7 +345,7 @@ public class BuildAnalysis {
             int idx = line.indexOf(' ');
             if (-1 == idx)
                 return null;
-            return new String[] {line.substring(0, idx), line.substring(idx + 1).trim()};
+            return new String[]{line.substring(0, idx), line.substring(idx + 1).trim()};
         }
 
     }

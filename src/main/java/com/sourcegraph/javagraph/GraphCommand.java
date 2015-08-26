@@ -35,9 +35,7 @@ public class GraphCommand {
         try {
             Reader r;
             if (!StringUtils.isEmpty(debugUnitFile)) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
-                }
+                LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
                 r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
             } else {
                 r = new InputStreamReader(System.in);
@@ -55,18 +53,12 @@ public class GraphCommand {
         try {
             Grapher grapher = new Grapher(proj,
                     rawGraph);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Starting graph collection");
-            }
+            LOGGER.debug("Starting graph collection");
             grapher.graphFilesAndDirs(unit.Files);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Graph collection complete");
-            }
+            LOGGER.debug("Graph collection complete");
             grapher.close();
 
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collecting defs");
-            }
+            LOGGER.debug("Collecting defs");
             graph.Defs = rawGraph.defs;
             for (Def def : rawGraph.defs) {
                 // Ignore empty docstrings.
@@ -74,9 +66,7 @@ public class GraphCommand {
                     graph.Docs.add(new Doc(def));
                 }
             }
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collecting refs");
-            }
+            LOGGER.debug("Collecting refs");
             for (Ref ref : rawGraph.refs) {
                 ResolvedTarget target = rs.resolveOrigin(ref.defKey.getOrigin(), unit);
                 if (target != null) {

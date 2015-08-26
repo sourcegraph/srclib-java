@@ -153,7 +153,7 @@ public class GradleProject implements Project {
 
             // leave only existing files
             unit.Files = new LinkedList<>();
-            for (String sourceFile :info.sources) {
+            for (String sourceFile : info.sources) {
                 File f = new File(sourceFile);
                 if (f.isFile()) {
                     // including only existing files to make 'make' tool happy
@@ -173,16 +173,14 @@ public class GradleProject implements Project {
 
     public static Collection<SourceUnit> findAllSourceUnits(String repoURI) throws IOException {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieving source units");
-        }
+        LOGGER.debug("Retrieving source units");
 
         // putting root gradle file first, it may contain references to all the subprojects
         Set<Path> gradleFiles = new LinkedHashSet<>();
         File rootGradleFile = new File("build.gradle");
         if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
             gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
-        }else {
+        } else {
             // alexsaveliev: trying settings.gradle - build file name may be custom one
             // (see https://github.com/Netflix/archaius)
             rootGradleFile = new File("settings.gradle");
@@ -201,9 +199,7 @@ public class GradleProject implements Project {
             if (visited.contains(gradleFile)) {
                 continue;
             }
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing Gradle file {}", gradleFile);
-            }
+            LOGGER.debug("Processing Gradle file {}", gradleFile);
             visited.add(gradleFile);
 
             try {
@@ -214,9 +210,7 @@ public class GradleProject implements Project {
             }
         }
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolving source unit dependencies");
-        }
+        LOGGER.debug("Resolving source unit dependencies");
 
         try {
             collectSourceUnitsDependencies(units);
@@ -224,13 +218,9 @@ public class GradleProject implements Project {
             LOGGER.warn("An error occurred while resolving source unit dependencies", e);
         }
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resolved source unit dependencies");
-        }
+        LOGGER.debug("Resolved source unit dependencies");
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieved source units");
-        }
+        LOGGER.debug("Retrieved source units");
         return units;
     }
 
@@ -238,15 +228,11 @@ public class GradleProject implements Project {
         path = path.toAbsolutePath().normalize();
         Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
         if (ret == null) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collecting meta information from {}", path);
-            }
+            LOGGER.debug("Collecting meta information from {}", path);
             BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(repoUri,
                     getWrapper(path),
                     path);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Collected meta information from {}", path);
-            }
+            LOGGER.debug("Collected meta information from {}", path);
             ret = new HashMap<>();
             for (BuildAnalysis.BuildInfo info : items) {
                 String unitId = info.getName();
@@ -279,7 +265,7 @@ public class GradleProject implements Project {
 
     private static void collectBuildInfo(String unitId,
                                          Collection<BuildAnalysis.BuildInfo> infos,
-                                         Set<String> visited) throws  IOException {
+                                         Set<String> visited) throws IOException {
         visited.add(unitId);
         BuildAnalysis.BuildInfo info = unitCache.get(unitId);
         if (info == null) {
