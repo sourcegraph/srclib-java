@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -81,7 +83,7 @@ public class ScanCommand {
      * @param units source units to normalize
      */
     @SuppressWarnings("unchecked")
-    private void normalize(Collection<SourceUnit> units) {
+    private static void normalize(Collection<SourceUnit> units) {
 
         Comparator<RawDependency> dependencyComparator = Comparator.comparing(dependency -> dependency.artifactID);
         dependencyComparator = dependencyComparator.
@@ -106,10 +108,13 @@ public class ScanCommand {
                     })
                     .sorted(dependencyComparator)
                     .collect(Collectors.toList());
-            unit.Files = unit.Files.stream()
-                    .map(PathUtil::relativizeCwd)
-                    .sorted()
-                    .collect(Collectors.toList());
+            List<String> internalFiles = new ArrayList<>();
+            List<String> externalFiles = new ArrayList<>();
+            splitInternalAndExternalFiles(unit.Files, internalFiles, externalFiles);
+            unit.Files = internalFiles;
+            if (!externalFiles.isEmpty()) {
+                unit.Data.put("ExtraSourceFiles", externalFiles);
+            }
             if (unit.Data.containsKey("POMFile")) {
                 unit.Data.put("POMFile", PathUtil.relativizeCwd((String) unit.Data.get("POMFile")));
             }
@@ -140,5 +145,28 @@ public class ScanCommand {
                 unit.Data.put("SourcePath", sourcePath);
             }
         }
+    }
+
+    /**
+     * Splits files to two lists, one that will keep files inside of current working directory
+     * (may be used as unit.Files) and the other that will keep files outside of current working directory.
+     * Sorts both lists alphabetically after splitting
+     * @param files list of files to split
+     * @param internal list to keep files inside of current working directory
+     * @param external list to keep files outside of current working directory
+     */
+    private static void splitInternalAndExternalFiles(Collection<String> files,
+                                                      List<String> internal,
+                                                      List<String> external) {
+        for (String file : files) {
+            Path p = Paths.get(file).toAbsolutePath();
+            if (p.startsWith(PathUtil.CWD)) {
+                internal.add(PathUtil.relativizeCwd(p));
+            } else {
+                external.add(PathUtil.normalize(file));
+            }
+        }
+        internal.sort(String::compareTo);
+        external.sort(String::compareTo);
     }
 }
