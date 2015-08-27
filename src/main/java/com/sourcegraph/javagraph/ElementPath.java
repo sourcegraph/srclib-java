@@ -5,18 +5,33 @@ import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.element.*;
 import javax.lang.model.util.ElementKindVisitor8;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
+/**
+ * Path to java program element
+ */
 public class ElementPath {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElementPath.class);
+
     private final List<String> components = new ArrayList<>(5);
 
+    /**
+     * Traverses tree to produce a path to a given program element
+     *
+     * @param compilationUnit compilation unit
+     * @param trees           trees object
+     * @param e               target element
+     * @return path to target element
+     */
     public static ElementPath get(CompilationUnitTree compilationUnit, Trees trees, Element e) {
         return new Visitor(compilationUnit, trees).visit(e, new ElementPath());
     }
@@ -30,8 +45,6 @@ public class ElementPath {
         components.add(0, name);
     }
 
-    private static Map<Element, Integer> anonClasses = new HashMap<>();
-
     private static class Visitor extends
             ElementKindVisitor8<ElementPath, ElementPath> {
         private final Trees trees;
@@ -39,7 +52,7 @@ public class ElementPath {
 
         public Visitor(CompilationUnitTree compilationUnit, Trees trees) {
             this.trees = trees;
-            this.compilationUnit=compilationUnit;
+            this.compilationUnit = compilationUnit;
         }
 
         @Override
@@ -58,7 +71,7 @@ public class ElementPath {
             SourcePositions sp = trees.getSourcePositions();
             if (tp != null) {
                 String filename = tp.getCompilationUnit().getSourceFile().getName();
-                String fileBasename = new File(filename).getName().replace(".java", "");
+                String fileBasename = new File(filename).getName().replace(".java", StringUtils.EMPTY);
                 name = "p-" + fileBasename + "-" + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             } else {
                 return null;
@@ -72,7 +85,7 @@ public class ElementPath {
             if (tp != null) {
                 return tp.getCompilationUnit().getSourceFile().getName() + sp.getStartPosition(tp.getCompilationUnit(), tp.getLeaf());
             }
-            return "(unknown file)";
+            return compilationUnit.getSourceFile().getName();
         }
 
         @Override
@@ -82,7 +95,7 @@ public class ElementPath {
             if (name.isEmpty() || name.equals("<any?>")) {
                 String uniqID = getUniqueID(e);
                 if (uniqID == null) return null;
-             name = "anon-" + uniqID;
+                name = "anon-" + uniqID;
             }
 
             // Except for top-level package scope, a type and a variable with
@@ -107,7 +120,12 @@ public class ElementPath {
 
         @Override
         public ElementPath visitUnknown(Element e, ElementPath p) {
-            System.err.println("Element visitor: unknown element " + e.getSimpleName().toString() + " of type " + e.getKind().toString() + " at " + getSourcePos(e));
+
+            LOGGER.warn("Element visitor: unknown element {} of type {} at {} while processing [{}]",
+                    e.getSimpleName(),
+                    e.getKind(),
+                    getSourcePos(e),
+                    p.toString());
             String name = e.getSimpleName().toString();
             if (name.isEmpty()) {
                 name = "u-" + getUniqueID(e);
@@ -141,11 +159,10 @@ public class ElementPath {
         }
 
         private List<String> getParameters(ExecutableElement e) {
-            final List<String> result = new ArrayList<String>();
-            for (VariableElement ve : e.getParameters()) {
-                result.add(ve.asType().toString().replaceAll("\\.", "\\$"));
-            }
-            return result;
+            return e.getParameters().
+                    stream().
+                    map(ve -> ve.asType().toString().replaceAll("\\.", "\\$")).
+                    collect(Collectors.toList());
         }
     }
 }

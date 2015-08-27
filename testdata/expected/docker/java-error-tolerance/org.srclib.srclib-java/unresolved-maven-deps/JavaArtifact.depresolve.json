@@ -3,7 +3,11 @@
     "Raw": {
       "groupID": "org.apache.commons",
       "artifactID": "commons-csv",
-      "version": "1.0"
+      "version": "1.0",
+      "scope": "compile",
+      "file": ".m2-srclib/org/apache/commons/commons-csv/1.0/commons-csv-1.0.jar",
+      "type": "jar",
+      "repoURI": "http://svn.apache.org/viewvc/commons/proper/csv/tags/CSV_1.0"
     },
     "Target": {
       "ToRepoCloneURL": "https://github.com/apache/commons-csv",
@@ -16,7 +20,9 @@
     "Raw": {
       "groupID": "some-group-that-doesnt-exist",
       "artifactID": "some-artifact-that-doesnt-exist",
-      "version": "1.2.3"
+      "version": "1.2.3",
+      "scope": "compile",
+      "type": "jar"
     },
     "Error": "Could not download file http://central.maven.org/maven2/some-group-that-doesnt-exist/some-artifact-that-doesnt-exist/1.2.3/some-artifact-that-doesnt-exist-1.2.3.pom"
   },

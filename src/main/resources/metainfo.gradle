@@ -1,0 +1,347 @@
+def isConfigSupported(conf) {
+	return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" ||  conf.name == "compileOnly");
+}
+
+def listSourceFiles(task) {
+
+    task.source.each {File file ->
+        println "SRCLIB-SOURCEFILE $file.absolutePath"
+    }
+}
+
+def listSourceDirs(task, sourceSets, sourceSetName) {
+    try {
+        Object ss = sourceSets.getByName(sourceSetName);
+        if (!ss) {
+            return
+        }
+        ss.java.srcDirs.each{File file ->
+                println "SRCLIB-SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+        }
+    } catch (UnknownDomainObjectException ignored) {
+    }
+}
+
+def displayAndroidInfo(project, root, isAndroidSupportFramework) {
+
+	String sdkVersion = "current"
+
+    if (root.hasProperty("compileSdkVersion")) {
+    	sdkVersion = root.compileSdkVersion
+        if (sdkVersion.startsWith("android-")) {
+            // leaving only number
+            sdkVersion = sdkVersion.substring(8)
+        }
+    }
+    println "SRCLIB-ANDROID-SDK $sdkVersion"
+
+    if (root.hasProperty("bootClasspath")) {
+    	String bootClasspath = root.bootClasspath.join(File.pathSeparator)
+	    println "SRCLIB-BOOTCLASSPATH $bootClasspath"
+    } else if (isAndroidSupportFramework) {
+    	File androidJar = new File("$project.rootDir/../../prebuilts/sdk/$sdkVersion/android.jar")
+    	if (androidJar.isFile()) {
+ 	   		println "SRCLIB-BOOTCLASSPATH $androidJar.canonicalPath"
+ 	   	}
+    }
+}
+
+def isStandardTask(project, name) {
+	if (isStandardJavaTask(name)) {
+		return true
+	}
+	if (isStandardScalaTask(name)) {
+		return true
+	}
+	if (isStandardGroovyTask(name)) {
+		return true
+	}
+	if (isStandardSourceSetTask(project, name)) {
+		return true
+	}
+	if (isStandardLifecycleTask(project, name)) {
+		return true
+	}
+	if (isStandardConfigurationLifecycleTask(project, name)) {
+		return true
+	}
+	return false
+}
+
+def isStandardJavaTask(name) {
+    return name in ["compileJava",
+                    "compileTestJava",
+                    "processResources",
+                    "processTestResources",
+                    "classes",
+                    "testClasses",
+                    "jar",
+                    "javadoc",
+                    "test",
+                    "uploadArchives",
+                    "clean",
+                    "cleanCompileJava",
+                    "cleanCompileTestJava",
+                    "cleanProcessResources",
+                    "cleanProcessTestResources",
+                    "cleanClasses",
+                    "cleanTestClasses",
+                    "cleanJar",
+                    "cleanJavadoc",
+                    "cleanTest",
+                    "cleanUploadArchives"]
+}
+
+def isStandardScalaTask(name) {
+	return name in ["compileScala", "compileTestScala", "scaladoc"]
+}
+
+def isStandardGroovyTask(name) {
+	return name in ["compileGroovy", "compileTestGroovy", "groovydoc"]
+}
+
+
+def isStandardSourceSetTask(project, name) {
+	if (!project.hasProperty("sourceSets")) {
+		return false
+	}
+	project.sourceSets.each { ss ->
+        String sName = ss.name.capitalize()
+        if (name == "compile${sName}Java" ||
+                name == "compile${sName}Scala" ||
+                name == "compile${sName}Groovy" ||
+                name == "process${sName}Resources" ||
+                name == "${ss.name}Classes") {
+            return true
+        }
+    }
+	return false
+}
+
+def isStandardLifecycleTask(project, name) {
+	if (name in ["assemble",
+		"check",
+		"build",
+		"buildNeeded",
+		"buildDependents"]) {
+		return true
+	}
+	return isStandardConfigurationLifecycleTask(project, name)
+}
+
+def isStandardConfigurationLifecycleTask(project, name) {
+	project.configurations.each { conf ->
+		String cName = conf.name.capitalize()
+		if (name == "build${cName}" ||
+			name == "upload${cName}") {
+			return true				
+		}
+	}
+	return false
+}
+
+def collectBuildableDependencies(project, task, dependency, target) {
+	Object o = dependency.getBuildDependencies()
+	if (o instanceof TaskDependency) {
+        o.getDependencies(task).each { taskdep ->
+			if ((taskdep instanceof Task) && !isStandardTask(project, taskdep.name)) {
+				target.dependsOn(taskdep)
+			}
+        }
+	}
+}
+
+allprojects {
+
+    afterEvaluate { project ->
+
+        task srclibCollectMetaInformation << { task ->
+
+            String desc = project.description
+            if (desc == null) {
+                desc = ""
+            }
+
+            println "SRCLIB-ARTIFACT $project.name"
+            println "SRCLIB-DESCRIPTION $desc"
+            println "SRCLIB-GROUP $project.group"
+            println "SRCLIB-VERSION $project.version"
+            println "SRCLIB-PROJECTDIR $project.projectDir"
+            println "SRCLIB-ROOTDIR $project.rootDir"
+            if (project.buildFile) {
+                println "SRCLIB-GRADLEFILE $project.buildFile.absolutePath"
+            }
+
+
+            boolean android = false
+            boolean androidSupportFramework = false
+
+            project.plugins.any { p ->
+                android = p.getClass().getName().startsWith("com.android.build.gradle")
+                androidSupportFramework = project.group == "com.android.support"
+                return android
+            }
+
+            try {
+                project.configurations.each { conf ->
+                    conf.resolvedConfiguration.getResolvedArtifacts().each {
+                        try {
+                            String group = it.moduleVersion.id.group
+                            String name = it.moduleVersion.id.name
+                            String version = it.moduleVersion.id.version
+                            String file = it.file
+                            if (isConfigSupported(conf)) {
+                                println "SRCLIB-DEPENDENCY $conf.name:$group:$name:$version:$file"
+                            }
+                        } catch (Exception e) {
+                            println "SRCLIB-WARNING $e"
+                        }
+                    }
+
+                    conf.getAllDependencies().each { d ->
+                        if (d instanceof ProjectDependency) {
+                            Project p = ((ProjectDependency) d).getDependencyProject()
+                            if (isConfigSupported(conf)) {
+                                if (p.buildFile) {
+                                    println "SRCLIB-PROJECTDEPENDENCY $p.name:$p.group:$p.buildFile.absolutePath"
+                                } else {
+                                    println "SRCLIB-PROJECTDEPENDENCY $p.name:$p.group:"
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    listSourceFiles(compileJava)
+                    listSourceFiles(compileTestJava)
+					if (project.hasProperty("sourceSets")) {
+                    	listSourceDirs(task, project.sourceSets, "main")
+                    	listSourceDirs(task, project.sourceSets, "test")
+                    }
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    compileJava {
+                        println "SRCLIB-SOURCEVERSION $sourceCompatibility"
+                        String encoding = options.encoding
+                        if (encoding == null) {
+                            encoding = "";
+                        }
+                        println("SRCLIB-ENCODING $encoding")
+                    }
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            try {
+                project.plugins.withType(JavaPlugin) {
+                    configurations.each { Configuration config ->
+                        if (isConfigSupported(config)) {
+                            println "SRCLIB-CLASSPATH $config.asPath"
+                        }
+                    }
+                }
+            } catch (e) {
+                println "SRCLIB-WARNING $e"
+            }
+
+            if (android) {
+
+            	if (project.extensions.hasProperty("android")) {
+            		displayAndroidInfo(project, project.extensions.android, false)
+            	} else if (project.hasProperty("android")) {            		
+
+            		// Android Support Framework
+            		displayAndroidInfo(project, project.android, androidSupportFramework)
+                    if (project.android.hasProperty("sourceSets")) {
+                    	listSourceDirs(task, project.android.sourceSets, "main")
+                    	listSourceDirs(task, project.android.sourceSets, "test")
+    				}
+            	}
+
+                if (project.tasks.hasProperty("compileDebugJava")) {
+                	listSourceFiles(project.tasks.compileDebugJava)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugJava.classpath.asPath"
+                }
+                if (project.tasks.hasProperty("compileDebugUnitTestJava")) {
+                	listSourceFiles(project.tasks.compileDebugUnitTestJava)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
+                }
+
+            }
+
+        }
+
+        project.plugins.any { p ->
+            if (p.getClass().getName().startsWith("com.android.build.gradle")) {
+                if (project.group == "com.android.support") {
+                    // Android Support Framework
+                    if (project.tasks.findByPath("generateDebugSources")) {
+                        srclibCollectMetaInformation.dependsOn(":$project.name:generateDebugSources")
+                    } else if (project.tasks.findByPath("assembleDebug")) {
+                        srclibCollectMetaInformation.dependsOn(":$project.name:assembleDebug")
+                    }
+                } else {
+                    if (project.tasks.findByPath("assembleDebug")) {
+                        srclibCollectMetaInformation.dependsOn("assembleDebug")
+                    }
+                }
+                return true
+            }
+            return false
+        }
+
+        // collect meta information task depends on any tasks (well, any not Buildable')
+        // compileJava / compileTestJava depends on
+        try {
+            project.plugins.withType(JavaPlugin) {
+                compileJava { 
+                    dependsOn.each {dependency ->
+                        if (!(dependency instanceof Buildable)) {
+                            srclibCollectMetaInformation.dependsOn(dependency)
+                        } else {
+                        	collectBuildableDependencies(project, compileJava, dependency, srclibCollectMetaInformation)
+                        }
+                    }
+                }
+                compileTestJava {
+                    dependsOn.each {dependency ->
+                        if (!(dependency instanceof Buildable)) {
+                            srclibCollectMetaInformation.dependsOn(dependency)
+                        } else {
+                        	collectBuildableDependencies(project, compileTestJava, dependency, srclibCollectMetaInformation)
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            println "SRCLIB-WARNING $e"
+        }
+        try {
+            Task compileTask = project.tasks.findByPath("compile")
+			if (compileTask) {
+                compileTask.dependsOn.each {dependency ->
+                    if ((dependency instanceof Task) && !isStandardTask(project, dependency.name)) {
+                    	srclibCollectMetaInformation.dependsOn(dependency)
+                    }
+                }
+			}
+        } catch (e) {
+            println "SRCLIB-WARNING $e"
+        }
+
+    }
+
+}

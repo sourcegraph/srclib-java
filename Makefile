@@ -1,11 +1,17 @@
-SRC = $(shell find ./src -type f)
+ifeq ($(OS),Windows_NT)
+	GRADLEW = .\gradlew.bat
+else
+	GRADLEW = ./gradlew
+endif
+
+SRC = $(shell /usr/bin/find ./src -type f)
 
 .PHONY: default install test test-gen clean dist upload-bundled-jdk
 
 default: install
 
 build/libs/srclib-java-0.0.1-SNAPSHOT.jar: build.gradle ${SRC}
-	./gradlew jar
+	${GRADLEW} jar
 
 .bin/srclib-java.jar: build/libs/srclib-java-0.0.1-SNAPSHOT.jar
 	cp build/libs/srclib-java-0.0.1-SNAPSHOT.jar .bin/srclib-java.jar

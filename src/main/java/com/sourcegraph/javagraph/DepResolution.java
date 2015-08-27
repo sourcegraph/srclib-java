@@ -1,8 +1,22 @@
 package com.sourcegraph.javagraph;
 
+/**
+ * Dependency resolution
+ */
 class DepResolution {
+    /**
+     * Raw dependency
+     */
     RawDependency Raw;
+
+    /**
+     * Resolved target
+     */
     ResolvedTarget Target;
+
+    /**
+     * Resolution error, if any
+     */
     String Error;
 
     public DepResolution(RawDependency raw, ResolvedTarget target) {

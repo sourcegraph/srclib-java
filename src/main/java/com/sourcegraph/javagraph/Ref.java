@@ -1,19 +1,53 @@
 package com.sourcegraph.javagraph;
 
 import com.google.gson.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 
+/**
+ * Reference to a definition object
+ */
 public class Ref {
+
+    /**
+     * Definition key
+     */
     DefKey defKey;
 
+    /**
+     * Definition's repository
+     */
     String defRepo;
+
+    /**
+     * Definitions's unit type
+     */
     String defUnitType;
+
+    /**
+     * Defitinion's unit name
+     */
     String defUnit;
 
+    /**
+     * File that holds a reference
+     */
     String file;
+
+    /**
+     * Start offset in file
+     */
     int start;
+
+    /**
+     * End offset in file
+     */
     int end;
+
+    /**
+     * If reference is also a definition
+     */
     boolean def;
 
     public void setDefTarget(ResolvedTarget target) {
@@ -56,10 +90,14 @@ public class Ref {
 
     @Override
     public String toString() {
-        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : "") + "}";
+        return "Ref{" + defKey +" @" + file + ":" + start + "-" + end + (def ? " DEF" : StringUtils.EMPTY) + "}";
     }
 
+    /**
+     * JSON serialization rules for reference objects
+     */
     static class JSONSerializer implements JsonSerializer<Ref> {
+
         @Override
         public JsonElement serialize(Ref ref, Type arg1, JsonSerializationContext arg2) {
             JsonObject object = new JsonObject();
@@ -74,7 +112,7 @@ public class Ref {
             if (ref.defUnit != null) object.add("DefUnit", new JsonPrimitive(ref.defUnit));
             object.add("DefPath", new JsonPrimitive(ref.defKey.formatPath()));
 
-            object.add("File", new JsonPrimitive(ref.file));
+            object.add("File", new JsonPrimitive(PathUtil.relativizeCwd(ref.file)));
             object.add("Start", new JsonPrimitive(ref.start));
             object.add("End", new JsonPrimitive(ref.end));
             object.add("Def", new JsonPrimitive(ref.def));
