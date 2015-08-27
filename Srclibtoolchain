@@ -30,6 +30,7 @@
       "Srclibtoolchain",
       ".bin",
       ".bin/srclib-java",
+      ".bin/srclib-java.bat",
       ".bin/srclib-java.jar",
       "bundled-jdk/"
     ],

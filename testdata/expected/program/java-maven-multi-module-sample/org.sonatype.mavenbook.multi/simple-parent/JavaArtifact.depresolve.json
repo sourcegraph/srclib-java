@@ -4,7 +4,10 @@
       "groupID": "junit",
       "artifactID": "junit",
       "version": "3.8.1",
-      "scope": "test"
+      "scope": "test",
+      "file": ".m2-srclib/junit/junit/3.8.1/junit-3.8.1.jar",
+      "type": "jar",
+      "repoURI": "http://junit.cvs.sourceforge.net/junit/"
     },
     "Target": {
       "ToRepoCloneURL": "https://github.com/junit-team/junit",

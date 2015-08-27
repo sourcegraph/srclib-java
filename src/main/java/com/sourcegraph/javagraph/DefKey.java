@@ -1,7 +1,12 @@
 package com.sourcegraph.javagraph;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.URI;
 
+/**
+ * Definition key
+ */
 public class DefKey {
     private final URI origin;
     private final String path;
@@ -54,7 +59,7 @@ public class DefKey {
     @Override
     public String toString() {
         return "DefKey{" +
-                (origin != null ? "origin=" + origin + ", " : "") +
+                (origin != null ? "origin=" + origin + ", " : StringUtils.EMPTY) +
                 "path='" + path + '\'' +
                 '}';
     }

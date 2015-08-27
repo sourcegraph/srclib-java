@@ -1529,18 +1529,6 @@
   ],
   "Refs": [
     {
-      "DefPath": "TestCase:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 346,
-      "End": 354
-    },
-    {
-      "DefPath": "TestCase:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 246,
-      "End": 254
-    },
-    {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
@@ -1760,6 +1748,33 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": ".",
+      "DefPath": "java/lang/Class:type/getClassLoader",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 505,
+      "End": 519
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Class:type/getClassLoader",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 725,
+      "End": 739
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Class:type/getClassLoader",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 400,
+      "End": 414
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
       "DefPath": "java/lang/ClassLoader:type/getResource:java.lang.String",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 280,
@@ -1773,6 +1788,33 @@
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 521,
       "End": 540
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 522,
+      "End": 541
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 742,
+      "End": 761
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 417,
+      "End": 436
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -1863,6 +1905,33 @@
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 493,
       "End": 501
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Object:type/getClass",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 494,
+      "End": 502
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Object:type/getClass",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 714,
+      "End": 722
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Object:type/getClass",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 389,
+      "End": 397
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -2315,12 +2384,126 @@
       "End": 1182
     },
     {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 788,
+      "End": 800
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 513,
+      "End": 525
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 562,
+      "End": 574
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 607,
+      "End": 619
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 653,
+      "End": 665
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 696,
+      "End": 708
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 746,
+      "End": 758
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/Assert:type/assertEquals:java.lang.String:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 790,
+      "End": 802
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase/:init:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 404,
+      "End": 409
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase/:init:java.lang.String",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 299,
+      "End": 304
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
       "DefPath": "junit/framework/TestCase:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 293,
       "End": 301
     },
     {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase:type",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 346,
+      "End": 354
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase:type",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 246,
+      "End": 254
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
       "DefPath": "junit/framework/TestCase:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 99,
@@ -4068,48 +4251,6 @@
       "End": 386
     },
     {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 788,
-      "End": 800
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type/getClassLoader:type/getResourceAsStream:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 522,
-      "End": 541
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type/getClassLoader:type/getResourceAsStream:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 742,
-      "End": 761
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type/getClassLoader:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 505,
-      "End": 519
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type/getClassLoader:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 725,
-      "End": 739
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 494,
-      "End": 502
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/getClass:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 714,
-      "End": 722
-    },
-    {
       "DefPath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/expected",
       "Def": true,
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
@@ -4194,66 +4335,6 @@
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 266,
       "End": 281
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 513,
-      "End": 525
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 562,
-      "End": 574
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 607,
-      "End": 619
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 653,
-      "End": 665
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 696,
-      "End": 708
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 746,
-      "End": 758
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/assertEquals:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 790,
-      "End": 802
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/getClass:type/getClassLoader:type/getResourceAsStream:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 417,
-      "End": 436
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/getClass:type/getClassLoader:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 400,
-      "End": 414
-    },
-    {
-      "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/getClass:type",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 389,
-      "End": 397
     },
     {
       "DefPath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser/nyData",

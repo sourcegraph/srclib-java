@@ -7,21 +7,27 @@ import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * Scans expression tree and emits references and definitions
+ */
 public class TreeScanner extends TreePathScanner<Void, Void> {
-    private final Trees trees;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
+
     private final GraphWriter emit;
     private final SourcePositions srcPos;
     // We sometimes emit defs or refs multiple times because Spans will
@@ -30,14 +36,27 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     private final Set<DefKey> seenDefs = new HashSet<>();
     private final Set<Ref> seenRefs = new HashSet<>();
     private Spans spans;
-    private CompilationUnitTree compilationUnit;
 
+    CompilationUnitTree compilationUnit;
+    final Trees trees;
+    Stack<Long> parameterizedPositions = new Stack<>();
+
+    /**
+     * Constructs new scanner
+     * @param emit graph writer that will process all refs and defs encountered
+     * @param trees trees object
+     */
     public TreeScanner(GraphWriter emit, Trees trees) {
         this.emit = emit;
         this.srcPos = trees.getSourcePositions();
         this.trees = trees;
     }
 
+    /**
+     * Emits reference
+     * @param span name span
+     * @param def true if current ref is a definition as well
+     */
     public void emitRef(int[] span, boolean def) {
         if (span == null) {
             error("Ref span is null");
@@ -51,6 +70,12 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         emitRef(span, defKey, def);
     }
 
+    /**
+     * Emits reference
+     * @param span name span
+     * @param defKey definition key
+     * @param def true if current ref is a definition as well
+     */
     public void emitRef(int[] span, DefKey defKey, boolean def) {
         Ref r = new Ref();
         r.defKey = defKey;
@@ -65,16 +90,27 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         try {
             emit.writeRef(r);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
+    /**
+     * Emits definition
+     * @param node current node of expression tree
+     * @param nameSpan name span
+     * @param modifiers definition modifiers (for example, public static final)
+     */
     public void emitDef(Tree node, int[] nameSpan, List<String> modifiers) {
         int[] defSpan = treeSpan(node);
         emitDef(nameSpan, defSpan, modifiers);
     }
 
+    /**
+     * Emits definition
+     * @param nameSpan name span
+     * @param defSpan definition span
+     * @param modifiers definition modifiers (for example, public static final)
+     */
     public void emitDef(int[] nameSpan, int[] defSpan, List<String> modifiers) {
         Def s = new Def();
         s.defKey = currentDefKey();
@@ -87,8 +123,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
             return;
         seenDefs.add(s.defKey);
 
-        s.name = currentElement().getSimpleName().toString();
-        s.kind = currentElement().getKind().toString();
+        Element current = currentElement();
+        s.name = current.getSimpleName().toString();
+        s.kind = current.getKind().toString();
         if (nameSpan != null) {
             s.identStart = nameSpan[0];
             s.identEnd = nameSpan[1];
@@ -97,26 +134,40 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         s.defEnd = defSpan[1];
         s.file = compilationUnit.getSourceFile().getName();
         s.pkg = compilationUnit.getPackageName().toString();
-        s.typeExpr = currentTypeMirror().toString();
+        TypeMirror typeMirror = currentTypeMirror();
+        if (typeMirror != null) {
+            s.typeExpr = typeMirror.toString();
+        }
         s.modifiers = modifiers;
         s.doc = trees.getDocComment(getCurrentPath());
 
         try {
             emit.writeDef(s);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("I/O error", e);
         }
     }
 
     public boolean verbose = false;
 
+    /**
+     * Reports error
+     * @param message error message
+     */
     private void error(String message) {
         if (!verbose) return;
         Tree node = getCurrentPath().getLeaf();
-        System.err.println(compilationUnit.getSourceFile().getName() + ":" + srcPos.getStartPosition(compilationUnit, node) + ": " + message + " [node " + node.getKind() + "]");
+
+        LOGGER.warn("{}:{} {} [node {}]",
+                compilationUnit.getSourceFile().getName(),
+                srcPos.getStartPosition(compilationUnit, node),
+                message,
+                node.getKind());
     }
 
+    /**
+     * @return current definition key
+     */
     private DefKey currentDefKey() {
         Element cur = currentElement();
         if (cur == null) {
@@ -139,6 +190,9 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return new DefKey(defOrigin, path.toString());
     }
 
+    /**
+     * @return current java program element
+     */
     private Element currentElement() {
         TreePath curPath = getCurrentPath();
         if (curPath == null) {
@@ -148,14 +202,21 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return trees.getElement(curPath);
     }
 
+    /**
+     * @return current type mirror
+     */
     private TypeMirror currentTypeMirror() {
         return trees.getTypeMirror(getCurrentPath());
     }
 
+    /**
+     * Scans given expression tree path
+     * @param root expression tree path to scan
+     */
     @Override
     public Void scan(TreePath root, Void p) {
         this.compilationUnit = root.getCompilationUnit();
-        this.spans = new Spans(this.compilationUnit, this.trees);
+        this.spans = new Spans(this);
         return super.scan(root, p);
     }
 
@@ -173,26 +234,27 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
     @Override
     public Void visitMethod(MethodTree node, Void p) {
-        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == -1;
+        boolean isSynthetic = srcPos.getEndPosition(compilationUnit, node) == Diagnostic.NOPOS;
         boolean isCtor = TreeInfo.isConstructor((JCTree) node);
         int[] nameSpan, defSpan;
         if (isCtor) {
+            Element current = currentElement();
             if (isSynthetic) {
-                if (currentElement() == null) {
-                    System.err.println("currentElement() == null (synthetic)");
+                if (current == null) {
+                    LOGGER.warn("currentElement() == null (synthetic)");
                     return null;
                 }
-                if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (synthetic)");
+                if (current.getEnclosingElement() == null) {
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (synthetic)");
                     return null;
                 }
-                if (trees.getPath(currentElement().getEnclosingElement()) == null) {
-                    System.err.println("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
+                if (trees.getPath(current.getEnclosingElement()) == null) {
+                    LOGGER.warn("trees.getPath(currentElement().getEnclosingElement()) == null (synthetic)");
                     return null;
                 }
 
                 ClassTree klass = (ClassTree) trees.getPath(
-                        currentElement().getEnclosingElement()).getLeaf();
+                        current.getEnclosingElement()).getLeaf();
                 if (klass.getSimpleName().toString().isEmpty()) {
                     // TODO(sqs): why is there an anonymous synthetic node? what
                     // does that even mean?
@@ -203,19 +265,19 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
 
             } else {
                 if (spans == null) {
-                    System.err.println("spans == null (non-synthetic)");
+                    LOGGER.warn("spans == null (non-synthetic)");
                     return null;
                 }
-                if (currentElement() == null) {
-                    System.err.println("currentElement() == null (non-synthetic)");
+                if (current == null) {
+                    LOGGER.warn("currentElement() == null (non-synthetic)");
                     return null;
                 }
-                if (currentElement().getEnclosingElement() == null) {
-                    System.err.println("currentElement().getEnclosingElement() == null (non-synthetic)");
+                if (current.getEnclosingElement() == null) {
+                    LOGGER.warn("currentElement().getEnclosingElement() == null (non-synthetic)");
                     return null;
                 }
 
-                nameSpan = spans.name(currentElement().getEnclosingElement()
+                nameSpan = spans.name(current.getEnclosingElement()
                         .getSimpleName().toString(), node);
                 defSpan = treeSpan(node);
             }
@@ -253,18 +315,18 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     public Void visitCompilationUnit(CompilationUnitTree node, Void p) {
         scanPackageName(node.getPackageName());
 
-        for (ImportTree t : node.getImports()) {
-            scanPackageName(t);
-        }
-        for (Tree t : node.getTypeDecls()) {
-            scan(t, p);
-        }
+        node.getImports().forEach(this::scanPackageName);
+        node.getTypeDecls().forEach(t -> scan(t, p));
         return null;
     }
 
     public void scanPackageName(Tree node) {
         if (getCurrentPath() == null) {
-            System.err.println("getCurrentPath() == null (scanPackageName)");
+            LOGGER.warn("Current path is null");
+            return;
+        }
+        if (node == null) {
+            // no package
             return;
         }
 
@@ -289,32 +351,58 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     @Override
+    public Void visitParameterizedType(ParameterizedTypeTree node, Void p) {
+        if (node instanceof JCTree.JCTypeApply) {
+            long pos = ((JCTree.JCTypeApply) node).pos;
+            parameterizedPositions.push(pos);
+        } else {
+            parameterizedPositions.push(srcPos.getStartPosition(compilationUnit, node));
+        }
+        super.visitParameterizedType(node, p);
+        parameterizedPositions.pop();
+        return null;
+    }
+
+    @Override
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
         if (SourceVersion.isIdentifier(node.getIdentifier())) {
             try {
-                emitRef(spans.name(node), false);
+                if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
+                    // TODO (alexsaveliev) otherwise fails on the following block (@result)
+                    /*
+                            callback = (result,processorId)->{
+                                outputQueue.put(result.id, result.item);
+                                idleProcessors.add(processorId);
+                            };
+                     */
+                    emitRef(spans.name(node), false);
+                }
             } catch (Spans.SpanException e) {
-                System.err.println("SpanException: " + e.getMessage());
+                LOGGER.warn("Span exception", e);
             }
         }
         super.visitMemberSelect(node, p);
         return null;
     }
 
+    /**
+     * @param node expression tree node
+     * @return node span in current compilation unit
+     */
     private int[] treeSpan(Tree node) {
         int[] span = new int[]{
                 (int) srcPos.getStartPosition(compilationUnit, node),
                 (int) srcPos.getEndPosition(compilationUnit, node)};
-        if (span[1] == -1)
+        if (span[1] == Diagnostic.NOPOS)
             return null;
         return span;
     }
 
+    /**
+     * @param node expression tree
+     * @return list of node modifiers as a string (for example, "public", "static", "final"
+     */
     private List<String> modifiersList(ModifiersTree node) {
-        List<String> mods = new ArrayList<>();
-        for (Modifier m : node.getFlags()) {
-            mods.add(m.toString());
-        }
-        return mods;
+        return node.getFlags().stream().map(Modifier::toString).collect(Collectors.toList());
     }
 }
