@@ -69,7 +69,7 @@ public class Resolver {
 
     /**
      * Resolves URI to target
-     * @param origin SCM URI
+     * @param origin jar of file URI
      * @return resolved target or null if URI cannot be resolved to known repository / unit
      * @throws Exception
      */
@@ -77,28 +77,30 @@ public class Resolver {
         if (origin == null) {
             return null;
         }
-        origin = normalizeOrigin(origin);
-        if (resolvedOrigins.containsKey(origin)) {
-            return resolvedOrigins.get(origin);
+        URI normalizedOrigin = normalizeOrigin(origin);
+
+        ResolvedTarget ret = resolvedOrigins.get(normalizedOrigin);
+        if (ret != null) {
+            return ret;
         }
 
         Path jarFile;
         try {
-            jarFile = getOriginJARFilePath(origin);
+            jarFile = getOriginJARFilePath(normalizedOrigin);
         } catch (URISyntaxException e) {
-            LOGGER.warn("Error getting origin file path for origin: {}", origin, e);
-            resolvedOrigins.put(origin, null);
+            LOGGER.warn("Error getting origin file path for origin: {}", normalizedOrigin, e);
+            resolvedOrigins.put(normalizedOrigin, null);
             return null;
         }
 
         if (jarFile == null) {
             // trying to resolve origin based on source directories
-            ResolvedTarget target = resolveFileOrigin(origin);
-            resolvedOrigins.put(origin, target);
+            ResolvedTarget target = resolveFileOrigin(normalizedOrigin);
+            resolvedOrigins.put(normalizedOrigin, target);
             return target;
         }
 
-        ResolvedTarget target = procesSpecialJar(origin, jarFile);
+        ResolvedTarget target = processSpecialJar(origin, jarFile);
         if (target != null) {
             return target;
         }
@@ -110,16 +112,16 @@ public class Resolver {
             LOGGER.warn("Error resolving JAR file path {} to dependency", jarFile, e);
         }
         if (rawDep == null) {
-            resolvedOrigins.put(origin, null);
+            resolvedOrigins.put(normalizedOrigin, null);
             return null;
         }
 
         DepResolution res = resolveRawDep(rawDep);
         if (res.Error != null) {
-            resolvedOrigins.put(origin, null);
+            resolvedOrigins.put(normalizedOrigin, null);
             return null;
         }
-        resolvedOrigins.put(origin, res.Target);
+        resolvedOrigins.put(normalizedOrigin, res.Target);
         return res.Target;
     }
 
@@ -129,7 +131,7 @@ public class Resolver {
      * @param jarFile jar file we are working with
      * @return resolved target if jar file matches known one
      */
-    private ResolvedTarget procesSpecialJar(URI origin, Path jarFile) {
+    private ResolvedTarget processSpecialJar(URI origin, Path jarFile) {
         if (PathUtil.normalize(jarFile.toString()).contains("jre/lib/")) {
             ResolvedTarget target = ResolvedTarget.jdk();
             resolvedOrigins.put(origin, target);
@@ -142,6 +144,8 @@ public class Resolver {
             ResolvedTarget target = ResolvedTarget.nashorn();
             resolvedOrigins.put(origin, target);
             return target;
+        } else if (jarFile.getFileName().toString().equals("android.jar")) {
+            return AndroidOriginResolver.resolve(origin);
         }
         return null;
     }
