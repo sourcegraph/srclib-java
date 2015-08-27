@@ -32,8 +32,6 @@ public class ScanCommand {
      */
     public void Execute() {
 
-        LOGGER.info("Collecting source units");
-
         try {
             if (repoURI == null) {
                 repoURI = StringUtils.EMPTY;
@@ -46,27 +44,27 @@ public class ScanCommand {
             List<SourceUnit> units = new ArrayList<>();
             switch (repoURI) {
                 case JDK_TEST_REPO:
-                    LOGGER.debug("Collecting JDK source units");
+                    LOGGER.info("Collecting test JDK source units");
                     units.addAll(JDKProject.standardSourceUnits());
                     break;
                 case ANDROID_SDK_REPO:
-                    LOGGER.debug("Collecting Android SDK source units");
+                    LOGGER.info("Collecting Android SDK source units");
                     units.add(AndroidSDKProject.createSourceUnit(subdir));
                     break;
                 case ANDROID_CORE_REPO:
-                    LOGGER.debug("Collecting Android core source units");
+                    LOGGER.info("Collecting Android core source units");
                     units.add(AndroidCoreProject.createSourceUnit(subdir));
                     break;
                 default:
                     if (repoURI.startsWith(JDKProject.OPENJDK_REPO_ROOT)) {
-                        LOGGER.debug("Collecting JDK source units");
+                        LOGGER.info("Collecting JDK source units");
                         units.addAll(JDKProject.standardSourceUnits());
                         break;
                     }
                     // Recursively find all Maven and Gradle projects.
-                    LOGGER.debug("Collecting Maven source units");
+                    LOGGER.info("Collecting Maven source units for repository {}", repoURI);
                     units.addAll(MavenProject.findAllSourceUnits(repoURI));
-                    LOGGER.debug("Collecting Gradle source units");
+                    LOGGER.info("Collecting Gradle source units for repository {}", repoURI);
                     units.addAll(GradleProject.findAllSourceUnits(repoURI));
                     break;
             }
