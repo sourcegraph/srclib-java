@@ -13,6 +13,3 @@
 [submodule "testdata/case/java-maven-multi-module-sample"]
 	path = testdata/case/java-maven-multi-module-sample
 	url = https://github.com/sgtest/java-maven-multi-module-sample.git
-[submodule "testdata/case/java-android-gradle-sample"]
-	path = testdata/case/java-android-gradle-sample
-	url = git://github.com/alexsaveliev/java-android-gradle-sample.git
