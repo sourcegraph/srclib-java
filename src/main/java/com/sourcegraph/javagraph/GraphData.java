@@ -35,10 +35,6 @@ public class GraphData implements GraphWriter {
     }
 
     @Override
-    public void prepareRef(Ref r) {
-    }
-
-    @Override
     public void writeRef(Ref r) throws IOException {
         refs.add(r);
     }
