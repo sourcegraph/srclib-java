@@ -19,7 +19,7 @@ public final class Spans {
     private final SourcePositions srcPos;
     private final TreeScanner scanner;
 
-    private String src;
+    private CharSequence src;
 
     /**
      * Constructs new span object
@@ -32,7 +32,7 @@ public final class Spans {
         this.trees = scanner.trees;
 
         try {
-            src = compilationUnit.getSourceFile().getCharContent(true).toString();
+            src = compilationUnit.getSourceFile().getCharContent(true);
         } catch (IOException e) {
             src = null;
         }
@@ -133,7 +133,7 @@ public final class Spans {
         if (treeEnd == -1)
             throw new SpanException("No treeEnd found for " + t.toString() + " (name: '" + name + "') at " + compilationUnit.getSourceFile().getName() + ":+" + treeStart);
 
-        String treeSrc = src.substring(treeStart, treeEnd);
+        String treeSrc = src.subSequence(treeStart, treeEnd).toString();
         int nameStart = treeSrc.indexOf(name);
         if (nameStart == -1) {
             // alexsaveliev. the following guava's TypeTokenResolutionTest.java code
@@ -142,7 +142,7 @@ public final class Spans {
             // let's try to resolve it using stacked positions
             if (!scanner.parameterizedPositions.isEmpty()) {
                 treeStart = scanner.parameterizedPositions.peek().intValue();
-                treeSrc = src.substring(treeStart, treeEnd);
+                treeSrc = src.subSequence(treeStart, treeEnd).toString();
                 nameStart = treeSrc.indexOf(name);
             }
             if (nameStart == -1) {

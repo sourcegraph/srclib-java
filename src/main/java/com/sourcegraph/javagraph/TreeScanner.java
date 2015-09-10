@@ -83,7 +83,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         r.start = span[0];
         r.end = span[1];
         r.def = def;
-
+        emit.prepareRef(r);
         if (seenRefs.contains(r))
             return;
         seenRefs.add(r);
