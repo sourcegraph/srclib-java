@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import javax.tools.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -190,13 +189,7 @@ public class Grapher {
                     }
 
                     TreePath root = new TreePath(unit);
-
-                    Charset charset = getMultiByteCharset();
-                    if (charset == null) {
-                        new TreeScanner(emit, trees).scan(root, null);
-                    } else {
-                        scanMultiByte(unit, charset, root, trees);
-                    }
+                    new TreeScanner(emit, trees).scan(root, null);
                 } catch (Exception e) {
                     LOGGER.warn("Skipping compilation unit {} ({})", unit.getPackageName(), unit.getSourceFile(), e);
                 }
@@ -237,63 +230,4 @@ public class Grapher {
         emit.flush();
         fileManager.close();
     }
-
-    /**
-     * @return charset if project's (or system default if absent) charset is a multi-byte one, i.e. UTF-8,
-     * null otherwise
-     * @throws Exception
-     */
-    private Charset getMultiByteCharset() throws Exception {
-        String encoding = project.getSourceCodeEncoding();
-        Charset charset;
-        if (StringUtils.isEmpty(encoding)) {
-            charset = Charset.defaultCharset();
-        } else {
-            charset = Charset.forName(encoding);
-        }
-        return charset.newEncoder().maxBytesPerChar() > 1 ? charset : null;
-    }
-
-    /**
-     * Multibyte-aware scanner that transforms all span positions (String.indexOf()) into byte offsets
-     * @param compilationUnitTree compilation unit
-     * @param charset charset to use
-     * @param root root path
-     * @param trees trees
-     * @throws IOException
-     */
-    private void scanMultiByte(CompilationUnitTree compilationUnitTree,
-                               Charset charset,
-                               TreePath root,
-                               Trees trees) throws IOException {
-        ByteOffsets offsets = new ByteOffsets(compilationUnitTree, charset);
-        GraphWriter writer = new GraphWriter() {
-            @Override
-            public void prepareRef(Ref r) {
-                r.start = offsets.offsets[r.start];
-                r.end = offsets.offsets[r.end];
-            }
-
-            @Override
-            public void writeRef(Ref r) throws IOException {
-                emit.writeRef(r);
-            }
-
-            @Override
-            public void writeDef(Def d) throws IOException {
-                d.defStart = offsets.offsets[d.defStart];
-                d.defEnd = offsets.offsets[d.defEnd];
-                d.identStart = offsets.offsets[d.identStart];
-                d.identEnd = offsets.offsets[d.identEnd];
-                emit.writeDef(d);
-            }
-
-            @Override
-            public void flush() throws IOException {
-                emit.flush();
-            }
-        };
-        new TreeScanner(writer, trees).scan(root, null);
-    }
-
 }
