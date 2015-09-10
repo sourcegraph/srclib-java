@@ -8,6 +8,13 @@ import java.io.IOException;
 public interface GraphWriter {
 
     /**
+     * May modify encountered references before writing them. For example, writer may transform span offsets
+     * computed based on character position to byte positions.
+     * @param r refs to prepare
+     */
+    void prepareRef(Ref r);
+
+    /**
      * Writes reference
      * @param r reference to write
      * @throws IOException
