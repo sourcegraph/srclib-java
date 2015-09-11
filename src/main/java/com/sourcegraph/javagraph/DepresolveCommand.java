@@ -56,9 +56,9 @@ public class DepresolveCommand {
         // All units but the JDK itself depend on the JDK.
         if (!(unit.getProject() instanceof JDKProject)) {
             LOGGER.debug("Adding JDK dep");
-            if (unit.Repo.equals(ScanCommand.ANDROID_CORE_REPO)) {
+            if (ScanCommand.ANDROID_CORE_REPO.equals(unit.Repo)) {
                 // no dependencies
-            } else if (unit.Repo.equals(ScanCommand.ANDROID_SDK_REPO)) {
+            } else if (ScanCommand.ANDROID_SDK_REPO.equals(unit.Repo)) {
                 // only Android Core
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
             } else if (unit.Data.containsKey("Android")) {
@@ -68,7 +68,7 @@ public class DepresolveCommand {
                 resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
             }
         } else {
-            if (!unit.Repo.equals(JDKProject.JDK_REPO)) {
+            if (!JDKProject.JDK_REPO.equals(unit.Repo)) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
             }
         }

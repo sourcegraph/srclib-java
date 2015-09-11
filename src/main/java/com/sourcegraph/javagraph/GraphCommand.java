@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class GraphCommand {
     /**
      * Main method
      */
+    @SuppressWarnings("unchecked")
     public void Execute() {
 
         final Graph graph = new Graph(); // Final graphJavaFiles object that is serialized to stdout
@@ -57,7 +60,12 @@ public class GraphCommand {
             Grapher grapher = new Grapher(proj,
                     rawGraph);
             LOGGER.debug("Starting graph collection");
-            grapher.graphFilesAndDirs(unit.Files);
+            Collection<String> files = new ArrayList<>(unit.Files);
+            Collection<String> extraFiles = (Collection<String>) unit.Data.get("ExtraSourceFiles");
+            if (extraFiles != null) {
+                files.addAll(extraFiles);
+            }
+            grapher.graphFilesAndDirs(files);
             LOGGER.debug("Graph collection complete");
             grapher.close();
 

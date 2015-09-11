@@ -31,8 +31,17 @@ public class Grapher {
     private final GraphWriter emit;
     private final List<String> javacOpts;
 
+    private final Project project;
+
+    /**
+     * Constructs new grapher object
+     * @param project project (compiler settings)
+     * @param emit target responsible for emitting definitions and references
+     * @throws Exception
+     */
     public Grapher(Project project,
                    GraphWriter emit) throws Exception {
+        this.project = project;
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
@@ -99,7 +108,14 @@ public class Grapher {
 
     }
 
-    public void graphFilesAndDirs(Iterable<String> filePaths) throws IOException {
+    /**
+     * Builds a graph of given files and directories.
+     * @param filePaths collection of file path elements to graph sources of. If element is a file it will be scheduled
+     * for graphing, otherwise, if element is a directory, we'll schedule for graphing all java files located in the
+     * given directory recursively. Each element should point to existing file/directory
+     * @throws IOException
+     */
+    public void graphFilesAndDirs(Collection<String> filePaths) throws IOException {
 
         LOGGER.debug("Collecting source files to graph");
         File root = SystemUtils.getUserDir();
@@ -130,13 +146,23 @@ public class Grapher {
         graphFiles(files);
     }
 
-    public void graphFiles(Iterable<String> files) throws IOException {
+    /**
+     * Builds a graph of given files
+     * @param files collection of file path elements to graph sources of. Each element should point to existing file
+     * @throws IOException
+     */
+    public void graphFiles(Collection<String> files) throws IOException {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("javac {} {}", StringUtils.join(javacOpts, ' '), StringUtils.join(files, ' '));
         }
         graphJavaFiles(fileManager.getJavaFileObjectsFromStrings(files));
     }
 
+    /**
+     * Builds a graph of given file objects
+     * @param files list of file objects to build graphs for
+     * @throws IOException
+     */
     public void graphJavaFiles(Iterable<? extends JavaFileObject> files) throws IOException {
         final JavacTask task = (JavacTask) compiler.getTask(null,
                 fileManager,
@@ -181,6 +207,11 @@ public class Grapher {
         }
     }
 
+    /**
+     * Emits package object definition to graph
+     * @param packageName package name to emit
+     * @throws IOException
+     */
     private void writePackageSymbol(String packageName) throws IOException {
         Def s = new Def();
         // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
@@ -191,6 +222,10 @@ public class Grapher {
         emit.writeDef(s);
     }
 
+    /**
+     * Closes grapher and releases underlying resources
+     * @throws IOException
+     */
     public void close() throws IOException {
         emit.flush();
         fileManager.close();

@@ -279,6 +279,14 @@ allprojects {
                 	listSourceFiles(project.tasks.compileDebugUnitTestJava)
                 	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
                 }
+                if (project.tasks.hasProperty("compileDebugJavaWithJavac")) {
+                	listSourceFiles(project.tasks.compileDebugJavaWithJavac)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugJavaWithJavac.classpath.asPath"
+                }
+                if (project.tasks.hasProperty("compileDebugUnitTestJavaWithJavac")) {
+                	listSourceFiles(project.tasks.compileDebugUnitTestJavaWithJavac)
+                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJavaWithJavac.classpath.asPath"
+                }
 
             }
 

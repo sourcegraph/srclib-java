@@ -38,7 +38,17 @@ public class PathUtil {
      * for path /foo/bar/baz and CWD /kaboom/bar result will be /foo/bar/baz
      */
     public static String relativizeCwd(String path) {
-        Path p = Paths.get(path).toAbsolutePath();
+        return relativizeCwd(Paths.get(path).toAbsolutePath());
+    }
+
+    /**
+     * Produces path relative to current working directory
+     * @param p path to process
+     * @return path translated relative to current directory, if path is located inside current directory or
+     * absolute path otherwise. For example, for path /foo/bar/baz and CWD /foo/bar result will be bar;
+     * for path /foo/bar/baz and CWD /kaboom/bar result will be /foo/bar/baz
+     */
+    public static String relativizeCwd(Path p) {
         if (p.startsWith(CWD)) {
             Path rel = CWD.relativize(p);
             if (rel.toString().isEmpty()) {
