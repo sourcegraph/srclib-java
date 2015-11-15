@@ -1,12 +1,12 @@
 FROM ubuntu:14.04
 
-RUN echo cachebuster 2014-12-22
+RUN echo cachebuster 2015-11-14
 RUN apt-get update -qq
 RUN apt-get install -qq curl git python-software-properties software-properties-common
 
 # Install Java 8 (to bootstrap building our own one, below)
 RUN add-apt-repository ppa:webupd8team/java
-RUN apt-get update -qq && echo 2015-03-02
+RUN apt-get update -qq
 # auto accept oracle jdk license
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN apt-get install -y oracle-java8-installer
