@@ -276,7 +276,7 @@ public class BuildAnalysis {
                             case "SRCLIB-ARTIFACT":
                                 info = new BuildInfo();
                                 results.add(info);
-                                info.attrs.artifactID = payload;
+                                info.attrs.artifactID = actualArtifactID(repoUri, payload);
                                 break;
                             case "SRCLIB-GROUP":
                                 if (info == null) {
@@ -345,7 +345,7 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 String tokens[] = payload.split(":", 4);
-                                String unitName = tokens[0] + '/' + tokens[1];
+                                String unitName = tokens[0] + '/' + actualArtifactID(repoUri, tokens[1]);
                                 info.sourceDirs.add(new String[]{unitName, tokens[2], tokens[3]});
                                 break;
                             case "SRCLIB-SOURCEVERSION":
@@ -411,6 +411,14 @@ public class BuildAnalysis {
                 FileUtils.deleteDirectory(gradleCacheDir.toString());
                 Files.deleteIfExists(modifiedGradleScriptFile);
             }
+        }
+
+        private static String actualArtifactID(String repoURI, String artifactID) {
+            if (System.getenv().get("IN_DOCKER_CONTAINER") != null && artifactID.equals("src")) {
+                String[] parts = repoURI.split("/");
+                return parts[parts.length - 1];
+            }
+            return artifactID;
         }
 
         /**
