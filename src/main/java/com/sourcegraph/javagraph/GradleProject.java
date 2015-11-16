@@ -46,18 +46,6 @@ public class GradleProject implements Project {
      */
     public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(String repoURI, Path build) throws IOException {
         Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(repoURI, build);
-
-        // HACK: fix the project name inside docker containers. By default, the name of a Gradle project is the name
-        // of its containing directory. srclib checks out code to /src inside Docker containers, which makes the name of
-        // every Gradle project rooted at the VCS root directory "src". This hack could erroneously change the project
-        // name if the name is actually supposed to be "src" (e.g., if the name is set manually).
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
-            ret.values().stream().filter(info -> info.attrs.artifactID.equals("src")).forEach(info -> {
-                String[] parts = repoURI.split("/");
-                info.attrs.artifactID = parts[parts.length - 1];
-            });
-        }
-
         return ret;
     }
 
