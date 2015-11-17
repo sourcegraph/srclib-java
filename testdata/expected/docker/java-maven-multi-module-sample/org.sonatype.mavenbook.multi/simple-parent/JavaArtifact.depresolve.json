@@ -5,7 +5,7 @@
       "artifactID": "junit",
       "version": "3.8.1",
       "scope": "test",
-      "file": ".m2-srclib/junit/junit/3.8.1/junit-3.8.1.jar",
+      "file": "/tmp/.m2-srclib/junit/junit/3.8.1/junit-3.8.1.jar",
       "type": "jar",
       "repoURI": "http://junit.cvs.sourceforge.net/junit/"
     },
