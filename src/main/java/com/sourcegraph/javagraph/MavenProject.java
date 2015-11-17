@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import com.google.common.collect.Iterators;
 import com.sourcegraph.javagraph.maven.plugins.MavenPlugins;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.*;
 import org.apache.maven.model.building.*;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -181,6 +182,19 @@ public class MavenProject implements Project {
         LOGGER.debug("Retrieved Maven dependencies");
 
         return deps;
+    }
+
+    @Override
+    public void init() {
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            LOGGER.info("Retrieving Maven artifacts");
+            try {
+                // alexsaveliev: we doing "scan" really
+                findAllSourceUnits(unit.Repo);
+            } catch (IOException e) {
+                LOGGER.warn("Failed to retrieve Maven artifacts {}", e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -439,8 +453,11 @@ public class MavenProject implements Project {
      * @return location of Maven's local repository
      */
     protected static String getRepoDir() {
-        // TODO(sqs): If running in Docker, use a directory not inside the repo if in Docker since the Docker source volume is readonly.
-        return REPO_DIR;
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
+        } else {
+            return REPO_DIR;
+        }
     }
 
     /**
@@ -481,7 +498,8 @@ public class MavenProject implements Project {
         try {
             node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         } catch (DependencyCollectionException e) {
-            LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage());
+            // TODO
+            LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage(), e);
             node = e.getResult().getRoot();
         }
         LOGGER.debug("Collected dependencies");

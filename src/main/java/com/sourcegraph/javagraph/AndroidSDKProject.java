@@ -30,6 +30,10 @@ public class AndroidSDKProject implements Project {
     public AndroidSDKProject(SourceUnit unit) {
     }
 
+    @Override
+    public void init() {
+    }
+
     /**
      * @return libart
      */
