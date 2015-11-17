@@ -26,6 +26,10 @@ public class AndroidCoreProject implements Project {
     public AndroidCoreProject(SourceUnit unit) {
     }
 
+    @Override
+    public void init() {
+    }
+
     /**
      * @return empty list because we are compiling JDK
      */

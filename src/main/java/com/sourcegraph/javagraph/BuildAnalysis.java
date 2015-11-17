@@ -212,7 +212,7 @@ public class BuildAnalysis {
 
                 List<String> gradleArgs = new ArrayList<>();
                 gradleArgs.add("--gradle-user-home");
-                gradleArgs.add(new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath());
+                gradleArgs.add(getGradleUserHome());
                 gradleArgs.add("-I");
                 gradleArgs.add(modifiedGradleScriptFile.toString());
                 if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
@@ -410,6 +410,18 @@ public class BuildAnalysis {
             } finally {
                 FileUtils.deleteDirectory(gradleCacheDir.toString());
                 Files.deleteIfExists(modifiedGradleScriptFile);
+            }
+        }
+
+        /**
+         * @return Gradle user home to be used.
+         * In Docker mode it's /tmp/.gradle-srclib, in program mode: ~/.gradle-srclib
+         */
+        private static String getGradleUserHome() {
+            if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+                return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
+            } else {
+                return new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath();
             }
         }
 

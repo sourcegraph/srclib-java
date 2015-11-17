@@ -12,7 +12,12 @@ public interface Project {
     /**
      * Default source code version (language level)
      */
-    public static final String DEFAULT_SOURCE_CODE_VERSION = "1.8";
+    String DEFAULT_SOURCE_CODE_VERSION = "1.8";
+
+    /**
+     * Project initialization phase
+     */
+    public void init();
 
     /**
      * @return list of classpath elements to be passed to javac's -classpath.
