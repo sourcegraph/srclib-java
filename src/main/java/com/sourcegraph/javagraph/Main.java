@@ -1,13 +1,18 @@
 package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.JCommander;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 
 public class Main {
@@ -20,14 +25,42 @@ public class Main {
         String version = getVersion();
 
         LOGGER.info("srclib-java version {}", version);
+
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Current working directory [{}]", SystemUtils.getUserDir());
             LOGGER.debug("Command line arguments [{}]", StringUtils.join(args, ' '));
         }
 
-        if (SystemUtils.IS_OS_WINDOWS) {
-            args = adjustWindowsArgs(args);
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            File sourceDir = SystemUtils.getUserDir();
+            // in Docker mode copying current directory to temporary location to clead readonly flag
+            Path tempDir = Files.createTempDirectory(FileUtils.getTempDirectory().toPath(), "srclib-java");
+            File destDir = new File(tempDir.toFile(), sourceDir.getName());
+            LOGGER.debug("Copying {} to {}", sourceDir, destDir);
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        FileUtils.deleteDirectory(tempDir.toFile());
+                    } catch (IOException e) {
+                        // ignore
+                    }
+                }
+            });
+            FileUtils.copyDirectory(sourceDir, destDir, new FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    // excluding .srclib-cache and unreadable entries
+                    if (f.isDirectory()) {
+                        return !f.getName().equals(".srclib-cache") && f.canRead();
+                    }
+                    return f.canRead();
+                }
+            });
+            LOGGER.debug("Copied {} to {}", sourceDir, destDir);
+            // updating CWD
+            PathUtil.CWD = destDir.toPath();
         }
+        LOGGER.debug("Current working directory [{}]", PathUtil.CWD);
 
         JCommander jc = new JCommander();
 
@@ -62,24 +95,6 @@ public class Main {
                 jc.usage();
                 System.exit(1);
         }
-    }
-
-    /**
-     * The purpose of this function is to convert Windows-style options produced by go-flags (/SHORTNAME, /LONGNAME) to
-     * POSIX-style to be able to parse them using JCommander. Each /NAME is replaced with --NAME
-     * @param args arguments to convert to POSIX-style
-     * @return arguments converted to POSIX-style
-     */
-    private static String[] adjustWindowsArgs(String args[]) {
-        String ret[] = new String[args.length];
-        int i = 0;
-        for (String arg: args) {
-            if (arg.length() > 1 && arg.startsWith("/")) {
-                arg = "--" + arg.substring(1);
-            }
-            ret[i++] = arg;
-        }
-        return ret;
     }
 
     private static String getVersion() {

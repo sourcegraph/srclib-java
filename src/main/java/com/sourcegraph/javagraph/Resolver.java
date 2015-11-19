@@ -2,7 +2,6 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -292,7 +291,7 @@ public class Resolver {
             return null;
         }
         File file = new File(origin);
-        File cwd = SystemUtils.getUserDir();
+        File cwd = PathUtil.CWD.toFile();
         for (List<String> dir : sourceDirs) {
             File root = PathUtil.concat(cwd, dir.get(2));
             try {

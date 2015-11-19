@@ -97,7 +97,8 @@ public class JDKProject implements Project {
             sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/impsrc");
         }
 
-        return sourcePaths.stream().filter(element -> new File(element).isDirectory()).collect(Collectors.toList());
+        return sourcePaths.stream().filter(element -> PathUtil.CWD.resolve(element).toFile().isDirectory()).
+                collect(Collectors.toList());
     }
 
     @Override
@@ -140,7 +141,8 @@ public class JDKProject implements Project {
             sourcePaths.add("src/solaris/classes/");
         }
 
-        return sourcePaths.stream().filter(element -> new File(element).isDirectory()).collect(Collectors.toList());
+        return sourcePaths.stream().filter(element -> PathUtil.CWD.resolve(element).toFile().isDirectory()).
+                collect(Collectors.toList());
     }
 
     public static Collection<SourceUnit> standardSourceUnits() throws Exception {
@@ -168,7 +170,7 @@ public class JDKProject implements Project {
     }
 
     private static void addKnownSourceUnit(Collection<SourceUnit> units, String directory) throws IOException {
-        File dir = new File(directory);
+        File dir = PathUtil.CWD.resolve(directory).toFile();
         if (dir.isDirectory()) {
             // Build tools source unit
             final SourceUnit toolsUnit = new SourceUnit();

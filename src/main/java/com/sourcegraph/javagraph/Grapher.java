@@ -118,7 +118,7 @@ public class Grapher {
     public void graphFilesAndDirs(Collection<String> filePaths) throws IOException {
 
         LOGGER.debug("Collecting source files to graph");
-        File root = SystemUtils.getUserDir();
+        File root = PathUtil.CWD.toFile();
 
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {
