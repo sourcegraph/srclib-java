@@ -94,7 +94,7 @@ public class AndroidCoreProject implements Project {
         unit.Name = "AndroidCore";
         unit.Dir = subdir;
         List<String> directories = new ArrayList<>();
-        getSourceFilesAndDirectories(Paths.get(subdir), unit.Files, directories);
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), unit.Files, directories);
         unit.Data.put("AndroidCoreSubdir", subdir);
         return unit;
     }

@@ -335,7 +335,7 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                File file = new File(payload);
+                                File file = PathUtil.CWD.resolve(payload).toFile();
                                 if (file.isFile()) {
                                     info.sources.add(file.getAbsolutePath());
                                 }
@@ -421,7 +421,7 @@ public class BuildAnalysis {
             if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
                 return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
             } else {
-                return new File(SystemUtils.getUserDir(), REPO_DIR).getAbsolutePath();
+                return new File(PathUtil.CWD.toFile(), REPO_DIR).getAbsolutePath();
             }
         }
 
