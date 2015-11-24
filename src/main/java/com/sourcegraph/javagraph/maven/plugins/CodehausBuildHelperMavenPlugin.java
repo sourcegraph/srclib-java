@@ -1,5 +1,6 @@
 package com.sourcegraph.javagraph.maven.plugins;
 
+import com.sourcegraph.javagraph.PathUtil;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.PluginExecution;
 import org.apache.maven.project.MavenProject;
@@ -61,7 +62,7 @@ public class CodehausBuildHelperMavenPlugin extends AbstractMavenPlugin {
                     continue;
                 }
                 for (Xpp3Dom source : sourceList) {
-                    project.getCompileSourceRoots().add(new File(source.getValue()).toString());
+                    project.getCompileSourceRoots().add(PathUtil.CWD.resolve(source.getValue()).toString());
                 }
             }
         }

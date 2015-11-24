@@ -29,7 +29,7 @@ public class ScanUtil {
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pat);
         HashSet<Path> result = new HashSet<>();
 
-        Files.walkFileTree(Paths.get("."), new SimpleFileVisitor<Path>() {
+        Files.walkFileTree(PathUtil.CWD, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 if (matcher.matches(file))
@@ -65,8 +65,8 @@ public class ScanUtil {
     public static List<String> scanFiles(String sourcePath) throws IOException {
         final List<String> files = new LinkedList<>();
 
-        if (Files.exists(Paths.get(sourcePath))) {
-            Files.walkFileTree(Paths.get(sourcePath), new SimpleFileVisitor<Path>() {
+        if (Files.exists(PathUtil.CWD.resolve(sourcePath))) {
+            Files.walkFileTree(PathUtil.CWD.resolve(sourcePath), new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     String filename = file.toString();
