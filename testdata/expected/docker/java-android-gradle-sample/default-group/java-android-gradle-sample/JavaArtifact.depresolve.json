@@ -1,0 +1,16 @@
+[
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/libcore",
+      "ToUnit": "AndroidCore",
+      "ToUnitType": "JavaArtifact"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/base",
+      "ToUnit": "AndroidSDK",
+      "ToUnitType": "JavaArtifact"
+    }
+  }
+]
