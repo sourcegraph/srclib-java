@@ -38,7 +38,7 @@ public class PathUtil {
      * for path /foo/bar/baz and CWD /kaboom/bar result will be /foo/bar/baz
      */
     public static String relativizeCwd(String path) {
-        return relativizeCwd(Paths.get(path).toAbsolutePath());
+        return relativizeCwd(CWD.resolve(path).toAbsolutePath());
     }
 
     /**
