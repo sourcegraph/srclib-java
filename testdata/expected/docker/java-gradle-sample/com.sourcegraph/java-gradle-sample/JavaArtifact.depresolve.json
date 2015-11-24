@@ -5,7 +5,7 @@
       "artifactID": "jcommander",
       "version": "1.30",
       "scope": "compile",
-      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
+      "file": "/tmp/.gradle-srclib/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
     },
     "Target": {
       "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",
@@ -20,7 +20,7 @@
       "artifactID": "jcommander",
       "version": "1.30",
       "scope": "testCompile",
-      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
+      "file": "/tmp/.gradle-srclib/caches/modules-2/files-2.1/com.beust/jcommander/1.30/c440b30a944ba199751551aee393f8aa03b3c327/jcommander-1.30.jar"
     },
     "Target": {
       "ToRepoCloneURL": "git@github.com:cbeust/jcommander.git",

@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import com.google.common.collect.Iterators;
 import com.sourcegraph.javagraph.maven.plugins.MavenPlugins;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.*;
 import org.apache.maven.model.building.*;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -42,7 +43,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -184,6 +184,19 @@ public class MavenProject implements Project {
     }
 
     @Override
+    public void init() {
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            LOGGER.info("Retrieving Maven artifacts");
+            try {
+                // alexsaveliev: we doing "scan" really
+                findAllSourceUnits(unit.Repo);
+            } catch (IOException e) {
+                LOGGER.warn("Failed to retrieve Maven artifacts {}", e.getMessage());
+            }
+        }
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public List<String> getClassPath() {
         // simply looking in the unit's data, classpath was collected at the "scan" phase
@@ -220,7 +233,8 @@ public class MavenProject implements Project {
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
         for (RawDependency dependency : unit.Dependencies) {
-            if (dependency.file != null && jarFile.equals(Paths.get(dependency.file).toAbsolutePath())) {
+            if (dependency.file != null &&
+                    jarFile.equals(PathUtil.CWD.resolve(dependency.file).toAbsolutePath())) {
                 return dependency;
             }
         }
@@ -264,11 +278,11 @@ public class MavenProject implements Project {
         for (String module : proj.getMavenProject().getModules()) {
             info.projectDependencies.add(new BuildAnalysis.ProjectDependency(StringUtils.EMPTY,
                     StringUtils.EMPTY,
-                    PathUtil.concat(proj.pomFile.getParent(), Paths.get(module)).
-                            resolve("pom.xml").
-                            toAbsolutePath().
-                            normalize().
-                            toString()));
+                    PathUtil.concat(PathUtil.CWD.resolve(proj.pomFile.getParent().toString()), module).
+                    resolve("pom.xml").
+                    toAbsolutePath().
+                    normalize().
+                    toString()));
         }
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
@@ -411,7 +425,7 @@ public class MavenProject implements Project {
                 continue;
             }
 
-            Path path = Paths.get(sourceRoot);
+            Path path = PathUtil.CWD.resolve(sourceRoot);
             if (!path.toFile().isDirectory()) {
                 continue;
             }
@@ -423,10 +437,10 @@ public class MavenProject implements Project {
             final DirectoryScanner directoryScanner = new DirectoryScanner();
             directoryScanner.setIncludes(new String[]{"**/*.java"});
             directoryScanner.setExcludes(null);
-            directoryScanner.setBasedir(sourceRoot);
+            directoryScanner.setBasedir(path.toString());
             directoryScanner.scan();
             for (String fileName : directoryScanner.getIncludedFiles()) {
-                sourceFiles.add(Paths.get(sourceRoot, fileName).toString());
+                sourceFiles.add(PathUtil.concat(path, fileName).toString());
             }
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collected source files from {}", path.toAbsolutePath());
@@ -439,8 +453,11 @@ public class MavenProject implements Project {
      * @return location of Maven's local repository
      */
     protected static String getRepoDir() {
-        // TODO(sqs): If running in Docker, use a directory not inside the repo if in Docker since the Docker source volume is readonly.
-        return REPO_DIR;
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
+        } else {
+            return REPO_DIR;
+        }
     }
 
     /**
@@ -481,7 +498,8 @@ public class MavenProject implements Project {
         try {
             node = repositorySystem.collectDependencies(repositorySystemSession, collectRequest).getRoot();
         } catch (DependencyCollectionException e) {
-            LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage());
+            // TODO
+            LOGGER.warn("Failed to collect dependencies for {} - {}", unitId, e.getMessage(), e);
             node = e.getResult().getRoot();
         }
         LOGGER.debug("Collected dependencies");

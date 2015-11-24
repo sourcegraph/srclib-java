@@ -12,7 +12,15 @@ public interface Project {
     /**
      * Default source code version (language level)
      */
-    public static final String DEFAULT_SOURCE_CODE_VERSION = "1.8";
+    String DEFAULT_SOURCE_CODE_VERSION = "1.8";
+
+    /**
+     * Project initialization phase.
+     * This method is invoked after source unit data was parsed but before graph or depresolve phase.
+     * Developer may want to add extra code when something should be done before graphing or depresolving source code,
+     * for example add Docker-specific code or initialize required resources (download and install tools etc)
+     */
+    public void init();
 
     /**
      * @return list of classpath elements to be passed to javac's -classpath.

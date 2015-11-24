@@ -42,7 +42,9 @@ public class DepresolveCommand {
         }
         LOGGER.info("Resolving dependencies of {}", unit.Name);
 
-        Resolver rs = new Resolver(unit.getProject(), unit);
+        Project project = unit.getProject();
+        project.init();
+        Resolver rs = new Resolver(project, unit);
 
         LOGGER.debug("Resolving deps");
         // Resolve all raw dependencies.
@@ -54,7 +56,7 @@ public class DepresolveCommand {
         LOGGER.debug("Deps resolved");
 
         // All units but the JDK itself depend on the JDK.
-        if (!(unit.getProject() instanceof JDKProject)) {
+        if (!(project instanceof JDKProject)) {
             LOGGER.debug("Adding JDK dep");
             if (ScanCommand.ANDROID_CORE_REPO.equals(unit.Repo)) {
                 // no dependencies

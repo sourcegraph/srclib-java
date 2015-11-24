@@ -15,7 +15,7 @@ public class PathUtil {
     /**
      * Current working directory
      */
-    public static final Path CWD = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
+    public static Path CWD = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
 
     /**
      * Normalizes path string by translating it to Unix-style (foo\bar => foo/bar)
@@ -38,7 +38,7 @@ public class PathUtil {
      * for path /foo/bar/baz and CWD /kaboom/bar result will be /foo/bar/baz
      */
     public static String relativizeCwd(String path) {
-        return relativizeCwd(Paths.get(path).toAbsolutePath());
+        return relativizeCwd(CWD.resolve(path).toAbsolutePath());
     }
 
     /**
@@ -73,6 +73,16 @@ public class PathUtil {
         } else {
             return parent.resolve(child);
         }
+    }
+
+    /**
+     * Concatenates two paths
+     * @param parent parent path
+     * @param child child path
+     * @return child resolved to parent if child is not absolute, child otherwise
+     */
+    public static Path concat(Path parent, String child) {
+        return concat(parent, Paths.get(child));
     }
 
     /**

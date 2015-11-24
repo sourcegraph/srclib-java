@@ -19,7 +19,6 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Grapher {
 
@@ -59,26 +58,45 @@ public class Grapher {
             }
             bootClassPath = Arrays.asList(envBootClasspath.split(SystemUtils.PATH_SEPARATOR));
         }
-        Collection<File> bootClasspathFiles = bootClassPath.stream().map(File::new).collect(Collectors.toList());
-        fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, bootClasspathFiles);
-        javacOpts.add("-Xbootclasspath:" + StringUtils.join(bootClassPath, SystemUtils.PATH_SEPARATOR));
+        Collection<File> bootClassPathFiles  = new ArrayList<>();
+        Collection<String> resolvedBootClassPath = new ArrayList<>();
+        for (String path : bootClassPath) {
+            Path resolvedPath = PathUtil.CWD.resolve(path).toAbsolutePath();
+            bootClassPathFiles.add(resolvedPath.toFile());
+            resolvedBootClassPath.add(resolvedPath.toString());
+        }
+
+        fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, bootClassPathFiles);
+        javacOpts.add("-Xbootclasspath:" + StringUtils.join(resolvedBootClassPath, SystemUtils.PATH_SEPARATOR));
 
         Collection<String> classPath = project.getClassPath();
         if (classPath == null) {
             classPath = Collections.emptyList();
         }
+        Collection<File> classPathFiles = new ArrayList<>();
+        Collection<String> resolvedClassPath = new ArrayList<>();
+        for (String path : classPath) {
+            Path resolvedPath = PathUtil.CWD.resolve(path).toAbsolutePath();
+            classPathFiles.add(resolvedPath.toFile());
+            resolvedClassPath.add(resolvedPath.toString());
+        }
 
-        Collection<File> classpathFiles = classPath.stream().map(File::new).collect(Collectors.toList());
-        fileManager.setLocation(StandardLocation.CLASS_PATH, classpathFiles);
+        fileManager.setLocation(StandardLocation.CLASS_PATH, classPathFiles);
         javacOpts.add("-classpath");
-        javacOpts.add(StringUtils.join(classPath, SystemUtils.PATH_SEPARATOR));
+        javacOpts.add(StringUtils.join(resolvedClassPath, SystemUtils.PATH_SEPARATOR));
 
         Collection<String> sourcePath = project.getSourcePath();
         if (sourcePath != null && !sourcePath.isEmpty()) {
             javacOpts.add("-sourcepath");
-            javacOpts.add(StringUtils.join(sourcePath, SystemUtils.PATH_SEPARATOR));
-            fileManager.setLocation(StandardLocation.SOURCE_PATH,
-                    sourcePath.stream().map(File::new).collect(Collectors.toList()));
+            Collection<String> resolvedSourcePath = new ArrayList<>();
+            Collection<File> sourcePathFiles = new ArrayList<>();
+            for (String path : sourcePath) {
+                Path resolvedPath = PathUtil.CWD.resolve(path).toAbsolutePath();
+                resolvedSourcePath.add(resolvedPath.toString());
+                sourcePathFiles.add(resolvedPath.toFile());
+            }
+            javacOpts.add(StringUtils.join(resolvedSourcePath, SystemUtils.PATH_SEPARATOR));
+            fileManager.setLocation(StandardLocation.SOURCE_PATH, sourcePathFiles);
         }
 
         // Speed up compilation by not doing dataflow, code gen, etc.
@@ -118,7 +136,7 @@ public class Grapher {
     public void graphFilesAndDirs(Collection<String> filePaths) throws IOException {
 
         LOGGER.debug("Collecting source files to graph");
-        File root = SystemUtils.getUserDir();
+        File root = PathUtil.CWD.toFile();
 
         final List<String> files = new ArrayList<>();
         for (String filePath : filePaths) {

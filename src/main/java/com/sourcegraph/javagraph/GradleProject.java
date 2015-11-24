@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -82,6 +81,21 @@ public class GradleProject implements Project {
         return null;
     }
 
+    @Override
+    public void init() {
+        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
+            LOGGER.info("Retrieving metadata information");
+            Path build = PathUtil.CWD.resolve((String) unit.Data.get("GradleFile"));
+            try {
+                BuildAnalysis.Gradle.collectMetaInformation(
+                        unit.Repo,
+                        getWrapper(build),
+                        build);
+            } catch (IOException e) {
+                LOGGER.warn("Failed to retrieve metadata information {}", e.getMessage());
+            }
+        }
+    }
     /**
      * @return cached bootstrap class path from unit data
      */
@@ -129,7 +143,7 @@ public class GradleProject implements Project {
     @Override
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
         for (RawDependency dependency : unit.Dependencies) {
-            if (dependency.file != null && jarFile.equals(Paths.get(dependency.file))) {
+            if (dependency.file != null && jarFile.equals(PathUtil.CWD.resolve(dependency.file))) {
                 return dependency;
             }
         }
@@ -158,7 +172,7 @@ public class GradleProject implements Project {
 
             for (BuildAnalysis.ProjectDependency projectDependency : info.projectDependencies) {
                 if (!StringUtils.isEmpty(projectDependency.buildFile)) {
-                    Path p = Paths.get(projectDependency.buildFile).toAbsolutePath().normalize();
+                    Path p = PathUtil.CWD.resolve(projectDependency.buildFile).toAbsolutePath().normalize();
                     visited.add(p);
                 }
             }
@@ -170,11 +184,11 @@ public class GradleProject implements Project {
             final SourceUnit unit = new SourceUnit();
             unit.Type = "JavaArtifact";
             unit.Name = info.getName();
-            Path projectRoot = Paths.get(info.projectDir);
+            Path projectRoot = PathUtil.CWD.resolve(info.projectDir);
             unit.Dir = info.projectDir;
             if (info.buildFile != null) {
                 unit.Data.put("GradleFile", PathUtil.normalize(
-                        projectRoot.relativize(Paths.get(info.buildFile)).normalize().toString()));
+                        projectRoot.relativize(PathUtil.CWD.resolve(info.buildFile)).normalize().toString()));
             } else {
                 unit.Data.put("GradleFile", StringUtils.EMPTY);
             }
@@ -193,7 +207,7 @@ public class GradleProject implements Project {
             // leave only existing files
             unit.Files = new LinkedList<>();
             for (String sourceFile : info.sources) {
-                File f = new File(sourceFile);
+                File f = PathUtil.CWD.resolve(sourceFile).toFile();
                 if (f.isFile()) {
                     // including only existing files to make 'make' tool happy
                     unit.Files.add(f.getAbsolutePath());
@@ -222,14 +236,14 @@ public class GradleProject implements Project {
 
         // putting root gradle file first, it may contain references to all the subprojects
         Set<Path> gradleFiles = new LinkedHashSet<>();
-        File rootGradleFile = new File("build.gradle");
-        if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
+        File rootGradleFile = PathUtil.CWD.resolve("build.gradle").toFile();
+        if (rootGradleFile.isFile()) {
             gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
         } else {
             // alexsaveliev: trying settings.gradle - build file name may be custom one
             // (see https://github.com/Netflix/archaius)
-            rootGradleFile = new File("settings.gradle");
-            if (rootGradleFile.exists() && !rootGradleFile.isDirectory()) {
+            rootGradleFile = PathUtil.CWD.resolve("settings.gradle").toFile();
+            if (rootGradleFile.isFile()) {
                 gradleFiles.add(rootGradleFile.toPath().toAbsolutePath().normalize());
             }
         }
@@ -290,7 +304,7 @@ public class GradleProject implements Project {
                 String unitId = info.getName();
                 // updating cache for sub-projects too
                 if (info.buildFile != null) {
-                    Path subProjectPath = Paths.get(info.buildFile).toAbsolutePath().normalize();
+                    Path subProjectPath = PathUtil.CWD.resolve(info.buildFile).toAbsolutePath().normalize();
                     if (!subProjectPath.equals(path)) {
                         Map<String, BuildAnalysis.BuildInfo> map = buildInfoCache.get(subProjectPath);
                         if (map == null) {
@@ -369,7 +383,7 @@ public class GradleProject implements Project {
                             sourceDir[2]});
                 }
                 for (String path : info.classPath) {
-                    File file = new File(path);
+                    File file = PathUtil.CWD.resolve(path).toFile();
                     if (file.isDirectory()) {
                         sourcepath.add(new String[]{unit.Name,
                                 info.version,
