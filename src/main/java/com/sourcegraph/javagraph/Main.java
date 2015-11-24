@@ -8,11 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Properties;
 
 public class Main {
@@ -46,16 +45,8 @@ public class Main {
                     }
                 }
             });
-            FileUtils.copyDirectory(sourceDir, destDir, new FileFilter() {
-                @Override
-                public boolean accept(File f) {
-                    // excluding .srclib-cache and unreadable entries
-                    if (f.isDirectory()) {
-                        return !f.getName().equals(".srclib-cache") && f.canRead();
-                    }
-                    return f.canRead();
-                }
-            });
+
+            Files.walkFileTree(sourceDir.toPath(), new CopyFileVisitor(destDir.toPath()));
             LOGGER.debug("Copied {} to {}", sourceDir, destDir);
             // updating CWD
             PathUtil.CWD = destDir.toPath();
@@ -110,5 +101,58 @@ public class Main {
             // ignore
         }
         return version;
+    }
+
+    /**
+     * Recursively copies directory to new location preserving attributes.
+     */
+    private static class CopyFileVisitor extends SimpleFileVisitor<Path> {
+        private final Path targetPath;
+        private Path sourcePath = null;
+
+        public CopyFileVisitor(Path targetPath) {
+            this.targetPath = targetPath;
+        }
+
+        @Override
+        public FileVisitResult preVisitDirectory(final Path dir,
+                                                 final BasicFileAttributes attrs) throws IOException {
+            if (sourcePath == null) {
+                sourcePath = dir;
+            } else {
+                File f = dir.toFile();
+                if (f.getName().equals(".srclib-cache") || !f.canRead()) {
+                    return FileVisitResult.SKIP_SUBTREE;
+                }
+                try {
+                    Files.createDirectories(targetPath.resolve(sourcePath.relativize(dir)));
+                } catch (IOException ex) {
+                    // ignore
+                }
+            }
+            return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+        public FileVisitResult visitFile(final Path file,
+                                         final BasicFileAttributes attrs) throws IOException {
+            try {
+                Files.copy(file, targetPath.resolve(sourcePath.relativize(file)), StandardCopyOption.COPY_ATTRIBUTES);
+            } catch (IOException ex) {
+                // ignore
+            }
+            return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+        public FileVisitResult visitFileFailed(Path file, IOException e)
+                throws IOException {
+            return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+        public FileVisitResult postVisitDirectory(Path dir, IOException e) throws IOException {
+            return FileVisitResult.CONTINUE;
+        }
     }
 }
