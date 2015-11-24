@@ -15,6 +15,11 @@ import static org.junit.Assert.assertNotNull;
 public class TestGrapher {
     private GraphData graph(String name, String javaSource) throws Exception {
         Project project = new Project() {
+
+            @Override
+            public void init() {
+            }
+
             @Override
             public List<String> getClassPath() throws Exception {
                 return null;

@@ -26,6 +26,10 @@ public class AndroidCoreProject implements Project {
     public AndroidCoreProject(SourceUnit unit) {
     }
 
+    @Override
+    public void init() {
+    }
+
     /**
      * @return empty list because we are compiling JDK
      */
@@ -90,7 +94,7 @@ public class AndroidCoreProject implements Project {
         unit.Name = "AndroidCore";
         unit.Dir = subdir;
         List<String> directories = new ArrayList<>();
-        getSourceFilesAndDirectories(Paths.get(subdir), unit.Files, directories);
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), unit.Files, directories);
         unit.Data.put("AndroidCoreSubdir", subdir);
         return unit;
     }

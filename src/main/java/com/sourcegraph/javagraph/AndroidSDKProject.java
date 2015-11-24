@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,6 +27,10 @@ public class AndroidSDKProject implements Project {
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidSDKProject.class);
 
     public AndroidSDKProject(SourceUnit unit) {
+    }
+
+    @Override
+    public void init() {
     }
 
     /**
@@ -109,7 +112,7 @@ public class AndroidSDKProject implements Project {
         unit.Type = "JavaArtifact";
         unit.Name = "AndroidSDK";
         unit.Dir = subdir;
-        unit.Files = getSourceFiles(Paths.get(subdir));
+        unit.Files = getSourceFiles(PathUtil.CWD.resolve(subdir));
         unit.Data.put("AndroidSDKSubdir", subdir);
         return unit;
     }
@@ -226,7 +229,8 @@ public class AndroidSDKProject implements Project {
         List<String> aidlFiles = collectFiles("aidl");
         // collect include locations
         Collection<String> includes = aidlFiles.stream().
-                map(aidlFile -> "-I" + getAidlWorkingDir(Paths.get(aidlFile)).getAbsoluteFile().toString()).
+                map(aidlFile -> "-I" + getAidlWorkingDir(PathUtil.CWD.resolve(aidlFile)).
+                        getAbsoluteFile().toString()).
                 collect(Collectors.toSet());
 
         List<String> cmdArgs = new ArrayList<>();

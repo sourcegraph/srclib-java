@@ -14,6 +14,10 @@ public class GenericProject implements Project {
     }
 
     @Override
+    public void init() {
+    }
+
+    @Override
     public List<String> getBootClassPath() throws Exception {
         return null;
     }
