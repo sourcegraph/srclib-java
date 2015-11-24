@@ -159,7 +159,7 @@ public class ScanCommand {
                                                       List<String> internal,
                                                       List<String> external) {
         for (String file : files) {
-            Path p = Paths.get(file).toAbsolutePath();
+            Path p = PathUtil.CWD.resolve(file).toAbsolutePath();
             if (p.startsWith(PathUtil.CWD)) {
                 internal.add(PathUtil.relativizeCwd(p));
             } else {

@@ -62,7 +62,7 @@ public class Antlr4MavenPlugin extends AbstractMavenPlugin {
             Xpp3Dom xmlConfiguration = (Xpp3Dom) configuration;
             Xpp3Dom outputDirectory = xmlConfiguration.getChild("outputDirectory");
             if (outputDirectory != null) {
-                return new File(outputDirectory.getValue()).getAbsolutePath();
+                return PathUtil.CWD.resolve(outputDirectory.getValue()).toAbsolutePath().toString();
             }
         }
         return getDefaultGeneratedSourceDirectory(project);

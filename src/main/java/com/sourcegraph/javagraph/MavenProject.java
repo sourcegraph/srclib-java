@@ -43,7 +43,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -234,7 +233,8 @@ public class MavenProject implements Project {
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
         for (RawDependency dependency : unit.Dependencies) {
-            if (dependency.file != null && jarFile.equals(Paths.get(dependency.file).toAbsolutePath())) {
+            if (dependency.file != null &&
+                    jarFile.equals(PathUtil.CWD.resolve(dependency.file).toAbsolutePath())) {
                 return dependency;
             }
         }
@@ -278,11 +278,11 @@ public class MavenProject implements Project {
         for (String module : proj.getMavenProject().getModules()) {
             info.projectDependencies.add(new BuildAnalysis.ProjectDependency(StringUtils.EMPTY,
                     StringUtils.EMPTY,
-                    PathUtil.concat(proj.pomFile.getParent(), Paths.get(module)).
-                            resolve("pom.xml").
-                            toAbsolutePath().
-                            normalize().
-                            toString()));
+                    PathUtil.concat(PathUtil.CWD.resolve(proj.pomFile.getParent().toString()), module).
+                    resolve("pom.xml").
+                    toAbsolutePath().
+                    normalize().
+                    toString()));
         }
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
@@ -425,7 +425,7 @@ public class MavenProject implements Project {
                 continue;
             }
 
-            Path path = Paths.get(sourceRoot);
+            Path path = PathUtil.CWD.resolve(sourceRoot);
             if (!path.toFile().isDirectory()) {
                 continue;
             }
@@ -437,10 +437,10 @@ public class MavenProject implements Project {
             final DirectoryScanner directoryScanner = new DirectoryScanner();
             directoryScanner.setIncludes(new String[]{"**/*.java"});
             directoryScanner.setExcludes(null);
-            directoryScanner.setBasedir(sourceRoot);
+            directoryScanner.setBasedir(path.toString());
             directoryScanner.scan();
             for (String fileName : directoryScanner.getIncludedFiles()) {
-                sourceFiles.add(Paths.get(sourceRoot, fileName).toString());
+                sourceFiles.add(PathUtil.concat(path, fileName).toString());
             }
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Collected source files from {}", path.toAbsolutePath());
