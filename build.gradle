@@ -34,15 +34,13 @@ dependencies {
 
 	compile 'org.slf4j:slf4j-api:1.7.12'
 
-	compile files("${System.properties['java.home']}/../lib/tools.jar")
-
 	runtime 'org.slf4j:slf4j-log4j12:1.7.12'
 	testRuntime 'org.slf4j:slf4j-log4j12:1.7.12'
 
 }
 
 jar {
-	def gitRef = "git rev-parse --short HEAD".execute().text.trim()
+	def gitRef = "sh -c 'git rev-parse --short HEAD || echo snapshot'".execute().text.trim()
 
 	manifest {
 		attributes "Main-Class" : mainClassName

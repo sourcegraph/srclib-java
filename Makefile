@@ -6,7 +6,7 @@ endif
 
 SRC = $(shell /usr/bin/find ./src -type f)
 
-.PHONY: default install test test-gen clean dist upload-bundled-jdk
+.PHONY: default install test test-gen clean dist upload-bundled-jdk docker-image release
 
 default: install
 
@@ -27,6 +27,12 @@ test-gen: .bin/srclib-java.jar
 clean:
 	rm -f .bin/srclib-java.jar
 	rm -rf build
+
+docker-image:
+	docker build -t srclib/srclib-java .
+
+release: docker-image
+	docker push srclib/srclib-java
 
 
 # To distribute, we also bundle the JRE for the OS and
