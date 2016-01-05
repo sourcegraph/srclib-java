@@ -84,18 +84,17 @@ public class AndroidCoreProject implements Project {
 
     /**
      * Creates source unit from a given directory
-     * @param subdir sub-directory inside current working dir to search for sources in
      * @return source unit
      * @throws Exception
      */
-    public static SourceUnit createSourceUnit(String subdir) throws Exception {
+    public static SourceUnit createSourceUnit() throws Exception {
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";
         unit.Name = "AndroidCore";
-        unit.Dir = subdir;
+        unit.Dir = ".";
         List<String> directories = new ArrayList<>();
-        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), unit.Files, directories);
-        unit.Data.put("AndroidCoreSubdir", subdir);
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve("."), unit.Files, directories);
+        unit.Data.put("AndroidCoreSubdir", ".");
         return unit;
     }
 
