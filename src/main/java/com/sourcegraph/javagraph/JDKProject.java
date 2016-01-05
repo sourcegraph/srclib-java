@@ -48,6 +48,7 @@ public class JDKProject implements Project {
 
     /**
      * @return tools.jar
+	 * TODO(sqs): tools.jar was removed in java9, update this to account for that
      */
     @Override
     public List<String> getClassPath() {
