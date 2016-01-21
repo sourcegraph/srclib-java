@@ -30,7 +30,15 @@ public class SourceUnit {
     /**
      * List of files that produce source units
      */
-    List<String> Files = new LinkedList<>();
+    List<String> Files;
+
+
+    /**
+     * Globs is a list of patterns that match files that make up this source
+     * unit. It is used to detect when the source unit definition is out of date
+     * (e.g., when a file matches the glob but is not in the Files list).
+     */
+    List<String> Globs;
 
     /**
      * Source unit directory
@@ -42,7 +50,6 @@ public class SourceUnit {
      */
     List<RawDependency> Dependencies = new LinkedList<>();
 
-    // TODO(rameshvarun): Globs entry
     /**
      * Source unit raw data
      */
