@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.plexus.util.DirectoryScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,10 +12,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GraphCommand {
 
@@ -61,7 +59,11 @@ public class GraphCommand {
             Grapher grapher = new Grapher(proj,
                     rawGraph);
             LOGGER.debug("Starting graph collection");
-            Collection<String> files = new ArrayList<>(unit.Files);
+            Collection<String> files = new ArrayList<>();
+            if (unit.Files != null) {
+                files.addAll(unit.Files);
+            }
+            files.addAll(collectFilesUsingGlobs(unit.Globs));
             Collection<String> extraFiles = (Collection<String>) unit.Data.get("ExtraSourceFiles");
             if (extraFiles != null) {
                 files.addAll(extraFiles);
@@ -95,6 +97,30 @@ public class GraphCommand {
         }
 
         JSONUtil.writeJSON(graph);
+    }
+
+    /**
+     * Collects files using globs if any
+     * @param globs globs
+     * @return list of files matching given globs
+     */
+    private Collection<String> collectFilesUsingGlobs(List<String> globs) {
+        if (globs == null || globs.isEmpty()) {
+            return Collections.emptyList();
+        }
+        LOGGER.info("Collecting files using globs");
+        final DirectoryScanner directoryScanner = new DirectoryScanner();
+        String globsArray[] = new String[globs.size()];
+        globs.toArray(globsArray);
+        directoryScanner.setIncludes(globsArray);
+        directoryScanner.setExcludes(new String[] {".gradle-srclib/**", ".m2-srclib/**"});
+        directoryScanner.setBasedir(PathUtil.CWD.toString());
+        directoryScanner.scan();
+        Collection<String> files = new LinkedList<>();
+        for (String fileName : directoryScanner.getIncludedFiles()) {
+            files.add(PathUtil.concat(PathUtil.CWD, fileName).toString());
+        }
+        return files;
     }
 
     /**

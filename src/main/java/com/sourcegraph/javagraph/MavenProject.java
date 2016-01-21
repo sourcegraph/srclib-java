@@ -353,6 +353,7 @@ public class MavenProject implements Project {
         Collection<SourceUnit> ret = new ArrayList<>();
         for (BuildAnalysis.BuildInfo info : infos) {
             SourceUnit unit = new SourceUnit();
+            unit.Files = new LinkedList<>();
             unit.Name = info.getName();
             unit.Dir = info.projectDir;
             unit.Files.addAll(info.sources);
