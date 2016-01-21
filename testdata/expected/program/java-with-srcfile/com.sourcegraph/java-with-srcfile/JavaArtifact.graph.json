@@ -1,0 +1,179 @@
+{
+  "Defs": [
+    {
+      "Path": "foo/bar/baz",
+      "Name": "baz",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "foo.bar.baz"
+      },
+      "TreePath": "foo/bar/baz"
+    },
+    {
+      "Path": "foo/bar/baz/Qux/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "DefStart": 76,
+      "DefEnd": 79,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "foo.bar.baz",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "foo/bar/baz/Qux/:init"
+    },
+    {
+      "Path": "foo/bar/baz/Qux:type",
+      "Name": "Qux",
+      "Kind": "type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "DefStart": 63,
+      "DefEnd": 183,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "foo.bar.baz.Qux",
+        "Package": "foo.bar.baz",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "foo/bar/baz/Qux:type"
+    },
+    {
+      "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]",
+      "Name": "main",
+      "Kind": "func",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "DefStart": 85,
+      "DefEnd": 181,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.lang.String[])void",
+        "Package": "foo.bar.baz",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "foo/bar/baz/Qux:type/main:java.lang.String[]"
+    },
+    {
+      "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]/args",
+      "Name": "args",
+      "Kind": "var",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "DefStart": 109,
+      "DefEnd": 122,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.lang.String[]",
+        "Package": "foo.bar.baz",
+        "Modifiers": []
+      },
+      "TreePath": "foo/bar/baz/Qux:type/main:java.lang.String[]/args"
+    },
+    {
+      "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc",
+      "Name": "jc",
+      "Kind": "var",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "DefStart": 145,
+      "DefEnd": 178,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "com.beust.jcommander.JCommander",
+        "Package": "foo.bar.baz",
+        "Modifiers": []
+      },
+      "TreePath": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc"
+    }
+  ],
+  "Refs": [
+    {
+      "DefRepo": "github.com/cbeust/jcommander",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.beust/jcommander",
+      "DefPath": "com/beust/jcommander/JCommander:type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 145,
+      "End": 155
+    },
+    {
+      "DefRepo": "github.com/cbeust/jcommander",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.beust/jcommander",
+      "DefPath": "com/beust/jcommander/JCommander:type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 165,
+      "End": 175
+    },
+    {
+      "DefRepo": "github.com/cbeust/jcommander",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.beust/jcommander",
+      "DefPath": "com/beust/jcommander/JCommander:type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 50,
+      "End": 60
+    },
+    {
+      "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/args",
+      "Def": true,
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 116,
+      "End": 120
+    },
+    {
+      "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc",
+      "Def": true,
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 156,
+      "End": 158
+    },
+    {
+      "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]",
+      "Def": true,
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 104,
+      "End": 108
+    },
+    {
+      "DefPath": "foo/bar/baz/Qux:type",
+      "Def": true,
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 76,
+      "End": 79
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Exception:type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 131,
+      "End": 140
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "src/main/java/foo/bar/baz/Qux.java",
+      "Start": 109,
+      "End": 115
+    }
+  ]
+}
