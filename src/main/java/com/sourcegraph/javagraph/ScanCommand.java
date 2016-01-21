@@ -158,6 +158,10 @@ public class ScanCommand {
     private static void splitInternalAndExternalFiles(Collection<String> files,
                                                       List<String> internal,
                                                       List<String> external) {
+
+        if (files == null) {
+            return;
+        }
         for (String file : files) {
             Path p = PathUtil.CWD.resolve(file).toAbsolutePath();
             if (p.startsWith(PathUtil.CWD)) {

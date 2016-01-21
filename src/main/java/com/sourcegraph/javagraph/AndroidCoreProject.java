@@ -8,10 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Set of rules to compile Android's libcore (https://android.googlesource.com/platform/libcore/)
@@ -93,8 +90,12 @@ public class AndroidCoreProject implements Project {
         unit.Type = "JavaArtifact";
         unit.Name = "AndroidCore";
         unit.Dir = subdir;
-        List<String> directories = new ArrayList<>();
-        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), unit.Files, directories);
+
+        List<String> files = new LinkedList<>();
+        List<String> directories = new LinkedList<>();
+
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), files, directories);
+        unit.Files = files;
         unit.Data.put("AndroidCoreSubdir", subdir);
         return unit;
     }
