@@ -55,7 +55,6 @@ public class GraphCommand {
         LOGGER.info("Building graph for {}", unit.Name);
 
         Project proj = unit.getProject();
-        proj.init();
         Resolver rs = new Resolver(proj, unit);
         try {
             Grapher grapher = new Grapher(proj,

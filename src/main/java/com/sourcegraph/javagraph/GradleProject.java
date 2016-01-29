@@ -81,21 +81,6 @@ public class GradleProject implements Project {
         return null;
     }
 
-    @Override
-    public void init() {
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
-            LOGGER.info("Retrieving metadata information");
-            Path build = PathUtil.CWD.resolve((String) unit.Data.get("GradleFile"));
-            try {
-                BuildAnalysis.Gradle.collectMetaInformation(
-                        unit.Repo,
-                        getWrapper(build),
-                        build);
-            } catch (IOException e) {
-                LOGGER.warn("Failed to retrieve metadata information {}", e.getMessage());
-            }
-        }
-    }
     /**
      * @return cached bootstrap class path from unit data
      */

@@ -43,7 +43,6 @@ public class DepresolveCommand {
         LOGGER.info("Resolving dependencies of {}", unit.Name);
 
         Project project = unit.getProject();
-        project.init();
         Resolver rs = new Resolver(project, unit);
 
         LOGGER.debug("Resolving deps");
