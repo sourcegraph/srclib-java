@@ -38,14 +38,12 @@ public class GradleProject implements Project {
 
     /**
      * Extracts all artifacts from a given Gradle build file
-     * @param repoURI repository URI
      * @param build Gradle build file location
      * @return map unit name -> build info
      * @throws IOException
      */
-    public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(String repoURI, Path build) throws IOException {
-        Map<String, BuildAnalysis.BuildInfo> ret = getBuildInfo(repoURI, build);
-        return ret;
+    public static Map<String, BuildAnalysis.BuildInfo> getGradleAttrs(Path build) throws IOException {
+        return getBuildInfo(build);
     }
 
     /**
@@ -135,10 +133,13 @@ public class GradleProject implements Project {
         return null;
     }
 
+    public static boolean is(SourceUnit unit) {
+        return unit.Data.containsKey("GradleFile");
+    }
+
     /**
      * Collects all source units in a given Gradle build file
      * @param gradleFile Gradle build file to process
-     * @param repoURI repository URI
      * @param visited holds all visited build files to avoid infinite loops when we scanning repository for build files
      * because some build files may be already taken into account by including them in parent's build file
      * @return list of source units collected
@@ -146,10 +147,9 @@ public class GradleProject implements Project {
      * @throws XmlPullParserException
      */
     private static Collection<SourceUnit> createSourceUnits(Path gradleFile,
-                                                            String repoURI,
                                                             Set<Path> visited)
             throws IOException, XmlPullParserException {
-        Map<String, BuildAnalysis.BuildInfo> infos = getGradleAttrs(repoURI, gradleFile);
+        Map<String, BuildAnalysis.BuildInfo> infos = getGradleAttrs(gradleFile);
 
         Collection<SourceUnit> ret = new ArrayList<>();
 
@@ -211,11 +211,10 @@ public class GradleProject implements Project {
 
     /**
      * Collects all source units from all Gradle build files in current working directory
-     * @param repoURI repository URI
      * @return collection of source units
      * @throws IOException
      */
-    public static Collection<SourceUnit> findAllSourceUnits(String repoURI) throws IOException {
+    public static Collection<SourceUnit> findAllSourceUnits() throws IOException {
 
         LOGGER.debug("Retrieving source units");
 
@@ -247,7 +246,7 @@ public class GradleProject implements Project {
             visited.add(gradleFile);
 
             try {
-                units.addAll(createSourceUnits(gradleFile, repoURI, visited));
+                units.addAll(createSourceUnits(gradleFile, visited));
             } catch (Exception e) {
                 LOGGER.warn("An error occurred while processing Gradle file {}",
                         gradleFile, e);
@@ -270,18 +269,16 @@ public class GradleProject implements Project {
 
     /**
      * Retrieving build information from a given build file
-     * @param repoUri repository URI
      * @param path path to build file
      * @return map (source unit id -> build info) extracted by meta information script
      * @throws IOException
      */
-    private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(String repoUri, Path path) throws IOException {
+    private static Map<String, BuildAnalysis.BuildInfo> getBuildInfo(Path path) throws IOException {
         path = path.toAbsolutePath().normalize();
         Map<String, BuildAnalysis.BuildInfo> ret = buildInfoCache.get(path);
         if (ret == null) {
             LOGGER.debug("Collecting meta information from {}", path);
-            BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(repoUri,
-                    getWrapper(path),
+            BuildAnalysis.BuildInfo items[] = BuildAnalysis.Gradle.collectMetaInformation(getWrapper(path),
                     path);
             LOGGER.debug("Collected meta information from {}", path);
             ret = new HashMap<>();

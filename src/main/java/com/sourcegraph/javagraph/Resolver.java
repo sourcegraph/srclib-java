@@ -210,7 +210,6 @@ public class Resolver {
             target.ToUnit = d.groupID + "/" + d.artifactID;
             target.ToUnitType = "JavaArtifact";
             target.ToVersionString = d.version;
-            target.ToRepoCloneURL = unit.Repo;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
@@ -297,7 +296,6 @@ public class Resolver {
             try {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
-                    target.ToRepoCloneURL = unit.Repo;
                     target.ToUnit = dir.get(0);
                     target.ToUnitType = "JavaArtifact";
                     target.ToVersionString = dir.get(1);
