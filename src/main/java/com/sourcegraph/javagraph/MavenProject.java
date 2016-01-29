@@ -286,11 +286,10 @@ public class MavenProject implements Project {
     /**
      * Retrieves all source units from current working directory by scanning for pom.xml files and processing them
      *
-     * @param repoUri repository URI
      * @return all source units collected
      * @throws IOException
      */
-    public static Collection<SourceUnit> findAllSourceUnits(String repoUri) throws IOException {
+    public static Collection<SourceUnit> findAllSourceUnits() throws IOException {
 
         LOGGER.debug("Retrieving source units");
 
@@ -344,7 +343,6 @@ public class MavenProject implements Project {
             unit.Files.addAll(info.sources);
             unit.Dependencies = new ArrayList<>(info.dependencies);
             unit.Type = "JavaArtifact";
-            unit.Repo = repoUri;
             unit.Data.put("POMFile", info.buildFile);
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("SourceVersion", info.sourceVersion);
@@ -395,6 +393,10 @@ public class MavenProject implements Project {
         }
 
         return ret;
+    }
+
+    public static boolean is(SourceUnit unit) {
+        return unit.Data.containsKey("POMFile");
     }
 
     /**

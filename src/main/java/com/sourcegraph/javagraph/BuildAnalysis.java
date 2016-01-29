@@ -186,14 +186,13 @@ public class BuildAnalysis {
         /**
          * Collects meta information from a gradle build file
          *
-         * @param repoUri repository URI
          * @param wrapper gradle command (gradlew, gradlew.bat, gradle, gradle.bat)
          * @param build   path to build file or directory
          * @return list of build info objects extracted from Gradle file. Returns empty list if no source units were
          * found or gradle command failed
          * @throws IOException
          */
-        public static BuildInfo[] collectMetaInformation(String repoUri, Path wrapper, Path build) throws IOException {
+        public static BuildInfo[] collectMetaInformation(Path wrapper, Path build) throws IOException {
             Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
             Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
@@ -217,11 +216,12 @@ public class BuildAnalysis {
                 gradleArgs.add(getGradleUserHome());
                 gradleArgs.add("-I");
                 gradleArgs.add(modifiedGradleScriptFile.toString());
-                if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
-                    // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
-                    gradleArgs.add("--project-cache-dir");
-                    gradleArgs.add(gradleCacheDir.toString());
-                }
+                // TODO (alexsaveliev) restore special handling of Android Support framework
+                // if (!GradleProject.isAndroidSupport(unit)) {
+                // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
+                gradleArgs.add("--project-cache-dir");
+                gradleArgs.add(gradleCacheDir.toString());
+                //}
                 // disabling parallel builds
                 gradleArgs.add("-Dorg.gradle.parallel=false");
                 gradleArgs.add("srclibCollectMetaInformation");
