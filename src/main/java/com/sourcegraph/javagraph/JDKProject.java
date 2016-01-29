@@ -31,10 +31,6 @@ public class JDKProject implements Project {
         this.unit = unit;
     }
 
-    @Override
-    public void init() {
-    }
-
     /**
      * @return empty list (no boot class path) when graphing OpenJDK's JDK
      */
