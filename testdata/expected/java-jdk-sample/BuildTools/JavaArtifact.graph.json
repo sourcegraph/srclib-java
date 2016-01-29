@@ -418,6 +418,8 @@
       "End": 1640
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/JSUM_SEED",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -425,12 +427,16 @@
       "End": 1536
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/JSUM_SEED",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2082,
       "End": 2091
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/c",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -438,18 +444,24 @@
       "End": 3035
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/c",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3068,
       "End": 3069
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/c",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3174,
       "End": 3175
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -457,24 +469,32 @@
       "End": 2954
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3161,
       "End": 3162
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3170,
       "End": 3171
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3194,
       "End": 3195
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -482,24 +502,32 @@
       "End": 3002
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3012,
       "End": 3013
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3021,
       "End": 3022
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3054,
       "End": 3055
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/len",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -507,12 +535,16 @@
       "End": 2975
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/len",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3016,
       "End": 3019
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/start",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -520,12 +552,16 @@
       "End": 2928
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/start",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2957,
       "End": 2962
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/str",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -533,24 +569,32 @@
       "End": 2940
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/str",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2978,
       "End": 2981
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/str",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 3043,
       "End": 3046
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2414,
       "End": 2418
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -558,6 +602,8 @@
       "End": 2917
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -565,24 +611,32 @@
       "End": 1600
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 1629,
       "End": 1633
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 1804,
       "End": 1808
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 1844,
       "End": 1848
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -590,24 +644,32 @@
       "End": 2079
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2399,
       "End": 2411
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2419,
       "End": 2431
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2552,
       "End": 2564
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/diff",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -615,12 +677,16 @@
       "End": 2581
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/diff",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2629,
       "End": 2633
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/e",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -628,12 +694,16 @@
       "End": 2794
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/e",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2876,
       "End": 2877
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -641,30 +711,40 @@
       "End": 2532
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2589,
       "End": 2592
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2650,
       "End": 2653
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2662,
       "End": 2665
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2701,
       "End": 2704
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/i",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -672,18 +752,24 @@
       "End": 2615
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/i",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2625,
       "End": 2626
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/i",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2635,
       "End": 2636
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/inFile",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -691,12 +777,16 @@
       "End": 1791
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/inFile",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 1918,
       "End": 1924
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -704,48 +794,64 @@
       "End": 2111
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2134,
       "End": 2138
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2183,
       "End": 2187
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2204,
       "End": 2208
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2261,
       "End": 2265
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2323,
       "End": 2327
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2433,
       "End": 2437
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2463,
       "End": 2467
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/m",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -753,12 +859,16 @@
       "End": 2248
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/m",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2283,
       "End": 2284
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/outFile",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -766,12 +876,16 @@
       "End": 1832
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/outFile",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 1992,
       "End": 1999
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/p",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -779,12 +893,16 @@
       "End": 2018
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/p",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2251,
       "End": 2252
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/reader",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -792,18 +910,24 @@
       "End": 1881
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/reader",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2141,
       "End": 2147
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/reader",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2737,
       "End": 2743
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -811,48 +935,64 @@
       "End": 1955
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2310,
       "End": 2316
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2342,
       "End": 2348
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2450,
       "End": 2456
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2480,
       "End": 2486
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2681,
       "End": 2687
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2713,
       "End": 2719
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "File": "make/src/classes/build/tools/AddJsum.java",
       "Start": 2759,
       "End": 2765
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
@@ -860,6 +1000,8 @@
       "End": 1586
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "BuildTools",
       "DefPath": "build/tools/addjsum/AddJsum:type",
       "Def": true,
       "File": "make/src/classes/build/tools/AddJsum.java",
