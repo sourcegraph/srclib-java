@@ -42,7 +42,6 @@
       "type": "jar"
     },
     "Target": {
-      "ToRepoCloneURL": "github.com/sgtest/java-maven-multi-module-sample",
       "ToUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "ToUnitType": "JavaArtifact",
       "ToVersionString": "0.0.1-SNAPSHOT"
