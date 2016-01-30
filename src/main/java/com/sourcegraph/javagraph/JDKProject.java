@@ -42,7 +42,7 @@ public class JDKProject implements Project {
      */
     @Override
     public List<String> getBootClassPath() {
-        if (isJdk(unit)) {
+        if (isJDK(unit)) {
             return Collections.emptyList();
         }
         return null;
@@ -120,15 +120,27 @@ public class JDKProject implements Project {
         return null;
     }
 
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains OpenJDK source code or related OpenJDK project such as nashorn
+     */
     public static boolean is(SourceUnit unit) {
-        return isJdk(unit) || isJdkBased(unit);
+        return isJDK(unit) || isJDKBased(unit);
     }
 
-    protected static boolean isJdk(SourceUnit unit) {
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains OpenJDK source code
+     */
+    protected static boolean isJDK(SourceUnit unit) {
         return MARKER_JDK.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
-    protected static boolean isJdkBased(SourceUnit unit) {
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains related OpenJDK project (such as nashorn) code
+     */
+    protected static boolean isJDKBased(SourceUnit unit) {
         return MARKER_JDK_BASED.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
