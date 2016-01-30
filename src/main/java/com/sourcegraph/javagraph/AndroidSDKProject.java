@@ -26,11 +26,9 @@ public class AndroidSDKProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidSDKProject.class);
 
-    public AndroidSDKProject(SourceUnit unit) {
-    }
+    private static final String MARKER = "AndroidSDK";
 
-    @Override
-    public void init() {
+    public AndroidSDKProject(SourceUnit unit) {
     }
 
     /**
@@ -109,11 +107,15 @@ public class AndroidSDKProject implements Project {
 
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";
-        unit.Name = "AndroidSDK";
+        unit.Name = MARKER;
         unit.Dir = ".";
         unit.Files = getSourceFiles(PathUtil.CWD.resolve("."));
-        unit.Data.put("AndroidSDKSubdir", ".");
+        unit.Data.put(SourceUnit.TYPE, MARKER);
         return unit;
+    }
+
+    public static boolean is(SourceUnit unit) {
+        return MARKER.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
     /**
