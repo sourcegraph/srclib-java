@@ -17,50 +17,19 @@ public class ScanCommand {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScanCommand.class);
 
-    public static final String JDK_TEST_REPO = "github.com/sgtest/java-jdk-sample";
-    public static final String ANDROID_SDK_REPO = "android.googlesource.com/platform/frameworks/base";
-    public static final String ANDROID_CORE_REPO = "android.googlesource.com/platform/libcore";
-    public static final String ANDROID_SUPPORT_FRAMEWORK_REPO = "android.googlesource.com/platform/frameworks/support";
-
-
     /**
      * Main method
      */
     public void Execute() {
-        // TODO(sqs): Previously there was a --repo flag. This no
-        // longer exists. We use the flag's value to determine if this
-        // is a special repo (JDK). We need a new way to do this.
-        String repoURI = "";
 
         try {
             // Scan for source units.
             List<SourceUnit> units = new ArrayList<>();
-            switch (repoURI) {
-                case JDK_TEST_REPO:
-                    LOGGER.info("Collecting test JDK source units");
-                    units.addAll(JDKProject.standardSourceUnits());
-                    break;
-                case ANDROID_SDK_REPO:
-                    LOGGER.info("Collecting Android SDK source units");
-                    units.add(AndroidSDKProject.createSourceUnit());
-                    break;
-                case ANDROID_CORE_REPO:
-                    LOGGER.info("Collecting Android core source units");
-                    units.add(AndroidCoreProject.createSourceUnit());
-                    break;
-                default:
-                    if (repoURI.startsWith(JDKProject.OPENJDK_REPO_ROOT)) {
-                        LOGGER.info("Collecting JDK source units");
-                        units.addAll(JDKProject.standardSourceUnits());
-                        break;
-                    }
-                    // Recursively find all Maven and Gradle projects.
-                    LOGGER.info("Collecting Maven source units");
-                    units.addAll(MavenProject.findAllSourceUnits(repoURI));
-                    LOGGER.info("Collecting Gradle source units");
-                    units.addAll(GradleProject.findAllSourceUnits(repoURI));
-                    break;
-            }
+            // Recursively find all Maven and Gradle projects.
+            LOGGER.info("Collecting Maven source units");
+            units.addAll(MavenProject.findAllSourceUnits());
+            LOGGER.info("Collecting Gradle source units");
+            units.addAll(GradleProject.findAllSourceUnits());
             normalize(units);
             JSONUtil.writeJSON(units);
         } catch (Exception e) {
@@ -71,6 +40,7 @@ public class ScanCommand {
 
     /**
      * Normalizes source units produces by scan command (sorts, relativizes file paths etc)
+     *
      * @param units source units to normalize
      */
     @SuppressWarnings("unchecked")
@@ -142,7 +112,8 @@ public class ScanCommand {
      * Splits files to two lists, one that will keep files inside of current working directory
      * (may be used as unit.Files) and the other that will keep files outside of current working directory.
      * Sorts both lists alphabetically after splitting
-     * @param files list of files to split
+     *
+     * @param files    list of files to split
      * @param internal list to keep files inside of current working directory
      * @param external list to keep files outside of current working directory
      */

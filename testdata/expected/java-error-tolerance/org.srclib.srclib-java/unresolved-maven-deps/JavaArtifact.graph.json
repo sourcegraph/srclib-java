@@ -1,0 +1,783 @@
+{
+  "Defs": [
+    {
+      "Path": "org/srclib/java",
+      "Name": "java",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "org.srclib.java"
+      },
+      "TreePath": "org/srclib/java"
+    },
+    {
+      "Path": "org/srclib/java/App/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 446,
+      "DefEnd": 449,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "org/srclib/java/App/:init"
+    },
+    {
+      "Path": "org/srclib/java/App:type",
+      "Name": "App",
+      "Kind": "type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 433,
+      "DefEnd": 1193,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "org.srclib.java.App",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "org/srclib/java/App:type"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord",
+      "Name": "G",
+      "Kind": "func",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 762,
+      "DefEnd": 1191,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(Bar,org.apache.commons.csv.CSVRecord)Qux",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
+      "Name": "c",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 782,
+      "DefEnd": 793,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "org.apache.commons.csv.CSVRecord",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
+      "Name": "firstName",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 1037,
+      "DefEnd": 1081,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
+      "Name": "lastName",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 982,
+      "DefEnd": 1024,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
+      "Name": "q",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 838,
+      "DefEnd": 857,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "Qux",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
+      "Name": "record",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 940,
+      "DefEnd": 956,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "org.apache.commons.csv.CSVRecord",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
+      "Name": "records",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 866,
+      "DefEnd": 926,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.Iterable\u003corg.apache.commons.csv.CSVRecord\u003e",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records"
+    },
+    {
+      "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
+      "Name": "x",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 775,
+      "DefEnd": 780,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "Bar",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x"
+    },
+    {
+      "Path": "org/srclib/java/App:type/main:java.lang.String[]",
+      "Name": "main",
+      "Kind": "func",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 457,
+      "DefEnd": 555,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.lang.String[])void",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "org/srclib/java/App:type/main:java.lang.String[]"
+    },
+    {
+      "Path": "org/srclib/java/App:type/main:java.lang.String[]/args",
+      "Name": "args",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "DefStart": 482,
+      "DefEnd": 495,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.lang.String[]",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/App:type/main:java.lang.String[]/args"
+    },
+    {
+      "Path": "org/srclib/java/JDK8062359/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "DefStart": 39,
+      "DefEnd": 49,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "org/srclib/java/JDK8062359/:init"
+    },
+    {
+      "Path": "org/srclib/java/JDK8062359:type",
+      "Name": "JDK8062359",
+      "Kind": "type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "DefStart": 26,
+      "DefEnd": 222,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "org.srclib.java.JDK8062359",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "org/srclib/java/JDK8062359:type"
+    },
+    {
+      "Path": "org/srclib/java/JDK8062359:type/main:java.lang.String[]",
+      "Name": "main",
+      "Kind": "func",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "DefStart": 57,
+      "DefEnd": 219,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.lang.String[])void",
+        "Package": "org.srclib.java",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]"
+    },
+    {
+      "Path": "org/srclib/java/JDK8062359:type/main:java.lang.String[]/args",
+      "Name": "args",
+      "Kind": "var",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "DefStart": 81,
+      "DefEnd": 94,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.lang.String[]",
+        "Package": "org.srclib.java",
+        "Modifiers": []
+      },
+      "TreePath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]/args"
+    }
+  ],
+  "Refs": [
+    {
+      "DefPath": "Bar:type/toString:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1145,
+      "End": 1153
+    },
+    {
+      "DefPath": "Bar:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 775,
+      "End": 778
+    },
+    {
+      "DefPath": "Qux:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 769,
+      "End": 772
+    },
+    {
+      "DefPath": "Qux:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 838,
+      "End": 841
+    },
+    {
+      "DefPath": "Qux:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 850,
+      "End": 853
+    },
+    {
+      "DefPath": "Undefined:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "Start": 111,
+      "End": 120
+    },
+    {
+      "DefPath": "ZazException:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 815,
+      "End": 827
+    },
+    {
+      "DefPath": "com/doesntexist/foo/Bar:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 101,
+      "End": 104
+    },
+    {
+      "DefPath": "com/doesntexist/foo/Qux:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 133,
+      "End": 136
+    },
+    {
+      "DefPath": "com/doesntexist/foo/ZazException:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 165,
+      "End": 177
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/IOException:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 314,
+      "End": 325
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/IOException:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 802,
+      "End": 813
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/InputStreamReader:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 342,
+      "End": 359
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/PrintStream:type/println:char[]",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1105,
+      "End": 1112
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/PrintStream:type/println:java.lang.String",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 523,
+      "End": 530
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/Reader:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 376,
+      "End": 382
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Iterable:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 866,
+      "End": 874
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1037,
+      "End": 1043
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 482,
+      "End": 488
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 982,
+      "End": 988
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "Start": 81,
+      "End": 87
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/System:type/out",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1101,
+      "End": 1104
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/System:type/out",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 519,
+      "End": 522
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/System:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1094,
+      "End": 1100
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/System:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 512,
+      "End": 518
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/net/URL:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 400,
+      "End": 403
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVFormat:type/DEFAULT",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 906,
+      "End": 913
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVFormat:type/parse:java.io.Reader",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 914,
+      "End": 919
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVFormat:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 246,
+      "End": 255
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVFormat:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 896,
+      "End": 905
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1007,
+      "End": 1010
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type/get:java.lang.String",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1063,
+      "End": 1066
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 287,
+      "End": 296
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 782,
+      "End": 791
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 875,
+      "End": 884
+    },
+    {
+      "DefRepo": "github.com/apache/commons-csv",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-csv",
+      "DefPath": "org/apache/commons/csv/CSVRecord:type",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 940,
+      "End": 949
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 787,
+      "End": 788
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 854,
+      "End": 855
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1044,
+      "End": 1053
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1131,
+      "End": 1140
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1113,
+      "End": 1121
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 989,
+      "End": 997
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1183,
+      "End": 1184
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 842,
+      "End": 843
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1000,
+      "End": 1006
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1056,
+      "End": 1062
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 950,
+      "End": 956
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 886,
+      "End": 893
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 959,
+      "End": 966
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 1143,
+      "End": 1144
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 779,
+      "End": 780
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 773,
+      "End": 774
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/main:java.lang.String[]/args",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 491,
+      "End": 495
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type/main:java.lang.String[]",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 476,
+      "End": 480
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/App:type",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
+      "Start": 446,
+      "End": 449
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]/args",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "Start": 90,
+      "End": 94
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "Start": 76,
+      "End": 80
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.srclib.srclib-java/unresolved-maven-deps",
+      "DefPath": "org/srclib/java/JDK8062359:type",
+      "Def": true,
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
+      "Start": 39,
+      "End": 49
+    }
+  ],
+  "Docs": [
+    {
+      "Path": "org/srclib/java/App:type",
+      "Format": "text/html",
+      "Data": " Hello world!\n\n",
+      "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java"
+    }
+  ]
+}

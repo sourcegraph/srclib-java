@@ -55,7 +55,6 @@ public class GraphCommand {
         LOGGER.info("Building graph for {}", unit.Name);
 
         Project proj = unit.getProject();
-        proj.init();
         Resolver rs = new Resolver(proj, unit);
         try {
             Grapher grapher = new Grapher(proj,
@@ -81,10 +80,7 @@ public class GraphCommand {
             LOGGER.debug("Collecting refs");
             for (Ref ref : rawGraph.refs) {
                 ResolvedTarget target = rs.resolveOrigin(ref.defKey.getOrigin());
-                // alexsaveliev: settings targets only different from current unit
-                if (target != null &&
-                        (!StringUtils.equals(unit.Repo, target.ToRepoCloneURL) ||
-                                !target.ToUnit.equals(unit.Name))) {
+                if (target != null) {
                     ref.setDefTarget(target);
                 }
             }

@@ -3,7 +3,6 @@ package com.sourcegraph.javagraph;
 import com.google.common.collect.Iterators;
 import com.sourcegraph.javagraph.maven.plugins.MavenPlugins;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.*;
 import org.apache.maven.model.building.*;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -184,19 +183,6 @@ public class MavenProject implements Project {
     }
 
     @Override
-    public void init() {
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
-            LOGGER.info("Retrieving Maven artifacts");
-            try {
-                // alexsaveliev: we doing "scan" really
-                findAllSourceUnits(unit.Repo);
-            } catch (IOException e) {
-                LOGGER.warn("Failed to retrieve Maven artifacts {}", e.getMessage());
-            }
-        }
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<String> getClassPath() {
         // simply looking in the unit's data, classpath was collected at the "scan" phase
@@ -279,10 +265,10 @@ public class MavenProject implements Project {
             info.projectDependencies.add(new BuildAnalysis.ProjectDependency(StringUtils.EMPTY,
                     StringUtils.EMPTY,
                     PathUtil.concat(PathUtil.CWD.resolve(proj.pomFile.getParent().toString()), module).
-                    resolve("pom.xml").
-                    toAbsolutePath().
-                    normalize().
-                    toString()));
+                            resolve("pom.xml").
+                            toAbsolutePath().
+                            normalize().
+                            toString()));
         }
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
@@ -300,11 +286,10 @@ public class MavenProject implements Project {
     /**
      * Retrieves all source units from current working directory by scanning for pom.xml files and processing them
      *
-     * @param repoUri repository URI
      * @return all source units collected
      * @throws IOException
      */
-    public static Collection<SourceUnit> findAllSourceUnits(String repoUri) throws IOException {
+    public static Collection<SourceUnit> findAllSourceUnits() throws IOException {
 
         LOGGER.debug("Retrieving source units");
 
@@ -358,7 +343,6 @@ public class MavenProject implements Project {
             unit.Files.addAll(info.sources);
             unit.Dependencies = new ArrayList<>(info.dependencies);
             unit.Type = "JavaArtifact";
-            unit.Repo = repoUri;
             unit.Data.put("POMFile", info.buildFile);
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("SourceVersion", info.sourceVersion);
@@ -411,6 +395,10 @@ public class MavenProject implements Project {
         return ret;
     }
 
+    public static boolean is(SourceUnit unit) {
+        return unit.Data.containsKey("POMFile");
+    }
+
     /**
      * Retrieves all source files in Maven project
      *
@@ -453,11 +441,7 @@ public class MavenProject implements Project {
      * @return location of Maven's local repository
      */
     protected static String getRepoDir() {
-        if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
-            return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
-        } else {
-            return REPO_DIR;
-        }
+        return REPO_DIR;
     }
 
     /**

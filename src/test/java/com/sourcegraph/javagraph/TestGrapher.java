@@ -17,10 +17,6 @@ public class TestGrapher {
         Project project = new Project() {
 
             @Override
-            public void init() {
-            }
-
-            @Override
             public List<String> getClassPath() throws Exception {
                 return null;
             }

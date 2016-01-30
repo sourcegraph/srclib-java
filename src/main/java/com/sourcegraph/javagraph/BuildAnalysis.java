@@ -50,9 +50,10 @@ public class BuildAnalysis {
 
         /**
          * Constructs new project dependency
-         * @param groupID group ID
+         *
+         * @param groupID    group ID
          * @param artifactID artifact ID
-         * @param buildFile sub-project's or module's build file used to build artifact, may ne null
+         * @param buildFile  sub-project's or module's build file used to build artifact, may ne null
          */
         public ProjectDependency(String groupID, String artifactID, String buildFile) {
             this.groupID = groupID;
@@ -184,14 +185,14 @@ public class BuildAnalysis {
 
         /**
          * Collects meta information from a gradle build file
-         * @param repoUri repository URI
+         *
          * @param wrapper gradle command (gradlew, gradlew.bat, gradle, gradle.bat)
-         * @param build path to build file or directory
+         * @param build   path to build file or directory
          * @return list of build info objects extracted from Gradle file. Returns empty list if no source units were
          * found or gradle command failed
          * @throws IOException
          */
-        public static BuildInfo[] collectMetaInformation(String repoUri, Path wrapper, Path build) throws IOException {
+        public static BuildInfo[] collectMetaInformation(Path wrapper, Path build) throws IOException {
             Path modifiedGradleScriptFile = Files.createTempFile("srclib-collect-meta", "gradle");
             Path gradleCacheDir = Files.createTempDirectory("gradle-cache");
 
@@ -215,11 +216,12 @@ public class BuildAnalysis {
                 gradleArgs.add(getGradleUserHome());
                 gradleArgs.add("-I");
                 gradleArgs.add(modifiedGradleScriptFile.toString());
-                if (!ScanCommand.ANDROID_SUPPORT_FRAMEWORK_REPO.equals(repoUri)) {
-                    // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
-                    gradleArgs.add("--project-cache-dir");
-                    gradleArgs.add(gradleCacheDir.toString());
-                }
+                // TODO (alexsaveliev) restore special handling of Android Support framework
+                // if (!GradleProject.isAndroidSupport(unit)) {
+                // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
+                gradleArgs.add("--project-cache-dir");
+                gradleArgs.add(gradleCacheDir.toString());
+                //}
                 // disabling parallel builds
                 gradleArgs.add("-Dorg.gradle.parallel=false");
                 gradleArgs.add("srclibCollectMetaInformation");
@@ -276,7 +278,7 @@ public class BuildAnalysis {
                             case "SRCLIB-ARTIFACT":
                                 info = new BuildInfo();
                                 results.add(info);
-                                info.attrs.artifactID = actualArtifactID(repoUri, payload);
+                                info.attrs.artifactID = payload;
                                 break;
                             case "SRCLIB-GROUP":
                                 if (info == null) {
@@ -345,7 +347,7 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 String tokens[] = payload.split(":", 4);
-                                String unitName = tokens[0] + '/' + actualArtifactID(repoUri, tokens[1]);
+                                String unitName = tokens[0] + '/' + tokens[1];
                                 info.sourceDirs.add(new String[]{unitName, tokens[2], tokens[3]});
                                 break;
                             case "SRCLIB-SOURCEVERSION":
@@ -415,22 +417,10 @@ public class BuildAnalysis {
 
         /**
          * @return Gradle user home to be used.
-         * In Docker mode it's /tmp/.gradle-srclib, in program mode: ~/.gradle-srclib
+         * ~/.gradle-srclib
          */
         private static String getGradleUserHome() {
-            if (System.getenv().get("IN_DOCKER_CONTAINER") != null) {
-                return new File(SystemUtils.getJavaIoTmpDir(), REPO_DIR).getAbsolutePath();
-            } else {
-                return new File(PathUtil.CWD.toFile(), REPO_DIR).getAbsolutePath();
-            }
-        }
-
-        private static String actualArtifactID(String repoURI, String artifactID) {
-            if (System.getenv().get("IN_DOCKER_CONTAINER") != null && artifactID.equals("src")) {
-                String[] parts = repoURI.split("/");
-                return parts[parts.length - 1];
-            }
-            return artifactID;
+            return new File(PathUtil.CWD.toFile(), REPO_DIR).getAbsolutePath();
         }
 
         /**

@@ -1,13 +1,14 @@
 package com.sourcegraph.javagraph;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.model.building.ModelBuildingException;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +18,11 @@ import java.util.stream.Collectors;
  * - include generated files if found into source path
  */
 public class JDKProject implements Project {
+
+    private static final String MARKER_JDK = "JDK";
+    private static final String MARKER_JDK_BASED = "JDKBased";
+
+    private static final String JDK_PROJECT_NAME = "JDKProjectName";
 
     public static final String OPENJDK_REPO_ROOT = "hg.openjdk.java.net/jdk8/jdk8/";
 
@@ -31,16 +37,12 @@ public class JDKProject implements Project {
         this.unit = unit;
     }
 
-    @Override
-    public void init() {
-    }
-
     /**
      * @return empty list (no boot class path) when graphing OpenJDK's JDK
      */
     @Override
     public List<String> getBootClassPath() {
-        if (unit.Repo.equals(JDK_REPO)) {
+        if (isJDK(unit)) {
             return Collections.emptyList();
         }
         return null;
@@ -91,9 +93,9 @@ public class JDKProject implements Project {
         }
 
         // adding project's generated sources dir, if any
-        if (unit.Repo.startsWith(OPENJDK_REPO_ROOT)) {
+        String project = (String) unit.Data.get(JDK_PROJECT_NAME);
+        if (project != null) {
             // TODO (alexsaveliev) support other build configurations?
-            String project = unit.Repo.substring(OPENJDK_REPO_ROOT.length());
             sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/gensrc");
             sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/impsrc");
         }
@@ -116,6 +118,30 @@ public class JDKProject implements Project {
     @Override
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
         return null;
+    }
+
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains OpenJDK source code or related OpenJDK project such as nashorn
+     */
+    public static boolean is(SourceUnit unit) {
+        return isJDK(unit) || isJDKBased(unit);
+    }
+
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains OpenJDK source code
+     */
+    protected static boolean isJDK(SourceUnit unit) {
+        return MARKER_JDK.equals(unit.Data.get(SourceUnit.TYPE));
+    }
+
+    /**
+     * @param unit source unit to check
+     * @return true if given unit contains related OpenJDK project (such as nashorn) code
+     */
+    protected static boolean isJDKBased(SourceUnit unit) {
+        return MARKER_JDK_BASED.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
     private static List<String> getJDKSourcePaths() throws Exception {
@@ -146,44 +172,4 @@ public class JDKProject implements Project {
                 collect(Collectors.toList());
     }
 
-    public static Collection<SourceUnit> standardSourceUnits() throws Exception {
-        List<SourceUnit> units = new ArrayList<>();
-
-        // Java SDK Unit
-        final SourceUnit unit = new SourceUnit();
-        unit.Type = "Java";
-        unit.Name = ".";
-        unit.Dir = "src/";
-        List<String> sourcePaths = getJDKSourcePaths();
-        unit.Files = ScanUtil.scanFiles(sourcePaths);
-        unit.Data.put("JDK", true);
-        Set<String[]> sourcePathSet = new HashSet<>();
-        for (String sourcePath : sourcePaths) {
-            sourcePathSet.add(new String[]{unit.Name, StringUtils.EMPTY, sourcePath});
-        }
-        unit.Data.put("SourcePath", sourcePathSet);
-        units.add(unit);
-
-        addKnownSourceUnit(units, "make/src/classes/");
-        addKnownSourceUnit(units, "buildtools/nasgen/");
-
-        return units;
-    }
-
-    private static void addKnownSourceUnit(Collection<SourceUnit> units, String directory) throws IOException {
-        File dir = PathUtil.CWD.resolve(directory).toFile();
-        if (dir.isDirectory()) {
-            // Build tools source unit
-            final SourceUnit toolsUnit = new SourceUnit();
-            toolsUnit.Type = "JavaArtifact";
-            toolsUnit.Name = "BuildTools";
-            toolsUnit.Dir = directory;
-            toolsUnit.Files = ScanUtil.scanFiles(directory);
-            toolsUnit.Data.put("JDK", true);
-            Set<String[]> sourcePath = new HashSet<>();
-            sourcePath.add(new String[] {toolsUnit.Name, StringUtils.EMPTY, directory});
-            toolsUnit.Data.put("SourcePath", sourcePath);
-            units.add(toolsUnit);
-        }
-    }
 }
