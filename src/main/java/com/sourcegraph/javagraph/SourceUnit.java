@@ -13,6 +13,11 @@ import java.util.*;
 public class SourceUnit {
 
     /**
+     * Source unit type (may be located in the Data, optional)
+     */
+    public static final String TYPE = "Type";
+
+    /**
      * Source unit name
      */
     String Name;
@@ -21,11 +26,6 @@ public class SourceUnit {
      * Source unit type
      */
     String Type;
-
-    /**
-     * Repo URI
-     */
-    String Repo;
 
     /**
      * List of files that produce source units
@@ -74,19 +74,19 @@ public class SourceUnit {
      */
     // TODO(rameshvarun): Info field
     public Project getProject() {
-        if (Data.containsKey("POMFile")) {
+        if (MavenProject.is(this)) {
             return new MavenProject(this);
         }
-        if (Data.containsKey("GradleFile")) {
+        if (GradleProject.is(this)) {
             return new GradleProject(this);
         }
-        if (Data.containsKey("AndroidSDKSubdir")) {
+        if (AndroidSDKProject.is(this)) {
             return new AndroidSDKProject(this);
         }
-        if (Data.containsKey("AndroidCoreSubdir")) {
+        if (AndroidCoreProject.is(this)) {
             return new AndroidCoreProject(this);
         }
-        if (Data.containsKey("JDK")) {
+        if (JDKProject.is(this)) {
             return new JDKProject(this);
         }
         return new GenericProject(this);

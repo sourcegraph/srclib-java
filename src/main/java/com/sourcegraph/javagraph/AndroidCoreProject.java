@@ -20,11 +20,9 @@ public class AndroidCoreProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidCoreProject.class);
 
-    public AndroidCoreProject(SourceUnit unit) {
-    }
+    private static final String MARKER = "AndroidCore";
 
-    @Override
-    public void init() {
+    public AndroidCoreProject(SourceUnit unit) {
     }
 
     /**
@@ -81,23 +79,27 @@ public class AndroidCoreProject implements Project {
 
     /**
      * Creates source unit from a given directory
-     * @param subdir sub-directory inside current working dir to search for sources in
      * @return source unit
      * @throws Exception
      */
-    public static SourceUnit createSourceUnit(String subdir) throws Exception {
+    public static SourceUnit createSourceUnit() throws Exception {
         final SourceUnit unit = new SourceUnit();
         unit.Type = "JavaArtifact";
-        unit.Name = "AndroidCore";
-        unit.Dir = subdir;
+        unit.Name = MARKER;
+        unit.Dir = ".";
 
         List<String> files = new LinkedList<>();
         List<String> directories = new LinkedList<>();
 
-        getSourceFilesAndDirectories(PathUtil.CWD.resolve(subdir), files, directories);
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve(unit.Dir), files, directories);
         unit.Files = files;
-        unit.Data.put("AndroidCoreSubdir", subdir);
+
+        unit.Data.put(SourceUnit.TYPE, MARKER);
         return unit;
+    }
+
+    public static boolean is(SourceUnit unit) {
+        return MARKER.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
     /**
