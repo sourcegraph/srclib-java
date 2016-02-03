@@ -23,3 +23,6 @@
 [submodule "testdata/case/java-ident-issue-23"]
 	path = testdata/case/java-ident-issue-23
 	url = https://github.com/sgtest/java-ident-issue-23
+[submodule "testdata/case/java-gradle-custom-project-name"]
+	path = testdata/case/java-gradle-custom-project-name
+	url = https://github.com/sgtest/java-gradle-custom-project-name
