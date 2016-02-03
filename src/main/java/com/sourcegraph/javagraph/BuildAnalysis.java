@@ -261,9 +261,10 @@ public class BuildAnalysis {
                     in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
                     String line;
+                    StringBuilder output = new StringBuilder();
                     while ((line = in.readLine()) != null) {
                         if ("BUILD FAILED".equals(line)) {
-                            LOGGER.error("Failed to process {} - gradle build failed", build);
+                            LOGGER.error("Failed to process {} - gradle build failed. Output was: {}", build, output);
                             results.clear();
                             break;
                         }
@@ -402,6 +403,7 @@ public class BuildAnalysis {
                                 break;
                             default:
                                 LOGGER.debug("gradle: {}", line);
+                                output.append(line).append(IOUtils.LINE_SEPARATOR);
                         }
                     }
                 } finally {
