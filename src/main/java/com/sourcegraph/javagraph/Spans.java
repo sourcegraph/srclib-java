@@ -105,9 +105,15 @@ public final class Spans {
      * @throws SpanException
      */
     public int[] name(MemberSelectTree mst) throws SpanException {
-        // TODO(sqs): specify offset in case the identifier name is repeated in
-        // the MemberSelect LHS expression.
-        return name(mst.getIdentifier().toString(), mst);
+        // alexsaveliev: searching for .NAME to deal with the cases such as "xxFOOxx.FOO"
+        String lookup = '.' + mst.getIdentifier().toString();
+        int ret[] = name(lookup, mst);
+        if (ret == null) {
+            return null;
+        }
+        // adjusting position
+        ret[0]++;
+        return ret;
     }
 
     /**
@@ -120,10 +126,6 @@ public final class Spans {
 
         if (src == null) {
             return null;
-        }
-
-        if (!SourceVersion.isIdentifier(name)) {
-            throw new SpanException("Name '" + name + "' is not an identifier");
         }
 
         int treeStart = (int) srcPos.getStartPosition(compilationUnit, t);
