@@ -24,15 +24,14 @@ RUN echo y | android update sdk --filter extra-android-m2repository,extra-google
 # See https://code.google.com/p/android/issues/detail?id=82711
 RUN apt-get install -y lib32z1 lib32ncurses5 lib32stdc++6
 
-# Add this toolchain
-RUN apt-get install -qq make
-ENV SRCLIBPATH /srclib
-ADD . /srclib/srclib-java/
-RUN cd /srclib/srclib-java && make
-
 # Adding special JDK
 WORKDIR /srclib/srclib-java
 RUN wget https://srclib-support.s3-us-west-2.amazonaws.com/srclib-java/build/bundled-jdk1.8.0_45.tar.gz
 RUN tar xfz bundled-jdk1.8.0_45.tar.gz
 RUN rm bundled-jdk1.8.0_45.tar.gz
 
+# Add this toolchain
+RUN apt-get install -qq make
+ENV SRCLIBPATH /srclib
+ADD . /srclib/srclib-java/
+RUN cd /srclib/srclib-java && make
