@@ -1,0 +1,1 @@
+{"Name":"foobar/java-ident-issue-23","Type":"JavaArtifact","Files":["src/main/java/x/Foo.java"],"Data":{"ClassPath":[],"Description":"","GradleFile":"build.gradle","SourcePath":[["foobar/java-ident-issue-23","1.0","src/main/java"],["foobar/java-ident-issue-23","1.0","src/test/java"]],"SourceVersion":"1.8"}}
