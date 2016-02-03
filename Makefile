@@ -5,8 +5,9 @@ else
 endif
 
 SRC = $(shell /usr/bin/find ./src -type f)
+DOCKER_TAG = $(shell git rev-parse --short HEAD)
 
-.PHONY: default install test test-gen clean dist upload-bundled-jdk
+.PHONY: default install test test-gen clean dist upload-bundled-jdk docker-image release
 
 default: install
 
@@ -18,15 +19,21 @@ build/libs/srclib-java-0.0.1-SNAPSHOT.jar: build.gradle ${SRC}
 
 install: .bin/srclib-java.jar
 
-test: .bin/srclib-java.jar
-	src -v test -m program
+test: install
+	srclib -v test
 
-test-gen: .bin/srclib-java.jar
-	src -v test -m program --gen
+test-gen: install
+	srclib -v test --gen
 
 clean:
 	rm -f .bin/srclib-java.jar
 	rm -rf build
+
+docker-image:
+	docker build -t srclib/srclib-java:$(DOCKER_TAG) .
+
+release: docker-image
+	docker push srclib/srclib-java:$(DOCKER_TAG)
 
 
 # To distribute, we also bundle the JRE for the OS and
