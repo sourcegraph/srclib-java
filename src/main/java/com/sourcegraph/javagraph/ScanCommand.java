@@ -30,6 +30,8 @@ public class ScanCommand {
             units.addAll(MavenProject.findAllSourceUnits());
             LOGGER.info("Collecting Gradle source units");
             units.addAll(GradleProject.findAllSourceUnits());
+            LOGGER.info("Collecting Ant source units");
+            units.addAll(AntProject.findAllSourceUnits());
             normalize(units);
             JSONUtil.writeJSON(units);
         } catch (Exception e) {
@@ -79,6 +81,12 @@ public class ScanCommand {
             if (unit.Data.containsKey("POMFile")) {
                 unit.Data.put("POMFile", PathUtil.relativizeCwd((String) unit.Data.get("POMFile")));
             }
+
+            if (unit.Data.containsKey(AntProject.BUILD_XML_PROPERTY)) {
+                unit.Data.put(AntProject.BUILD_XML_PROPERTY,
+                        PathUtil.relativizeCwd((String) unit.Data.get(AntProject.BUILD_XML_PROPERTY)));
+            }
+
             if (unit.Data.containsKey("ClassPath")) {
                 Collection<String> classPath = (Collection<String>) unit.Data.get("ClassPath");
                 classPath = classPath.stream().

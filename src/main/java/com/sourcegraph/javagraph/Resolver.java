@@ -2,6 +2,7 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -78,9 +79,8 @@ public class Resolver {
         }
         URI normalizedOrigin = normalizeOrigin(origin);
 
-        ResolvedTarget ret = resolvedOrigins.get(normalizedOrigin);
-        if (ret != null) {
-            return ret;
+        if (resolvedOrigins.containsKey(normalizedOrigin)) {
+            return resolvedOrigins.get(normalizedOrigin);
         }
 
         Path jarFile;
@@ -205,10 +205,10 @@ public class Resolver {
 
         // HACK: Assume that if groupID of the RawDependency equals the groupID
         // of the current project, then it is from the same repo and shouldn't be resolved externally.
-        if (unit.Name.substring(0, this.unit.Name.indexOf('/')).equals(d.groupID)) {
+        if (StringUtils.substringBefore(unit.Name, "/").equals(d.groupID)) {
             ResolvedTarget target = new ResolvedTarget();
             target.ToUnit = d.groupID + "/" + d.artifactID;
-            target.ToUnitType = "JavaArtifact";
+            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
             target.ToVersionString = d.version;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
@@ -221,7 +221,7 @@ public class Resolver {
         if (cloneURL != null || d.repoURI != null) {
             ResolvedTarget target = new ResolvedTarget();
             target.ToUnit = d.groupID + "/" + d.artifactID;
-            target.ToUnitType = "JavaArtifact";
+            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
             target.ToVersionString = d.version;
             target.ToRepoCloneURL = cloneURL == null ? d.repoURI : cloneURL;
             resolution = new DepResolution(d, target);
@@ -255,7 +255,7 @@ public class Resolver {
                 ResolvedTarget target = new ResolvedTarget();
                 target.ToRepoCloneURL = cloneURL;
                 target.ToUnit = d.groupID + "/" + d.artifactID;
-                target.ToUnitType = "JavaArtifact";
+                target.ToUnitType = SourceUnit.DEFAULT_TYPE;
                 target.ToVersionString = d.version;
 
                 res.Target = target;
@@ -297,7 +297,7 @@ public class Resolver {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
                     target.ToUnit = dir.get(0);
-                    target.ToUnitType = "JavaArtifact";
+                    target.ToUnitType = SourceUnit.DEFAULT_TYPE;
                     target.ToVersionString = dir.get(1);
                     return target;
                 }
