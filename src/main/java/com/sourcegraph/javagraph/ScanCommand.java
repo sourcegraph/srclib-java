@@ -53,7 +53,14 @@ public class ScanCommand {
                 thenComparing(dependency -> dependency.groupID).
                 thenComparing(dependency -> dependency.version).
                 thenComparing(dependency -> dependency.scope).
-                thenComparing(dependency -> dependency.file == null ? StringUtils.EMPTY : dependency.file);
+                thenComparing((o1, o2) -> {
+                    if (o1.file == null) {
+                        return o2.file == null ? 0 : -1;
+                    } else if (o2.file == null) {
+                        return 1;
+                    }
+                    return o1.file.compareTo(o2.file);
+                });
 
         Comparator<String[]> sourcePathComparator = Comparator.comparing(sourcePathElement -> sourcePathElement[0]);
         sourcePathComparator = sourcePathComparator.
