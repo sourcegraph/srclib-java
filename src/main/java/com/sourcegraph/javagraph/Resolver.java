@@ -197,7 +197,7 @@ public class Resolver {
      */
     public DepResolution resolveRawDep(RawDependency d) {
 
-        String groupId = StringUtils.defaultString(d.groupID, BuildAnalysis.DEFAULT_GROUP_ID);
+        String groupId = d.groupID;
         String key = groupId + ':' + d.artifactID + ':' + d.version + ':' + d.scope;
         DepResolution resolution = depsCache.get(key);
         if (resolution != null) {
