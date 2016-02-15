@@ -2,7 +2,8 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.*;
-import org.apache.tools.ant.taskdefs.Javac;
+import org.apache.tools.ant.taskdefs.*;
+import org.apache.tools.ant.types.FileSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,55 @@ public class AntProject implements Project {
 
     private SourceUnit unit;
 
+    /**
+     * Keeps mapping between JAR files and dependencies computed via JAR's SHA1
+     */
+    private static Map<Path, RawDependency> dependencyCache = new HashMap<>();
+
+    /**
+     * This set keeps known Ant types that might be executed while collecting data
+     */
+    private static Set<String> executables = new HashSet<>();
+
+    static {
+
+        executables.add("property");
+        executables.add("basename");
+        executables.add("condition");
+        executables.add("dirname");
+        executables.add("import");
+        executables.add("loadproperties");
+        executables.add("xmlproperty");
+        executables.add("and");
+        executables.add("antversion");
+        executables.add("contains");
+        executables.add("equals");
+        executables.add("filesmatch");
+        executables.add("hasfreespace");
+        executables.add("hasmethod");
+        executables.add("isfailure");
+        executables.add("isfalse");
+        executables.add("isfileselected");
+        executables.add("islastmodified");
+        executables.add("isreference");
+        executables.add("isset");
+        executables.add("issigned");
+        executables.add("istrue");
+        executables.add("matches");
+        executables.add("not");
+        executables.add("or");
+        executables.add("os");
+        executables.add("parsersupports");
+        executables.add("resourcecontains");
+        executables.add("resourceexists");
+        executables.add("resourcesmatch");
+        executables.add("typefound");
+        executables.add("xor");
+        executables.add("available");
+        executables.add("uptodate");
+        executables.add("fileset");
+        executables.add("path");
+    }
 
     public AntProject(SourceUnit unit) {
         this.unit = unit;
@@ -61,7 +111,13 @@ public class AntProject implements Project {
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
-        return MavenCentralUtils.searchInCentral(jarFile);
+        for (RawDependency dependency : unit.Dependencies) {
+            if (dependency.file != null &&
+                    jarFile.equals(PathUtil.CWD.resolve(dependency.file).toAbsolutePath())) {
+                return dependency;
+            }
+        }
+        return null;
     }
 
     /**
@@ -100,20 +156,44 @@ public class AntProject implements Project {
         return unit.Data.containsKey(BUILD_XML_PROPERTY);
     }
 
+    /**
+     * Constructs source unit based on given build.xml
+     * @param buildXml location of build.xml file
+     * @return source unit
+     */
     private static SourceUnit getSourceUnit(Path buildXml) {
 
-        LOGGER.debug("Processing {}", buildXml);
+        LOGGER.info("Processing {}", buildXml);
         org.apache.tools.ant.Project project = new org.apache.tools.ant.Project();
         project.init();
 
         project.setUserProperty(MagicNames.ANT_FILE, buildXml.toAbsolutePath().toString());
         project.setUserProperty(MagicNames.ANT_FILE_TYPE, MagicNames.ANT_FILE_TYPE_FILE);
 
+        // Component helper that handles unknown objects
+        ComponentHelper componentHelper = new ComponentHelper() {
+            @Override
+            public Object createComponent(String componentName) {
+                AntTypeDefinition def = getDefinition(componentName);
+                return def == null ? new DynamicObject() : def.create(project);
+            }
+        };
+        componentHelper.setProject(project);
+        componentHelper.initDefaultDefinitions();
+
+        project.addReference(ComponentHelper.COMPONENT_HELPER_REFERENCE, componentHelper);
+
+        // alexsaveliev: Using special implementations of javac, fileset, path, and uptodate typedefs
+        // to ignore missing directories errors. Ant scripts usually make directories before
+        // compiling files but we'd like to collect all the available files and directories
+        // without making them
+
+        componentHelper.addTaskDefinition("javac", ErrorTolerantJavac.class);
+        componentHelper.addDataTypeDefinition("fileset", ErrorTolerantFileSet.class);
+        componentHelper.addDataTypeDefinition("path", ErrorTolerantPath.class);
+        componentHelper.addDataTypeDefinition("uptodate", ErrorTolerantUpToDate.class);
+
         ProjectHelper.configureProject(project, buildXml.toFile());
-
-        ComponentHelper componentHelper = ComponentHelper.getComponentHelper(project);
-        componentHelper.addTaskDefinition("javac", NoopJavac.class);
-
         Collection<String> files = new HashSet<>();
         Collection<String[]> sourcePath = new LinkedList<>();
         Collection<String> classPath = new LinkedList<>();
@@ -124,7 +204,7 @@ public class AntProject implements Project {
 
         SourceUnit unit = new SourceUnit();
         unit.Files = new LinkedList<>();
-        unit.Name = project.getName();
+        unit.Name = getProjectName(project);
         unit.Dir = buildXml.getParent().toString();
         unit.Type = SourceUnit.DEFAULT_TYPE;
         unit.Data.put(BUILD_XML_PROPERTY, buildXml.toString());
@@ -137,9 +217,13 @@ public class AntProject implements Project {
                 if (!"javac".equals(taskType)) {
                     continue;
                 }
+
+                LOGGER.debug("Found javac {}:{}", target.getName(), task.getTaskName());
+                prepare(project, target);
+
                 task.getRuntimeConfigurableWrapper().setProxy(componentHelper.createComponent(taskType));
                 task.maybeConfigure();
-                NoopJavac javac = (NoopJavac) task.getRuntimeConfigurableWrapper().getProxy();
+                ErrorTolerantJavac javac = (ErrorTolerantJavac) task.getRuntimeConfigurableWrapper().getProxy();
                 javac.execute();
 
                 String source = javac.getSource();
@@ -176,14 +260,33 @@ public class AntProject implements Project {
         for (String item : classPath) {
             File file = new File(item);
             if (file.isFile()) {
-                RawDependency dependency = MavenCentralUtils.searchInCentral(file.toPath());
+
+                Path jarPath = file.toPath();
+                RawDependency dependency;
+                if (dependencyCache.containsKey(jarPath)) {
+                    dependency = dependencyCache.get(jarPath);
+                } else {
+                    dependency = MavenCentralUtils.searchInCentral(jarPath);
+                    if (dependency != null) {
+                        dependency.file = file.toString();
+                        dependency.scope = StringUtils.EMPTY;
+                    }
+                    dependencyCache.put(jarPath, dependency);
+                }
                 if (dependency != null) {
                     unit.Dependencies.add(dependency);
                 }
             }
         }
-        unit.Data.put("SourceVersion", sourceVersion);
-        unit.Data.put("SourceEncoding", sourceEncoding);
+        sourceEncoding = nonVariable(sourceEncoding);
+        sourceVersion = nonVariable(sourceVersion);
+
+        if (sourceVersion != null) {
+            unit.Data.put("SourceVersion", sourceVersion);
+        }
+        if (sourceEncoding != null) {
+            unit.Data.put("SourceEncoding", sourceEncoding);
+        }
         unit.Data.put("SourcePath", sourcePath);
         unit.Data.put("ClassPath", classPath);
         if (!bootClassPath.isEmpty()) {
@@ -192,30 +295,347 @@ public class AntProject implements Project {
         return unit;
     }
 
+    /**
+     * @param project Ant project
+     * @return project name extracted from build.xml or relative path to project's base dir if project name
+     * wasn't defined in build.xml
+     */
+    private static String getProjectName(org.apache.tools.ant.Project project) {
+        String name = project.getName();
+        if (!StringUtils.isEmpty(name)) {
+            return name;
+        }
+        return PathUtil.relativizeCwd(project.getBaseDir().toPath());
+    }
+
+    /**
+     * @param path path to process
+     * @return list of existing files denoted by a given path
+     */
     private static Collection<String> getPathItems(org.apache.tools.ant.types.Path path) {
         if (path == null) {
             return Collections.emptyList();
         }
         Collection<String> ret = new LinkedList<>();
-        Collections.addAll(ret, path.list());
+        for (String item : path.list()) {
+            if (new File(item).exists()) {
+                ret.add(item);
+            } else {
+                LOGGER.warn("Removing non-existent item {}", item);
+            }
+        }
         return ret;
     }
 
-    public static class NoopJavac extends Javac {
+    /**
+     * @param s string to check
+     * @return null if string contains unresolved variables
+     */
+    private static String nonVariable(String s) {
+        if (s == null || s.contains("${")) {
+            return null;
+        }
+        return s;
+    }
 
-        @Override
-        protected void compile() {
-            // NOOP
+    /**
+     * Collects dependencies and runs all tasks specific target depends on
+     * @param project Ant project
+     * @param target Ant target
+     */
+    private static void prepare(org.apache.tools.ant.Project project, Target target) {
+        Collection<Target> dependencies = getDependencies(project, target);
+        for (Target dependency : dependencies) {
+            runTasks(project, dependency);
+        }
+    }
+
+    /**
+     * Runs all tasks of specific target (that we know how to deal with)
+     * @param project Ant project
+     * @param target Ant target
+     */
+    private static void runTasks(org.apache.tools.ant.Project project, Target target) {
+        for (Task task : target.getTasks()) {
+            String taskType = task.getTaskType();
+            if (!executables.contains(taskType)) {
+                continue;
+            }
+            LOGGER.debug("Executing {}:{}", target.getName(), task.getTaskName());
+
+            Object proxy = ComponentHelper.getComponentHelper(project).
+                    createComponent(taskType);
+            task.getRuntimeConfigurableWrapper().setProxy(proxy);
+            task.maybeConfigure();
+            try {
+                task.execute();
+            } catch (BuildException ex) {
+                LOGGER.warn("Unable to execute {}:{}", target.getName(), task.getTaskName(), ex);
+            }
+        }
+    }
+
+    /**
+     * @param project Ant project
+     * @param target Ant target
+     * @return list of  target's dependencies
+     */
+    private static Collection<Target> getDependencies(org.apache.tools.ant.Project project, Target target) {
+        LinkedList<Target> dependencies = new LinkedList<>();
+        collectDependencies(project, target, dependencies);
+        return dependencies;
+    }
+
+    /**
+     * Collects dependencies of a given target
+     * @param project Ant project
+     * @param target Ant target
+     * @param dependencies dependencies holder
+     */
+    private static void collectDependencies(org.apache.tools.ant.Project project,
+                                            Target target,
+                                            LinkedList<Target> dependencies) {
+        if (dependencies.contains(target)) {
+            return;
+        }
+        dependencies.add(0, target);
+        Enumeration<String> deps = target.getDependencies();
+        while (deps.hasMoreElements()) {
+            Target dependency = project.getTargets().get(deps.nextElement());
+            collectDependencies(project, dependency, dependencies);
+        }
+    }
+
+    /**
+     * The main purpose of this hack around "javac" Ant's task is to tolerate missing directories.
+     * For example, Ant may create "build" directory and use it as a path element later while we don't making any dirs
+     */
+    public static class ErrorTolerantJavac extends Javac {
+
+        private org.apache.tools.ant.types.Path src;
+        private org.apache.tools.ant.types.Path compileClasspath;
+        private org.apache.tools.ant.types.Path compileSourcepath;
+        private org.apache.tools.ant.types.Path bootclasspath;
+        private org.apache.tools.ant.types.Path extdirs;
+
+        public ErrorTolerantJavac() {
+            super();
+            fileset.setErrorOnMissingDir(false);
         }
 
         @Override
-        protected void checkParameters() throws BuildException {
-            // NOOP
+        public org.apache.tools.ant.types.Path createSrc() {
+            if (src == null) {
+                src = new ErrorTolerantPath(getProject());
+            }
+            return src.createPath();
+        }
+
+        @Override
+        protected org.apache.tools.ant.types.Path recreateSrc() {
+            src = null;
+            return createSrc();
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path getSrcdir() {
+            return src;
+        }
+
+        @Override
+        public void setSrcdir(final org.apache.tools.ant.types.Path srcDir) {
+            if (src == null) {
+                src = new ErrorTolerantPath(getProject());
+            }
+            src.append(srcDir);
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path createClasspath() {
+            if (compileClasspath == null) {
+                compileClasspath = new ErrorTolerantPath(getProject());
+            }
+            return compileClasspath.createPath();
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path getClasspath() {
+            return compileClasspath;
+        }
+
+        @Override
+        public void setClasspath(final org.apache.tools.ant.types.Path classpath) {
+            if (compileClasspath == null) {
+                compileClasspath = new ErrorTolerantPath(getProject());
+            }
+            compileClasspath.append(classpath);
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path createSourcepath() {
+            if (compileSourcepath == null) {
+                compileSourcepath = new ErrorTolerantPath(getProject());
+            }
+            return compileSourcepath.createPath();
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path getSourcepath() {
+            return compileSourcepath;
+        }
+
+        @Override
+        public void setSourcepath(final org.apache.tools.ant.types.Path sourcepath) {
+            if (compileSourcepath == null) {
+                compileSourcepath = sourcepath;
+            }
+            compileSourcepath.append(sourcepath);
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path createBootclasspath() {
+            if (bootclasspath == null) {
+                bootclasspath = new ErrorTolerantPath(getProject());
+            }
+            return bootclasspath.createPath();
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path getBootclasspath() {
+            return bootclasspath;
+        }
+
+        @Override
+        public void setBootclasspath(final org.apache.tools.ant.types.Path bootclasspath) {
+            if (this.bootclasspath == null) {
+                this.bootclasspath = bootclasspath;
+            }
+            this.bootclasspath.append(bootclasspath);
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path createExtdirs() {
+            if (extdirs == null) {
+                extdirs = new ErrorTolerantPath(getProject());
+            }
+            return extdirs.createPath();
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path getExtdirs() {
+            return extdirs;
+        }
+
+        @Override
+        public void setExtdirs(final org.apache.tools.ant.types.Path extdirs) {
+            if (this.extdirs == null) {
+                this.extdirs = extdirs;
+            }
+            this.extdirs.append(extdirs);
+        }
+
+        @Override
+        public void execute() throws BuildException {
+            resetFileLists();
+
+            final String[] list = getSrcdir().list();
+            for (String aList : list) {
+                final File srcDir = getProject().resolveFile(aList);
+                if (!srcDir.exists()) {
+                    continue;
+                }
+
+                final DirectoryScanner ds = this.getDirectoryScanner(srcDir);
+                final String[] files = ds.getIncludedFiles();
+
+                scanDir(srcDir, getDestdir() != null ? getDestdir() : srcDir, files);
+            }
         }
 
         protected File[] getCompileList() {
             return compileList;
         }
     }
+
+    /**
+     * The purpose of this hack around "fileset" Ant's type is to tolerate missing directories.
+     * For example, Ant may create "build" directory and use it as a path element later while we don't making any dirs
+     */
+    public static class ErrorTolerantFileSet extends FileSet {
+
+        @SuppressWarnings("unused")
+        public ErrorTolerantFileSet() {
+            super();
+            setErrorOnMissingDir(false);
+        }
+
+        @SuppressWarnings("unused")
+        public ErrorTolerantFileSet(FileSet fileSet) {
+            super(fileSet);
+            setErrorOnMissingDir(false);
+        }
+    }
+
+    /**
+     * The purpose of this hack around "path" Ant's type is to tolerate missing directories.
+     * For example, Ant may create "build" directory and use it as a path element later while we don't making any dirs
+     */
+    public static class ErrorTolerantPath extends org.apache.tools.ant.types.Path {
+
+        @SuppressWarnings("unused")
+        public ErrorTolerantPath(org.apache.tools.ant.Project p, String path) {
+            super(p, path);
+        }
+
+        public ErrorTolerantPath(org.apache.tools.ant.Project p) {
+            super(p);
+        }
+
+        @Override
+        public org.apache.tools.ant.types.Path createPath() throws BuildException {
+            org.apache.tools.ant.types.Path p = new ErrorTolerantPath(getProject());
+            add(p);
+            return p;
+        }
+
+        @Override
+        public void addFileset(FileSet fs) throws BuildException {
+            fs.setErrorOnMissingDir(false);
+            super.addFileset(fs);
+        }
+
+    }
+
+    /**
+     * The purpose of this hack around "uptodate" Ant's task is to tolerate missing directories.
+     * For example, Ant may create "build" directory and use it as a path element later while we don't making any dirs
+     */
+    public static class ErrorTolerantUpToDate extends UpToDate {
+
+        @Override
+        public void addSrcfiles(final FileSet fs) {
+            fs.setErrorOnMissingDir(false);
+            super.addSrcfiles(fs);
+        }
+    }
+
+    /**
+     * We'll instantiate objects of this type for all "unknown" elements
+     */
+    public static class DynamicObject extends AntlibDefinition implements DynamicAttribute, TaskContainer {
+
+        @SuppressWarnings("unused")
+        public void addText(String text) {
+        }
+
+        @Override
+        public void setDynamicAttribute(String name, String value) throws BuildException {
+        }
+
+        @Override
+        public void addTask(Task task) {
+        }
+    }
+
 
 }
