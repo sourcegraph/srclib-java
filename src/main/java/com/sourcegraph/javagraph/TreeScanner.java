@@ -366,19 +366,15 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
     @Override
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
         if (SourceVersion.isIdentifier(node.getIdentifier())) {
-            try {
-                if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
-                    // TODO (alexsaveliev) otherwise fails on the following block (@result)
+            if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
+                // TODO (alexsaveliev) otherwise fails on the following block (@result)
                     /*
                             callback = (result,processorId)->{
                                 outputQueue.put(result.id, result.item);
                                 idleProcessors.add(processorId);
                             };
                      */
-                    emitRef(spans.name(node), false);
-                }
-            } catch (Spans.SpanException e) {
-                LOGGER.warn("Span exception", e);
+                emitRef(spans.name(node), false);
             }
         }
         super.visitMemberSelect(node, p);
