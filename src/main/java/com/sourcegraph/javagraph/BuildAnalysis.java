@@ -22,11 +22,13 @@ public class BuildAnalysis {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildAnalysis.class);
 
+    public static final String DEFAULT_GROUP_ID = "default-group";
+
     /**
      * POM attributes, holds group ID, artifact ID, and description
      */
     public static class POMAttrs {
-        public String groupID = "default-group";
+        public String groupID = DEFAULT_GROUP_ID;
         public String artifactID = StringUtils.EMPTY;
         public String description = StringUtils.EMPTY;
 
