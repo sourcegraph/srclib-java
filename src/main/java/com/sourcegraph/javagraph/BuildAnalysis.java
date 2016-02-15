@@ -40,6 +40,10 @@ public class BuildAnalysis {
             artifactID = a;
             description = d;
         }
+
+        public static String groupId(String groupId) {
+            return StringUtils.defaultIfEmpty(groupId, DEFAULT_GROUP_ID);
+        }
     }
 
     /**
@@ -287,9 +291,7 @@ public class BuildAnalysis {
                                 if (info == null) {
                                     continue;
                                 }
-                                if (!StringUtils.isEmpty(payload)) {
-                                    info.attrs.groupID = payload;
-                                }
+                                info.attrs.groupID = POMAttrs.groupId(payload);
                                 break;
                             case "SRCLIB-DEPENDENCY":
                                 if (info == null) {
@@ -297,7 +299,7 @@ public class BuildAnalysis {
                                 }
                                 String[] parts = payload.split(":", 5);
                                 info.dependencies.add(new RawDependency(
-                                        parts[1], // GroupID
+                                        POMAttrs.groupId(parts[1]), // GroupID
                                         parts[2], // ArtifactID
                                         parts[3], // Version
                                         parts[0], // Scope
@@ -350,7 +352,7 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 String tokens[] = payload.split(":", 4);
-                                String unitName = tokens[0] + '/' + tokens[1];
+                                String unitName = POMAttrs.groupId(tokens[0]) + '/' + tokens[1];
                                 info.sourceDirs.add(new String[]{unitName, tokens[2], tokens[3]});
                                 break;
                             case "SRCLIB-SOURCEVERSION":
@@ -384,7 +386,7 @@ public class BuildAnalysis {
                                     continue;
                                 }
                                 String depTokens[] = payload.split(":", 3);
-                                info.projectDependencies.add(new ProjectDependency(depTokens[0],
+                                info.projectDependencies.add(new ProjectDependency(POMAttrs.groupId(depTokens[0]),
                                         depTokens[1],
                                         depTokens[2]));
                                 break;
