@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.*;
 import org.apache.tools.ant.taskdefs.*;
+import org.apache.tools.ant.taskdefs.optional.javacc.JavaCC;
 import org.apache.tools.ant.types.FileSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +70,9 @@ public class AntProject implements Project {
         executables.add("uptodate");
         executables.add("fileset");
         executables.add("path");
+        executables.add("get");
+        executables.add("mkdir");
+        executables.add("javacc");
     }
 
     public AntProject(SourceUnit unit) {
@@ -158,6 +162,7 @@ public class AntProject implements Project {
 
     /**
      * Constructs source unit based on given build.xml
+     *
      * @param buildXml location of build.xml file
      * @return source unit
      */
@@ -189,6 +194,7 @@ public class AntProject implements Project {
         // without making them
 
         componentHelper.addTaskDefinition("javac", ErrorTolerantJavac.class);
+        componentHelper.addTaskDefinition("javacc", ErrorTolerantJavaCC.class);
         componentHelper.addDataTypeDefinition("fileset", ErrorTolerantFileSet.class);
         componentHelper.addDataTypeDefinition("path", ErrorTolerantPath.class);
         componentHelper.addDataTypeDefinition("uptodate", ErrorTolerantUpToDate.class);
@@ -340,8 +346,9 @@ public class AntProject implements Project {
 
     /**
      * Collects dependencies and runs all tasks specific target depends on
+     *
      * @param project Ant project
-     * @param target Ant target
+     * @param target  Ant target
      */
     private static void prepare(org.apache.tools.ant.Project project, Target target) {
         Collection<Target> dependencies = getDependencies(project, target);
@@ -352,10 +359,26 @@ public class AntProject implements Project {
 
     /**
      * Runs all tasks of specific target (that we know how to deal with)
+     *
      * @param project Ant project
-     * @param target Ant target
+     * @param target  Ant target
      */
     private static void runTasks(org.apache.tools.ant.Project project, Target target) {
+
+        PropertyHelper propertyHelper = PropertyHelper.getPropertyHelper(project);
+
+        String ifString = StringUtils.defaultString(target.getIf());
+        Object o = propertyHelper.parseProperties(ifString);
+        if (!propertyHelper.testIfCondition(o)) {
+            return;
+        }
+
+        String unlessString = StringUtils.defaultString(target.getUnless());
+        o = propertyHelper.parseProperties(unlessString);
+        if (!propertyHelper.testUnlessCondition(o)) {
+            return;
+        }
+
         for (Task task : target.getTasks()) {
             String taskType = task.getTaskType();
             if (!executables.contains(taskType)) {
@@ -377,33 +400,11 @@ public class AntProject implements Project {
 
     /**
      * @param project Ant project
-     * @param target Ant target
+     * @param target  Ant target
      * @return list of  target's dependencies
      */
     private static Collection<Target> getDependencies(org.apache.tools.ant.Project project, Target target) {
-        LinkedList<Target> dependencies = new LinkedList<>();
-        collectDependencies(project, target, dependencies);
-        return dependencies;
-    }
-
-    /**
-     * Collects dependencies of a given target
-     * @param project Ant project
-     * @param target Ant target
-     * @param dependencies dependencies holder
-     */
-    private static void collectDependencies(org.apache.tools.ant.Project project,
-                                            Target target,
-                                            LinkedList<Target> dependencies) {
-        if (dependencies.contains(target)) {
-            return;
-        }
-        dependencies.add(0, target);
-        Enumeration<String> deps = target.getDependencies();
-        while (deps.hasMoreElements()) {
-            Target dependency = project.getTargets().get(deps.nextElement());
-            collectDependencies(project, dependency, dependencies);
-        }
+        return project.topoSort(target.getName(), project.getTargets());
     }
 
     /**
@@ -634,6 +635,22 @@ public class AntProject implements Project {
 
         @Override
         public void addTask(Task task) {
+        }
+    }
+
+    /**
+     * srclib-java includes JavaCC library so we making special version of "javacc" Ant task
+     * that uses bundled library
+     */
+    public static class ErrorTolerantJavaCC extends JavaCC {
+
+        @Override
+        public void execute() throws BuildException {
+            File f = new File(AntProject.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            // we are in .bin/somefile.jar
+            File javaCcHome = new File(f.getParentFile(), "../vendor/javacc");
+            setJavacchome(javaCcHome);
+            super.execute();
         }
     }
 
