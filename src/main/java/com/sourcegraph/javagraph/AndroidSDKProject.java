@@ -106,7 +106,7 @@ public class AndroidSDKProject implements Project {
 
 
         final SourceUnit unit = new SourceUnit();
-        unit.Type = "JavaArtifact";
+        unit.Type = SourceUnit.DEFAULT_TYPE;
         unit.Name = MARKER;
         unit.Dir = ".";
         unit.Files = getSourceFiles(PathUtil.CWD.resolve("."));

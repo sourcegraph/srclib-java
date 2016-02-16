@@ -26,3 +26,6 @@
 [submodule "testdata/case/java-gradle-custom-project-name"]
 	path = testdata/case/java-gradle-custom-project-name
 	url = https://github.com/sgtest/java-gradle-custom-project-name
+[submodule "testdata/case/java-ant-sample"]
+	path = testdata/case/java-ant-sample
+	url = https://github.com/sgtest/java-ant-sample
