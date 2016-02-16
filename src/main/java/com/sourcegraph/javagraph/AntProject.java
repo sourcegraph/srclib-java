@@ -198,6 +198,8 @@ public class AntProject implements Project {
         componentHelper.addDataTypeDefinition("fileset", ErrorTolerantFileSet.class);
         componentHelper.addDataTypeDefinition("path", ErrorTolerantPath.class);
         componentHelper.addDataTypeDefinition("uptodate", ErrorTolerantUpToDate.class);
+        // preventing custom tasks creation
+        componentHelper.addDataTypeDefinition("taskdef", DynamicObject.class);
 
         ProjectHelper.configureProject(project, buildXml.toFile());
         Collection<String> files = new HashSet<>();
@@ -210,7 +212,7 @@ public class AntProject implements Project {
 
         SourceUnit unit = new SourceUnit();
         unit.Files = new LinkedList<>();
-        unit.Name = getProjectName(project);
+        unit.Name = getProjectName(project, buildXml);
         unit.Dir = buildXml.getParent().toString();
         unit.Type = SourceUnit.DEFAULT_TYPE;
         unit.Data.put(BUILD_XML_PROPERTY, buildXml.toString());
@@ -303,15 +305,16 @@ public class AntProject implements Project {
 
     /**
      * @param project Ant project
-     * @return project name extracted from build.xml or relative path to project's base dir if project name
+     * @param buildXml location of build.xml file
+     * @return project name extracted from build.xml or relative path to project's build.xml dir if project name
      * wasn't defined in build.xml
      */
-    private static String getProjectName(org.apache.tools.ant.Project project) {
+    private static String getProjectName(org.apache.tools.ant.Project project, Path buildXml) {
         String name = project.getName();
         if (!StringUtils.isEmpty(name)) {
             return name;
         }
-        return PathUtil.relativizeCwd(project.getBaseDir().toPath());
+        return PathUtil.relativizeCwd(buildXml.getParent());
     }
 
     /**
