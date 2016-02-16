@@ -130,6 +130,8 @@
       "End": 60
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/args",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
@@ -137,6 +139,8 @@
       "End": 120
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
@@ -144,6 +148,8 @@
       "End": 158
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
@@ -151,6 +157,8 @@
       "End": 108
     },
     {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",

@@ -1,0 +1,125 @@
+{
+  "Defs": [
+    {
+      "Path": "com/sourcegraph",
+      "Name": "sourcegraph",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "com.sourcegraph"
+      },
+      "TreePath": "com/sourcegraph"
+    },
+    {
+      "Path": "com/sourcegraph/Main/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "DefStart": 39,
+      "DefEnd": 43,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "com.sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "com/sourcegraph/Main/:init"
+    },
+    {
+      "Path": "com/sourcegraph/Main:type",
+      "Name": "Main",
+      "Kind": "type",
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "DefStart": 26,
+      "DefEnd": 92,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "com.sourcegraph.Main",
+        "Package": "com.sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "com/sourcegraph/Main:type"
+    },
+    {
+      "Path": "com/sourcegraph/Main:type/main:java.lang.String[]",
+      "Name": "main",
+      "Kind": "func",
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "DefStart": 51,
+      "DefEnd": 90,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.lang.String[])void",
+        "Package": "com.sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "com/sourcegraph/Main:type/main:java.lang.String[]"
+    },
+    {
+      "Path": "com/sourcegraph/Main:type/main:java.lang.String[]/args",
+      "Name": "args",
+      "Kind": "var",
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "DefStart": 68,
+      "DefEnd": 81,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.lang.String[]",
+        "Package": "com.sourcegraph",
+        "Modifiers": []
+      },
+      "TreePath": "com/sourcegraph/Main:type/main:java.lang.String[]/args"
+    }
+  ],
+  "Refs": [
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/tweedledee-tweedledum",
+      "DefPath": "com/sourcegraph/Main:type/main:java.lang.String[]/args",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "Start": 75,
+      "End": 79
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/tweedledee-tweedledum",
+      "DefPath": "com/sourcegraph/Main:type/main:java.lang.String[]",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "Start": 63,
+      "End": 67
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/tweedledee-tweedledum",
+      "DefPath": "com/sourcegraph/Main:type",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "Start": 39,
+      "End": 43
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "src/main/java/com/sourcegraph/Main.java",
+      "Start": 68,
+      "End": 74
+    }
+  ]
+}

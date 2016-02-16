@@ -1,0 +1,209 @@
+{
+  "Defs": [
+    {
+      "Path": "x",
+      "Name": "x",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "x"
+      },
+      "TreePath": "x"
+    },
+    {
+      "Path": "x/Foo/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 25,
+      "DefEnd": 28,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "x",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "x/Foo/:init"
+    },
+    {
+      "Path": "x/Foo:type",
+      "Name": "Foo",
+      "Kind": "type",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 12,
+      "DefEnd": 149,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "x.Foo",
+        "Package": "x",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "x/Foo:type"
+    },
+    {
+      "Path": "x/Foo:type/fo",
+      "Name": "fo",
+      "Kind": "func",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 36,
+      "DefEnd": 60,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "x",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "x/Foo:type/fo"
+    },
+    {
+      "Path": "x/Foo:type/main:java.lang.String[]",
+      "Name": "main",
+      "Kind": "func",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 66,
+      "DefEnd": 146,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.lang.String[])void",
+        "Package": "x",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "x/Foo:type/main:java.lang.String[]"
+    },
+    {
+      "Path": "x/Foo:type/main:java.lang.String[]/args",
+      "Name": "args",
+      "Kind": "var",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 83,
+      "DefEnd": 96,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.lang.String[]",
+        "Package": "x",
+        "Modifiers": []
+      },
+      "TreePath": "x/Foo:type/main:java.lang.String[]/args"
+    },
+    {
+      "Path": "x/Foo:type/main:java.lang.String[]/foo",
+      "Name": "foo",
+      "Kind": "var",
+      "File": "src/main/java/x/Foo.java",
+      "DefStart": 105,
+      "DefEnd": 125,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "x.Foo",
+        "Package": "x",
+        "Modifiers": []
+      },
+      "TreePath": "x/Foo:type/main:java.lang.String[]/foo"
+    }
+  ],
+  "Refs": [
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "src/main/java/x/Foo.java",
+      "Start": 83,
+      "End": 89
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/fo",
+      "File": "src/main/java/x/Foo.java",
+      "Start": 135,
+      "End": 137
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/fo",
+      "Def": true,
+      "File": "src/main/java/x/Foo.java",
+      "Start": 48,
+      "End": 50
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/main:java.lang.String[]/args",
+      "Def": true,
+      "File": "src/main/java/x/Foo.java",
+      "Start": 90,
+      "End": 94
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/main:java.lang.String[]/foo",
+      "Def": true,
+      "File": "src/main/java/x/Foo.java",
+      "Start": 109,
+      "End": 112
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/main:java.lang.String[]/foo",
+      "File": "src/main/java/x/Foo.java",
+      "Start": 131,
+      "End": 134
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type/main:java.lang.String[]",
+      "Def": true,
+      "File": "src/main/java/x/Foo.java",
+      "Start": 78,
+      "End": 82
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type",
+      "File": "src/main/java/x/Foo.java",
+      "Start": 105,
+      "End": 108
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type",
+      "File": "src/main/java/x/Foo.java",
+      "Start": 119,
+      "End": 122
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "foobar/java-ident-issue-23",
+      "DefPath": "x/Foo:type",
+      "Def": true,
+      "File": "src/main/java/x/Foo.java",
+      "Start": 25,
+      "End": 28
+    }
+  ]
+}

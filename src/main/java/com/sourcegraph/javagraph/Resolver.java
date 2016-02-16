@@ -2,6 +2,7 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -78,9 +79,8 @@ public class Resolver {
         }
         URI normalizedOrigin = normalizeOrigin(origin);
 
-        ResolvedTarget ret = resolvedOrigins.get(normalizedOrigin);
-        if (ret != null) {
-            return ret;
+        if (resolvedOrigins.containsKey(normalizedOrigin)) {
+            return resolvedOrigins.get(normalizedOrigin);
         }
 
         Path jarFile;
@@ -197,7 +197,8 @@ public class Resolver {
      */
     public DepResolution resolveRawDep(RawDependency d) {
 
-        String key = d.groupID + ':' + d.artifactID + ':' + d.version + ':' + d.scope;
+        String groupId = d.groupID;
+        String key = groupId + ':' + d.artifactID + ':' + d.version + ':' + d.scope;
         DepResolution resolution = depsCache.get(key);
         if (resolution != null) {
             return resolution;
@@ -205,23 +206,23 @@ public class Resolver {
 
         // HACK: Assume that if groupID of the RawDependency equals the groupID
         // of the current project, then it is from the same repo and shouldn't be resolved externally.
-        if (unit.Name.substring(0, this.unit.Name.indexOf('/')).equals(d.groupID)) {
+        if (StringUtils.substringBefore(unit.Name, "/").equals(groupId)) {
             ResolvedTarget target = new ResolvedTarget();
-            target.ToUnit = d.groupID + "/" + d.artifactID;
-            target.ToUnitType = "JavaArtifact";
+            target.ToUnit = groupId + '/' + d.artifactID;
+            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
             target.ToVersionString = d.version;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
         }
 
-        String cloneURL = checkOverrides(d.groupID + '/' + d.artifactID);
+        String cloneURL = checkOverrides(groupId + '/' + d.artifactID);
 
         // We may know repo URI already
         if (cloneURL != null || d.repoURI != null) {
             ResolvedTarget target = new ResolvedTarget();
-            target.ToUnit = d.groupID + "/" + d.artifactID;
-            target.ToUnitType = "JavaArtifact";
+            target.ToUnit = groupId + '/' + d.artifactID;
+            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
             target.ToVersionString = d.version;
             target.ToRepoCloneURL = cloneURL == null ? d.repoURI : cloneURL;
             resolution = new DepResolution(d, target);
@@ -231,8 +232,8 @@ public class Resolver {
 
         // Get the url to the POM file for this artifact
         String url = "http://central.maven.org/maven2/"
-                + d.groupID.replace(".", "/") + "/" + d.artifactID + "/"
-                + d.version + "/" + d.artifactID + "-" + d.version + ".pom";
+                + groupId.replace('.', '/') + '/' + d.artifactID + '/'
+                + d.version + '/' + d.artifactID + '-' + d.version + ".pom";
 
         DepResolution res = new DepResolution(d, null);
 
@@ -254,8 +255,8 @@ public class Resolver {
 
                 ResolvedTarget target = new ResolvedTarget();
                 target.ToRepoCloneURL = cloneURL;
-                target.ToUnit = d.groupID + "/" + d.artifactID;
-                target.ToUnitType = "JavaArtifact";
+                target.ToUnit = groupId + '/' + d.artifactID;
+                target.ToUnitType = SourceUnit.DEFAULT_TYPE;
                 target.ToVersionString = d.version;
 
                 res.Target = target;
@@ -297,7 +298,7 @@ public class Resolver {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
                     target.ToUnit = dir.get(0);
-                    target.ToUnitType = "JavaArtifact";
+                    target.ToUnitType = SourceUnit.DEFAULT_TYPE;
                     target.ToVersionString = dir.get(1);
                     return target;
                 }

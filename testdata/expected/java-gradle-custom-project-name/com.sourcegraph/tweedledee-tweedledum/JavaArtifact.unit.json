@@ -1,0 +1,1 @@
+{"Name":"com.sourcegraph/tweedledee-tweedledum","Type":"JavaArtifact","Files":["src/main/java/com/sourcegraph/Main.java"],"Data":{"ClassPath":[],"Description":"","GradleFile":"build.gradle","SourcePath":[["com.sourcegraph/tweedledee-tweedledum","unspecified","src/main/java"],["com.sourcegraph/tweedledee-tweedledum","unspecified","src/test/java"]],"SourceVersion":"1.8"}}
