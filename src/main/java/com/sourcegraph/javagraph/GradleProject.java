@@ -167,7 +167,7 @@ public class GradleProject implements Project {
                 continue;
             }
             final SourceUnit unit = new SourceUnit();
-            unit.Type = "JavaArtifact";
+            unit.Type = SourceUnit.DEFAULT_TYPE;
             unit.Name = info.getName();
             Path projectRoot = PathUtil.CWD.resolve(info.projectDir);
             unit.Dir = info.projectDir;
