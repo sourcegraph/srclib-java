@@ -1,0 +1,54 @@
+[
+  {
+    "Raw": {
+      "groupID": "org.apache.commons",
+      "artifactID": "commons-lang3",
+      "version": "3.1",
+      "scope": "",
+      "file": "lib/commons-lang3-3.1.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/apache/commons-lang3",
+      "ToUnit": "org.apache.commons/commons-lang3",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "org.apache.commons",
+      "artifactID": "commons-lang3",
+      "version": "3.1",
+      "scope": "",
+      "file": "lib/commons-lang3-3.1.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/apache/commons-lang3",
+      "ToUnit": "org.apache.commons/commons-lang3",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "junit",
+      "artifactID": "junit",
+      "version": "4.12",
+      "scope": "",
+      "file": "lib/junit-4.12.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/junit-team/junit",
+      "ToUnit": "junit/junit",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "4.12"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "ToUnit": ".",
+      "ToUnitType": "Java"
+    }
+  }
+]

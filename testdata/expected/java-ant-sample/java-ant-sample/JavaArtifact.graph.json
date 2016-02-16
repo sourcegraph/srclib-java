@@ -1,0 +1,426 @@
+{
+  "Defs": [
+    {
+      "Path": "sourcegraph",
+      "Name": "sourcegraph",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "sourcegraph"
+      },
+      "TreePath": "sourcegraph"
+    },
+    {
+      "Path": "sourcegraph/Foo/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "DefStart": 174,
+      "DefEnd": 177,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/Foo/:init"
+    },
+    {
+      "Path": "sourcegraph/Foo:type",
+      "Name": "Foo",
+      "Kind": "type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "DefStart": 161,
+      "DefEnd": 375,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "sourcegraph.Foo",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/Foo:type"
+    },
+    {
+      "Path": "sourcegraph/Foo:type/bar",
+      "Name": "bar",
+      "Kind": "var",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "DefStart": 185,
+      "DefEnd": 224,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "java.lang.String",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "private"
+        ]
+      },
+      "TreePath": "sourcegraph/Foo:type/bar"
+    },
+    {
+      "Path": "sourcegraph/Foo:type/foo",
+      "Name": "foo",
+      "Kind": "func",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "DefStart": 230,
+      "DefEnd": 373,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()java.lang.String",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/Foo:type/foo"
+    },
+    {
+      "Path": "sourcegraph/Foo:type/foo/url",
+      "Name": "url",
+      "Kind": "var",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "DefStart": 277,
+      "DefEnd": 316,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.net.URL",
+        "Package": "sourcegraph",
+        "Modifiers": []
+      },
+      "TreePath": "sourcegraph/Foo:type/foo/url"
+    },
+    {
+      "Path": "sourcegraph/FooTest/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "DefStart": 85,
+      "DefEnd": 92,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/FooTest/:init"
+    },
+    {
+      "Path": "sourcegraph/FooTest:type",
+      "Name": "FooTest",
+      "Kind": "type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "DefStart": 72,
+      "DefEnd": 243,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "sourcegraph.FooTest",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/FooTest:type"
+    },
+    {
+      "Path": "sourcegraph/FooTest:type/testSessionExpiration",
+      "Name": "testSessionExpiration",
+      "Kind": "func",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "DefStart": 100,
+      "DefEnd": 240,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "sourcegraph",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "sourcegraph/FooTest:type/testSessionExpiration"
+    },
+    {
+      "Path": "sourcegraph/FooTest:type/testSessionExpiration/foo",
+      "Name": "foo",
+      "Kind": "var",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "DefStart": 173,
+      "DefEnd": 193,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "sourcegraph.Foo",
+        "Package": "sourcegraph",
+        "Modifiers": []
+      },
+      "TreePath": "sourcegraph/FooTest:type/testSessionExpiration/foo"
+    }
+  ],
+  "Refs": [
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/io/FileInputStream:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 122,
+      "End": 137
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Exception:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 257,
+      "End": 266
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/Exception:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 153,
+      "End": 162
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 193,
+      "End": 199
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/lang/String:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 237,
+      "End": 243
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/net/URL:type/openStream",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 353,
+      "End": 363
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/net/URL:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 155,
+      "End": 158
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/net/URL:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 277,
+      "End": 280
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": ".",
+      "DefPath": "java/net/URL:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 291,
+      "End": 294
+    },
+    {
+      "DefPath": "org/apache/commons/io/IOUtils:type/toString:java.io.InputStream",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 340,
+      "End": 348
+    },
+    {
+      "DefPath": "org/apache/commons/io/IOUtils:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 332,
+      "End": 339
+    },
+    {
+      "DefPath": "org/apache/commons/io/IOUtils:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 52,
+      "End": 59
+    },
+    {
+      "DefRepo": "github.com/apache/commons-lang3",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-lang3",
+      "DefPath": "org/apache/commons/lang3/StringUtils:type/EMPTY",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 218,
+      "End": 223
+    },
+    {
+      "DefRepo": "github.com/apache/commons-lang3",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-lang3",
+      "DefPath": "org/apache/commons/lang3/StringUtils:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 206,
+      "End": 217
+    },
+    {
+      "DefRepo": "github.com/apache/commons-lang3",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.apache.commons/commons-lang3",
+      "DefPath": "org/apache/commons/lang3/StringUtils:type",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 93,
+      "End": 104
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "org/junit/Assert:type/assertNotNull:java.lang.Object",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 209,
+      "End": 222
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "org/junit/Assert:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 202,
+      "End": 208
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "org/junit/Assert:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 40,
+      "End": 46
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "org/junit/Test:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 101,
+      "End": 105
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "org/junit/Test:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 65,
+      "End": 69
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type/bar",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 200,
+      "End": 203
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type/foo/url",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 281,
+      "End": 284
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type/foo/url",
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 349,
+      "End": 352
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type/foo",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 244,
+      "End": 247
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type/foo",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 227,
+      "End": 230
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type",
+      "Def": true,
+      "File": "src/main/java/com/sourcegraph/Foo.java",
+      "Start": 174,
+      "End": 177
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 173,
+      "End": 176
+    },
+    {
+      "DefPath": "sourcegraph/Foo:type",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 187,
+      "End": 190
+    },
+    {
+      "DefPath": "sourcegraph/FooTest:type/testSessionExpiration/foo",
+      "Def": true,
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 177,
+      "End": 180
+    },
+    {
+      "DefPath": "sourcegraph/FooTest:type/testSessionExpiration/foo",
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 223,
+      "End": 226
+    },
+    {
+      "DefPath": "sourcegraph/FooTest:type/testSessionExpiration",
+      "Def": true,
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 122,
+      "End": 143
+    },
+    {
+      "DefPath": "sourcegraph/FooTest:type",
+      "Def": true,
+      "File": "src/test/java/com/sourcegraph/FooTest.java",
+      "Start": 85,
+      "End": 92
+    }
+  ]
+}
