@@ -75,6 +75,8 @@ public class AntProject implements Project {
         executables.add("javacc");
     }
 
+    private static ErrorTolerantJavac lastJavac;
+
     public AntProject(SourceUnit unit) {
         this.unit = unit;
     }
@@ -222,17 +224,37 @@ public class AntProject implements Project {
             for (Task task : target.getTasks()) {
 
                 String taskType = task.getTaskType();
+
+                ErrorTolerantJavac javac = null;
+
                 if (!"javac".equals(taskType)) {
-                    continue;
+
+                    task = maybeJavacInMacro(task);
+                    if (task == null) {
+                        continue;
+                    }
+                    LOGGER.debug("Found javac in macro {}:{}", target.getName(), task.getTaskName());
+
+                    // executing macrodef and using last encountered javac as a reference
+                    prepare(project, target);
+
+                    MacroInstance macroinstance = (MacroInstance) task.getRuntimeConfigurableWrapper().getProxy();
+                    macroinstance.execute();
+
+                    javac = lastJavac;
+                } else {
+                    LOGGER.debug("Found javac {}:{}", target.getName(), task.getTaskName());
+                    prepare(project, target);
+
+                    task.getRuntimeConfigurableWrapper().setProxy(componentHelper.createComponent(taskType));
+                    task.maybeConfigure();
+                    javac = (ErrorTolerantJavac) task.getRuntimeConfigurableWrapper().getProxy();
+                    javac.execute();
                 }
 
-                LOGGER.debug("Found javac {}:{}", target.getName(), task.getTaskName());
-                prepare(project, target);
-
-                task.getRuntimeConfigurableWrapper().setProxy(componentHelper.createComponent(taskType));
-                task.maybeConfigure();
-                ErrorTolerantJavac javac = (ErrorTolerantJavac) task.getRuntimeConfigurableWrapper().getProxy();
-                javac.execute();
+                if (javac == null) {
+                    continue;
+                }
 
                 String source = javac.getSource();
                 if (source != null && !source.equals(sourceVersion)) {
@@ -304,6 +326,38 @@ public class AntProject implements Project {
     }
 
     /**
+     * @param task task to check
+     * @return not-null if task points to macrodef with javac inside
+     */
+    private static Task maybeJavacInMacro(Task task) {
+        ComponentHelper componentHelper = ComponentHelper.getComponentHelper(task.getProject());
+        Class clazz = componentHelper.getComponentClass(task.getTaskType());
+        if (clazz != MacroInstance.class) {
+            return null;
+        }
+        task.getRuntimeConfigurableWrapper().setProxy(componentHelper.createComponent(task.getTaskType()));
+        task.maybeConfigure();
+        MacroInstance instance = (MacroInstance) task.getRuntimeConfigurableWrapper().getProxy();
+        if (findJavac(instance) != null) {
+            return task;
+        }
+        return null;
+    }
+
+    /**
+     * @param instance macroinstance object
+     * @return javac task in given macroinstance
+     */
+    private static Task findJavac(MacroInstance instance) {
+        for (UnknownElement element : instance.getMacroDef().getNestedTask().getChildren()) {
+            if ("javac".equals(element.getTaskType())) {
+                return (Task) element.getRuntimeConfigurableWrapper().getProxy();
+            }
+        }
+        return null;
+    }
+
+    /**
      * @param project Ant project
      * @param buildXml location of build.xml file
      * @return project name extracted from build.xml or relative path to project's build.xml dir if project name
@@ -326,12 +380,16 @@ public class AntProject implements Project {
             return Collections.emptyList();
         }
         Collection<String> ret = new LinkedList<>();
-        for (String item : path.list()) {
-            if (new File(item).exists()) {
-                ret.add(item);
-            } else {
-                LOGGER.warn("Removing non-existent item {}", item);
+        try {
+            for (String item : path.list()) {
+                if (new File(item).exists()) {
+                    ret.add(item);
+                } else {
+                    LOGGER.warn("Removing non-existent item {}", item);
+                }
             }
+        } catch (BuildException ex) {
+            // it happens, ignore
         }
         return ret;
     }
@@ -367,37 +425,40 @@ public class AntProject implements Project {
      * @param target  Ant target
      */
     private static void runTasks(org.apache.tools.ant.Project project, Target target) {
+        try {
+            PropertyHelper propertyHelper = PropertyHelper.getPropertyHelper(project);
 
-        PropertyHelper propertyHelper = PropertyHelper.getPropertyHelper(project);
-
-        String ifString = StringUtils.defaultString(target.getIf());
-        Object o = propertyHelper.parseProperties(ifString);
-        if (!propertyHelper.testIfCondition(o)) {
-            return;
-        }
-
-        String unlessString = StringUtils.defaultString(target.getUnless());
-        o = propertyHelper.parseProperties(unlessString);
-        if (!propertyHelper.testUnlessCondition(o)) {
-            return;
-        }
-
-        for (Task task : target.getTasks()) {
-            String taskType = task.getTaskType();
-            if (!executables.contains(taskType)) {
-                continue;
+            String ifString = StringUtils.defaultString(target.getIf());
+            Object o = propertyHelper.parseProperties(ifString);
+            if (!propertyHelper.testIfCondition(o)) {
+                return;
             }
-            LOGGER.debug("Executing {}:{}", target.getName(), task.getTaskName());
 
-            Object proxy = ComponentHelper.getComponentHelper(project).
-                    createComponent(taskType);
-            task.getRuntimeConfigurableWrapper().setProxy(proxy);
-            task.maybeConfigure();
-            try {
-                task.execute();
-            } catch (BuildException ex) {
-                LOGGER.warn("Unable to execute {}:{}", target.getName(), task.getTaskName(), ex);
+            String unlessString = StringUtils.defaultString(target.getUnless());
+            o = propertyHelper.parseProperties(unlessString);
+            if (!propertyHelper.testUnlessCondition(o)) {
+                return;
             }
+
+            for (Task task : target.getTasks()) {
+                String taskType = task.getTaskType();
+                if (!executables.contains(taskType)) {
+                    continue;
+                }
+                LOGGER.debug("Executing {}:{}", target.getName(), task.getTaskName());
+
+                Object proxy = ComponentHelper.getComponentHelper(project).
+                        createComponent(taskType);
+                task.getRuntimeConfigurableWrapper().setProxy(proxy);
+                task.maybeConfigure();
+                try {
+                    task.execute();
+                } catch (BuildException ex) {
+                    LOGGER.warn("Unable to execute {}:{}", target.getName(), task.getTaskName(), ex);
+                }
+            }
+        } catch (Exception ex) {
+            LOGGER.warn("An error occurred while executing {}", target.getName(), ex);
         }
     }
 
@@ -540,6 +601,9 @@ public class AntProject implements Project {
 
         @Override
         public void execute() throws BuildException {
+
+            lastJavac = this;
+
             resetFileLists();
 
             final String[] list = getSrcdir().list();
