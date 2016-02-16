@@ -84,7 +84,7 @@ public class AndroidCoreProject implements Project {
      */
     public static SourceUnit createSourceUnit() throws Exception {
         final SourceUnit unit = new SourceUnit();
-        unit.Type = "JavaArtifact";
+        unit.Type = SourceUnit.DEFAULT_TYPE;
         unit.Name = MARKER;
         unit.Dir = ".";
 

@@ -343,7 +343,7 @@ public class MavenProject implements Project {
             unit.Dir = info.projectDir;
             unit.Files.addAll(info.sources);
             unit.Dependencies = new ArrayList<>(info.dependencies);
-            unit.Type = "JavaArtifact";
+            unit.Type = SourceUnit.DEFAULT_TYPE;
             unit.Data.put("POMFile", info.buildFile);
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("SourceVersion", info.sourceVersion);

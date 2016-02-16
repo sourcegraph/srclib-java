@@ -43,18 +43,16 @@ public final class Spans {
     /**
      * @param c class node
      * @return name span of class node in current compilation unit
-     * @throws SpanException
      */
-    public int[] name(ClassTree c) throws SpanException {
+    public int[] name(ClassTree c) {
         return name(c.getSimpleName().toString(), c);
     }
 
     /**
      * @param method method node
      * @return name span of method node in current compilation unit
-     * @throws SpanException
      */
-    public int[] name(MethodTree method) throws SpanException {
+    public int[] name(MethodTree method) {
         String name;
 
         TreePath path = trees.getPath(compilationUnit, method);
@@ -82,9 +80,8 @@ public final class Spans {
     /**
      * @param file compilation unit node
      * @return name span of compilation unit node in current compilation unit
-     * @throws SpanException
      */
-    public int[] name(CompilationUnitTree file) throws SpanException {
+    public int[] name(CompilationUnitTree file) {
         String pkgName = file.getPackageName().toString();
         String rightName = pkgName.substring(pkgName.lastIndexOf('.') + 1);
         return name(rightName, file);
@@ -93,36 +90,50 @@ public final class Spans {
     /**
      * @param var variable node
      * @return name span of variable node in current compilation unit
-     * @throws SpanException
      */
-    public int[] name(VariableTree var) throws SpanException {
+    public int[] name(VariableTree var) {
         return name(var.getName().toString(), var);
     }
 
     /**
      * @param mst member select node
      * @return name span of member select node in current compilation unit
-     * @throws SpanException
      */
-    public int[] name(MemberSelectTree mst) throws SpanException {
-        // alexsaveliev: searching for .NAME to deal with the cases such as "xxFOOxx.FOO"
-        String lookup = '.' + mst.getIdentifier().toString();
-        int ret[] = name(lookup, mst);
-        if (ret == null) {
+    public int[] name(MemberSelectTree mst) {
+        // alexsaveliev: searching after dot to deal with the cases such as "xxFOOxx.FOO"
+        // another case to consider "Collections.<Type> emptyList"
+
+        if (src == null) {
             return null;
         }
-        // adjusting position
-        ret[0]++;
-        return ret;
+
+        int treeStart = (int) srcPos.getStartPosition(compilationUnit, mst);
+        int treeEnd = (int) srcPos.getEndPosition(compilationUnit, mst);
+        if (treeStart == -1 || treeEnd == -1) {
+            return null;
+        }
+
+        String treeSrc = src.substring(treeStart, treeEnd);
+        int offset = memberSelectOffset(treeSrc);
+        if (offset == -1) {
+            return null;
+        }
+
+        String ident = mst.getIdentifier().toString();
+        int pos = treeSrc.indexOf(ident, offset);
+        if (pos == -1) {
+            return null;
+        }
+        return new int[]{treeStart + pos, treeStart + pos + ident.length()};
+
     }
 
     /**
      * @param name name to produce span for
      * @param t tree node to look for name span
      * @return name span of a given name inside span defined by given tree node
-     * @throws SpanException
      */
-    public int[] name(String name, Tree t) throws SpanException {
+    public int[] name(String name, Tree t) {
 
         if (src == null) {
             return null;
@@ -130,10 +141,9 @@ public final class Spans {
 
         int treeStart = (int) srcPos.getStartPosition(compilationUnit, t);
         int treeEnd = (int) srcPos.getEndPosition(compilationUnit, t);
-        if (treeStart == -1)
-            throw new SpanException("No treeStart found for " + t.toString() + " in " + compilationUnit.getSourceFile().getName());
-        if (treeEnd == -1)
-            throw new SpanException("No treeEnd found for " + t.toString() + " (name: '" + name + "') at " + compilationUnit.getSourceFile().getName() + ":+" + treeStart);
+        if (treeStart == -1 || treeEnd == -1) {
+            return null;
+        }
 
         String treeSrc = src.substring(treeStart, treeEnd);
         int nameStart = treeSrc.indexOf(name);
@@ -148,17 +158,44 @@ public final class Spans {
                 nameStart = treeSrc.indexOf(name);
             }
             if (nameStart == -1) {
-                throw new SpanException("No nameStart found for " + t.toString() + " at " + compilationUnit.getSourceFile().getName() + ":+" + treeStart + "-" + treeEnd);
+                return null;
             }
         }
         return new int[]{treeStart + nameStart, treeStart + nameStart + name.length()};
     }
 
-    public static class SpanException extends RuntimeException {
-        private static final long serialVersionUID = 1L;
-
-        public SpanException(String message) {
-            super(message);
+    /**
+     * Computers member select start in a given source code
+     * @param code source code
+     * @return member select start in a given source code or -1. Member select start is
+     * the first non-whitespace character's position after dot and angle brackets
+     */
+    private int memberSelectOffset(String code) {
+        int state = 0; // before dot
+        int pos = 0;
+        int angleBrackets = 0;
+        int len = code.length();
+        while (pos < len) {
+            char c = code.charAt(pos);
+            switch (state) {
+                case 0:
+                    if (c == '.') {
+                        state = 1;
+                    }
+                    break;
+                case 1: // after dot
+                    if (c == '<') {
+                        angleBrackets++;
+                    } else if (c == '>') {
+                        angleBrackets--;
+                    } else if (!Character.isWhitespace(c)) {
+                        if (angleBrackets == 0) {
+                            return pos;
+                        }
+                    }
+            }
+            pos++;
         }
+        return -1;
     }
 }

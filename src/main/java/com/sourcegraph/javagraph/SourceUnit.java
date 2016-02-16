@@ -18,6 +18,11 @@ public class SourceUnit {
     public static final String TYPE = "Type";
 
     /**
+     * Default source unit type
+     */
+    public static final String DEFAULT_TYPE = "JavaArtifact";
+
+    /**
      * Source unit name
      */
     String Name;
@@ -79,6 +84,9 @@ public class SourceUnit {
         }
         if (GradleProject.is(this)) {
             return new GradleProject(this);
+        }
+        if (AntProject.is(this)) {
+            return new AntProject(this);
         }
         if (AndroidSDKProject.is(this)) {
             return new AndroidSDKProject(this);

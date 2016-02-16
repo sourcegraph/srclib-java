@@ -64,7 +64,7 @@ class ResolvedTarget {
     public static ResolvedTarget androidSDK() {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ANDROID_SDK_REPO;
-        target.ToUnitType = "JavaArtifact";
+        target.ToUnitType = SourceUnit.DEFAULT_TYPE;
         target.ToUnit = "AndroidSDK";
         return target;
     }
@@ -75,7 +75,7 @@ class ResolvedTarget {
     public static ResolvedTarget androidCore() {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ANDROID_CORE_REPO;
-        target.ToUnitType = "JavaArtifact";
+        target.ToUnitType = SourceUnit.DEFAULT_TYPE;
         target.ToUnit = "AndroidCore";
         return target;
     }
