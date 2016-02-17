@@ -177,3 +177,79 @@ If you'd like to graph Anroid libraries, you have the following options
     *  Make a symlinks for `aapt` and `llvm-rs-cc` in `prebuilts/sdk/tools/linux` to point to matching files in `prebuilts/sdk/tools/linux/bin` (similar as done for aidl command)
     * Run `src config && src make` in `frameworks/support`
 
+
+## Apache Ant support
+
+`srclib-java` provides basic support for projects supposed to be built with 
+Apache Ant. Currently we support the following Ant tasks and types
+* property
+* basename
+* condition
+* dirname
+* import
+* loadproperties
+* xmlproperty
+* and
+* antversion
+* contains
+* equals
+* filesmatch
+* hasfreespace
+* hasmethod
+* isfailure
+* isfalse
+* isfileselected
+* islastmodified
+* isreference
+* isset
+* issigned
+* istrue
+* matches
+* not
+* or
+* os
+* parsersupports
+* resourcecontains
+* resourceexists
+* resourcesmatch
+* typefound
+* xor
+* available
+* uptodate
+* fileset
+* path
+* get
+* mkdir
+* javacc
+* macrodef
+
+`srclib-java` extracts source files, classpath, and bootstrap classpath from 
+`javac` tasks (which also may be enclosed into `macrodef`).
+
+`srclib-java` tries to resolve external dependencies by using "search by SHA1" 
+feature of Maven Central
+
+### JavaCC
+
+`srclib-java` uses bundled JavaCC 6.1.2.
+
+### Limitations
+* `srclib-java` does not support Apache Ivy
+* `srclib-java` does not support custom Ant tasks
+* there will be compilation errors when project contains code based on Ant 
+classes because Ant automatically includes Ant jar files into classpath 
+while we don't.
+* some Ant tasks may not be executed and some may fail because of requirements 
+not met. Such requirements may include missing properties, missing directories 
+or missing files which may appear as a result of custom Ant tasks or actions 
+we don't support yet.
+* there may be errors when repository containing Ant-based project provides 
+build properties file in the form of template (for example, 
+`build.properties.sample`). We suggest to provide `build.properties` with 
+default values and load `local.build.properies` if there is such a file.
+* all source files and classpath entries of all `javac` elements encountered 
+in `build.xml` file would be merged into the single source unit. 
+One `build.xml` === one source unit.
+* there may be compilation issues when repository contains few sub-projects 
+that may depend on each other. We won't be able to resolve dependencies between
+sub-projects.

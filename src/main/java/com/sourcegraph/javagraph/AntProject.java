@@ -91,7 +91,7 @@ public class AntProject implements Project {
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getBootClassPath() {
-        // simply looking in the unit's data, bootsrap classpath was collected at the "scan" phase
+        // simply looking in the unit's data, bootstrap classpath was collected at the "scan" phase
         return (List<String>) unit.Data.get("BootClassPath");
     }
 
