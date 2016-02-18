@@ -2,6 +2,7 @@ package com.sourcegraph.javagraph;
 
 import com.google.common.collect.Iterators;
 import com.sourcegraph.javagraph.maven.plugins.MavenPlugins;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.*;
 import org.apache.maven.model.building.*;
@@ -34,6 +35,7 @@ import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
 import org.eclipse.aether.transport.http.HttpTransporterFactory;
 import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -348,6 +350,11 @@ public class MavenProject implements Project {
             unit.Data.put("Description", info.attrs.description);
             unit.Data.put("SourceVersion", info.sourceVersion);
             unit.Data.put("SourceEncoding", info.sourceEncoding);
+            try {
+                unit.Data.put("POM", org.json.XML.toJSONObject(IOUtils.toString(new FileInputStream(info.buildFile))));
+            } catch (Exception e) {
+                LOGGER.warn("Unable to embed POM object into the {} unit data", unit.Name, e);
+            }
             Collection<BuildAnalysis.BuildInfo> dependencies = collectDependencies(info.getName() + '/' + info.version,
                     artifactsByUnitId,
                     unitsByPomFile);
