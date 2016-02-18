@@ -19,7 +19,6 @@ dependencies {
 	compile 'commons-codec:commons-codec:1.10'
 	compile 'org.apache.solr:solr-solrj:5.4.1'
 	compile 'com.beust:jcommander:1.30'
-	compile 'com.googlecode.json-simple:json-simple:1.1.1'
 	compile 'org.apache.maven:maven-core:3.2.3'
 	compile 'org.apache.maven:maven-model:3.2.3'
 	compile 'commons-io:commons-io:2.4'
@@ -35,6 +34,8 @@ dependencies {
 	compile 'org.apache.ant:ant:1.9.6'
 
 	compile 'com.google.guava:guava:18.0'
+
+	compile 'org.json:json:20160212'
 
 	compile 'org.slf4j:slf4j-api:1.7.12'
 
