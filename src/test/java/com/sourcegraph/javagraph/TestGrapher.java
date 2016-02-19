@@ -83,8 +83,6 @@ public class TestGrapher {
     @Test
     public void testGraph_PackageRef() throws Exception {
         GraphData w = graph("Foo.java", "package foo; public class Foo { public java.lang.String s; }");
-        assertEquals(1, w.refsTo(new DefKey(null, "java")).size());
-        assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang")).size());
         assertEquals(1, w.refsTo(new DefKey(matchAnyOrigin, "java.lang.String:type")).size());
     }
 
@@ -139,7 +137,7 @@ public class TestGrapher {
         GraphData w = graph("Bar.java", "package foo; public class Bar { interface I { public void F(); }; private I foo() { return new I() { @Override public void F() { F(); } }; } }");
         //System.err.println("======== Refs:\n" + StringUtils.join(w.refs, "\n") + "\n============\n");
         assertEquals(2, w.refsTo(new DefKey(null, "foo.Bar:type.foo.anon-p-Bar-99:type.F")).size());
-        assertNotNull(w.getSymbolFromKey(new DefKey(null, "foo.Bar:type.foo.anon-p-Bar-99:type.F")));
+        assertNotNull(w.getSymbolFromKey(new DefKey(new URI("string:///Bar.java"), "foo.Bar:type.foo.anon-p-Bar-99:type.F")));
     }
 
 
