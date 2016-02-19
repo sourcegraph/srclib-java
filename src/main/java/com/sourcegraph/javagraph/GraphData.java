@@ -24,7 +24,8 @@ public class GraphData implements GraphWriter {
         for (Ref r : this.refs) {
             boolean exactMatch = r.defKey.equals(defKey);
             boolean fuzzyMatch = defKey.getPath().equals(r.defKey.getPath()) && (
-                    (defKey.getOrigin() == null && r.defKey.getOrigin() == null) ||
+                    (defKey.getOrigin() == null &&
+                            (r.defKey.getOrigin() == null || r.defKey.getOrigin().getScheme().equals("string"))) ||
                     (defKey.getOrigin() != null && defKey.getOrigin().getPath().equals("ANY"))
             );
             if (exactMatch || fuzzyMatch) {
