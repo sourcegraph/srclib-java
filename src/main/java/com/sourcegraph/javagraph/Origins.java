@@ -12,6 +12,9 @@ public class Origins {
 
     private static JavaFileObject lastElementObject;
 
+    private Origins() {
+    }
+
     /**
      * resolves java file object for a given java program element
      * @param e java program element
