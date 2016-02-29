@@ -2,6 +2,7 @@ package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,8 @@ public class DepresolveCommand {
     public void Execute() {
 
         SourceUnit unit = null;
+        Reader r = null;
         try {
-            Reader r;
             if (!StringUtils.isEmpty(debugUnitFile)) {
                 LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
                 r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
@@ -35,10 +36,11 @@ public class DepresolveCommand {
                 r = new InputStreamReader(System.in);
             }
             unit = new Gson().fromJson(r, SourceUnit.class);
-            r.close();
         } catch (IOException e) {
             LOGGER.error("Failed to read source unit data", e);
             System.exit(1);
+        } finally {
+            IOUtils.closeQuietly(r);
         }
         LOGGER.info("Resolving dependencies of {}", unit.Name);
 
