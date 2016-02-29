@@ -24,6 +24,9 @@ public class BuildAnalysis {
 
     public static final String DEFAULT_GROUP_ID = "default-group";
 
+    private BuildAnalysis() {
+    }
+
     /**
      * POM attributes, holds group ID, artifact ID, and description
      */
@@ -188,6 +191,9 @@ public class BuildAnalysis {
         private static final String GRADLE_CMD_OTHER = "gradle";
 
         private static final String REPO_DIR = ".gradle-srclib";
+
+        private Gradle() {
+        }
 
         /**
          * Collects meta information from a gradle build file

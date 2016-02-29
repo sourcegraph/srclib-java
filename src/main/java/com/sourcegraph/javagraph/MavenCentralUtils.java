@@ -24,6 +24,9 @@ public class MavenCentralUtils {
 
     private static final String BASE_URL = "http://search.maven.org/solrsearch";
 
+    private MavenCentralUtils() {
+    }
+
     public static RawDependency searchInCentral(Path jar) {
         try {
             return searchInCentral(calculateSha(jar));

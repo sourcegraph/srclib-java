@@ -17,6 +17,9 @@ public class PathUtil {
      */
     public static Path CWD = SystemUtils.getUserDir().toPath().toAbsolutePath().normalize();
 
+    private PathUtil() {
+    }
+
     /**
      * Normalizes path string by translating it to Unix-style (foo\bar => foo/bar)
      * @param path path to normalize
