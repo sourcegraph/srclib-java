@@ -2,6 +2,7 @@ package com.sourcegraph.javagraph;
 
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.slf4j.Logger;
@@ -35,9 +36,8 @@ public class GraphCommand {
 
         final Graph graph = new Graph(); // Final graphJavaFiles object that is serialized to stdout
         final GraphData rawGraph = new GraphData(); // Raw graphJavaFiles from the tree traversal
-
+        Reader r = null;
         try {
-            Reader r;
             if (!StringUtils.isEmpty(debugUnitFile)) {
                 LOGGER.debug("Reading source unit JSON data from {}", debugUnitFile);
                 r = Files.newBufferedReader(FileSystems.getDefault().getPath(debugUnitFile));
@@ -49,6 +49,8 @@ public class GraphCommand {
         } catch (IOException e) {
             LOGGER.error("Failed to read source unit data", e);
             System.exit(1);
+        } finally {
+            IOUtils.closeQuietly(r);
         }
         LOGGER.info("Building graph for {}", unit.Name);
 
