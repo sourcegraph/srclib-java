@@ -18,6 +18,9 @@ public class ScanUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScanUtil.class);
 
+    private ScanUtil() {
+    }
+
     /**
      * Retrieves all matching files in current working directory
      * @param fileName file name to match against

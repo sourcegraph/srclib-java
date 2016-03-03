@@ -36,6 +36,9 @@ public class AndroidOriginResolver {
         }
     }
 
+    private AndroidOriginResolver() {
+    }
+
     /**
      * Resolves jar URI either to libcore or to frameworks/base resolved target
      * @param origin URI to resolve

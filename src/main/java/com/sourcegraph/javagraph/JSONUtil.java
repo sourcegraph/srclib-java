@@ -15,6 +15,9 @@ import java.nio.charset.StandardCharsets;
  */
 public class JSONUtil {
 
+    private JSONUtil() {
+    }
+
     /**
      * Writes object as UTF-8 JSON
      *
