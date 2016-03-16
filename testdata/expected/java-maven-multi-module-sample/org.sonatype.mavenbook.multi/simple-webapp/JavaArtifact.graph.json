@@ -607,8 +607,8 @@
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/e",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
-      "Start": 589,
-      "End": 590
+      "Start": 596,
+      "End": 597
     },
     {
       "DefUnitType": "JavaArtifact",

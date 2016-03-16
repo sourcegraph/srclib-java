@@ -2998,8 +2998,8 @@
       "DefPath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/e",
       "Def": true,
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
-      "Start": 475,
-      "End": 476
+      "Start": 482,
+      "End": 483
     },
     {
       "DefUnitType": "JavaArtifact",

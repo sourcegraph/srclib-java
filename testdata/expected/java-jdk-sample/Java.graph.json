@@ -23558,8 +23558,8 @@
       "DefPath": "java/math/BigInteger:type/and:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 111107,
-      "End": 111108
+      "Start": 111111,
+      "End": 111112
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -23706,8 +23706,8 @@
       "DefPath": "java/math/BigInteger:type/andNot:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 113511,
-      "End": 113512
+      "Start": 113515,
+      "End": 113516
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -23918,8 +23918,8 @@
       "DefPath": "java/math/BigInteger:type/bitCount/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 119489,
-      "End": 119490
+      "Start": 119493,
+      "End": 119494
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -24076,8 +24076,8 @@
       "DefPath": "java/math/BigInteger:type/bitLength/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 118537,
-      "End": 118538
+      "Start": 118541,
+      "End": 118542
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -24206,8 +24206,8 @@
       "DefPath": "java/math/BigInteger:type/bitLength/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 117943,
-      "End": 117944
+      "Start": 117968,
+      "End": 117969
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -24373,8 +24373,8 @@
       "DefPath": "java/math/BigInteger:type/bitLengthForInt:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 85293,
-      "End": 85294
+      "Start": 85296,
+      "End": 85297
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -24868,8 +24868,8 @@
       "DefPath": "java/math/BigInteger:type/clearBit:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 115506,
-      "End": 115507
+      "Start": 115510,
+      "End": 115511
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -24933,8 +24933,8 @@
       "DefPath": "java/math/BigInteger:type/clearBit:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 115291,
-      "End": 115292
+      "Start": 115294,
+      "End": 115295
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -25109,8 +25109,8 @@
       "DefPath": "java/math/BigInteger:type/compareMagnitude:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 122805,
-      "End": 122806
+      "Start": 122809,
+      "End": 122810
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -25893,8 +25893,8 @@
       "DefPath": "java/math/BigInteger:type/destructiveMulAdd:int[]:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 22120,
-      "End": 22121
+      "Start": 22124,
+      "End": 22125
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -25939,8 +25939,8 @@
       "DefPath": "java/math/BigInteger:type/destructiveMulAdd:int[]:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 22441,
-      "End": 22442
+      "Start": 22445,
+      "End": 22446
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26588,8 +26588,8 @@
       "DefPath": "java/math/BigInteger:type/divideAndRemainderBurnikelZiegler:java.math.BigInteger/r",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 79377,
-      "End": 79378
+      "Start": 79379,
+      "End": 79380
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26681,8 +26681,8 @@
       "DefPath": "java/math/BigInteger:type/divideAndRemainderKnuth:java.math.BigInteger/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 77140,
-      "End": 77141
+      "Start": 77166,
+      "End": 77167
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26700,8 +26700,8 @@
       "DefPath": "java/math/BigInteger:type/divideAndRemainderKnuth:java.math.BigInteger/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 77141,
-      "End": 77142
+      "Start": 77167,
+      "End": 77168
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26784,8 +26784,8 @@
       "DefPath": "java/math/BigInteger:type/divideAndRemainderKnuth:java.math.BigInteger/r",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 77333,
-      "End": 77334
+      "Start": 77335,
+      "End": 77336
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26888,8 +26888,8 @@
       "DefPath": "java/math/BigInteger:type/divideKnuth:java.math.BigInteger/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 75881,
-      "End": 75882
+      "Start": 75907,
+      "End": 75908
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -26907,8 +26907,8 @@
       "DefPath": "java/math/BigInteger:type/divideKnuth:java.math.BigInteger/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 75882,
-      "End": 75883
+      "Start": 75908,
+      "End": 75909
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -27436,8 +27436,8 @@
       "DefPath": "java/math/BigInteger:type/equals:java.lang.Object/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 124971,
-      "End": 124972
+      "Start": 124975,
+      "End": 124976
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -27867,8 +27867,8 @@
       "DefPath": "java/math/BigInteger:type/exactDivideBy3/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 66913,
-      "End": 66914
+      "Start": 66917,
+      "End": 66918
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28181,8 +28181,8 @@
       "DefPath": "java/math/BigInteger:type/firstNonzeroIntNum/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 152739,
-      "End": 152740
+      "Start": 152743,
+      "End": 152744
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28311,8 +28311,8 @@
       "DefPath": "java/math/BigInteger:type/flipBit:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 116239,
-      "End": 116240
+      "Start": 116243,
+      "End": 116244
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28385,8 +28385,8 @@
       "DefPath": "java/math/BigInteger:type/flipBit:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 116035,
-      "End": 116036
+      "Start": 116038,
+      "End": 116039
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28830,8 +28830,8 @@
       "DefPath": "java/math/BigInteger:type/gcd:java.math.BigInteger/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 84973,
-      "End": 84974
+      "Start": 84988,
+      "End": 84989
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28849,8 +28849,8 @@
       "DefPath": "java/math/BigInteger:type/gcd:java.math.BigInteger/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 85033,
-      "End": 85034
+      "Start": 85047,
+      "End": 85048
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -28971,8 +28971,8 @@
       "DefPath": "java/math/BigInteger:type/getInt:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 151999,
-      "End": 152000
+      "Start": 152002,
+      "End": 152003
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -29236,8 +29236,8 @@
       "DefPath": "java/math/BigInteger:type/getLower:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 68038,
-      "End": 68039
+      "Start": 68041,
+      "End": 68042
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -29347,8 +29347,8 @@
       "DefPath": "java/math/BigInteger:type/getLowestSetBit/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 117128,
-      "End": 117129
+      "Start": 117132,
+      "End": 117133
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -29723,8 +29723,8 @@
       "DefPath": "java/math/BigInteger:type/getRadixConversionCache:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 132250,
-      "End": 132251
+      "Start": 132254,
+      "End": 132255
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -30415,8 +30415,8 @@
       "DefPath": "java/math/BigInteger:type/getUpper:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 68526,
-      "End": 68527
+      "Start": 68529,
+      "End": 68530
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -30573,8 +30573,8 @@
       "DefPath": "java/math/BigInteger:type/hashCode/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 126096,
-      "End": 126097
+      "Start": 126100,
+      "End": 126101
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -30714,8 +30714,8 @@
       "DefPath": "java/math/BigInteger:type/intArrayCmpToLen:int[]:int[]:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 101477,
-      "End": 101478
+      "Start": 101481,
+      "End": 101482
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -31258,8 +31258,8 @@
       "DefPath": "java/math/BigInteger:type/jacobiSymbol:int:java.math.BigInteger/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 35736,
-      "End": 35737
+      "Start": 35743,
+      "End": 35744
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -31467,8 +31467,8 @@
       "DefPath": "java/math/BigInteger:type/jacobiSymbol:int:java.math.BigInteger/t",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 37071,
-      "End": 37072
+      "Start": 37073,
+      "End": 37074
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -31659,8 +31659,8 @@
       "DefPath": "java/math/BigInteger:type/javaIncrement:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 110447,
-      "End": 110448
+      "Start": 110451,
+      "End": 110452
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -32450,8 +32450,8 @@
       "DefPath": "java/math/BigInteger:type/leftShift:int[]:int:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 85575,
-      "End": 85576
+      "Start": 85578,
+      "End": 85579
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -32654,8 +32654,8 @@
       "DefPath": "java/math/BigInteger:type/longValue/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 136264,
-      "End": 136265
+      "Start": 136268,
+      "End": 136269
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -32858,8 +32858,8 @@
       "DefPath": "java/math/BigInteger:type/lucasLehmerSequence:int:java.math.BigInteger:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 37510,
-      "End": 37511
+      "Start": 37514,
+      "End": 37515
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -32923,8 +32923,8 @@
       "DefPath": "java/math/BigInteger:type/lucasLehmerSequence:int:java.math.BigInteger:java.math.BigInteger/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 37352,
-      "End": 37353
+      "Start": 37359,
+      "End": 37360
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -33482,8 +33482,8 @@
       "DefPath": "java/math/BigInteger:type/magSerializedForm/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 159014,
-      "End": 159015
+      "Start": 159018,
+      "End": 159019
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -35329,8 +35329,8 @@
       "DefPath": "java/math/BigInteger:type/makePositive:byte[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 146475,
-      "End": 146476
+      "Start": 146479,
+      "End": 146480
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -35393,8 +35393,8 @@
       "DefPath": "java/math/BigInteger:type/makePositive:byte[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 147060,
-      "End": 147061
+      "Start": 147064,
+      "End": 147065
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -35926,8 +35926,8 @@
       "DefPath": "java/math/BigInteger:type/makePositive:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 148056,
-      "End": 148057
+      "Start": 148060,
+      "End": 148061
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -35972,8 +35972,8 @@
       "DefPath": "java/math/BigInteger:type/makePositive:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 148220,
-      "End": 148221
+      "Start": 148224,
+      "End": 148225
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -36646,8 +36646,8 @@
       "DefPath": "java/math/BigInteger:type/modInverse:java.math.BigInteger/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 105591,
-      "End": 105592
+      "Start": 105606,
+      "End": 105607
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -36665,8 +36665,8 @@
       "DefPath": "java/math/BigInteger:type/modInverse:java.math.BigInteger/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 105653,
-      "End": 105654
+      "Start": 105667,
+      "End": 105668
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -38078,8 +38078,8 @@
       "DefPath": "java/math/BigInteger:type/montReduce:int[]:int[]:int:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 100739,
-      "End": 100740
+      "Start": 100744,
+      "End": 100745
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -38298,8 +38298,8 @@
       "DefPath": "java/math/BigInteger:type/mulAdd:int[]:int[]:int:int:int/in",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 102214,
-      "End": 102216
+      "Start": 102220,
+      "End": 102222
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -39099,8 +39099,8 @@
       "DefPath": "java/math/BigInteger:type/multiply:long/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 56869,
-      "End": 56870
+      "Start": 56873,
+      "End": 56874
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -39136,8 +39136,8 @@
       "DefPath": "java/math/BigInteger:type/multiply:long/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 57192,
-      "End": 57193
+      "Start": 57196,
+      "End": 57197
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -39633,8 +39633,8 @@
       "DefPath": "java/math/BigInteger:type/multiplyByInt:int[]:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 55734,
-      "End": 55735
+      "Start": 55738,
+      "End": 55739
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -40477,8 +40477,8 @@
       "DefPath": "java/math/BigInteger:type/multiplyToLen:int[]:int:int[]:int:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 58358,
-      "End": 58359
+      "Start": 58362,
+      "End": 58363
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -42830,8 +42830,8 @@
       "DefPath": "java/math/BigInteger:type/not/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 112798,
-      "End": 112799
+      "Start": 112802,
+      "End": 112803
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -43717,8 +43717,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 96568,
-      "End": 96569
+      "Start": 96572,
+      "End": 96573
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -43754,8 +43754,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 97323,
-      "End": 97324
+      "Start": 97327,
+      "End": 97328
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -43800,8 +43800,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 97732,
-      "End": 97733
+      "Start": 97736,
+      "End": 97737
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -43846,8 +43846,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 98107,
-      "End": 98108
+      "Start": 98111,
+      "End": 98112
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -44423,8 +44423,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/r",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 97043,
-      "End": 97044
+      "Start": 97045,
+      "End": 97046
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -44716,8 +44716,8 @@
       "DefPath": "java/math/BigInteger:type/oddModPow:java.math.BigInteger:java.math.BigInteger/t",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 97627,
-      "End": 97628
+      "Start": 97631,
+      "End": 97632
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -44910,8 +44910,8 @@
       "DefPath": "java/math/BigInteger:type/or:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 111704,
-      "End": 111705
+      "Start": 111708,
+      "End": 111709
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -45485,8 +45485,8 @@
       "DefPath": "java/math/BigInteger:type/passesMillerRabin:int:java.util.Random/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 38948,
-      "End": 38949
+      "Start": 38952,
+      "End": 38953
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -46598,8 +46598,8 @@
       "DefPath": "java/math/BigInteger:type/primeToCertainty:int:java.util.Random/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 34082,
-      "End": 34083
+      "Start": 34085,
+      "End": 34086
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -47002,8 +47002,8 @@
       "DefPath": "java/math/BigInteger:type/primitiveLeftShift:int[]:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 86974,
-      "End": 86975
+      "Start": 86978,
+      "End": 86979
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -47141,8 +47141,8 @@
       "DefPath": "java/math/BigInteger:type/primitiveLeftShift:int[]:int:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 86875,
-      "End": 86876
+      "Start": 86878,
+      "End": 86879
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -47326,8 +47326,8 @@
       "DefPath": "java/math/BigInteger:type/primitiveRightShift:int[]:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 86587,
-      "End": 86588
+      "Start": 86591,
+      "End": 86592
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -47419,8 +47419,8 @@
       "DefPath": "java/math/BigInteger:type/primitiveRightShift:int[]:int:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 86541,
-      "End": 86542
+      "Start": 86544,
+      "End": 86545
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -47727,8 +47727,8 @@
       "DefPath": "java/math/BigInteger:type/readObject:java.io.ObjectInputStream/e",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 156623,
-      "End": 156624
+      "Start": 156637,
+      "End": 156638
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48091,8 +48091,8 @@
       "DefPath": "java/math/BigInteger:type/remainderKnuth:java.math.BigInteger/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 78201,
-      "End": 78202
+      "Start": 78227,
+      "End": 78228
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48110,8 +48110,8 @@
       "DefPath": "java/math/BigInteger:type/remainderKnuth:java.math.BigInteger/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 78202,
-      "End": 78203
+      "Start": 78228,
+      "End": 78229
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48252,8 +48252,8 @@
       "DefPath": "java/math/BigInteger:type/setBit:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 114759,
-      "End": 114760
+      "Start": 114763,
+      "End": 114764
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48326,8 +48326,8 @@
       "DefPath": "java/math/BigInteger:type/setBit:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 114555,
-      "End": 114556
+      "Start": 114558,
+      "End": 114559
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48455,8 +48455,8 @@
       "DefPath": "java/math/BigInteger:type/shiftLeft:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 106215,
-      "End": 106216
+      "Start": 106218,
+      "End": 106219
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48529,8 +48529,8 @@
       "DefPath": "java/math/BigInteger:type/shiftLeft:int[]:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 107326,
-      "End": 107327
+      "Start": 107330,
+      "End": 107331
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -48924,8 +48924,8 @@
       "DefPath": "java/math/BigInteger:type/shiftLeft:int[]:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 107038,
-      "End": 107039
+      "Start": 107041,
+      "End": 107042
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -49125,8 +49125,8 @@
       "DefPath": "java/math/BigInteger:type/shiftRight:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 108253,
-      "End": 108254
+      "Start": 108256,
+      "End": 108257
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -49299,8 +49299,8 @@
       "DefPath": "java/math/BigInteger:type/shiftRightImpl:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 109411,
-      "End": 109412
+      "Start": 109415,
+      "End": 109416
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -49327,8 +49327,8 @@
       "DefPath": "java/math/BigInteger:type/shiftRightImpl:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 110016,
-      "End": 110017
+      "Start": 110020,
+      "End": 110021
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -49759,8 +49759,8 @@
       "DefPath": "java/math/BigInteger:type/shiftRightImpl:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 108984,
-      "End": 108985
+      "Start": 108987,
+      "End": 108988
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -51113,8 +51113,8 @@
       "DefPath": "java/math/BigInteger:type/smallPrime:int:int:java.util.Random/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 27996,
-      "End": 27997
+      "Start": 28000,
+      "End": 28001
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -51462,8 +51462,8 @@
       "DefPath": "java/math/BigInteger:type/smallToString:int/a",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 128403,
-      "End": 128404
+      "Start": 128429,
+      "End": 128430
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -51481,8 +51481,8 @@
       "DefPath": "java/math/BigInteger:type/smallToString:int/b",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 128404,
-      "End": 128405
+      "Start": 128430,
+      "End": 128431
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -51638,8 +51638,8 @@
       "DefPath": "java/math/BigInteger:type/smallToString:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 129213,
-      "End": 129214
+      "Start": 129217,
+      "End": 129218
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -51889,8 +51889,8 @@
       "DefPath": "java/math/BigInteger:type/smallToString:int/r",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 128605,
-      "End": 128606
+      "Start": 128607,
+      "End": 128608
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -52224,8 +52224,8 @@
       "DefPath": "java/math/BigInteger:type/squareToLen:int[]:int:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 71317,
-      "End": 71318
+      "Start": 71326,
+      "End": 71327
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -52252,8 +52252,8 @@
       "DefPath": "java/math/BigInteger:type/squareToLen:int[]:int:int[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 71657,
-      "End": 71658
+      "Start": 71661,
+      "End": 71662
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -52520,8 +52520,8 @@
       "DefPath": "java/math/BigInteger:type/squareToLen:int[]:int:int[]/t",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 71717,
-      "End": 71718
+      "Start": 71719,
+      "End": 71720
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -53835,8 +53835,8 @@
       "DefPath": "java/math/BigInteger:type/stripLeadingZeroBytes:byte[]/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 145204,
-      "End": 145205
+      "Start": 145208,
+      "End": 145209
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -55967,8 +55967,8 @@
       "DefPath": "java/math/BigInteger:type/testBit:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 114064,
-      "End": 114065
+      "Start": 114067,
+      "End": 114068
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -56962,8 +56962,8 @@
       "DefPath": "java/math/BigInteger:type/toByteArray/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 134390,
-      "End": 134391
+      "Start": 134394,
+      "End": 134395
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -57287,8 +57287,8 @@
       "DefPath": "java/math/BigInteger:type/toString:java.math.BigInteger:java.lang.StringBuilder:int:int/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 130722,
-      "End": 130723
+      "Start": 130726,
+      "End": 130727
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -57315,8 +57315,8 @@
       "DefPath": "java/math/BigInteger:type/toString:java.math.BigInteger:java.lang.StringBuilder:int:int/n",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 130951,
-      "End": 130952
+      "Start": 130957,
+      "End": 130958
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -58676,8 +58676,8 @@
       "DefPath": "java/math/BigInteger:type/xor:java.math.BigInteger/i",
       "Def": true,
       "File": "src/share/classes/java/math/BigInteger.java",
-      "Start": 112313,
-      "End": 112314
+      "Start": 112317,
+      "End": 112318
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
