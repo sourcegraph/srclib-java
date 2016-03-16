@@ -92,7 +92,36 @@ public final class Spans {
      * @return name span of variable node in current compilation unit
      */
     public int[] name(VariableTree var) {
-        return name(var.getName().toString(), var);
+        // alexsaveliev: there may be the following caveats
+        // Foobar bar
+        // Foo bar = Foobar()
+        // regular search for "bar" in the tree won't work
+
+        if (src == null) {
+            return null;
+        }
+
+        int treeStart = (int) srcPos.getStartPosition(compilationUnit, var);
+        int treeEnd = (int) srcPos.getEndPosition(compilationUnit, var);
+        if (treeStart == -1 || treeEnd == -1) {
+            return null;
+        }
+
+        String treeSrc = src.substring(treeStart, treeEnd);
+        // cut type prefix
+        String name = var.getName().toString();
+        String type = var.getType().toString();
+        int pos = treeSrc.indexOf(type);
+        if (pos < 0) {
+            // fallback
+            return name(name, var);
+        }
+        pos = treeSrc.indexOf(name, pos + type.length());
+        if (pos < 0) {
+            // fallback
+            return name(name, var);
+        }
+        return new int[] {treeStart + pos, treeStart + pos + name.length()};
     }
 
     /**

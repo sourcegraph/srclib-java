@@ -587,8 +587,8 @@
       "DefPath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
       "Def": true,
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
-      "Start": 787,
-      "End": 788
+      "Start": 792,
+      "End": 793
     },
     {
       "DefUnitType": "JavaArtifact",
