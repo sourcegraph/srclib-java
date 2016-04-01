@@ -207,7 +207,7 @@ public class Grapher {
                     }
 
                     TreePath root = new TreePath(unit);
-                    new TreeScanner(emit, trees).scan(root, null);
+                    new TreeScanner(emit, trees, this.unit).scan(root, null);
                 } catch (Exception e) {
                     LOGGER.warn("Skipping compilation unit {} ({})", unit.getPackageName(), unit.getSourceFile(), e);
                 }
@@ -231,7 +231,7 @@ public class Grapher {
      * @throws IOException
      */
     private void writePackageSymbol(String packageName) throws IOException {
-        Def s = new Def();
+        Def s = new Def(unit.Name);
         // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
         s.defKey = new DefKey(null, packageName);
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);
