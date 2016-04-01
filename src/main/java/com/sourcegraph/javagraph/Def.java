@@ -61,6 +61,16 @@ public class Def {
 
     String typeExpr;
 
+    String unit;
+
+    /**
+     * Def cannot exist without a unit
+     * @param unit source unit
+     */
+    public Def(String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,6 +90,7 @@ public class Def {
         if (name != null ? !name.equals(def.name) : def.name != null) return false;
         if (pkg != null ? !pkg.equals(def.pkg) : def.pkg != null) return false;
         if (typeExpr != null ? !typeExpr.equals(def.typeExpr) : def.typeExpr != null) return false;
+        if (!unit.equals(def.unit)) return false;
 
         return true;
     }
@@ -98,6 +109,7 @@ public class Def {
         result = 31 * result + (pkg != null ? pkg.hashCode() : 0);
         result = 31 * result + (doc != null ? doc.hashCode() : 0);
         result = 31 * result + (typeExpr != null ? typeExpr.hashCode() : 0);
+        result = 31 * result + unit.hashCode();
         return result;
     }
 
@@ -160,6 +172,7 @@ public class Def {
 
             object.add("Path", new JsonPrimitive(sym.defKey.formatPath()));
             object.add("TreePath", new JsonPrimitive(sym.defKey.formatTreePath()));
+            object.add("Unit", new JsonPrimitive(sym.unit));
 
             // Populate extra data field
             JsonObject data = new JsonObject();
