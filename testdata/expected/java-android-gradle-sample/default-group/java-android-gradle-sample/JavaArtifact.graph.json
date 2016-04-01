@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld",
       "Name": "helloworld",
       "Kind": "package",
@@ -14,6 +15,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -32,6 +34,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type",
       "Name": "BuildConfig",
       "Kind": "type",
@@ -51,6 +54,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/APPLICATION_ID",
       "Name": "APPLICATION_ID",
       "Kind": "var",
@@ -71,6 +75,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/APPLICATION_ID"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/BUILD_TYPE",
       "Name": "BUILD_TYPE",
       "Kind": "var",
@@ -91,6 +96,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/BUILD_TYPE"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/DEBUG",
       "Name": "DEBUG",
       "Kind": "var",
@@ -111,6 +117,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/DEBUG"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/FLAVOR",
       "Name": "FLAVOR",
       "Kind": "var",
@@ -131,6 +138,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/FLAVOR"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_CODE",
       "Name": "VERSION_CODE",
       "Kind": "var",
@@ -151,6 +159,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_CODE"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_NAME",
       "Name": "VERSION_NAME",
       "Kind": "var",
@@ -171,6 +180,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_NAME"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -189,6 +199,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type",
       "Name": "MainActivity",
       "Kind": "type",
@@ -207,6 +218,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle",
       "Name": "onCreate",
       "Kind": "func",
@@ -225,6 +237,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle/savedInstanceState",
       "Name": "savedInstanceState",
       "Kind": "var",
@@ -241,6 +254,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle/savedInstanceState"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu",
       "Name": "onCreateOptionsMenu",
       "Kind": "func",
@@ -259,6 +273,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/menu",
       "Name": "menu",
       "Kind": "var",
@@ -275,6 +290,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/menu"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/s",
       "Name": "s",
       "Kind": "var",
@@ -291,6 +307,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/s"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -309,6 +326,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type",
       "Name": "R",
       "Kind": "type",
@@ -328,6 +346,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/attr/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -346,6 +365,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/attr/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/attr:type",
       "Name": "attr",
       "Kind": "type",
@@ -366,6 +386,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/attr:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/drawable/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -384,6 +405,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/drawable/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/drawable:type",
       "Name": "drawable",
       "Kind": "type",
@@ -404,6 +426,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_action_search",
       "Name": "ic_action_search",
       "Kind": "var",
@@ -424,6 +447,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_action_search"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_launcher",
       "Name": "ic_launcher",
       "Kind": "var",
@@ -444,6 +468,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_launcher"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/id/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -462,6 +487,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/id/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/id:type",
       "Name": "id",
       "Kind": "type",
@@ -482,6 +508,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/id:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/id:type/menu_settings",
       "Name": "menu_settings",
       "Kind": "var",
@@ -502,6 +529,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/id:type/menu_settings"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/layout/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -520,6 +548,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/layout/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/layout:type",
       "Name": "layout",
       "Kind": "type",
@@ -540,6 +569,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/layout:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/layout:type/activity_main",
       "Name": "activity_main",
       "Kind": "var",
@@ -560,6 +590,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/layout:type/activity_main"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/menu/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -578,6 +609,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/menu/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/menu:type",
       "Name": "menu",
       "Kind": "type",
@@ -598,6 +630,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/menu:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/menu:type/activity_main",
       "Name": "activity_main",
       "Kind": "var",
@@ -618,6 +651,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/menu:type/activity_main"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -636,6 +670,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string:type",
       "Name": "string",
       "Kind": "type",
@@ -656,6 +691,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string:type/app_name",
       "Name": "app_name",
       "Kind": "var",
@@ -676,6 +712,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string:type/app_name"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string:type/hello_world",
       "Name": "hello_world",
       "Kind": "var",
@@ -696,6 +733,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string:type/hello_world"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string:type/menu_settings",
       "Name": "menu_settings",
       "Kind": "var",
@@ -716,6 +754,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string:type/menu_settings"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/string:type/title_activity_main",
       "Name": "title_activity_main",
       "Kind": "var",
@@ -736,6 +775,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/string:type/title_activity_main"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/style/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -754,6 +794,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/style/:init"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/style:type",
       "Name": "style",
       "Kind": "type",
@@ -774,6 +815,7 @@
       "TreePath": "de/goddchen/android/gradle/helloworld/R:type/style:type"
     },
     {
+      "Unit": "default-group/java-android-gradle-sample",
       "Path": "de/goddchen/android/gradle/helloworld/R:type/style:type/AppTheme",
       "Name": "AppTheme",
       "Kind": "var",
@@ -800,6 +842,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/app/Activity:type/getMenuInflater",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 450,
       "End": 465
@@ -809,6 +852,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/app/Activity:type/onCreate:android.os.Bundle",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 258,
       "End": 266
@@ -818,6 +862,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/app/Activity:type/setContentView:int",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 296,
       "End": 310
@@ -827,6 +872,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/app/Activity:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 164,
       "End": 172
@@ -836,6 +882,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/app/Activity:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 93,
       "End": 101
@@ -845,6 +892,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/os/Bundle:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 215,
       "End": 221
@@ -854,6 +902,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/os/Bundle:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 66,
       "End": 72
@@ -863,6 +912,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/view/Menu:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 123,
       "End": 127
@@ -872,6 +922,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/view/Menu:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 396,
       "End": 400
@@ -881,6 +932,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidSDK",
       "DefPath": "android/view/MenuInflater:type/inflate:int:android.view.Menu",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 468,
       "End": 475
@@ -889,6 +941,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/APPLICATION_ID",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 233,
@@ -898,6 +951,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/BUILD_TYPE",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 320,
@@ -907,6 +961,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/DEBUG",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 166,
@@ -916,6 +971,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/FLAVOR",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 371,
@@ -925,6 +981,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_CODE",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 410,
@@ -934,6 +991,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type/VERSION_NAME",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 457,
@@ -943,6 +1001,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/BuildConfig:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 122,
@@ -952,6 +1011,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle/savedInstanceState",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 222,
@@ -961,6 +1021,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle/savedInstanceState",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 267,
       "End": 285
@@ -969,6 +1030,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreate:android.os.Bundle",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 206,
@@ -978,6 +1040,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/menu",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 401,
@@ -987,6 +1050,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/menu",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 498,
       "End": 502
@@ -995,6 +1059,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu/s",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 422,
@@ -1004,6 +1069,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/onCreateOptionsMenu:android.view.Menu",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 376,
@@ -1013,6 +1079,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type/super",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 252,
       "End": 257
@@ -1021,6 +1088,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/MainActivity:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 143,
@@ -1030,6 +1098,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/attr:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 283,
@@ -1039,6 +1108,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_action_search",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 369,
@@ -1048,6 +1118,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type/ic_launcher",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 430,
@@ -1057,6 +1128,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/drawable:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 326,
@@ -1066,6 +1138,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/id:type/menu_settings",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 527,
@@ -1075,6 +1148,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/id:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 490,
@@ -1084,6 +1158,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/layout:type/activity_main",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 630,
@@ -1093,6 +1168,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/layout:type/activity_main",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 320,
       "End": 333
@@ -1101,6 +1177,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/layout:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 589,
@@ -1110,6 +1187,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/layout:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 313,
       "End": 319
@@ -1118,6 +1196,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/menu:type/activity_main",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 731,
@@ -1127,6 +1206,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/menu:type/activity_main",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 483,
       "End": 496
@@ -1135,6 +1215,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/menu:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 692,
@@ -1144,6 +1225,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/menu:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 478,
       "End": 482
@@ -1152,6 +1234,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/string:type/app_name",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 834,
@@ -1161,6 +1244,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/string:type/hello_world",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 887,
@@ -1170,6 +1254,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/string:type/menu_settings",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 943,
@@ -1179,6 +1264,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/string:type/title_activity_main",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 1001,
@@ -1188,6 +1274,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/string:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 793,
@@ -1197,6 +1284,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/style:type/AppTheme",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 1109,
@@ -1206,6 +1294,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type/style:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 1069,
@@ -1215,6 +1304,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "Def": true,
       "File": "build/generated/source/r/debug/de/goddchen/android/gradle/helloworld/R.java",
       "Start": 249,
@@ -1224,6 +1314,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 311,
       "End": 312
@@ -1232,6 +1323,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "default-group/java-android-gradle-sample",
       "DefPath": "de/goddchen/android/gradle/helloworld/R:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 476,
       "End": 477
@@ -1241,6 +1333,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/Boolean:type/parseBoolean:java.lang.String",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 182,
       "End": 194
@@ -1250,6 +1343,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/Boolean:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 174,
       "End": 181
@@ -1259,6 +1353,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/Override:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 181,
       "End": 189
@@ -1268,6 +1363,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/Override:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 348,
       "End": 356
@@ -1277,6 +1373,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/String:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 226,
       "End": 232
@@ -1286,6 +1383,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/String:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 313,
       "End": 319
@@ -1295,6 +1393,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/String:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 364,
       "End": 370
@@ -1304,6 +1403,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/String:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "build/generated/source/buildConfig/debug/de/goddchen/android/gradle/helloworld/BuildConfig.java",
       "Start": 450,
       "End": 456
@@ -1313,6 +1413,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "AndroidCore",
       "DefPath": "java/lang/String:type",
+      "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 415,
       "End": 421

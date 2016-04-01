@@ -142,6 +142,10 @@ public class GraphCommand {
          * Source file
          */
         String File;
+        /**
+         * Source unit
+         */
+        String Unit;
 
         public Doc(Def def) {
             Path = def.defKey.formatPath();
@@ -150,6 +154,7 @@ public class GraphCommand {
             Format = "text/html";
             Data = def.doc;
             File = PathUtil.relativizeCwd(def.file);
+            Unit = def.unit;
         }
     }
 

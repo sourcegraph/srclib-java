@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x",
       "Name": "x",
       "Kind": "package",
@@ -14,6 +15,7 @@
       "TreePath": "x"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -32,6 +34,7 @@
       "TreePath": "x/Foo/:init"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type",
       "Name": "Foo",
       "Kind": "type",
@@ -50,6 +53,7 @@
       "TreePath": "x/Foo:type"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/fo",
       "Name": "fo",
       "Kind": "func",
@@ -68,6 +72,7 @@
       "TreePath": "x/Foo:type/fo"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]",
       "Name": "main",
       "Kind": "func",
@@ -86,6 +91,7 @@
       "TreePath": "x/Foo:type/main:java.lang.String[]"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]/args",
       "Name": "args",
       "Kind": "var",
@@ -102,6 +108,7 @@
       "TreePath": "x/Foo:type/main:java.lang.String[]/args"
     },
     {
+      "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]/foo",
       "Name": "foo",
       "Kind": "var",
@@ -124,6 +131,7 @@
       "DefUnitType": "Java",
       "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
+      "Unit": "foobar/java-ident-issue-23",
       "File": "src/main/java/x/Foo.java",
       "Start": 83,
       "End": 89
@@ -132,6 +140,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/fo",
+      "Unit": "foobar/java-ident-issue-23",
       "File": "src/main/java/x/Foo.java",
       "Start": 135,
       "End": 137
@@ -140,6 +149,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/fo",
+      "Unit": "foobar/java-ident-issue-23",
       "Def": true,
       "File": "src/main/java/x/Foo.java",
       "Start": 48,
@@ -149,6 +159,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/main:java.lang.String[]/args",
+      "Unit": "foobar/java-ident-issue-23",
       "Def": true,
       "File": "src/main/java/x/Foo.java",
       "Start": 90,
@@ -158,6 +169,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/main:java.lang.String[]/foo",
+      "Unit": "foobar/java-ident-issue-23",
       "Def": true,
       "File": "src/main/java/x/Foo.java",
       "Start": 109,
@@ -167,6 +179,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/main:java.lang.String[]/foo",
+      "Unit": "foobar/java-ident-issue-23",
       "File": "src/main/java/x/Foo.java",
       "Start": 131,
       "End": 134
@@ -175,6 +188,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type/main:java.lang.String[]",
+      "Unit": "foobar/java-ident-issue-23",
       "Def": true,
       "File": "src/main/java/x/Foo.java",
       "Start": 78,
@@ -184,6 +198,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type",
+      "Unit": "foobar/java-ident-issue-23",
       "File": "src/main/java/x/Foo.java",
       "Start": 105,
       "End": 108
@@ -192,6 +207,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type",
+      "Unit": "foobar/java-ident-issue-23",
       "File": "src/main/java/x/Foo.java",
       "Start": 119,
       "End": 122
@@ -200,6 +216,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "foobar/java-ident-issue-23",
       "DefPath": "x/Foo:type",
+      "Unit": "foobar/java-ident-issue-23",
       "Def": true,
       "File": "src/main/java/x/Foo.java",
       "Start": 25,
