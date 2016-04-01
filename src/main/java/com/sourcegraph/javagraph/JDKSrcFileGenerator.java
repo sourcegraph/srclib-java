@@ -3,6 +3,7 @@ package com.sourcegraph.javagraph;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class JDKSrcFileGenerator {
 
         Srcfile srcfile = new Srcfile();
         srcfile.SourceUnits = units;
-        srcfile.SkipScan = true;
+        srcfile.Scanners = Collections.emptyList();
         JSONUtil.writeJSON(srcfile);
     }
 

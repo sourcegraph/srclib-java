@@ -13,5 +13,5 @@ class Srcfile {
 
     Collection<SourceUnit> SourceUnits;
 
-    Boolean SkipScan;
+    Collection<Toolref> Scanners;
 }
