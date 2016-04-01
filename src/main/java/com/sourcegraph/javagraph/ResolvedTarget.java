@@ -32,7 +32,7 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = JDKProject.JDK_REPO;
         target.ToUnitType = "Java";
-        target.ToUnit = ".";
+        target.ToUnit = "jdk";
         return target;
     }
 
@@ -43,7 +43,7 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = JDKProject.TOOLS_JAR_REPO;
         target.ToUnitType = "Java";
-        target.ToUnit = ".";
+        target.ToUnit = "langtools";
         return target;
     }
 
@@ -54,7 +54,7 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = JDKProject.NASHORN_REPO;
         target.ToUnitType = "Java";
-        target.ToUnit = ".";
+        target.ToUnit = "nashorn";
         return target;
     }
 
