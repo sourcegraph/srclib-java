@@ -57,7 +57,7 @@ public class GraphCommand {
         Project proj = unit.getProject();
         Resolver rs = new Resolver(proj, unit);
         try {
-            Grapher grapher = new Grapher(proj,
+            Grapher grapher = new Grapher(unit,
                     rawGraph);
             LOGGER.debug("Starting graph collection");
             Collection<String> files = new ArrayList<>();

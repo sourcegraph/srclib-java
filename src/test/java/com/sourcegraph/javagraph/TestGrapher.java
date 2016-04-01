@@ -14,40 +14,47 @@ import static org.junit.Assert.assertNotNull;
 
 public class TestGrapher {
     private GraphData graph(String name, String javaSource) throws Exception {
-        Project project = new Project() {
+        SourceUnit unit = new SourceUnit() {
 
             @Override
-            public List<String> getClassPath() throws Exception {
-                return null;
-            }
+            public Project getProject() {
 
-            @Override
-            public List<String> getBootClassPath() throws Exception {
-                return null;
-            }
+                return new Project() {
 
-            @Override
-            public List<String> getSourcePath() throws Exception {
-                return null;
-            }
+                    @Override
+                    public List<String> getClassPath() throws Exception {
+                        return null;
+                    }
 
-            @Override
-            public RawDependency getDepForJAR(Path jarFile) throws Exception {
-                return null;
-            }
+                    @Override
+                    public List<String> getBootClassPath() throws Exception {
+                        return null;
+                    }
 
-            @Override
-            public String getSourceCodeVersion() throws Exception {
-                return Project.DEFAULT_SOURCE_CODE_VERSION;
-            }
+                    @Override
+                    public List<String> getSourcePath() throws Exception {
+                        return null;
+                    }
 
-            @Override
-            public String getSourceCodeEncoding() throws Exception {
-                return null;
+                    @Override
+                    public RawDependency getDepForJAR(Path jarFile) throws Exception {
+                        return null;
+                    }
+
+                    @Override
+                    public String getSourceCodeVersion() throws Exception {
+                        return Project.DEFAULT_SOURCE_CODE_VERSION;
+                    }
+
+                    @Override
+                    public String getSourceCodeEncoding() throws Exception {
+                        return null;
+                    }
+                };
             }
         };
         GraphData w = new GraphData();
-        Grapher g = new Grapher(project, w);
+        Grapher g = new Grapher(unit, w);
         List<JavaFileObject> files = new ArrayList<>();
         files.add(new StringJavaFileObject(name, javaSource));
         g.graphJavaFiles(files);
