@@ -628,7 +628,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 114,
@@ -637,7 +637,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 383,
@@ -646,7 +646,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStreamReader:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 142,
@@ -655,7 +655,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 605,
@@ -664,7 +664,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 421,
@@ -673,7 +673,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 139,
@@ -682,7 +682,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 177,
@@ -691,7 +691,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 230,
@@ -700,7 +700,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/Reader:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 176,
@@ -709,7 +709,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type/toString:int",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 193,
@@ -718,7 +718,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type/toString:int",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 246,
@@ -727,7 +727,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 304,
@@ -736,7 +736,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 340,
@@ -745,7 +745,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 185,
@@ -754,7 +754,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 238,
@@ -763,7 +763,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Iterable:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 399,
@@ -772,7 +772,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type/length",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 554,
@@ -781,7 +781,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 500,
@@ -790,7 +790,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 546,
@@ -799,7 +799,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 205,
@@ -808,7 +808,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 233,
@@ -817,7 +817,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 590,
@@ -826,7 +826,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 601,
@@ -835,7 +835,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 417,
@@ -844,7 +844,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 135,
@@ -853,7 +853,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 173,
@@ -862,7 +862,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 226,
@@ -871,7 +871,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 594,
@@ -880,7 +880,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 410,
@@ -889,7 +889,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 128,
@@ -898,7 +898,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 166,
@@ -907,7 +907,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 219,
@@ -916,7 +916,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 200,
@@ -925,7 +925,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/ArrayList:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 330,
@@ -934,7 +934,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/ArrayList:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 45,
@@ -943,7 +943,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/List:type/size",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 389,
@@ -952,7 +952,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/List:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 299,
@@ -961,7 +961,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/List:type",
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 73,

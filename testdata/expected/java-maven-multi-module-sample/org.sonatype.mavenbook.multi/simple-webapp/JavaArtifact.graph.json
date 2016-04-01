@@ -270,7 +270,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 293,
@@ -279,7 +279,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 348,
@@ -288,7 +288,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/close",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 423,
@@ -297,7 +297,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/close",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 706,
@@ -306,7 +306,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/flush",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 402,
@@ -315,7 +315,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/flush",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 685,
@@ -324,7 +324,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 353,
@@ -333,7 +333,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 525,
@@ -342,7 +342,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 611,
@@ -351,7 +351,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 308,
@@ -360,7 +360,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 462,
@@ -369,7 +369,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 586,
@@ -378,7 +378,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 363,
@@ -387,7 +387,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Throwable:type/getMessage",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 654,

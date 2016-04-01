@@ -1531,7 +1531,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 56,
@@ -1540,7 +1540,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 679,
@@ -1549,7 +1549,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 220,
@@ -1558,7 +1558,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 56,
@@ -1567,7 +1567,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 360,
@@ -1576,7 +1576,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 56,
@@ -1585,7 +1585,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 264,
@@ -1594,7 +1594,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 56,
@@ -1603,7 +1603,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 469,
@@ -1612,7 +1612,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 62,
@@ -1621,7 +1621,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 687,
@@ -1630,7 +1630,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 364,
@@ -1639,7 +1639,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStream:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 62,
@@ -1648,7 +1648,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStreamReader:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 474,
@@ -1657,7 +1657,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStreamReader:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 56,
@@ -1666,7 +1666,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/print:java.lang.String",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 849,
@@ -1675,7 +1675,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/Reader:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 454,
@@ -1684,7 +1684,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/Reader:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 90,
@@ -1693,7 +1693,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/StringWriter:type/toString",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 753,
@@ -1702,7 +1702,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/StringWriter:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 113,
@@ -1711,7 +1711,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/StringWriter:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 645,
@@ -1720,7 +1720,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/StringWriter:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 671,
@@ -1729,7 +1729,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Class:type/getClassLoader",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 263,
@@ -1738,7 +1738,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Class:type/getClassLoader",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 504,
@@ -1747,7 +1747,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Class:type/getClassLoader",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 505,
@@ -1756,7 +1756,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Class:type/getClassLoader",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 725,
@@ -1765,7 +1765,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Class:type/getClassLoader",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 400,
@@ -1774,7 +1774,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/ClassLoader:type/getResource:java.lang.String",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 280,
@@ -1783,7 +1783,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 521,
@@ -1792,7 +1792,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 522,
@@ -1801,7 +1801,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 742,
@@ -1810,7 +1810,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/ClassLoader:type/getResourceAsStream:java.lang.String",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 417,
@@ -1819,7 +1819,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 186,
@@ -1828,7 +1828,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 472,
@@ -1837,7 +1837,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 646,
@@ -1846,7 +1846,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 399,
@@ -1855,7 +1855,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 189,
@@ -1864,7 +1864,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 392,
@@ -1873,7 +1873,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 308,
@@ -1882,7 +1882,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 455,
@@ -1891,7 +1891,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 350,
@@ -1900,7 +1900,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Object:type/getClass",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 493,
@@ -1909,7 +1909,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Object:type/getClass",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 494,
@@ -1918,7 +1918,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Object:type/getClass",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 714,
@@ -1927,7 +1927,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Object:type/getClass",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 389,
@@ -1936,7 +1936,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 164,
@@ -1945,7 +1945,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 392,
@@ -1954,7 +1954,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 555,
@@ -1963,7 +1963,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 581,
@@ -1972,7 +1972,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 1019,
@@ -1981,7 +1981,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 120,
@@ -1990,7 +1990,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 148,
@@ -1999,7 +1999,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 178,
@@ -2008,7 +2008,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 203,
@@ -2017,7 +2017,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 229,
@@ -2026,7 +2026,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 284,
@@ -2035,7 +2035,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 339,
@@ -2044,7 +2044,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 383,
@@ -2053,7 +2053,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 444,
@@ -2062,7 +2062,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 494,
@@ -2071,7 +2071,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 558,
@@ -2080,7 +2080,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 611,
@@ -2089,7 +2089,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 681,
@@ -2098,7 +2098,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 740,
@@ -2107,7 +2107,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 74,
@@ -2116,7 +2116,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 795,
@@ -2125,7 +2125,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 847,
@@ -2134,7 +2134,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 905,
@@ -2143,7 +2143,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 952,
@@ -2152,7 +2152,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 96,
@@ -2161,7 +2161,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
       "Start": 359,
@@ -2170,7 +2170,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 144,
@@ -2179,7 +2179,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 169,
@@ -2188,7 +2188,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1183,
@@ -2197,7 +2197,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1190,
@@ -2206,7 +2206,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1217,
@@ -2215,7 +2215,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1224,
@@ -2224,7 +2224,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 285,
@@ -2233,7 +2233,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 363,
@@ -2242,7 +2242,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 387,
@@ -2251,7 +2251,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
       "Start": 618,
@@ -2260,7 +2260,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 282,
@@ -2269,7 +2269,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 845,
@@ -2278,7 +2278,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 838,
@@ -2287,7 +2287,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type/openConnection",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 827,
@@ -2296,7 +2296,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 818,
@@ -2305,7 +2305,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 85,
@@ -2314,7 +2314,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URLConnection:type/getInputStream",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 859,
@@ -2323,7 +2323,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URLConnection:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 106,
@@ -2332,7 +2332,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URLConnection:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
       "Start": 793,
@@ -2341,7 +2341,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/HashMap:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1209,
@@ -2350,7 +2350,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/HashMap:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 86,
@@ -2359,7 +2359,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/Map:type/put:K:V",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1248,
@@ -2368,7 +2368,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/Map:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 112,
@@ -2377,7 +2377,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/util/Map:type",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
       "Start": 1179,

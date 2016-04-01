@@ -350,7 +350,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 314,
@@ -359,7 +359,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 802,
@@ -368,7 +368,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/InputStreamReader:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 342,
@@ -377,7 +377,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:char[]",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1105,
@@ -386,7 +386,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintStream:type/println:java.lang.String",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 523,
@@ -395,7 +395,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/Reader:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 376,
@@ -404,7 +404,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Iterable:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 866,
@@ -413,7 +413,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1037,
@@ -422,7 +422,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 482,
@@ -431,7 +431,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 982,
@@ -440,7 +440,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/JDK8062359.java",
       "Start": 81,
@@ -449,7 +449,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1101,
@@ -458,7 +458,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type/out",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 519,
@@ -467,7 +467,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 1094,
@@ -476,7 +476,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/System:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 512,
@@ -485,7 +485,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "unresolved-maven-deps/src/main/java/org/srclib/java/App.java",
       "Start": 400,

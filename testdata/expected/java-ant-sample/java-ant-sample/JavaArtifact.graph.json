@@ -175,7 +175,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/FileInputStream:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 122,
@@ -184,7 +184,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 257,
@@ -193,7 +193,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 153,
@@ -202,7 +202,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 193,
@@ -211,7 +211,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 237,
@@ -220,7 +220,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type/openStream",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 353,
@@ -229,7 +229,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 155,
@@ -238,7 +238,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 277,
@@ -247,7 +247,7 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 291,
