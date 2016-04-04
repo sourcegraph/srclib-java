@@ -35,6 +35,16 @@ public class JDKSrcFileGenerator {
             PathUtil.CWD = Paths.get(args[1]);
         }
 
+        JSONUtil.writeJSON(getSrcfile(project));
+    }
+
+    /**
+     * Generates Srcfile for a given OpenJDK project
+     * @param project OpenJDK project name (jdk, langtools, nashorn, ...)
+     * @return generated Srcfile
+     * @throws IOException
+     */
+    static Srcfile getSrcfile(String project) throws IOException {
         Collection<SourceUnit> units = new LinkedList<>();
 
         SourceUnit unit = new SourceUnit();
@@ -54,7 +64,7 @@ public class JDKSrcFileGenerator {
         Srcfile srcfile = new Srcfile();
         srcfile.SourceUnits = units;
         srcfile.Scanners = Collections.emptyList();
-        JSONUtil.writeJSON(srcfile);
+        return srcfile;
     }
 
     private static String getMarker(String project) {
