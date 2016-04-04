@@ -151,6 +151,16 @@ def collectBuildableDependencies(project, task, dependency, target) {
     }
 }
 
+class SrclibPrintStream extends PrintStream {
+    SrclibPrintStream() {
+        super(System.err);
+    }
+
+    void println(Object o) {
+        super.println("SRCLIB-WARNING " + o)
+    }
+}
+
 allprojects {
 
     afterEvaluate { project ->
@@ -200,7 +210,7 @@ allprojects {
                                 println "SRCLIB-DEPENDENCY $conf.name:$group:$name:$version:$file"
                             }
                         } catch (e) {
-                            println "SRCLIB-WARNING 1 $e"
+                            e.printStackTrace(new SrclibPrintStream());
                         }
                     }
 
@@ -220,7 +230,7 @@ allprojects {
 
                 }
             } catch (e) {
-                println "SRCLIB-WARNING 2 $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
@@ -233,7 +243,7 @@ allprojects {
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING 3 $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
@@ -248,7 +258,7 @@ allprojects {
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING 4 $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
@@ -263,13 +273,13 @@ allprojects {
                             try {
                                 println "SRCLIB-CLASSPATH $config.asPath"
                             } catch (e) {
-                                println "SRCLIB-WARNING 5 $e"
+                                e.printStackTrace(new SrclibPrintStream());
                             }
                         }
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING 6 $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             if (android) {
@@ -347,14 +357,14 @@ allprojects {
                             try {
                                 collectBuildableDependencies(project, compileTestJava, dependency, srclibCollectMetaInformation)
                             } catch (e) {
-                                println "SRCLIB-WARNING 7 $e"
+                                e.printStackTrace(new SrclibPrintStream());
                             }
                         }
                     }
                 }
             }
         } catch (e) {
-            println "SRCLIB-WARNING 8 $e"
+            e.printStackTrace(new SrclibPrintStream());
         }
         try {
             Task compileTask = project.tasks.findByPath("compile")
@@ -366,7 +376,7 @@ allprojects {
                 }
             }
         } catch (e) {
-            println "SRCLIB-WARNING 9 $e"
+            e.printStackTrace(new SrclibPrintStream());
         }
 
     }
