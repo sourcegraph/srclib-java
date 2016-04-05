@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz",
       "Name": "baz",
       "Kind": "package",
@@ -14,6 +15,7 @@
       "TreePath": "foo/bar/baz"
     },
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz/Qux/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -32,6 +34,7 @@
       "TreePath": "foo/bar/baz/Qux/:init"
     },
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz/Qux:type",
       "Name": "Qux",
       "Kind": "type",
@@ -50,6 +53,7 @@
       "TreePath": "foo/bar/baz/Qux:type"
     },
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]",
       "Name": "main",
       "Kind": "func",
@@ -69,6 +73,7 @@
       "TreePath": "foo/bar/baz/Qux:type/main:java.lang.String[]"
     },
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]/args",
       "Name": "args",
       "Kind": "var",
@@ -85,6 +90,7 @@
       "TreePath": "foo/bar/baz/Qux:type/main:java.lang.String[]/args"
     },
     {
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Path": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc",
       "Name": "jc",
       "Kind": "var",
@@ -107,6 +113,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.beust/jcommander",
       "DefPath": "com/beust/jcommander/JCommander:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 145,
       "End": 155
@@ -116,6 +123,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.beust/jcommander",
       "DefPath": "com/beust/jcommander/JCommander:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 165,
       "End": 175
@@ -125,6 +133,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.beust/jcommander",
       "DefPath": "com/beust/jcommander/JCommander:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 50,
       "End": 60
@@ -133,6 +142,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/args",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 116,
@@ -142,6 +152,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]/jc",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 156,
@@ -151,6 +162,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type/main:java.lang.String[]",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 104,
@@ -160,6 +172,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.sourcegraph/java-with-srcfile",
       "DefPath": "foo/bar/baz/Qux:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "Def": true,
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 76,
@@ -168,8 +181,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 131,
       "End": 140
@@ -177,8 +191,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-with-srcfile",
       "File": "src/main/java/foo/bar/baz/Qux.java",
       "Start": 109,
       "End": 115

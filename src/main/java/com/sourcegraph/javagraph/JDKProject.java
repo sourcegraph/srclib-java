@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
  */
 public class JDKProject implements Project {
 
-    private static final String MARKER_JDK = "JDK";
-    private static final String MARKER_JDK_BASED = "JDKBased";
+    static final String MARKER_JDK = "JDK";
+    static final String MARKER_JDK_BASED = "JDKBased";
 
-    private static final String JDK_PROJECT_NAME = "JDKProjectName";
+    static final String JDK_PROJECT_NAME = "JDKProjectName";
 
     public static final String OPENJDK_REPO_ROOT = "hg.openjdk.java.net/jdk8/jdk8/";
 
@@ -144,7 +144,10 @@ public class JDKProject implements Project {
         return MARKER_JDK_BASED.equals(unit.Data.get(SourceUnit.TYPE));
     }
 
-    private static List<String> getJDKSourcePaths() throws Exception {
+    /**
+     * @return list of source path where OpenJDK source file may be found
+     */
+    static List<String> getJDKSourcePaths() {
         List<String> sourcePaths = new ArrayList<>();
         sourcePaths.add("src/share/classes/");
         sourcePaths.add("src/share/jaxws_classes/");

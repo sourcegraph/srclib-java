@@ -1,10 +1,10 @@
 def isConfigSupported(conf) {
-	return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" ||  conf.name == "compileOnly");
+    return (conf.name == "compile" || conf.name == "testCompile" || conf.name == "provided" || conf.name == "compileOnly");
 }
 
 def listSourceFiles(task) {
 
-    task.source.each {File file ->
+    task.source.each { File file ->
         println "SRCLIB-SOURCEFILE $file.absolutePath"
     }
 }
@@ -15,8 +15,8 @@ def listSourceDirs(task, sourceSets, sourceSetName) {
         if (!ss) {
             return
         }
-        ss.java.srcDirs.each{File file ->
-                println "SRCLIB-SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
+        ss.java.srcDirs.each { File file ->
+            println "SRCLIB-SOURCEDIR $task.project.group:$task.project.name:$task.project.version:$file.absolutePath"
         }
     } catch (UnknownDomainObjectException ignored) {
     }
@@ -24,10 +24,10 @@ def listSourceDirs(task, sourceSets, sourceSetName) {
 
 def displayAndroidInfo(project, root, isAndroidSupportFramework) {
 
-	String sdkVersion = "current"
+    String sdkVersion = "current"
 
     if (root.hasProperty("compileSdkVersion")) {
-    	sdkVersion = root.compileSdkVersion
+        sdkVersion = root.compileSdkVersion
         if (sdkVersion.startsWith("android-")) {
             // leaving only number
             sdkVersion = sdkVersion.substring(8)
@@ -36,36 +36,36 @@ def displayAndroidInfo(project, root, isAndroidSupportFramework) {
     println "SRCLIB-ANDROID-SDK $sdkVersion"
 
     if (root.hasProperty("bootClasspath")) {
-    	String bootClasspath = root.bootClasspath.join(File.pathSeparator)
-	    println "SRCLIB-BOOTCLASSPATH $bootClasspath"
+        String bootClasspath = root.bootClasspath.join(File.pathSeparator)
+        println "SRCLIB-BOOTCLASSPATH $bootClasspath"
     } else if (isAndroidSupportFramework) {
-    	File androidJar = new File("$project.rootDir/../../prebuilts/sdk/$sdkVersion/android.jar")
-    	if (androidJar.isFile()) {
- 	   		println "SRCLIB-BOOTCLASSPATH $androidJar.canonicalPath"
- 	   	}
+        File androidJar = new File("$project.rootDir/../../prebuilts/sdk/$sdkVersion/android.jar")
+        if (androidJar.isFile()) {
+            println "SRCLIB-BOOTCLASSPATH $androidJar.canonicalPath"
+        }
     }
 }
 
 def isStandardTask(project, name) {
-	if (isStandardJavaTask(name)) {
-		return true
-	}
-	if (isStandardScalaTask(name)) {
-		return true
-	}
-	if (isStandardGroovyTask(name)) {
-		return true
-	}
-	if (isStandardSourceSetTask(project, name)) {
-		return true
-	}
-	if (isStandardLifecycleTask(project, name)) {
-		return true
-	}
-	if (isStandardConfigurationLifecycleTask(project, name)) {
-		return true
-	}
-	return false
+    if (isStandardJavaTask(name)) {
+        return true
+    }
+    if (isStandardScalaTask(name)) {
+        return true
+    }
+    if (isStandardGroovyTask(name)) {
+        return true
+    }
+    if (isStandardSourceSetTask(project, name)) {
+        return true
+    }
+    if (isStandardLifecycleTask(project, name)) {
+        return true
+    }
+    if (isStandardConfigurationLifecycleTask(project, name)) {
+        return true
+    }
+    return false
 }
 
 def isStandardJavaTask(name) {
@@ -93,19 +93,19 @@ def isStandardJavaTask(name) {
 }
 
 def isStandardScalaTask(name) {
-	return name in ["compileScala", "compileTestScala", "scaladoc"]
+    return name in ["compileScala", "compileTestScala", "scaladoc"]
 }
 
 def isStandardGroovyTask(name) {
-	return name in ["compileGroovy", "compileTestGroovy", "groovydoc"]
+    return name in ["compileGroovy", "compileTestGroovy", "groovydoc"]
 }
 
 
 def isStandardSourceSetTask(project, name) {
-	if (!project.hasProperty("sourceSets")) {
-		return false
-	}
-	project.sourceSets.each { ss ->
+    if (!project.hasProperty("sourceSets")) {
+        return false
+    }
+    project.sourceSets.each { ss ->
         String sName = ss.name.capitalize()
         if (name == "compile${sName}Java" ||
                 name == "compile${sName}Scala" ||
@@ -115,40 +115,50 @@ def isStandardSourceSetTask(project, name) {
             return true
         }
     }
-	return false
+    return false
 }
 
 def isStandardLifecycleTask(project, name) {
-	if (name in ["assemble",
-		"check",
-		"build",
-		"buildNeeded",
-		"buildDependents"]) {
-		return true
-	}
-	return isStandardConfigurationLifecycleTask(project, name)
+    if (name in ["assemble",
+                 "check",
+                 "build",
+                 "buildNeeded",
+                 "buildDependents"]) {
+        return true
+    }
+    return isStandardConfigurationLifecycleTask(project, name)
 }
 
 def isStandardConfigurationLifecycleTask(project, name) {
-	project.configurations.each { conf ->
-		String cName = conf.name.capitalize()
-		if (name == "build${cName}" ||
-			name == "upload${cName}") {
-			return true				
-		}
-	}
-	return false
+    project.configurations.each { conf ->
+        String cName = conf.name.capitalize()
+        if (name == "build${cName}" ||
+                name == "upload${cName}") {
+            return true
+        }
+    }
+    return false
 }
 
 def collectBuildableDependencies(project, task, dependency, target) {
-	Object o = dependency.getBuildDependencies()
-	if (o instanceof TaskDependency) {
+    Object o = dependency.getBuildDependencies()
+    if (o instanceof TaskDependency) {
         o.getDependencies(task).each { taskdep ->
-			if ((taskdep instanceof Task) && !isStandardTask(project, taskdep.name)) {
-				target.dependsOn(taskdep)
-			}
+            if ((taskdep instanceof Task) && !isStandardTask(project, taskdep.name)) {
+                target.dependsOn(taskdep)
+            }
         }
-	}
+    }
+}
+
+class SrclibPrintStream extends PrintStream {
+    SrclibPrintStream() {
+        super(System.err);
+    }
+
+    void println(Object o) {
+        super.println("SRCLIB-WARNING " + o)
+    }
 }
 
 allprojects {
@@ -184,7 +194,13 @@ allprojects {
 
             try {
                 project.configurations.each { conf ->
-                    conf.resolvedConfiguration.getResolvedArtifacts().each {
+                    Set resolvedArtifacts = null
+                    try {
+                        resolvedArtifacts = conf.resolvedConfiguration.getResolvedArtifacts()
+                    } catch (e) {
+                        return
+                    }
+                    resolvedArtifacts.each {
                         try {
                             String group = it.moduleVersion.id.group
                             String name = it.moduleVersion.id.name
@@ -193,8 +209,8 @@ allprojects {
                             if (isConfigSupported(conf)) {
                                 println "SRCLIB-DEPENDENCY $conf.name:$group:$name:$version:$file"
                             }
-                        } catch (Exception e) {
-                            println "SRCLIB-WARNING $e"
+                        } catch (e) {
+                            e.printStackTrace(new SrclibPrintStream());
                         }
                     }
 
@@ -214,20 +230,20 @@ allprojects {
 
                 }
             } catch (e) {
-                println "SRCLIB-WARNING $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
                 project.plugins.withType(JavaPlugin) {
                     listSourceFiles(compileJava)
                     listSourceFiles(compileTestJava)
-					if (project.hasProperty("sourceSets")) {
-                    	listSourceDirs(task, project.sourceSets, "main")
-                    	listSourceDirs(task, project.sourceSets, "test")
+                    if (project.hasProperty("sourceSets")) {
+                        listSourceDirs(task, project.sourceSets, "main")
+                        listSourceDirs(task, project.sourceSets, "test")
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
@@ -242,50 +258,59 @@ allprojects {
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             try {
                 project.plugins.withType(JavaPlugin) {
                     configurations.each { Configuration config ->
                         if (isConfigSupported(config)) {
-                            println "SRCLIB-CLASSPATH $config.asPath"
+                            try {
+                                conf.resolvedConfiguration.getResolvedArtifacts()
+                            } catch (e) {
+                                return
+                            }
+                            try {
+                                println "SRCLIB-CLASSPATH $config.asPath"
+                            } catch (e) {
+                                e.printStackTrace(new SrclibPrintStream());
+                            }
                         }
                     }
                 }
             } catch (e) {
-                println "SRCLIB-WARNING $e"
+                e.printStackTrace(new SrclibPrintStream());
             }
 
             if (android) {
 
-            	if (project.extensions.hasProperty("android")) {
-            		displayAndroidInfo(project, project.extensions.android, false)
-            	} else if (project.hasProperty("android")) {            		
+                if (project.extensions.hasProperty("android")) {
+                    displayAndroidInfo(project, project.extensions.android, false)
+                } else if (project.hasProperty("android")) {
 
-            		// Android Support Framework
-            		displayAndroidInfo(project, project.android, androidSupportFramework)
+                    // Android Support Framework
+                    displayAndroidInfo(project, project.android, androidSupportFramework)
                     if (project.android.hasProperty("sourceSets")) {
-                    	listSourceDirs(task, project.android.sourceSets, "main")
-                    	listSourceDirs(task, project.android.sourceSets, "test")
-    				}
-            	}
+                        listSourceDirs(task, project.android.sourceSets, "main")
+                        listSourceDirs(task, project.android.sourceSets, "test")
+                    }
+                }
 
                 if (project.tasks.hasProperty("compileDebugJava")) {
-                	listSourceFiles(project.tasks.compileDebugJava)
-                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugJava.classpath.asPath"
+                    listSourceFiles(project.tasks.compileDebugJava)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugJava.classpath.asPath"
                 }
                 if (project.tasks.hasProperty("compileDebugUnitTestJava")) {
-                	listSourceFiles(project.tasks.compileDebugUnitTestJava)
-                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
+                    listSourceFiles(project.tasks.compileDebugUnitTestJava)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJava.classpath.asPath"
                 }
                 if (project.tasks.hasProperty("compileDebugJavaWithJavac")) {
-                	listSourceFiles(project.tasks.compileDebugJavaWithJavac)
-                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugJavaWithJavac.classpath.asPath"
+                    listSourceFiles(project.tasks.compileDebugJavaWithJavac)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugJavaWithJavac.classpath.asPath"
                 }
                 if (project.tasks.hasProperty("compileDebugUnitTestJavaWithJavac")) {
-                	listSourceFiles(project.tasks.compileDebugUnitTestJavaWithJavac)
-                	println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJavaWithJavac.classpath.asPath"
+                    listSourceFiles(project.tasks.compileDebugUnitTestJavaWithJavac)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJavaWithJavac.classpath.asPath"
                 }
 
             }
@@ -315,39 +340,43 @@ allprojects {
         // compileJava / compileTestJava depends on
         try {
             project.plugins.withType(JavaPlugin) {
-                compileJava { 
-                    dependsOn.each {dependency ->
+                compileJava {
+                    dependsOn.each { dependency ->
                         if (!(dependency instanceof Buildable)) {
                             srclibCollectMetaInformation.dependsOn(dependency)
                         } else {
-                        	collectBuildableDependencies(project, compileJava, dependency, srclibCollectMetaInformation)
+                            collectBuildableDependencies(project, compileJava, dependency, srclibCollectMetaInformation)
                         }
                     }
                 }
                 compileTestJava {
-                    dependsOn.each {dependency ->
+                    dependsOn.each { dependency ->
                         if (!(dependency instanceof Buildable)) {
                             srclibCollectMetaInformation.dependsOn(dependency)
                         } else {
-                        	collectBuildableDependencies(project, compileTestJava, dependency, srclibCollectMetaInformation)
+                            try {
+                                collectBuildableDependencies(project, compileTestJava, dependency, srclibCollectMetaInformation)
+                            } catch (e) {
+                                e.printStackTrace(new SrclibPrintStream());
+                            }
                         }
                     }
                 }
             }
         } catch (e) {
-            println "SRCLIB-WARNING $e"
+            e.printStackTrace(new SrclibPrintStream());
         }
         try {
             Task compileTask = project.tasks.findByPath("compile")
-			if (compileTask) {
-                compileTask.dependsOn.each {dependency ->
+            if (compileTask) {
+                compileTask.dependsOn.each { dependency ->
                     if ((dependency instanceof Task) && !isStandardTask(project, dependency.name)) {
-                    	srclibCollectMetaInformation.dependsOn(dependency)
+                        srclibCollectMetaInformation.dependsOn(dependency)
                     }
                 }
-			}
+            }
         } catch (e) {
-            println "SRCLIB-WARNING $e"
+            e.printStackTrace(new SrclibPrintStream());
         }
 
     }

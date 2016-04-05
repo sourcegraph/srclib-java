@@ -340,6 +340,18 @@ public class GradleProject implements Project {
                 collectBuildInfo(depId, infos, visited);
             }
         }
+        // alexsaveliev: github.com/elastic/elasticsearch declares project dependencies as external
+        // in order to resolve it, we'll check if there is an source unit with the same name and version
+        // as declared in external dependency and use unit's sourcepath if found
+        for (RawDependency raw : info.dependencies) {
+            String id = raw.groupID + '/' + raw.artifactID;
+            info = unitCache.get(id);
+            if (info != null && info.version.equals(raw.version)) {
+                if (!visited.contains(id)) {
+                    collectBuildInfo(id, infos, visited);
+                }
+            }
+        }
     }
 
     /**

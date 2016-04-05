@@ -47,7 +47,7 @@
   {
     "Target": {
       "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
-      "ToUnit": ".",
+      "ToUnit": "jdk",
       "ToUnitType": "Java"
     }
   }

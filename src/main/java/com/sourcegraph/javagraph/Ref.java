@@ -50,6 +50,16 @@ public class Ref {
      */
     boolean def;
 
+    String unit;
+
+    /**
+     * Ref cannot exist without a unit
+     * @param unit source unit
+     */
+    public Ref(String unit) {
+        this.unit = unit;
+    }
+
     public void setDefTarget(ResolvedTarget target) {
         defRepo = target.ToRepoCloneURL;
         defUnitType = target.ToUnitType;
@@ -71,6 +81,7 @@ public class Ref {
         if (defUnit != null ? !defUnit.equals(ref.defUnit) : ref.defUnit != null) return false;
         if (defUnitType != null ? !defUnitType.equals(ref.defUnitType) : ref.defUnitType != null) return false;
         if (file != null ? !file.equals(ref.file) : ref.file != null) return false;
+        if (!unit.equals(ref.unit)) return false;
 
         return true;
     }
@@ -85,6 +96,7 @@ public class Ref {
         result = 31 * result + start;
         result = 31 * result + end;
         result = 31 * result + (def ? 1 : 0);
+        result = 31 * result + unit.hashCode();
         return result;
     }
 
@@ -116,6 +128,7 @@ public class Ref {
             object.add("Start", new JsonPrimitive(ref.start));
             object.add("End", new JsonPrimitive(ref.end));
             object.add("Def", new JsonPrimitive(ref.def));
+            object.add("Unit", new JsonPrimitive(ref.unit));
 
             return object;
         }

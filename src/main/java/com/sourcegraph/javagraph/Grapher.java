@@ -30,17 +30,17 @@ public class Grapher {
     private final GraphWriter emit;
     private final List<String> javacOpts;
 
-    private final Project project;
+    private final SourceUnit unit;
 
     /**
      * Constructs new grapher object
-     * @param project project (compiler settings)
+     * @param unit source unit
      * @param emit target responsible for emitting definitions and references
      * @throws Exception
      */
-    public Grapher(Project project,
+    public Grapher(SourceUnit unit,
                    GraphWriter emit) throws Exception {
-        this.project = project;
+        this.unit = unit;
         this.emit = emit;
 
         compiler = ToolProvider.getSystemJavaCompiler();
@@ -49,7 +49,7 @@ public class Grapher {
 
         javacOpts = new ArrayList<>();
 
-        Collection<String> bootClassPath = project.getBootClassPath();
+        Collection<String> bootClassPath = unit.getProject().getBootClassPath();
         if (bootClassPath == null) {
             String envBootClasspath = System.getProperty("sun.boot.class.path");
             if (StringUtils.isEmpty(envBootClasspath)) {
@@ -69,7 +69,7 @@ public class Grapher {
         fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, bootClassPathFiles);
         javacOpts.add("-Xbootclasspath:" + StringUtils.join(resolvedBootClassPath, SystemUtils.PATH_SEPARATOR));
 
-        Collection<String> classPath = project.getClassPath();
+        Collection<String> classPath = unit.getProject().getClassPath();
         if (classPath == null) {
             classPath = Collections.emptyList();
         }
@@ -85,7 +85,7 @@ public class Grapher {
         javacOpts.add("-classpath");
         javacOpts.add(StringUtils.join(resolvedClassPath, SystemUtils.PATH_SEPARATOR));
 
-        Collection<String> sourcePath = project.getSourcePath();
+        Collection<String> sourcePath = unit.getProject().getSourcePath();
         if (sourcePath != null && !sourcePath.isEmpty()) {
             javacOpts.add("-sourcepath");
             Collection<String> resolvedSourcePath = new ArrayList<>();
@@ -104,7 +104,7 @@ public class Grapher {
         javacOpts.add("-XDshouldStopPolicyIfError=ATTR");
         javacOpts.add("-XDshouldStopPolicyIfNoError=ATTR");
 
-        String sourceVersion = project.getSourceCodeVersion();
+        String sourceVersion = unit.getProject().getSourceCodeVersion();
         if (!StringUtils.isEmpty(sourceVersion)) {
             javacOpts.add("-source");
             javacOpts.add(sourceVersion);
@@ -115,7 +115,7 @@ public class Grapher {
         // turn off warnings
         javacOpts.add("-Xlint:none");
 
-        String sourceEncoding = project.getSourceCodeEncoding();
+        String sourceEncoding = unit.getProject().getSourceCodeEncoding();
         if (!StringUtils.isEmpty(sourceEncoding)) {
             javacOpts.add("-encoding");
             javacOpts.add(sourceEncoding);
@@ -185,7 +185,7 @@ public class Grapher {
         final JavacTask task = (JavacTask) compiler.getTask(null,
                 fileManager,
                 diagnostic -> {
-                    LOGGER.warn("javac: {}", diagnostic);
+                    LOGGER.warn("{} javac: {}", unit.Name, diagnostic);
                 },
                 javacOpts,
                 null,
@@ -207,7 +207,7 @@ public class Grapher {
                     }
 
                     TreePath root = new TreePath(unit);
-                    new TreeScanner(emit, trees).scan(root, null);
+                    new TreeScanner(emit, trees, this.unit).scan(root, null);
                 } catch (Exception e) {
                     LOGGER.warn("Skipping compilation unit {} ({})", unit.getPackageName(), unit.getSourceFile(), e);
                 }
@@ -231,7 +231,7 @@ public class Grapher {
      * @throws IOException
      */
     private void writePackageSymbol(String packageName) throws IOException {
-        Def s = new Def();
+        Def s = new Def(unit.Name);
         // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
         s.defKey = new DefKey(null, packageName);
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);

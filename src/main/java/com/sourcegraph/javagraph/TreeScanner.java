@@ -24,11 +24,13 @@ import java.util.stream.Collectors;
 /**
  * Scans expression tree and emits references and definitions
  */
-public class TreeScanner extends TreePathScanner<Void, Void> {
+class TreeScanner extends TreePathScanner<Void, Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TreeScanner.class);
 
     private final GraphWriter emit;
+    private final SourceUnit unit;
+
     private final SourcePositions srcPos;
     // We sometimes emit defs or refs multiple times because Spans will
     // output a ref that we've already visited normally. I don't know why we
@@ -45,11 +47,13 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
      * Constructs new scanner
      * @param emit graph writer that will process all refs and defs encountered
      * @param trees trees object
+     * @param unit current source unit
      */
-    public TreeScanner(GraphWriter emit, Trees trees) {
+    TreeScanner(GraphWriter emit, Trees trees, SourceUnit unit) {
         this.emit = emit;
         this.srcPos = trees.getSourcePositions();
         this.trees = trees;
+        this.unit = unit;
     }
 
     /**
@@ -57,7 +61,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
      * @param span name span
      * @param def true if current ref is a definition as well
      */
-    public void emitRef(int[] span, boolean def) {
+    private void emitRef(int[] span, boolean def) {
         if (span == null) {
             error("Ref span is null");
             return;
@@ -76,8 +80,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
      * @param defKey definition key
      * @param def true if current ref is a definition as well
      */
-    public void emitRef(int[] span, DefKey defKey, boolean def) {
-        Ref r = new Ref();
+    private void emitRef(int[] span, DefKey defKey, boolean def) {
+        Ref r = new Ref(this.unit.Name);
         r.defKey = defKey;
         r.file = compilationUnit.getSourceFile().getName();
         r.start = span[0];
@@ -100,7 +104,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
      * @param nameSpan name span
      * @param modifiers definition modifiers (for example, public static final)
      */
-    public void emitDef(Tree node, int[] nameSpan, List<String> modifiers) {
+    private void emitDef(Tree node, int[] nameSpan, List<String> modifiers) {
         int[] defSpan = treeSpan(node);
         emitDef(nameSpan, defSpan, modifiers);
     }
@@ -111,8 +115,8 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
      * @param defSpan definition span
      * @param modifiers definition modifiers (for example, public static final)
      */
-    public void emitDef(int[] nameSpan, int[] defSpan, List<String> modifiers) {
-        Def s = new Def();
+    private void emitDef(int[] nameSpan, int[] defSpan, List<String> modifiers) {
+        Def s = new Def(unit.Name);
         s.defKey = currentDefKey();
         if (s.defKey == null) {
             error("def defKey is null");
@@ -148,7 +152,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         }
     }
 
-    public boolean verbose = false;
+    private boolean verbose = false;
 
     /**
      * Reports error
@@ -320,7 +324,7 @@ public class TreeScanner extends TreePathScanner<Void, Void> {
         return null;
     }
 
-    public void scanPackageName(Tree node) {
+    private void scanPackageName(Tree node) {
         if (getCurrentPath() == null) {
             LOGGER.warn("Current path is null");
             return;

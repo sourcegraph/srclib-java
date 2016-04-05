@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph",
       "Name": "sourcegraph",
       "Kind": "package",
@@ -14,6 +15,7 @@
       "TreePath": "sourcegraph"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -32,6 +34,7 @@
       "TreePath": "sourcegraph/Foo/:init"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type",
       "Name": "Foo",
       "Kind": "type",
@@ -50,6 +53,7 @@
       "TreePath": "sourcegraph/Foo:type"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/bar",
       "Name": "bar",
       "Kind": "var",
@@ -67,6 +71,7 @@
       "TreePath": "sourcegraph/Foo:type/bar"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/foo",
       "Name": "foo",
       "Kind": "func",
@@ -85,6 +90,7 @@
       "TreePath": "sourcegraph/Foo:type/foo"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/foo/url",
       "Name": "url",
       "Kind": "var",
@@ -101,6 +107,7 @@
       "TreePath": "sourcegraph/Foo:type/foo/url"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -119,6 +126,7 @@
       "TreePath": "sourcegraph/FooTest/:init"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type",
       "Name": "FooTest",
       "Kind": "type",
@@ -137,6 +145,7 @@
       "TreePath": "sourcegraph/FooTest:type"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type/testSessionExpiration",
       "Name": "testSessionExpiration",
       "Kind": "func",
@@ -155,6 +164,7 @@
       "TreePath": "sourcegraph/FooTest:type/testSessionExpiration"
     },
     {
+      "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type/testSessionExpiration/foo",
       "Name": "foo",
       "Kind": "var",
@@ -175,8 +185,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/FileInputStream:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 122,
       "End": 137
@@ -184,8 +195,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 257,
       "End": 266
@@ -193,8 +205,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 153,
       "End": 162
@@ -202,8 +215,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 193,
       "End": 199
@@ -211,8 +225,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 237,
       "End": 243
@@ -220,8 +235,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type/openStream",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 353,
       "End": 363
@@ -229,8 +245,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 155,
       "End": 158
@@ -238,8 +255,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 277,
       "End": 280
@@ -247,26 +265,30 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 291,
       "End": 294
     },
     {
       "DefPath": "org/apache/commons/io/IOUtils:type/toString:java.io.InputStream",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 340,
       "End": 348
     },
     {
       "DefPath": "org/apache/commons/io/IOUtils:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 332,
       "End": 339
     },
     {
       "DefPath": "org/apache/commons/io/IOUtils:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 52,
       "End": 59
@@ -276,6 +298,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-lang3",
       "DefPath": "org/apache/commons/lang3/StringUtils:type/EMPTY",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 218,
       "End": 223
@@ -285,6 +308,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-lang3",
       "DefPath": "org/apache/commons/lang3/StringUtils:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 206,
       "End": 217
@@ -294,6 +318,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.commons/commons-lang3",
       "DefPath": "org/apache/commons/lang3/StringUtils:type",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 93,
       "End": 104
@@ -303,6 +328,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
       "DefPath": "org/junit/Assert:type/assertNotNull:java.lang.Object",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 209,
       "End": 222
@@ -312,6 +338,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
       "DefPath": "org/junit/Assert:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 202,
       "End": 208
@@ -321,6 +348,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
       "DefPath": "org/junit/Assert:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 40,
       "End": 46
@@ -330,6 +358,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
       "DefPath": "org/junit/Test:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 101,
       "End": 105
@@ -339,12 +368,14 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
       "DefPath": "org/junit/Test:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 65,
       "End": 69
     },
     {
       "DefPath": "sourcegraph/Foo:type/bar",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 200,
@@ -352,6 +383,7 @@
     },
     {
       "DefPath": "sourcegraph/Foo:type/foo/url",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 281,
@@ -359,12 +391,14 @@
     },
     {
       "DefPath": "sourcegraph/Foo:type/foo/url",
+      "Unit": "java-ant-sample",
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 349,
       "End": 352
     },
     {
       "DefPath": "sourcegraph/Foo:type/foo",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 244,
@@ -372,12 +406,14 @@
     },
     {
       "DefPath": "sourcegraph/Foo:type/foo",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 227,
       "End": 230
     },
     {
       "DefPath": "sourcegraph/Foo:type",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/main/java/com/sourcegraph/Foo.java",
       "Start": 174,
@@ -385,18 +421,21 @@
     },
     {
       "DefPath": "sourcegraph/Foo:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 173,
       "End": 176
     },
     {
       "DefPath": "sourcegraph/Foo:type",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 187,
       "End": 190
     },
     {
       "DefPath": "sourcegraph/FooTest:type/testSessionExpiration/foo",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 177,
@@ -404,12 +443,14 @@
     },
     {
       "DefPath": "sourcegraph/FooTest:type/testSessionExpiration/foo",
+      "Unit": "java-ant-sample",
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 223,
       "End": 226
     },
     {
       "DefPath": "sourcegraph/FooTest:type/testSessionExpiration",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 122,
@@ -417,6 +458,7 @@
     },
     {
       "DefPath": "sourcegraph/FooTest:type",
+      "Unit": "java-ant-sample",
       "Def": true,
       "File": "src/test/java/com/sourcegraph/FooTest.java",
       "Start": 85,

@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web",
       "Name": "web",
       "Kind": "package",
@@ -14,6 +15,7 @@
       "TreePath": "org/sonatype/mavenbook/web"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -32,6 +34,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet/:init"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet:type",
       "Name": "SimpleServlet",
       "Kind": "type",
@@ -50,6 +53,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet:type"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse",
       "Name": "doGet",
       "Kind": "func",
@@ -68,6 +72,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
       "Name": "out",
       "Kind": "var",
@@ -84,6 +89,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request",
       "Name": "request",
       "Kind": "var",
@@ -100,6 +106,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
       "Name": "response",
       "Kind": "var",
@@ -116,6 +123,7 @@
       "TreePath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -134,6 +142,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet/:init"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type",
       "Name": "WeatherServlet",
       "Kind": "type",
@@ -152,6 +161,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse",
       "Name": "doGet",
       "Kind": "func",
@@ -170,6 +180,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/e",
       "Name": "e",
       "Kind": "var",
@@ -186,6 +197,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/e"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
       "Name": "out",
       "Kind": "var",
@@ -202,6 +214,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request",
       "Name": "request",
       "Kind": "var",
@@ -218,6 +231,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
       "Name": "response",
       "Kind": "var",
@@ -234,6 +248,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/weatherService",
       "Name": "weatherService",
       "Kind": "var",
@@ -250,6 +265,7 @@
       "TreePath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/weatherService"
     },
     {
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Path": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/zip",
       "Name": "zip",
       "Kind": "var",
@@ -270,8 +286,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 293,
       "End": 304
@@ -279,8 +296,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 348,
       "End": 359
@@ -288,8 +306,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/close",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 423,
       "End": 428
@@ -297,8 +316,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/close",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 706,
       "End": 711
@@ -306,8 +326,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/flush",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 402,
       "End": 407
@@ -315,8 +336,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/flush",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 685,
       "End": 690
@@ -324,8 +346,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 353,
       "End": 360
@@ -333,8 +356,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 525,
       "End": 532
@@ -342,8 +366,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type/println:java.lang.String",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 611,
       "End": 618
@@ -351,8 +376,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 308,
       "End": 319
@@ -360,8 +386,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/io/PrintWriter:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 462,
       "End": 473
@@ -369,8 +396,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Exception:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 586,
       "End": 595
@@ -378,8 +406,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 363,
       "End": 369
@@ -387,8 +416,9 @@
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
-      "DefUnit": ".",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Throwable:type/getMessage",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 654,
       "End": 664
@@ -398,6 +428,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/ServletException:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 275,
       "End": 291
@@ -407,6 +438,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/ServletException:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 330,
       "End": 346
@@ -416,6 +448,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/ServletRequest:type/getParameter:java.lang.String",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 384,
       "End": 396
@@ -425,6 +458,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/ServletResponse:type/getWriter",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 335,
       "End": 344
@@ -434,6 +468,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/ServletResponse:type/getWriter",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 489,
       "End": 498
@@ -443,6 +478,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServlet:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 144,
       "End": 155
@@ -452,6 +488,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServlet:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 199,
       "End": 210
@@ -461,6 +498,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServletRequest:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 180,
       "End": 198
@@ -470,6 +508,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServletRequest:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 235,
       "End": 253
@@ -479,6 +518,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServletResponse:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 230,
       "End": 249
@@ -488,6 +528,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.apache.geronimo.specs/geronimo-servlet_2.4_spec",
       "DefPath": "javax/servlet/http/HttpServletResponse:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 285,
       "End": 304
@@ -496,6 +537,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 549,
       "End": 565
@@ -504,6 +546,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/WeatherService:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 407,
       "End": 421
@@ -512,6 +555,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/WeatherService:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 443,
       "End": 457
@@ -520,6 +564,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/WeatherService:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 75,
       "End": 89
@@ -528,6 +573,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 320,
@@ -537,6 +583,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 349,
       "End": 352
@@ -545,6 +592,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 398,
       "End": 401
@@ -553,6 +601,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 419,
       "End": 422
@@ -561,6 +610,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 199,
@@ -570,6 +620,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 250,
@@ -579,6 +630,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 326,
       "End": 334
@@ -587,6 +639,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 174,
@@ -596,6 +649,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/SimpleServlet:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/SimpleServlet.java",
       "Start": 122,
@@ -605,6 +659,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/e",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 596,
@@ -614,6 +669,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/e",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 652,
       "End": 653
@@ -622,6 +678,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 474,
@@ -631,6 +688,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 521,
       "End": 524
@@ -639,6 +697,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 607,
       "End": 610
@@ -647,6 +706,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 681,
       "End": 684
@@ -655,6 +715,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/out",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 702,
       "End": 705
@@ -663,6 +724,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 254,
@@ -672,6 +734,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/request",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 376,
       "End": 383
@@ -680,6 +743,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 305,
@@ -689,6 +753,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/response",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 480,
       "End": 488
@@ -697,6 +762,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/weatherService",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 422,
@@ -706,6 +772,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/weatherService",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 534,
       "End": 548
@@ -714,6 +781,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/zip",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 370,
@@ -723,6 +791,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse/zip",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 567,
       "End": 570
@@ -731,6 +800,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type/doGet:javax.servlet.http.HttpServletRequest:javax.servlet.http.HttpServletResponse",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 229,
@@ -740,6 +810,7 @@
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-webapp",
       "DefPath": "org/sonatype/mavenbook/web/WeatherServlet:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-webapp",
       "Def": true,
       "File": "simple-webapp/src/main/java/org/sonatype/mavenbook/web/WeatherServlet.java",
       "Start": 176,

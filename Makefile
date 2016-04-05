@@ -5,9 +5,8 @@ else
 endif
 
 SRC = $(shell /usr/bin/find ./src -type f)
-DOCKER_TAG = $(shell git rev-parse --short HEAD)
 
-.PHONY: default install test test-gen clean dist upload-bundled-jdk docker-image release
+.PHONY: default install test test-gen clean dist upload-bundled-jdk
 
 default: install
 
@@ -28,13 +27,6 @@ test-gen: install
 clean:
 	rm -f .bin/srclib-java.jar
 	rm -rf build
-
-docker-image:
-	docker build -t srclib/srclib-java:$(DOCKER_TAG) .
-
-release: docker-image
-	docker push srclib/srclib-java:$(DOCKER_TAG)
-
 
 # To distribute, we also bundle the JRE for the OS and
 # architecture. These targets automate the uploading and downloading
