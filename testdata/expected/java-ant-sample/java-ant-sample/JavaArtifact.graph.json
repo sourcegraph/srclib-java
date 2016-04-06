@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph",
       "Name": "sourcegraph",
@@ -15,6 +16,7 @@
       "TreePath": "sourcegraph"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "sourcegraph/Foo/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type",
       "Name": "Foo",
@@ -53,6 +56,7 @@
       "TreePath": "sourcegraph/Foo:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/bar",
       "Name": "bar",
@@ -71,6 +75,7 @@
       "TreePath": "sourcegraph/Foo:type/bar"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/foo",
       "Name": "foo",
@@ -90,6 +95,7 @@
       "TreePath": "sourcegraph/Foo:type/foo"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/Foo:type/foo/url",
       "Name": "url",
@@ -107,6 +113,7 @@
       "TreePath": "sourcegraph/Foo:type/foo/url"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest/:init",
       "Name": "\u003cinit\u003e",
@@ -126,6 +133,7 @@
       "TreePath": "sourcegraph/FooTest/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type",
       "Name": "FooTest",
@@ -145,6 +153,7 @@
       "TreePath": "sourcegraph/FooTest:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type/testSessionExpiration",
       "Name": "testSessionExpiration",
@@ -164,6 +173,7 @@
       "TreePath": "sourcegraph/FooTest:type/testSessionExpiration"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "java-ant-sample",
       "Path": "sourcegraph/FooTest:type/testSessionExpiration/foo",
       "Name": "foo",

@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather",
       "Name": "weather",
@@ -15,6 +16,7 @@
       "TreePath": "org/sonatype/mavenbook/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main/:init:java.lang.String",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main/:init:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main/:init:java.lang.String/zip",
       "Name": "zip",
@@ -51,6 +54,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main/:init:java.lang.String/zip"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type",
       "Name": "Main",
@@ -70,6 +74,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]",
       "Name": "main",
@@ -90,6 +95,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/args",
       "Name": "args",
@@ -107,6 +113,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/args"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/e",
       "Name": "e",
@@ -124,6 +131,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/e"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/zipcode",
       "Name": "zipcode",
@@ -141,6 +149,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/zipcode"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/start",
       "Name": "start",
@@ -160,6 +169,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/start"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/start/dataIn",
       "Name": "dataIn",
@@ -177,6 +187,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/start/dataIn"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/start/weather",
       "Name": "weather",
@@ -194,6 +205,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/start/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Main:type/zip",
       "Name": "zip",
@@ -212,6 +224,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Main:type/zip"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather/:init",
       "Name": "\u003cinit\u003e",
@@ -231,6 +244,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type",
       "Name": "Weather",
@@ -250,6 +264,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/chill",
       "Name": "chill",
@@ -268,6 +283,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/chill"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/city",
       "Name": "city",
@@ -286,6 +302,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/city"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/condition",
       "Name": "condition",
@@ -304,6 +321,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/condition"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/country",
       "Name": "country",
@@ -322,6 +340,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/country"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getChill",
       "Name": "getChill",
@@ -341,6 +360,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getChill"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getCity",
       "Name": "getCity",
@@ -360,6 +380,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getCity"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getCondition",
       "Name": "getCondition",
@@ -379,6 +400,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getCondition"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getCountry",
       "Name": "getCountry",
@@ -398,6 +420,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getCountry"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getHumidity",
       "Name": "getHumidity",
@@ -417,6 +440,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getHumidity"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getRegion",
       "Name": "getRegion",
@@ -436,6 +460,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getRegion"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/getTemp",
       "Name": "getTemp",
@@ -455,6 +480,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/getTemp"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/humidity",
       "Name": "humidity",
@@ -473,6 +499,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/humidity"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/region",
       "Name": "region",
@@ -491,6 +518,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/region"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setChill:java.lang.String",
       "Name": "setChill",
@@ -510,6 +538,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setChill:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setChill:java.lang.String/chill",
       "Name": "chill",
@@ -527,6 +556,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setChill:java.lang.String/chill"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCity:java.lang.String",
       "Name": "setCity",
@@ -546,6 +576,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCity:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCity:java.lang.String/city",
       "Name": "city",
@@ -563,6 +594,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCity:java.lang.String/city"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCondition:java.lang.String",
       "Name": "setCondition",
@@ -582,6 +614,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCondition:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCondition:java.lang.String/condition",
       "Name": "condition",
@@ -599,6 +632,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCondition:java.lang.String/condition"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCountry:java.lang.String",
       "Name": "setCountry",
@@ -618,6 +652,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCountry:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setCountry:java.lang.String/country",
       "Name": "country",
@@ -635,6 +670,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setCountry:java.lang.String/country"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setHumidity:java.lang.String",
       "Name": "setHumidity",
@@ -654,6 +690,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setHumidity:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setHumidity:java.lang.String/humidity",
       "Name": "humidity",
@@ -671,6 +708,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setHumidity:java.lang.String/humidity"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setRegion:java.lang.String",
       "Name": "setRegion",
@@ -690,6 +728,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setRegion:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setRegion:java.lang.String/region",
       "Name": "region",
@@ -707,6 +746,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setRegion:java.lang.String/region"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setTemp:java.lang.String",
       "Name": "setTemp",
@@ -726,6 +766,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setTemp:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/setTemp:java.lang.String/temp",
       "Name": "temp",
@@ -743,6 +784,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/setTemp:java.lang.String/temp"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/Weather:type/temp",
       "Name": "temp",
@@ -761,6 +803,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/Weather:type/temp"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter/:init",
       "Name": "\u003cinit\u003e",
@@ -780,6 +823,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type",
       "Name": "WeatherFormatter",
@@ -799,6 +843,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather",
       "Name": "format",
@@ -818,6 +863,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/context",
       "Name": "context",
@@ -835,6 +881,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/context"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/reader",
       "Name": "reader",
@@ -852,6 +899,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/reader"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/weather",
       "Name": "weather",
@@ -869,6 +917,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/writer",
       "Name": "writer",
@@ -886,6 +935,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/format:org.sonatype.mavenbook.weather.Weather/writer"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherFormatter:type/log",
       "Name": "log",
@@ -905,6 +955,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/log"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService/:init",
       "Name": "\u003cinit\u003e",
@@ -924,6 +975,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService:type",
       "Name": "WeatherService",
@@ -943,6 +995,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String",
       "Name": "retrieveForecast",
@@ -962,6 +1015,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/dataIn",
       "Name": "dataIn",
@@ -979,6 +1033,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/dataIn"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/weather",
       "Name": "weather",
@@ -996,6 +1051,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/zip",
       "Name": "zip",
@@ -1013,6 +1069,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/WeatherService:type/retrieveForecast:java.lang.String/zip"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser/:init",
       "Name": "\u003cinit\u003e",
@@ -1032,6 +1089,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type",
       "Name": "YahooParser",
@@ -1051,6 +1109,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader",
       "Name": "createXmlReader",
@@ -1069,6 +1128,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/factory",
       "Name": "factory",
@@ -1086,6 +1146,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/factory"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/uris",
       "Name": "uris",
@@ -1103,6 +1164,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/uris"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/xmlReader",
       "Name": "xmlReader",
@@ -1120,6 +1182,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/createXmlReader/xmlReader"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/log",
       "Name": "log",
@@ -1139,6 +1202,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/log"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream",
       "Name": "parse",
@@ -1158,6 +1222,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/doc",
       "Name": "doc",
@@ -1175,6 +1240,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/doc"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/inputStream",
       "Name": "inputStream",
@@ -1192,6 +1258,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/inputStream"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/weather",
       "Name": "weather",
@@ -1209,6 +1276,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/xmlReader",
       "Name": "xmlReader",
@@ -1226,6 +1294,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooParser:type/parse:java.io.InputStream/xmlReader"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever/:init",
       "Name": "\u003cinit\u003e",
@@ -1245,6 +1314,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type",
       "Name": "YahooRetriever",
@@ -1264,6 +1334,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type/log",
       "Name": "log",
@@ -1283,6 +1354,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type/log"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String",
       "Name": "retrieve",
@@ -1302,6 +1374,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/conn",
       "Name": "conn",
@@ -1319,6 +1392,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/conn"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/url",
       "Name": "url",
@@ -1336,6 +1410,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/url"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/zipcode",
       "Name": "zipcode",
@@ -1353,6 +1428,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/YahooRetriever:type/retrieve:java.lang.String/zipcode"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo",
       "Name": "yahoo",
@@ -1367,6 +1443,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest/:init:java.lang.String",
       "Name": "\u003cinit\u003e",
@@ -1386,6 +1463,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest/:init:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest/:init:java.lang.String/name",
       "Name": "name",
@@ -1403,6 +1481,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest/:init:java.lang.String/name"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type",
       "Name": "WeatherFormatterTest",
@@ -1422,6 +1501,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat",
       "Name": "testFormat",
@@ -1441,6 +1521,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/expected",
       "Name": "expected",
@@ -1458,6 +1539,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/expected"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/formattedResult",
       "Name": "formattedResult",
@@ -1475,6 +1557,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/formattedResult"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/nyData",
       "Name": "nyData",
@@ -1492,6 +1575,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/nyData"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/weather",
       "Name": "weather",
@@ -1509,6 +1593,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest:type/testFormat/weather"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest/:init:java.lang.String",
       "Name": "\u003cinit\u003e",
@@ -1528,6 +1613,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest/:init:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest/:init:java.lang.String/name",
       "Name": "name",
@@ -1545,6 +1631,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest/:init:java.lang.String/name"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type",
       "Name": "YahooParserTest",
@@ -1564,6 +1651,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser",
       "Name": "testParser",
@@ -1583,6 +1671,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser/nyData",
       "Name": "nyData",
@@ -1600,6 +1689,7 @@
       "TreePath": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser/nyData"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Path": "org/sonatype/mavenbook/weather/yahoo/YahooParserTest:type/testParser/weather",
       "Name": "weather",
@@ -2652,26 +2742,6 @@
       "DefRepo": "github.com/junit-team/junit",
       "DefUnitType": "JavaArtifact",
       "DefUnit": "junit/junit",
-      "DefPath": "junit/framework/TestCase/:init:java.lang.String",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
-      "Start": 404,
-      "End": 409
-    },
-    {
-      "DefRepo": "github.com/junit-team/junit",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "junit/junit",
-      "DefPath": "junit/framework/TestCase/:init:java.lang.String",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
-      "Start": 299,
-      "End": 304
-    },
-    {
-      "DefRepo": "github.com/junit-team/junit",
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "junit/junit",
       "DefPath": "junit/framework/TestCase:type",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
@@ -3221,15 +3291,6 @@
     {
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Main:type/class",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
-      "Start": 257,
-      "End": 262
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/Main:type/main:java.lang.String[]/args",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Def": true,
@@ -3350,15 +3411,6 @@
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
       "Start": 631,
       "End": 636
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Main:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
-      "Start": 597,
-      "End": 601
     },
     {
       "DefUnitType": "JavaArtifact",
@@ -4024,69 +4076,6 @@
     {
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 1038,
-      "End": 1042
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 354,
-      "End": 358
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 461,
-      "End": 465
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 576,
-      "End": 580
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 701,
-      "End": 705
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 810,
-      "End": 814
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/Weather:type/this",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
-      "Start": 921,
-      "End": 925
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
@@ -4183,15 +4172,6 @@
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 458,
       "End": 465
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/WeatherFormatter:type/class",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherFormatter.java",
-      "Start": 342,
-      "End": 347
     },
     {
       "DefUnitType": "JavaArtifact",
@@ -4484,15 +4464,6 @@
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/WeatherService.java",
       "Start": 83,
       "End": 97
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/YahooParser:type/class",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooParser.java",
-      "Start": 329,
-      "End": 334
     },
     {
       "DefUnitType": "JavaArtifact",
@@ -4936,15 +4907,6 @@
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 480,
       "End": 491
-    },
-    {
-      "DefUnitType": "JavaArtifact",
-      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
-      "DefPath": "org/sonatype/mavenbook/weather/YahooRetriever:type/class",
-      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
-      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/YahooRetriever.java",
-      "Start": 247,
-      "End": 252
     },
     {
       "DefUnitType": "JavaArtifact",

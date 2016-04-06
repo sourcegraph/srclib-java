@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java",
       "Name": "java",
@@ -15,6 +16,7 @@
       "TreePath": "org/srclib/java"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "org/srclib/java/App/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type",
       "Name": "App",
@@ -53,6 +56,7 @@
       "TreePath": "org/srclib/java/App:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord",
       "Name": "G",
@@ -72,6 +76,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c",
       "Name": "c",
@@ -89,6 +94,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/c"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName",
       "Name": "firstName",
@@ -106,6 +112,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/firstName"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName",
       "Name": "lastName",
@@ -123,6 +130,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/lastName"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q",
       "Name": "q",
@@ -140,6 +148,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/q"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record",
       "Name": "record",
@@ -157,6 +166,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/record"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records",
       "Name": "records",
@@ -174,6 +184,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/records"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x",
       "Name": "x",
@@ -191,6 +202,7 @@
       "TreePath": "org/srclib/java/App:type/G:Bar:org.apache.commons.csv.CSVRecord/x"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/main:java.lang.String[]",
       "Name": "main",
@@ -211,6 +223,7 @@
       "TreePath": "org/srclib/java/App:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/App:type/main:java.lang.String[]/args",
       "Name": "args",
@@ -228,6 +241,7 @@
       "TreePath": "org/srclib/java/App:type/main:java.lang.String[]/args"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/JDK8062359/:init",
       "Name": "\u003cinit\u003e",
@@ -247,6 +261,7 @@
       "TreePath": "org/srclib/java/JDK8062359/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/JDK8062359:type",
       "Name": "JDK8062359",
@@ -266,6 +281,7 @@
       "TreePath": "org/srclib/java/JDK8062359:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/JDK8062359:type/main:java.lang.String[]",
       "Name": "main",
@@ -286,6 +302,7 @@
       "TreePath": "org/srclib/java/JDK8062359:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "org.srclib.srclib-java/unresolved-maven-deps",
       "Path": "org/srclib/java/JDK8062359:type/main:java.lang.String[]/args",
       "Name": "args",
