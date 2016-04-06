@@ -308,7 +308,8 @@ class TreeScanner extends TreePathScanner<Void, Void> {
 
     @Override
     public Void visitIdentifier(IdentifierTree node, Void p) {
-        if (SourceVersion.isIdentifier(node.getName())) {
+        CharSequence name = node.getName();
+        if (SourceVersion.isIdentifier(name) && !isSpecial(name)) {
             emitRef(treeSpan(node), false);
         }
         super.visitIdentifier(node, p);
@@ -369,7 +370,8 @@ class TreeScanner extends TreePathScanner<Void, Void> {
 
     @Override
     public Void visitMemberSelect(MemberSelectTree node, Void p) {
-        if (SourceVersion.isIdentifier(node.getIdentifier())) {
+        CharSequence name = node.getIdentifier();
+        if (SourceVersion.isIdentifier(name) && !isSpecial(name)) {
             if (srcPos.getEndPosition(compilationUnit, node) != Diagnostic.NOPOS) {
                 // TODO (alexsaveliev) otherwise fails on the following block (@result)
                     /*
@@ -404,5 +406,15 @@ class TreeScanner extends TreePathScanner<Void, Void> {
      */
     private List<String> modifiersList(ModifiersTree node) {
         return node.getFlags().stream().map(Modifier::toString).collect(Collectors.toList());
+    }
+
+    /**
+     * @param name symbol to check
+     * @return true if there is a special symbol, such as class, this, super
+     */
+    private boolean isSpecial(CharSequence name) {
+        return "class".contentEquals(name) ||
+                "this".contentEquals(name) ||
+                "super".contentEquals(name);
     }
 }
