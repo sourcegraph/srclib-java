@@ -116,7 +116,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
      * @param modifiers definition modifiers (for example, public static final)
      */
     private void emitDef(int[] nameSpan, int[] defSpan, List<String> modifiers) {
-        Def s = new Def(unit.Name);
+        Def s = new Def(unit.Name, unit.Type);
         s.defKey = currentDefKey();
         if (s.defKey == null) {
             error("def defKey is null");

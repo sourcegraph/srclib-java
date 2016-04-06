@@ -231,7 +231,7 @@ public class Grapher {
      * @throws IOException
      */
     private void writePackageSymbol(String packageName) throws IOException {
-        Def s = new Def(unit.Name);
+        Def s = new Def(unit.Name, unit.Type);
         // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
         s.defKey = new DefKey(null, packageName);
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);

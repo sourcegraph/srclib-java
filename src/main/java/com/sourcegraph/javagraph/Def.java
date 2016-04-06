@@ -61,14 +61,17 @@ public class Def {
 
     String typeExpr;
 
-    String unit;
+    String unitName;
+
+    private String unitType;
 
     /**
-     * Def cannot exist without a unit
-     * @param unit source unit
+     * @param unitName source unit name, for example - "com.squareup.okhttp3/mockwebserver"
+     * @param unitType source unit type, for example - "JavaArtifact"
      */
-    public Def(String unit) {
-        this.unit = unit;
+    public Def(String unitName, String unitType) {
+        this.unitName = unitName;
+        this.unitType = unitType;
     }
 
     @Override
@@ -90,7 +93,8 @@ public class Def {
         if (name != null ? !name.equals(def.name) : def.name != null) return false;
         if (pkg != null ? !pkg.equals(def.pkg) : def.pkg != null) return false;
         if (typeExpr != null ? !typeExpr.equals(def.typeExpr) : def.typeExpr != null) return false;
-        if (!unit.equals(def.unit)) return false;
+        if (!unitName.equals(def.unitName)) return false;
+        if (!unitType.equals(def.unitType)) return false;
 
         return true;
     }
@@ -109,7 +113,8 @@ public class Def {
         result = 31 * result + (pkg != null ? pkg.hashCode() : 0);
         result = 31 * result + (doc != null ? doc.hashCode() : 0);
         result = 31 * result + (typeExpr != null ? typeExpr.hashCode() : 0);
-        result = 31 * result + unit.hashCode();
+        result = 31 * result + unitName.hashCode();
+        result = 31 * result + unitType.hashCode();
         return result;
     }
 
@@ -172,7 +177,8 @@ public class Def {
 
             object.add("Path", new JsonPrimitive(sym.defKey.formatPath()));
             object.add("TreePath", new JsonPrimitive(sym.defKey.formatTreePath()));
-            object.add("Unit", new JsonPrimitive(sym.unit));
+            object.add("Unit", new JsonPrimitive(sym.unitName));
+            object.add("UnitType", new JsonPrimitive(sym.unitType));
 
             // Populate extra data field
             JsonObject data = new JsonObject();
