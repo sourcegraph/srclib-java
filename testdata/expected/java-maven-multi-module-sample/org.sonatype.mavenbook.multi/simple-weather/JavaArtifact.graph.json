@@ -2764,9 +2764,29 @@
       "DefUnit": "junit/junit",
       "DefPath": "junit/framework/TestCase:type",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/WeatherFormatterTest.java",
+      "Start": 404,
+      "End": 409
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
       "Start": 246,
       "End": 254
+    },
+    {
+      "DefRepo": "github.com/junit-team/junit",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "junit/junit",
+      "DefPath": "junit/framework/TestCase:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/test/java/org/sonatype/mavenbook/weather/yahoo/YahooParserTest.java",
+      "Start": 299,
+      "End": 304
     },
     {
       "DefRepo": "github.com/junit-team/junit",
@@ -3471,6 +3491,15 @@
     {
       "DefUnitType": "JavaArtifact",
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Main:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Main.java",
+      "Start": 597,
+      "End": 601
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/Weather/:init",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Def": true,
@@ -4087,10 +4116,73 @@
       "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
       "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
       "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 1038,
+      "End": 1042
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 354,
+      "End": 358
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 461,
+      "End": 465
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
       "Def": true,
       "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
       "Start": 55,
       "End": 62
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 576,
+      "End": 580
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 701,
+      "End": 705
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 810,
+      "End": 814
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.sonatype.mavenbook.multi/simple-weather",
+      "DefPath": "org/sonatype/mavenbook/weather/Weather:type",
+      "Unit": "org.sonatype.mavenbook.multi/simple-weather",
+      "File": "simple-weather/src/main/java/org/sonatype/mavenbook/weather/Weather.java",
+      "Start": 921,
+      "End": 925
     },
     {
       "DefUnitType": "JavaArtifact",

@@ -926,6 +926,16 @@
       "DefPath": "android/app/Activity:type",
       "Unit": "default-group/java-android-gradle-sample",
       "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
+      "Start": 252,
+      "End": 257
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/app/Activity:type",
+      "Unit": "default-group/java-android-gradle-sample",
+      "File": "src/main/java/de/goddchen/android/gradle/helloworld/MainActivity.java",
       "Start": 93,
       "End": 101
     },
