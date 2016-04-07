@@ -131,7 +131,7 @@ public class Resolver {
      * @return resolved target if jar file matches known one
      */
     private ResolvedTarget processSpecialJar(URI origin, Path jarFile) {
-        if (PathUtil.normalize(jarFile.toString()).contains("jre/lib/")) {
+        if (isJDK(jarFile)) {
             ResolvedTarget target = ResolvedTarget.jdk();
             resolvedOrigins.put(origin, target);
             return target;
@@ -331,6 +331,14 @@ public class Resolver {
         } else {
             return origin;
         }
+    }
+
+    /**
+     * @param jarFile path to Jar file
+     * @return true if given Jar file belongs to JDK
+     */
+    private static boolean isJDK(Path jarFile) {
+        return PathUtil.normalize(jarFile.toString()).contains("jre/lib/");
     }
 
 
