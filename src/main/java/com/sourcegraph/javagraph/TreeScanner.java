@@ -436,13 +436,13 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                      */
                 if (isThis(name)) {
                     // ClassName.this
-                    DefKey defKey = extractExpressionDef(node.getExpression());
+                    DefKey defKey = extractCallerDef(node);
                     if (defKey != null) {
                         emitRef(spans.name(node), defKey, false);
                     }
                 } else if (isSuper(name)) {
                     // ClassName.super
-                    DefKey defKey = extractExpressionParentDef(node.getExpression());
+                    DefKey defKey = extractCallerParentDef(node);
                     if (defKey != null) {
                         emitRef(spans.name(node), defKey, false);
                     }
@@ -477,6 +477,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
+     * Checks if given name denotes "class" Java keyword
      * @param name symbol to check
      * @return true if name denotes "class" keyword
      */
@@ -485,6 +486,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
+     * Checks if given name denotes "this" Java keyword
      * @param name symbol to check
      * @return true if name denotes "this" keyword
      */
@@ -493,6 +495,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
+     * Checks if given name denotes "super" Java keyword
      * @param name symbol to check
      * @return true if name denotes "super" keyword
      */
@@ -501,6 +504,8 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
+     * Extracts definition key of class's parent. For example, for expression 'class A extends B' extracts B's def key.
+     * If class does not extend explicitly any class, extracts java.lang.Object's def key
      * @param node class node (class A extends B)
      * @return extracted def key (B) for a given class node
      */
@@ -526,11 +531,13 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
-     * @param node expression node (foo for foo.bar)
+     * Extracts definition key of MST's caller. Assumes that caller always points to type
+     * and does not support "foo().bar"
+     * @param node MST (foo.bar)
      * @return extracted def key (foo) for a given node
      */
-    private DefKey extractExpressionDef(ExpressionTree node) {
-        TreePath path = trees.getPath(compilationUnit, node);
+    private DefKey extractCallerDef(MemberSelectTree node) {
+        TreePath path = trees.getPath(compilationUnit, node.getExpression());
         if (path == null) {
             return null;
         }
@@ -547,11 +554,13 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
-     * @param node expression node ((parent of foo) for foo.bar)
+     * Extracts definition key of MST's caller's parent. Assumes that caller always points to type
+     * and does not support "foo().bar"
+     * @param node MST (for foo.bar)
      * @return extracted def key (parent of foo) for a given node
      */
-    private DefKey extractExpressionParentDef(ExpressionTree node) {
-        TreePath path = trees.getPath(compilationUnit, node);
+    private DefKey extractCallerParentDef(MemberSelectTree node) {
+        TreePath path = trees.getPath(compilationUnit, node.getExpression());
         if (path == null) {
             return null;
         }
@@ -579,7 +588,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
     }
 
     /**
-     * Class definition
+     * Class definition, used to keep current class's def and parent class's def
      */
     private static class ClassDef {
         /**
