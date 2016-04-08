@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum",
       "Name": "addjsum",
@@ -15,6 +16,7 @@
       "TreePath": "build/tools/addjsum"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "build/tools/addjsum/AddJsum/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type",
       "Name": "AddJsum",
@@ -53,6 +56,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/JSUM_SEED",
       "Name": "JSUM_SEED",
@@ -73,6 +77,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/JSUM_SEED"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String",
       "Name": "jsum",
@@ -92,6 +97,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/c",
       "Name": "c",
@@ -109,6 +115,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/c"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h",
       "Name": "h",
@@ -126,6 +133,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/h"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i",
       "Name": "i",
@@ -143,6 +151,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/i"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/len",
       "Name": "len",
@@ -160,6 +169,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/len"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/start",
       "Name": "start",
@@ -177,6 +187,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/start"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/str",
       "Name": "str",
@@ -194,6 +205,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/jsum:long:java.lang.String/str"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]",
       "Name": "main",
@@ -214,6 +226,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args",
       "Name": "args",
@@ -231,6 +244,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/args"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum",
       "Name": "computedJsum",
@@ -248,6 +262,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/computedJsum"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/diff",
       "Name": "diff",
@@ -265,6 +280,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/diff"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/e",
       "Name": "e",
@@ -282,6 +298,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/e"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex",
       "Name": "hex",
@@ -299,6 +316,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/hex"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/i",
       "Name": "i",
@@ -316,6 +334,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/i"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/inFile",
       "Name": "inFile",
@@ -333,6 +352,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/inFile"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line",
       "Name": "line",
@@ -350,6 +370,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/line"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/m",
       "Name": "m",
@@ -367,6 +388,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/m"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/outFile",
       "Name": "outFile",
@@ -384,6 +406,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/outFile"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/p",
       "Name": "p",
@@ -401,6 +424,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/p"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/reader",
       "Name": "reader",
@@ -418,6 +442,7 @@
       "TreePath": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/reader"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "BuildTools",
       "Path": "build/tools/addjsum/AddJsum:type/main:java.lang.String[]/writer",
       "Name": "writer",

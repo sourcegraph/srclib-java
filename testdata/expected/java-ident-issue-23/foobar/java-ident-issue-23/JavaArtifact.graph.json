@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x",
       "Name": "x",
@@ -15,6 +16,7 @@
       "TreePath": "x"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "x/Foo/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type",
       "Name": "Foo",
@@ -53,6 +56,7 @@
       "TreePath": "x/Foo:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/fo",
       "Name": "fo",
@@ -72,6 +76,7 @@
       "TreePath": "x/Foo:type/fo"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]",
       "Name": "main",
@@ -91,6 +96,7 @@
       "TreePath": "x/Foo:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]/args",
       "Name": "args",
@@ -108,6 +114,7 @@
       "TreePath": "x/Foo:type/main:java.lang.String[]/args"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "foobar/java-ident-issue-23",
       "Path": "x/Foo:type/main:java.lang.String[]/foo",
       "Name": "foo",

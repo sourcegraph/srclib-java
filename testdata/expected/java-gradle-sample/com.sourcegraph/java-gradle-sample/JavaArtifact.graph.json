@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg",
       "Name": "mypkg",
@@ -15,6 +16,7 @@
       "TreePath": "mypkg"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "mypkg/Container/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container:type",
       "Name": "Container",
@@ -53,6 +56,7 @@
       "TreePath": "mypkg/Container:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container:type/F",
       "Name": "F",
@@ -72,6 +76,7 @@
       "TreePath": "mypkg/Container:type/F"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container:type/Inner/:init",
       "Name": "\u003cinit\u003e",
@@ -91,6 +96,7 @@
       "TreePath": "mypkg/Container:type/Inner/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container:type/Inner:type",
       "Name": "Inner",
@@ -110,6 +116,7 @@
       "TreePath": "mypkg/Container:type/Inner:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/Container:type/Inner:type/F",
       "Name": "F",
@@ -129,6 +136,7 @@
       "TreePath": "mypkg/Container:type/Inner:type/F"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass/:init",
       "Name": "\u003cinit\u003e",
@@ -148,6 +156,7 @@
       "TreePath": "mypkg/FooClass/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type",
       "Name": "FooClass",
@@ -167,6 +176,7 @@
       "TreePath": "mypkg/FooClass:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/foo",
       "Name": "foo",
@@ -186,6 +196,7 @@
       "TreePath": "mypkg/FooClass:type/foo"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myInt",
       "Name": "myInt",
@@ -205,6 +216,7 @@
       "TreePath": "mypkg/FooClass:type/myInt"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myInt/len",
       "Name": "len",
@@ -222,6 +234,7 @@
       "TreePath": "mypkg/FooClass:type/myInt/len"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myIntegers",
       "Name": "myIntegers",
@@ -240,6 +253,7 @@
       "TreePath": "mypkg/FooClass:type/myIntegers"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myStatic",
       "Name": "myStatic",
@@ -260,6 +274,7 @@
       "TreePath": "mypkg/FooClass:type/myStatic"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myString",
       "Name": "myString",
@@ -279,6 +294,7 @@
       "TreePath": "mypkg/FooClass:type/myString"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myStringStatic",
       "Name": "myStringStatic",
@@ -299,6 +315,7 @@
       "TreePath": "mypkg/FooClass:type/myStringStatic"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/myStringStatic/s",
       "Name": "s",
@@ -316,6 +333,7 @@
       "TreePath": "mypkg/FooClass:type/myStringStatic/s"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/FooClass:type/numIntegers",
       "Name": "numIntegers",
@@ -334,6 +352,7 @@
       "TreePath": "mypkg/FooClass:type/numIntegers"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/IBar:type",
       "Name": "IBar",
@@ -353,6 +372,7 @@
       "TreePath": "mypkg/IBar:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar",
       "Name": "getFoo",
@@ -369,6 +389,7 @@
       "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
       "Name": "bar",
@@ -386,6 +407,7 @@
       "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg",
       "Name": "subpkg",
@@ -400,6 +422,7 @@
       "TreePath": "mypkg/subpkg"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/QuxEnum/:init",
       "Name": "\u003cinit\u003e",
@@ -418,6 +441,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/QuxEnum:type",
       "Name": "QuxEnum",
@@ -437,6 +461,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/AAA",
       "Name": "AAA",
@@ -458,6 +483,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/AAA"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/BBB",
       "Name": "BBB",
@@ -479,6 +505,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/BBB"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/CCC",
       "Name": "CCC",
@@ -500,6 +527,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/CCC"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/ZipClass/:init",
       "Name": "\u003cinit\u003e",
@@ -519,6 +547,7 @@
       "TreePath": "mypkg/subpkg/ZipClass/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/ZipClass:type",
       "Name": "ZipClass",
@@ -538,6 +567,7 @@
       "TreePath": "mypkg/subpkg/ZipClass:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/ZipClass:type/zap",
       "Name": "zap",
@@ -556,6 +586,7 @@
       "TreePath": "mypkg/subpkg/ZipClass:type/zap"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-gradle-sample",
       "Path": "mypkg/subpkg/ZipClass:type/zap/foo",
       "Name": "foo",

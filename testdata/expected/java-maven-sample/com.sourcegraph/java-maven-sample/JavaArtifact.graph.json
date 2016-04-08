@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg",
       "Name": "mypkg",
@@ -15,6 +16,7 @@
       "TreePath": "mypkg"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "mypkg/Container/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type",
       "Name": "Container",
@@ -53,6 +56,7 @@
       "TreePath": "mypkg/Container:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/F",
       "Name": "F",
@@ -72,6 +76,7 @@
       "TreePath": "mypkg/Container:type/F"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/G",
       "Name": "G",
@@ -91,6 +96,7 @@
       "TreePath": "mypkg/Container:type/G"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/G/firstName",
       "Name": "firstName",
@@ -108,6 +114,7 @@
       "TreePath": "mypkg/Container:type/G/firstName"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/G/lastName",
       "Name": "lastName",
@@ -125,6 +132,7 @@
       "TreePath": "mypkg/Container:type/G/lastName"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/G/record",
       "Name": "record",
@@ -142,6 +150,7 @@
       "TreePath": "mypkg/Container:type/G/record"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/G/records",
       "Name": "records",
@@ -159,6 +168,7 @@
       "TreePath": "mypkg/Container:type/G/records"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/Inner/:init",
       "Name": "\u003cinit\u003e",
@@ -178,6 +188,7 @@
       "TreePath": "mypkg/Container:type/Inner/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/Inner:type",
       "Name": "Inner",
@@ -197,6 +208,7 @@
       "TreePath": "mypkg/Container:type/Inner:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/Container:type/Inner:type/F",
       "Name": "F",
@@ -216,6 +228,7 @@
       "TreePath": "mypkg/Container:type/Inner:type/F"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass/:init",
       "Name": "\u003cinit\u003e",
@@ -235,6 +248,7 @@
       "TreePath": "mypkg/FooClass/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type",
       "Name": "FooClass",
@@ -254,6 +268,7 @@
       "TreePath": "mypkg/FooClass:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/foo",
       "Name": "foo",
@@ -273,6 +288,7 @@
       "TreePath": "mypkg/FooClass:type/foo"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myInt",
       "Name": "myInt",
@@ -292,6 +308,7 @@
       "TreePath": "mypkg/FooClass:type/myInt"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myInt/len",
       "Name": "len",
@@ -309,6 +326,7 @@
       "TreePath": "mypkg/FooClass:type/myInt/len"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myIntegers",
       "Name": "myIntegers",
@@ -327,6 +345,7 @@
       "TreePath": "mypkg/FooClass:type/myIntegers"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myStatic",
       "Name": "myStatic",
@@ -347,6 +366,7 @@
       "TreePath": "mypkg/FooClass:type/myStatic"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myString",
       "Name": "myString",
@@ -366,6 +386,7 @@
       "TreePath": "mypkg/FooClass:type/myString"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myStringStatic",
       "Name": "myStringStatic",
@@ -386,6 +407,7 @@
       "TreePath": "mypkg/FooClass:type/myStringStatic"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/myStringStatic/s",
       "Name": "s",
@@ -403,6 +425,7 @@
       "TreePath": "mypkg/FooClass:type/myStringStatic/s"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/FooClass:type/numIntegers",
       "Name": "numIntegers",
@@ -421,6 +444,7 @@
       "TreePath": "mypkg/FooClass:type/numIntegers"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/IBar:type",
       "Name": "IBar",
@@ -440,6 +464,7 @@
       "TreePath": "mypkg/IBar:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar",
       "Name": "getFoo",
@@ -456,6 +481,7 @@
       "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/IBar:type/getFoo:mypkg.IBar/bar",
       "Name": "bar",
@@ -473,6 +499,215 @@
       "TreePath": "mypkg/IBar:type/getFoo:mypkg.IBar/bar"
     },
     {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 119,
+      "DefEnd": 133,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type",
+      "Name": "ThisSuperClass",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 113,
+      "DefEnd": 1311,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.ThisSuperClass",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/Qux/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 751,
+      "DefEnd": 995,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/Qux/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/Qux:type",
+      "Name": "Qux",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 711,
+      "DefEnd": 1309,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.ThisSuperClass.Qux",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/Qux:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/Qux:type/Norf/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 1031,
+      "DefEnd": 1292,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/Qux:type/Norf/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/Qux:type/Norf:type",
+      "Name": "Norf",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 1005,
+      "DefEnd": 1302,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.ThisSuperClass.Qux.Norf",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/Qux:type/Norf:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/bar",
+      "Name": "bar",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 393,
+      "DefEnd": 495,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/bar"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/baz",
+      "Name": "baz",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 501,
+      "DefEnd": 705,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/baz"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/baz/e",
+      "Name": "e",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 561,
+      "DefEnd": 562,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.beans.PropertyChangeEvent",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/baz/e"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/counter",
+      "Name": "counter",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 173,
+      "DefEnd": 193,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": [
+          "private"
+        ]
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/counter"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/foo",
+      "Name": "foo",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 199,
+      "DefEnd": 387,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()mypkg.ThisSuperClass",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/foo"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/ThisSuperClass:type/foo/c",
+      "Name": "c",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "DefStart": 248,
+      "DefEnd": 279,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.Class",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/ThisSuperClass:type/foo/c"
+    },
+    {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg",
       "Name": "subpkg",
@@ -487,6 +722,7 @@
       "TreePath": "mypkg/subpkg"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/QuxEnum/:init",
       "Name": "\u003cinit\u003e",
@@ -505,6 +741,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/QuxEnum:type",
       "Name": "QuxEnum",
@@ -524,6 +761,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/AAA",
       "Name": "AAA",
@@ -545,6 +783,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/AAA"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/BBB",
       "Name": "BBB",
@@ -566,6 +805,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/BBB"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/QuxEnum:type/CCC",
       "Name": "CCC",
@@ -587,6 +827,7 @@
       "TreePath": "mypkg/subpkg/QuxEnum:type/CCC"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/ZipClass/:init",
       "Name": "\u003cinit\u003e",
@@ -606,6 +847,7 @@
       "TreePath": "mypkg/subpkg/ZipClass/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/ZipClass:type",
       "Name": "ZipClass",
@@ -625,6 +867,7 @@
       "TreePath": "mypkg/subpkg/ZipClass:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/ZipClass:type/zap",
       "Name": "zap",
@@ -643,6 +886,7 @@
       "TreePath": "mypkg/subpkg/ZipClass:type/zap"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg/ZipClass:type/zap/foo",
       "Name": "foo",
@@ -661,6 +905,16 @@
     }
   ],
   "Refs": [
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/awt/Window:type/addPropertyChangeListener:java.beans.PropertyChangeListener",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 535,
+      "End": 560
+    },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
@@ -755,6 +1009,16 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/lang/Class:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 248,
+      "End": 253
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type/toString:int",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
@@ -825,6 +1089,56 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/lang/Number:type/byteValue",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 847,
+      "End": 856
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Number:type/byteValue",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 899,
+      "End": 908
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Object:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1061,
+      "End": 1069
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Object:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1180,
+      "End": 1188
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Object:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1174,
+      "End": 1179
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type/length",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/FooClass.java",
@@ -880,6 +1194,26 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 590,
       "End": 596
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 150,
+      "End": 156
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 158,
+      "End": 164
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -985,11 +1319,101 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1098,
+      "End": 1106
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1218,
+      "End": 1226
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1212,
+      "End": 1217
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 729,
+      "End": 739
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 74,
+      "End": 84
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 794,
+      "End": 799
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/math/BigInteger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 841,
+      "End": 846
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/net/URL:type",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/Container.java",
       "Start": 200,
       "End": 203
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/AbstractMap:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1146,
+      "End": 1154
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/AbstractMap:type/hashCode",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1267,
+      "End": 1275
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -1010,6 +1434,76 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 45,
       "End": 54
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type/get:java.lang.Object",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 481,
+      "End": 484
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type/get:java.lang.Object",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 679,
+      "End": 682
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 103,
+      "End": 110
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1261,
+      "End": 1266
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 142,
+      "End": 149
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 475,
+      "End": 480
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/HashMap:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 673,
+      "End": 678
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -1040,6 +1534,16 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 73,
       "End": 77
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "javax/swing/JFrame:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 526,
+      "End": 532
     },
     {
       "DefUnitType": "JavaArtifact",
@@ -1485,6 +1989,305 @@
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 57,
       "End": 61
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass/Qux:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1093,
+      "End": 1097
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux/:init",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 751,
+      "End": 754
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type/Norf/:init",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1031,
+      "End": 1035
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type/Norf:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1011,
+      "End": 1015
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type/Norf:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1056,
+      "End": 1060
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1089,
+      "End": 1092
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1208,
+      "End": 1211
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 717,
+      "End": 720
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/Qux:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 894,
+      "End": 898
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/bar",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 398,
+      "End": 401
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/baz/e",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 561,
+      "End": 562
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/baz",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 506,
+      "End": 509
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/counter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 185,
+      "End": 192
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/counter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 334,
+      "End": 341
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/counter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 437,
+      "End": 444
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/counter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 617,
+      "End": 624
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/counter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 974,
+      "End": 981
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/foo/c",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 254,
+      "End": 255
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type/foo",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 214,
+      "End": 217
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1126,
+      "End": 1140
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1141,
+      "End": 1145
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 119,
+      "End": 133
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 1246,
+      "End": 1260
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 199,
+      "End": 213
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 258,
+      "End": 272
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 314,
+      "End": 328
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 329,
+      "End": 333
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 376,
+      "End": 380
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 432,
+      "End": 436
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 612,
+      "End": 616
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 954,
+      "End": 968
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/ThisSuperClass:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/ThisSuperClass.java",
+      "Start": 969,
+      "End": 973
     },
     {
       "DefUnitType": "JavaArtifact",

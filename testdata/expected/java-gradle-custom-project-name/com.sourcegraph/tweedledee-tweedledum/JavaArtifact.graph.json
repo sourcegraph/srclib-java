@@ -1,6 +1,7 @@
 {
   "Defs": [
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/tweedledee-tweedledum",
       "Path": "com/sourcegraph",
       "Name": "sourcegraph",
@@ -15,6 +16,7 @@
       "TreePath": "com/sourcegraph"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/tweedledee-tweedledum",
       "Path": "com/sourcegraph/Main/:init",
       "Name": "\u003cinit\u003e",
@@ -34,6 +36,7 @@
       "TreePath": "com/sourcegraph/Main/:init"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/tweedledee-tweedledum",
       "Path": "com/sourcegraph/Main:type",
       "Name": "Main",
@@ -53,6 +56,7 @@
       "TreePath": "com/sourcegraph/Main:type"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/tweedledee-tweedledum",
       "Path": "com/sourcegraph/Main:type/main:java.lang.String[]",
       "Name": "main",
@@ -72,6 +76,7 @@
       "TreePath": "com/sourcegraph/Main:type/main:java.lang.String[]"
     },
     {
+      "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/tweedledee-tweedledum",
       "Path": "com/sourcegraph/Main:type/main:java.lang.String[]/args",
       "Name": "args",

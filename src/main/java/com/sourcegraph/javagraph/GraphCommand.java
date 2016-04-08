@@ -154,7 +154,7 @@ public class GraphCommand {
             Format = "text/html";
             Data = def.doc;
             File = PathUtil.relativizeCwd(def.file);
-            Unit = def.unit;
+            Unit = def.unitName;
         }
     }
 
