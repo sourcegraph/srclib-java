@@ -46,7 +46,7 @@ dependencies {
 }
 
 jar {
-	def gitRef = "sh -c 'git rev-parse --short HEAD || echo snapshot'".execute().text.trim()
+	def gitRef = "sh -c 'git rev-parse --short HEAD || git ls-remote https://github.com/sourcegraph/srclib-java master | awk \"{ print \\\$1 }\" || echo snapshot'".execute().text.trim()
 
 	manifest {
 		attributes "Main-Class" : mainClassName
