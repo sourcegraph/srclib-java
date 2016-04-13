@@ -158,6 +158,15 @@ public class ElementPath {
             return visit(e.getEnclosingElement().getEnclosingElement(), p);
         }
 
+        @Override
+        public ElementPath visitExecutableAsStaticInit(ExecutableElement e,
+                                                        ElementPath p) {
+            String name = e.getEnclosingElement().getSimpleName().toString()
+                    + "/:static";
+            p.unshift(name);
+            return visit(e.getEnclosingElement().getEnclosingElement(), p);
+        }
+
         private List<String> getParameters(ExecutableElement e) {
             return e.getParameters().
                     stream().
