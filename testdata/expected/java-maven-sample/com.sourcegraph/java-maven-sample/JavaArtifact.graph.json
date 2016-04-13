@@ -501,6 +501,78 @@
     {
       "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/StaticInit/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "DefStart": 22,
+      "DefEnd": 32,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/StaticInit/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/StaticInit/:static/i",
+      "Name": "i",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "DefStart": 160,
+      "DefEnd": 170,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/StaticInit/:static/i"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/StaticInit:type",
+      "Name": "StaticInit",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "DefStart": 16,
+      "DefEnd": 234,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.StaticInit",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/StaticInit:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/StaticInit:type/q",
+      "Name": "q",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "DefStart": 40,
+      "DefEnd": 61,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": [
+          "private",
+          "static"
+        ]
+      },
+      "TreePath": "mypkg/StaticInit:type/q"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/ThisSuperClass/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -1989,6 +2061,63 @@
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 57,
       "End": 61
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit/:static/i",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 164,
+      "End": 165
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit/:static/i",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 186,
+      "End": 187
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit/:static/i",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 212,
+      "End": 213
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit:type/q",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 208,
+      "End": 209
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit:type/q",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 59,
+      "End": 60
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/StaticInit:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/StaticInit.java",
+      "Start": 22,
+      "End": 32
     },
     {
       "DefUnitType": "JavaArtifact",
