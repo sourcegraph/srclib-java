@@ -16,13 +16,13 @@ import java.util.*;
  * - empty classpath
  * - include ICU4J classes if found into source path
  */
-public class AndroidCoreProject implements Project {
+class AndroidCoreProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidCoreProject.class);
 
     private static final String MARKER = "AndroidCore";
 
-    public AndroidCoreProject(SourceUnit unit) {
+    AndroidCoreProject(SourceUnit unit) {
     }
 
     /**
@@ -47,11 +47,9 @@ public class AndroidCoreProject implements Project {
     @Override
     public List<String> getSourcePath() throws Exception {
         // if there is ICU available, let's use it
-        File icuDir = new File("../external/icu/icu4j/main/classes");
+        File icuDir = new File("../external/icu/android_icu4j/src/main/java");
         if (icuDir.isDirectory()) {
-            List<String> icuSrcDirs = new ArrayList<>();
-            Files.walkFileTree(icuDir.toPath(), new ICUDirectoriesCollector(icuSrcDirs));
-            return icuSrcDirs;
+            return Collections.singletonList(icuDir.getPath());
         }
         return null;
     }
@@ -80,18 +78,17 @@ public class AndroidCoreProject implements Project {
     /**
      * Creates source unit from a given directory
      * @return source unit
-     * @throws Exception
+     * @throws IOException
      */
-    public static SourceUnit createSourceUnit() throws Exception {
+    static SourceUnit createSourceUnit() throws IOException {
         final SourceUnit unit = new SourceUnit();
         unit.Type = SourceUnit.DEFAULT_TYPE;
         unit.Name = MARKER;
         unit.Dir = ".";
 
         List<String> files = new LinkedList<>();
-        List<String> directories = new LinkedList<>();
 
-        getSourceFilesAndDirectories(PathUtil.CWD.resolve(unit.Dir), files, directories);
+        getSourceFilesAndDirectories(PathUtil.CWD.resolve(unit.Dir), files);
         unit.Files = files;
 
         unit.Data.put(SourceUnit.TYPE, MARKER);
@@ -107,11 +104,10 @@ public class AndroidCoreProject implements Project {
      * excluding useless ones
      * @param root location to start walking filetree
      * @param files holder to keep found files
-     * @param directories holder to keep found directories
      * @return list of files collected
      * @throws IOException
      */
-    static List<String> getSourceFilesAndDirectories(Path root, List<String> files, List<String> directories)
+    private static List<String> getSourceFilesAndDirectories(Path root, List<String> files)
             throws IOException {
 
         if (Files.exists(root)) {
@@ -123,7 +119,6 @@ public class AndroidCoreProject implements Project {
                             dir.endsWith("tzdata")) {
                         return FileVisitResult.SKIP_SUBTREE;
                     }
-                    directories.add(PathUtil.normalize(dir.toString()));
                     return FileVisitResult.CONTINUE;
                 }
 
@@ -134,7 +129,7 @@ public class AndroidCoreProject implements Project {
                         filename = PathUtil.normalize(filename);
                         if (filename.startsWith("./"))
                             filename = filename.substring(2);
-                        files.add(filename);
+                        files.add(PathUtil.relativizeCwd(filename));
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -145,24 +140,4 @@ public class AndroidCoreProject implements Project {
         return files;
     }
 
-    /**
-     * Walks file tree and collects ICU4J source directories if there are any
-     */
-    private static final class ICUDirectoriesCollector extends SimpleFileVisitor<Path> {
-
-        private Collection<String> dirs;
-
-        ICUDirectoriesCollector(Collection<String> dirs) {
-            this.dirs = dirs;
-        }
-
-        @Override
-        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-            if (dir.getFileName().toString().equals("src")) {
-                dirs.add(dir.toAbsolutePath().normalize().toString());
-                return FileVisitResult.SKIP_SUBTREE;
-            }
-            return FileVisitResult.CONTINUE;
-        }
-    }
 }
