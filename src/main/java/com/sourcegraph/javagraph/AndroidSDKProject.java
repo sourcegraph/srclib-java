@@ -10,8 +10,11 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,22 +25,22 @@ import java.util.stream.Collectors;
  * - include source directories generated from .logtags if found into source path
  * - include source directories that contain R.java and Manifest.java into source path, if found
  */
-public class AndroidSDKProject implements Project {
+class AndroidSDKProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidSDKProject.class);
 
     private static final String MARKER = "AndroidSDK";
 
-    public AndroidSDKProject(SourceUnit unit) {
+    AndroidSDKProject(SourceUnit unit) {
     }
 
     /**
-     * @return libart
+     * @return bootclasspath to compile Android base framework (should include libcore classes)
      */
     @Override
     public List<String> getBootClassPath() {
         return getLibraries(new String[]{
-                "../../out/target/common/obj/JAVA_LIBRARIES/core-libart_intermediates/classes.jar"
+                "../../out/target/common/obj/JAVA_LIBRARIES/core-all_intermediates/classes.jar"
         });
     }
 
@@ -64,14 +67,11 @@ public class AndroidSDKProject implements Project {
     @Override
     public List<String> getSourcePath() throws IOException {
         List<String> sourcePath = new ArrayList<>();
-        // needed to include java directories generated from .logtags
-        File intermediate = new File("../../out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/src/core/java");
+        // needed to include java directories generated from .logtags and AIDL
+        File intermediate = new File("../../out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/src");
         if (intermediate.isDirectory()) {
-            sourcePath.add(intermediate.toString());
-        } else {
-            LOGGER.warn("Directory that contains directories generated from .logtags does not exist, there might be some errors while graphing");
+            Files.walkFileTree(intermediate.toPath(), new GeneratedDirectoriesCollector(sourcePath));
         }
-
         // Adding directories that contain auto-generated Manifest.java and R.java
         File rRoot = new File("../../out/target/common/R");
         if (rRoot.isDirectory()) {
@@ -100,9 +100,9 @@ public class AndroidSDKProject implements Project {
     /**
      * Creates source unit from a given directory
      * @return source unit
-     * @throws Exception
+     * @throws IOException
      */
-    public static SourceUnit createSourceUnit() throws Exception {
+    static SourceUnit createSourceUnit() throws IOException {
 
 
         final SourceUnit unit = new SourceUnit();
@@ -338,17 +338,22 @@ public class AndroidSDKProject implements Project {
      */
     private static List<String> collectFiles(String extension) {
         List<String> files = new ArrayList<>();
+        collectFiles(files, "cmds/java", extension);
         collectFiles(files, "core/java", extension);
         collectFiles(files, "drm/java", extension);
         collectFiles(files, "graphics/java", extension);
         collectFiles(files, "keystore/java", extension);
+        collectFiles(files, "libs/java", extension);
         collectFiles(files, "location/java", extension);
         collectFiles(files, "media/java", extension);
+        collectFiles(files, "nfc-extras/java", extension);
+        collectFiles(files, "obex/java", extension);
         collectFiles(files, "opengl/java", extension);
         collectFiles(files, "rs/java", extension);
         collectFiles(files, "sax/java", extension);
         collectFiles(files, "telecomm/java", extension);
         collectFiles(files, "telephony/java", extension);
+        collectFiles(files, "tools/java", extension);
         collectFiles(files, "wifi/java", extension);
         collectFiles(files, "packages/services/PacProcessor", extension);
         return files;
@@ -366,8 +371,30 @@ public class AndroidSDKProject implements Project {
         if (root.isDirectory()) {
             files.addAll(FileUtils.listFiles(root, new String[]{extension}, true).
                     stream().
-                    map(File::getAbsolutePath).
+                    map(s -> PathUtil.relativizeCwd(s.toPath())).
                     collect(Collectors.toList()));
+        }
+    }
+
+    /**
+     * Walks file tree and collects source directories which contain generated java files if there are any
+     */
+    private static final class GeneratedDirectoriesCollector extends SimpleFileVisitor<Path> {
+
+        private Collection<String> dirs;
+
+        GeneratedDirectoriesCollector(Collection<String> dirs) {
+            this.dirs = dirs;
+        }
+
+        @Override
+        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+            String name = dir.getFileName().toString();
+            if (name.equals("java") || name.equals("PacProcessor")) {
+                dirs.add(dir.toAbsolutePath().normalize().toString());
+                return FileVisitResult.SKIP_SUBTREE;
+            }
+            return FileVisitResult.CONTINUE;
         }
     }
 
