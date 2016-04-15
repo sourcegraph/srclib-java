@@ -132,6 +132,9 @@ public class Resolver {
      */
     private ResolvedTarget processSpecialJar(URI origin, Path jarFile) {
         if (isJDK(jarFile)) {
+            if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+                return AndroidOriginResolver.resolve(origin);
+            }
             ResolvedTarget target = ResolvedTarget.jdk();
             resolvedOrigins.put(origin, target);
             return target;

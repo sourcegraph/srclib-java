@@ -64,7 +64,7 @@ public class DepresolveCommand {
             } else if (AndroidSDKProject.is(unit)) {
                 // only Android Core
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
-            } else if (unit.Data.containsKey("Android")) {
+            } else if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
             } else {

@@ -395,7 +395,7 @@ public class MavenProject implements Project {
             unit.Data.put("ClassPath", classPath);
             unit.Data.put("SourcePath", sourcePath);
             if (info.androidSdk != null) {
-                unit.Data.put("Android", true);
+                unit.Data.put(SourceUnit.ANDROID_MARKER, true);
             }
             ret.add(unit);
         }
