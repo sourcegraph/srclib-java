@@ -28,7 +28,7 @@ public class SimpligilityAndroidMavenPlugin extends AbstractMavenPlugin {
 
     @Override
     public boolean isStandard() {
-        return false;
+        return true;
     }
 
     /**

@@ -23,6 +23,11 @@ public class SourceUnit {
     public static final String DEFAULT_TYPE = "JavaArtifact";
 
     /**
+     * Android-based project indicator
+     */
+    public static final String ANDROID_MARKER = "Android";
+
+    /**
      * Source unit name
      */
     String Name;

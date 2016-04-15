@@ -186,7 +186,7 @@ public class GradleProject implements Project {
             }
 
             if (info.androidSdk != null) {
-                unit.Data.put("Android", info.androidSdk);
+                unit.Data.put(SourceUnit.ANDROID_MARKER, info.androidSdk);
             }
 
             // leave only existing files
