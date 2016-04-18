@@ -16,11 +16,12 @@ import java.util.List;
  * libcore and frameworks/base combined produce android.jar thus for each class file we should check if it belongs to
  * libcore or frameworks/base
  */
-public class AndroidOriginResolver {
+class AndroidOriginResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidOriginResolver.class);
 
     private static List<String> libcoreClasses;
+    private static List<String> supportClasses;
 
     static {
         InputStream is = AndroidOriginResolver.class.getResourceAsStream("/android-libcore.dat");
@@ -34,17 +35,32 @@ public class AndroidOriginResolver {
         } else {
             libcoreClasses = new ArrayList<>();
         }
+
+        is = AndroidOriginResolver.class.getResourceAsStream("/android-support.dat");
+        if (is != null) {
+            try {
+                supportClasses = IOUtils.readLines(is);
+            } catch (IOException e) {
+                LOGGER.warn("Failed to load Android Support classes list", e);
+                supportClasses = new ArrayList<>();
+            }
+        } else {
+            supportClasses = new ArrayList<>();
+        }
+
     }
 
     private AndroidOriginResolver() {
     }
 
     /**
-     * Resolves jar URI either to libcore or to frameworks/base resolved target
+     * Resolves jar URI either to libcore or to frameworks/base (support) resolved target
      * @param origin URI to resolve
+     * @param force indicates if URI should be resolved to Android SDK if it can't be resolved neither to libcore nor to
+     *              Android Support framework
      * @return resolved target or null if resolution failed
      */
-    public static ResolvedTarget resolve(URI origin) {
+    public static ResolvedTarget resolve(URI origin, boolean force) {
         String topClassName = extractTopClassName(origin);
         if (topClassName == null) {
             return null;
@@ -53,7 +69,11 @@ public class AndroidOriginResolver {
         if (index >= 0) {
             return ResolvedTarget.androidCore();
         } else {
-            return ResolvedTarget.androidSDK();
+            index = Collections.binarySearch(supportClasses, topClassName);
+            if (index >= 0) {
+                return ResolvedTarget.androidSupport();
+            }
+            return force ? ResolvedTarget.androidSDK() : null;
         }
     }
 

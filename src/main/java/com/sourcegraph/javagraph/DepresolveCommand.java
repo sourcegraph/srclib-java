@@ -64,9 +64,14 @@ public class DepresolveCommand {
             } else if (AndroidSDKProject.is(unit)) {
                 // only Android Core
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
+            } else if (AndroidSupportProject.is(unit)) {
+                // Android Core + Android SDK
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
             } else if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
+                resolutions.add(new DepResolution(null, ResolvedTarget.androidSupport()));
             } else {
                 resolutions.add(new DepResolution(null, ResolvedTarget.jdk()));
             }

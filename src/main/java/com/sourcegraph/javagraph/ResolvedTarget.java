@@ -6,6 +6,7 @@ package com.sourcegraph.javagraph;
 class ResolvedTarget {
 
     private static final String ANDROID_SDK_REPO = "android.googlesource.com/platform/frameworks/base";
+    private static final String ANDROID_SUPPORT_REPO = "android.googlesource.com/platform/frameworks/support";
     private static final String ANDROID_CORE_REPO = "android.googlesource.com/platform/libcore";
 
     /**
@@ -65,7 +66,18 @@ class ResolvedTarget {
         ResolvedTarget target = new ResolvedTarget();
         target.ToRepoCloneURL = ANDROID_SDK_REPO;
         target.ToUnitType = SourceUnit.DEFAULT_TYPE;
-        target.ToUnit = "AndroidSDK";
+        target.ToUnit = AndroidSDKProject.MARKER;
+        return target;
+    }
+
+    /**
+     * @return Android Support resolved target
+     */
+    public static ResolvedTarget androidSupport() {
+        ResolvedTarget target = new ResolvedTarget();
+        target.ToRepoCloneURL = ANDROID_SUPPORT_REPO;
+        target.ToUnitType = SourceUnit.DEFAULT_TYPE;
+        target.ToUnit = AndroidSupportProject.MARKER;
         return target;
     }
 

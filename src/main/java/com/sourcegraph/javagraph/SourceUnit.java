@@ -96,6 +96,9 @@ public class SourceUnit {
         if (AndroidSDKProject.is(this)) {
             return new AndroidSDKProject(this);
         }
+        if (AndroidSupportProject.is(this)) {
+            return new AndroidSupportProject(this);
+        }
         if (AndroidCoreProject.is(this)) {
             return new AndroidCoreProject(this);
         }

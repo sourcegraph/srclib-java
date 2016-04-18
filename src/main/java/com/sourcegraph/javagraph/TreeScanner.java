@@ -261,7 +261,9 @@ class TreeScanner extends TreePathScanner<Void, Void> {
         Def def = emitDef(node, nameSpan, modifiersList(node.getModifiers()));
         DefKey parentDef = extractParentDef(node);
         ClassDef classDef = new ClassDef();
-        classDef.def = def.defKey;
+        if (def != null) {
+            classDef.def = def.defKey;
+        }
         classDef.parentDef = parentDef;
         this.classDef.push(classDef);
         super.visitClass(node, p);
@@ -347,7 +349,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 ClassDef currentClassDef = classDef.empty() ? null : classDef.peek();
                 if (currentClassDef != null) {
                     int span[] = treeSpan(node);
-                    if (span != null) {
+                    if (span != null && currentClassDef.def != null) {
                         emitRef(span, currentClassDef.def, false);
                     }
                 }

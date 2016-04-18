@@ -131,23 +131,30 @@ public class Resolver {
      * @return resolved target if jar file matches known one
      */
     private ResolvedTarget processSpecialJar(URI origin, Path jarFile) {
+        String jarName = jarFile.getFileName().toString();
         if (isJDK(jarFile)) {
             if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
-                return AndroidOriginResolver.resolve(origin);
+                return AndroidOriginResolver.resolve(origin, true);
             }
             ResolvedTarget target = ResolvedTarget.jdk();
             resolvedOrigins.put(origin, target);
             return target;
-        } else if (jarFile.getFileName().toString().equals("tools.jar")) {
+        } else if (jarName.equals("tools.jar")) {
             ResolvedTarget target = ResolvedTarget.langtools();
             resolvedOrigins.put(origin, target);
             return target;
-        } else if (jarFile.getFileName().toString().equals("nashorn.jar")) {
+        } else if (jarName.equals("nashorn.jar")) {
             ResolvedTarget target = ResolvedTarget.nashorn();
             resolvedOrigins.put(origin, target);
             return target;
-        } else if (jarFile.getFileName().toString().equals("android.jar")) {
-            return AndroidOriginResolver.resolve(origin);
+        } else if (jarName.equals("android.jar")) {
+            return AndroidOriginResolver.resolve(origin, true);
+        } else if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+            return AndroidOriginResolver.resolve(origin, false);
+        } else if (AndroidSDKProject.is(unit) ||
+                AndroidSupportProject.is(unit) ||
+                AndroidCoreProject.is(unit)) {
+            return AndroidOriginResolver.resolve(origin, true);
         }
         return null;
     }
