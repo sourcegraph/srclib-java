@@ -781,6 +781,122 @@
     {
       "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport",
+      "Name": "innerclassimport",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "mypkg.innerclassimport"
+      },
+      "TreePath": "mypkg/innerclassimport"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport/Foo/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/innerclassimport/Foo.java",
+      "DefStart": 48,
+      "DefEnd": 51,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg.innerclassimport",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/innerclassimport/Foo/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport/Foo:type",
+      "Name": "Foo",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/innerclassimport/Foo.java",
+      "DefStart": 35,
+      "DefEnd": 102,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.innerclassimport.Foo",
+        "Package": "mypkg.innerclassimport",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/innerclassimport/Foo:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport/Foo:type/Bar:type",
+      "Name": "Bar",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/innerclassimport/Foo.java",
+      "DefStart": 61,
+      "DefEnd": 99,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "INTERFACE",
+        "TypeExpression": "mypkg.innerclassimport.Foo.Bar",
+        "Package": "mypkg.innerclassimport",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "mypkg/innerclassimport/Foo:type/Bar:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport/Main/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/innerclassimport/Main.java",
+      "DefStart": 90,
+      "DefEnd": 94,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg.innerclassimport",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/innerclassimport/Main/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/innerclassimport/Main:type",
+      "Name": "Main",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/innerclassimport/Main.java",
+      "DefStart": 77,
+      "DefEnd": 114,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.innerclassimport.Main",
+        "Package": "mypkg.innerclassimport",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/innerclassimport/Main:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/subpkg",
       "Name": "subpkg",
       "Kind": "package",
@@ -2417,6 +2533,54 @@
       "File": "src/main/java/mypkg/ThisSuperClass.java",
       "Start": 969,
       "End": 973
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/innerclassimport/Foo:type/Bar:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/innerclassimport/Foo.java",
+      "Start": 85,
+      "End": 88
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/innerclassimport/Foo:type/Bar:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/innerclassimport/Main.java",
+      "Start": 106,
+      "End": 109
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/innerclassimport/Foo:type/Bar:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/innerclassimport/Main.java",
+      "Start": 69,
+      "End": 72
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/innerclassimport/Foo:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/innerclassimport/Foo.java",
+      "Start": 48,
+      "End": 51
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/innerclassimport/Main:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/innerclassimport/Main.java",
+      "Start": 90,
+      "End": 94
     },
     {
       "DefUnitType": "JavaArtifact",
