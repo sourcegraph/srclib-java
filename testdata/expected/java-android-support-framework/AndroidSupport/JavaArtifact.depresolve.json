@@ -12,12 +12,5 @@
       "ToUnit": "AndroidSDK",
       "ToUnitType": "JavaArtifact"
     }
-  },
-  {
-    "Target": {
-      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/support",
-      "ToUnit": "AndroidSupport",
-      "ToUnitType": "JavaArtifact"
-    }
   }
 ]

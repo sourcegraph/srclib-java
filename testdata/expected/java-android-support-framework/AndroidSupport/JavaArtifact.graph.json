@@ -1,0 +1,790 @@
+{
+  "Defs": [
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os",
+      "Name": "os",
+      "Kind": "package",
+      "File": "",
+      "DefStart": 0,
+      "DefEnd": 0,
+      "Data": {
+        "JavaKind": "PACKAGE",
+        "Package": "android.support.v4.os"
+      },
+      "TreePath": "android/support/v4/os"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 929,
+      "DefEnd": 946,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type",
+      "Name": "EnvironmentCompat",
+      "Kind": "type",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 916,
+      "DefEnd": 2543,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "android.support.v4.os.EnvironmentCompat",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/MEDIA_UNKNOWN",
+      "Name": "MEDIA_UNKNOWN",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 1165,
+      "DefEnd": 1218,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "public",
+          "static",
+          "final"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/MEDIA_UNKNOWN"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/TAG",
+      "Name": "TAG",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 953,
+      "DefEnd": 1007,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "private",
+          "static",
+          "final"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/TAG"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File",
+      "Name": "getStorageState",
+      "Kind": "func",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 1840,
+      "DefEnd": 2541,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.io.File)java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalExternal",
+      "Name": "canonicalExternal",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 2139,
+      "DefEnd": 2254,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "final"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalExternal"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalPath",
+      "Name": "canonicalPath",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 2073,
+      "DefEnd": 2126,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "final"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalPath"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/e",
+      "Name": "e",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 2412,
+      "DefEnd": 2425,
+      "Local": true,
+      "Data": {
+        "JavaKind": "EXCEPTION_PARAMETER",
+        "TypeExpression": "java.io.IOException",
+        "Package": "android.support.v4.os",
+        "Modifiers": []
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/e"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/path",
+      "Name": "path",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 1877,
+      "DefEnd": 1886,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.io.File",
+        "Package": "android.support.v4.os",
+        "Modifiers": []
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/path"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/version",
+      "Name": "version",
+      "Kind": "var",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "DefStart": 1898,
+      "DefEnd": 1940,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "int",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "final"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/version"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompatKitKat/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "DefStart": 713,
+      "DefEnd": 736,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "android.support.v4.os",
+        "Modifiers": []
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompatKitKat/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompatKitKat:type",
+      "Name": "EnvironmentCompatKitKat",
+      "Kind": "type",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "DefStart": 707,
+      "DefEnd": 850,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "android.support.v4.os.EnvironmentCompatKitKat",
+        "Package": "android.support.v4.os",
+        "Modifiers": []
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompatKitKat:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File",
+      "Name": "getStorageState",
+      "Kind": "func",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "DefStart": 743,
+      "DefEnd": 848,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.io.File)java.lang.String",
+        "Package": "android.support.v4.os",
+        "Modifiers": [
+          "public",
+          "static"
+        ]
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File/path",
+      "Name": "path",
+      "Kind": "var",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "DefStart": 780,
+      "DefEnd": 789,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.io.File",
+        "Package": "android.support.v4.os",
+        "Modifiers": []
+      },
+      "TreePath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File/path"
+    }
+  ],
+  "Refs": [
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Build:type/VERSION:type/SDK_INT",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1932,
+      "End": 1939
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Build:type/VERSION:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1924,
+      "End": 1931
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Build:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1918,
+      "End": 1923
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Build:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 671,
+      "End": 676
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type/getExternalStorageDirectory",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2184,
+      "End": 2211
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type/getExternalStorageState",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2354,
+      "End": 2377
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type/getStorageState:java.io.File",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 820,
+      "End": 835
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2172,
+      "End": 2183
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2342,
+      "End": 2353
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 696,
+      "End": 707
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 671,
+      "End": 682
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/os/Environment:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 808,
+      "End": 819
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/MEDIA_UNKNOWN",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1192,
+      "End": 1205
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/MEDIA_UNKNOWN",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2521,
+      "End": 2534
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/TAG",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2447,
+      "End": 2450
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/TAG",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 981,
+      "End": 984
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalExternal",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2152,
+      "End": 2169
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalExternal",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2297,
+      "End": 2314
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalPath",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2086,
+      "End": 2099
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/canonicalPath",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2272,
+      "End": 2285
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/e",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2424,
+      "End": 2425
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/e",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2491,
+      "End": 2492
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/path",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1882,
+      "End": 1886
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/path",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2029,
+      "End": 2033
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/path",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2102,
+      "End": 2106
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/version",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1908,
+      "End": 1915
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File/version",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1953,
+      "End": 1960
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1861,
+      "End": 1876
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompat:type",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 929,
+      "End": 946
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File/path",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 785,
+      "End": 789
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File/path",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 836,
+      "End": 840
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2013,
+      "End": 2028
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type/getStorageState:java.io.File",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 764,
+      "End": 779
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1989,
+      "End": 2012
+    },
+    {
+      "DefPath": "android/support/v4/os/EnvironmentCompatKitKat:type",
+      "Unit": "AndroidSupport",
+      "Def": true,
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 713,
+      "End": 736
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/util/Log:type/w:java.lang.String:java.lang.String",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2445,
+      "End": 2446
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/util/Log:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2441,
+      "End": 2444
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/frameworks/base",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidSDK",
+      "DefPath": "android/util/Log:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 729,
+      "End": 732
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type/getCanonicalPath",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2107,
+      "End": 2123
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type/getCanonicalPath",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2235,
+      "End": 2251
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1877,
+      "End": 1881
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 750,
+      "End": 754
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 700,
+      "End": 704
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/File:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 780,
+      "End": 784
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/IOException:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2412,
+      "End": 2423
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/io/IOException:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 771,
+      "End": 782
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type/startsWith:java.lang.String",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2286,
+      "End": 2296
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1185,
+      "End": 1191
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 1854,
+      "End": 1860
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2079,
+      "End": 2085
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 2145,
+      "End": 2151
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java",
+      "Start": 974,
+      "End": 980
+    },
+    {
+      "DefRepo": "android.googlesource.com/platform/libcore",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "AndroidCore",
+      "DefPath": "java/lang/String:type",
+      "Unit": "AndroidSupport",
+      "File": "v4/kitkat/android/support/v4/os/EnvironmentCompatKitKat.java",
+      "Start": 757,
+      "End": 763
+    }
+  ],
+  "Docs": [
+    {
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type",
+      "Format": "text/html",
+      "Data": " Helper for accessing features in {@link Environment} introduced after API\n level 4 in a backwards compatible fashion.\n",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java"
+    },
+    {
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/MEDIA_UNKNOWN",
+      "Format": "text/html",
+      "Data": " Unknown storage state, such as when a path isn't backed by known storage\n media.\n\n @see #getStorageState(File)\n",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java"
+    },
+    {
+      "Unit": "AndroidSupport",
+      "Path": "android/support/v4/os/EnvironmentCompat:type/getStorageState:java.io.File",
+      "Format": "text/html",
+      "Data": " Returns the current state of the storage device that provides the given\n path.\n\n @return one of {@link #MEDIA_UNKNOWN}, {@link Environment#MEDIA_REMOVED},\n         {@link Environment#MEDIA_UNMOUNTED},\n         {@link Environment#MEDIA_CHECKING},\n         {@link Environment#MEDIA_NOFS},\n         {@link Environment#MEDIA_MOUNTED},\n         {@link Environment#MEDIA_MOUNTED_READ_ONLY},\n         {@link Environment#MEDIA_SHARED},\n         {@link Environment#MEDIA_BAD_REMOVAL}, or\n         {@link Environment#MEDIA_UNMOUNTABLE}.\n",
+      "File": "v4/java/android/support/v4/os/EnvironmentCompat.java"
+    }
+  ]
+}

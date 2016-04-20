@@ -5,7 +5,7 @@
 - build Android from source code 
 - add libcore
 - add base framework
-- add support framework (some day, not supported yet)
+- add support framework
 
 ## Building Android from source code
 
@@ -107,4 +107,43 @@ srclib make
 cd $WORKING_DIRECTORY/frameworks/base
 src push --repo=android.googlesource.com/platform/frameworks/base
 ```
+
+## Configuring Android Support framework repository on your server
+
+### Prerequisites
+
+Please make sure you have `$SRC_URL` variable set, which points to `http[s]://YOUR-SOURCEGRAPH-SERVER[:PORT]`
+
+### Mirroring repository
+
+You need to create repository named `android.googlesource.com/platform/frameworks/support` on your Sourcegraph server and mirror `https://android.googlesource.com/platform/frameworks/support` there. You can use the following commands:
+
+```
+mkdir /tmp/mirror
+cd /tmp/mirror
+src repo create android.googlesource.com/platform/frameworks/support
+git clone --mirror https://android.googlesource.com/platform/frameworks/support
+cd support.git/
+git remote set-url --push origin $SRC_URL/android.googlesource.com/platform/frameworks/support
+git push --mirror
+```
+
+### Indexing Support framework repository
+
+I assume that you have `srclib-java` toolchain installed to default location.
+First we'll generate special `Srcfile` to instruct `srclib-java` how to deal with Support repository.
+
+```
+cd $WORKING_DIRECTORY/frameworks/support
+java -classpath ~/.srclib/sourcegraph.com/sourcegraph/srclib-java/.bin/srclib-java.jar com.sourcegraph.javagraph.AndroidSupportSrcFileGenerator > Srcfile
+srclib config
+srclib make
+```
+
+### Pushing indexes
+```
+cd $WORKING_DIRECTORY/frameworks/support
+src push --repo=android.googlesource.com/platform/frameworks/support
+```
+
 

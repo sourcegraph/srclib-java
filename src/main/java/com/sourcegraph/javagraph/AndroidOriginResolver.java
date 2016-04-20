@@ -7,44 +7,38 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Resolves Android libcore and frameworks/base origins to proper target.
  * libcore and frameworks/base combined produce android.jar thus for each class file we should check if it belongs to
  * libcore or frameworks/base
  */
-public class AndroidOriginResolver {
+class AndroidOriginResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidOriginResolver.class);
 
     private static List<String> libcoreClasses;
+    private static List<String> supportClasses;
+    private static List<String> sdkClasses;
 
     static {
-        InputStream is = AndroidOriginResolver.class.getResourceAsStream("/android-libcore.dat");
-        if (is != null) {
-            try {
-                libcoreClasses = IOUtils.readLines(is);
-            } catch (IOException e) {
-                LOGGER.warn("Failed to load Android libcore classes list", e);
-                libcoreClasses = new ArrayList<>();
-            }
-        } else {
-            libcoreClasses = new ArrayList<>();
-        }
+        libcoreClasses = loadDefinitions("/android-libcore.dat");
+        supportClasses = loadDefinitions("/android-support.dat");
+        sdkClasses = loadDefinitions("/android-sdk.dat");
     }
 
     private AndroidOriginResolver() {
     }
 
     /**
-     * Resolves jar URI either to libcore or to frameworks/base resolved target
+     * Resolves jar URI either to libcore or to frameworks/base (support) resolved target
      * @param origin URI to resolve
+     * @param force indicates if URI should be resolved to Android SDK if it can't be resolved neither to libcore nor to
+     *              Android Support framework. I.e. we are sure that origin belongs to Android
      * @return resolved target or null if resolution failed
      */
-    public static ResolvedTarget resolve(URI origin) {
+    public static ResolvedTarget resolve(URI origin, boolean force) {
         String topClassName = extractTopClassName(origin);
         if (topClassName == null) {
             return null;
@@ -53,7 +47,17 @@ public class AndroidOriginResolver {
         if (index >= 0) {
             return ResolvedTarget.androidCore();
         } else {
-            return ResolvedTarget.androidSDK();
+            index = Collections.binarySearch(supportClasses, topClassName);
+            if (index >= 0) {
+                return ResolvedTarget.androidSupport();
+            }
+            if (force) {
+                return ResolvedTarget.androidSDK();
+            }
+            if (Collections.binarySearch(sdkClasses, topClassName) >= 0) {
+                return ResolvedTarget.androidSDK();
+            }
+            return null;
         }
     }
 
@@ -82,5 +86,26 @@ public class AndroidOriginResolver {
             return path.substring(0, i);
         }
         return null;
+    }
+
+    /**
+     * Loads class definitions from specified resource
+     * @param id resource ID
+     * @return sorted class definitions
+     */
+    private static List<String> loadDefinitions(String id) {
+        InputStream is = AndroidOriginResolver.class.getResourceAsStream(id);
+        if (is != null) {
+            try {
+                List<String> ret = IOUtils.readLines(is);
+                Collections.sort(ret);
+                return ret;
+            } catch (IOException e) {
+                LOGGER.warn("Failed to load definitions", e);
+                return Collections.emptyList();
+            }
+        } else {
+            return Collections.emptyList();
+        }
     }
 }

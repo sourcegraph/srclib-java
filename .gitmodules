@@ -29,3 +29,6 @@
 [submodule "testdata/case/java-ant-sample"]
 	path = testdata/case/java-ant-sample
 	url = https://github.com/sgtest/java-ant-sample
+[submodule "testdata/case/java-android-support-framework"]
+	path = testdata/case/java-android-support-framework
+	url = https://github.com/sgtest/java-android-support-framework

@@ -29,7 +29,7 @@ class AndroidSDKProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndroidSDKProject.class);
 
-    private static final String MARKER = "AndroidSDK";
+    static final String MARKER = "AndroidSDK";
 
     AndroidSDKProject(SourceUnit unit) {
     }
