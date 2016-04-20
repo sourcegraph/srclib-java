@@ -9,6 +9,7 @@ import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -406,7 +407,33 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 if (f != null) {
                     defOrigin = f.toUri();
                 }
-                emitRef(spans.name(simpleName, node), new DefKey(defOrigin, qualName + ":type"), false);
+                emitRef(spans.name(simpleName, node), new DefKey(defOrigin, getPath(node)), false);
+            }
+
+            /**
+             * Constructs path to given MST. If MST component denotes class name, ":type" is added to path component
+             * to distinguish them from packages.
+             * @param node MST
+             * @return path to given MST in form foo.bar.baz:type
+             */
+            private String getPath(Tree node) {
+                if (node == null) {
+                    return StringUtils.EMPTY;
+                }
+                if (!(node instanceof JCTree.JCFieldAccess)) {
+                    return node.toString();
+                }
+                JCTree.JCFieldAccess jcFieldAccess = (JCTree.JCFieldAccess) node;
+                if (jcFieldAccess.type instanceof Type.ClassType) {
+                    StringBuilder path = new StringBuilder();
+                    path.append(getPath(jcFieldAccess.selected));
+                    if (path.length() > 0) {
+                        path.append('.');
+                    }
+                    path.append(jcFieldAccess.getIdentifier()).append(":type");
+                    return path.toString();
+                }
+                return node.toString();
             }
         }.scan(pkgName, null);
     }
