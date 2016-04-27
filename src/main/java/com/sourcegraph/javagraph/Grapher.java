@@ -270,28 +270,31 @@ public class Grapher {
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);
         s.kind = "PACKAGE";
         s.pkg = packageName;
-        if (packageTree instanceof JCTree.JCFieldAccess) {
-            JCTree.JCFieldAccess fieldAccessTree = (JCTree.JCFieldAccess) packageTree;
-            int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
-                    fieldAccessTree.selected);
-            int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
-                    fieldAccessTree.selected);
-            if (start != NOPOS && end != NOPOS) {
-                s.defStart = start;
-                s.defEnd = end;
+        //if (isPackageInfo(compilationUnit)) {
+        if (isPackageInfo(compilationUnit)) {
+            if (packageTree instanceof JCTree.JCFieldAccess) {
+                JCTree.JCFieldAccess fieldAccessTree = (JCTree.JCFieldAccess) packageTree;
+                int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
+                        fieldAccessTree.selected);
+                int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
+                        fieldAccessTree.selected);
+                if (start != NOPOS && end != NOPOS) {
+                    s.defStart = start;
+                    s.defEnd = end;
+                }
+            } else if (packageTree instanceof JCTree.JCIdent) {
+                int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
+                        packageTree);
+                int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
+                        packageTree);
+                if (start != NOPOS && end != NOPOS) {
+                    s.defStart = start;
+                    s.defEnd = end;
+                }
             }
-        } else if (packageTree instanceof JCTree.JCIdent) {
-            int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
-                    packageTree);
-            int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
-                    packageTree);
-            if (start != NOPOS && end != NOPOS) {
-                s.defStart = start;
-                s.defEnd = end;
-            }
+            s.file = compilationUnit.getSourceFile().getName();
+            s.doc = trees.getDocComment(getRootPath(trees.getPath(compilationUnit, packageTree)));
         }
-        s.file = compilationUnit.getSourceFile().getName();
-        s.doc = trees.getDocComment(getRootPath(trees.getPath(compilationUnit, packageTree)));
         emit.writeDef(s);
     }
 
