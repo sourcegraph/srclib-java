@@ -228,14 +228,14 @@ public class BuildAnalysis {
                 gradleArgs.add(getGradleUserHome());
                 gradleArgs.add("-I");
                 gradleArgs.add(modifiedGradleScriptFile.toString());
-                // TODO (alexsaveliev) restore special handling of Android Support framework
-                // if (!GradleProject.isAndroidSupport(unit)) {
-                // alexsaveliev: Android Support framework comes with gradle wrapper that defines own project-cache-dir
                 gradleArgs.add("--project-cache-dir");
                 gradleArgs.add(gradleCacheDir.toString());
-                //}
                 // disabling parallel builds
                 gradleArgs.add("-Dorg.gradle.parallel=false");
+                // turning off Gradle version check
+                // see https://discuss.gradle.org/t/gradle-thinks-2-10-is-less-than-2-2-when-resolving-plugins/13434/3
+                // it blocks indexing of github.com/facebook/react-native for example
+                gradleArgs.add("-Dcom.android.build.gradle.overrideVersionCheck=true");
                 gradleArgs.add("srclibCollectMetaInformation");
 
                 if (SystemUtils.IS_OS_WINDOWS) {
