@@ -4,8 +4,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
+import org.apache.maven.model.Parent;
 import org.apache.maven.model.Scm;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -240,25 +242,11 @@ public class Resolver {
             return resolution;
         }
 
-        // Get the url to the POM file for this artifact
-        String url = "http://central.maven.org/maven2/"
-                + groupId.replace('.', '/') + '/' + d.artifactID + '/'
-                + d.version + '/' + d.artifactID + '-' + d.version + ".pom";
-
         DepResolution res = new DepResolution(d, null);
 
         try {
 
-            InputStream input = new BOMInputStream(new URL(url).openStream());
-
-            MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
-            Model model = xpp3Reader.read(input);
-            input.close();
-
-            Scm scm = model.getScm();
-            if (scm != null) {
-                cloneURL = scm.getUrl();
-            }
+            cloneURL = getScmUrl(d);
 
             if (cloneURL != null) {
                 res.Raw = d;
@@ -351,5 +339,58 @@ public class Resolver {
         return PathUtil.normalize(jarFile.toString()).contains("jre/lib/");
     }
 
+    /**
+     * Tries to fetch POM model from maven central for a given dependency
+     * @param dependency dependency to fetch model to
+     * @return POM model if found and valid
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    private static Model fetchModel(RawDependency dependency)
+            throws IOException, XmlPullParserException {
+
+        // Get the url to the POM file for this artifact
+        String url = "http://central.maven.org/maven2/"
+                + dependency.groupID.replace('.', '/') + '/' + dependency.artifactID + '/'
+                + dependency.version + '/' + dependency.artifactID + '-' + dependency.version + ".pom";
+        InputStream input = new BOMInputStream(new URL(url).openStream());
+
+        MavenXpp3Reader xpp3Reader = new MavenXpp3Reader();
+        Model model = xpp3Reader.read(input);
+        input.close();
+        return model;
+    }
+
+    /**
+     * This method tries to retrieve SCM URL, if POM model for given dependency does not specify SCM URL and
+     * parent model belongs to the same group, we'll try to fecth URL from the parent model
+     * @param dependency dependency to retrieve SCM URL for
+     * @return SCM URL or null
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    private static String getScmUrl(RawDependency dependency) throws IOException, XmlPullParserException {
+        Model model = fetchModel(dependency);
+        while (model != null) {
+            Scm scm = model.getScm();
+            if (scm != null) {
+                return scm.getUrl();
+            }
+
+            Parent parent = model.getParent();
+            if (parent == null) {
+                return null;
+            }
+            if (!StringUtils.equals(parent.getGroupId(), dependency.groupID)) {
+                return null;
+            }
+            dependency = new RawDependency(parent.getGroupId(),
+                    parent.getArtifactId(),
+                    parent.getVersion(), null, null);
+            model = fetchModel(dependency);
+        }
+        return null;
+
+    }
 
 }
