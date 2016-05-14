@@ -113,8 +113,11 @@ public class Resolver {
             LOGGER.warn("Error resolving JAR file path {} to dependency", jarFile, e);
         }
         if (rawDep == null) {
-            resolvedOrigins.put(normalizedOrigin, null);
-            return null;
+            if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+                target = tryResolveExplodedAar(normalizedOrigin);
+            }
+            resolvedOrigins.put(normalizedOrigin, target);
+            return target;
         }
 
         DepResolution res = resolveRawDep(rawDep);
@@ -124,6 +127,36 @@ public class Resolver {
         }
         resolvedOrigins.put(normalizedOrigin, res.Target);
         return res.Target;
+    }
+
+    /**
+     * This method tries to resolve target for origins matching .../exploded-aar/group/artifact/version/...
+     * @param origin to resolve
+     * @return resolved target if origin matches exploded AAR pattern
+     */
+    private ResolvedTarget tryResolveExplodedAar(URI origin) {
+        String uri = origin.toString();
+        int pos = uri.indexOf("/exploded-aar/");
+        if (pos < 0) {
+            return null;
+        }
+        uri = uri.substring(pos + "/exploded-aar/".length());
+        String parts[] = uri.split("\\/", 4);
+        if (parts.length < 4) {
+            return null;
+        }
+        // looking for unit's dependency that matches group/artifact/version
+        for (RawDependency dependency : unit.Dependencies) {
+            if (StringUtils.equals(parts[0], dependency.groupID) &&
+                    StringUtils.equals(parts[1], dependency.artifactID) &&
+                    StringUtils.equals(parts[2], dependency.version)) {
+                DepResolution res = resolveRawDep(dependency);
+                if (res.Error == null) {
+                    return res.Target;
+                }
+            }
+        }
+        return null;
     }
 
     /**
