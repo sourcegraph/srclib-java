@@ -270,7 +270,6 @@ public class Grapher {
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);
         s.kind = "PACKAGE";
         s.pkg = packageName;
-        //if (isPackageInfo(compilationUnit)) {
         if (isPackageInfo(compilationUnit)) {
             if (packageTree instanceof JCTree.JCFieldAccess) {
                 JCTree.JCFieldAccess fieldAccessTree = (JCTree.JCFieldAccess) packageTree;
