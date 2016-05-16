@@ -5,6 +5,7 @@ import com.sun.source.tree.ExpressionTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
+import com.sun.tools.javac.tree.JCTree;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
@@ -13,12 +14,11 @@ import org.slf4j.LoggerFactory;
 import javax.tools.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+
+import static com.sun.tools.javac.util.Position.NOPOS;
 
 public class Grapher {
 
@@ -178,6 +178,7 @@ public class Grapher {
 
     /**
      * Builds a graph of given file objects
+     *
      * @param files list of file objects to build graphs for
      * @throws IOException
      */
@@ -201,9 +202,10 @@ public class Grapher {
 
                 try {
                     ExpressionTree pkgName = unit.getPackageName();
-                    if (pkgName != null && !seenPackages.contains(pkgName.toString())) {
+                    if (pkgName != null && !seenPackages.contains(pkgName.toString()) &&
+                            (isPackageInfo(unit) || !hasPackageInfo(pkgName.toString(), files))) {
                         seenPackages.add(pkgName.toString());
-                        writePackageSymbol(pkgName.toString());
+                        writePackageSymbol(pkgName, unit, trees);
                     }
 
                     TreePath root = new TreePath(unit);
@@ -226,17 +228,72 @@ public class Grapher {
     }
 
     /**
+     * @param packageName package name to check
+     * @param files list of source unit files
+     * @return true if there is explicit package info file (package-info.java) for the given package in the
+     * given files list
+     */
+    private boolean hasPackageInfo(String packageName,
+                                   Iterable<? extends JavaFileObject> files) {
+        Path p = Paths.get(packageName.replace('.', File.separatorChar)).resolve("package-info.java");
+        for (JavaFileObject file : files) {
+            Path candidate = Paths.get(file.getName());
+            if (candidate.endsWith(p)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param unit compilation unit
+     * @return true if given compilation unit matches .../package-info.java
+     */
+    private boolean isPackageInfo(CompilationUnitTree unit) {
+        return unit.getSourceFile().getName().endsWith("package-info.java");
+    }
+
+    /**
      * Emits package object definition to graph
-     * @param packageName package name to emit
+     * @param packageTree package AST node
+     * @param compilationUnit current compilation unit
+     * @param trees trees object
      * @throws IOException
      */
-    private void writePackageSymbol(String packageName) throws IOException {
+    private void writePackageSymbol(ExpressionTree packageTree,
+                                    CompilationUnitTree compilationUnit,
+                                    Trees trees) throws IOException {
         Def s = new Def(unit.Name, unit.Type);
+        String packageName = packageTree.toString();
         // TODO(sqs): set origin to the JAR this likely came from (it's hard because it could be from multiple JARs)
         s.defKey = new DefKey(null, packageName);
         s.name = packageName.substring(packageName.lastIndexOf('.') + 1);
         s.kind = "PACKAGE";
         s.pkg = packageName;
+        if (isPackageInfo(compilationUnit)) {
+            if (packageTree instanceof JCTree.JCFieldAccess) {
+                JCTree.JCFieldAccess fieldAccessTree = (JCTree.JCFieldAccess) packageTree;
+                int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
+                        fieldAccessTree.selected);
+                int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
+                        fieldAccessTree.selected);
+                if (start != NOPOS && end != NOPOS) {
+                    s.defStart = start;
+                    s.defEnd = end;
+                }
+            } else if (packageTree instanceof JCTree.JCIdent) {
+                int start = (int) trees.getSourcePositions().getStartPosition(compilationUnit,
+                        packageTree);
+                int end = (int) trees.getSourcePositions().getEndPosition(compilationUnit,
+                        packageTree);
+                if (start != NOPOS && end != NOPOS) {
+                    s.defStart = start;
+                    s.defEnd = end;
+                }
+            }
+            s.file = compilationUnit.getSourceFile().getName();
+            s.doc = trees.getDocComment(getRootPath(trees.getPath(compilationUnit, packageTree)));
+        }
         emit.writeDef(s);
     }
 
@@ -247,5 +304,18 @@ public class Grapher {
     public void close() throws IOException {
         emit.flush();
         fileManager.close();
+    }
+
+    /**
+     * @param path tree path, e.g. foo/bar/baz
+     * @return root path (foo) that has no parent tree path
+     */
+    private TreePath getRootPath(TreePath path) {
+        TreePath parent = path == null ? null : path.getParentPath();
+        while (parent != null) {
+            path = parent;
+            parent = path.getParentPath();
+        }
+        return path;
     }
 }

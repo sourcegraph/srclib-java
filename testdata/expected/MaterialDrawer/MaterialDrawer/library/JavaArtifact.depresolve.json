@@ -1,0 +1,173 @@
+[
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "animated-vector-drawable",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/animated-vector-drawable/23.4.0/animated-vector-drawable-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/animated-vector-drawable",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "appcompat-v7",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/appcompat-v7/23.4.0/appcompat-v7-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/appcompat-v7",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "design",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/design/23.4.0/design-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/design",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "fastadapter",
+      "version": "1.5.1",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/fastadapter/1.5.1/b4373a7461e72bd715919fdf521b929193315e0e/fastadapter-1.5.1.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/FastAdapter",
+      "ToUnit": "com.mikepenz/fastadapter",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.5.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "iconics-core",
+      "version": "2.5.11",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/iconics-core/2.5.11/1583f6a54ba9c1f5febfa196a6eb408fb338bf0/iconics-core-2.5.11.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Android-Iconics",
+      "ToUnit": "com.mikepenz/iconics-core",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "2.5.11"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "materialize",
+      "version": "0.8.8",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/materialize/0.8.8/df86b8d9eb8870d03d585fb408375d7a1affba77/materialize-0.8.8.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Materialize",
+      "ToUnit": "com.mikepenz/materialize",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "0.8.8"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "recyclerview-v7",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/recyclerview-v7/23.4.0/recyclerview-v7-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/recyclerview-v7",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-annotations",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-annotations",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-v4",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-v4",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-vector-drawable",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-vector-drawable/23.4.0/support-vector-drawable-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-vector-drawable",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/libcore",
+      "ToUnit": "AndroidCore",
+      "ToUnitType": "JavaArtifact"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/base",
+      "ToUnit": "AndroidSDK",
+      "ToUnitType": "JavaArtifact"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "AndroidSupport",
+      "ToUnitType": "JavaArtifact"
+    }
+  }
+]

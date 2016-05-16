@@ -1,0 +1,352 @@
+[
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "aboutlibraries",
+      "version": "5.6.6",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/aboutlibraries/5.6.6/49834edd9dae440f4b57f5a7be309397be25b014/aboutlibraries-5.6.6.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/AboutLibraries",
+      "ToUnit": "com.mikepenz/aboutlibraries",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "5.6.6"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "animated-vector-drawable",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/animated-vector-drawable/23.4.0/animated-vector-drawable-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/animated-vector-drawable",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "appcompat-v7",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/appcompat-v7/23.4.0/appcompat-v7-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/appcompat-v7",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "cardview-v7",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/cardview-v7/23.4.0/cardview-v7-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/cardview-v7",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "crossfadedrawerlayout",
+      "version": "0.3.4",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/crossfadedrawerlayout/0.3.4/7dbedbf564ea36d4b9422068c9fbdd2b39ce604b/crossfadedrawerlayout-0.3.4.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/CrossfadeDrawerLayout",
+      "ToUnit": "com.mikepenz/crossfadedrawerlayout",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "0.3.4"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "crossfader",
+      "version": "1.3.7",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/crossfader/1.3.7/d2340328f4faa1a454b63b83806e0427f50158eb/crossfader-1.3.7.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Crossfader",
+      "ToUnit": "com.mikepenz/crossfader",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.3.7"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "design",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/design/23.4.0/design-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/design",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "fastadapter",
+      "version": "1.5.1",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/fastadapter/1.5.1/b4373a7461e72bd715919fdf521b929193315e0e/fastadapter-1.5.1.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/FastAdapter",
+      "ToUnit": "com.mikepenz/fastadapter",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.5.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "fontawesome-typeface",
+      "version": "4.4.0.1",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/fontawesome-typeface/4.4.0.1/ff93552efbfd03f55f8db7dd53328e8bd8801dfc/fontawesome-typeface-4.4.0.1.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Android-Iconics",
+      "ToUnit": "com.mikepenz/fontawesome-typeface",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "4.4.0.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.github.bumptech.glide",
+      "artifactID": "glide",
+      "version": "3.7.0",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/bumptech/glide",
+      "ToUnit": "com.github.bumptech.glide/glide",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.7.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "google-material-typeface",
+      "version": "2.2.0.1",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/google-material-typeface/2.2.0.1/b66211a3ef7e6bbc150c3eb294f078f7e2e98ac2/google-material-typeface-2.2.0.1.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Android-Iconics",
+      "ToUnit": "com.mikepenz/google-material-typeface",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "2.2.0.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "iconics-core",
+      "version": "2.5.11",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/iconics-core/2.5.11/1583f6a54ba9c1f5febfa196a6eb408fb338bf0/iconics-core-2.5.11.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Android-Iconics",
+      "ToUnit": "com.mikepenz/iconics-core",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "2.5.11"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "itemanimators",
+      "version": "0.2.4",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/itemanimators/0.2.4/24deb0f84d5ad8d45901c2892a210f3f6fd4cb71/itemanimators-0.2.4.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/itemanimators",
+      "ToUnit": "com.mikepenz/itemanimators",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "0.2.4"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.squareup.leakcanary",
+      "artifactID": "leakcanary-android-no-op",
+      "version": "1.4-beta2",
+      "scope": "testCompile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.squareup.leakcanary/leakcanary-android-no-op/1.4-beta2/2c4d6f39d383357e3958e88c1db9908a5466c4f7/leakcanary-android-no-op-1.4-beta2.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "http://github.com/square/leakcanary/",
+      "ToUnit": "com.squareup.leakcanary/leakcanary-android-no-op",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.4-beta2"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "MaterialDrawer",
+      "artifactID": "library",
+      "version": "unspecified",
+      "scope": "compile",
+      "file": "library/build/outputs/aar/library-release.aar"
+    },
+    "Target": {
+      "ToUnit": "MaterialDrawer/library",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "unspecified"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "materialize",
+      "version": "0.8.8",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/materialize/0.8.8/df86b8d9eb8870d03d585fb408375d7a1affba77/materialize-0.8.8.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Materialize",
+      "ToUnit": "com.mikepenz/materialize",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "0.8.8"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.mikepenz",
+      "artifactID": "octicons-typeface",
+      "version": "3.0.0.1",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.mikepenz/octicons-typeface/3.0.0.1/bc01e0d2ae7a4a4124bb31ecff6d4ee623794f0a/octicons-typeface-3.0.0.1.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/mikepenz/Android-Iconics",
+      "ToUnit": "com.mikepenz/octicons-typeface",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "3.0.0.1"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.squareup.picasso",
+      "artifactID": "picasso",
+      "version": "2.5.2",
+      "scope": "compile",
+      "file": ".gradle-srclib/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "http://github.com/square/picasso/",
+      "ToUnit": "com.squareup.picasso/picasso",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "2.5.2"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "recyclerview-v7",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/recyclerview-v7/23.4.0/recyclerview-v7-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/recyclerview-v7",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-annotations",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-annotations",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-v4",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-v4",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Raw": {
+      "groupID": "com.android.support",
+      "artifactID": "support-vector-drawable",
+      "version": "23.4.0",
+      "scope": "compile",
+      "file": "/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-vector-drawable/23.4.0/support-vector-drawable-23.4.0.aar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "com.android.support/support-vector-drawable",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "23.4.0"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/libcore",
+      "ToUnit": "AndroidCore",
+      "ToUnitType": "JavaArtifact"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/base",
+      "ToUnit": "AndroidSDK",
+      "ToUnitType": "JavaArtifact"
+    }
+  },
+  {
+    "Target": {
+      "ToRepoCloneURL": "android.googlesource.com/platform/frameworks/support",
+      "ToUnit": "AndroidSupport",
+      "ToUnitType": "JavaArtifact"
+    }
+  }
+]
