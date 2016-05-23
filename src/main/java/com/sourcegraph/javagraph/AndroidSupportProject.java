@@ -92,12 +92,12 @@ class AndroidSupportProject implements Project {
         unit.Dir = ".";
         unit.Files = new ArrayList<>();
         Files.walkFileTree(PathUtil.CWD, new SourceFilesCollector(unit.Files));
-        unit.Data.put(SourceUnit.TYPE, MARKER);
+        unit.Data.Type = MARKER;
         return unit;
     }
 
     public static boolean is(SourceUnit unit) {
-        return MARKER.equals(unit.Data.get(SourceUnit.TYPE));
+        return MARKER.equals(unit.Data.Type);
     }
 
     /**

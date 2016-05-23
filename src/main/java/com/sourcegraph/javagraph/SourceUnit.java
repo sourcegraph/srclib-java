@@ -1,41 +1,20 @@
 package com.sourcegraph.javagraph;
 
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * SourceUnit represents a source unit expected by srclib. A source unit is a
  * build-system- and language-independent abstraction of a Maven repository or
  * Gradle project.
  */
-public class SourceUnit {
-
-    /**
-     * Source unit type (may be located in the Data, optional)
-     */
-    public static final String TYPE = "Type";
+public class SourceUnit extends Key {
 
     /**
      * Default source unit type
      */
     public static final String DEFAULT_TYPE = "JavaArtifact";
-
-    /**
-     * Android-based project indicator
-     */
-    public static final String ANDROID_MARKER = "Android";
-
-    /**
-     * Source unit name
-     */
-    String Name;
-
-    /**
-     * Source unit type
-     */
-    String Type;
 
     /**
      * List of files that produce source units
@@ -58,22 +37,12 @@ public class SourceUnit {
     /**
      * Source unit dependencies
      */
-    List<RawDependency> Dependencies = new LinkedList<>();
+    List<Key> Dependencies = new LinkedList<>();
 
     /**
-     * Source unit raw data
+     * Source unit data
      */
-    Map<String, Object> Data = new HashMap<>();
-
-    /**
-     * Source unit ops data
-     */
-    Map<String, String> Ops = new HashMap<>();
-
-    {
-        Ops.put("graphJavaFiles", null);
-        Ops.put("depresolve", null);
-    }
+    SourceUnitData Data = new SourceUnitData();
 
     public SourceUnit() {
 
@@ -106,18 +75,5 @@ public class SourceUnit {
             return new JDKProject(this);
         }
         return new GenericProject(this);
-    }
-
-    @Override
-    public int hashCode() {
-        return Name == null ? 0 : Name.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || !(o instanceof SourceUnit)) {
-            return false;
-        }
-        return StringUtils.equals(Name, ((SourceUnit) o).Name);
     }
 }

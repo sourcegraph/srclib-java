@@ -75,7 +75,7 @@ public class MavenProject implements Project {
 
     public MavenProject(SourceUnit unit) {
         this.unit = unit;
-        this.pomFile = FileSystems.getDefault().getPath((String) unit.Data.get("POMFile")).toAbsolutePath();
+        this.pomFile = FileSystems.getDefault().getPath(unit.Data.POMFile).toAbsolutePath();
     }
 
     public MavenProject(Path pomFile) {
@@ -186,41 +186,39 @@ public class MavenProject implements Project {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getClassPath() {
+    public Collection<String> getClassPath() {
         // simply looking in the unit's data, classpath was collected at the "scan" phase
-        return (List<String>) unit.Data.get("ClassPath");
+        return unit.Data.ClassPath;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getBootClassPath() {
+    public Collection<String> getBootClassPath() {
         // simply looking in the unit's data, bootstrap classpath was collected at the "scan" phase
-        return (List<String>) unit.Data.get("BootClassPath");
+        return unit.Data.BootClassPath;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getSourcePath() {
-        // simply looking in the unit's data, sourcepath was collected at the "scan" phase
-        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
-        return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());
+    public Collection<String> getSourcePath() {
+        return unit.Data.SourcePath.stream().map(element -> element.filePath).collect(Collectors.toList());
     }
 
     @Override
     public String getSourceCodeVersion() {
         // simply looking in the unit's data, source version was returieved at the "scan" phase
-        return (String) unit.Data.get("SourceVersion");
+        return unit.Data.SourceVersion;
     }
 
     @Override
     public String getSourceCodeEncoding() {
         // simply looking in the unit's data, source encoding was returieved at the "scan" phase
-        return (String) unit.Data.get("SourceEncoding");
+        return unit.Data.SourceEncoding;
     }
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
-        for (RawDependency dependency : unit.Dependencies) {
+        for (RawDependency dependency : unit.Data.Dependencies) {
             if (dependency.file != null &&
                     jarFile.equals(PathUtil.CWD.resolve(dependency.file).toAbsolutePath())) {
                 return dependency;
@@ -275,7 +273,7 @@ public class MavenProject implements Project {
 
         Collection<String> sourceRoots = collectSourceRoots(proj.pomFile, proj);
         info.sourceDirs = sourceRoots.stream().map(sourceRoot ->
-                new String[]{info.getName(), info.version, sourceRoot}).collect(Collectors.toList());
+                new SourcePathElement(info.getName(), info.version, sourceRoot)).collect(Collectors.toList());
         info.sources = collectSourceFiles(sourceRoots);
         info.sourceEncoding = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_ENCODING_PROPERTY);
         info.sourceVersion = proj.getMavenProject().getProperties().getProperty(SOURCE_CODE_VERSION_PROPERTY,
@@ -344,21 +342,20 @@ public class MavenProject implements Project {
             unit.Name = info.getName();
             unit.Dir = info.projectDir;
             unit.Files.addAll(info.sources);
-            unit.Dependencies = new ArrayList<>(info.dependencies);
+            unit.Data.Dependencies = info.dependencies;
             unit.Type = SourceUnit.DEFAULT_TYPE;
-            unit.Data.put("POMFile", info.buildFile);
-            unit.Data.put("Description", info.attrs.description);
-            unit.Data.put("SourceVersion", info.sourceVersion);
-            unit.Data.put("SourceEncoding", info.sourceEncoding);
+            unit.Data.POMFile = info.buildFile;
+            unit.Data.SourceVersion = info.sourceVersion;
+            unit.Data.SourceEncoding = info.sourceEncoding;
             try {
-                unit.Data.put("POM", org.json.XML.toJSONObject(IOUtils.toString(new FileInputStream(info.buildFile))));
+                unit.Data.POM = org.json.XML.toJSONObject(IOUtils.toString(new FileInputStream(info.buildFile)));
             } catch (Exception e) {
                 LOGGER.warn("Unable to embed POM object into the {} unit data", unit.Name, e);
             }
             Collection<BuildAnalysis.BuildInfo> dependencies = collectDependencies(info.getName() + '/' + info.version,
                     artifactsByUnitId,
                     unitsByPomFile);
-            Set<String[]> sourcePath = new HashSet<>();
+            Set<SourcePathElement> sourcePath = new HashSet<>();
             Collection<RawDependency> allDependencies = new ArrayList<>();
             for (BuildAnalysis.BuildInfo dependency : dependencies) {
                 allDependencies.addAll(dependency.dependencies);
@@ -382,7 +379,7 @@ public class MavenProject implements Project {
                 if (file != null) {
                     classPath.add(file.getAbsolutePath());
                     // updating unit dependencies with files after resolution
-                    for (RawDependency rawDependency : unit.Dependencies) {
+                    for (RawDependency rawDependency : unit.Data.Dependencies) {
                         if (rawDependency.artifactID.equals(artifact.getArtifactId()) &&
                                 rawDependency.groupID.equals(artifact.getGroupId()) &&
                                 rawDependency.version.equals(artifact.getVersion())) {
@@ -392,10 +389,10 @@ public class MavenProject implements Project {
                     }
                 }
             }
-            unit.Data.put("ClassPath", classPath);
-            unit.Data.put("SourcePath", sourcePath);
+            unit.Data.ClassPath = classPath;
+            unit.Data.SourcePath = sourcePath;
             if (info.androidSdk != null) {
-                unit.Data.put(SourceUnit.ANDROID_MARKER, true);
+                unit.Data.Android = true;
             }
             ret.add(unit);
         }
@@ -404,7 +401,7 @@ public class MavenProject implements Project {
     }
 
     public static boolean is(SourceUnit unit) {
-        return unit.Data.containsKey("POMFile");
+        return unit.Data.POMFile != null;
     }
 
     /**

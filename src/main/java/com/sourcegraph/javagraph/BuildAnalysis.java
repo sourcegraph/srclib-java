@@ -119,7 +119,7 @@ public class BuildAnalysis {
         /**
          * List of source directories
          */
-        public Collection<String[]> sourceDirs; // contains triplets: source unit name, source unit version, directory
+        public Collection<SourcePathElement> sourceDirs;
 
         /**
          * Classpath used to compile module
@@ -359,7 +359,7 @@ public class BuildAnalysis {
                                 }
                                 String tokens[] = payload.split(":", 4);
                                 String unitName = POMAttrs.groupId(tokens[0]) + '/' + tokens[1];
-                                info.sourceDirs.add(new String[]{unitName, tokens[2], tokens[3]});
+                                info.sourceDirs.add(new SourcePathElement(unitName, tokens[2], tokens[3]));
                                 break;
                             case "SRCLIB-SOURCEVERSION":
                                 if (info == null) {

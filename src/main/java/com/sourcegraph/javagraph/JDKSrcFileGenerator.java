@@ -50,8 +50,8 @@ public class JDKSrcFileGenerator {
         SourceUnit unit = new SourceUnit();
         unit.Type = "Java";
         unit.Name = project;
-        unit.Data.put(SourceUnit.TYPE, getMarker(project));
-        unit.Data.put(JDKProject.JDK_PROJECT_NAME, project);
+        unit.Data.Type = getMarker(project);
+        unit.Data.JDKProjectName = project;
 
         List<String> sourcePaths = JDKProject.getJDKSourcePaths();
         unit.Files = ScanUtil.scanFiles(sourcePaths).

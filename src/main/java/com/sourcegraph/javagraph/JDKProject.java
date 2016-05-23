@@ -22,8 +22,6 @@ public class JDKProject implements Project {
     static final String MARKER_JDK = "JDK";
     static final String MARKER_JDK_BASED = "JDKBased";
 
-    static final String JDK_PROJECT_NAME = "JDKProjectName";
-
     public static final String OPENJDK_REPO_ROOT = "hg.openjdk.java.net/jdk8/jdk8/";
 
     public static final String JDK_REPO = OPENJDK_REPO_ROOT + "jdk";
@@ -93,7 +91,7 @@ public class JDKProject implements Project {
         }
 
         // adding project's generated sources dir, if any
-        String project = (String) unit.Data.get(JDK_PROJECT_NAME);
+        String project = unit.Data.JDKProjectName;
         if (project != null) {
             // TODO (alexsaveliev) support other build configurations?
             sourcePaths.add("../build/linux-x86_64-normal-server-release/" + project + "/gensrc");
@@ -133,7 +131,7 @@ public class JDKProject implements Project {
      * @return true if given unit contains OpenJDK source code
      */
     protected static boolean isJDK(SourceUnit unit) {
-        return MARKER_JDK.equals(unit.Data.get(SourceUnit.TYPE));
+        return MARKER_JDK.equals(unit.Data.Type);
     }
 
     /**
@@ -141,7 +139,7 @@ public class JDKProject implements Project {
      * @return true if given unit contains related OpenJDK project (such as nashorn) code
      */
     protected static boolean isJDKBased(SourceUnit unit) {
-        return MARKER_JDK_BASED.equals(unit.Data.get(SourceUnit.TYPE));
+        return MARKER_JDK_BASED.equals(unit.Data.Type);
     }
 
     /**

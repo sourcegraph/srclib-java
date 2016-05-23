@@ -19,10 +19,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -113,7 +110,7 @@ public class Resolver {
             LOGGER.warn("Error resolving JAR file path {} to dependency", jarFile, e);
         }
         if (rawDep == null) {
-            if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+            if (unit.Data.isAndroid()) {
                 target = tryResolveExplodedAar(normalizedOrigin);
             }
             resolvedOrigins.put(normalizedOrigin, target);
@@ -146,7 +143,7 @@ public class Resolver {
             return null;
         }
         // looking for unit's dependency that matches group/artifact/version
-        for (RawDependency dependency : unit.Dependencies) {
+        for (RawDependency dependency : unit.Data.Dependencies) {
             if (StringUtils.equals(parts[0], dependency.groupID) &&
                     StringUtils.equals(parts[1], dependency.artifactID) &&
                     StringUtils.equals(parts[2], dependency.version)) {
@@ -168,7 +165,7 @@ public class Resolver {
     private ResolvedTarget processSpecialJar(URI origin, Path jarFile) {
         String jarName = jarFile.getFileName().toString();
         if (isJDK(jarFile)) {
-            if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+            if (unit.Data.isAndroid()) {
                 return AndroidOriginResolver.resolve(origin, true);
             }
             ResolvedTarget target = ResolvedTarget.jdk();
@@ -184,7 +181,7 @@ public class Resolver {
             return target;
         } else if (jarName.equals("android.jar")) {
             return AndroidOriginResolver.resolve(origin, true);
-        } else if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+        } else if (unit.Data.isAndroid()) {
             return AndroidOriginResolver.resolve(origin, false);
         } else if (AndroidSDKProject.is(unit) ||
                 AndroidSupportProject.is(unit) ||
@@ -317,20 +314,20 @@ public class Resolver {
         if (!origin.getScheme().equals("file")) {
             return null;
         }
-        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
+        Collection<SourcePathElement> sourceDirs = unit.Data.SourcePath;
         if (sourceDirs == null) {
             return null;
         }
         File file = new File(origin);
         File cwd = PathUtil.CWD.toFile();
-        for (List<String> dir : sourceDirs) {
-            File root = PathUtil.concat(cwd, dir.get(2));
+        for (SourcePathElement element : sourceDirs) {
+            File root = PathUtil.concat(cwd, element.filePath);
             try {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
-                    target.ToUnit = dir.get(0);
+                    target.ToUnit = element.name;
                     target.ToUnitType = SourceUnit.DEFAULT_TYPE;
-                    target.ToVersionString = dir.get(1);
+                    target.ToVersionString = element.version;
                     return target;
                 }
             } catch (IOException e) {

@@ -1,6 +1,7 @@
 package com.sourcegraph.javagraph;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface Project {
      * Null or empty list indicate absence of classpath to use
      * @throws Exception
      */
-    public List<String> getClassPath() throws Exception;
+    public Collection<String> getClassPath() throws Exception;
 
     /**
      * @return list of bootstrap classpath elements to be passed to javac -Xbootclasspath command line argument.
@@ -29,14 +30,14 @@ public interface Project {
      * (for example, when you are compiling JDK source code)
      * @throws Exception
      */
-    public List<String> getBootClassPath() throws Exception;
+    public Collection<String> getBootClassPath() throws Exception;
 
     /**
      * @return list of directories where javac should look for java files (matches javac's -sourcepath). Each element
      * should denote existing directory, either absolute or relative to source unit directory.
      * @throws Exception
      */
-    public List<String> getSourcePath() throws Exception;
+    public Collection<String> getSourcePath() throws Exception;
 
     /**
      * Translates path to JAR file to raw dependency if possible
