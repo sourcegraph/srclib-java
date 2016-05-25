@@ -1,12 +1,9 @@
 package com.sourcegraph.javagraph;
 
-import com.beust.jcommander.Parameter;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -62,14 +59,22 @@ public class ScanCommand {
                     return o1.file.compareTo(o2.file);
                 });
 
-        Comparator<String[]> sourcePathComparator = Comparator.comparing(sourcePathElement -> sourcePathElement[0]);
+        Comparator<SourcePathElement> sourcePathComparator = Comparator.comparing(
+                sourcePathElement -> sourcePathElement.name);
         sourcePathComparator = sourcePathComparator.
-                thenComparing(sourcePathElement -> sourcePathElement[1]).
-                thenComparing(sourcePathElement -> sourcePathElement[2]);
+                thenComparing(sourcePathElement -> sourcePathElement.version).
+                thenComparing(sourcePathElement -> sourcePathElement.filePath);
+
+        Comparator<Key> keyComparator = Comparator.comparing(key -> key.Name, Comparator.nullsFirst(String::compareTo));
+        keyComparator = keyComparator.
+                thenComparing(key -> key.Version, Comparator.nullsFirst(String::compareTo)).
+                thenComparing(key -> key.Type, Comparator.nullsFirst(String::compareTo)).
+                thenComparing(key -> key.CommitID, Comparator.nullsFirst(String::compareTo)).
+                thenComparing(key -> key.Repo, Comparator.nullsFirst(String::compareTo));
 
         for (SourceUnit unit : units) {
             unit.Dir = PathUtil.relativizeCwd(unit.Dir);
-            unit.Dependencies = unit.Dependencies.stream()
+            unit.Data.Dependencies = unit.Data.Dependencies.stream()
                     .map(dependency -> {
                         if (dependency.file != null) {
                             dependency.file = PathUtil.relativizeCwd(dependency.file);
@@ -78,47 +83,52 @@ public class ScanCommand {
                     })
                     .sorted(dependencyComparator)
                     .collect(Collectors.toList());
+
+            unit.Dependencies = unit.Data.Dependencies.stream()
+                    .map(dependency -> {
+                        Key key = new Key();
+                        key.Name = dependency.groupID + '/' + dependency.artifactID;
+                        key.Version = dependency.version;
+                        key.Type = SourceUnit.DEFAULT_TYPE;
+                        return key;
+                    })
+                    .sorted(keyComparator)
+                    .collect(Collectors.toList());
+
             List<String> internalFiles = new ArrayList<>();
             List<String> externalFiles = new ArrayList<>();
             splitInternalAndExternalFiles(unit.Files, internalFiles, externalFiles);
             unit.Files = internalFiles;
             if (!externalFiles.isEmpty()) {
-                unit.Data.put("ExtraSourceFiles", externalFiles);
+                unit.Data.ExtraSourceFiles = externalFiles;
             }
-            if (unit.Data.containsKey("POMFile")) {
-                unit.Data.put("POMFile", PathUtil.relativizeCwd((String) unit.Data.get("POMFile")));
-            }
-
-            if (unit.Data.containsKey(AntProject.BUILD_XML_PROPERTY)) {
-                unit.Data.put(AntProject.BUILD_XML_PROPERTY,
-                        PathUtil.relativizeCwd((String) unit.Data.get(AntProject.BUILD_XML_PROPERTY)));
+            if (unit.Data.POMFile != null) {
+                unit.Data.POMFile = PathUtil.relativizeCwd(unit.Data.POMFile);
             }
 
-            if (unit.Data.containsKey("ClassPath")) {
-                Collection<String> classPath = (Collection<String>) unit.Data.get("ClassPath");
-                classPath = classPath.stream().
+            if (unit.Data.BuildXML != null) {
+                unit.Data.BuildXML = PathUtil.relativizeCwd(unit.Data.BuildXML);
+            }
+
+            if (unit.Data.ClassPath != null) {
+                unit.Data.ClassPath = unit.Data.ClassPath.stream().
                         map(PathUtil::relativizeCwd).
                         collect(Collectors.toList());
-                unit.Data.put("ClassPath", classPath);
             }
-            if (unit.Data.containsKey("BootClassPath")) {
-                Collection<String> classPath = (Collection<String>) unit.Data.get("BootClassPath");
-                classPath = classPath.stream().
+            if (unit.Data.BootClassPath != null) {
+                unit.Data.BootClassPath = unit.Data.BootClassPath.stream().
                         map(PathUtil::relativizeCwd).
                         sorted().
                         collect(Collectors.toList());
-                unit.Data.put("BootClassPath", classPath);
             }
-            if (unit.Data.containsKey("SourcePath")) {
-                Collection<String[]> sourcePath = (Collection<String[]>) unit.Data.get("SourcePath");
-                sourcePath = sourcePath.stream().
+            if (unit.Data.SourcePath != null) {
+                unit.Data.SourcePath = unit.Data.SourcePath.stream().
                         map(sourcePathElement -> {
-                            sourcePathElement[2] = PathUtil.relativizeCwd(sourcePathElement[2]);
+                            sourcePathElement.filePath = PathUtil.relativizeCwd(sourcePathElement.filePath);
                             return sourcePathElement;
                         }).
                         sorted(sourcePathComparator).
                         collect(Collectors.toList());
-                unit.Data.put("SourcePath", sourcePath);
             }
         }
     }

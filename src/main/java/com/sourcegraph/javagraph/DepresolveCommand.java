@@ -50,7 +50,7 @@ public class DepresolveCommand {
         LOGGER.debug("Resolving deps");
         // Resolve all raw dependencies.
         final ArrayList<DepResolution> resolutions = new ArrayList<>();
-        for (RawDependency rawDep : unit.Dependencies) {
+        for (RawDependency rawDep : unit.Data.Dependencies) {
             DepResolution res = rs.resolveRawDep(rawDep);
             resolutions.add(res);
         }
@@ -68,7 +68,7 @@ public class DepresolveCommand {
                 // Android Core + Android SDK
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
-            } else if (unit.Data.containsKey(SourceUnit.ANDROID_MARKER)) {
+            } else if (unit.Data.isAndroid()) {
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidCore()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSDK()));
                 resolutions.add(new DepResolution(null, ResolvedTarget.androidSupport()));

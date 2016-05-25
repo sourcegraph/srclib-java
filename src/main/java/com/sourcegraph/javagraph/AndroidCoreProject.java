@@ -91,12 +91,12 @@ class AndroidCoreProject implements Project {
         getSourceFilesAndDirectories(PathUtil.CWD.resolve(unit.Dir), files);
         unit.Files = files;
 
-        unit.Data.put(SourceUnit.TYPE, MARKER);
+        unit.Data.Type = MARKER;
         return unit;
     }
 
     public static boolean is(SourceUnit unit) {
-        return MARKER.equals(unit.Data.get(SourceUnit.TYPE));
+        return MARKER.equals(unit.Data.Type);
     }
 
     /**

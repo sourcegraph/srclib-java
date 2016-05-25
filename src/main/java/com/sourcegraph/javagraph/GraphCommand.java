@@ -65,7 +65,7 @@ public class GraphCommand {
                 files.addAll(unit.Files);
             }
             files.addAll(collectFilesUsingGlobs(unit.Globs));
-            Collection<String> extraFiles = (Collection<String>) unit.Data.get("ExtraSourceFiles");
+            Collection<String> extraFiles = unit.Data.ExtraSourceFiles;
             if (extraFiles != null) {
                 files.addAll(extraFiles);
             }

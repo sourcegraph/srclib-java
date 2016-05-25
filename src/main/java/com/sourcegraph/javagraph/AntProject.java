@@ -2,7 +2,10 @@ package com.sourcegraph.javagraph;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.*;
-import org.apache.tools.ant.taskdefs.*;
+import org.apache.tools.ant.taskdefs.AntlibDefinition;
+import org.apache.tools.ant.taskdefs.Javac;
+import org.apache.tools.ant.taskdefs.MacroInstance;
+import org.apache.tools.ant.taskdefs.UpToDate;
 import org.apache.tools.ant.taskdefs.optional.javacc.JavaCC;
 import org.apache.tools.ant.types.FileSet;
 import org.slf4j.Logger;
@@ -17,8 +20,6 @@ import java.util.stream.Collectors;
 public class AntProject implements Project {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AntProject.class);
-
-    static final String BUILD_XML_PROPERTY = "BuildXML";
 
     private SourceUnit unit;
 
@@ -83,41 +84,40 @@ public class AntProject implements Project {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getClassPath() {
+    public Collection<String> getClassPath() {
         // simply looking in the unit's data, classpath was collected at the "scan" phase
-        return (List<String>) unit.Data.get("ClassPath");
+        return unit.Data.ClassPath;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getBootClassPath() {
+    public Collection<String> getBootClassPath() {
         // simply looking in the unit's data, bootstrap classpath was collected at the "scan" phase
-        return (List<String>) unit.Data.get("BootClassPath");
+        return unit.Data.BootClassPath;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getSourcePath() {
+    public Collection<String> getSourcePath() {
         // simply looking in the unit's data, sourcepath was collected at the "scan" phase
-        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
-        return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());
+        return unit.Data.SourcePath.stream().map(element -> element.filePath).collect(Collectors.toList());
     }
 
     @Override
     public String getSourceCodeVersion() {
         // simply looking in the unit's data, source version was returieved at the "scan" phase
-        return (String) unit.Data.get("SourceVersion");
+        return unit.Data.SourceVersion;
     }
 
     @Override
     public String getSourceCodeEncoding() {
         // simply looking in the unit's data, source encoding was returieved at the "scan" phase
-        return (String) unit.Data.get("SourceEncoding");
+        return unit.Data.SourceEncoding;
     }
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) {
-        for (RawDependency dependency : unit.Dependencies) {
+        for (RawDependency dependency : unit.Data.Dependencies) {
             if (dependency.file != null &&
                     jarFile.equals(PathUtil.CWD.resolve(dependency.file).toAbsolutePath())) {
                 return dependency;
@@ -159,7 +159,7 @@ public class AntProject implements Project {
     }
 
     public static boolean is(SourceUnit unit) {
-        return unit.Data.containsKey(BUILD_XML_PROPERTY);
+        return unit.Data.BuildXML != null;
     }
 
     /**
@@ -205,7 +205,7 @@ public class AntProject implements Project {
 
         ProjectHelper.configureProject(project, buildXml.toFile());
         Collection<String> files = new HashSet<>();
-        Collection<String[]> sourcePath = new LinkedList<>();
+        Collection<SourcePathElement> sourcePath = new LinkedList<>();
         Collection<String> classPath = new LinkedList<>();
         Collection<String> bootClassPath = new LinkedList<>();
 
@@ -217,7 +217,7 @@ public class AntProject implements Project {
         unit.Name = getProjectName(project, buildXml);
         unit.Dir = buildXml.getParent().toString();
         unit.Type = SourceUnit.DEFAULT_TYPE;
-        unit.Data.put(BUILD_XML_PROPERTY, buildXml.toString());
+        unit.Data.BuildXML = buildXml.toString();
 
         for (Target target : project.getTargets().values()) {
             LOGGER.debug("Processing target {}", target.getName());
@@ -278,7 +278,7 @@ public class AntProject implements Project {
                     files.add(file.getPath());
                 }
                 for (String item : getPathItems(javac.getSourcepath())) {
-                    sourcePath.add(new String[]{StringUtils.EMPTY, StringUtils.EMPTY, item});
+                    sourcePath.add(new SourcePathElement(item));
                 }
                 classPath.addAll(getPathItems(javac.getClasspath()));
                 bootClassPath.addAll(getPathItems(javac.getBootclasspath()));
@@ -304,7 +304,7 @@ public class AntProject implements Project {
                     dependencyCache.put(jarPath, dependency);
                 }
                 if (dependency != null) {
-                    unit.Dependencies.add(dependency);
+                    unit.Data.Dependencies.add(dependency);
                 }
             }
         }
@@ -312,15 +312,15 @@ public class AntProject implements Project {
         sourceVersion = nonVariable(sourceVersion);
 
         if (sourceVersion != null) {
-            unit.Data.put("SourceVersion", sourceVersion);
+            unit.Data.SourceVersion = sourceVersion;
         }
         if (sourceEncoding != null) {
-            unit.Data.put("SourceEncoding", sourceEncoding);
+            unit.Data.SourceEncoding = sourceEncoding;
         }
-        unit.Data.put("SourcePath", sourcePath);
-        unit.Data.put("ClassPath", classPath);
+        unit.Data.SourcePath = sourcePath;
+        unit.Data.ClassPath = classPath;
         if (!bootClassPath.isEmpty()) {
-            unit.Data.put("BootClassPath", bootClassPath);
+            unit.Data.BootClassPath = bootClassPath;
         }
         return unit;
     }

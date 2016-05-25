@@ -55,8 +55,8 @@ public class JDKSrcFileGeneratorTest {
         SourceUnit unit = srcfile.SourceUnits.iterator().next();
         assertEquals("Unexpected source unit name", "jdk", unit.Name);
         assertEquals("Unexpected source unit type", "Java", unit.Type);
-        assertEquals("Unexpected source unit marker", "JDK", unit.Data.get(SourceUnit.TYPE));
-        assertEquals("Unexpected source unit project name", "jdk", unit.Data.get(JDKProject.JDK_PROJECT_NAME));
+        assertEquals("Unexpected source unit marker", "JDK", unit.Data.Type);
+        assertEquals("Unexpected source unit project name", "jdk", unit.Data.JDKProjectName);
         assertEquals("Unexpected number of source files", 2, unit.Files.size());
     }
 }

@@ -17,9 +17,6 @@
 	path = testdata/case/java-android-gradle-sample
 	url = https://github.com/sgtest/java-android-gradle-sample
 	branch = master
-[submodule "testdata/case/java-with-srcfile"]
-	path = testdata/case/java-with-srcfile
-	url = https://github.com/sgtest/java-with-srcfile
 [submodule "testdata/case/java-ident-issue-23"]
 	path = testdata/case/java-ident-issue-23
 	url = https://github.com/sgtest/java-ident-issue-23

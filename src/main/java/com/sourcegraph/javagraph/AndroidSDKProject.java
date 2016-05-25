@@ -110,12 +110,12 @@ class AndroidSDKProject implements Project {
         unit.Name = MARKER;
         unit.Dir = ".";
         unit.Files = getSourceFiles(PathUtil.CWD.resolve("."));
-        unit.Data.put(SourceUnit.TYPE, MARKER);
+        unit.Data.Type = MARKER;
         return unit;
     }
 
     public static boolean is(SourceUnit unit) {
-        return MARKER.equals(unit.Data.get(SourceUnit.TYPE));
+        return MARKER.equals(unit.Data.Type);
     }
 
     /**

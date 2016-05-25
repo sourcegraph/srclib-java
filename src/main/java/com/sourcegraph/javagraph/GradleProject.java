@@ -84,8 +84,8 @@ public class GradleProject implements Project {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getBootClassPath() {
-        return (List<String>) unit.Data.get("BootClassPath");
+    public Collection<String> getBootClassPath() {
+        return unit.Data.BootClassPath;
     }
 
     /**
@@ -93,8 +93,8 @@ public class GradleProject implements Project {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getClassPath() {
-        return (List<String>) unit.Data.get("ClassPath");
+    public Collection<String> getClassPath() {
+        return unit.Data.ClassPath;
     }
 
     /**
@@ -102,9 +102,8 @@ public class GradleProject implements Project {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<String> getSourcePath() {
-        List<List<String>> sourceDirs = (List<List<String>>) unit.Data.get("SourcePath");
-        return sourceDirs.stream().map(sourceDir -> sourceDir.get(2)).collect(Collectors.toList());
+    public Collection<String> getSourcePath() {
+        return unit.Data.SourcePath.stream().map(element -> element.filePath).collect(Collectors.toList());
     }
 
     /**
@@ -112,7 +111,7 @@ public class GradleProject implements Project {
      */
     @Override
     public String getSourceCodeVersion() {
-        return (String) unit.Data.get("SourceVersion");
+        return unit.Data.SourceVersion;
     }
 
     /**
@@ -120,12 +119,12 @@ public class GradleProject implements Project {
      */
     @Override
     public String getSourceCodeEncoding() {
-        return (String) unit.Data.get("SourceEncoding");
+        return unit.Data.SourceEncoding;
     }
 
     @Override
     public RawDependency getDepForJAR(Path jarFile) throws Exception {
-        for (RawDependency dependency : unit.Dependencies) {
+        for (RawDependency dependency : unit.Data.Dependencies) {
             if (dependency.file != null && jarFile.equals(PathUtil.CWD.resolve(dependency.file))) {
                 return dependency;
             }
@@ -134,7 +133,7 @@ public class GradleProject implements Project {
     }
 
     public static boolean is(SourceUnit unit) {
-        return unit.Data.containsKey("GradleFile");
+        return unit.Data.GradleFile != null;
     }
 
     /**
@@ -172,21 +171,20 @@ public class GradleProject implements Project {
             Path projectRoot = PathUtil.CWD.resolve(info.projectDir);
             unit.Dir = info.projectDir;
             if (info.buildFile != null) {
-                unit.Data.put("GradleFile", PathUtil.normalize(
-                        projectRoot.relativize(PathUtil.CWD.resolve(info.buildFile)).normalize().toString()));
+                unit.Data.GradleFile = PathUtil.normalize(
+                        projectRoot.relativize(PathUtil.CWD.resolve(info.buildFile)).normalize().toString());
             } else {
-                unit.Data.put("GradleFile", StringUtils.EMPTY);
+                unit.Data.GradleFile = StringUtils.EMPTY;
             }
-            unit.Data.put("Description", info.attrs.description);
             if (!StringUtils.isEmpty(info.sourceVersion)) {
-                unit.Data.put("SourceVersion", info.sourceVersion);
+                unit.Data.SourceVersion = info.sourceVersion;;
             }
             if (!StringUtils.isEmpty(info.sourceEncoding)) {
-                unit.Data.put("SourceEncoding", info.sourceEncoding);
+                unit.Data.SourceEncoding = info.sourceEncoding;
             }
 
             if (info.androidSdk != null) {
-                unit.Data.put(SourceUnit.ANDROID_MARKER, info.androidSdk);
+                unit.Data.Android = true;
             }
 
             // leave only existing files
@@ -198,9 +196,9 @@ public class GradleProject implements Project {
                     unit.Files.add(f.getAbsolutePath());
                 }
             }
-            unit.Dependencies = new ArrayList<>(info.dependencies);
+            unit.Data.Dependencies = info.dependencies;
             if (!info.bootClassPath.isEmpty()) {
-                unit.Data.put("BootClassPath", new ArrayList<>(info.bootClassPath));
+                unit.Data.BootClassPath = info.bootClassPath;
             }
             ret.add(unit);
         }
@@ -364,31 +362,26 @@ public class GradleProject implements Project {
             Collection<BuildAnalysis.BuildInfo> infos = collectBuildInfo(unit.Name);
             Collection<String> classpathSet = new HashSet<>();
 
-            List<String[]> sourcepath = new ArrayList<>();
+            List<SourcePathElement> sourcepath = new LinkedList<>();
             for (BuildAnalysis.BuildInfo info : infos) {
                 classpathSet.addAll(info.classPath);
                 classpathSet.addAll(info.dependencies.stream().filter(dependency ->
                         !StringUtils.isEmpty(dependency.file)).map(dependency ->
                         dependency.file).
                         collect(Collectors.toList()));
-                for (String sourceDir[] : info.sourceDirs) {
-                    sourcepath.add(new String[]{sourceDir[0],
-                            sourceDir[1],
-                            sourceDir[2]});
-                }
+                sourcepath.addAll(info.sourceDirs);
                 for (String path : info.classPath) {
                     File file = PathUtil.CWD.resolve(path).toFile();
                     if (file.isDirectory()) {
-                        sourcepath.add(new String[]{unit.Name,
+                        sourcepath.add(new SourcePathElement(unit.Name,
                                 info.version,
-                                path});
+                                path));
                     }
                 }
             }
-            List<String> classpath = new ArrayList<>(classpathSet);
 
-            unit.Data.put("ClassPath", classpath);
-            unit.Data.put("SourcePath", sourcepath);
+            unit.Data.ClassPath = classpathSet;
+            unit.Data.SourcePath = sourcepath;
         }
     }
 
