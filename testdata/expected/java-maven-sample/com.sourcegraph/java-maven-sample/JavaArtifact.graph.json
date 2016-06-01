@@ -612,6 +612,80 @@
     {
       "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 29,
+      "DefEnd": 37,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/NameSpan/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type",
+      "Name": "NameSpan",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 16,
+      "DefEnd": 72,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.NameSpan",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/NameSpan:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type/d",
+      "Name": "d",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 54,
+      "DefEnd": 70,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/NameSpan:type/d"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type/i",
+      "Name": "i",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 42,
+      "DefEnd": 48,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/NameSpan:type/i"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/StaticInit/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -2485,6 +2559,36 @@
       "File": "src/main/java/mypkg/MST.java",
       "Start": 50,
       "End": 53
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type/d",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 59,
+      "End": 60
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type/i",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 46,
+      "End": 47
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 29,
+      "End": 37
     },
     {
       "DefUnitType": "JavaArtifact",

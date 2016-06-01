@@ -321,7 +321,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 }
 
                 nameSpan = spans.name(current.getEnclosingElement()
-                        .getSimpleName().toString(), node);
+                        .getSimpleName().toString(), node, 0);
                 defSpan = treeSpan(node);
             }
         } else {
@@ -410,7 +410,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 if (f != null) {
                     defOrigin = f.toUri();
                 }
-                emitRef(spans.name(simpleName, node), new DefKey(defOrigin, getPath(node)), false);
+                emitRef(spans.name(simpleName, node, 0), new DefKey(defOrigin, getPath(node)), false);
             }
 
             /**
