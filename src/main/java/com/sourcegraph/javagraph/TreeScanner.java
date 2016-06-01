@@ -487,6 +487,16 @@ class TreeScanner extends TreePathScanner<Void, Void> {
         return null;
     }
 
+    @Override
+    public Void visitMemberReference(MemberReferenceTree node, Void p) {
+        String name = node.getName().toString();
+        if (SourceVersion.isIdentifier(name)) {
+            emitRef(spans.name(name, node, 0), false);
+        }
+        super.visitMemberReference(node, p);
+        return null;
+    }
+
     /**
      * @param node expression tree node
      * @return node span in current compilation unit
