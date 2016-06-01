@@ -136,7 +136,7 @@ public final class Spans {
             return null;
         }
 
-        int treeStart = (int) srcPos.getStartPosition(compilationUnit, mst);
+        int treeStart = (int) srcPos.getEndPosition(compilationUnit, mst.getExpression());
         int treeEnd = (int) srcPos.getEndPosition(compilationUnit, mst);
         if (treeStart == -1 || treeEnd == -1) {
             return null;
