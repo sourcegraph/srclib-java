@@ -106,6 +106,9 @@ class TreeScanner extends TreePathScanner<Void, Void> {
      * @param def true if current ref is a definition as well
      */
     private void emitRef(int[] span, DefKey defKey, boolean def) {
+        if (span == null) {
+            return;
+        }
         Ref r = new Ref(this.unit.Name);
         r.defKey = defKey;
         r.file = compilationUnit.getSourceFile().getName();
