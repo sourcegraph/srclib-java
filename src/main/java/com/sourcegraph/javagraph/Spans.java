@@ -5,7 +5,6 @@ import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import java.io.IOException;
@@ -45,7 +44,7 @@ public final class Spans {
      * @return name span of class node in current compilation unit
      */
     public int[] name(ClassTree c) {
-        return name(c.getSimpleName().toString(), c);
+        return name(c.getSimpleName().toString(), c, 0);
     }
 
     /**
@@ -65,16 +64,19 @@ public final class Spans {
             return null;
         }
 
+        int offset;
         if (e.getKind() == ElementKind.CONSTRUCTOR) {
             Element klass = e.getEnclosingElement();
             if (klass == null || !klass.getKind().isClass()) {
                 return null;
             }
             name = klass.getSimpleName().toString();
+            offset = 0;
         } else {
             name = method.getName().toString();
+            offset = (int) srcPos.getEndPosition(compilationUnit, method.getReturnType());
         }
-        return name(name, method);
+        return name(name, method, offset);
     }
 
     /**
@@ -84,7 +86,7 @@ public final class Spans {
     public int[] name(CompilationUnitTree file) {
         String pkgName = file.getPackageName().toString();
         String rightName = pkgName.substring(pkgName.lastIndexOf('.') + 1);
-        return name(rightName, file);
+        return name(rightName, file, 0);
     }
 
     /**
@@ -114,12 +116,12 @@ public final class Spans {
         int pos = treeSrc.indexOf(type);
         if (pos < 0) {
             // fallback
-            return name(name, var);
+            return name(name, var, 0);
         }
         pos = treeSrc.indexOf(name, pos + type.length());
         if (pos < 0) {
             // fallback
-            return name(name, var);
+            return name(name, var, 0);
         }
         return new int[] {treeStart + pos, treeStart + pos + name.length()};
     }
@@ -136,7 +138,7 @@ public final class Spans {
             return null;
         }
 
-        int treeStart = (int) srcPos.getStartPosition(compilationUnit, mst);
+        int treeStart = (int) srcPos.getEndPosition(compilationUnit, mst.getExpression());
         int treeEnd = (int) srcPos.getEndPosition(compilationUnit, mst);
         if (treeStart == -1 || treeEnd == -1) {
             return null;
@@ -160,15 +162,19 @@ public final class Spans {
     /**
      * @param name name to produce span for
      * @param t tree node to look for name span
+     * @param offset optional offset to start looking at.
+     *               By default we are looking for a name span in [start(t), end(t)], however if offset is not 0,
+     *               then lookup will be performed in [offset, end(t)]. This can be used to ensure we don't taking
+     *               into account chunk of code which may cause conflict (voiD D)
      * @return name span of a given name inside span defined by given tree node
      */
-    public int[] name(String name, Tree t) {
+    public int[] name(String name, Tree t, int offset) {
 
         if (src == null) {
             return null;
         }
 
-        int treeStart = (int) srcPos.getStartPosition(compilationUnit, t);
+        int treeStart = offset == 0 ? (int) srcPos.getStartPosition(compilationUnit, t) : offset;
         int treeEnd = (int) srcPos.getEndPosition(compilationUnit, t);
         if (treeStart == -1 || treeEnd == -1) {
             return null;

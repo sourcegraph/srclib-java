@@ -501,6 +501,231 @@
     {
       "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 50,
+      "DefEnd": 53,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/MST/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST:type",
+      "Name": "MST",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 37,
+      "DefEnd": 362,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.MST",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/MST:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST:type/foo",
+      "Name": "foo",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 61,
+      "DefEnd": 360,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/MST:type/foo"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST:type/foo/list",
+      "Name": "list",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 148,
+      "DefEnd": 200,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.util.List\u003cjava.lang.String\u003e",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/MST:type/foo/list"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST:type/foo/replaceAll",
+      "Name": "replaceAll",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 209,
+      "DefEnd": 232,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/MST:type/foo/replaceAll"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MST:type/foo/s",
+      "Name": "s",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/MST.java",
+      "DefStart": 82,
+      "DefEnd": 139,
+      "Local": true,
+      "Data": {
+        "JavaKind": "LOCAL_VARIABLE",
+        "TypeExpression": "java.lang.String",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/MST:type/foo/s"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MemberReference/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "DefStart": 51,
+      "DefEnd": 66,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/MemberReference/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/MemberReference:type",
+      "Name": "MemberReference",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "DefStart": 38,
+      "DefEnd": 154,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.MemberReference",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/MemberReference:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 29,
+      "DefEnd": 37,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/NameSpan/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type",
+      "Name": "NameSpan",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 16,
+      "DefEnd": 72,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.NameSpan",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/NameSpan:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type/d",
+      "Name": "d",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 54,
+      "DefEnd": 70,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/NameSpan:type/d"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/NameSpan:type/i",
+      "Name": "i",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "DefStart": 42,
+      "DefEnd": 48,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "int",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/NameSpan:type/i"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/StaticInit/:init",
       "Name": "\u003cinit\u003e",
       "Kind": "func",
@@ -1107,6 +1332,56 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/io/File:type/isDirectory",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 129,
+      "End": 140
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/io/File:type/listFiles:java.io.FileFilter",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 113,
+      "End": 122
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/io/File:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 103,
+      "End": 107
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/io/File:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 123,
+      "End": 127
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/io/File:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 31,
+      "End": 35
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/io/IOException:type",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/Container.java",
@@ -1337,6 +1612,56 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type/replaceAll:java.lang.String:java.lang.String",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 118,
+      "End": 128
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type/replaceAll:java.lang.String:java.lang.String",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 252,
+      "End": 262
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type/replaceAll:java.lang.String:java.lang.String",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 293,
+      "End": 303
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type/replaceAll:java.lang.String:java.lang.String",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 334,
+      "End": 344
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type/replaceAll:java.lang.String:java.lang.String",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 97,
+      "End": 107
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/lang/String:type",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/Container.java",
@@ -1382,6 +1707,46 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 590,
       "End": 596
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 153,
+      "End": 159
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 181,
+      "End": 187
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 209,
+      "End": 215
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/String:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 82,
+      "End": 88
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -1627,6 +1992,26 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/util/Collections:type/emptyList",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 188,
+      "End": 197
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/Collections:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 168,
+      "End": 179
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/util/HashMap:type/get:java.lang.Object",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/ThisSuperClass.java",
@@ -1722,6 +2107,16 @@
       "File": "src/main/java/mypkg/FooClass.java",
       "Start": 73,
       "End": 77
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/List:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 148,
+      "End": 152
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -2177,6 +2572,123 @@
       "File": "src/main/java/mypkg/IBar.java",
       "Start": 57,
       "End": 61
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/list",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 161,
+      "End": 165
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/replaceAll",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 216,
+      "End": 226
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/replaceAll",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 241,
+      "End": 251
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/replaceAll",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 281,
+      "End": 291
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/replaceAll",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 322,
+      "End": 332
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo/s",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 89,
+      "End": 90
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type/foo",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 66,
+      "End": 69
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MST:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MST.java",
+      "Start": 50,
+      "End": 53
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/MemberReference:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/MemberReference.java",
+      "Start": 51,
+      "End": 66
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type/d",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 59,
+      "End": 60
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type/i",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 46,
+      "End": 47
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/NameSpan:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/NameSpan.java",
+      "Start": 29,
+      "End": 37
     },
     {
       "DefUnitType": "JavaArtifact",
