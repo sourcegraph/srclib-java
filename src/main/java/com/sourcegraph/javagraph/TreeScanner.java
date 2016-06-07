@@ -321,7 +321,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 }
 
                 nameSpan = spans.name(current.getEnclosingElement()
-                        .getSimpleName().toString(), node);
+                        .getSimpleName().toString(), node, 0);
                 defSpan = treeSpan(node);
             }
         } else {
@@ -410,7 +410,7 @@ class TreeScanner extends TreePathScanner<Void, Void> {
                 if (f != null) {
                     defOrigin = f.toUri();
                 }
-                emitRef(spans.name(simpleName, node), new DefKey(defOrigin, getPath(node)), false);
+                emitRef(spans.name(simpleName, node, 0), new DefKey(defOrigin, getPath(node)), false);
             }
 
             /**
@@ -484,6 +484,16 @@ class TreeScanner extends TreePathScanner<Void, Void> {
             }
         }
         super.visitMemberSelect(node, p);
+        return null;
+    }
+
+    @Override
+    public Void visitMemberReference(MemberReferenceTree node, Void p) {
+        String name = node.getName().toString();
+        if (SourceVersion.isIdentifier(name)) {
+            emitRef(spans.name(name, node, 0), false);
+        }
+        super.visitMemberReference(node, p);
         return null;
     }
 
