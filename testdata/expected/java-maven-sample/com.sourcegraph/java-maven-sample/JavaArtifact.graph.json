@@ -1006,6 +1006,189 @@
     {
       "UnitType": "JavaArtifact",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard/:init",
+      "Name": "\u003cinit\u003e",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 139,
+      "DefEnd": 147,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CONSTRUCTOR",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/Wildcard/:init"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type",
+      "Name": "Wildcard",
+      "Kind": "type",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 126,
+      "DefEnd": 485,
+      "Exported": true,
+      "Data": {
+        "JavaKind": "CLASS",
+        "TypeExpression": "mypkg.Wildcard",
+        "Package": "mypkg",
+        "Modifiers": [
+          "public"
+        ]
+      },
+      "TreePath": "mypkg/Wildcard:type"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/LOGGER",
+      "Name": "LOGGER",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 152,
+      "DefEnd": 229,
+      "Data": {
+        "JavaKind": "FIELD",
+        "TypeExpression": "org.slf4j.Logger",
+        "Package": "mypkg",
+        "Modifiers": [
+          "private",
+          "static",
+          "final"
+        ]
+      },
+      "TreePath": "mypkg/Wildcard:type/LOGGER"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/foo",
+      "Name": "foo",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 360,
+      "DefEnd": 482,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "()void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/foo"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer.",
+      "Name": "lower",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 280,
+      "DefEnd": 323,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.util.List\u003c? super java.lang.Integer\u003e)void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer."
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer./list",
+      "Name": "list",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 291,
+      "DefEnd": 317,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.util.List\u003c? super java.lang.Integer\u003e",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer./list"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/unbound:java.util.List...",
+      "Name": "unbound",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 326,
+      "DefEnd": 357,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.util.List\u003c?\u003e)void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/unbound:java.util.List..."
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/unbound:java.util.List.../list",
+      "Name": "list",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 339,
+      "DefEnd": 351,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.util.List\u003c?\u003e",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/unbound:java.util.List.../list"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer.",
+      "Name": "upper",
+      "Kind": "func",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 232,
+      "DefEnd": 277,
+      "Data": {
+        "JavaKind": "METHOD",
+        "TypeExpression": "(java.util.List\u003c? extends java.lang.Integer\u003e)void",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer."
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Path": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer./list",
+      "Name": "list",
+      "Kind": "var",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "DefStart": 243,
+      "DefEnd": 271,
+      "Local": true,
+      "Data": {
+        "JavaKind": "PARAMETER",
+        "TypeExpression": "java.util.List\u003c? extends java.lang.Integer\u003e",
+        "Package": "mypkg",
+        "Modifiers": []
+      },
+      "TreePath": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer./list"
+    },
+    {
+      "UnitType": "JavaArtifact",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "Path": "mypkg/innerclassimport",
       "Name": "innerclassimport",
       "Kind": "package",
@@ -1524,6 +1707,56 @@
       "DefUnit": "jdk",
       "DefPath": "java/lang/Integer:type",
       "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 258,
+      "End": 265
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Integer:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 304,
+      "End": 311
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Integer:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 395,
+      "End": 402
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Integer:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 430,
+      "End": 437
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Integer:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 467,
+      "End": 474
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/lang/Integer:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/subpkg/ZipClass.java",
       "Start": 185,
       "End": 192
@@ -1992,6 +2225,46 @@
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "DefUnitType": "Java",
       "DefUnit": "jdk",
+      "DefPath": "java/util/ArrayList:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 33,
+      "End": 42
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/ArrayList:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 385,
+      "End": 394
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/ArrayList:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 420,
+      "End": 429
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/ArrayList:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 457,
+      "End": 466
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
       "DefPath": "java/util/Collections:type/emptyList",
       "Unit": "com.sourcegraph/java-maven-sample",
       "File": "src/main/java/mypkg/MST.java",
@@ -2117,6 +2390,46 @@
       "File": "src/main/java/mypkg/MST.java",
       "Start": 148,
       "End": 152
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/List:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 243,
+      "End": 247
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/List:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 291,
+      "End": 295
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/List:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 339,
+      "End": 343
+    },
+    {
+      "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
+      "DefUnitType": "Java",
+      "DefUnit": "jdk",
+      "DefPath": "java/util/List:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 61,
+      "End": 65
     },
     {
       "DefRepo": "hg.openjdk.java.net/jdk8/jdk8/jdk",
@@ -3049,6 +3362,132 @@
     {
       "DefUnitType": "JavaArtifact",
       "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/LOGGER",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 180,
+      "End": 186
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/foo",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 365,
+      "End": 368
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer./list",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 313,
+      "End": 317
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer.",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 285,
+      "End": 290
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/lower:java.util.List.. super java.lang.Integer.",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 410,
+      "End": 415
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/unbound:java.util.List.../list",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 347,
+      "End": 351
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/unbound:java.util.List...",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 331,
+      "End": 338
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/unbound:java.util.List...",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 445,
+      "End": 452
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer./list",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 267,
+      "End": 271
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer.",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 237,
+      "End": 242
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type/upper:java.util.List.. extends java.lang.Integer.",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 375,
+      "End": 380
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "Def": true,
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 139,
+      "End": 147
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
+      "DefPath": "mypkg/Wildcard:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 213,
+      "End": 221
+    },
+    {
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "com.sourcegraph/java-maven-sample",
       "DefPath": "mypkg/innerclassimport/Foo:type/Bar:type",
       "Unit": "com.sourcegraph/java-maven-sample",
       "Def": true,
@@ -3289,6 +3728,56 @@
       "File": "src/main/java/mypkg/Container.java",
       "Start": 87,
       "End": 96
+    },
+    {
+      "DefRepo": "github.com/qos-ch/slf4j",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.slf4j/slf4j-api",
+      "DefPath": "org/slf4j/Logger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 173,
+      "End": 179
+    },
+    {
+      "DefRepo": "github.com/qos-ch/slf4j",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.slf4j/slf4j-api",
+      "DefPath": "org/slf4j/Logger:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 85,
+      "End": 91
+    },
+    {
+      "DefRepo": "github.com/qos-ch/slf4j",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.slf4j/slf4j-api",
+      "DefPath": "org/slf4j/LoggerFactory:type/getLogger:java.lang.Class...",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 203,
+      "End": 212
+    },
+    {
+      "DefRepo": "github.com/qos-ch/slf4j",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.slf4j/slf4j-api",
+      "DefPath": "org/slf4j/LoggerFactory:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 110,
+      "End": 123
+    },
+    {
+      "DefRepo": "github.com/qos-ch/slf4j",
+      "DefUnitType": "JavaArtifact",
+      "DefUnit": "org.slf4j/slf4j-api",
+      "DefPath": "org/slf4j/LoggerFactory:type",
+      "Unit": "com.sourcegraph/java-maven-sample",
+      "File": "src/main/java/mypkg/Wildcard.java",
+      "Start": 189,
+      "End": 202
     }
   ],
   "Docs": [

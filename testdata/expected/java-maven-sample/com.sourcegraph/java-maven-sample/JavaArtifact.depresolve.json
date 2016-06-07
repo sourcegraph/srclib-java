@@ -17,6 +17,22 @@
     }
   },
   {
+    "Raw": {
+      "groupID": "org.slf4j",
+      "artifactID": "slf4j-api",
+      "version": "1.7.21",
+      "scope": "compile",
+      "file": ".m2-srclib/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar",
+      "type": "jar"
+    },
+    "Target": {
+      "ToRepoCloneURL": "https://github.com/qos-ch/slf4j",
+      "ToUnit": "org.slf4j/slf4j-api",
+      "ToUnitType": "JavaArtifact",
+      "ToVersionString": "1.7.21"
+    }
+  },
+  {
     "Target": {
       "ToRepoCloneURL": "hg.openjdk.java.net/jdk8/jdk8/jdk",
       "ToUnit": "jdk",
