@@ -293,6 +293,7 @@ allprojects {
                     if (project.android.hasProperty("sourceSets")) {
                         listSourceDirs(task, project.android.sourceSets, "main")
                         listSourceDirs(task, project.android.sourceSets, "test")
+                        listSourceDirs(task, project.android.sourceSets, "androidTest")
                     }
                 }
 
@@ -312,7 +313,14 @@ allprojects {
                     listSourceFiles(project.tasks.compileDebugUnitTestJavaWithJavac)
                     println "SRCLIB-CLASSPATH $project.tasks.compileDebugUnitTestJavaWithJavac.classpath.asPath"
                 }
-
+                if (project.tasks.hasProperty("compileDebugAndroidTestJava")) {
+                    listSourceFiles(project.tasks.compileDebugAndroidTestJava)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugAndroidTestJava.classpath.asPath"
+                }
+                if (project.tasks.hasProperty("compileDebugAndroidTestJavaWithJavac")) {
+                    listSourceFiles(project.tasks.compileDebugAndroidTestJavaWithJavac)
+                    println "SRCLIB-CLASSPATH $project.tasks.compileDebugAndroidTestJavaWithJavac.classpath.asPath"
+                }
             }
 
         }

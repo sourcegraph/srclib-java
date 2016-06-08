@@ -23,6 +23,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.sourcegraph.javagraph.SourceUnit.DEFAULT_TYPE;
+
 /**
  * Resolves URI to {@code}ResolvedTarget{@code}
  */
@@ -35,7 +37,7 @@ public class Resolver {
 
     private Map<String, DepResolution> depsCache;
 
-    private static Map<Pattern, String> overrides;
+    private static Map<Pattern, OverrideConfiguration> overrides;
 
     static {
         overrides = new HashMap<>();
@@ -45,7 +47,16 @@ public class Resolver {
                 Properties props = new Properties();
                 props.load(is);
                 for (Object key : props.keySet()) {
-                    overrides.put(Pattern.compile(key.toString()), props.get(key).toString());
+                    String v[] = props.get(key).toString().split(";", 2);
+                    String replacement = v[0];
+                    String unit = null;
+                    if (v.length > 1) {
+                        unit = v[1];
+                    }
+                    OverrideConfiguration override = new OverrideConfiguration();
+                    override.replacement = replacement;
+                    override.unit = unit;
+                    overrides.put(Pattern.compile(key.toString()), override);
                 }
             } catch (IOException e) {
                 LOGGER.warn("Failed to load substitution properties", e);
@@ -219,13 +230,17 @@ public class Resolver {
 
     /**
      * @param lookup GroupID + "/" + ArtifactID
-     * @return A VCS url, if an override was found, null if not.
+     * @return resolved object (URI, unit) if there is such config
      */
-    public static String checkOverrides(String lookup) {
-        for (Map.Entry<Pattern, String> entry : overrides.entrySet()) {
+    public static Result getOverride(String lookup) {
+        for (Map.Entry<Pattern, OverrideConfiguration> entry : overrides.entrySet()) {
             Matcher m = entry.getKey().matcher(lookup);
             if (m.find()) {
-                return m.replaceAll(entry.getValue());
+                Result result = new Result();
+                OverrideConfiguration overrideConfiguration = entry.getValue();
+                result.uri = m.replaceAll(overrideConfiguration.replacement);
+                result.unit = overrideConfiguration.unit;
+                return result;
             }
         }
         return null;
@@ -251,22 +266,28 @@ public class Resolver {
         if (StringUtils.substringBefore(unit.Name, "/").equals(groupId)) {
             ResolvedTarget target = new ResolvedTarget();
             target.ToUnit = groupId + '/' + d.artifactID;
-            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
+            target.ToUnitType = DEFAULT_TYPE;
             target.ToVersionString = d.version;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
         }
 
-        String cloneURL = checkOverrides(groupId + '/' + d.artifactID);
-
+        Result result = getOverride(groupId + '/' + d.artifactID);
+        if (result != null && result.unit == null) {
+            result.unit = groupId + '/' + d.artifactID;
+        } else if (result == null && d.repoURI != null) {
+            result = new Result();
+            result.unit = groupId + '/' + d.artifactID;
+            result.uri = d.repoURI;
+        }
         // We may know repo URI already
-        if (cloneURL != null || d.repoURI != null) {
+        if (result != null) {
             ResolvedTarget target = new ResolvedTarget();
-            target.ToUnit = groupId + '/' + d.artifactID;
-            target.ToUnitType = SourceUnit.DEFAULT_TYPE;
+            target.ToUnit = result.unit;
+            target.ToUnitType = DEFAULT_TYPE;
             target.ToVersionString = d.version;
-            target.ToRepoCloneURL = cloneURL == null ? d.repoURI : cloneURL;
+            target.ToRepoCloneURL = result.uri;
             resolution = new DepResolution(d, target);
             depsCache.put(key, resolution);
             return resolution;
@@ -276,7 +297,7 @@ public class Resolver {
 
         try {
 
-            cloneURL = getScmUrl(d);
+            String cloneURL = getScmUrl(d);
 
             if (cloneURL != null) {
                 res.Raw = d;
@@ -284,7 +305,7 @@ public class Resolver {
                 ResolvedTarget target = new ResolvedTarget();
                 target.ToRepoCloneURL = cloneURL;
                 target.ToUnit = groupId + '/' + d.artifactID;
-                target.ToUnitType = SourceUnit.DEFAULT_TYPE;
+                target.ToUnitType = DEFAULT_TYPE;
                 target.ToVersionString = d.version;
 
                 res.Target = target;
@@ -326,7 +347,7 @@ public class Resolver {
                 if (root.isDirectory() && FileUtils.directoryContains(root, file)) {
                     ResolvedTarget target = new ResolvedTarget();
                     target.ToUnit = element.name;
-                    target.ToUnitType = SourceUnit.DEFAULT_TYPE;
+                    target.ToUnitType = DEFAULT_TYPE;
                     target.ToVersionString = element.version;
                     return target;
                 }
@@ -420,7 +441,33 @@ public class Resolver {
             model = fetchModel(dependency);
         }
         return null;
-
     }
 
+    /**
+     * Defines override configuration that allows to map URI to (URI, UnitType) if vendor provides incorrect data
+     */
+    private static class OverrideConfiguration {
+        /**
+         * Replacement pattern, may contain $x references
+         */
+        String replacement;
+        /**
+         * If specified, resolved target should refer to specific unit instead of the guessed one
+         */
+        String unit;
+    }
+
+    /**
+     * Holder for (URI, Unit)
+     */
+    private static class Result {
+        /**
+         * Def repo URI
+         */
+        String uri;
+        /**
+         * Def unit
+         */
+        String unit;
+    }
 }
