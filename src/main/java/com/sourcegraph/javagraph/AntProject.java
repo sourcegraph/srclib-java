@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -134,28 +135,35 @@ public class AntProject implements Project {
      */
     public static Collection<SourceUnit> findAllSourceUnits() throws IOException {
 
-        LOGGER.debug("Retrieving source units");
+        PrintStream out = System.out;
+        try {
+            // redirecting all possible output to stderr to avoid mixing it with toolchain's output
+            System.setOut(System.err);
+            LOGGER.debug("Retrieving source units");
 
-        // step 1 : process all pom.xml files
-        Collection<Path> buildXmlFiles = ScanUtil.findMatchingFiles("build.xml");
+            // step 1 : process all pom.xml files
+            Collection<Path> buildXmlFiles = ScanUtil.findMatchingFiles("build.xml");
 
-        Collection<SourceUnit> ret = new ArrayList<>();
+            Collection<SourceUnit> ret = new ArrayList<>();
 
-        for (Path buildXml : buildXmlFiles) {
+            for (Path buildXml : buildXmlFiles) {
 
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing Ant file {}", buildXml.toAbsolutePath());
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Processing Ant file {}", buildXml.toAbsolutePath());
+                }
+                try {
+                    ret.add(getSourceUnit(buildXml));
+                } catch (Exception e) {
+                    LOGGER.warn("Error processing Ant file {}", buildXml.toAbsolutePath(), e);
+                }
             }
-            try {
-                ret.add(getSourceUnit(buildXml));
-            } catch (Exception e) {
-                LOGGER.warn("Error processing Ant file {}", buildXml.toAbsolutePath(), e);
-            }
+
+            LOGGER.debug("Retrieved source units");
+
+            return ret;
+        } finally {
+            System.setOut(out);
         }
-
-        LOGGER.debug("Retrieved source units");
-
-        return ret;
     }
 
     public static boolean is(SourceUnit unit) {
