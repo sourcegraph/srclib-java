@@ -239,7 +239,9 @@ public class Resolver {
                 Result result = new Result();
                 OverrideConfiguration overrideConfiguration = entry.getValue();
                 result.uri = m.replaceAll(overrideConfiguration.replacement);
-                result.unit = overrideConfiguration.unit;
+                if (overrideConfiguration.unit != null) {
+                    result.unit = m.replaceAll(overrideConfiguration.unit);
+                }
                 return result;
             }
         }
