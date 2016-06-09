@@ -5,8 +5,8 @@
 srclib-java requires:
 
 * Oracle JDK 8 or OpenJDK 8
-* Maven 3
-* Gradle 2.1
+* Maven (in some cases we may execute `mvn generate-sources`)
+* Gradle (if project to be indexed doesn't come with Gradle wrapper)
 
 ### WARNING
 
@@ -17,19 +17,25 @@ https://bugs.openjdk.java.net/browse/JDK-8062359?page=com.atlassian.jira.plugin.
 for a description of the problem and a workaround. Build instructions for
 OpenJDK 8 are here: http://openjdk.java.net/projects/build-infra/guide.html.
 
-See the Dockerfile for how to check out the right version of jdk8u and
-apply the patch.
-
 You'll probably be able to use your system JDK without this patch on
 most projects; only follow those steps if you see NPEs in the javac
 API.
 
 ## Building
 
-srclib-java can be build and registered with the following two commands:
+You need to have the following tools available to build Java toolchain:
+* make
+* JDK 8
+* git
 
+srclib-java can be built and registered with the following commands:
+```
     make
-    src toolchain add sourcegraph.com/sourcegraph/srclib-java
+    mkdir -p $SRCLIBPATH/sourcegraph.com/sourcegraph/
+    ln -s $PWD $SRCLIBPATH/sourcegraph.com/sourcegraph/srclib-java
+```
+
+or you may run `srclib toolchain install java` which will clone the latest version to `$SRCLIBPATH/sourcegraph.com/sourcegraph/srclib-java` and build it.
 
 ## Testing
 
@@ -67,8 +73,9 @@ versions that you'll need to update.
 ## TODOs
 
 * Don't emit unresolved refs as refs to the same pkg
-* If running in Docker, use a m2-srclib directory not inside the repo if in Docker since the Docker source volume is readonly.
 * Simplify the Java 8 JRE bundling process
+* Add support of other build tools and/or projects (Eclipse's `.classpath` for example)
+* Add support of Android product flavors and build variants
 
 ## Known limitations
 
@@ -106,7 +113,11 @@ If your file A.java contains two classes A and B, there might be compilation err
 
 ### Unstable build environment
 
-We expect that your project may be compiled out of the box using latest Gradle, Maven, and Java 8. If there are some build pre-requisites (such as some expected environment variables, hardcoded file locations, pre-installed libraries and/or tools), we may fail to graph your source code properly.
+We expect that your project may be compiled out of the box using latest Gradle, Maven, and Java 8. If there are some build pre-requisites (such as some expected environment variables, hardcoded file locations, pre-installed libraries and/or tools, presence of some configuration files), we may fail to graph your source code properly. Please try to make sure that 
+* If your project is Gradle-based (but not Android-based) then `gradlew compileJava` works in clean environment
+* If your project is Gradle-based (and Android-based) then `gradlew assembleDebug` works in clean environment
+* If your project is Maven-based then `mvn compile` works in clean environment
+* If your project is Ant-based then `ant` works in clean environment
 
 ### Class name conflicts
 
@@ -117,6 +128,10 @@ If few of your modules have class with the same name, we may be unable to resolv
 When scanning for source units, we are processing ALL pom.xml and gradle build files in your repository. Some of them might be remnants of old build process and we might fail to process them if they were abandonned. Sometimes there may be both pom.xml and .gradle files in the same directory which may define the same group / artifact pair and we can't tell which one will be taken into account when graphing your source code. It's possible that we'll pick the wrong one.
 
 ## Maven notes
+
+### Maven version
+
+Please try to support most recent version of Maven (it's currently 3.3.9). Apache Maven 3.x should be fine in most cases.
 
 ### Supported Maven plugins 
 
@@ -142,6 +157,10 @@ We are trying to be as close as possible to the way Maven gathers dependencies, 
 
 ## Gradle notes
 
+### Gradle version
+
+If you compiling your project using Gradle vX please add `gradlew` Gradle wrapper as suggested here: https://docs.gradle.org/current/userguide/gradle_wrapper.html otherwise please expect that we'll try to use the latest Gradle version. Don't forget to add and check in `gradle/wrapper` wrapper's directory (some don't).
+
 ### Scanning and graphing of Gradle-based projects
 
 * When we are extracting meta information from Gradle script files, we'll try to run first all not-standard tasks `compile` task depends on (see [Java Plugin](https://docs.gradle.org/current/userguide/java_plugin.html) for the list of tasks we considering "standard"). Such tasks may generate source code, repack jar files using jarjar or do something else in order to prepare your project for compilation. Unfortunately we can't identify what particular task does thus we may run some tasks that weren't needed. For Android-based projects we'll run either `generateDebugSources` or `assembleDebug` (which one we found first) to generate java files so please make sure that these tasks may be run out of the box and won't fail, otherwise we'll be unable to properly extract project information.
@@ -155,28 +174,11 @@ We are trying to be as close as possible to the way Maven gathers dependencies, 
 
 ## Graphing OpenJDK
 
-If you'd like to graph OpenJDK you have the following options
-* Grab prebuilt source graph [here](https://github.com/alexsaveliev/srclib-java-prebuilts/tree/master/openjdk)
-* Graph it yourself
-  * Grab and `build` OpenJDK using the following [instructions](http://hg.openjdk.java.net/build-infra/jdk8/raw-file/tip/README-builds.html)
-  * Switch your java back to java 8 (I believe you switched it to java 7 at the previous step)
-  * Run `src config && src make` in `jdk`, `langtools`, `nashorn`, `jaxp`, `jaxws`, there will be some compilation errors for `jdk` project, you may ignore them
-  * Copy the results (content of .srclib-cache) to the target directory
+Please see instructions [here](README.jdk.md)
 
 ## Graphing Android's libcore, frameworks/base, frameworks/support
 
-If you'd like to graph Anroid libraries, you have the following options
-* Grab prebuilt source graph [here](https://github.com/alexsaveliev/srclib-java-prebuilts/tree/master/android)
-* Graph it yourself
-  * Grab and `build` Android using the following [instructions](http://source.android.com/source/index.html). Note, that if you are running x64 Linux, follow instructions from http://superuser.com/questions/344533/no-such-file-or-directory-error-in-bash-but-the-file-exists if you see errors
-  * Switch your java back to java 8 (I believe you switched it to java 7 at the previous step)
-  * Run `src config && src make` in `libcore` and `frameworks/base`
-  * Graphing `frameworks/support` is a little bit tricky
-    * Edit `v4/build.gradle` and replace there `compileSdkVersion 4` with     `compileSdkVersion "current"`
-    * Backup `prebuilts/sdk/current` and replace it with the content of platform-22 directory from Android SDK
-    *  Make a symlinks for `aapt` and `llvm-rs-cc` in `prebuilts/sdk/tools/linux` to point to matching files in `prebuilts/sdk/tools/linux/bin` (similar as done for aidl command)
-    * Run `src config && src make` in `frameworks/support`
-
+Please see instructions [here](README.android.md)
 
 ## Apache Ant support
 
