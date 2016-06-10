@@ -58,10 +58,9 @@ public class ElementPath {
         @Override
         public ElementPath visitPackage(PackageElement e, ElementPath p) {
             String name = e.getQualifiedName().toString();
-            if (name.isEmpty()) {
-                return null;
+            if (!name.isEmpty()) {
+                p.unshift(name);
             }
-            p.unshift(name);
             return p;
         }
 
