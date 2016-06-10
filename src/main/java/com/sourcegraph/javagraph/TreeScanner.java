@@ -167,7 +167,8 @@ class TreeScanner extends TreePathScanner<Void, Void> {
         s.defStart = defSpan[0];
         s.defEnd = defSpan[1];
         s.file = compilationUnit.getSourceFile().getName();
-        s.pkg = compilationUnit.getPackageName().toString();
+        ExpressionTree packageName = compilationUnit.getPackageName();
+        s.pkg = packageName == null ? StringUtils.EMPTY : packageName.toString();
         TypeMirror typeMirror = currentTypeMirror();
         if (typeMirror != null) {
             s.typeExpr = typeMirror.toString();
