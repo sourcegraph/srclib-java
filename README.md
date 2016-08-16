@@ -70,13 +70,6 @@ other platforms, edit the `.bin/srclib-java` script and the
 versions that you'll need to update.
 
 
-## TODOs
-
-* Don't emit unresolved refs as refs to the same pkg
-* Simplify the Java 8 JRE bundling process
-* Add support of other build tools and/or projects (Eclipse's `.classpath` for example)
-* Add support of Android product flavors and build variants
-
 ## Known limitations
 
 ### File encoding
